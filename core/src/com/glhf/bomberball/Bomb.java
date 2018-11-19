@@ -2,7 +2,7 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Bombe extends GameObject {
+public class Bomb extends GameObject {
     @Override
     public Texture getTexture() {
         return null;

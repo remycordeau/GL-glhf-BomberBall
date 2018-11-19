@@ -2,11 +2,11 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Enemy extends Entity{
+public class Ennemy extends Character {
     //attributes
     private int strengh;
     @Override
-    public boolean collide(Entity e) {
+    public boolean collide(Character e) {
         return false;
     }
 

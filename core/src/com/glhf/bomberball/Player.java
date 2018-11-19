@@ -2,12 +2,10 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-import java.util.Hashtable;
-
-public class Player extends Entity {
+public class Player extends Character {
     private int number_bomb_remaining;
     @Override
-    public boolean collide(Entity e) {
+    public boolean collide(Character e) {
         return false;
     }
 
