@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Ennemy extends Character {
     //attributes
-    private int strengh;
+    protected int strength;
 
     public void touchPlayer(Player player){
-        player.getDamage(strengh);
+        player.getDamage(strength);
     }
 
 }
