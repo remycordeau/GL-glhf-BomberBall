@@ -33,7 +33,8 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		font.draw(batch, "Natan il est trop beau", 200, 200);
-		batch.end();
+        font.draw(batch, "Vincent trop stock", 500, 500);
+        batch.end();
 	}
 	
 	@Override

@@ -7,4 +7,9 @@ public class ActiveEnnemy extends Ennemy{
     public ActiveEnnemy(){//file with parameters for constructor
         strength =1;
     }
+
+    @Override
+    public void followWay() {
+
+    }
 }
