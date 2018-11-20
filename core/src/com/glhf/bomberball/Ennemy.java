@@ -2,16 +2,16 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Ennemy extends Character {
+import java.util.ArrayList;
+
+public abstract class Ennemy extends Character {
     //attributes
-    private int strengh;
+    protected int strength;
+    protected ArrayList<Integer> way;
 
     public void touchPlayer(Player player){
-        player.getDamage(strengh);
+        player.getDamage(strength);
     }
 
-    @Override
-    public Texture getTexture() {
-        return null;
-    }
+    public abstract void followWay();
 }
