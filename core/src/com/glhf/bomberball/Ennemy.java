@@ -10,8 +10,4 @@ public abstract class Ennemy extends Character {
         player.getDamage(strengh);
     }
 
-    @Override
-    public Texture getTexture() {
-        return null;
-    }
 }
