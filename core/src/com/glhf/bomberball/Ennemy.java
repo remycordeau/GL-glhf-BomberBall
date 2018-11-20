@@ -2,7 +2,7 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Ennemy extends Character {
+public abstract class Ennemy extends Character {
     //attributes
     private int strengh;
 
