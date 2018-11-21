@@ -8,7 +8,7 @@ public abstract class Character extends GameObject {
     protected int number_move_remaining;
 
     // constructor
-    public Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
+    protected Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
         super(position_x, position_y, appearance);
         this.life = 1;
         this.number_move_remaining = 5;
