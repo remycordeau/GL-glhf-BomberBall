@@ -11,7 +11,6 @@ public class Player extends Character {
         life=1;
         number_bomb_remaining=1;
         number_move_remaining=5;
-        //sprite_path
     }
 
     // getters and setters

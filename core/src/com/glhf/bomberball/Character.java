@@ -4,7 +4,7 @@ public abstract class Character extends GameObject {
     //attributes
     protected int life;
     protected int number_move_remaining;
-    protected String sprite_path; // texture or string ?
+
 
 
 
@@ -52,19 +52,11 @@ public abstract class Character extends GameObject {
         return number_move_remaining;
     }
 
-    public String getSpritePath() {
-        return sprite_path;
-    }
-
     public void setLife(int life) {
         this.life = life;
     }
 
     public void setNumberMoveRemaining(int number_move_remaining) {
         this.number_move_remaining = number_move_remaining;
-    }
-
-    public void setSpritePath(String sprite_path) {
-        this.sprite_path = sprite_path;
     }
 }
