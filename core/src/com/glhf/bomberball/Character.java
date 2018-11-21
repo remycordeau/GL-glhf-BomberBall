@@ -1,10 +1,18 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public abstract class Character extends GameObject {
     //attributes
     protected int life;
     protected int number_move_remaining;
 
+    // constructor
+    public Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
+        super(position_x, position_y, appearance);
+        this.life = 1;
+        this.number_move_remaining = 5;
+    }
 
     public void getDamage(int damage){
         life -= damage;

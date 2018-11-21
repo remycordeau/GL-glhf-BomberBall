@@ -6,11 +6,8 @@ public class Player extends Character {
     private int number_bomb_remaining;
 
     // constructor
-    public Player(){ // temporary, create a file with parameter
-        position_x=0;
-        position_y=0;
-        life=1;
+    public Player(int position_x, int position_y, Texture appearance) {
+        super(position_x, position_y, appearance); // temporary, create a file with parameter
         number_bomb_remaining=1;
-        number_move_remaining=5;
     }
 }
