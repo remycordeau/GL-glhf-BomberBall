@@ -25,6 +25,8 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
 		loadTextures();
 		font.setColor(Color.RED);
+		System.out.println(new Maze().toJson());
+
 	}
 
 	@Override
@@ -34,6 +36,7 @@ public class Game extends ApplicationAdapter {
 		batch.begin();
 		font.draw(batch, "Natan il est trop beau", 200, 200);
         font.draw(batch, "Vincent trop stock", 500, 500);
+		font.draw(batch, "OBIIIIIIIIIIIIIIIIIIIIIIII", 300, 300);
         batch.end();
 	}
 	
