@@ -14,6 +14,8 @@ public abstract class Character extends GameObject {
         this.number_move_remaining = 5;
     }
 
+
+
     public void getDamage(int damage){
         life -= damage;
     }
@@ -40,7 +42,7 @@ public abstract class Character extends GameObject {
         number_move_remaining-=1;
     }
 
-    // call this method only if number_move_remaining is >=0 after the move
+    // call this method only if number_move_remaining is >=0 after the move, mouse
     public void move(int position_x, int position_y){
         this.setPositionX(position_x);
         this.setPositionY(position_y);
