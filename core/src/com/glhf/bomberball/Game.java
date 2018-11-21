@@ -17,13 +17,12 @@ import java.util.HashMap;
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private HashMap<String, Texture> textures;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		loadTextures();
+		Textures.loadTextures();
 		font.setColor(Color.RED);
 		System.out.println(new Maze().toJson());
 
@@ -46,24 +45,4 @@ public class Game extends ApplicationAdapter {
 		font.dispose();
 	}
 
-
-	private void loadTextures() {
-		textures = new HashMap<String, Texture>();
-		loadTextures("core/assets/");
-	}
-	private void loadTextures(String path) {
-		textures = new HashMap<String, Texture>();
-		File f = new File(path);
-		File[] files = f.listFiles();
-		assert files != null;// le fichier f doit être un dossier
-		for(File file : files) {
-			if (file.isDirectory()){
-				loadTextures(path + file.getName() + "/");
-				continue;
-			}
-			String stringId = file.getName().replace(".png", "");
-			System.out.println(stringId);
-			textures.put(stringId, new Texture(Gdx.files.internal(path + file.getName())));
-		}
-	}
 }
