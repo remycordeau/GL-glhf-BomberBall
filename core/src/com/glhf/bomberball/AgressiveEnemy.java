@@ -8,15 +8,10 @@ public class AgressiveEnemy extends Enemy {
     //attributes
 
     // constructor
-    public AgressiveEnemy(int position_x, int position_y, Texture appearance, ArrayList<Integer> way) { // temporary, create a file with parameter
+    public AgressiveEnemy(int position_x, int position_y, Texture appearance, ArrayList<moves> way) { // temporary, create a file with parameter
         super(position_x, position_y, appearance);
         strength = 1;
         this.way = way;
-    }
-
-    @Override
-    public void followWay() {
-
     }
 
     public void huntPlayer(Player player) {

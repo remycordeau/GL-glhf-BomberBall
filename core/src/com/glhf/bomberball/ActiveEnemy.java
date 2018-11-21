@@ -2,6 +2,8 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
+
 public class ActiveEnemy extends Enemy {
     //attributes
 
@@ -12,8 +14,7 @@ public class ActiveEnemy extends Enemy {
         // way = plus long chemin;
     }
 
-    @Override
-    public void followWay() {
-
+    public void setWay(ArrayList<moves> way) {
+        this.way = way;
     }
 }
