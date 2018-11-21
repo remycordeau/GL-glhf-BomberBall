@@ -27,4 +27,12 @@ public class Player extends Character {
 
         //}
     }
+
+    public void lootBonus(Bonus bonus) {
+        if (this.bonus_owned.contains(bonus)) {
+            this.bonus_owned.put(bonus, bonus_owned.get(bonus) + 1);
+        } else {
+            this.bonus_owned.put(bonus, 1);
+        }
+    }
 }
