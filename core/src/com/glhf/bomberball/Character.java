@@ -1,9 +1,19 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public abstract class Character extends GameObject {
     //attributes
     protected int life;
     protected int number_move_remaining;
+
+    // constructor
+    public Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
+        super(position_x, position_y, appearance);
+        this.life = 1;
+        this.number_move_remaining = 5;
+    }
+
 
 
     public void getDamage(int damage){
@@ -32,7 +42,7 @@ public abstract class Character extends GameObject {
         number_move_remaining-=1;
     }
 
-    // call this method only if number_move_remaining is >=0 after the move
+    // call this method only if number_move_remaining is >=0 after the move, mouse
     public void move(int position_x, int position_y){
         this.setPositionX(position_x);
         this.setPositionY(position_y);
