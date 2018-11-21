@@ -6,14 +6,19 @@ public abstract class Character extends GameObject {
     //attributes
     protected int life;
     protected int number_move_remaining;
+    protected int number_initial_moves;
 
     // constructor
     protected Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
         super(position_x, position_y, appearance);
         this.life = 1;
-        this.number_move_remaining = 5;
+        this.number_initial_moves = 5;
     }
 
+    // method inititate turn
+    public void initiateTurn(){
+        number_move_remaining=number_initial_moves;
+    }
 
 
     public void getDamage(int damage){
