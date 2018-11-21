@@ -2,7 +2,9 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public abstract class GameObject {
+import java.io.Serializable;
+
+public abstract class GameObject implements Serializable {
     //attributes
     protected int position_x;
     protected int position_y;
