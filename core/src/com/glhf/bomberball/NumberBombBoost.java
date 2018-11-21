@@ -1,9 +1,9 @@
 package com.glhf.bomberball;
 
-public class numberBombBoost implements Bonus{
+public class NumberBombBoost implements Bonus{
     private int numberBombBoost;
     //constructor
-    public numberBombBoost(){
+    public NumberBombBoost(){
         numberBombBoost=0;
     }
 }
