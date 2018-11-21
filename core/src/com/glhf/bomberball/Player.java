@@ -7,11 +7,6 @@ public class Player extends Character {
 
 
 
-    // getters and setters
-    public int getNumberBombRemaining() {
-        return number_bomb_remaining;
-    }
-
     public void setNumberBombRemaining(int number_bomb_remaining) {
         this.number_bomb_remaining = number_bomb_remaining;
     }
