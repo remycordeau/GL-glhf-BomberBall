@@ -1,6 +1,6 @@
 package com.glhf.bomberball;
 
-public class ActiveEnnemy extends Ennemy{
+/*public class ActiveEnnemy extends Ennemy{
     //attributes
 
     // constructor
@@ -13,3 +13,4 @@ public class ActiveEnnemy extends Ennemy{
 
     }
 }
+*/
