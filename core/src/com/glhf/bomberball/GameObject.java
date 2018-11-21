@@ -8,6 +8,13 @@ public abstract class GameObject {
     protected int position_y;
     protected Texture appearance;
 
+    // constructor
+    protected GameObject(int position_x, int position_y, Texture appearance) {
+        this.position_x = position_x;
+        this.position_y = position_y;
+        this.appearance = appearance;
+    }
+
     // getters and setters
     public int getPositionX() {
         return position_x;
