@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 public class Player extends Character {
     private int number_bomb_remaining;
 
+    //constructor
 
-
-    public void setNumberBombRemaining(int number_bomb_remaining) {
-        this.number_bomb_remaining = number_bomb_remaining;
+    public Player(int position_x, int position_y, Texture appearance) {
+        super(position_x, position_y, appearance);
+        number_bomb_remaining=1;
     }
-
 }
