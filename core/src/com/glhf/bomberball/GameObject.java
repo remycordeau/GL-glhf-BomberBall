@@ -8,7 +8,7 @@ public abstract class GameObject implements Serializable {
     //attributes
     protected int position_x;
     protected int position_y;
-    protected Texture appearance;
+    protected transient Texture appearance; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
 
     // constructor
     protected GameObject(int position_x, int position_y, Texture appearance) {
