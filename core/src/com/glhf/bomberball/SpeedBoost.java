@@ -1,6 +1,6 @@
 package com.glhf.bomberball;
 
-public class SpeedBoost {
+public class SpeedBoost implements Bonus{
     //attributes
     private int speedBoost;
 
