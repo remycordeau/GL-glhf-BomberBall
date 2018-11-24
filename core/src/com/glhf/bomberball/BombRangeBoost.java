@@ -1,6 +1,6 @@
 package com.glhf.bomberball;
 
-public class BombRangeBoost {
+public class BombRangeBoost implements Bonus{
     // attributes
     private int bomb_range_boost;
 
