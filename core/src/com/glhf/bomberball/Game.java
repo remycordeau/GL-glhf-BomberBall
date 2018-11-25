@@ -18,19 +18,15 @@ import java.util.HashMap;
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
-	private Texture test;
-	private TextureRegion region;
 	private HashMap<String, Texture> textures;
-//	private State state;
+	private State StartState;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		StartState = new StateMainMenu();
 		Textures.loadTextures();
-		//state = StartState.get();
-        test = Textures.get("badlogic");
-		region = new TextureRegion(test, 0, 0, 256, 256);
 		font.setColor(Color.RED);
 	}
 
@@ -38,12 +34,9 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(255, 255, 255, 255);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
 		batch.begin();
-		//state.draw(batch);
+		StartState.draw(batch);
 		font.draw(batch, "Natan il est trop beau", 200, 200);
-		batch.draw(region, 300, 200);
 		batch.end();
 
 	}
