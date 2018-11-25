@@ -14,10 +14,10 @@ public class Player extends Character {
 
 
     // constructor
-    public Player(int position_x, int position_y, Texture appearance, int life) { // temporary, create a file with parameter
-        super(position_x, position_y, appearance, life);
+    public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
+        super(position_x, position_y, life);
         number_initial_bombs=1;
-        //initialisation with no bonus (numberBombBoost, bombRangeBoost, speedBoost =0)
+        //appearance= path
     }
 
     // this method initiate the begin of a new turn
