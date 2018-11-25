@@ -30,8 +30,8 @@ public class Maze {
         positionStart[3]= new Vector2(12,10);
         positionEnd = new Vector2(6,5);
         tab = new GameObject[width][height];
-        tab[0][0] = new Bomb(0,0,Textures.get("badlogic"));
-        tab[0][1] = new ActiveEnemy(1,0,Textures.get("badlogic"));
+        tab[0][0] = new Bomb(0,0,Textures.get("badlogic"), 1);
+        tab[0][1] = new ActiveEnemy(1,0,Textures.get("badlogic"), 3);
         //tab[0][2] = new NumberBombBoost();
         if(gson==null)createGson();
     }
