@@ -36,10 +36,10 @@ public class Player extends Character {
     }
 
     public void lootBonus(Bonus bonus) {
-        if (this.bonus_owned.contains(bonus)) {
-            this.bonus_owned.put(bonus.getClass().getCanonicalName(), bonus_owned.get(bonus) + 1);
+        if (this.bonus_owned.contains(bonus.getName())) {
+            this.bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);
         } else {
-            this.bonus_owned.put(bonus.getClass().getName(), 1);
+            this.bonus_owned.put(bonus.getName(), 1);
         }
     }
 }
