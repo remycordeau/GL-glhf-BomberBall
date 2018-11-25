@@ -7,8 +7,8 @@ public abstract class Bonus extends GameObject{
     protected String name;
 
     //contructor
-    public Bonus(int position_x, int position_y, Texture appearance) {
-        super(position_x, position_y, appearance, 1);
+    public Bonus(int position_x, int position_y) {
+        super(position_x, position_y, 1);
     }
 
     //getter

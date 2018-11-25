@@ -8,8 +8,8 @@ public abstract class Character extends GameObject {
     protected int number_initial_moves;
 
     // constructor
-    protected Character(int position_x, int position_y, Texture appearance, int life) { // temporary, create a file with parameter
-        super(position_x, position_y, appearance, life);
+    protected Character(int position_x, int position_y, int life) { // temporary, create a file with parameter
+        super(position_x, position_y, life);
         this.number_initial_moves = 5;
     }
 
