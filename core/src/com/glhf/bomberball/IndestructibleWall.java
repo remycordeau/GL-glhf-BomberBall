@@ -8,4 +8,9 @@ public class IndestructibleWall extends  Wall {
     protected IndestructibleWall(int position_x, int position_y, Texture appearance,int life) {
         super(position_x, position_y, appearance, life);
     }
+
+    // an indestructibleWall cannot be broken
+    @Override
+    public void getDamage(int damage){
+    }
 }
