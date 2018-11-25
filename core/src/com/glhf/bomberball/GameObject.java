@@ -12,10 +12,9 @@ public abstract class GameObject implements Serializable {
     protected int life;
 
     // constructor
-    protected GameObject(int position_x, int position_y, Texture appearance, int life) {
+    protected GameObject(int position_x, int position_y, int life) {
         this.position_x = position_x;
         this.position_y = position_y;
-        this.appearance = appearance;
         this.life= life;
     }
 
