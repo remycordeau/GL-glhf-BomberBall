@@ -7,11 +7,12 @@ public class Bomb extends GameObject {
     private int damage;
     private int range;
     //constructor
-    public Bomb(int position_x, int position_y, Texture appearance, int range) {
-        super(position_x, position_y, appearance, 1);
+    public Bomb(int position_x, int position_y, int range) {
+        super(position_x, position_y, 1);
         // initially, bomb inflict 1 damage
         this.damage=1;
         this.range=range;
+        //appearance
     }
 
     @Override
