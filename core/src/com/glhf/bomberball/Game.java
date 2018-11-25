@@ -38,6 +38,8 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(255, 255, 255, 255);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
 		batch.begin();
 		//state.draw(batch);
 		font.draw(batch, "Natan il est trop beau", 200, 200);
