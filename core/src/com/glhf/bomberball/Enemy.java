@@ -12,8 +12,8 @@ public abstract class Enemy extends Character {
     protected int actualMove;
 
     // constructor
-    protected Enemy(int position_x, int position_y, Texture appearance) {
-        super(position_x, position_y, appearance);
+    protected Enemy(int position_x, int position_y, Texture appearance, int life) {
+        super(position_x, position_y, appearance, life);
         this.actualMove = 0;
     }
 

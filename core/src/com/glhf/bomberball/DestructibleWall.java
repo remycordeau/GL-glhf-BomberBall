@@ -6,7 +6,7 @@ public class DestructibleWall extends Wall {
 
     // constructor
 
-    protected DestructibleWall(int position_x, int position_y, Texture appearance) {
-        super(position_x, position_y, appearance);
+    protected DestructibleWall(int position_x, int position_y, Texture appearance, int life) {
+        super(position_x, position_y, appearance, life);
     }
 }

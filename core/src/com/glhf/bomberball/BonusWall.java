@@ -10,8 +10,8 @@ public class BonusWall extends DestructibleWall {
 
     // constructor
 
-    protected BonusWall(int position_x, int position_y, Texture appearance,Bonus bonus) {
-        super(position_x, position_y, appearance);
+    protected BonusWall(int position_x, int position_y, Texture appearance,Bonus bonus, int life) {
+        super(position_x, position_y, appearance, life);
         this.bonus=bonus;
     }
 }

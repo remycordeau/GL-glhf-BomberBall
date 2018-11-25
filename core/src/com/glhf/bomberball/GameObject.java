@@ -9,12 +9,14 @@ public abstract class GameObject implements Serializable {
     protected int position_x;
     protected int position_y;
     protected transient Texture appearance; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
+    protected int life;
 
     // constructor
-    protected GameObject(int position_x, int position_y, Texture appearance) {
+    protected GameObject(int position_x, int position_y, Texture appearance, int life) {
         this.position_x = position_x;
         this.position_y = position_y;
         this.appearance = appearance;
+        this.life= life;
     }
 
     // getters and setters
@@ -37,4 +39,8 @@ public abstract class GameObject implements Serializable {
     public void setPositionY(int position_y) {
         this.position_y = position_y;
     }
+
+   public void getDamage(int damage){
+        life-=damage;
+   }
 }
