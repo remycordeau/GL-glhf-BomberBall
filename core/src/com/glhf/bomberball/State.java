@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class State {
+    protected SpriteBatch batch;
 
     //Attributes
     private String state_name;
@@ -11,6 +12,7 @@ public abstract class State {
     //Constructors
     public State(String e){
         state_name = e;
+        batch = new SpriteBatch();
     }
 
     //Methods
@@ -26,5 +28,5 @@ public abstract class State {
         state_name = new_state;
     }
 
-    public abstract void draw(SpriteBatch batch);
+    public abstract void draw();
 }

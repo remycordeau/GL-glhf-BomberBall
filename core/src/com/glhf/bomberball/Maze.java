@@ -20,33 +20,50 @@ public class Maze {
     private static Gson gson;
 
     public Maze() {
-        title = "Classic";
-        height = 11;
-        width = 13;
-        positionStart = new Vector2[4];
-        positionStart[0]= new Vector2(1,1);
-        positionStart[1]= new Vector2(1,10);
-        positionStart[2]= new Vector2(12,1);
-        positionStart[3]= new Vector2(12,10);
-        positionEnd = new Vector2(6,5);
-        tab = new GameObject[width][height];
-        tab[0][0] = new Bomb(0,0,Textures.get("badlogic"), 1);
-        tab[0][1] = new ActiveEnemy(1,0,Textures.get("badlogic"), 3);
-        //tab[0][2] = new NumberBombBoost();
+//        title = "Classic";
+//        height = 11;
+//        width = 13;
+//        positionStart = new Vector2[4];
+//        positionStart[0]= new Vector2(1,1);
+//        positionStart[1]= new Vector2(1,10);
+//        positionStart[2]= new Vector2(12,1);
+//        positionStart[3]= new Vector2(12,10);
+//        positionEnd = new Vector2(6,5);
+//        tab = new GameObject[width][height];
+//        tab[0][0] = new Bomb(0,0,1);
+//        tab[0][1] = new ActiveEnemy(1,0,3);
         if(gson==null)createGson();
     }
 
 
     public void draw(SpriteBatch batch){
-
+        for(int y=0; y<height; y++) {
+            for (int x = 0; x < width; x++) {
+                GameObject o = tab[x][y];
+                int posX = x * Constants.BOX_WIDTH;
+                int posY = y * Constants.BOX_HEIGHT;
+                batch.draw(Textures.get(Constants.FLOOR_TEXTURE_NAME+"_1"), posX, -posY);//TODO choisir aléatoirement la variation de ground
+                if(o != null) {
+                    //TODO attribué une texture à chaque GameObject non null
+                    //batch.draw(o.getTexture(), posX, -posY);
+                }
+            }
+        }
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 
     public static Maze fromJsonFile(String filename) {
         Maze m;
         if(gson==null)createGson();
         try {
-            m = gson.fromJson(new FileReader(new File(filename)), Maze.class);
+            m = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("ERROR : "+e.getMessage());
         }
