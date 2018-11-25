@@ -21,13 +21,15 @@ public class Game extends ApplicationAdapter {
 	private Texture test;
 	private TextureRegion region;
 	private HashMap<String, Texture> textures;
+//	private State state;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		test = new Texture(Gdx.files.internal("core/assets/img/badlogic.jpg"));
-		loadTextures();
+		Textures.loadTextures();
+		//state = StartState.get();
+        test = Textures.get("badlogic");
 		region = new TextureRegion(test, 0, 0, 256, 256);
 		font.setColor(Color.RED);
 	}
@@ -37,6 +39,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(255, 255, 255, 255);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		//state.draw(batch);
 		font.draw(batch, "Natan il est trop beau", 200, 200);
 		batch.draw(region, 300, 200);
 		batch.end();
@@ -47,26 +50,5 @@ public class Game extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		font.dispose();
-	}
-
-
-	private void loadTextures() {
-		textures = new HashMap<String, Texture>();
-		loadTextures("core/assets/");
-	}
-	private void loadTextures(String path) {
-		textures = new HashMap<String, Texture>();
-		File f = new File(path);
-		File[] files = f.listFiles();
-		assert files != null;// le fichier f doit être un dossier
-		for(File file : files) {
-			if (file.isDirectory()){
-				loadTextures(path + file.getName() + "/");
-				continue;
-			}
-			String stringId = file.getName().replace(".jpg", "");
-			System.out.println(stringId);
-			textures.put(stringId, new Texture(Gdx.files.internal(path + file.getName())));
-		}
 	}
 }
