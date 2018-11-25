@@ -15,6 +15,7 @@ public abstract class Enemy extends Character {
     protected Enemy(int position_x, int position_y, int life) {
         super(position_x, position_y, life);
         this.actualMove = 0;
+        //this.strength=path
     }
 
     public void touchPlayer(Player player){
