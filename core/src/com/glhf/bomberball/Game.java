@@ -4,28 +4,23 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 
-import java.io.File;
 import java.util.HashMap;
 
 public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private HashMap<String, Texture> textures;
-	private State StartState;
+	private State state;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		StartState = new StateMainMenu();
+		state = new StateGame().loadMaze("maze_classic.json");
 		Textures.loadTextures();
 		font.setColor(Color.RED);
 	}
@@ -35,7 +30,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(255, 255, 255, 255);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		StartState.draw(batch);
+		state.draw();
 		font.draw(batch, "Natan il est trop beau", 200, 200);
 		batch.end();
 
