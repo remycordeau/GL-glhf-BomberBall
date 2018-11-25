@@ -17,12 +17,13 @@ public class StateMainMenu extends State{
     //Constructor
     public StateMainMenu(){
         super("MainMenu");
+        //this.settings();//TODO La texture boutonsolo n'a pas été push
     }
 
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        test1 = Textures.get("BoutonSolo");
+        test1 = Textures.get("BoutonSolo");//TODO La texture boutonsolo n'a pas été push
         region1 = new TextureRegion(test1, 0, 0, 400, 100);
 
         //BoutonMulti
@@ -34,8 +35,7 @@ public class StateMainMenu extends State{
         region3 = new TextureRegion(test3, 0, 0, 400, 100);
     }
 
-    public void draw(SpriteBatch batch){
-        this.settings();
+    public void draw(){
         batch.draw(region1, 200, 400);
         batch.draw(region2, 200, 300);
         batch.draw(region3, 200, 200);
