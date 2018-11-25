@@ -8,8 +8,8 @@ public class ActiveEnemy extends Enemy {
     //attributes
 
     // constructor
-    public ActiveEnemy(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
-        super(position_x, position_y, appearance);
+    public ActiveEnemy(int position_x, int position_y, Texture appearance, int life) { // temporary, create a file with parameter
+        super(position_x, position_y, appearance, life);
         strength = 1;
         // way = plus long chemin;
     }

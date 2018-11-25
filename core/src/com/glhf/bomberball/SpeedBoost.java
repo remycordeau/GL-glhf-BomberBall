@@ -7,8 +7,8 @@ public class SpeedBoost extends GameObject implements Bonus{
     private int speedBoost;
 
     // constructor
-    public SpeedBoost(int position_x, int position_y, Texture appearance) {
-        super(position_x, position_y, appearance);
+    public SpeedBoost(int position_x, int position_y, Texture appearance, int life) {
+        super(position_x, position_y, appearance, life);
         speedBoost=0;
     }
 }
