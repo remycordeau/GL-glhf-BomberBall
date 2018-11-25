@@ -8,7 +8,8 @@ public class Player extends Character {
     //attributes
     private int number_bomb_remaining;
     private int number_initial_bombs;
-        //bonus owned
+    private int initial_bomb_range;
+    //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
 
@@ -17,22 +18,19 @@ public class Player extends Character {
     public Player(int position_x, int position_y, Texture appearance, int life) { // temporary, create a file with parameter
         super(position_x, position_y, appearance, life);
         number_initial_bombs=1;
-        //initialisation with no bonus (numberBombBoost, bombRangeBoost, speedBoost =0)
+        initial_bomb_range = 3;
     }
 
     // this method initiate the begin of a new turn
     @Override
     public void initiateTurn(){
-        //numberBomb playable = initial numberBomb + number of Bonus that gives more bombs
         number_bomb_remaining= number_initial_bombs+ bonus_owned.get("NumberBombBoost");
         number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
     }
 
-    public void dropBomb(int drop_position_x, int drop_position_y){
+    public Bomb dropBomb(int drop_position_x, int drop_position_y){
         number_bomb_remaining-=1;
-        //if(Math.abs(position_x-drop_position_x)< bonus_owned.get(Object key_element)  and Math.abs(position_y-drop_position_y)<){
-
-        //}
+        return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
     }
 
     public void lootBonus(Bonus bonus) {
