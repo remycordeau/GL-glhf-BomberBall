@@ -1,10 +1,25 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public abstract class Character extends GameObject {
     //attributes
     protected int life;
     protected int number_move_remaining;
-    protected String sprite_path; // texture or string ?
+    protected int number_initial_moves;
+
+    // constructor
+    protected Character(int position_x, int position_y, Texture appearance) { // temporary, create a file with parameter
+        super(position_x, position_y, appearance);
+        this.life = 1;
+        this.number_initial_moves = 5;
+    }
+
+    // method inititate turn
+    public void initiateTurn(){
+        number_move_remaining=number_initial_moves;
+    }
+
 
     public void getDamage(int damage){
         life -= damage;
@@ -32,7 +47,7 @@ public abstract class Character extends GameObject {
         number_move_remaining-=1;
     }
 
-    // call this method only if number_move_remaining is >=0 after the move
+    // call this method only if number_move_remaining is >=0 after the move, mouse
     public void move(int position_x, int position_y){
         this.setPositionX(position_x);
         this.setPositionY(position_y);
@@ -50,19 +65,11 @@ public abstract class Character extends GameObject {
         return number_move_remaining;
     }
 
-    public String getSpritePath() {
-        return sprite_path;
-    }
-
     public void setLife(int life) {
         this.life = life;
     }
 
     public void setNumberMoveRemaining(int number_move_remaining) {
         this.number_move_remaining = number_move_remaining;
-    }
-
-    public void setSpritePath(String sprite_path) {
-        this.sprite_path = sprite_path;
     }
 }
