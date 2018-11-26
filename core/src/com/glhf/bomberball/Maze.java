@@ -1,5 +1,6 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.google.gson.*;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.Random;
 
 public class Maze {
 
@@ -18,6 +20,7 @@ public class Maze {
     private Vector2 positionEnd;
     private GameObject[][] tab;
     private static Gson gson;
+    private long seed; //défini les variations des textures
 
     public Maze() {
 //        title = "Classic";
@@ -35,16 +38,23 @@ public class Maze {
         if(gson==null)createGson();
     }
 
+    public GameObject getGameObjectAt(int pos_x,int pos_y)
+    {
+        return tab[pos_x][pos_y];
+    }
+
 
     public void draw(SpriteBatch batch){
+        Random rand = new Random(seed);
         for(int y=0; y<height; y++) {
             for (int x = 0; x < width; x++) {
                 GameObject o = tab[x][y];
                 int posX = x * Constants.BOX_WIDTH;
-                int posY = y * Constants.BOX_HEIGHT;
-                batch.draw(Textures.get(Constants.FLOOR_TEXTURE_NAME+"_1"), posX, -posY);//TODO choisir aléatoirement la variation de ground
+                int posY = (height-y-1) * Constants.BOX_HEIGHT;
+                Texture texture = Textures.get(Constants.FLOOR_TEXTURE_NAME+"_"+rand.nextInt(Constants.NB_FLOOR_VARIATION));
+                batch.draw(texture, posX, posY);
                 if(o != null) {
-                    //TODO attribué une texture à chaque GameObject non null
+                    //TODO attribuer une texture à chaque GameObject non null
                     //batch.draw(o.getTexture(), posX, -posY);
                 }
             }
@@ -111,3 +121,4 @@ public class Maze {
 
     }
 }
+
