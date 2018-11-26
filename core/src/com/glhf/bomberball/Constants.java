@@ -2,7 +2,7 @@ package com.glhf.bomberball;
 
 public class Constants {
     public static final int BOX_WIDTH = 16;
-    public static final int BOX_HEIGHT = 10;
+    public static final int BOX_HEIGHT = 16;
     public static final int APP_WIDTH = 4*200;
     public static final int APP_HEIGHT = 3*200;
 

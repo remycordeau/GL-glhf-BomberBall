@@ -1,6 +1,7 @@
 package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Bomb extends GameObject {
     // attributes
@@ -17,8 +18,8 @@ public class Bomb extends GameObject {
     }
 
     @Override
-    public Texture getTexture() {
-        return null;
+    public void draw(SpriteBatch batch) {
+
     }
 
     //method explode
