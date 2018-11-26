@@ -23,10 +23,45 @@ public class Bomb extends GameObject {
     //method explode
     public void explode(Maze map){
         int i=1;
+        GameObject object;
         //UP
-        while(i<range){
-            if(map[][])
+        while(i<=range){
+            object=map.getGameObjectAt(position_x,position_y-i);
+            if(object instanceof Wall){
+               i=range;
+            }
+            object.getDamage(damage);
+            i++;
         }
-
+        i=1;
+        //DOWN
+        while(i<=range){
+            object=map.getGameObjectAt(position_x,position_y+i);
+            if(object instanceof Wall){
+                i=range;
+            }
+            object.getDamage(damage);
+            i++;
+        }
+        i=1;
+        //RIGHT
+        while(i<=range){
+            object=map.getGameObjectAt(position_x+i,position_y);
+            if(object instanceof Wall){
+                i=range;
+            }
+            object.getDamage(damage);
+            i++;
+        }
+        i=1;
+        //LEFT
+        while(i<=range){
+            object=map.getGameObjectAt(position_x-i,position_y);
+            if(object instanceof Wall){
+                i=range;
+            }
+            object.getDamage(damage);
+            i++;
+        }
     }
 }
