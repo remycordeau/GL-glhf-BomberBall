@@ -38,6 +38,11 @@ public class Maze {
         if(gson==null)createGson();
     }
 
+    public GameObject getGameObjectAt(int pos_x,int pos_y)
+    {
+        return tab[pos_x][pos_y];
+    }
+
 
     public void draw(SpriteBatch batch){
         Random rand = new Random(seed);
@@ -49,7 +54,7 @@ public class Maze {
                 Texture texture = Textures.get(Constants.FLOOR_TEXTURE_NAME+"_"+rand.nextInt(Constants.NB_FLOOR_VARIATION));
                 batch.draw(texture, posX, posY);
                 if(o != null) {
-                    //TODO attribué une texture à chaque GameObject non null
+                    //TODO attribuer une texture à chaque GameObject non null
                     //batch.draw(o.getTexture(), posX, -posY);
                 }
             }
@@ -116,3 +121,4 @@ public class Maze {
 
     }
 }
+
