@@ -48,14 +48,13 @@ public class Maze {
         Random rand = new Random(seed);
         for(int y=0; y<height; y++) {
             for (int x = 0; x < width; x++) {
-                GameObject o = tab[x][y];
+                GameObject object = tab[x][y];
                 int posX = x * Constants.BOX_WIDTH;
                 int posY = (height-y-1) * Constants.BOX_HEIGHT;
                 Texture texture = Textures.get(Constants.FLOOR_TEXTURE_NAME+"_"+rand.nextInt(Constants.NB_FLOOR_VARIATION));
                 batch.draw(texture, posX, posY);
-                if(o != null) {
-                    //TODO attribuer une texture à chaque GameObject non null
-                    //batch.draw(o.getTexture(), posX, -posY);
+                if(object != null) {
+                    object.draw(batch);
                 }
             }
         }
@@ -133,4 +132,3 @@ public class Maze {
         }
     }
 }
-

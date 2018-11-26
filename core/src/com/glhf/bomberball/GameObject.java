@@ -1,10 +1,12 @@
 package com.glhf.bomberball;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.io.Serializable;
 
-public abstract class GameObject implements Serializable {
+public abstract class GameObject {
     //attributes
     protected int position_x;
     protected int position_y;
@@ -27,8 +29,8 @@ public abstract class GameObject implements Serializable {
         return position_y;
     }
 
-    public Texture getTexture(){
-        return appearance;
+    public void draw(SpriteBatch batch){
+        batch.draw(appearance, position_x*Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
 
     public void setPositionX(int position_x) {
