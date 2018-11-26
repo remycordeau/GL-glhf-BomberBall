@@ -39,7 +39,7 @@ public abstract class GameObject implements Serializable {
         this.position_y = position_y;
     }
 
-   public void getDamage(int damage){
+    public void getDamage(int damage){
         life-=damage;
    }
 }
