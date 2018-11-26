@@ -120,5 +120,17 @@ public class Maze {
         }
 
     }
+
+    // destruction of GameObject when dead
+    public void handleDestruction(){
+        int i, j;
+        for(i=0; i>-getHeight(); i--){
+            for(j=0; j<getWidth(); j++){
+                if(! getGameObjectAt(i,j).isAlive()){
+                    tab[i][j]=null;
+                }
+            }
+        }
+    }
 }
 
