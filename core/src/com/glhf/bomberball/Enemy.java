@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public abstract class Enemy extends Character {
     //attributes
     protected int strength;
-    protected enum moves {UP, DOWN, RIGHT,LEFT}; // A mettre en global
-    protected ArrayList<moves> way;
+    protected ArrayList<Constants.moves> way;
     protected int actualMove;
 
     // constructor
@@ -33,5 +32,6 @@ public abstract class Enemy extends Character {
             case RIGHT:
                 this.moveRight();
         }
+        actualMove += 1;
     }
 }
