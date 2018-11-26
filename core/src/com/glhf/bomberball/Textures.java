@@ -23,7 +23,6 @@ public class Textures {
         loadTextures("core/assets/img/");
     }
     private static void loadTextures(String path) {
-        textures = new HashMap<String, Texture>();
         File f = new File(path);
         File[] files = f.listFiles();
         assert files != null;// le fichier f doit être un dossier

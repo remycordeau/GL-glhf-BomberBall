@@ -34,6 +34,10 @@ public abstract class GameObject {
         batch.draw(appearance, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
 
+    public void setAppearance(Texture texture){
+        this.appearance = texture;
+    }
+
     public void setPositionX(int position_x) {
         this.position_x = position_x;
     }
@@ -50,4 +54,5 @@ public abstract class GameObject {
     public Boolean isAlive() {
         return life <= 0;
     }
+
 }

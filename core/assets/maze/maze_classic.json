@@ -29,7 +29,7 @@
       {
         "position_x":0,
         "position_y":0,
-        "_class":"com.glhf.bomberball.Bomb"
+        "_class":"com.glhf.bomberball.gameobject.Bomb"
       },
       {
         "strength":1,
@@ -39,7 +39,7 @@
         "number_initial_moves":5,
         "position_x":1,
         "position_y":0,
-        "_class":"com.glhf.bomberball.ActiveEnemy"
+        "_class":"com.glhf.bomberball.gameobject.ActiveEnemy"
       },
       null,
       null,
