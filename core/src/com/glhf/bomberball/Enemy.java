@@ -21,6 +21,11 @@ public abstract class Enemy extends Character {
         player.getDamage(strength);
     }
 
+    //set way
+    public void setWay(ArrayList<Constants.moves> way) {
+        this.way = way;
+    }
+
     public void followWay() {
         switch (way.get(actual_move)) {
             case UP:

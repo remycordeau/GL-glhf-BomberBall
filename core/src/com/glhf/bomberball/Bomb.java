@@ -6,6 +6,7 @@ public class Bomb extends GameObject {
     // attributes
     private int damage;
     private int range;
+
     //constructor
     public Bomb(int position_x, int position_y, int range) {
         super(position_x, position_y, 1);

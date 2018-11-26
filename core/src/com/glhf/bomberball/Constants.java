@@ -17,4 +17,5 @@ public class Constants {
 
     // constants for enemies
     public enum moves {UP, DOWN, RIGHT,LEFT}
+    public enum enemyState {ACTIVE, HUNTER}
 }
