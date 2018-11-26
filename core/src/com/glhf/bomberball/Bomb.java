@@ -63,5 +63,6 @@ public class Bomb extends GameObject {
             object.getDamage(damage);
             i++;
         }
+        map.handleDestruction();
     }
 }
