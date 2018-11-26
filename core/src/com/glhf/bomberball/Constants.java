@@ -12,6 +12,9 @@ public class Constants {
 
     public static final String PATH_MAZE = "core/assets/maze/";
 
+    // contants for assets
+    public static final int NB_FLOOR_VARIATION = 8;
+
     // constants for enemies
-    public enum moves {UP, DOWN, RIGHT,LEFT};
+    public enum moves {UP, DOWN, RIGHT,LEFT}
 }
