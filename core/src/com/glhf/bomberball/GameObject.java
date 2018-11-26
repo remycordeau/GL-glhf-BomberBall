@@ -42,4 +42,8 @@ public abstract class GameObject implements Serializable {
     public void getDamage(int damage){
         life-=damage;
    }
+
+    public Boolean isAlive() {
+        return life <= 0;
+    }
 }
