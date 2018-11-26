@@ -21,7 +21,12 @@ public class Bomb extends GameObject {
     }
 
     //method explode
-    public void explode(){
+    public void explode(Maze map){
+        int i=1;
+        //UP
+        while(i<range){
+            if(map[][])
+        }
 
     }
 }
