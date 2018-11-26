@@ -17,11 +17,6 @@ public class Bomb extends GameObject {
         //appearance
     }
 
-    @Override
-    public void draw(SpriteBatch batch) {
-
-    }
-
     //method explode
     public void explode(Maze map){
         int i=1;
@@ -67,7 +62,7 @@ public class Bomb extends GameObject {
         }
         //version avec Coord (un Vector2 avec des int)
         /*
-        for(Coord dir : Coords.directions){
+        for(Coord dir : Coords.directions){//Coords.directions est une variable statique constante avec les 4 vecteurs (0,1),(1,0),(1,0),(1,1)
             for(int i=i; i<=range && !(object instanceof Wall); i++){
                 object=map.getGameObjectAt(position.add(dir));
                 object.getDamage(damage);
