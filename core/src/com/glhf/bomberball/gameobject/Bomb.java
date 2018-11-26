@@ -65,6 +65,15 @@ public class Bomb extends GameObject {
             object.getDamage(damage);
             i++;
         }
+        //version avec Coord (un Vector2 avec des int)
+        /*
+        for(Coord dir : Coords.directions){
+            for(int i=i; i<=range && !(object instanceof Wall); i++){
+                object=map.getGameObjectAt(position.add(dir));
+                object.getDamage(damage);
+            }
+        }
+        */
         map.handleDestruction();
     }
 }
