@@ -18,10 +18,10 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		Textures.loadTextures();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		state = new StateGame().loadMaze("maze_classic.json");
-		Textures.loadTextures();
 		font.setColor(Color.RED);
 	}
 

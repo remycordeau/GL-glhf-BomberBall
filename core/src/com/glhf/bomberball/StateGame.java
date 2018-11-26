@@ -20,9 +20,8 @@ public class StateGame extends State{
         }else{
             height = width/Constants.APP_WIDTH*Constants.APP_HEIGHT;
         }
-        //TODO comprendre pourquoi le Maze n'est pas centré verticalement sur l'écran
         OrthographicCamera cam = new OrthographicCamera(width, height);
-        cam.translate(maze.getWidth()/2f*Constants.BOX_WIDTH, maze.getHeight()/2f*Constants.BOX_HEIGHT);
+        cam.translate(maze.getWidth()/2f*Constants.BOX_WIDTH, -maze.getHeight()/2f*Constants.BOX_HEIGHT+Constants.BOX_HEIGHT);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
         return this;

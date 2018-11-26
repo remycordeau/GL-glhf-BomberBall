@@ -41,6 +41,10 @@ public abstract class GameObject {
         this.position_y = position_y;
     }
 
+    public void setAppearance(Texture appearance) {
+        this.appearance = appearance;
+    }
+
     public void getDamage(int damage){
         life-=damage;
     }
