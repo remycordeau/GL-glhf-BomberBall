@@ -25,16 +25,17 @@ public class Player extends Character {
     // this method initiate the begin of a new turn
     @Override
     public void initiateTurn(){
-        //numberBomb playable = initial numberBomb + number of Bonus that gives more bombs
         number_bomb_remaining= number_initial_bombs+ bonus_owned.get("NumberBombBoost");
         number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
     }
 
+    // to use bombs
     public Bomb dropBomb(int drop_position_x, int drop_position_y){
         number_bomb_remaining-=1;
         return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
     }
 
+    //to loot bonus
     public void lootBonus(Bonus bonus) {
         if (this.bonus_owned.contains(bonus.getName())) {
             this.bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);

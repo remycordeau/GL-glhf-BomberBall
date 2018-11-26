@@ -9,6 +9,7 @@ public class AgressiveEnemy extends Enemy {
     private int begin_position_x;
     private int begin_position_y;
 
+
     // constructor
 
     public AgressiveEnemy(int position_x, int position_y, int life, ArrayList<Constants.moves> way, int begin_position_x, int begin_position_y) { // temporary, create a file with parameter
@@ -20,11 +21,11 @@ public class AgressiveEnemy extends Enemy {
         //appearance
     }
 
-    public void huntPlayer(Player player) {
+    public void huntPlayer(ArrayList<Constants.moves> way) {
         // follow the minimal way to the player
+        setWay(way);
+        followWay();
     }
 
-    public void returnToWay(Maze map) {
-        // return to its way
-    }
+
 }

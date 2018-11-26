@@ -15,7 +15,5 @@ public class ActiveEnemy extends Enemy {
         // way = plus long chemin;
     }
 
-    public void setWay(ArrayList<Constants.moves> way) {
-        this.way = way;
-    }
+
 }
