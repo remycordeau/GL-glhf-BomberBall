@@ -1,6 +1,4 @@
-package com.glhf.bomberball;
-
-import com.badlogic.gdx.graphics.Texture;
+package com.glhf.bomberball.gameobject;
 
 public class Player extends Character {
     private int number_bomb_remaining;

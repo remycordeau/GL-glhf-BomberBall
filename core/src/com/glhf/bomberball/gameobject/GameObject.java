@@ -1,8 +1,9 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.glhf.bomberball.Constants;
 
 import java.io.Serializable;
 
@@ -30,7 +31,7 @@ public abstract class GameObject {
     }
 
     public void draw(SpriteBatch batch){
-        batch.draw(appearance, position_x*Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
+        batch.draw(appearance, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
 
     public void setPositionX(int position_x) {

@@ -1,6 +1,4 @@
-package com.glhf.bomberball;
-
-import com.badlogic.gdx.graphics.Texture;
+package com.glhf.bomberball.gameobject;
 
 public abstract class Character extends GameObject {
     //attributes

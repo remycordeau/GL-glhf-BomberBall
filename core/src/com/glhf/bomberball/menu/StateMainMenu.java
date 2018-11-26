@@ -1,10 +1,11 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.glhf.bomberball.Textures;
+import com.glhf.bomberball.menu.State;
 
-public class StateMainMenu extends State{
+public class StateMainMenu extends State {
 
     //Attributes
     private Texture test1;

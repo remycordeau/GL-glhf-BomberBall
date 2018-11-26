@@ -1,6 +1,5 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class State {

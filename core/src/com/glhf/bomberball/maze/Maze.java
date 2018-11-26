@@ -1,8 +1,12 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Textures;
+import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.gameobject.GameObject;
 import com.google.gson.*;
 
 import java.io.File;

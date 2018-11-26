@@ -1,8 +1,4 @@
-package com.glhf.bomberball;
-
-import com.badlogic.gdx.graphics.Texture;
-
-import java.util.ArrayList;
+package com.glhf.bomberball.gameobject;
 
 public class ActiveEnemy extends Enemy {
     //attributes

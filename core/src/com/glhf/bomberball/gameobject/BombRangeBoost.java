@@ -1,8 +1,8 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.glhf.bomberball.gameobject.Bonus;
 
-public class BombRangeBoost extends Bonus{
+public class BombRangeBoost extends Bonus {
 
     // constructor
     public BombRangeBoost(int position_x, int position_y) {

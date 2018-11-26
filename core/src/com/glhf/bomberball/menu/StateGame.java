@@ -1,9 +1,11 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.maze.Maze;
 
-public class StateGame extends State{
+public class StateGame extends State {
     private Maze maze;
 
     public StateGame(){

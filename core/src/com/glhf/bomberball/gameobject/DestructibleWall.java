@@ -1,6 +1,6 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.glhf.bomberball.gameobject.Wall;
 
 public class DestructibleWall extends Wall {
 

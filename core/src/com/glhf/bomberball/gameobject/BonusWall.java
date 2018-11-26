@@ -1,12 +1,10 @@
-package com.glhf.bomberball;
-
-import com.badlogic.gdx.graphics.Texture;
+package com.glhf.bomberball.gameobject;
 
 public class BonusWall extends DestructibleWall {
 
     //attributes
 
-    private  Bonus bonus;
+    private Bonus bonus;
 
     // constructor
 

@@ -1,8 +1,6 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.Texture;
-
-public class SpeedBoost extends Bonus{
+public class SpeedBoost extends Bonus {
 
     // constructor
     public SpeedBoost(int position_x, int position_y) {

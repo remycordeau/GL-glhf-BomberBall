@@ -1,8 +1,8 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.glhf.bomberball.gameobject.GameObject;
 
-public abstract class Bonus extends GameObject{
+public abstract class Bonus extends GameObject {
     //attributes
     protected String name;
 

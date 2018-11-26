@@ -1,4 +1,4 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.gameobject;
 
 /*public class AgressiveEnnemy extends Ennemy{
     //attributes
