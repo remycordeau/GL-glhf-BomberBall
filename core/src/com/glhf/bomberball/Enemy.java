@@ -8,12 +8,12 @@ public abstract class Enemy extends Character {
     //attributes
     protected int strength;
     protected ArrayList<Constants.moves> way;
-    protected int actualMove;
+    protected int actual_move;
 
     // constructor
     protected Enemy(int position_x, int position_y, int life) {
         super(position_x, position_y, life);
-        this.actualMove = 0;
+        this.actual_move = 0;
         //this.strength=path
     }
 
@@ -22,7 +22,7 @@ public abstract class Enemy extends Character {
     }
 
     public void followWay() {
-        switch (way.get(actualMove)) {
+        switch (way.get(actual_move)) {
             case UP:
                 this.moveUp();
             case DOWN:
@@ -32,6 +32,6 @@ public abstract class Enemy extends Character {
             case RIGHT:
                 this.moveRight();
         }
-        actualMove += 1;
+        actual_move += 1;
     }
 }

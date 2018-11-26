@@ -9,7 +9,7 @@ public class Player extends Character {
     private int number_bomb_remaining;
     private int number_initial_bombs;
     private int initial_bomb_range;
-        //bonus owned
+    //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
 
