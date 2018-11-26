@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.glhf.bomberball.menu.State;
+import com.glhf.bomberball.menu.StateGame;
 
 import java.util.HashMap;
 
@@ -18,10 +20,10 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		Textures.loadTextures();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		state = new StateGame().loadMaze("maze_classic.json");
+		Textures.loadTextures();
 		font.setColor(Color.RED);
 	}
 

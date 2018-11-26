@@ -1,8 +1,12 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Textures;
+import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.gameobject.GameObject;
 import com.google.gson.*;
 
 import java.io.File;
@@ -50,9 +54,9 @@ public class Maze {
             for (int x = 0; x < width; x++) {
                 GameObject object = tab[x][y];
                 int posX = x * Constants.BOX_WIDTH;
-                int posY = y * Constants.BOX_HEIGHT;
+                int posY = (height-y-1) * Constants.BOX_HEIGHT;
                 Texture texture = Textures.get(Constants.FLOOR_TEXTURE_NAME+"_"+rand.nextInt(Constants.NB_FLOOR_VARIATION));
-                batch.draw(texture, posX, -posY);
+                batch.draw(texture, posX, posY);
                 if(object != null) {
                     object.draw(batch);
                 }
@@ -103,10 +107,7 @@ public class Maze {
             String className = jsonObj.get(CLASS_META_KEY).getAsString();
             try {
                 Class<?> clz = Class.forName(className);
-                GameObject o = (GameObject) gson.fromJson(jsonElement, clz);
-                String[] s = className.split("[.]");
-                o.setAppearance(Textures.get(s[s.length-1]));
-                return o;
+                return gson.fromJson(jsonElement, clz);
             } catch (ClassNotFoundException e) {
                 throw new JsonParseException(e);
             }
