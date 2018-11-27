@@ -6,6 +6,8 @@ public class Constants {
     public static final int APP_WIDTH = 720;
     public static final int APP_HEIGHT = 480;
 
+    public static final int NB_PLAYER_MAX = 4;
+
 
     public static final String FLOOR_TEXTURE_NAME = "floor";
 
