@@ -31,17 +31,17 @@
         "position_y":0,
         "_class":"com.glhf.bomberball.gameobject.Bomb"
       },
+      null,
       {
         "strength":1,
         "actualMove":0,
         "life":1,
         "number_move_remaining":0,
         "number_initial_moves":5,
-        "position_x":1,
+        "position_x":2,
         "position_y":0,
         "_class":"com.glhf.bomberball.gameobject.ActiveEnemy"
       },
-      null,
       null,
       null,
       null,

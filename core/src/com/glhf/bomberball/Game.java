@@ -37,7 +37,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		state.draw();
-		//debugRenderer.drawLines(3);
+		//debugRenderer.drawLines(2);
 		font.draw(batch, "Natan il est trop beau :)", 200, 200);
 		batch.end();
 	}

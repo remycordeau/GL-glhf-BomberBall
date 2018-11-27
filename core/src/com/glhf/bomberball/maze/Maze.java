@@ -47,23 +47,6 @@ public class Maze {
         return tab[pos_x][pos_y];
     }
 
-
-    public void draw(SpriteBatch batch){
-        Random rand = new Random(seed);
-        for(int y=0; y<height; y++) {
-            for (int x = 0; x < width; x++) {
-                GameObject object = tab[x][y];
-                int posX = x * Constants.BOX_WIDTH;
-                int posY = y * Constants.BOX_HEIGHT;
-                Texture texture = Textures.get(Constants.FLOOR_TEXTURE_NAME+"_"+rand.nextInt(Constants.NB_FLOOR_VARIATION));
-                batch.draw(texture, posX, posY);
-                if(object != null) {
-                    object.draw(batch);
-                }
-            }
-        }
-    }
-
     public int getHeight() {
         return height;
     }
