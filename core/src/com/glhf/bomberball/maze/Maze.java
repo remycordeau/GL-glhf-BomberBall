@@ -7,6 +7,7 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
+import com.glhf.bomberball.gameobject.Player;
 import com.google.gson.*;
 
 import java.io.File;
@@ -78,6 +79,21 @@ public class Maze {
         gson = new GsonBuilder()
                 .registerTypeAdapter(GameObject.class, new PropertyBasedInterfaceMarshal())
                 .registerTypeAdapter(Bomb.class, new PropertyBasedInterfaceMarshal()).create();
+    }
+
+    /**
+     * Créer les joueurs dans le labyrynthe aux positions de départs
+     * @param life correspond à la vie initial de chacun des joueur
+     * @return une liste des instances de classe des joueurs créés
+     */
+    public Player[] spawnPlayers(int life) {
+        Player[] players = new Player[4];
+        for(int i=0; i<Constants.NB_PLAYER_MAX; i++){
+            Vector2 pos = positionStart[i];
+            players[i] = new Player((int)pos.x, (int)pos.y, life);
+            tab[(int) pos.x][(int) pos.y] = players[i];
+        }
+        return players;
     }
 
     public static class PropertyBasedInterfaceMarshal implements JsonSerializer<Object>, JsonDeserializer<Object> {

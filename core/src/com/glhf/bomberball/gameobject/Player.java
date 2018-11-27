@@ -4,7 +4,7 @@ public class Player extends Character {
     private int number_bomb_remaining;
 
     // constructor
-    protected Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
+    public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
         super(position_x, position_y, life);
     }
 
