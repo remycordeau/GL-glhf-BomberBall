@@ -18,6 +18,8 @@ public class Game extends ApplicationAdapter {
 	private HashMap<String, Texture> textures;
 	private State state;
 
+    private DebugRenderer debugRenderer;
+
 	@Override
 	public void create () {
 		Textures.loadTextures();
@@ -25,6 +27,8 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
 		state = new StateGame().loadMaze("maze_classic.json");
 		font.setColor(Color.RED);
+
+        debugRenderer = new DebugRenderer(batch);
 	}
 
 	@Override
@@ -33,9 +37,9 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		state.draw();
-		font.draw(batch, "Natan il est trop beau", 200, 200);
+		//debugRenderer.drawLines(3);
+		font.draw(batch, "Natan il est trop beau :)", 200, 200);
 		batch.end();
-
 	}
 	
 	@Override
