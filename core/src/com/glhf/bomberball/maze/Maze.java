@@ -121,7 +121,8 @@ public class Maze {
     private static void createGson() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(GameObject.class, new PropertyBasedInterfaceMarshal())
-                .registerTypeAdapter(Bomb.class, new PropertyBasedInterfaceMarshal()).create();
+                .setPrettyPrinting()
+                .create();
     }
 
     /**
@@ -149,10 +150,7 @@ public class Maze {
             String className = jsonObj.get(CLASS_META_KEY).getAsString();
             try {
                 Class<?> clz = Class.forName(className);
-                GameObject o = (GameObject) gson.fromJson(jsonElement, clz);
-                String[] s = className.split("[.]");
-                //o.setAppearance(Textures.get(s[s.length-1]));
-                return o;
+                return (GameObject) gson.fromJson(jsonElement, clz);
             } catch (ClassNotFoundException e) {
                 throw new JsonParseException(e);
             }
