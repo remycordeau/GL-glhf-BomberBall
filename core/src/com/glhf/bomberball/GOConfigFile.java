@@ -2,6 +2,7 @@ package com.glhf.bomberball;
 
 import java.io.IOException;
 import java.io.*;
+import java.util.Scanner;
 
 public class GOConfigFile {
     private File file = null;
