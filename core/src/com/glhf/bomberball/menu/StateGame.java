@@ -14,8 +14,9 @@ public abstract class StateGame extends State {
     protected Maze maze;
     private MazeDrawer mazeDrawer;
 
-    public StateGame(String name) {
+    public StateGame(String name, String maze_filename) {
         super(name);
+        loadMaze(maze_filename);
     }
 
     public void loadMaze(String filename) {
