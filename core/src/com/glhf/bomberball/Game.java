@@ -49,6 +49,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		state.draw();
 		//debugRenderer.drawLines(2);
         batch.end();
 	}
