@@ -11,14 +11,17 @@ import java.util.HashMap;
 public class StateGameMulti extends StateGame{
 
     private Player[] players = new Player[4];
-    private int turnNumber;
+    private int current_player;
+    private int turn_number;
 
-    public StateGameMulti() {
+    public StateGameMulti(String maze_filename) {
         super("GameMulti");
-        turnNumber=0;
+        current_player = 0;
+        turn_number = 0;
+        loadMaze(maze_filename);
     }
 
-    private void start(){
+    private void start() {
         players = maze.spawnPlayers(1);
     }
 
@@ -28,7 +31,7 @@ public class StateGameMulti extends StateGame{
         for(int key : inputs.keySet()){
             if(key==keycode){
                 try {
-                    Player.class.getMethod(inputs.get(key)).invoke(players[turnNumber%Constants.NB_PLAYER_MAX]);
+                    Player.class.getMethod(inputs.get(key)).invoke(players[turn_number % Constants.NB_PLAYER_MAX]);
                 } catch (IllegalAccessException e) { e.printStackTrace(); }
                   catch (InvocationTargetException e) { e.printStackTrace(); }
                   catch (NoSuchMethodException e) { e.printStackTrace(); }

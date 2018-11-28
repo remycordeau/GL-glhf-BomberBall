@@ -29,7 +29,7 @@ public class Game extends ApplicationAdapter {
 		Textures.loadTextures();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		state = new StateGameMulti().loadMaze("classic_maze_1.json");
+		state = new StateGameMulti("classic_maze_1.json");
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
 		Config.load();

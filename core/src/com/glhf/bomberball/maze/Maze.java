@@ -24,9 +24,20 @@ public class Maze {
     private long seed; //défini les variations des textures
 
     public Maze() {
-        /*title = "Classic";
-        height = 11;
-        width = 13;
+        if(gson==null) {
+            createGson();
+        }
+    }
+
+    /**
+     *
+     * @param h hauteur
+     * @param w largeur
+     */
+    public Maze(int h, int w) {
+        title = "Classic";
+        height = h;
+        width = w;
         positionStart = new Vector2[4];
         positionStart[0]= new Vector2(1,1);
         positionStart[1]= new Vector2(1,10);
@@ -43,8 +54,7 @@ public class Maze {
             }
         }
         tab[0][0] = new Bomb(0,0,1);
-        tab[0][1] = new ActiveEnemy(0, 1, 1);*/
-        if(gson==null)createGson();
+        tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
     public GameObject getGameObjectAt(int pos_x,int pos_y)
@@ -69,30 +79,6 @@ public class Maze {
             throw new RuntimeException("ERROR : "+e.getMessage());
         }
         return m;
-    }
-
-    public Maze(int h, int w)
-    {
-        title = "Classic";
-        height = h;
-        width = w;
-        positionStart = new Vector2[4];
-        positionStart[0]= new Vector2(1,1);
-        positionStart[1]= new Vector2(1,10);
-        positionStart[2]= new Vector2(12,1);
-        positionStart[3]= new Vector2(12,10);
-        positionEnd = new Vector2(6,5);
-        tab = new GameObject[width][height];
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                if (Math.random() < 0.1)
-                    tab[x][y] = new DestructibleWall(x, y, 1);
-                if (x % 2 == 1 && y % 2 == 1)
-                    tab[x][y] = new IndestructibleWall(x, y, 1);
-            }
-        }
-        tab[0][0] = new Bomb(0,0,1);
-        tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
     public void toJsonFile(String filename)

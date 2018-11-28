@@ -18,12 +18,10 @@ public abstract class StateGame extends State {
         super(name);
     }
 
-    public State loadMaze(String filename){
+    public void loadMaze(String filename) {
         maze = Maze.fromJsonFile(filename);
 
         mazeDrawer = new MazeDrawer(maze, 0f,1f, 0f, 1f);
-
-        return this;
     }
 
     public void draw() {
