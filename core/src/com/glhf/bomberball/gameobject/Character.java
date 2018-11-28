@@ -11,7 +11,7 @@ public abstract class Character extends GameObject {
         this.number_initial_moves = 5;
     }
 
-    // method inititate turn
+    // method initiate turn
     public void initiateTurn(){
         number_move_remaining=number_initial_moves;
     }

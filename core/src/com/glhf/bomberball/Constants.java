@@ -12,10 +12,11 @@ public class Constants {
 
     public static final String FLOOR_TEXTURE_NAME = "floor";
 
-    // constans of path
+    // constans for paths
     public static final String PATH_ASSET       = "core/assets/";
     public static final String PATH_MAZE        = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE = PATH_ASSET+"config.json";
+    public static final String PATH_GAMEOBJECT =  PATH_ASSET+"gameobject/";
 
     // contants for assets
     public static final int NB_FLOOR_VARIATION = 8;
