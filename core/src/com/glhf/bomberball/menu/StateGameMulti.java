@@ -25,9 +25,8 @@ public class StateGameMulti extends StateGame{
     private void moveCurrentPlayer(int dx, int dy)
     {
         Player p = players[current_player];
-        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy))
-        {
-            maze.moveGameObjectAt(p, dx, dy);
+        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy)) {
+            maze.moveGameObject(p, dx, dy);
         }
     }
 
@@ -35,7 +34,7 @@ public class StateGameMulti extends StateGame{
     @Override
     public boolean keyDown(int keycode) {
         HashMap<Integer, String> inputs = Config.getInputs();
-        System.out.println("keyDown"+keycode);
+        //System.out.println("keyDown"+keycode);
         switch (keycode){
             case Input.Keys.UP:
                 moveCurrentPlayer(0,1);

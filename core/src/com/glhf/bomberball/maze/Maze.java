@@ -52,7 +52,7 @@ public class Maze {
         tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
-    public void moveGameObjectAt(GameObject gameObject, int dx, int dy)
+    public void moveGameObject(GameObject gameObject, int dx, int dy)
     {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
         gameObject.move(dx, dy);
@@ -89,8 +89,16 @@ public class Maze {
 
     public boolean isWalkable(int cell_x, int cell_y)
     {
+        if (!isCellInBounds(cell_x, cell_y)) {
+            return false;
+        }
         GameObject gameObject = getGameObjectAt(cell_x, cell_y);
         return gameObject == null || gameObject.isWalkable();
+    }
+
+    private boolean isCellInBounds(int cell_x, int cell_y)
+    {
+        return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
     // destruction of GameObject when dead
