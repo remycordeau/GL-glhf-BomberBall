@@ -9,7 +9,7 @@ public class GOConfigFile {
 
     public GOConfigFile(String pathname) {
         this.file = new File(pathname);
-        this.scanner = new Scanner(this.file);
+        //this.scanner = new Scanner(this.file);
     }
 
     public void getAttribute(String attributeName) {
