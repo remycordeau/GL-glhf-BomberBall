@@ -11,8 +11,9 @@ public class Constants {
 
     public static final String FLOOR_TEXTURE_NAME = "floor";
 
-
+    // constants for paths
     public static final String PATH_MAZE = "core/assets/maze/";
+    public static final String PATH_GAMEOBJECT = "core/assets/gameobject/";
 
     // contants for assets
     public static final int NB_FLOOR_VARIATION = 8;
