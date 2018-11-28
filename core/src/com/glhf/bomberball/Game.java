@@ -22,6 +22,8 @@ public class Game extends ApplicationAdapter {
 	private HashMap<String, Texture> textures;
 	private State state;
 
+    private DebugRenderer debugRenderer;
+
 	@Override
 	public void create () {
 		Textures.loadTextures();
@@ -35,17 +37,19 @@ public class Game extends ApplicationAdapter {
 		Config.setInput(Input.Keys.RIGHT, "moveRight");
 		Config.setInput(Input.Keys.DOWN, "moveDown");
 		Config.setInput(Input.Keys.LEFT, "moveLeft");
+
+        debugRenderer = new DebugRenderer(batch);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(255, 255, 255, 255);
+		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		state.draw();
-		font.draw(batch, "Natan il est trop beau", 200, 200);
+		//debugRenderer.drawLines(2);
+		font.draw(batch, "Natan il est trop beau :)", 200, 200);
 		batch.end();
-
 	}
 	
 	@Override

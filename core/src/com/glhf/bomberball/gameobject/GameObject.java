@@ -38,6 +38,7 @@ public abstract class GameObject {
         this.appearance = texture;
     }
 
+
     public void setPositionX(int position_x) {
         this.position_x = position_x;
     }
@@ -49,6 +50,9 @@ public abstract class GameObject {
     public void getDamage(int damage){
         life-=damage;
     }
+
+    public Texture getAppearance() { return this.appearance; }
+
 
     // is the Object alive ?
     public Boolean isAlive() {
