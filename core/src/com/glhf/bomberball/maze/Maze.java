@@ -52,11 +52,11 @@ public class Maze {
         tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
-    public void setGameObjectAt(GameObject gameObject, int cell_x, int cell_y)
+    public void moveGameObjectAt(GameObject gameObject, int dx, int dy)
     {
-        gameObject.setPositionX(cell_x);
-        gameObject.setPositionY(cell_y);
-        tab[cell_x][cell_y] = gameObject;
+        tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
+        gameObject.move(dx, dy);
+        tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
     }
 
     public GameObject getGameObjectAt(int cell_x, int cell_y)

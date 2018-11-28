@@ -8,7 +8,7 @@ public class Constants {
     public static final int APP_HEIGHT = 480;
 
     //game properties
-    public static final int NB_PLAYER_MAX = 4;
+    public static final int NB_PLAYER_MAX = 1;
 
     public static final String FLOOR_TEXTURE_NAME = "floor";
 
@@ -22,6 +22,6 @@ public class Constants {
     public static final int NB_FLOOR_VARIATION = 8;
 
     // constants for enemies
-    public enum moves {UP, DOWN, RIGHT,LEFT}
+    public enum moves {UP, DOWN, RIGHT, LEFT}
     public enum enemyState {ACTIVE, HUNTER}
 }

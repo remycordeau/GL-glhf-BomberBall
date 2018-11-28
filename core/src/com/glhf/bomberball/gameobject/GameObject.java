@@ -63,4 +63,9 @@ public abstract class GameObject {
     }
 
     public boolean isWalkable() { return false; }
+
+    public void move(int dx, int dy) {
+        position_x += dx;
+        position_y += dy;
+    }
 }
