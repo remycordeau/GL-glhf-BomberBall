@@ -8,7 +8,7 @@ public class Player extends Character {
     // constructor
     public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
         super(position_x, position_y, life);
-        appearance = Textures.get("box");
+        appearance = Textures.get("Player");
     }
 
 
