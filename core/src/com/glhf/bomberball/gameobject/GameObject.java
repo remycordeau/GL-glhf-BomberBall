@@ -53,6 +53,7 @@ public abstract class GameObject {
 
     public Texture getApperance() { return this.appearance; }
 
+
     // is the Object alive ?
     public Boolean isAlive() {
         return life <= 0;
