@@ -5,13 +5,17 @@ public abstract class Character extends GameObject {
     protected int number_move_remaining;
     protected int number_initial_moves;
 
+    public Character() {
+
+    }
+
     // constructor
     protected Character(int position_x, int position_y, int life) { // temporary, create a file with parameter
         super(position_x, position_y, life);
         this.number_initial_moves = 5;
     }
 
-    // method inititate turn
+    // method initiate turn
     public void initiateTurn(){
         number_move_remaining=number_initial_moves;
     }
@@ -39,11 +43,16 @@ public abstract class Character extends GameObject {
         number_move_remaining-=1;
     }
 
+    public void move(int dx, int dy){
+        super.move(dx, dy);
+        number_move_remaining --; // Math.abs(dx - this.position_x) + Math.abs(position_y - this.position_y);
+    }
+
     // call this method only if number_move_remaining is >=0 after the move, mouse
-    public void move(int position_x, int position_y){
-        this.setPositionX(position_x);
-        this.setPositionY(position_y);
+    public void moveAt(int position_x, int position_y){
         number_move_remaining -= Math.abs(position_x - this.position_x) + Math.abs(position_y - this.position_y);
+        setPositionX(position_x);
+        setPositionY(position_y);
     }
 
 

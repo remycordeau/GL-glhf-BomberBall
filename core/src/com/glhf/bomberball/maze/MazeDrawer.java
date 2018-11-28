@@ -74,12 +74,11 @@ public class MazeDrawer {
     }
 
     private void drawObjects() {
-        for(int y = 0; y < maze_height; y++) {
+        for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
                 GameObject gameobject = maze.getGameObjectAt(x, y);
                 if(gameobject != null) {
-                    drawTextureInCell(gameobject.getApperance(), x, y);
-                    //System.out.println("(" + x + "," + y + ")");
+                    drawTextureInCell(gameobject.getAppearance(), x, y);
                 }
             }
         }
@@ -128,8 +127,10 @@ public class MazeDrawer {
 
     private void drawTextureInCell(Texture texture, int cell_x, int cell_y)
     {
-        Vector2 p = cellToBatchPos(cell_x, cell_y);
-        batch.draw(texture, p.x, p.y);
+        if (texture != null) {
+            Vector2 p = cellToBatchPos(cell_x, cell_y);
+            batch.draw(texture, p.x, p.y);
+        }
     }
 
     private Vector2 cellToBatchPos(int cell_x, int cell_y)

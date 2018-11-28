@@ -2,31 +2,30 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.glhf.bomberball.Config;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 
-public class StateGame extends State {
-    private Maze maze;
-    private MazeDrawer mazeDrawer_0;
-    private MazeDrawer mazeDrawer_1;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 
-    public StateGame() {
-        super("Game");
+public abstract class StateGame extends State {
+    protected Maze maze;
+    private MazeDrawer mazeDrawer;
+
+    public StateGame(String name, String maze_filename) {
+        super(name);
+        loadMaze(maze_filename);
     }
 
-    public State loadMaze(String filename){
+    public void loadMaze(String filename) {
         maze = Maze.fromJsonFile(filename);
 
-        mazeDrawer_0 = new MazeDrawer(maze, 0f,0.75f, 0f, 0.75f);
-        mazeDrawer_1 = new MazeDrawer(maze, 0.75f, 1f, 0.75f, 1f);
-
-        return this;
+        mazeDrawer = new MazeDrawer(maze, 0f,1f, 0f, 1f);
     }
 
     public void draw() {
-        mazeDrawer_0.drawMaze();
-        mazeDrawer_1.drawMaze();
+        mazeDrawer.drawMaze();
     }
-
 }

@@ -1,13 +1,19 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.gameobject.Wall;
 
 public class IndestructibleWall extends Wall {
 
+    public IndestructibleWall()
+    {
+        this.appearance = Textures.get("wall");
+    }
+
     // constructor
-    protected IndestructibleWall(int position_x, int position_y, int life) {
+    public IndestructibleWall(int position_x, int position_y, int life) {
         super(position_x, position_y,life);
-        //apperance
+        appearance = Textures.get("wall");
     }
 
     // an indestructibleWall cannot be broken

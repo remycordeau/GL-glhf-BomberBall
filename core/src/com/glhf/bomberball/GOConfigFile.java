@@ -1,15 +1,18 @@
 package com.glhf.bomberball;
+
 import java.io.IOException;
 import java.io.*;
 
 public class GOConfigFile {
-    //attributes
-    private File file = new File("../../../../../assets/gameobject/config.txt");
+    private File file = null;
+    private Scanner scanner = null;
 
-    public GOConfigFile(){
-
+    public GOConfigFile(String pathname) {
+        this.file = new File(pathname);
+        //this.scanner = new Scanner(this.file);
     }
-    public String read(String variable){
-        return "bleuh";
+
+    public void getAttribute(String attributeName) {
+
     }
 }

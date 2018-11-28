@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Textures;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class AgressiveEnemy extends Enemy {
         strength = 1;
         this.way = way;
         //appearance
+        this.appearance = Textures.get("AgressiveEnemy");
     }
 
     public void huntPlayer(ArrayList<Constants.moves> way) {
