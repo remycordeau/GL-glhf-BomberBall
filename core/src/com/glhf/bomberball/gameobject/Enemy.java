@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.gameobject.Player;
 
@@ -11,6 +12,10 @@ public abstract class Enemy extends Character {
     protected int strength;
     protected ArrayList<Constants.moves> way;
     protected int actual_move;
+
+    public Enemy() {
+
+    }
 
     // constructor
     protected Enemy(int position_x, int position_y, int life) {

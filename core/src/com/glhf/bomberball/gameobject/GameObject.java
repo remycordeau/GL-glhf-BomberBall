@@ -14,8 +14,7 @@ public abstract class GameObject {
     protected transient Texture appearance; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
     protected int life;
 
-    protected GameObject()
-    {
+    protected GameObject() {
 
     }
 
@@ -57,7 +56,6 @@ public abstract class GameObject {
     }
 
     public Texture getAppearance() { return this.appearance; }
-
 
     // is the Object alive ?
     public Boolean isAlive() {

@@ -5,6 +5,10 @@ public abstract class Character extends GameObject {
     protected int number_move_remaining;
     protected int number_initial_moves;
 
+    public Character() {
+
+    }
+
     // constructor
     protected Character(int position_x, int position_y, int life) { // temporary, create a file with parameter
         super(position_x, position_y, life);
