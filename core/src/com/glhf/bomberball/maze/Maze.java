@@ -1,24 +1,19 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.util.Random;
 
 public class Maze {
 
     private String title;
     private int height;
     private int width;
-    private Vector2[] positionStart;
-    private Vector2 positionEnd;
+    private Vector2[] position_start;
+    private Vector2 position_end;
     private GameObject[][] tab;
     private static Gson gson;
     private long seed; //défini les variations des textures
@@ -38,12 +33,12 @@ public class Maze {
         title = "Classic";
         height = h;
         width = w;
-        positionStart = new Vector2[4];
-        positionStart[0]= new Vector2(1,1);
-        positionStart[1]= new Vector2(1,10);
-        positionStart[2]= new Vector2(12,1);
-        positionStart[3]= new Vector2(12,10);
-        positionEnd = new Vector2(6,5);
+        position_start = new Vector2[4];
+        position_start[0]= new Vector2(1,1);
+        position_start[1]= new Vector2(1,10);
+        position_start[2]= new Vector2(12,1);
+        position_start[3]= new Vector2(12,10);
+        position_end = new Vector2(6,5);
         tab = new GameObject[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -71,42 +66,35 @@ public class Maze {
     }
 
     public static Maze fromJsonFile(String filename) {
-        Maze m;
         if(gson==null)createGson();
         try {
-            m = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("ERROR : "+e.getMessage());
-        }
-        return m;
+            return gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
+        } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
+
 
     public void toJsonFile(String filename)
     {
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_MAZE+filename));
+            Writer writer = new FileWriter(new File(Constants.PATH_MAZE + filename));
             writer.write(this.toJson());
             writer.close();
             System.out.println(this.toJson());
-        }
-        catch (Exception e)
-        {
-
-        }
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     public static Maze fromJson(String str) {
         return gson.fromJson(str, Maze.class);
     }
 
-    public String toJson(){
+    public String toJson() {
         return gson.toJson(this);
     }
 
 
     private static void createGson() {
         gson = new GsonBuilder()
-                .registerTypeAdapter(GameObject.class, new PropertyBasedInterfaceMarshal())
+                .registerTypeAdapter(GameObject.class, new MazeTypeAdapter())
                 .setPrettyPrinting()
                 .create();
     }
@@ -118,39 +106,12 @@ public class Maze {
      */
     public Player[] spawnPlayers(int life) {
         Player[] players = new Player[4];
-        for(int i=0; i<Constants.NB_PLAYER_MAX; i++){
-            Vector2 pos = positionStart[i];
-            players[i] = new Player((int)pos.x, (int)pos.y, life);
+        for (int i = 0; i < Constants.NB_PLAYER_MAX; i++) {
+            Vector2 pos = position_start[i];
+            players[i] = new Player((int) pos.x, (int) pos.y, life);
             tab[(int) pos.x][(int) pos.y] = players[i];
         }
         return players;
-    }
-
-    public static class PropertyBasedInterfaceMarshal implements JsonSerializer<Object>, JsonDeserializer<Object> {
-        private static Gson gson = new Gson();
-        private static final String CLASS_META_KEY = "_class";
-
-        @Override
-        public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-            JsonObject jsonObj = (JsonObject) jsonElement;
-            String className = jsonObj.get(CLASS_META_KEY).getAsString();
-            try {
-                Class<?> clz = Class.forName(className);
-                return (GameObject) gson.fromJson(jsonElement, clz);
-            } catch (ClassNotFoundException e) {
-                throw new JsonParseException(e);
-            }
-        }
-
-
-        @Override
-        public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonSerializationContext) {
-            System.out.println(object);
-            JsonElement jsonEle = gson.toJsonTree(object);
-            jsonEle.getAsJsonObject().addProperty(CLASS_META_KEY, object.getClass().getCanonicalName());
-            return jsonEle;
-        }
-
     }
 
     // destruction of GameObject when dead
