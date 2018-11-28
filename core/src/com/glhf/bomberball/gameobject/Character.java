@@ -43,10 +43,16 @@ public abstract class Character extends GameObject {
         number_move_remaining-=1;
     }
 
-    // call this method only if number_move_remaining is >=0 after the move, mouse
     public void move(int dx, int dy){
         super.move(dx, dy);
         number_move_remaining --; // Math.abs(dx - this.position_x) + Math.abs(position_y - this.position_y);
+    }
+
+    // call this method only if number_move_remaining is >=0 after the move, mouse
+    public void moveAt(int position_x, int position_y){
+        number_move_remaining -= Math.abs(position_x - this.position_x) + Math.abs(position_y - this.position_y);
+        setPositionX(position_x);
+        setPositionY(position_y);
     }
 
 
