@@ -25,7 +25,7 @@ public class Game extends ApplicationAdapter {
 		Textures.loadTextures();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		state = new StateGame().loadMaze("maze_classic.json");
+		state = new StateGame().loadMaze("classic_maze_1.json");
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);

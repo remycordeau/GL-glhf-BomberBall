@@ -71,6 +71,44 @@ public class Maze {
         return m;
     }
 
+    public Maze(int h, int w)
+    {
+        title = "Classic";
+        height = h;
+        width = w;
+        positionStart = new Vector2[4];
+        positionStart[0]= new Vector2(1,1);
+        positionStart[1]= new Vector2(1,10);
+        positionStart[2]= new Vector2(12,1);
+        positionStart[3]= new Vector2(12,10);
+        positionEnd = new Vector2(6,5);
+        tab = new GameObject[width][height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (Math.random() < 0.1)
+                    tab[x][y] = new DestructibleWall(x, y, 1);
+                if (x % 2 == 1 && y % 2 == 1)
+                    tab[x][y] = new IndestructibleWall(x, y, 1);
+            }
+        }
+        tab[0][0] = new Bomb(0,0,1);
+        tab[0][1] = new ActiveEnemy(0, 1, 1);
+    }
+
+    public void toJsonFile(String filename)
+    {
+        try {
+            Writer writer = new FileWriter(new File(Constants.PATH_MAZE+filename));
+            writer.write(this.toJson());
+            writer.close();
+            System.out.println(this.toJson());
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
     public static Maze fromJson(String str) {
         return gson.fromJson(str, Maze.class);
     }
@@ -78,6 +116,7 @@ public class Maze {
     public String toJson(){
         return gson.toJson(this);
     }
+
 
     private static void createGson() {
         gson = new GsonBuilder()
