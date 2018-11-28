@@ -5,14 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Textures;
-import com.glhf.bomberball.gameobject.Bomb;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Random;
 
@@ -28,18 +24,26 @@ public class Maze {
     private long seed; //défini les variations des textures
 
     public Maze() {
-//        title = "Classic";
-//        height = 11;
-//        width = 13;
-//        positionStart = new Vector2[4];
-//        positionStart[0]= new Vector2(1,1);
-//        positionStart[1]= new Vector2(1,10);
-//        positionStart[2]= new Vector2(12,1);
-//        positionStart[3]= new Vector2(12,10);
-//        positionEnd = new Vector2(6,5);
-//        tab = new GameObject[width][height];
-//        tab[0][0] = new Bomb(0,0,1);
-//        tab[0][1] = new ActiveEnemy(1,0,3);
+        /*title = "Classic";
+        height = 11;
+        width = 13;
+        positionStart = new Vector2[4];
+        positionStart[0]= new Vector2(1,1);
+        positionStart[1]= new Vector2(1,10);
+        positionStart[2]= new Vector2(12,1);
+        positionStart[3]= new Vector2(12,10);
+        positionEnd = new Vector2(6,5);
+        tab = new GameObject[width][height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (Math.random() < 0.1)
+                    tab[x][y] = new DestructibleWall(x, y, 1);
+                if (x % 2 == 1 && y % 2 == 1)
+                    tab[x][y] = new IndestructibleWall(x, y, 1);
+            }
+        }
+        tab[0][0] = new Bomb(0,0,1);
+        tab[0][1] = new ActiveEnemy(0, 1, 1);*/
         if(gson==null)createGson();
     }
 
@@ -108,7 +112,7 @@ public class Maze {
                 Class<?> clz = Class.forName(className);
                 GameObject o = (GameObject) gson.fromJson(jsonElement, clz);
                 String[] s = className.split("[.]");
-                o.setAppearance(Textures.get(s[s.length-1]));
+                //o.setAppearance(Textures.get(s[s.length-1]));
                 return o;
             } catch (ClassNotFoundException e) {
                 throw new JsonParseException(e);

@@ -51,7 +51,7 @@ public abstract class GameObject {
         life-=damage;
     }
 
-    public Texture getApperance() { return this.appearance; }
+    public Texture getAppearance() { return this.appearance; }
 
     // is the Object alive ?
     public Boolean isAlive() {

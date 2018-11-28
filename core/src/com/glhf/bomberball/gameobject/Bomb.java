@@ -1,6 +1,8 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.maze.Maze;
 
 public class Bomb extends GameObject {
@@ -14,7 +16,7 @@ public class Bomb extends GameObject {
         // initially, bomb inflict 1 damage
         this.damage=1;
         this.range=range;
-        //appearance
+        this.appearance = Textures.get("Bomb");
     }
 
     //method explode
