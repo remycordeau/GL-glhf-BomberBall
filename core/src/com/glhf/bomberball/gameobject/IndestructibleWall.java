@@ -5,6 +5,11 @@ import com.glhf.bomberball.gameobject.Wall;
 
 public class IndestructibleWall extends Wall {
 
+    public IndestructibleWall()
+    {
+        this.appearance = Textures.get("wall");
+    }
+
     // constructor
     public IndestructibleWall(int position_x, int position_y, int life) {
         super(position_x, position_y,life);

@@ -10,6 +10,11 @@ public class Bomb extends GameObject {
     private int damage;
     private int range;
 
+    public Bomb()
+    {
+        this.appearance = Textures.get("Bomb");
+    }
+
     //constructor
     public Bomb(int position_x, int position_y, int range) {
         super(position_x, position_y, 1);

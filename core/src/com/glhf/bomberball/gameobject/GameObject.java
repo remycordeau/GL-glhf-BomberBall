@@ -14,6 +14,11 @@ public abstract class GameObject {
     protected transient Texture appearance; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
     protected int life;
 
+    protected GameObject()
+    {
+
+    }
+
     // constructor
     protected GameObject(int position_x, int position_y, int life) {
         this.position_x = position_x;
