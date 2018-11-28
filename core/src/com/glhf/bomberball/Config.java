@@ -8,7 +8,6 @@ import java.util.HashMap;
 public class Config {
     private static Config config;
     private static Gson gson;
-    private static RandomAccessFile file;
     private HashMap<Integer, String> inputs;
 
     public Config() {
@@ -19,7 +18,6 @@ public class Config {
         gson = new Gson();
         try {
             config = gson.fromJson(new FileReader(new File(Constants.PATH_CONFIG_FILE)), Config.class);
-            file = new RandomAccessFile(new File(Constants.PATH_CONFIG_FILE), "rw");
 
         } catch (FileNotFoundException e)   { e.printStackTrace();
         }
@@ -32,8 +30,9 @@ public class Config {
     public static void setInput(int k, String m){
         config.inputs.put(k, m);
         try {
-            file.seek(0);
-            file.writeUTF(gson.toJson(config));
+            FileWriter file = new FileWriter(new File(Constants.PATH_CONFIG_FILE), false);
+            file.write(gson.toJson(config));
+            file.close();
         } catch (IOException e) { e.printStackTrace(); }
     }
 }
