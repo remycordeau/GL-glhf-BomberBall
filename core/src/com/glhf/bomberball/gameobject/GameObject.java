@@ -58,8 +58,9 @@ public abstract class GameObject {
     public Texture getAppearance() { return this.appearance; }
 
     // is the Object alive ?
-    public Boolean isAlive() {
+    public boolean isAlive() {
         return life <= 0;
     }
 
+    public boolean isWalkable() { return false; }
 }

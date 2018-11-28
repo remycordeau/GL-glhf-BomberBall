@@ -52,9 +52,16 @@ public class Maze {
         tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
-    public GameObject getGameObjectAt(int pos_x,int pos_y)
+    public void setGameObjectAt(GameObject gameObject, int cell_x, int cell_y)
     {
-        return tab[pos_x][pos_y];
+        gameObject.setPositionX(cell_x);
+        gameObject.setPositionY(cell_y);
+        tab[cell_x][cell_y] = gameObject;
+    }
+
+    public GameObject getGameObjectAt(int cell_x, int cell_y)
+    {
+        return tab[cell_x][cell_y];
     }
 
     public int getHeight() {
@@ -65,13 +72,45 @@ public class Maze {
         return width;
     }
 
+    /**
+     * Créer les joueurs dans le labyrynthe aux positions de départs
+     * @param life correspond à la vie initial de chacun des joueur
+     * @return une liste des instances de classe des joueurs créés
+     */
+    public Player[] spawnPlayers(int life) {
+        Player[] players = new Player[4];
+        for (int i = 0; i < Constants.NB_PLAYER_MAX; i++) {
+            Vector2 pos = position_start[i];
+            players[i] = new Player((int) pos.x, (int) pos.y, life);
+            tab[(int) pos.x][(int) pos.y] = players[i];
+        }
+        return players;
+    }
+
+    public boolean isWalkable(int cell_x, int cell_y)
+    {
+        GameObject gameObject = getGameObjectAt(cell_x, cell_y);
+        return gameObject == null || gameObject.isWalkable();
+    }
+
+    // destruction of GameObject when dead
+    public void handleDestruction(){
+        int i, j;
+        for(i=0; i>-getHeight(); i--){
+            for(j=0; j<getWidth(); j++){
+                if(! getGameObjectAt(i,j).isAlive()){
+                    tab[i][j]=null;
+                }
+            }
+        }
+    }
+
     public static Maze fromJsonFile(String filename) {
         if(gson==null)createGson();
         try {
             return gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
-
 
     public void toJsonFile(String filename)
     {
@@ -91,38 +130,10 @@ public class Maze {
         return gson.toJson(this);
     }
 
-
     private static void createGson() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(GameObject.class, new MazeTypeAdapter())
                 .setPrettyPrinting()
                 .create();
-    }
-
-    /**
-     * Créer les joueurs dans le labyrynthe aux positions de départs
-     * @param life correspond à la vie initial de chacun des joueur
-     * @return une liste des instances de classe des joueurs créés
-     */
-    public Player[] spawnPlayers(int life) {
-        Player[] players = new Player[4];
-        for (int i = 0; i < Constants.NB_PLAYER_MAX; i++) {
-            Vector2 pos = position_start[i];
-            players[i] = new Player((int) pos.x, (int) pos.y, life);
-            tab[(int) pos.x][(int) pos.y] = players[i];
-        }
-        return players;
-    }
-
-    // destruction of GameObject when dead
-    public void handleDestruction(){
-        int i, j;
-        for(i=0; i>-getHeight(); i--){
-            for(j=0; j<getWidth(); j++){
-                if(! getGameObjectAt(i,j).isAlive()){
-                    tab[i][j]=null;
-                }
-            }
-        }
     }
 }

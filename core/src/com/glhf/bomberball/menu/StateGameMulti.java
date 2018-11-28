@@ -25,6 +25,15 @@ public class StateGameMulti extends StateGame{
         players = maze.spawnPlayers(1);
     }
 
+    private void moveCurrentPlayer(int dx, int dy)
+    {
+        Player p = players[current_player];
+        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy))
+        {
+            maze.setGameObjectAt(p, p.getPositionX() + dx, p.getPositionY() + dy);
+        }
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         HashMap<Integer, String> inputs = Config.getInputs();
