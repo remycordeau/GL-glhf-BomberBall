@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
@@ -26,6 +28,7 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		Textures.loadAtlasRegions();
 		Textures.loadTextures();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -46,10 +49,8 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		state.draw();
 		//debugRenderer.drawLines(2);
-		font.draw(batch, "Natan il est trop beau :)", 200, 200);
-		batch.end();
+        batch.end();
 	}
 	
 	@Override

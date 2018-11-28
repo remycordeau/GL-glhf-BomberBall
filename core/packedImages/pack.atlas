@@ -1046,14 +1046,14 @@ zombie_run_anim
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 3
 zombie_run_anim
   rotate: false
   xy: 974, 28
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
+  index: 1
 zombie_idle_anim
   rotate: false
   xy: 992, 46
