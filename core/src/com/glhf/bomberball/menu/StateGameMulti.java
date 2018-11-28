@@ -10,18 +10,15 @@ import java.util.HashMap;
 
 public class StateGameMulti extends StateGame{
 
-    private Player[] players = new Player[4];
+    private Player[] players;
     private int current_player;
     private int turn_number;
 
     public StateGameMulti(String maze_filename) {
-        super("GameMulti");
+        super("GameMulti", maze_filename);
         current_player = 0;
         turn_number = 0;
         loadMaze(maze_filename);
-    }
-
-    private void start() {
         players = maze.spawnPlayers(1);
     }
 
