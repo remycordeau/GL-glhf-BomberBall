@@ -26,13 +26,13 @@ public class StateMainMenu extends State {
     public void settings(){
         //BoutonSolo
         //get("BoutonSolo");
-        solo = Graphics.GUI.get("crate");
+        solo = Graphics.GUI.get("boutonSolo");
 
         //BoutonMulti
-        multi = Graphics.GUI.get("crate");
+        multi = Graphics.GUI.get("boutonMulti");
 
         //Bouton Paramètres
-        parametre = Graphics.GUI.get("crate");
+        parametre = Graphics.GUI.get("boutonParametre");
     }
 
     public void draw(){
