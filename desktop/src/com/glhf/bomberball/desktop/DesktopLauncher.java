@@ -15,7 +15,7 @@ public class DesktopLauncher {
 		config.height = Constants.APP_HEIGHT;
 		config.resizable = false;
 
-        TexturePacker.process("core/assets/sprites", "core/packedImages", "pack");
+        TexturePacker.process(Constants.PATH_ASSET+"sprites", Constants.PATH_ASSET+"packedImages/", Constants.ATLAS_NAME);
 
 		new LwjglApplication(new Game(), config);
 	}

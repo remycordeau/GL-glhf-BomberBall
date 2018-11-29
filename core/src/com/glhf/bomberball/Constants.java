@@ -11,12 +11,14 @@ public class Constants {
     public static final int NB_PLAYER_MAX = 1;
 
     public static final String FLOOR_TEXTURE_NAME = "floor";
+    public static final String ATLAS_NAME = "pack";
 
     // constans for paths
     public static final String PATH_ASSET       = "core/assets/";
     public static final String PATH_MAZE        = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE = PATH_ASSET+"config.json";
-    public static final String PATH_GAMEOBJECT =  PATH_ASSET+"gameobject/";
+    public static final String PATH_GAMEOBJECT  = PATH_ASSET+"gameobject/";
+    public static final String PATH_ATLAS       = PATH_ASSET+"packedImages/"+ATLAS_NAME+".atlas";
 
     // contants for assets
     public static final int NB_FLOOR_VARIATION = 8;

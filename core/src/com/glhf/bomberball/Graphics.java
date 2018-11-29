@@ -9,7 +9,7 @@ public class Graphics {
     private static HashMap<String, TextureAtlas.AtlasRegion> atlasRegions;
 
     public static void load() {
-        atlas = new TextureAtlas("core/packedImages/pack.atlas");
+        atlas = new TextureAtlas(Constants.PATH_ATLAS);
         atlasRegions = new HashMap<String, TextureAtlas.AtlasRegion>();
         for (TextureAtlas.AtlasRegion atlasRegion : atlas.getRegions()) {
             atlasRegions.put(atlasRegion.name, atlasRegion);
