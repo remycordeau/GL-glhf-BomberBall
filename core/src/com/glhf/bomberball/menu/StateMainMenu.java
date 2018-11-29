@@ -24,22 +24,20 @@ public class StateMainMenu extends State {
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        get("BoutonSolo");
         test1 = Graphics.GUI.get("BoutonSolo");
-        region1 = new TextureRegion(test1, 0, 0, 400, 100);
 
         //BoutonMulti
         test2 = Graphics.GUI.get("BoutonMulti");
-        region2 = new TextureRegion(test2, 0, 0, 400, 100);
 
         //Bouton Paramètres
         test3 = Graphics.GUI.get("BoutonParametres");
-        region3 = new TextureRegion(test3, 0, 0, 400, 100);
     }
 
     public void draw(){
-        batch.draw(region1, 200, 400);
-        batch.draw(region2, 200, 300);
-        batch.draw(region3, 200, 200);
+        batch.begin();
+        batch.draw(test1, 200, 400);
+        batch.draw(test2, 200, 300);
+        batch.draw(test3, 200, 200);
+        batch.end();
     }
 }

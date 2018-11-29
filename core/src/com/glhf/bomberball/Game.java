@@ -38,8 +38,8 @@ public class Game extends ApplicationAdapter {
 		//Choisir le state voulu pour le lancement de l'application
 
         //state = new StateGameMulti("classic_maze_1.json");
-
         state = new StateMainMenu();
+
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
 
