@@ -1,9 +1,10 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.glhf.bomberball.Graphics;
+
+import static com.glhf.bomberball.Graphics.GUI.get;
 
 public class StateMainMenu extends State {
 
@@ -20,10 +21,10 @@ public class StateMainMenu extends State {
         super("MainMenu");
         this.settings();//TODO La texture boutonsolo n'a pas été push
     }
-
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
+        get("BoutonSolo");
         test1 = Graphics.GUI.get("BoutonSolo");
         region1 = new TextureRegion(test1, 0, 0, 400, 100);
 
