@@ -5,7 +5,6 @@ import com.glhf.bomberball.Config;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 public class StateGameMulti extends StateGame{
@@ -56,6 +55,9 @@ public class StateGameMulti extends StateGame{
                 break;
             case Input.Keys.LEFT:
                 moveCurrentPlayer(-1,0);
+                break;
+            case Input.Keys.SPACE:
+                maze.putBombAt(2, 2);
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
