@@ -14,7 +14,7 @@ public class Graphics {
 
         private static void load()
         {
-            sprites_atlasTexture = new TextureAtlas("core/assets/graphics/packs/pack_sprites.atlas");
+            sprites_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_SPRITES);
             sprites_atlasRegions = new HashMap<String, AtlasRegion>();
             for (AtlasRegion atlasRegion : sprites_atlasTexture.getRegions()) {
                 sprites_atlasRegions.put(atlasRegion.name, atlasRegion);
@@ -38,7 +38,7 @@ public class Graphics {
 
         private static void load()
         {
-            anim_atlasTexture = new TextureAtlas("core/assets/graphics/packs/pack_animations.atlas");
+            anim_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_ANIMS);
             anim_atlasRegions = new HashMap<String, Array<AtlasRegion>>();
             for (AtlasRegion atlasRegion : anim_atlasTexture.getRegions()) {
                 if (!anim_atlasRegions.containsKey(atlasRegion.name)) {
