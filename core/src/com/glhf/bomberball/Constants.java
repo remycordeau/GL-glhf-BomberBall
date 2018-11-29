@@ -16,7 +16,7 @@ public class Constants {
     public static final String PATH_ASSET       = "core/assets/";
     public static final String PATH_MAZE        = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE = PATH_ASSET+"config.json";
-    public static final String PATH_GAMEOBJECT =  PATH_ASSET+"gameobject/";
+    public static final String PATH_GAMEOBJECT =  PATH_ASSET+"gameobject/config.txt";
 
     // contants for assets
     public static final int NB_FLOOR_VARIATION = 8;
@@ -24,4 +24,7 @@ public class Constants {
     // constants for enemies
     public enum moves {UP, DOWN, RIGHT, LEFT}
     public enum enemyState {ACTIVE, HUNTER}
+
+    // constants to configure game objects
+    public static GOConfigFile config_file = new GOConfigFile(Constants.PATH_GAMEOBJECT);
 }

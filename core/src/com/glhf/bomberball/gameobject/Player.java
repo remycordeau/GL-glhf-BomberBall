@@ -1,5 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Textures;
 
 import java.util.Hashtable;
@@ -9,18 +10,16 @@ public class Player extends Character {
     private int number_bomb_remaining;
     private int number_initial_bombs;
     private int initial_bomb_range;
-    //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
 
 
     // constructor
-    public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
-        super(position_x, position_y, life);
+    public Player(int position_x, int position_y) { // temporary, create a file with parameter
+        super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
         appearance = Textures.get("Player");
         number_initial_bombs=1;
         initial_bomb_range = 3;
-        //appearance= path
     }
 
     // this method initiate the begin of a new turn
