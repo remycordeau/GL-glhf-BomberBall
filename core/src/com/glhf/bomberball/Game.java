@@ -15,6 +15,7 @@ import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
 import com.glhf.bomberball.menu.StateGameMulti;
+import com.glhf.bomberball.menu.StateMainMenu;
 
 import java.util.HashMap;
 
@@ -34,7 +35,11 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		state = new StateGameMulti("classic_maze_1.json");
+		//Choisir le state voulu pour le lancement de l'application
+
+        //state = new StateGameMulti("classic_maze_1.json");
+
+        state = new StateMainMenu();
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
 

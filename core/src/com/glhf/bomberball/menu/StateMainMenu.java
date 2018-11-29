@@ -16,21 +16,21 @@ public class StateMainMenu extends State {
     //Constructor
     public StateMainMenu(){
         super("MainMenu");
-        //this.settings();//TODO La texture boutonsolo n'a pas été push
+        this.settings();//TODO La texture boutonsolo n'a pas été push
     }
 
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        //test1 = Textures.get("BoutonSolo");//TODO La texture boutonsolo n'a pas été push
+        test1 = Texture.get("BoutonSolo");//TODO La texture boutonsolo n'a pas été push
         region1 = new TextureRegion(test1, 0, 0, 400, 100);
 
         //BoutonMulti
-        //test2 = Textures.get("BoutonMulti");
+        test2 = Textures.get("BoutonMulti");
         region2 = new TextureRegion(test2, 0, 0, 400, 100);
 
         //Bouton Paramètres
-        //test3 = Textures.get("BoutonParametres");
+        test3 = Textures.get("BoutonParametres");
         region3 = new TextureRegion(test3, 0, 0, 400, 100);
     }
 
