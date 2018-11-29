@@ -37,8 +37,9 @@ public class StateMainMenu extends State {
 
     public void draw(){
         batch.begin();
-        batch.draw(solo, 200, 400);
-        batch.draw(multi, 200, 300);
-        batch.draw(parametre, 200, 200);
+        batch.draw(solo, 200, 300);
+        batch.draw(multi, 200, 200);
+        batch.draw(parametre, 200, 100);
+        batch.end();
     }
 }
