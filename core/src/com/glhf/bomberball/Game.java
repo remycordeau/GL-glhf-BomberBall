@@ -30,17 +30,13 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		Config.load();
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		state = new StateGameMulti("classic_maze_1.json");
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
-		Config.load();
-		Config.setInput(Input.Keys.UP, "moveUp");
-		Config.setInput(Input.Keys.RIGHT, "moveRight");
-		Config.setInput(Input.Keys.DOWN, "moveDown");
-		Config.setInput(Input.Keys.LEFT, "moveLeft");
 
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;

@@ -49,13 +49,13 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(-1,0);
                 break;
         }
-//            if(key==keycode) {
-//                try {
-//                    Player.class.getMethod(inputs.get(key)).invoke(players[turn_number % Constants.NB_PLAYER_MAX]);
-//                } catch (IllegalAccessException e) { e.printStackTrace(); }
-//                  catch (InvocationTargetException e) { e.printStackTrace(); }
-//                  catch (NoSuchMethodException e) { e.printStackTrace(); }
-//            }
+//        if(inputs.keySet().contains(keycode)) {
+//            try {
+//                Player.class.getMethod(inputs.get(keycode)).invoke(players[turn_number % Constants.NB_PLAYER_MAX]);
+//            } catch (IllegalAccessException e) { e.printStackTrace(); }
+//              catch (InvocationTargetException e) { e.printStackTrace(); }
+//              catch (NoSuchMethodException e) { e.printStackTrace(); }
+//        }
         return false;
     }
 }

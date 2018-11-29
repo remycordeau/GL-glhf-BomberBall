@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
@@ -22,8 +23,8 @@ public class Player extends Character {
     private Animation<AtlasRegion> animation_idle;
 
     // constructor
-    public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
-        super(position_x, position_y, life);
+    public Player(int position_x, int position_y) {
+        super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
         number_initial_bombs=1;
         initial_bomb_range = 3;
         animation_idle = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get("knight_m_idle_anim"), PlayMode.LOOP);
