@@ -26,6 +26,8 @@ public class Game extends ApplicationAdapter {
 
     private DebugRenderer debugRenderer;
 
+    public static float time_elapsed;
+
 	@Override
 	public void create () {
 		Graphics.load();
@@ -41,10 +43,12 @@ public class Game extends ApplicationAdapter {
 		Config.setInput(Input.Keys.LEFT, "moveLeft");
 
         debugRenderer = new DebugRenderer(batch);
+        Game.time_elapsed = 0;
 	}
 
 	@Override
 	public void render () {
+	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
