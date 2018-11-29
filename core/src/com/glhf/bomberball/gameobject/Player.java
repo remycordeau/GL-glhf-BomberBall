@@ -27,7 +27,7 @@ public class Player extends Character {
         super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
         number_initial_bombs=1;
         initial_bomb_range = 3;
-        animation_idle = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get("knight_m_idle_anim"), PlayMode.LOOP);
+        animation_idle = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get("chort/idle"), PlayMode.LOOP);
     }
 
     @Override
