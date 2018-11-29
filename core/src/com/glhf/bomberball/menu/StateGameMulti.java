@@ -1,6 +1,7 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Config;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
@@ -28,6 +29,7 @@ public class StateGameMulti extends StateGame{
         if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy)) {
             maze.moveGameObject(p, dx, dy);
             if (p.getNumberMoveRemaining() == 0) {
+                maze.processEndTurn();
                 nextPlayer();
             }
         }
@@ -41,7 +43,7 @@ public class StateGameMulti extends StateGame{
 
     @Override
     public boolean keyDown(int keycode) {
-        HashMap<Integer, String> inputs = Config.getInputs();
+        //HashMap<Integer, String> inputs = Config.getInputs();
         //System.out.println("keyDown"+keycode);
         switch (keycode){
             case Input.Keys.UP:
@@ -57,7 +59,7 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(-1,0);
                 break;
             case Input.Keys.SPACE:
-                maze.putBombAt(2, 2);
+
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
@@ -67,6 +69,17 @@ public class StateGameMulti extends StateGame{
 //              catch (InvocationTargetException e) { e.printStackTrace(); }
 //              catch (NoSuchMethodException e) { e.printStackTrace(); }
 //        }
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector2 cell = mazeDrawer.screenPosToCell(screenX, screenY);
+        int cell_x = (int)cell.x;
+        int cell_y = (int)cell.y;
+        if (maze.isWalkable(cell_x, cell_y)) {
+            maze.putBombAt(cell_x, cell_y);
+        }
         return false;
     }
 }
