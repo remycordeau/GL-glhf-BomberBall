@@ -1,11 +1,11 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -21,6 +21,7 @@ public class MazeDrawer {
     private SpriteBatch batch;
     private int maze_width;
     private int maze_height;
+    private OrthographicCamera camera;
 
     private float x_pos_offset;
     private float y_pos_offset;
@@ -57,11 +58,11 @@ public class MazeDrawer {
         float width_scaled = width * ratio * scaling;
         float height_scaled = height * scaling;
 
-        OrthographicCamera cam = new OrthographicCamera(width_scaled, height_scaled);
+        camera = new OrthographicCamera(width_scaled, height_scaled);
         float x_offset = 0.5f * dx * width_scaled * (1 - 1/ratio);
-        cam.translate(width_scaled * (0.5f - x_minp) - x_offset, height_scaled * (0.5f - y_minp));
-        cam.update();
-        batch.setProjectionMatrix(cam.combined);
+        camera.translate(width_scaled * (0.5f - x_minp) - x_offset, height_scaled * (0.5f - y_minp));
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
     }
 
     public void drawMaze()
@@ -144,6 +145,17 @@ public class MazeDrawer {
             Vector2 p = cellToBatchPos(cell_x, cell_y);
             batch.draw(atlasRegion, p.x, p.y);
         }
+    }
+
+    public Vector2 screenPosToCell(int screen_x, int screen_y)
+    {
+        Vector3 p = new Vector3(screen_x, screen_y, 0f);
+        camera.unproject(p);
+        p.x = p.x - x_pos_offset;
+        p.y = p.y - y_pos_offset;
+        int cell_x = (int)Math.floor(p.x / Constants.BOX_WIDTH);
+        int cell_y = (int)Math.floor(p.y / Constants.BOX_HEIGHT);
+        return new Vector2(cell_x, cell_y);
     }
 
     private Vector2 cellToBatchPos(int cell_x, int cell_y)
