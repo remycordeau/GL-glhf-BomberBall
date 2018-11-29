@@ -6,6 +6,7 @@ import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Maze {
 
@@ -17,6 +18,7 @@ public class Maze {
     private GameObject[][] tab;
     private static Gson gson;
     private long seed; //défini les variations des textures
+    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
     public Maze() {
         if(gson==null) {
@@ -59,6 +61,13 @@ public class Maze {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
     }
 
+    public void putBombAt(int cell_x, int cell_y)
+    {
+        Bomb b = new Bomb(cell_x, cell_y, 3);
+        tab[cell_x][cell_y] = b;
+        bombs.add(b);
+    }
+
     public GameObject getGameObjectAt(int cell_x, int cell_y)
     {
         return tab[cell_x][cell_y];
@@ -86,6 +95,15 @@ public class Maze {
             tab[(int) pos.x][(int) pos.y] = players[i];
         }
         return players;
+    }
+
+    public void processEndTurn()
+    {
+        for (Bomb bomb : bombs) {
+            bomb.explode(this);
+            tab[bomb.getPositionX()][bomb.getPositionY()] = null;
+        }
+        bombs.clear();
     }
 
     public boolean isWalkable(int cell_x, int cell_y)

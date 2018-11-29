@@ -20,7 +20,6 @@ public abstract class Character extends GameObject {
         number_move_remaining=number_initial_moves;
     }
 
-
     //move functions
     public void moveRight(){
         position_x+=1;
@@ -54,8 +53,6 @@ public abstract class Character extends GameObject {
         setPositionX(position_x);
         setPositionY(position_y);
     }
-
-
 
     //getters et setters
     public int getLife() {
