@@ -45,6 +45,8 @@ public class StateGameMulti extends StateGame{
     public boolean keyDown(int keycode) {
         //HashMap<Integer, String> inputs = Config.getInputs();
         //System.out.println("keyDown"+keycode);
+        int x = players[current_player_index].getPositionX();
+        int y = players[current_player_index].getPositionY();
         switch (keycode){
             case Input.Keys.UP:
                 moveCurrentPlayer(0,1);
@@ -59,7 +61,8 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(-1,0);
                 break;
             case Input.Keys.SPACE:
-
+                maze.processEndTurn();
+                nextPlayer();
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
