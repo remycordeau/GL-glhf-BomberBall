@@ -31,14 +31,12 @@ public class Player extends Character {
         setAnimation(player_skin+"/idle");
     }
 
-    private void setAnimation(String animation_str)
-    {
+    private void setAnimation(String animation_str) {
         animation = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get(animation_str), PlayMode.LOOP);
     }
 
     @Override
-    public AtlasRegion getSprite()
-    {
+    public AtlasRegion getSprite() {
         return animation.getKeyFrame(Game.time_elapsed);
     }
 
@@ -63,7 +61,11 @@ public class Player extends Character {
     // to use bombs
     public Bomb dropBomb(int drop_position_x, int drop_position_y){
         number_bomb_remaining-=1;
-        return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+        Integer range_boost = bonus_owned.get("BombRangeBoost");
+        if(range_boost == null)
+            return new Bomb(drop_position_x, drop_position_y, initial_bomb_range);
+        else
+            return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + range_boost);
     }
     //to loot bonus
     public void lootBonus(Bonus bonus) {

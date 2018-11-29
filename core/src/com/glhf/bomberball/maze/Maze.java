@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Void;
 import com.google.gson.*;
 
 import java.io.*;
@@ -19,7 +20,7 @@ public class Maze {
     private GameObject[][] tab;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+    private transient ArrayList<Bomb> bombs = new ArrayList<Bomb>(); //transient permet d'éviter d'écrire l'objet bomb dans le fichier json
 
     public Maze() {
         if(gson==null) {
@@ -37,41 +38,53 @@ public class Maze {
         height = h;
         width = w;
         position_start = new Vector2[4];
-        position_start[0]= new Vector2(1,1);
-        position_start[1]= new Vector2(1,10);
-        position_start[2]= new Vector2(12,1);
-        position_start[3]= new Vector2(12,10);
+        position_start[0]= new Vector2(0,0);
+        position_start[1]= new Vector2(0,h-1);
+        position_start[2]= new Vector2(w-1,0);
+        position_start[3]= new Vector2(w-1,h-1);
         position_end = new Vector2(6,5);
         tab = new GameObject[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (Math.random() < 0.1)
-                    tab[x][y] = new DestructibleWall(x, y, 1);
                 if (x % 2 == 1 && y % 2 == 1)
                     tab[x][y] = new IndestructibleWall(x, y, 1);
+                else if (Math.random() < 0.1)
+                    tab[x][y] = new DestructibleWall(x, y, 1);
+                else
+                    tab[x][y] = new Void(x, y);
             }
         }
-        tab[0][0] = new Bomb(0,0,1);
-        tab[0][1] = new ActiveEnemy(0, 1, 1);
     }
 
-    public void moveGameObject(GameObject gameObject, int dx, int dy)
-    {
-        tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
+    /**
+     * cette fonction échange deux game objets
+     * @param gameObject l'objet qui va être dépacer de (dx, dy)
+     * @param dx deplacement en x
+     * @param dy deplacement en y
+     */
+    public void moveGameObject(GameObject gameObject, int dx, int dy) {
+        int x = gameObject.getPositionX(), y = gameObject.getPositionY();
+        tab[x][y] = tab[x+dx][y+dy];
+        tab[x][y].move(-dx, -dy);
         gameObject.move(dx, dy);
-        tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
+        tab[x+dx][y+dy] = gameObject;
     }
 
-    public void putBombAt(int cell_x, int cell_y)
+    public void putBomb(Bomb bomb)
     {
-        Bomb b = new Bomb(cell_x, cell_y, 3);
-        tab[cell_x][cell_y] = b;
-        bombs.add(b);
+        int cell_x = bomb.getPositionX();
+        int cell_y = bomb.getPositionY();
+        try {
+            if(tab[cell_x][cell_y] instanceof Void) {
+                tab[cell_x][cell_y] = bomb;
+                bombs.add(bomb);
+            }
+        } catch (ArrayIndexOutOfBoundsException e){ }
     }
 
     public GameObject getGameObjectAt(int cell_x, int cell_y)
     {
-        GameObject gameObject = null;
+        GameObject gameObject = new Void(cell_x, cell_y);
         try {
             gameObject = tab[cell_x][cell_y];
         }
@@ -109,7 +122,7 @@ public class Maze {
     {
         for (Bomb bomb : bombs) {
             bomb.explode(this);
-            tab[bomb.getPositionX()][bomb.getPositionY()] = null;
+            tab[bomb.getPositionX()][bomb.getPositionY()] = new Void(bomb.getPositionX(),bomb.getPositionY());
         }
         bombs.clear();
     }
@@ -120,7 +133,7 @@ public class Maze {
             return false;
         }
         GameObject gameObject = getGameObjectAt(cell_x, cell_y);
-        return gameObject == null || gameObject.isWalkable();
+        return gameObject.isWalkable();
     }
 
     private boolean isCellInBounds(int cell_x, int cell_y)
@@ -130,8 +143,8 @@ public class Maze {
 
     public void handleGameObjectDamage(GameObject gameObject)
     {
-        if (gameObject != null && !gameObject.isAlive()) {
-            tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
+        if (!gameObject.isAlive()) {
+            tab[gameObject.getPositionX()][gameObject.getPositionY()] = new Void(gameObject.getPositionX(),gameObject.getPositionY());
         }
     }
 
@@ -142,8 +155,8 @@ public class Maze {
         for(i=0; i>-getHeight(); i--) {
             for(j=0; j<getWidth(); j++) {
                 gameobject = getGameObjectAt(i,j);
-                if(gameobject != null && !gameobject.isAlive()){
-                    tab[i][j]=null;
+                if(!gameobject.isAlive()){
+                    tab[i][j]= new Void(i,j);
                 }
             }
         }
@@ -156,13 +169,12 @@ public class Maze {
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
 
-    public void toJsonFile(String filename)
-    {
+    public void toJsonFile(String filename){
+        if(gson==null)createGson();
         try {
             Writer writer = new FileWriter(new File(Constants.PATH_MAZE + filename));
             writer.write(this.toJson());
             writer.close();
-            System.out.println(this.toJson());
         } catch (IOException e) { e.printStackTrace(); }
     }
 

@@ -2,11 +2,8 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Config;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
-
-import java.util.HashMap;
 
 public class StateGameMulti extends StateGame{
 
@@ -60,6 +57,18 @@ public class StateGameMulti extends StateGame{
             case Input.Keys.LEFT:
                 moveCurrentPlayer(-1,0);
                 break;
+            case Input.Keys.NUMPAD_8:
+                maze.putBomb(players[current_player_index].dropBomb(x,y+1));
+                break;
+            case Input.Keys.NUMPAD_6:
+                maze.putBomb(players[current_player_index].dropBomb(x+1,y));
+                break;
+            case Input.Keys.NUMPAD_2:
+                maze.putBomb(players[current_player_index].dropBomb(x,y-1));
+                break;
+            case Input.Keys.NUMPAD_4:
+                maze.putBomb(players[current_player_index].dropBomb(x-1,y));
+                break;
             case Input.Keys.SPACE:
                 maze.processEndTurn();
                 nextPlayer();
@@ -81,7 +90,7 @@ public class StateGameMulti extends StateGame{
         int cell_x = (int)cell.x;
         int cell_y = (int)cell.y;
         if (maze.isWalkable(cell_x, cell_y)) {
-            maze.putBombAt(cell_x, cell_y);
+            maze.putBomb(players[current_player_index].dropBomb(cell_x,cell_y));
         }
         return false;
     }
