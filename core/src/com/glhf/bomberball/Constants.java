@@ -8,7 +8,7 @@ public class Constants {
     public static final int APP_HEIGHT = 480;
 
     //game properties
-    public static final int NB_PLAYER_MAX = 2;
+    public static final int NB_PLAYER_MAX = 4;
 
 
     // constans for paths
