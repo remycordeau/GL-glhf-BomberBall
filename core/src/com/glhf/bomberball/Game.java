@@ -15,6 +15,7 @@ import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
 import com.glhf.bomberball.menu.StateGameMulti;
+import com.glhf.bomberball.menu.StateMainMenu;
 
 import java.util.HashMap;
 
@@ -26,26 +27,29 @@ public class Game extends ApplicationAdapter {
 
     private DebugRenderer debugRenderer;
 
+    public static float time_elapsed;
+
 	@Override
 	public void create () {
-		Textures.loadAtlasRegions();
-		Textures.loadTextures();
+		Config.load();
+		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		state = new StateGameMulti("classic_maze_1.json");
+		//Choisir le state voulu pour le lancement de l'application
+
+        //state = new StateGameMulti("classic_maze_1.json");
+
+        state = new StateMainMenu();
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
-		Config.load();
-		Config.setInput(Input.Keys.UP, "moveUp");
-		Config.setInput(Input.Keys.RIGHT, "moveRight");
-		Config.setInput(Input.Keys.DOWN, "moveDown");
-		Config.setInput(Input.Keys.LEFT, "moveLeft");
 
         debugRenderer = new DebugRenderer(batch);
+        Game.time_elapsed = 0;
 	}
 
 	@Override
 	public void render () {
+	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();

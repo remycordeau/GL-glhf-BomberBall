@@ -3,9 +3,11 @@ package com.glhf.bomberball.maze;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Textures;
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 
 /*
@@ -78,58 +80,69 @@ public class MazeDrawer {
             for (int x = 0; x < maze_width; x++) {
                 GameObject gameobject = maze.getGameObjectAt(x, y);
                 if(gameobject != null) {
-                    drawTextureInCell(gameobject.getAppearance(), x, y);
+                    drawTextureInCell(gameobject.getSprite(), x, y);
                 }
+            }
+        }
+    }
+
+    private void drawFloor()
+    {
+        AtlasRegion sprite = Graphics.Sprites.get("floor");
+        for(int y = 0; y < maze_height; y++) {
+            for (int x = 0; x < maze_width; x++) {
+               drawTextureInCell(sprite, x, y);
             }
         }
     }
 
     private void drawSideWalls()
     {
-        Texture texture_l = Textures.get("left_wall");
-        Texture texture_r = Textures.get("right_wall");
+        AtlasRegion sprite_l = Graphics.Sprites.get("wall_side_mid_left");
+        AtlasRegion sprite_r = Graphics.Sprites.get("wall_side_mid_right");
         for (int y = 0; y < maze_height; y++)
         {
-            drawTextureInCell(texture_l, -1, y);
-            drawTextureInCell(texture_r, maze_width, y);
+            drawTextureInCell(sprite_l, -1, y);
+            drawTextureInCell(sprite_r, maze_width, y);
         }
     }
 
     private void drawBackWall()
     {
-        Texture texture = Textures.get("back_wall");
-        for (int x = 0; x < maze_width; x++)
-            drawTextureInCell(texture, x, maze_height);
+        AtlasRegion sprite_top = Graphics.Sprites.get("wall_top_mid");
+        AtlasRegion sprite_mid = Graphics.Sprites.get("wall_mid");
+        for (int x = 0; x < maze_width; x++) {
+            drawTextureInCell(sprite_top, x, maze_height + 1);
+            drawTextureInCell(sprite_mid, x, maze_height);
+        }
 
-        drawTextureInCell(Textures.get("left_back_wall"), -1, maze_height);
-        drawTextureInCell(Textures.get("right_back_wall"), maze_width, maze_height);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_top_left"), -1, maze_height + 1);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_left"), -1, maze_height);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_top_right"), maze_width, maze_height + 1);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_right"), maze_width, maze_height);
     }
 
     private void drawFrontWall()
     {
-        Texture texture = Textures.get("front_wall");
+        AtlasRegion sprite_top = Graphics.Sprites.get("wall_top_mid");
+        AtlasRegion sprite_mid = Graphics.Sprites.get("wall_mid");
+        AtlasRegion sprite_bottom = Graphics.Sprites.get("edge");
         for (int x = 0; x < maze_width; x++) {
-            drawTextureInCell(texture, x, -2);
+            drawTextureInCell(sprite_top, x, 0);
+            drawTextureInCell(sprite_mid, x, -1);
+            drawTextureInCell(sprite_bottom, x, -2);
         }
-        drawTextureInCell(Textures.get("left_front_wall"), -1, -2);
-        drawTextureInCell(Textures.get("right_front_wall"), maze_width, -2);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_front_left"), -1, -1);
+        drawTextureInCell(Graphics.Sprites.get("edge_left"), -1, -2);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_front_right"), maze_width, -1);
+        drawTextureInCell(Graphics.Sprites.get("edge_right"), maze_width, -2);
     }
 
-    private void drawFloor()
+    private void drawTextureInCell(AtlasRegion atlasRegion, int cell_x, int cell_y)
     {
-        Texture texture = Textures.get("floor_1");
-        for(int y = 0; y < maze_height; y++) {
-            for (int x = 0; x < maze_width; x++) {
-               drawTextureInCell(texture, x, y);
-            }
-        }
-    }
-
-    private void drawTextureInCell(Texture texture, int cell_x, int cell_y)
-    {
-        if (texture != null) {
+        if (atlasRegion != null) {
             Vector2 p = cellToBatchPos(cell_x, cell_y);
-            batch.draw(texture, p.x, p.y);
+            batch.draw(atlasRegion, p.x, p.y);
         }
     }
 
