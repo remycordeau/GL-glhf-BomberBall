@@ -58,9 +58,34 @@ public class Graphics {
         }
     }
 
+    public static class GUI {
+        private static TextureAtlas gui_atlasTexture;;
+        private static HashMap<String, AtlasRegion> gui_atlasRegions;
+
+        private static void load()
+        {
+            gui_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_GUI);
+            gui_atlasRegions = new HashMap<String, AtlasRegion>();
+            for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
+                gui_atlasRegions.put(atlasRegion.name, atlasRegion);
+                System.out.println("GUI element " + atlasRegion.name + " loaded");
+            }
+            System.out.println(gui_atlasRegions.size() + " GUI elements succesfully loaded");
+        }
+
+        public static AtlasRegion get(String sprite_str)
+        {
+            if (!gui_atlasRegions.containsKey(sprite_str)) {
+                System.err.println("GUI element " + sprite_str + " doesn't exists");
+            }
+            return gui_atlasRegions.get(sprite_str);
+        }
+    }
+
     public static void load() {
         Graphics.Sprites.load();
         Graphics.Anims.load();
+        Graphics.GUI.load();
     }
 
 }

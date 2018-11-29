@@ -1,1056 +1,1158 @@
 
 pack_animations.png
-size: 1024,64
+size: 256,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-chort_idle_anim
+knight_f/hit
   rotate: false
-  xy: 488, 38
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_f/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_f/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+knight_f/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+knight_f/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+knight_f/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_f/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+knight_f/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+knight_f/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+
+pack_animations2.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+wizzard_f/hit
+  rotate: false
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_f/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_f/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+wizzard_f/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+wizzard_f/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+wizzard_f/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_f/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+wizzard_f/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+wizzard_f/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+
+pack_animations3.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+knight_m/hit
+  rotate: false
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_m/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_m/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+knight_m/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+knight_m/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+knight_m/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+knight_m/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+knight_m/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+knight_m/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+
+pack_animations4.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+efl_m/hit
+  rotate: false
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+efl_m/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+efl_m/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+efl_m/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+efl_m/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+efl_m/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+efl_m/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+efl_m/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+efl_m/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+
+pack_animations5.png
+size: 128,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+imp/idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+imp/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+imp/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+imp/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+imp/run
+  rotate: false
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+imp/run
+  rotate: false
+  xy: 74, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+imp/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+imp/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+
+pack_animations6.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+wogol/wogol_idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+wogol/wogol_idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+wogol/wogol_idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+wogol/wogol_idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+wogol/wogol_run
+  rotate: false
+  xy: 74, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+wogol/wogol_run
+  rotate: false
+  xy: 92, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+wogol/wogol_run
+  rotate: false
+  xy: 110, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+wogol/wogol_run
+  rotate: false
+  xy: 128, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+
+pack_animations7.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+orc_shaman/idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+orc_shaman/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+orc_shaman/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+orc_shaman/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+orc_shaman/run
+  rotate: false
+  xy: 74, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+orc_shaman/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+orc_shaman/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+orc_shaman/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+
+pack_animations8.png
+size: 64,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+zombie/idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+zombie/run
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+zombie/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+zombie/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+zombie/run
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+zombie/run
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+zombie/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+zombie/run
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+
+pack_animations9.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+wizzard_m/hit
+  rotate: false
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_m/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_m/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+wizzard_m/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+wizzard_m/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+wizzard_m/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+wizzard_m/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+wizzard_m/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+wizzard_m/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+
+pack_animations10.png
+size: 128,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+swampy/idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+swampy/run
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+swampy/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+swampy/run
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+swampy/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+swampy/run
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+swampy/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+swampy/run
+  rotate: false
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+
+pack_animations11.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+orc_warrior/idle
+  rotate: false
+  xy: 2, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+orc_warrior/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+orc_warrior/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+orc_warrior/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+orc_warrior/run
+  rotate: false
+  xy: 74, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 0
+orc_warrior/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+orc_warrior/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+orc_warrior/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 3
+
+pack_animations12.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+chort/idle
+  rotate: false
+  xy: 2, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 0
-chort_idle_anim
+chort/idle
   rotate: false
-  xy: 488, 12
+  xy: 20, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 1
-chort_idle_anim
+chort/idle
   rotate: false
-  xy: 506, 38
+  xy: 38, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 2
-chort_idle_anim
+chort/idle
   rotate: false
-  xy: 506, 12
+  xy: 56, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 3
-chort_run_anim
+chort/run
   rotate: false
-  xy: 524, 38
+  xy: 74, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 0
-chort_run_anim
+chort/run
   rotate: false
-  xy: 524, 12
+  xy: 92, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 1
-chort_run_anim
+chort/run
   rotate: false
-  xy: 542, 38
+  xy: 110, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 2
-chort_run_anim
+chort/run
   rotate: false
-  xy: 542, 12
+  xy: 128, 2
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 3
-elf_f_hit_anim
+
+pack_animations13.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+skelet/idle
   rotate: false
-  xy: 2, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_f_idle_anim
-  rotate: false
-  xy: 2, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_f_idle_anim
-  rotate: false
-  xy: 20, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-elf_f_idle_anim
-  rotate: false
-  xy: 20, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-elf_f_idle_anim
-  rotate: false
-  xy: 38, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-elf_f_run_anim
-  rotate: false
-  xy: 38, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_f_run_anim
-  rotate: false
-  xy: 56, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-elf_f_run_anim
-  rotate: false
-  xy: 56, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-elf_f_run_anim
-  rotate: false
-  xy: 74, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-elf_m_hit_anim
-  rotate: false
-  xy: 74, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_m_idle_anim
-  rotate: false
-  xy: 92, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_m_idle_anim
-  rotate: false
-  xy: 92, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-elf_m_idle_anim
-  rotate: false
-  xy: 110, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-elf_m_idle_anim
-  rotate: false
-  xy: 110, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-elf_m_run_anim
-  rotate: false
-  xy: 128, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-elf_m_run_anim
-  rotate: false
-  xy: 128, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-elf_m_run_anim
-  rotate: false
-  xy: 146, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-elf_m_run_anim
-  rotate: false
-  xy: 146, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-imp_idle_anim
-  rotate: false
-  xy: 560, 2
+  xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-imp_idle_anim
+skelet/idle
   rotate: false
-  xy: 578, 2
+  xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-imp_idle_anim
+skelet/idle
   rotate: false
-  xy: 578, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-imp_idle_anim
-  rotate: false
-  xy: 596, 2
+  xy: 38, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-imp_run_anim
+skelet/idle
   rotate: false
-  xy: 614, 2
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+skelet/run
+  rotate: false
+  xy: 74, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-imp_run_anim
+skelet/run
   rotate: false
-  xy: 632, 2
+  xy: 92, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-imp_run_anim
+skelet/run
   rotate: false
-  xy: 650, 2
+  xy: 110, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-imp_run_anim
+skelet/run
   rotate: false
-  xy: 668, 2
+  xy: 128, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
-knight_f_hit_anim
+
+pack_animations14.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+elf_f/hit
   rotate: false
-  xy: 164, 34
+  xy: 2, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 0
-knight_f_idle_anim
+elf_f/idle
   rotate: false
-  xy: 164, 4
+  xy: 20, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 0
-knight_f_idle_anim
+elf_f/idle
   rotate: false
-  xy: 182, 34
+  xy: 38, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 1
-knight_f_idle_anim
+elf_f/idle
   rotate: false
-  xy: 182, 4
+  xy: 56, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 2
-knight_f_idle_anim
+elf_f/idle
   rotate: false
-  xy: 200, 34
+  xy: 74, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 3
-knight_f_run_anim
+elf_f/run
   rotate: false
-  xy: 200, 4
+  xy: 92, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 0
-knight_f_run_anim
+elf_f/run
   rotate: false
-  xy: 218, 34
+  xy: 110, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 1
-knight_f_run_anim
+elf_f/run
   rotate: false
-  xy: 218, 4
+  xy: 128, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 2
-knight_f_run_anim
+elf_f/run
   rotate: false
-  xy: 236, 34
+  xy: 146, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: 3
-knight_m_hit_anim
+
+pack_animations15.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+masked_orc/idle
   rotate: false
-  xy: 236, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-knight_m_idle_anim
-  rotate: false
-  xy: 254, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-knight_m_idle_anim
-  rotate: false
-  xy: 254, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-knight_m_idle_anim
-  rotate: false
-  xy: 272, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-knight_m_idle_anim
-  rotate: false
-  xy: 272, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-knight_m_run_anim
-  rotate: false
-  xy: 290, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-knight_m_run_anim
-  rotate: false
-  xy: 290, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-knight_m_run_anim
-  rotate: false
-  xy: 308, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-knight_m_run_anim
-  rotate: false
-  xy: 308, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-masked_orc_idle_anim
-  rotate: false
-  xy: 560, 42
+  xy: 2, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 0
-masked_orc_idle_anim
+masked_orc/idle
   rotate: false
-  xy: 560, 20
+  xy: 20, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 1
-masked_orc_idle_anim
+masked_orc/idle
   rotate: false
-  xy: 578, 42
+  xy: 38, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 2
-masked_orc_idle_anim
+masked_orc/idle
   rotate: false
-  xy: 578, 20
+  xy: 56, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 3
-masked_orc_run_anim
+masked_orc/run
   rotate: false
-  xy: 596, 42
+  xy: 74, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 0
-masked_orc_run_anim
+masked_orc/run
   rotate: false
-  xy: 596, 20
+  xy: 92, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 1
-masked_orc_run_anim
+masked_orc/run
   rotate: false
-  xy: 614, 42
+  xy: 110, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 2
-masked_orc_run_anim
+masked_orc/run
   rotate: false
-  xy: 614, 20
+  xy: 128, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 3
-muddy_idle_anim
+
+pack_animations16.png
+size: 128,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tiny_zombie/idle
   rotate: false
-  xy: 686, 2
+  xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-muddy_run_anim
+tiny_zombie/idle
   rotate: false
-  xy: 686, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-muddy_idle_anim
-  rotate: false
-  xy: 704, 2
+  xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-muddy_run_anim
+tiny_zombie/idle
   rotate: false
-  xy: 704, 2
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+tiny_zombie/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+tiny_zombie/run
+  rotate: false
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+tiny_zombie/run
+  rotate: false
+  xy: 74, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-muddy_idle_anim
+tiny_zombie/run
   rotate: false
-  xy: 722, 2
+  xy: 92, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-muddy_run_anim
+tiny_zombie/run
   rotate: false
-  xy: 722, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-muddy_idle_anim
-  rotate: false
-  xy: 740, 2
+  xy: 110, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
-muddy_run_anim
+
+pack_animations17.png
+size: 128,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+muddy/idle
   rotate: false
-  xy: 740, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-necromancer_idle_anim
-  rotate: false
-  xy: 632, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-necromancer_run_anim
-  rotate: false
-  xy: 632, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-necromancer_idle_anim
-  rotate: false
-  xy: 632, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-necromancer_run_anim
-  rotate: false
-  xy: 632, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-necromancer_idle_anim
-  rotate: false
-  xy: 650, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-necromancer_run_anim
-  rotate: false
-  xy: 650, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-necromancer_idle_anim
-  rotate: false
-  xy: 650, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-necromancer_run_anim
-  rotate: false
-  xy: 650, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-orc_shaman_idle_anim
-  rotate: false
-  xy: 668, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-orc_shaman_idle_anim
-  rotate: false
-  xy: 668, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-orc_shaman_idle_anim
-  rotate: false
-  xy: 686, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-orc_shaman_idle_anim
-  rotate: false
-  xy: 686, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-orc_shaman_run_anim
-  rotate: false
-  xy: 704, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-orc_shaman_run_anim
-  rotate: false
-  xy: 704, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-orc_shaman_run_anim
-  rotate: false
-  xy: 722, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-orc_shaman_run_anim
-  rotate: false
-  xy: 722, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-orc_warrior_idle_anim
-  rotate: false
-  xy: 740, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-orc_warrior_idle_anim
-  rotate: false
-  xy: 740, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-orc_warrior_idle_anim
-  rotate: false
-  xy: 758, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-orc_warrior_idle_anim
-  rotate: false
-  xy: 758, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-orc_warrior_run_anim
-  rotate: false
-  xy: 776, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 0
-orc_warrior_run_anim
-  rotate: false
-  xy: 776, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-orc_warrior_run_anim
-  rotate: false
-  xy: 794, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-orc_warrior_run_anim
-  rotate: false
-  xy: 794, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-skelet_idle_anim
-  rotate: false
-  xy: 758, 2
+  xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-skelet_idle_anim
+muddy/run
   rotate: false
-  xy: 776, 2
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+muddy/idle
+  rotate: false
+  xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-skelet_idle_anim
+muddy/run
   rotate: false
-  xy: 794, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-skelet_idle_anim
-  rotate: false
-  xy: 812, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-skelet_run_anim
-  rotate: false
-  xy: 830, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-skelet_run_anim
-  rotate: false
-  xy: 848, 2
+  xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-skelet_run_anim
+muddy/idle
   rotate: false
-  xy: 866, 2
+  xy: 38, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-skelet_run_anim
+muddy/run
   rotate: false
-  xy: 884, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-swampy_idle_anim
-  rotate: false
-  xy: 884, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-swampy_run_anim
-  rotate: false
-  xy: 884, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-swampy_idle_anim
-  rotate: false
-  xy: 902, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-swampy_run_anim
-  rotate: false
-  xy: 902, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-swampy_idle_anim
-  rotate: false
-  xy: 884, 10
+  xy: 38, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-swampy_run_anim
+muddy/idle
   rotate: false
-  xy: 884, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-swampy_idle_anim
-  rotate: false
-  xy: 902, 28
+  xy: 56, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
-swampy_run_anim
+muddy/run
   rotate: false
-  xy: 902, 28
+  xy: 56, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
-tiny_zombie_idle_anim
+
+pack_animations18.png
+size: 128,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+necromancer/idle
   rotate: false
-  xy: 920, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-tiny_zombie_idle_anim
-  rotate: false
-  xy: 902, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-tiny_zombie_idle_anim
-  rotate: false
-  xy: 902, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-tiny_zombie_idle_anim
-  rotate: false
-  xy: 920, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-tiny_zombie_run_anim
-  rotate: false
-  xy: 938, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-tiny_zombie_run_anim
-  rotate: false
-  xy: 920, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-tiny_zombie_run_anim
-  rotate: false
-  xy: 938, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-tiny_zombie_run_anim
-  rotate: false
-  xy: 956, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-wizzard_f_idle_anim
-  rotate: false
-  xy: 326, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzard_f_idle_anim
-  rotate: false
-  xy: 326, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-wizzard_f_idle_anim
-  rotate: false
-  xy: 344, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-wizzard_f_idle_anim
-  rotate: false
-  xy: 344, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-wizzard_m_idle_anim
-  rotate: false
-  xy: 362, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzard_m_idle_anim
-  rotate: false
-  xy: 362, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-wizzard_m_idle_anim
-  rotate: false
-  xy: 380, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-wizzard_m_idle_anim
-  rotate: false
-  xy: 380, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-wizzart_f_hit_anim
-  rotate: false
-  xy: 398, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzart_f_run_anim
-  rotate: false
-  xy: 398, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzart_f_run_anim
-  rotate: false
-  xy: 416, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-wizzart_f_run_anim
-  rotate: false
-  xy: 416, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-wizzart_f_run_anim
-  rotate: false
-  xy: 434, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-wizzart_m_hit_anim
-  rotate: false
-  xy: 434, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzart_m_run_anim
-  rotate: false
-  xy: 452, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-wizzart_m_run_anim
-  rotate: false
-  xy: 452, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-wizzart_m_run_anim
-  rotate: false
-  xy: 470, 34
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-wizzart_m_run_anim
-  rotate: false
-  xy: 470, 4
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-wogol_idle_anim
-  rotate: false
-  xy: 812, 42
+  xy: 2, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 0
-wogol_idle_anim
+necromancer/run
   rotate: false
-  xy: 812, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-wogol_idle_anim
-  rotate: false
-  xy: 830, 42
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-wogol_idle_anim
-  rotate: false
-  xy: 830, 20
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-wogol_run_anim
-  rotate: false
-  xy: 848, 42
+  xy: 2, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 0
-wogol_run_anim
+necromancer/idle
   rotate: false
-  xy: 848, 20
+  xy: 20, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 1
-wogol_run_anim
+necromancer/run
   rotate: false
-  xy: 866, 42
+  xy: 20, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 1
+necromancer/idle
+  rotate: false
+  xy: 38, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 2
-wogol_run_anim
+necromancer/run
   rotate: false
-  xy: 866, 20
+  xy: 38, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: 2
+necromancer/idle
+  rotate: false
+  xy: 56, 2
   size: 16, 20
   orig: 16, 20
   offset: 0, 0
   index: 3
-zombie_idle_anim
+necromancer/run
   rotate: false
-  xy: 938, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-zombie_run_anim
-  rotate: false
-  xy: 938, 10
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-zombie_idle_anim
-  rotate: false
-  xy: 956, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-zombie_idle_anim
-  rotate: false
-  xy: 956, 28
-  size: 16, 16
-  orig: 16, 16
+  xy: 56, 2
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 3
-zombie_run_anim
-  rotate: false
-  xy: 956, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-zombie_run_anim
-  rotate: false
-  xy: 956, 28
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-zombie_idle_anim
-  rotate: false
-  xy: 974, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-zombie_run_anim
-  rotate: false
-  xy: 974, 46
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
