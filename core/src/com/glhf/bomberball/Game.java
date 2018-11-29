@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
@@ -26,17 +28,13 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		Textures.loadTextures();
+		Config.load();
+		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		state = new StateGameMulti("classic_maze_1.json");
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
-		Config.load();
-		Config.setInput(Input.Keys.UP, "moveUp");
-		Config.setInput(Input.Keys.RIGHT, "moveRight");
-		Config.setInput(Input.Keys.DOWN, "moveDown");
-		Config.setInput(Input.Keys.LEFT, "moveLeft");
 
         debugRenderer = new DebugRenderer(batch);
 	}
@@ -48,8 +46,7 @@ public class Game extends ApplicationAdapter {
 		batch.begin();
 		state.draw();
 		//debugRenderer.drawLines(2);
-		font.draw(batch, "Natan il est trop beau :)", 200, 200);
-		batch.end();
+        batch.end();
 	}
 	
 	@Override

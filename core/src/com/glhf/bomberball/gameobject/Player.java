@@ -1,7 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Textures;
 
 import java.util.Hashtable;
 
@@ -12,12 +12,10 @@ public class Player extends Character {
     private int initial_bomb_range;
     private Hashtable<String, Integer> bonus_owned;
 
-
-
     // constructor
-    public Player(int position_x, int position_y) { // temporary, create a file with parameter
+    public Player(int position_x, int position_y) {
         super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
-        appearance = Textures.get("Player");
+        sprite = Graphics.get("knight_m_idle_anim");
         number_initial_bombs=1;
         initial_bomb_range = 3;
     }

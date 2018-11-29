@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Textures;
 
 import java.util.ArrayList;
 
@@ -13,6 +12,6 @@ public class PassiveEnemy extends Enemy {
         super(position_x, position_y, life);
         strength = 1;
         this.way = way;
-        appearance = Textures.get("PassiveEnemy");
+        //appearance = Textures.get("PassiveEnemy");
     }
 }
