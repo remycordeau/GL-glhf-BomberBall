@@ -1,8 +1,15 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 import java.util.Hashtable;
+
+import static com.badlogic.gdx.graphics.g2d.Animation.*;
 
 public class Player extends Character {
     //attributes
@@ -12,12 +19,20 @@ public class Player extends Character {
     //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
+    private Animation<AtlasRegion> animation_idle;
+
     // constructor
     public Player(int position_x, int position_y, int life) { // temporary, create a file with parameter
         super(position_x, position_y, life);
-        sprite = Graphics.get("knight_m_idle_anim");
         number_initial_bombs=1;
         initial_bomb_range = 3;
+        animation_idle = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get("knight_m_idle_anim"), PlayMode.LOOP);
+    }
+
+    @Override
+    public AtlasRegion getSprite()
+    {
+        return animation_idle.getKeyFrame(Game.time_elapsed);
     }
 
     // this method initiate the begin of a new turn

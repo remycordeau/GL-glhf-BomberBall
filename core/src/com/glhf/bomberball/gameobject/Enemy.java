@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Textures;
 import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.gameobject.Player;
 

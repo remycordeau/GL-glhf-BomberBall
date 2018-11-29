@@ -1,0 +1,132 @@
+
+pack_sprites.png
+size: 128,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+crate
+  rotate: false
+  xy: 2, 2
+  size: 16, 22
+  orig: 16, 22
+  offset: 0, 0
+  index: -1
+edge
+  rotate: false
+  xy: 20, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+edge_left
+  rotate: false
+  xy: 20, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+edge_right
+  rotate: false
+  xy: 38, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+floor
+  rotate: false
+  xy: 20, 6
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall
+  rotate: false
+  xy: 2, 26
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+wall_left
+  rotate: false
+  xy: 38, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_mid
+  rotate: false
+  xy: 56, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_right
+  rotate: false
+  xy: 38, 6
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_front_left
+  rotate: false
+  xy: 56, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_front_right
+  rotate: false
+  xy: 74, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_mid_left
+  rotate: false
+  xy: 56, 6
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_mid_right
+  rotate: false
+  xy: 74, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_top_left
+  rotate: false
+  xy: 92, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_side_top_right
+  rotate: false
+  xy: 110, 42
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_top_left
+  rotate: false
+  xy: 74, 6
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_top_mid
+  rotate: false
+  xy: 92, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+wall_top_right
+  rotate: false
+  xy: 110, 24
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

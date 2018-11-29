@@ -6,7 +6,7 @@ public class ActiveEnemy extends Enemy {
     //attributes
 
     public ActiveEnemy() {
-        sprite = Graphics.get("chort_idle_anim");
+        sprite = Graphics.Sprites.get("chort_idle_anim");
     }
 
     // constructor
