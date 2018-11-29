@@ -20,20 +20,25 @@ public class Player extends Character {
     //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
-    private Animation<AtlasRegion> animation_idle;
+    private Animation<AtlasRegion> animation;
 
     // constructor
-    public Player(int position_x, int position_y) {
+    public Player(int position_x, int position_y, String player_skin) {
         super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
         number_initial_bombs=1;
         initial_bomb_range = 3;
-        animation_idle = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get("chort/idle"), PlayMode.LOOP);
+        setAnimation(player_skin+"/idle");
+    }
+
+    private void setAnimation(String animation_str)
+    {
+        animation = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get(animation_str), PlayMode.LOOP);
     }
 
     @Override
     public AtlasRegion getSprite()
     {
-        return animation_idle.getKeyFrame(Game.time_elapsed);
+        return animation.getKeyFrame(Game.time_elapsed);
     }
 
     // this method initiate the begin of a new turn

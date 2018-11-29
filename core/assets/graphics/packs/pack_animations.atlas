@@ -207,75 +207,6 @@ knight_m/run
   index: 3
 
 pack_animations4.png
-size: 256,32
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-efl_m/hit
-  rotate: false
-  xy: 2, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-efl_m/idle
-  rotate: false
-  xy: 20, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-efl_m/idle
-  rotate: false
-  xy: 38, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-efl_m/idle
-  rotate: false
-  xy: 56, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-efl_m/idle
-  rotate: false
-  xy: 74, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-efl_m/run
-  rotate: false
-  xy: 92, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 0
-efl_m/run
-  rotate: false
-  xy: 110, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 1
-efl_m/run
-  rotate: false
-  xy: 128, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-efl_m/run
-  rotate: false
-  xy: 146, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 3
-
-pack_animations5.png
 size: 128,32
 format: RGBA8888
 filter: Nearest,Nearest
@@ -337,7 +268,7 @@ imp/run
   offset: 0, 0
   index: 3
 
-pack_animations6.png
+pack_animations5.png
 size: 256,32
 format: RGBA8888
 filter: Nearest,Nearest
@@ -399,7 +330,7 @@ wogol/wogol_run
   offset: 0, 0
   index: 3
 
-pack_animations7.png
+pack_animations6.png
 size: 256,32
 format: RGBA8888
 filter: Nearest,Nearest
@@ -458,6 +389,75 @@ orc_shaman/run
   xy: 128, 2
   size: 16, 20
   orig: 16, 20
+  offset: 0, 0
+  index: 3
+
+pack_animations7.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+elf_m/hit
+  rotate: false
+  xy: 2, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+elf_m/idle
+  rotate: false
+  xy: 20, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+elf_m/idle
+  rotate: false
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+elf_m/idle
+  rotate: false
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+elf_m/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+elf_m/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+elf_m/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+elf_m/run
+  rotate: false
+  xy: 128, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+elf_m/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 3
 
@@ -500,14 +500,14 @@ zombie/run
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 3
 zombie/run
   rotate: false
   xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
+  index: 1
 zombie/idle
   rotate: false
   xy: 38, 2
