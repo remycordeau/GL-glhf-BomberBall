@@ -11,25 +11,34 @@ import java.util.HashMap;
 public class StateGameMulti extends StateGame{
 
     private Player[] players;
-    private int current_player;
+    private int current_player_index;
     private int turn_number;
 
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
-        current_player = 0;
+        current_player_index = 0;
         turn_number = 0;
         loadMaze(maze_filename);
         players = maze.spawnPlayers(1);
+        players[0].initiateTurn();
     }
 
     private void moveCurrentPlayer(int dx, int dy)
     {
-        Player p = players[current_player];
+        Player p = players[current_player_index];
         if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy)) {
             maze.moveGameObject(p, dx, dy);
+            if (p.getNumberMoveRemaining() == 0) {
+                nextPlayer();
+            }
         }
     }
 
+    private void nextPlayer()
+    {
+        current_player_index = (current_player_index + 1) % Constants.NB_PLAYER_MAX;
+        players[current_player_index].initiateTurn();
+    }
 
     @Override
     public boolean keyDown(int keycode) {

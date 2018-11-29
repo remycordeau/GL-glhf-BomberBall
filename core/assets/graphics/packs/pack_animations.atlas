@@ -500,14 +500,14 @@ zombie/run
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
+  index: 1
 zombie/run
   rotate: false
   xy: 20, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 3
 zombie/idle
   rotate: false
   xy: 38, 2
