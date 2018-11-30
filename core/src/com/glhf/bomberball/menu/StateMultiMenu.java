@@ -3,6 +3,7 @@ package com.glhf.bomberball.menu;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
+import com.glhf.bomberball.GUI.SelectButton;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
@@ -10,6 +11,7 @@ public class StateMultiMenu extends State {
     //Attributes
     private Button retrievePlayer;
     private Button addPlayer;
+    private SelectButton numberPlayer;
     private Button begin;
     private Button begin_random;
     private ButtonUndo cancel;
@@ -23,10 +25,13 @@ public class StateMultiMenu extends State {
     /*Loading textures*/
     public void settings(){
         //Button retrievePlayer
-        retrievePlayer = new Button(0, 0, 167, 100, "Minus");
+        retrievePlayer = new Button(100, 15, 167, 100, "Minus2");
 
         //Button addPlayer
-        addPlayer = new Button(200, 0, 167, 100, "Plus");
+        addPlayer = new Button(200, 15, 167, 100, "Plus2");
+
+        //Button numberPlayer
+        numberPlayer = new SelectButton(137, 2, 50, 50);
 
         //Button Cancel
         State s = new StateMainMenu("MainMenu");
@@ -43,6 +48,7 @@ public class StateMultiMenu extends State {
         cancel.draw(batch);
         retrievePlayer.draw(batch);
         addPlayer.draw(batch);
+        numberPlayer.draw(batch);
         begin.draw(batch);
         begin_random.draw(batch);
         if(err)
@@ -58,7 +64,12 @@ public class StateMultiMenu extends State {
         y = Constants.APP_HEIGHT - y;
         if(retrievePlayer.contains(x, y))
         {
-            err=true;
+            /*int newNumberOfPlayers;
+            newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
+            newNumberOfPlayers++;
+            Constants.config_file.setIntAttribute(newNumberOfPlayers);
+            numberPlayer.setSprite(Graphics.GUI.get(newNumberOfPlayers +""));
+            */
             //TODO retirer un joueur et l'afficher
         }
         if(addPlayer.contains(x, y)) {

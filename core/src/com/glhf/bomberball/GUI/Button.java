@@ -7,7 +7,7 @@ import com.glhf.bomberball.Graphics;
 
 public class Button extends Rectangle {
     //Attributes
-    TextureAtlas.AtlasRegion sprite;
+    private TextureAtlas.AtlasRegion sprite;
 
 
     public Button(int x, int y, int width, int height, String s){
@@ -19,5 +19,13 @@ public class Button extends Rectangle {
         batch.begin();
         batch.draw(sprite, x, y);
         batch.end();
+    }
+
+    TextureAtlas.AtlasRegion getSprite(){
+        return sprite;
+    }
+
+    public void setSprite(TextureAtlas.AtlasRegion sprite){
+        this.sprite = sprite;
     }
 }
