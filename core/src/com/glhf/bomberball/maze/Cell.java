@@ -50,6 +50,10 @@ public class Cell {
         }
     }
 
+    /**
+     * Add a GameObject to a Cell
+     * @param gameObject the GameObject to be inserted
+     */
     public void addGameObject(GameObject gameObject)
     {
         objects.add(gameObject);
@@ -62,14 +66,28 @@ public class Cell {
         }
     }*/
 
+    /**
+     * Remove a GameObject from a Cell
+     * @param gameObject the GameObject to be removed
+     */
     public void removeGameObject(GameObject gameObject) {
         objects.remove(gameObject);
     }
 
+    /**
+     * Fonction non nécéssaire si la classe Cell s'affiche elle même
+     * TODO remove this function
+     * @return objects
+     */
     public ArrayList<GameObject> getObjects() {
         return objects;
     }
 
+    /**
+     * Search in the Cell if a GameObject is instance of a specific Class
+     * @param c the class to check
+     * @return true if an object is instance of c
+     */
     public boolean hasGameObjectInstanceOf(Class c) {
         for(GameObject gameObject : objects){
             if(c.isInstance(gameObject)){
