@@ -64,7 +64,7 @@ public class Maze {
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y+1));
+                cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
             }
         }
     }
@@ -190,7 +190,9 @@ public class Maze {
     public static Maze fromJsonFile(String filename) {
         if(gson==null)createGson();
         try {
-            return gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
+            Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
+            maze.init();
+            return maze;
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
 

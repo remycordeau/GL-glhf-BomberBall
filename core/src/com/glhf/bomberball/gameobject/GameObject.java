@@ -100,7 +100,14 @@ public abstract class GameObject {
 
     public boolean moveDir(DIRECTIONS dir)
     {
-        return moveToCell(cell.getAdjacentCell(dir));
+        try {
+        return moveToCell(cell.getAdjacentCell(dir)); }
+        catch (NullPointerException e)
+        {
+            System.out.println(cell);
+            System.err.println("err");
+        }
+        return false;
     }
 
     public boolean moveToCell(Cell dest_cell)

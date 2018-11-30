@@ -21,7 +21,6 @@ public abstract class StateGame extends State {
 
     public void loadMaze(String filename) {
         maze = Maze.fromJsonFile(filename);
-        maze.init();
         mazeDrawer = new MazeDrawer(maze, 0f,1f, 0f, 1f);
     }
 

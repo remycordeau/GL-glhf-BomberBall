@@ -81,6 +81,7 @@ public class Cell {
      */
     public void addGameObject(GameObject gameObject)
     {
+        gameObject.setCell(this);
         objects.add(gameObject);
     }
 
@@ -110,6 +111,7 @@ public class Cell {
      * @param gameObject the GameObject to be removed
      */
     public void removeGameObject(GameObject gameObject) {
+        gameObject.setCell(null);
         objects.remove(gameObject);
     }
 

@@ -23,12 +23,9 @@ public class StateGameMulti extends StateGame{
         players[0].initiateTurn();
     }
 
-    private void moveCurrentPlayer(int dx, int dy)
+    private void moveCurrentPlayer(DIRECTIONS dir)
     {
-        Player p = players[current_player_index];
-        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy) && p.getNumberMoveRemaining() > 0) {
-            maze.moveGameObject(p, dx, dy);
-        }
+        players[current_player_index].moveDir(dir);
     }
 
     /**
@@ -49,16 +46,16 @@ public class StateGameMulti extends StateGame{
         //System.out.println("keyDown"+keycode);
         switch (keycode){
             case Input.Keys.UP:
-                moveCurrentPlayer(0,1);
+                moveCurrentPlayer(DIRECTIONS.UP);
                 break;
             case Input.Keys.RIGHT:
-                moveCurrentPlayer(1,0);
+                moveCurrentPlayer(DIRECTIONS.RIGHT);
                 break;
             case Input.Keys.DOWN:
-                moveCurrentPlayer(0,-1);
+                moveCurrentPlayer(DIRECTIONS.DOWN);
                 break;
             case Input.Keys.LEFT:
-                moveCurrentPlayer(-1,0);
+                moveCurrentPlayer(DIRECTIONS.LEFT);
                 break;
             case Input.Keys.SPACE:
                 nextPlayer();
