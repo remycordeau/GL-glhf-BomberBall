@@ -35,6 +35,9 @@ public class StateGameMulti extends StateGame{
         }
     }
 
+    /**
+     * gives the next player after a turn. If the next player is dead, choose the following player.
+     */
     private void nextPlayer()
     {
         current_player_index = (current_player_index + 1) % Constants.config_file.getIntAttribute("nb_player_max");
