@@ -15,7 +15,7 @@ public class StateMainMenu extends State {
     //Constructor
     public StateMainMenu(String name){
         super(name);
-        this.settings();//TODO La texture boutonsolo n'a pas été push
+        this.settings();
     }
 
     /*Loading textures*/
@@ -42,7 +42,6 @@ public class StateMainMenu extends State {
         }
         if(multi.contains(x, y))
         {
-            //TODO: On lance le jeu multi
             State state = new StateGameMulti("classic_maze_1.json");
             Game.setState(state);
         }
