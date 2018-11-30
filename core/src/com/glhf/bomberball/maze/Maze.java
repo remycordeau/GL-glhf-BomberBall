@@ -29,6 +29,7 @@ public class Maze {
         if(gson==null) {
             createGson();
         }
+        nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
     }
 
     /**
