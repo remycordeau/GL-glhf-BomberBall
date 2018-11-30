@@ -12,7 +12,7 @@ public class StateMainMenu extends State {
     private TextureAtlas.AtlasRegion multi;
     private TextureAtlas.AtlasRegion parametre;
     private TextureAtlas.AtlasRegion erreur;
-    private final int X_BUTTON =200;
+    private final int X_BUTTON =160;
     private final int Y_SOLO=300;
     private final int Y_MULTI=200;
     private final int Y_PARAM=100;
@@ -31,11 +31,11 @@ public class StateMainMenu extends State {
         //Message d'erreur
         erreur = Graphics.GUI.get("erreur");
         //BoutonSolo
-        solo = Graphics.GUI.get("boutonSolo");
+        solo = Graphics.GUI.get("BoutonSolo");
         //BoutonMulti
-        multi = Graphics.GUI.get("boutonMulti");
+        multi = Graphics.GUI.get("BoutonMulti");
         //Bouton Paramètres
-        parametre = Graphics.GUI.get("boutonParametre");
+        parametre = Graphics.GUI.get("BoutonParametres");
     }
 
     public void draw(){
@@ -50,6 +50,9 @@ public class StateMainMenu extends State {
         if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_SOLO && y<Y_SOLO+Y_SIZE)
         {
             //TODO: On lance le jeu solo
+            /*batch.begin();
+            batch.draw(erreur, 0, 0);
+            batch.end();*/
         }
         if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_MULTI && y<Y_MULTI+Y_SIZE)
         {
@@ -59,6 +62,9 @@ public class StateMainMenu extends State {
         {
             //TODO: On lance les parametres
         }
+        batch.begin();
+        batch.draw(erreur, 0, 0);
+        batch.end();
         return false;
     }
 }
