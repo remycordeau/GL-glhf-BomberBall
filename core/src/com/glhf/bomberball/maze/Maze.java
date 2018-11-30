@@ -22,6 +22,7 @@ public class Maze {
     private int nb_player_max;
 
 
+
     /**
      * Constructor for the Maze class
      */

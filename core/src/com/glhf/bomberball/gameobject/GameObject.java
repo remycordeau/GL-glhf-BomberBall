@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.maze.Cell;
 
 import java.io.Serializable;
 
@@ -16,8 +17,9 @@ public abstract class GameObject {
     protected transient AtlasRegion sprite; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
     protected int life;
 
-    protected GameObject() {
+    protected transient Cell cell;
 
+    protected GameObject() {
     }
 
     /**
@@ -93,5 +95,10 @@ public abstract class GameObject {
     public void move(int dx, int dy) {
         position_x += dx;
         position_y += dy;
+    }
+
+    public void setCell(Cell cell)
+    {
+        this.cell = cell;
     }
 }

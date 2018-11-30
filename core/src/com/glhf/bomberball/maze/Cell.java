@@ -22,6 +22,15 @@ public class Cell {
      */
     private ArrayList<GameObject> objects;
 
+/*
+    public Cell()
+    {
+        for (GameObject o : objects) {
+            o.setCell(this);
+        }
+    }
+*/
+
     /**
      * Cell constructor
      * @param maze cell's maze
@@ -52,7 +61,7 @@ public class Cell {
      */
     public void getDamage(int damage)
     {
-        for (int i=0; i<objects.size(); ) {
+        for (int i = 0; i < objects.size(); ) {
             GameObject o = objects.get(i);
             o.getDamage(damage);
             if (o.isAlive()) {

@@ -9,11 +9,10 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 
-/*
-    Class MazeDrawer
-
-    Vue du modèle Maze. Affiche le labyrinthe à l'écran.
-*/
+/**
+ * Class MazeDrawer
+ * Vue du modèle Maze. Affiche le labyrinthe à l'écran.
+ */
 public class MazeDrawer {
 
     private Maze maze;
