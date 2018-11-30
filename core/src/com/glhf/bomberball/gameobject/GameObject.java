@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.io.Serializable;
 
