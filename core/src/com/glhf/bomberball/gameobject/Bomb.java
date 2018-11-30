@@ -1,5 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Maze;
 
@@ -15,10 +16,11 @@ public class Bomb extends GameObject {
 
     //constructor
     public Bomb(int position_x, int position_y, int range) {
-        super(position_x, position_y, 1);
+        super(position_x, position_y);
         // initially, bomb inflict 1 damage
-        this.damage=1;
+        this.damage=Constants.config_file.getAttribute("bomb_damage");
         this.range=range;
+        this.life = 1;
         sprite = Graphics.Sprites.get("bomb");
     }
 

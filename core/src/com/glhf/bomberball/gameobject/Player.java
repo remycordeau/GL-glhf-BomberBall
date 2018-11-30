@@ -24,9 +24,10 @@ public class Player extends Character {
 
     // constructor
     public Player(int position_x, int position_y, String player_skin) {
-        super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
-        number_initial_bombs=1;
-        initial_bomb_range = 3;
+        super(position_x, position_y);
+        life = Constants.config_file.getAttribute("player_life");
+        number_initial_bombs = Constants.config_file.getAttribute("number_initial_bomb");
+        initial_bomb_range = Constants.config_file.getAttribute("initial_bomb_range");
         bonus_owned = new Hashtable<String, Integer>();
         setAnimation(player_skin+"/idle");
     }

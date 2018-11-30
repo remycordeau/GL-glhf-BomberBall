@@ -52,7 +52,7 @@ public class Maze {
             }
         }
         tab[0][0] = new Bomb(0,0,1);
-        tab[0][1] = new ActiveEnemy(0, 1, 1);
+        tab[0][1] = new ActiveEnemy(0, 1);
     }
 
     public void moveGameObject(GameObject gameObject, int dx, int dy)
@@ -91,10 +91,9 @@ public class Maze {
 
     /**
      * Créer les joueurs dans le labyrynthe aux positions de départs
-     * @param life correspond à la vie initial de chacun des joueur
      * @return une liste des instances de classe des joueurs créés
      */
-    public Player[] spawnPlayers(int life) {
+    public Player[] spawnPlayers() {
         Player[] players = new Player[4];
         String[] players_skins = {"knight_m", "knight_f", "elf_m", "wizzard_f"};
         for (int i = 0; i < Constants.NB_PLAYER_MAX; i++) {
