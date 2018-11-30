@@ -37,7 +37,7 @@ public class StateGameMulti extends StateGame{
 
     private void nextPlayer()
     {
-        current_player_index = (current_player_index + 1) % Constants.NB_PLAYER_MAX;
+        current_player_index = (current_player_index + 1) % Constants.config_file.getIntAttribute("nb_player_max");;
         players[current_player_index].initiateTurn();
     }
 
