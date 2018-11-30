@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.menu.DIRECTIONS;
 
 import java.io.Serializable;
 
@@ -97,12 +98,23 @@ public abstract class GameObject {
         position_y += dy;
     }
 
-    public void moveToCell(Cell dest_cell)
+    public boolean moveDir(DIRECTIONS dir)
     {
-        if (dest_cell.isWalkable()) {
+        return moveToCell(cell.getAdjacentCell(dir));
+    }
+
+    public boolean moveToCell(Cell dest_cell)
+    {
+        boolean moved = false;
+        if (dest_cell == null) {
+            moved = false;
+        }
+        else if (dest_cell.isWalkable()) {
             cell.removeGameObject(this);
             dest_cell.addGameObject(this);
+            moved = true;
         }
+        return moved;
     }
 
     public void setCell(Cell cell)
