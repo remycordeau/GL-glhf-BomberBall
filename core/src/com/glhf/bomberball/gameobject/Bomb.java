@@ -43,10 +43,8 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
+            object.getDamage(damage);
+            map.handleGameObjectDamage(object);
             i++;
         }
         i=1;
@@ -56,10 +54,8 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
+            object.getDamage(damage);
+            map.handleGameObjectDamage(object);
             i++;
         }
         i=1;
@@ -69,10 +65,8 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
+            object.getDamage(damage);
+            map.handleGameObjectDamage(object);
             i++;
         }
         i=1;
@@ -82,10 +76,8 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
+            object.getDamage(damage);
+            map.handleGameObjectDamage(object);
             i++;
         }
         //version avec Coord (un Vector2 avec des int)

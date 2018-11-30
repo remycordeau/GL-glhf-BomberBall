@@ -80,9 +80,7 @@ public class MazeDrawer {
         for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
                 GameObject gameobject = maze.getGameObjectAt(x, y);
-                if(gameobject != null) {
-                    drawTextureInCell(gameobject.getSprite(), x, y);
-                }
+                drawTextureInCell(gameobject.getSprite(), x, y);
             }
         }
     }
