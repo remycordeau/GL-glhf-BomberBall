@@ -1,5 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Constants;
+
 public abstract class Character extends GameObject {
     //attributes
     protected int number_move_remaining;
@@ -10,9 +12,9 @@ public abstract class Character extends GameObject {
     }
 
     // constructor
-    protected Character(int position_x, int position_y) { // temporary, create a file with parameter
+    protected Character(int position_x, int position_y) {
         super(position_x, position_y);
-        this.number_initial_moves = 5;
+        this.number_initial_moves = Constants.config_file.getAttribute("number_initial_move");
     }
 
     // method initiate turn
@@ -44,7 +46,7 @@ public abstract class Character extends GameObject {
 
     public void move(int dx, int dy){
         super.move(dx, dy);
-        number_move_remaining --; // Math.abs(dx - this.position_x) + Math.abs(position_y - this.position_y);
+        number_move_remaining -= Math.abs(dx) + Math.abs(dy);
     }
 
     // call this method only if number_move_remaining is >=0 after the move, mouse

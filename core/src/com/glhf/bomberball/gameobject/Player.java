@@ -45,11 +45,17 @@ public class Player extends Character {
 
     // this method initiate the begin of a new turn
     @Override
-    public void initiateTurn(){
-        //number_bomb_remaining= number_initial_bombs+ bonus_owned.get("NumberBombBoost");
-        number_bomb_remaining= number_initial_bombs;
-        //number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
-        number_move_remaining = number_initial_moves;
+    public void initiateTurn() {
+        if (bonus_owned.contains("NumberBombBoost")) {
+            number_bomb_remaining = number_initial_bombs + bonus_owned.get("NumberBombBoost");
+        } else {
+            number_bomb_remaining = number_initial_bombs;
+        }
+        if (bonus_owned.contains("SpeedBoost")) {
+            number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
+        } else {
+            number_move_remaining = number_initial_moves;
+        }
     }
 
     // getters and setters
