@@ -30,5 +30,5 @@ public class Constants {
     public enum enemyState {ACTIVE, HUNTER}
 
     // constants to configure game objects
-    public static GOConfigFile config_file = new GOConfigFile(Constants.PATH_GAMEOBJECT);
+    public static ConfigFile config_file = new ConfigFile(Constants.PATH_GAMEOBJECT);
 }

@@ -22,7 +22,7 @@ public abstract class Character extends GameObject {
      */
     protected Character(int position_x, int position_y) {
         super(position_x, position_y);
-        this.number_initial_moves = Constants.config_file.getAttribute("number_initial_move");
+        this.number_initial_moves = Constants.config_file.getIntAttribute("number_initial_move");
     }
 
     /**
