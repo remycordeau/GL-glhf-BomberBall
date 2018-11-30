@@ -164,13 +164,17 @@ public class Maze {
      * tests if a given position is in the maze
      * @param cell_x
      * @param cell_y
-     * @return
+     * @return true if the position is in the maze, else it returns false
      */
     private boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
+    /**
+     * Removes a given GameObject in the maze if it hasn't any life left
+     * @param gameObject
+     */
     public void handleGameObjectDamage(GameObject gameObject)
     {
         if (gameObject != null && !gameObject.isAlive()) {
@@ -178,19 +182,6 @@ public class Maze {
         }
     }
 
-    // destruction of GameObject when dead
-    public void handleDestruction(){
-        int i, j;
-        GameObject gameobject;
-        for(i=0; i>-getHeight(); i--) {
-            for(j=0; j<getWidth(); j++) {
-                gameobject = getGameObjectAt(i,j);
-                if(gameobject != null && !gameobject.isAlive()){
-                    tab[i][j]=null;
-                }
-            }
-        }
-    }
 
     public static Maze fromJsonFile(String filename) {
         if(gson==null)createGson();
