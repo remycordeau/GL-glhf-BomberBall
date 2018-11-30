@@ -1,26 +1,19 @@
 
 pack_gui.png
-size: 1024,1024
+size: 512,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 BoutonMulti
   rotate: false
-  xy: 380, 372
+  xy: 2, 206
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
   index: -1
 BoutonParametres
   rotate: false
-  xy: 380, 270
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
-BoutonSolo
-  rotate: false
-  xy: 380, 168
+  xy: 2, 104
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -32,30 +25,9 @@ BoutonSolo
   orig: 400, 100
   offset: 0, 0
   index: -1
-boutonMulti
-  rotate: false
-  xy: 2, 474
-  size: 376, 183
-  orig: 376, 183
-  offset: 0, 0
-  index: -1
-boutonParametre
-  rotate: false
-  xy: 2, 289
-  size: 376, 183
-  orig: 376, 183
-  offset: 0, 0
-  index: -1
-boutonSolo
-  rotate: false
-  xy: 380, 474
-  size: 376, 183
-  orig: 376, 183
-  offset: 0, 0
-  index: -1
 erreur
   rotate: false
-  xy: 2, 104
+  xy: 2, 308
   size: 376, 183
   orig: 376, 183
   offset: 0, 0
