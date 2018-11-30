@@ -17,7 +17,7 @@ public class StateGameMulti extends StateGame{
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
         current_player_index = 0;
-        turn_number = 0;
+        turn_number = 1;
         loadMaze(maze_filename);
         players = maze.spawnPlayers();
         players[0].initiateTurn();

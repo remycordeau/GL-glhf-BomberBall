@@ -18,9 +18,10 @@ public class ActiveEnemy extends Enemy {
      */
     public ActiveEnemy(int position_x, int position_y) {
         super(position_x, position_y);
-        strength = Constants.config_file.getAttribute("activeEnemy_strength");
-        life = Constants.config_file.getAttribute("activeEnemy_life");
+        strength = Constants.config_file.getIntAttribute("activeEnemy_strength");
+        life = Constants.config_file.getIntAttribute("activeEnemy_life");
         sprite = Graphics.Sprites.get("chort_idle_anim");
+        //TODO set the animation of the active enemy
         // way = plus long chemin;
     }
 

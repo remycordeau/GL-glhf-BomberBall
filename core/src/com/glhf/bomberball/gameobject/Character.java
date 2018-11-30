@@ -1,11 +1,15 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
     //attributes
     protected int number_move_remaining;
     protected int number_initial_moves;
+    protected Animation<TextureAtlas.AtlasRegion> animation;
 
     public Character() {
 
@@ -18,9 +22,19 @@ public abstract class Character extends GameObject {
      */
     protected Character(int position_x, int position_y) {
         super(position_x, position_y);
-        this.number_initial_moves = Constants.config_file.getAttribute("number_initial_move");
+        this.number_initial_moves = Constants.config_file.getIntAttribute("number_initial_move");
     }
 
+    /**
+     * set the animation of the character
+     * @param animation_str path to the animation
+     */
+    protected void setAnimation(String animation_str)
+    {
+        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(animation_str), Animation.PlayMode.LOOP);
+    }
+
+    // method initiate turn
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */

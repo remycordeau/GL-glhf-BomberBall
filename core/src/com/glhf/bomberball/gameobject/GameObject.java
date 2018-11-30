@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
+import com.sun.xml.internal.bind.v2.TODO;
 
 import java.io.Serializable;
 
@@ -46,6 +47,10 @@ public abstract class GameObject {
         return position_y;
     }
 
+    /**
+     * This function add a Sprite to the SpriteBatch batch
+     * @param batch the SpriteBatch in which it will add a Sprite
+     */
     public void draw(SpriteBatch batch){
         batch.draw(sprite, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
@@ -58,18 +63,28 @@ public abstract class GameObject {
         this.position_x = position_x;
     }
 
-
+    /**
+     * set a value for the y axis position
+     * @param position_y
+     */
     public void setPositionY(int position_y) {
         this.position_y = position_y;
     }
 
+    /**
+     * modification of the life of the gameObject
+     * @param damage
+     */
     public void getDamage(int damage){
         life-=damage;
     }
 
     public AtlasRegion getSprite() { return this.sprite; }
 
-    // is the Object alive ?
+    /**
+     * to know if an object has been destroyed or not
+     * @return boolean if the gameObject is Alive
+     */
     public boolean isAlive() {
         return life > 0;
     }
