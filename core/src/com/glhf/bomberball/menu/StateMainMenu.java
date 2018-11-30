@@ -3,8 +3,8 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 
 public class StateMainMenu extends State {
@@ -56,12 +56,12 @@ public class StateMainMenu extends State {
 
         {
             //TODO: On lance le jeu solo
-
         }
         if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y_screen > Y_MULTI && y_screen <Y_MULTI+Y_SIZE)
         {
             //TODO: On lance le jeu multi
-
+            State state = new StateGameMulti("classic_maze_1.json");
+            Game.setState(state);
         }
         if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y_screen > Y_PARAM && y_screen <Y_PARAM+Y_SIZE)
         {

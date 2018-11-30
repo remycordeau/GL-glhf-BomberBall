@@ -23,7 +23,7 @@ public class Game extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private HashMap<String, Texture> textures;
-	private State state;
+	private static State state;
 
     private DebugRenderer debugRenderer;
 
@@ -35,13 +35,8 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		//Choisir le state voulu pour le lancement de l'application
-
-        state = new StateGameMulti("classic_maze_1.json");
-
-        //state = new StateMainMenu();
+        setState(new StateMainMenu("MainMenu"));
 		font.setColor(Color.RED);
-		Gdx.input.setInputProcessor(state);
 
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;
@@ -62,5 +57,10 @@ public class Game extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		font.dispose();
+	}
+
+	public static void setState(State etat){
+		state = etat;
+		Gdx.input.setInputProcessor(state);
 	}
 }
