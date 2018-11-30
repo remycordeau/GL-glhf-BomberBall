@@ -24,7 +24,7 @@ public class AgressiveEnemy extends Enemy {
         life = Constants.config_file.getAttribute("aggressiveEnemy_life");
         strength = Constants.config_file.getAttribute("aggressiveEnemy_strength");
         this.way = way;
-        //this.sprite = Textures.getAtlasRegion("AgressiveEnemy");
+        //TODO set the animation of the aggressive enemy
     }
 
     /**
