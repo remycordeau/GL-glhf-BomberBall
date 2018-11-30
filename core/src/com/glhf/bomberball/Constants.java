@@ -7,15 +7,12 @@ public class Constants {
     public static final int APP_WIDTH = 720;
     public static final int APP_HEIGHT = 480;
 
-    //game properties
-    public static final int NB_PLAYER_MAX = 4;
-
 
     // constans for paths
     public static final String PATH_ASSET         = "core/assets/";
     public static final String PATH_MAZE          = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE   = PATH_ASSET+"config.json";
-    public static final String PATH_GAMEOBJECT    = PATH_ASSET+"gameobject/config.txt";
+    public static final String PATH_GAMEOBJECT    = PATH_ASSET+"Config/config.txt";
     public static final String PATH_GRAPHICS      = PATH_ASSET+"graphics/";
     public static final String PATH_PACKS         = PATH_GRAPHICS+"packs/";
     public static final String PATH_ATLAS_SPRITES = PATH_PACKS+"pack_sprites.atlas";
