@@ -35,7 +35,7 @@ public class StateMainMenu extends State {
         if (err)
         {
             batch.begin();
-            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
+            batch.draw(Graphics.GUI.get("erreur"), 160, 0);
             batch.end();
         }
     }
@@ -50,7 +50,7 @@ public class StateMainMenu extends State {
         if(multi.contains(x, y))
         {
             //TODO: On lance le menu Multi
-            State state = new StateGameMulti("classic_maze_1.json");
+            State state = new StateMultiMenu("Menu multi");
             Game.setState(state);
         }
         if(parametres.contains(x, y)) {

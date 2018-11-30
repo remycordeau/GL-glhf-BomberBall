@@ -1,16 +1,17 @@
 package com.glhf.bomberball.menu;
 
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public class StateMultiMenu extends State {
     //Attributes
-    private Button solo;
-    private Button multi;
-    private Button parametres;
-    private boolean solob=false;
+    private Button retrievePlayer;
+    private Button addPlayer;
+    private Button begin;
+    private Button begin_random;
+    private Button cancel;
+    private boolean err =false;
     //Constructor
     public StateMultiMenu(String name){
         super(name);
@@ -19,20 +20,29 @@ public class StateMultiMenu extends State {
 
     /*Loading textures*/
     public void settings(){
-        //BoutonSolo
-        solo = new Button(160, 300, 400, 100, "BoutonSolo");
-        //BoutonMulti
-        multi = new Button(160, 200, 400, 100, "BoutonMulti");
-        //BoutonParametres
-        parametres = new Button(160, 100, 400, 100, "BoutonParametres");
+        //Button retrievePlayer
+        retrievePlayer = new Button(0, 0, 167, 100, "Minus");
+
+        //Button addPlayer
+        addPlayer = new Button(200, 0, 167, 100, "Plus");
+
+        //Button Cancel
+        cancel = new Button(400, 0, 178, 68, "BoutonAnnuler");
+
+        //Button Begin
+        begin = new Button(160, 200, 400, 100, "BoutonMulti");
+
+        //Button Beign Random
+        begin_random = new Button(160, 100, 400, 100, "BoutonMulti");
     }
 
     public void draw(){
-        System.out.println("in");
-        solo.draw(batch);
-        multi.draw(batch);
-        parametres.draw(batch);
-        if(solob)
+        cancel.draw(batch);
+        retrievePlayer.draw(batch);
+        addPlayer.draw(batch);
+        begin.draw(batch);
+        begin_random.draw(batch);
+        if(err)
         {
             batch.begin();
             batch.draw(Graphics.GUI.get("erreur"), 0, 0);
@@ -42,20 +52,32 @@ public class StateMultiMenu extends State {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        if(solo.contains(x, y)) {
-
-            solob=true;
-            //TODO: On lance le jeu solo
+        if(cancel.contains(x, y)) {
+            State state = new StateMainMenu("main");
+            Game.setState(state);
         }
-        if(multi.contains(x, y))
+        if(retrievePlayer.contains(x, y))
         {
+            err=true;
+            //TODO retirer un joueur et l'afficher
+        }
+        if(addPlayer.contains(x, y)) {
+            err=true;
+            //TODO: On lance les parametres
+        }
+        if(begin.contains(x, y)) {
             State state = new StateGameMulti("classic_maze_1.json");
             Game.setState(state);
         }
-        if(solo.contains(x, y)) {
-            //TODO: On lance les parametres
+        if(begin_random.contains(x, y)) {
+            err =true;
+            //TODO: On lance le jeu solo
         }
         return false;
     }
-
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (err){err=false;}
+        return super.touchUp(screenX, screenY, pointer, button);
+    }
 }
