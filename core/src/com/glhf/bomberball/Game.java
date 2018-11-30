@@ -35,7 +35,7 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        state = new StateMainMenu("MainMenu");
+        setState(new StateMainMenu("MainMenu"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);
