@@ -15,8 +15,11 @@ public class Cell {
 
     private int x;
     private int y;
-    private transient Maze maze;
+    private Maze maze;
 
+    /**
+     * Objects in cell
+     */
     private ArrayList<GameObject> objects;
 
     /**
@@ -33,6 +36,16 @@ public class Cell {
         objects = new ArrayList<GameObject>();
     }
 
+    public int getX()
+    {
+        return x;
+    }
+
+    public int getY()
+    {
+        return y;
+    }
+
     /**
      * Damages all GameObjects in cell
      * @param damage getDamage amount to apply
@@ -44,23 +57,41 @@ public class Cell {
             o.getDamage(damage);
             if (o.isAlive()) {
                 i++;
-            }else{
+            } else{
                 objects.remove(o);
             }
         }
     }
 
+    /**
+     * Add an object in the cell
+     * @param gameObject object to add
+     */
     public void addGameObject(GameObject gameObject)
     {
         objects.add(gameObject);
     }
 
-    /*public void draw(SpriteBatch batch)
+    /**
+     * Moves an object to another cell
+     * @param object object in cell to move
+     * @param dest_cell destination cell
+     */
+    public void moveObjectTo(GameObject object, Cell dest_cell)
+    {
+        /*if (objects.contains(object)) {
+            object.move(dest_cell);
+        } else {
+            System.err.println("Cannot move object not in cell");
+        }*/
+    }
+
+    public void draw(SpriteBatch batch)
     {
         for (GameObject o : objects) {
             batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
         }
-    }*/
+    }
 
     public void removeGameObject(GameObject gameObject) {
         objects.remove(gameObject);
