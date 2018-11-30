@@ -31,12 +31,15 @@ public class StateGameMulti extends StateGame{
         }
     }
 
+    /**
+     * gives the next player after a turn. If the next player is dead, choose the following player.
+     */
     private void nextPlayer()
     {
         maze.processEndTurn();
-        while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive()) {
+        do {
             current_player_index = (current_player_index + 1) % maze.getNb_player_max();
-        }
+        } while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive());
         players[current_player_index].initiateTurn();
     }
 
@@ -77,7 +80,7 @@ public class StateGameMulti extends StateGame{
         int cell_x = (int)cell.x;
         int cell_y = (int)cell.y;
         if (maze.isWalkable(cell_x, cell_y)) {
-            maze.putBombAt(cell_x, cell_y);
+            maze.addBomb(players[current_player_index].dropBomb(cell_x, cell_y));
         }
         return false;
     }
