@@ -42,8 +42,8 @@ public class Game extends ApplicationAdapter {
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;
 
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET+"sounds/musics/test.mp3"));
-		sound.loop();
+		//Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET+"sounds/musics/test.mp3"));
+		//sound.loop();
 	}
 
 	@Override
