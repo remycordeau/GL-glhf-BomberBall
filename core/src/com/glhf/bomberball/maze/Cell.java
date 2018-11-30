@@ -1,8 +1,10 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.GameObject;
+import com.glhf.bomberball.gameobject.Wall;
 
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public class Cell {
 
     private int x;
     private int y;
-    private Maze maze;
+    private transient Maze maze;
 
     private ArrayList<GameObject> objects;
 
@@ -33,13 +35,16 @@ public class Cell {
 
     /**
      * Damages all GameObjects in cell
-     * @param damage damage amount to apply
+     * @param damage getDamage amount to apply
      */
-    public void damage(int damage)
+    public void getDamage(int damage)
     {
-        for (GameObject o : objects) {
+        for (int i=0; i<objects.size(); ) {
+            GameObject o = objects.get(i);
             o.getDamage(damage);
-            if (!o.isAlive()) {
+            if (o.isAlive()) {
+                i++;
+            }else{
                 objects.remove(o);
             }
         }
@@ -50,10 +55,27 @@ public class Cell {
         objects.add(gameObject);
     }
 
-    public void draw(SpriteBatch batch)
+    /*public void draw(SpriteBatch batch)
     {
         for (GameObject o : objects) {
             batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
         }
+    }*/
+
+    public void removeGameObject(GameObject gameObject) {
+        objects.remove(gameObject);
+    }
+
+    public ArrayList<GameObject> getObjects() {
+        return objects;
+    }
+
+    public boolean hasGameObjectInstanceOf(Class c) {
+        for(GameObject gameObject : objects){
+            if(c.isInstance(gameObject)){
+                return true;
+            }
+        }
+        return false;
     }
 }

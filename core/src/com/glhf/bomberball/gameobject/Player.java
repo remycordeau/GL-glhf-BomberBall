@@ -91,4 +91,9 @@ public class Player extends Character {
             this.bonus_owned.put(bonus.getName(), 1);
         }
     }
+
+    @Override
+    public boolean isWalkable(){
+        return true;
+    }
 }

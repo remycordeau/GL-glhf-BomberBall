@@ -2,7 +2,10 @@ package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.maze.Maze;
+
+import java.util.ArrayList;
 
 public class Bomb extends GameObject {
     // attributes
@@ -23,7 +26,7 @@ public class Bomb extends GameObject {
      */
     public Bomb(int position_x, int position_y, int range) {
         super(position_x, position_y);
-        // initially, bomb inflict 1 damage
+        // initially, bomb inflict 1 getDamage
         this.damage=Constants.config_file.getIntAttribute("bomb_damage");
         this.range=range;
         this.life = 1;
@@ -35,65 +38,50 @@ public class Bomb extends GameObject {
      * @param map the map where the bomb is
      */
     public void explode(Maze map){
-        int i=1;
-        GameObject object;
+        int i;
+        Cell cell;
         //UP
-        while(i<=range){
-            object=map.getGameObjectAt(position_x,position_y-i);
-            if(object instanceof Wall){
+        for(i=1;i<=range;i++){
+            cell=map.getCellAt(position_x,position_y-i);
+            if(cell==null)continue;
+            if(cell.hasGameObjectInstanceOf(Wall.class)){
                i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
-            i++;
+            cell.getDamage(damage);
         }
-        i=1;
         //DOWN
-        while(i<=range){
-            object=map.getGameObjectAt(position_x,position_y+i);
-            if(object instanceof Wall){
+        for(i=1;i<=range;i++){
+            cell=map.getCellAt(position_x,position_y+i);
+            if(cell==null)continue;
+            if(cell.hasGameObjectInstanceOf(Wall.class)){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
-            i++;
+            cell.getDamage(damage);
         }
-        i=1;
         //RIGHT
-        while(i<=range){
-            object=map.getGameObjectAt(position_x+i,position_y);
-            if(object instanceof Wall){
+        for(i=1;i<=range;i++){
+            cell=map.getCellAt(position_x+1,position_y);
+            if(cell==null)continue;
+            if(cell.hasGameObjectInstanceOf(Wall.class)){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
-            i++;
+            cell.getDamage(damage);
         }
-        i=1;
         //LEFT
-        while(i<=range){
-            object=map.getGameObjectAt(position_x-i,position_y);
-            if(object instanceof Wall){
+        for(i=1;i<=range;i++){
+            cell=map.getCellAt(position_x-1,position_y);
+            if(cell==null)continue;
+            if(cell.hasGameObjectInstanceOf(Wall.class)){
                 i=range;
             }
-            if (object != null) {
-                object.getDamage(damage);
-                map.handleGameObjectDamage(object);
-            }
-            i++;
+            cell.getDamage(damage);
         }
         //version avec Coord (un Vector2 avec des int)
         /*
         for(Coord dir : Coords.directions){//Coords.directions est une variable statique constante avec les 4 vecteurs (0,1),(1,0),(1,0),(1,1)
             for(int i=i; i<=range && !(object instanceof Wall); i++){
-                object=map.getGameObjectAt(position.add(dir));
-                object.getDamage(damage);
+                object=map.getGameObjectsAt(position.add(dir));
+                object.getDamage(getDamage);
             }
         }
         */
