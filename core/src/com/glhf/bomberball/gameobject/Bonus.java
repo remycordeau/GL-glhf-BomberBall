@@ -6,9 +6,10 @@ public abstract class Bonus extends GameObject {
     //attributes
     protected String name;
 
-    //contructor
+    //constructor
     public Bonus(int position_x, int position_y) {
-        super(position_x, position_y, 1);
+        super(position_x, position_y);
+        life = 1;
     }
 
     //getter
