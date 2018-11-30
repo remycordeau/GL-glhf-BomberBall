@@ -11,7 +11,7 @@ public class StateMainMenu extends State {
     private Button solo;
     private Button multi;
     private Button parametres;
-    boolean solob = false;
+    boolean err = false;
     //Constructor
     public StateMainMenu(String name){
         super(name);
@@ -32,34 +32,37 @@ public class StateMainMenu extends State {
         solo.draw(batch);
         multi.draw(batch);
         parametres.draw(batch);
-        /*if (solob)
+        if (err)
         {
             batch.begin();
             batch.draw(Graphics.GUI.get("erreur"), 0, 0);
             batch.end();
-        }*/
+        }
     }
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         y = Constants.APP_HEIGHT - y;
         if(solo.contains(x, y)) {
-            solob = true;
-            batch.begin();
-            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
-            batch.end();
             //TODO: On lance le jeu solo
-
-
+            err = true;
         }
         if(multi.contains(x, y))
         {
+            //TODO: On lance le menu Multi
             State state = new StateGameMulti("classic_maze_1.json");
             Game.setState(state);
         }
-        if(solo.contains(x, y)) {
-            //TODO: On lance les parametres
+        if(parametres.contains(x, y)) {
+            //TODO: On lance le menu parametres
+            err=true;
         }
         return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (err){err=false;}
+        return super.touchUp(screenX, screenY, pointer, button);
     }
 }
