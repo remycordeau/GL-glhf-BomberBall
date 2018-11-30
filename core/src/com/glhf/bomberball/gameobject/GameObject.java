@@ -56,7 +56,7 @@ public abstract class GameObject {
 
     // is the Object alive ?
     public boolean isAlive() {
-        return life <= 0;
+        return life > 0;
     }
 
     public boolean isWalkable() { return false; }

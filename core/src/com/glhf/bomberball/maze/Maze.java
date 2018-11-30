@@ -2,10 +2,12 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Maze {
 
@@ -17,6 +19,7 @@ public class Maze {
     private GameObject[][] tab;
     private static Gson gson;
     private long seed; //défini les variations des textures
+    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 
     public Maze() {
         if(gson==null) {
@@ -59,9 +62,23 @@ public class Maze {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
     }
 
+    public void putBombAt(int cell_x, int cell_y)
+    {
+        Bomb b = new Bomb(cell_x, cell_y, 3);
+        tab[cell_x][cell_y] = b;
+        bombs.add(b);
+    }
+
     public GameObject getGameObjectAt(int cell_x, int cell_y)
     {
-        return tab[cell_x][cell_y];
+        GameObject gameObject = null;
+        try {
+            gameObject = tab[cell_x][cell_y];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Cell (" + cell_x + ", " + cell_y + ") out of bounds");
+        }
+        return gameObject;
     }
 
     public int getHeight() {
@@ -88,6 +105,15 @@ public class Maze {
         return players;
     }
 
+    public void processEndTurn()
+    {
+        for (Bomb bomb : bombs) {
+            bomb.explode(this);
+            tab[bomb.getPositionX()][bomb.getPositionY()] = null;
+        }
+        bombs.clear();
+    }
+
     public boolean isWalkable(int cell_x, int cell_y)
     {
         if (!isCellInBounds(cell_x, cell_y)) {
@@ -102,12 +128,21 @@ public class Maze {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
+    public void handleGameObjectDamage(GameObject gameObject)
+    {
+        if (gameObject != null && !gameObject.isAlive()) {
+            tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
+        }
+    }
+
     // destruction of GameObject when dead
     public void handleDestruction(){
         int i, j;
-        for(i=0; i>-getHeight(); i--){
-            for(j=0; j<getWidth(); j++){
-                if(! getGameObjectAt(i,j).isAlive()){
+        GameObject gameobject;
+        for(i=0; i>-getHeight(); i--) {
+            for(j=0; j<getWidth(); j++) {
+                gameobject = getGameObjectAt(i,j);
+                if(gameobject != null && !gameobject.isAlive()){
                     tab[i][j]=null;
                 }
             }
