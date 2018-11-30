@@ -97,6 +97,14 @@ public abstract class GameObject {
         position_y += dy;
     }
 
+    public void moveToCell(Cell dest_cell)
+    {
+        if (dest_cell.isWalkable()) {
+            cell.removeGameObject(this);
+            dest_cell.addGameObject(this);
+        }
+    }
+
     public void setCell(Cell cell)
     {
         this.cell = cell;

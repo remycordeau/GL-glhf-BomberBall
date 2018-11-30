@@ -130,4 +130,14 @@ public class Cell {
         }
         return false;
     }
+
+    public boolean isWalkable()
+    {
+        for (GameObject o : objects) {
+            if (!o.isWalkable()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
