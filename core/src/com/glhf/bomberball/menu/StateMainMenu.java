@@ -2,7 +2,9 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 
 public class StateMainMenu extends State {
@@ -16,15 +18,16 @@ public class StateMainMenu extends State {
     private final int Y_SOLO=300;
     private final int Y_MULTI=200;
     private final int Y_PARAM=100;
-    private final int X_SIZE=376;  //Note : les boutons à la rache font 376x183
-    private final int Y_SIZE=183;
+    private final int X_SIZE=400;  //Note : les boutons à la rache font 376x183
+    private final int Y_SIZE=100;
 
 
     //Constructor
-    public StateMainMenu(){
-        super("MainMenu");
+    public StateMainMenu(String name){
+        super(name);
         this.settings();//TODO La texture boutonsolo n'a pas été push
     }
+
     /*Loading textures*/
     public void settings(){
 
@@ -45,26 +48,26 @@ public class StateMainMenu extends State {
         batch.draw(parametre, X_BUTTON, Y_PARAM);
         batch.end();
     }
+
     @Override
-    public boolean touchDown(int x, int y, int pointer, int bouton) {
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_SOLO && y<Y_SOLO+Y_SIZE)
+    public boolean touchDown(int x, int y, int pointer, int button) {
+        int y_screen = Constants.APP_HEIGHT - y;
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y_screen > Y_SOLO && y_screen < Y_SOLO+Y_SIZE)
+
         {
             //TODO: On lance le jeu solo
-            /*batch.begin();
-            batch.draw(erreur, 0, 0);
-            batch.end();*/
+
         }
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_MULTI && y<Y_MULTI+Y_SIZE)
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y_screen > Y_MULTI && y_screen <Y_MULTI+Y_SIZE)
         {
             //TODO: On lance le jeu multi
+
         }
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_PARAM && y<Y_PARAM+Y_SIZE)
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y_screen > Y_PARAM && y_screen <Y_PARAM+Y_SIZE)
         {
             //TODO: On lance les parametres
+
         }
-        batch.begin();
-        batch.draw(erreur, 0, 0);
-        batch.end();
         return false;
     }
 }
