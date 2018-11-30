@@ -19,7 +19,7 @@ public class StateGameMulti extends StateGame{
         current_player_index = 0;
         turn_number = 0;
         loadMaze(maze_filename);
-        players = maze.spawnPlayers(1);
+        players = maze.spawnPlayers();
         players[0].initiateTurn();
     }
 

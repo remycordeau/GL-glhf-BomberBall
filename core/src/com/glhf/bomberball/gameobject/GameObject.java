@@ -21,10 +21,9 @@ public abstract class GameObject {
     }
 
     // constructor
-    protected GameObject(int position_x, int position_y, int life) {
+    protected GameObject(int position_x, int position_y) {
         this.position_x = position_x;
         this.position_y = position_y;
-        this.life= life;
     }
 
     // getters and setters
