@@ -48,24 +48,25 @@ public class StateMainMenu extends State {
     public boolean touchDown(int x, int y, int pointer, int button) {
         y = Constants.APP_HEIGHT - y;
         if(solo.contains(x, y)) {
-            solob = true;
-            batch.begin();
-            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
-            batch.end();
+            State state = new StateSoloMenu("Menu Solo");
+            Game.setState(state);
             //TODO: On lance le jeu solo
-
-
         }
+
         if(editor.contains(x,y)) {
 
         }
+
         if(multi.contains(x, y))
         {
             State state = new StateMultiMenu("Menu Multi");
             Game.setState(state);
         }
-        if(solo.contains(x, y)) {
-            //TODO: On lance les parametres
+
+        if(parametres.contains(x, y))
+        {
+            State state = new StateSettingsMenu("Menu Paramètres");
+            Game.setState(state);
         }
 
         if(quit.contains(x,y)){
