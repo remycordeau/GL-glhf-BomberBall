@@ -19,8 +19,11 @@ public class Maze {
     private GameObject[][] tab;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+    private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
 
+    /**
+     * Constructor for the Maze class
+     */
     public Maze() {
         if(gson==null) {
             createGson();
@@ -28,7 +31,7 @@ public class Maze {
     }
 
     /**
-     *
+     * Constructor for the Maze class
      * @param h hauteur
      * @param w largeur
      */
@@ -55,6 +58,12 @@ public class Maze {
         tab[0][1] = new ActiveEnemy(0, 1);
     }
 
+    /**
+     * Moves a GameObject with a relative delta
+     * @param gameObject
+     * @param dx
+     * @param dy
+     */
     public void moveGameObject(GameObject gameObject, int dx, int dy)
     {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
@@ -62,6 +71,11 @@ public class Maze {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
     }
 
+    /**
+     * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
+     * @param cell_x
+     * @param cell_y
+     */
     public void putBombAt(int cell_x, int cell_y)
     {
         Bomb b = new Bomb(cell_x, cell_y, 3);
@@ -69,6 +83,12 @@ public class Maze {
         bombs.add(b);
     }
 
+    /**
+     * returns a GameObject at a specified poition in the maze
+     * @param cell_x
+     * @param cell_y
+     * @return null if there's no GameObject at the specified position, else it returns the GameObject
+     */
     public GameObject getGameObjectAt(int cell_x, int cell_y)
     {
         GameObject gameObject = null;
@@ -81,10 +101,18 @@ public class Maze {
         return gameObject;
     }
 
+    /**
+     * Getter for the variable height
+     * @return an integer
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Getter for the variable width
+     * @return an integer
+     */
     public int getWidth() {
         return width;
     }
@@ -104,6 +132,9 @@ public class Maze {
         return players;
     }
 
+    /**
+     * Detonates all the bombs in the Maze and thus delete them from the bombs ArrayList
+     */
     public void processEndTurn()
     {
         for (Bomb bomb : bombs) {
@@ -113,6 +144,12 @@ public class Maze {
         bombs.clear();
     }
 
+    /**
+     * Returns if a given cell is walkable
+     * @param cell_x
+     * @param cell_y
+     * @return
+     */
     public boolean isWalkable(int cell_x, int cell_y)
     {
         if (!isCellInBounds(cell_x, cell_y)) {
@@ -122,6 +159,12 @@ public class Maze {
         return gameObject == null || gameObject.isWalkable();
     }
 
+    /**
+     * tests if a given position is in the maze
+     * @param cell_x
+     * @param cell_y
+     * @return
+     */
     private boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
