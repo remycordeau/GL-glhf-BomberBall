@@ -10,7 +10,10 @@ public class StateMainMenu extends State {
     //Attributes
     private Button solo;
     private Button multi;
+    private Button editor;
     private Button parametres;
+    private Button quit;
+
     boolean solob = false;
     //Constructor
     public StateMainMenu(String name){
@@ -21,23 +24,23 @@ public class StateMainMenu extends State {
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        solo = new Button(160, 300, 400, 100, "BoutonSolo");
+        solo = new Button(160, 400, 400, 100, "BoutonSolo");
         //BoutonMulti
-        multi = new Button(160, 200, 400, 100, "BoutonMulti");
+        multi = new Button(160, 300, 400, 100, "BoutonMulti");
+        //BoutonEditeur
+        editor = new Button(160, 200, 400, 100, "BoutonEditeur");
         //BoutonParametres
         parametres = new Button(160, 100, 400, 100, "BoutonParametres");
+        //BoutonQuitter
+        quit = new Button(160, 0, 400, 100, "BoutonQuitter");
     }
 
     public void draw(){
         solo.draw(batch);
         multi.draw(batch);
+        editor.draw(batch);
         parametres.draw(batch);
-        /*if (solob)
-        {
-            batch.begin();
-            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
-            batch.end();
-        }*/
+        quit.draw(batch);
     }
 
     @Override
@@ -52,6 +55,9 @@ public class StateMainMenu extends State {
 
 
         }
+        if(editor.contains(x,y)) {
+
+        }
         if(multi.contains(x, y))
         {
             State state = new StateGameMulti("classic_maze_1.json");
@@ -59,6 +65,9 @@ public class StateMainMenu extends State {
         }
         if(solo.contains(x, y)) {
             //TODO: On lance les parametres
+        }
+
+        if(quit.contains(x,y)){
         }
         return false;
     }
