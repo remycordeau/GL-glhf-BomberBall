@@ -35,6 +35,10 @@ public abstract class GameObject {
         return position_y;
     }
 
+    /**
+     * This function add a Sprite to the SpriteBatch batch
+     * @param batch the SpriteBatch in which it will add a Sprite
+     */
     public void draw(SpriteBatch batch){
         batch.draw(sprite, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }

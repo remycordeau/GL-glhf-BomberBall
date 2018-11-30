@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
@@ -10,7 +11,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Maze {
-
     private String title;
     private int height;
     private int width;
@@ -28,7 +28,8 @@ public class Maze {
     }
 
     /**
-     *
+     * Constructor of Maze
+     * Generate a random Maze with a specific size
      * @param h hauteur
      * @param w largeur
      */
