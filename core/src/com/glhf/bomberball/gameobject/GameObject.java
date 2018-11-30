@@ -20,41 +20,70 @@ public abstract class GameObject {
 
     }
 
-    // constructor
-    protected GameObject(int position_x, int position_y, int life) {
+    /**
+     * constructor
+     * @param position_x x axis initial position
+     * @param position_y y axis initial position
+     */
+    protected GameObject(int position_x, int position_y) {
         this.position_x = position_x;
         this.position_y = position_y;
-        this.life= life;
     }
 
-    // getters and setters
+    /**
+     *
+     * @return actual x axis position of the gameObject
+     */
     public int getPositionX() {
         return position_x;
     }
 
+    /**
+     *
+     * @return actual y axis position of the gameObject
+     */
     public int getPositionY() {
         return position_y;
     }
 
+    /**
+     * This function add a Sprite to the SpriteBatch batch
+     * @param batch the SpriteBatch in which it will add a Sprite
+     */
     public void draw(SpriteBatch batch){
         batch.draw(sprite, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
 
+    /**
+     * set a value for the x axis position
+     * @param position_x
+     */
     public void setPositionX(int position_x) {
         this.position_x = position_x;
     }
 
+    /**
+     * set a value for the y axis position
+     * @param position_y
+     */
     public void setPositionY(int position_y) {
         this.position_y = position_y;
     }
 
+    /**
+     * modification of the life of the gameObject
+     * @param damage
+     */
     public void getDamage(int damage){
         life-=damage;
     }
 
     public AtlasRegion getSprite() { return this.sprite; }
 
-    // is the Object alive ?
+    /**
+     * to know if an object has been destroyed or not
+     * @return boolean if the gameObject is Alive
+     */
     public boolean isAlive() {
         return life > 0;
     }

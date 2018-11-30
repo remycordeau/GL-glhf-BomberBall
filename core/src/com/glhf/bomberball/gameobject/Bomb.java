@@ -1,5 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Maze;
 
@@ -13,16 +14,26 @@ public class Bomb extends GameObject {
 
     }
 
-    //constructor
+    /**
+     * constructor
+     * @param position_x x axis position of the bomb
+     * @param position_y y axis position of the bomb
+     * @param range number of squares reached by the bomb in the four directions ( north, east, sout, west)
+     * @return Bomb
+     */
     public Bomb(int position_x, int position_y, int range) {
-        super(position_x, position_y, 1);
+        super(position_x, position_y);
         // initially, bomb inflict 1 damage
-        this.damage=1;
+        this.damage=Constants.config_file.getIntAttribute("bomb_damage");
         this.range=range;
+        this.life = 1;
         sprite = Graphics.Sprites.get("bomb");
     }
 
-    //method explode
+    /**
+     * set damages to gameObjects on the reachable squares
+     * @param map the map where the bomb is
+     */
     public void explode(Maze map){
         int i=1;
         GameObject object;

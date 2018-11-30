@@ -4,19 +4,28 @@ import com.glhf.bomberball.Graphics;
 
 public class IndestructibleWall extends Wall {
 
+    /**
+     * Constructor for the IndestructibleWall class
+     */
     public IndestructibleWall()
     {
         this.sprite = Graphics.Sprites.get("wall");
     }
 
-    // constructor
-    public IndestructibleWall(int position_x, int position_y, int life) {
-        super(position_x, position_y,life);
+    /**
+     * Constructor for the IndestructibleWall class
+     * @param position_x
+     * @param position_y
+     */
+    public IndestructibleWall(int position_x, int position_y) {
+        super(position_x, position_y);
         this.sprite = Graphics.Sprites.get("wall");
     }
 
-    // an indestructibleWall cannot be broken
+    /**
+     * Override of the GameObject's getDamage method : an indestructible can't be broken
+     * @param damage
+     */
     @Override
-    public void getDamage(int damage){
-    }
+    public void getDamage(int damage){}
 }

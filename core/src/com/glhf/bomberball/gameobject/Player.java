@@ -1,16 +1,10 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
-import com.glhf.bomberball.Graphics;
 
 import java.util.Hashtable;
-
-import static com.badlogic.gdx.graphics.g2d.Animation.*;
 
 public class Player extends Character {
     //attributes
@@ -20,54 +14,76 @@ public class Player extends Character {
     //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
-    private Animation<AtlasRegion> animation;
 
-    // constructor
+    /**
+     * constructor
+     * @param position_x x axis initial position
+     * @param position_y y axis initial position
+     * @param player_skin path to the player sprites
+     */
     public Player(int position_x, int position_y, String player_skin) {
-        super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
-        number_initial_bombs=1;
-        initial_bomb_range = 3;
+        super(position_x, position_y);
+        life = Constants.config_file.getIntAttribute("player_life");
+        number_initial_bombs = Constants.config_file.getIntAttribute("number_initial_bomb");
+        initial_bomb_range = Constants.config_file.getIntAttribute("initial_bomb_range");
         bonus_owned = new Hashtable<String, Integer>();
+        bonus_owned.put("NumberBombBoost", 0);
+        bonus_owned.put("SpeedBoost", 0);
+        bonus_owned.put("BombRangeBoost", 0);
         setAnimation(player_skin+"/idle");
     }
 
-    private void setAnimation(String animation_str) {
-        animation = new Animation<AtlasRegion>(0.15f, Graphics.Anims.get(animation_str), PlayMode.LOOP);
-    }
 
+    /**
+     * sprite getter
+     * @return the sprite of the player
+     */
     @Override
-    public AtlasRegion getSprite() {
+    public AtlasRegion getSprite()
+    {
         return animation.getKeyFrame(Game.time_elapsed);
     }
 
-    // this method initiate the begin of a new turn
+    /**
+     * initiate the turn of the player, initialize the number of bombs and the number of moves
+     */
     @Override
-    public void initiateTurn(){
-        //number_bomb_remaining= number_initial_bombs+ bonus_owned.get("NumberBombBoost");
-        number_bomb_remaining= number_initial_bombs;
-        //number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
-        number_move_remaining = number_initial_moves;
+    public void initiateTurn() {
+        number_bomb_remaining = number_initial_bombs + bonus_owned.get("NumberBombBoost");
+        number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
     }
 
-    // getters and setters
+    /**
+     *
+     * @return number_bomb_remaining
+     */
     public int getNumberBombRemaining() {
         return number_bomb_remaining;
     }
 
+    /**
+     *
+     * @param number_bomb_remaining
+     */
     public void setNumberBombRemaining(int number_bomb_remaining) {
         this.number_bomb_remaining = number_bomb_remaining;
     }
 
-    // to use bombs
+    /**
+     * The player create a bomb and put it on the square given
+     * @param drop_position_x x axis position of the bomb
+     * @param drop_position_y y axis position of the bomb
+     * @return a new Bomb
+     */
     public Bomb dropBomb(int drop_position_x, int drop_position_y){
         number_bomb_remaining-=1;
-        Integer range_boost = bonus_owned.get("BombRangeBoost");
-        if(range_boost == null)
-            return new Bomb(drop_position_x, drop_position_y, initial_bomb_range);
-        else
-            return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + range_boost);
+        return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
     }
-    //to loot bonus
+
+    /**
+     * The player loot the bonus and add it to its bonus_owned attribute
+     * @param bonus the bonus to loot
+     */
     public void lootBonus(Bonus bonus) {
         if (this.bonus_owned.contains(bonus.getName())) {
             this.bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);

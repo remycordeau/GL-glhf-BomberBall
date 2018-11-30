@@ -4,14 +4,21 @@ import com.glhf.bomberball.Graphics;
 
 public class DestructibleWall extends Wall {
 
-    // constructor
+    /**
+     * Constructor for the DestructibleWall class
+     */
     public DestructibleWall()
     {
         this.sprite = Graphics.Sprites.get("crate");
     }
 
-    public DestructibleWall(int position_x, int position_y, int life) {
-        super(position_x, position_y, life);
+    /**
+     * Constructor for the DestructibleWall class
+     * @param position_x
+     * @param position_y
+     */
+    public DestructibleWall(int position_x, int position_y) {
+        super(position_x, position_y);
         sprite = Graphics.Sprites.get("crate");
     }
 }

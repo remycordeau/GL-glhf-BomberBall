@@ -1,63 +1,75 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-
+import com.badlogic.gdx.Gdx;
+import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.GUI.Button;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 
 public class StateMainMenu extends State {
-
     //Attributes
-    private TextureAtlas.AtlasRegion solo;
-    private TextureAtlas.AtlasRegion multi;
-    private TextureAtlas.AtlasRegion parametre;
-    private TextureAtlas.AtlasRegion erreur;
-    private final int X_BUTTON =200;
-    private final int Y_SOLO=300;
-    private final int Y_MULTI=200;
-    private final int Y_PARAM=100;
-    private final int X_SIZE=376;  //Note : les boutons à la rache font 376x183
-    private final int Y_SIZE=183;
+    private Button solo;
+    private Button multi;
+    private Button editor;
+    private Button parametres;
+    private Button quit;
 
-
+    boolean solob = false;
     //Constructor
-    public StateMainMenu(){
-        super("MainMenu");
-        this.settings();//TODO La texture boutonsolo n'a pas été push
+    public StateMainMenu(String name){
+        super(name);
+        this.settings();
     }
+
     /*Loading textures*/
     public void settings(){
-
-        //Message d'erreur
-        erreur = Graphics.GUI.get("erreur");
         //BoutonSolo
-        solo = Graphics.GUI.get("boutonSolo");
+        solo = new Button(160, 400, 400, 100, "BoutonSolo");
         //BoutonMulti
-        multi = Graphics.GUI.get("boutonMulti");
-        //Bouton Paramètres
-        parametre = Graphics.GUI.get("boutonParametre");
+        multi = new Button(160, 300, 400, 100, "BoutonMulti");
+        //BoutonEditeur
+        editor = new Button(160, 200, 400, 100, "BoutonEditeur");
+        //BoutonParametres
+        parametres = new Button(160, 100, 400, 100, "BoutonParametres");
+        //BoutonQuitter
+        quit = new Button(160, 0, 400, 100, "BoutonQuitter");
     }
 
     public void draw(){
-        batch.begin();
-        batch.draw(solo, X_BUTTON, Y_SOLO);
-        batch.draw(multi, X_BUTTON, Y_MULTI);
-        batch.draw(parametre, X_BUTTON, Y_PARAM);
-        batch.end();
+        solo.draw(batch);
+        multi.draw(batch);
+        editor.draw(batch);
+        parametres.draw(batch);
+        quit.draw(batch);
     }
+
     @Override
-    public boolean touchDown(int x, int y, int pointer, int bouton) {
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_SOLO && y<Y_SOLO+Y_SIZE)
-        {
+    public boolean touchDown(int x, int y, int pointer, int button) {
+        y = Constants.APP_HEIGHT - y;
+        if(solo.contains(x, y)) {
+            solob = true;
+            batch.begin();
+            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
+            batch.end();
             //TODO: On lance le jeu solo
+
+
         }
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_MULTI && y<Y_MULTI+Y_SIZE)
-        {
-            //TODO: On lance le jeu multi
+        if(editor.contains(x,y)) {
+
         }
-        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_PARAM && y<Y_PARAM+Y_SIZE)
+        if(multi.contains(x, y))
         {
+            State state = new StateMultiMenu("Menu Multi");
+            Game.setState(state);
+        }
+        if(solo.contains(x, y)) {
             //TODO: On lance les parametres
+        }
+
+        if(quit.contains(x,y)){
+            Gdx.app.exit();
         }
         return false;
     }

@@ -6,11 +6,15 @@ public class BonusWall extends DestructibleWall {
 
     private Bonus bonus;
 
-    // constructor
-
-    protected BonusWall(int position_x, int position_y,Bonus bonus, int life) {
-        super(position_x, position_y, life);
+    /**
+     * constructor
+     * @param position_x x axis initial position
+     * @param position_y y axis initial position
+     * @param bonus which bonus is inside the wall
+     */
+    protected BonusWall(int position_x, int position_y,Bonus bonus) {
+        super(position_x, position_y);
         this.bonus=bonus;
-        //apperance
+        //TODO set the BonusWall sprite
     }
 }
