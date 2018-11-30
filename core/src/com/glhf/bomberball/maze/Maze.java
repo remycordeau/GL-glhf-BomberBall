@@ -50,7 +50,7 @@ public class Maze {
         cells = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y] = new Cell(this, x, y);
+                cells[x][y] = new Cell(x, y);
                 if (Math.random() < 0.1)
                     cells[x][y].addGameObject(new DestructibleWall(x, y));
                 if (x % 2 == 1 && y % 2 == 1)
@@ -64,7 +64,8 @@ public class Maze {
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y].init();
+                // TODO : ajouter les cellules adjacentes
+                cells[x][y].init(null, null, null, null);
             }
         }
     }

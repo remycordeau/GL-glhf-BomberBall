@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Wall;
+import com.glhf.bomberball.menu.DIRECTIONS;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class Cell {
 
     private int x;
     private int y;
-    private transient Maze maze;
+    private transient Cell[] adjacent_cells;
 
     /**
      * Objects in cell
@@ -24,13 +25,11 @@ public class Cell {
 
     /**
      * Cell constructor
-     * @param maze cell's maze
      * @param x position x in maze
      * @param y position y in maze
      */
-    public Cell(Maze maze, int x, int y)
+    public Cell(int x, int y)
     {
-        this.maze = maze;
         this.x = x;
         this.y = y;
         objects = new ArrayList<GameObject>();
@@ -46,11 +45,17 @@ public class Cell {
         return y;
     }
 
-    public void init()
+    public void init(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
+        this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
         for (GameObject o : objects) {
             o.setCell(this);
         }
+    }
+
+    public Cell getAdjacentCell(DIRECTIONS dir)
+    {
+        return adjacent_cells[dir.ordinal()];
     }
 
     /**
