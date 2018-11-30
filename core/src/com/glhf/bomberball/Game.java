@@ -37,7 +37,6 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
         state = new StateMainMenu("MainMenu");
 		font.setColor(Color.RED);
-		Gdx.input.setInputProcessor(state);
 
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;
@@ -62,5 +61,6 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
+		Gdx.input.setInputProcessor(state);
 	}
 }
