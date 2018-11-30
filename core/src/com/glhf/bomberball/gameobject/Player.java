@@ -1,16 +1,10 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
-import com.glhf.bomberball.Graphics;
 
 import java.util.Hashtable;
-
-import static com.badlogic.gdx.graphics.g2d.Animation.*;
 
 public class Player extends Character {
     //attributes
@@ -29,9 +23,9 @@ public class Player extends Character {
      */
     public Player(int position_x, int position_y, String player_skin) {
         super(position_x, position_y);
-        life = Constants.config_file.getAttribute("player_life");
-        number_initial_bombs = Constants.config_file.getAttribute("number_initial_bomb");
-        initial_bomb_range = Constants.config_file.getAttribute("initial_bomb_range");
+        life = Constants.config_file.getIntAttribute("player_life");
+        number_initial_bombs = Constants.config_file.getIntAttribute("number_initial_bomb");
+        initial_bomb_range = Constants.config_file.getIntAttribute("initial_bomb_range");
         bonus_owned = new Hashtable<String, Integer>();
         bonus_owned.put("NumberBombBoost", 0);
         bonus_owned.put("SpeedBoost", 0);
