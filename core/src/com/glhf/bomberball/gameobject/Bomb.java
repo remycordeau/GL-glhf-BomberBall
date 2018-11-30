@@ -24,7 +24,7 @@ public class Bomb extends GameObject {
     public Bomb(int position_x, int position_y, int range) {
         super(position_x, position_y);
         // initially, bomb inflict 1 damage
-        this.damage=Constants.config_file.getAttribute("bomb_damage");
+        this.damage=Constants.config_file.getIntAttribute("bomb_damage");
         this.range=range;
         this.life = 1;
         sprite = Graphics.Sprites.get("bomb");
