@@ -26,18 +26,17 @@ public class StateGameMulti extends StateGame{
     private void moveCurrentPlayer(int dx, int dy)
     {
         Player p = players[current_player_index];
-        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy)) {
+        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy) && p.getNumberMoveRemaining() > 0) {
             maze.moveGameObject(p, dx, dy);
-            if (p.getNumberMoveRemaining() == 0) {
-                maze.processEndTurn();
-                nextPlayer();
-            }
         }
     }
 
     private void nextPlayer()
     {
-        current_player_index = (current_player_index + 1) % Constants.config_file.getIntAttribute("nb_player_max");;
+        maze.processEndTurn();
+        while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive()) {
+            current_player_index = (current_player_index + 1) % maze.getNb_player_max();
+        }
         players[current_player_index].initiateTurn();
     }
 
@@ -59,7 +58,7 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(-1,0);
                 break;
             case Input.Keys.SPACE:
-
+                nextPlayer();
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
