@@ -24,9 +24,10 @@ public class Player extends Character {
 
     // constructor
     public Player(int position_x, int position_y, String player_skin) {
-        super(position_x, position_y, Constants.config_file.getAttribute("player_life"));
-        number_initial_bombs=1;
-        initial_bomb_range = 3;
+        super(position_x, position_y);
+        life = Constants.config_file.getAttribute("player_life");
+        number_initial_bombs = Constants.config_file.getAttribute("number_initial_bomb");
+        initial_bomb_range = Constants.config_file.getAttribute("initial_bomb_range");
         bonus_owned = new Hashtable<String, Integer>();
         setAnimation(player_skin+"/idle");
     }
@@ -44,11 +45,17 @@ public class Player extends Character {
 
     // this method initiate the begin of a new turn
     @Override
-    public void initiateTurn(){
-        //number_bomb_remaining= number_initial_bombs+ bonus_owned.get("NumberBombBoost");
-        number_bomb_remaining= number_initial_bombs;
-        //number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
-        number_move_remaining = number_initial_moves;
+    public void initiateTurn() {
+        if (bonus_owned.contains("NumberBombBoost")) {
+            number_bomb_remaining = number_initial_bombs + bonus_owned.get("NumberBombBoost");
+        } else {
+            number_bomb_remaining = number_initial_bombs;
+        }
+        if (bonus_owned.contains("SpeedBoost")) {
+            number_move_remaining = number_initial_moves + bonus_owned.get("SpeedBoost");
+        } else {
+            number_move_remaining = number_initial_moves;
+        }
     }
 
     // getters and setters

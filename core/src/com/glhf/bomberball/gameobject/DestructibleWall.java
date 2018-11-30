@@ -10,8 +10,8 @@ public class DestructibleWall extends Wall {
         this.sprite = Graphics.Sprites.get("crate");
     }
 
-    public DestructibleWall(int position_x, int position_y, int life) {
-        super(position_x, position_y, life);
+    public DestructibleWall(int position_x, int position_y) {
+        super(position_x, position_y);
         sprite = Graphics.Sprites.get("crate");
     }
 }

@@ -37,9 +37,9 @@ public class Game extends ApplicationAdapter {
 		font = new BitmapFont();
 		//Choisir le state voulu pour le lancement de l'application
 
-        //state = new StateGameMulti("classic_maze_1.json");
+        state = new StateGameMulti("classic_maze_1.json");
 
-        state = new StateMainMenu("MainMenu");
+        //state = new StateMainMenu();
 		font.setColor(Color.RED);
 		Gdx.input.setInputProcessor(state);
 
@@ -52,8 +52,10 @@ public class Game extends ApplicationAdapter {
 	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
 		state.draw();
 		//debugRenderer.drawLines(2);
+        batch.end();
 	}
 	
 	@Override

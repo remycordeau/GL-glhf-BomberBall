@@ -8,9 +8,10 @@ import java.util.ArrayList;
 public class PassiveEnemy extends Enemy {
 
     // constructor
-    public PassiveEnemy(int position_x, int position_y, int life, ArrayList<Constants.moves> way) { // temporary, create a file with parameter
-        super(position_x, position_y, life);
-        strength = 1;
+    public PassiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
+        super(position_x, position_y);
+        life = Constants.config_file.getAttribute("passiveEnemy_life");
+        strength = Constants.config_file.getAttribute("passiveEnemy_strength");
         this.way = way;
         //appearance = Textures.get("PassiveEnemy");
     }
