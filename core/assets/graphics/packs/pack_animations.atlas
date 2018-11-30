@@ -266,67 +266,60 @@ size: 256,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-efl_m/hit
+masked_orc/idle
   rotate: false
   xy: 2, 2
-  size: 16, 28
-  orig: 16, 28
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 0
-efl_m/idle
+masked_orc/idle
   rotate: false
   xy: 20, 2
-  size: 16, 28
-  orig: 16, 28
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
-  index: 0
-efl_m/idle
+  index: 1
+masked_orc/idle
   rotate: false
   xy: 38, 2
-  size: 16, 28
-  orig: 16, 28
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
-  index: 1
-efl_m/idle
+  index: 2
+masked_orc/idle
   rotate: false
   xy: 56, 2
-  size: 16, 28
-  orig: 16, 28
-  offset: 0, 0
-  index: 2
-efl_m/idle
-  rotate: false
-  xy: 74, 2
-  size: 16, 28
-  orig: 16, 28
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 3
-efl_m/run
+masked_orc/run
   rotate: false
-  xy: 92, 2
-  size: 16, 28
-  orig: 16, 28
+  xy: 74, 2
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 0
-efl_m/run
+masked_orc/run
   rotate: false
-  xy: 110, 2
-  size: 16, 28
-  orig: 16, 28
+  xy: 92, 2
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 1
-efl_m/run
+masked_orc/run
   rotate: false
-  xy: 128, 2
-  size: 16, 28
-  orig: 16, 28
+  xy: 110, 2
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 2
-efl_m/run
+masked_orc/run
   rotate: false
-  xy: 146, 2
-  size: 16, 28
-  orig: 16, 28
+  xy: 128, 2
+  size: 16, 20
+  orig: 16, 20
   offset: 0, 0
   index: 3
 
@@ -335,60 +328,67 @@ size: 256,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-masked_orc/idle
+elf_m/hit
   rotate: false
   xy: 2, 2
-  size: 16, 20
-  orig: 16, 20
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 0
-masked_orc/idle
+elf_m/idle
   rotate: false
   xy: 20, 2
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 1
-masked_orc/idle
-  rotate: false
-  xy: 38, 2
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 2
-masked_orc/idle
-  rotate: false
-  xy: 56, 2
-  size: 16, 20
-  orig: 16, 20
-  offset: 0, 0
-  index: 3
-masked_orc/run
-  rotate: false
-  xy: 74, 2
-  size: 16, 20
-  orig: 16, 20
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 0
-masked_orc/run
+elf_m/idle
   rotate: false
-  xy: 92, 2
-  size: 16, 20
-  orig: 16, 20
+  xy: 38, 2
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 1
-masked_orc/run
+elf_m/idle
   rotate: false
-  xy: 110, 2
-  size: 16, 20
-  orig: 16, 20
+  xy: 56, 2
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 2
-masked_orc/run
+elf_m/idle
+  rotate: false
+  xy: 74, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 3
+elf_m/run
+  rotate: false
+  xy: 92, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 0
+elf_m/run
+  rotate: false
+  xy: 110, 2
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 1
+elf_m/run
   rotate: false
   xy: 128, 2
-  size: 16, 20
-  orig: 16, 20
+  size: 16, 28
+  orig: 16, 28
+  offset: 0, 0
+  index: 2
+elf_m/run
+  rotate: false
+  xy: 146, 2
+  size: 16, 28
+  orig: 16, 28
   offset: 0, 0
   index: 3
 
