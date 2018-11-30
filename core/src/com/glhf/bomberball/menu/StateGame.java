@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public abstract class StateGame extends State {
     protected Maze maze;
-    private MazeDrawer mazeDrawer;
+    protected MazeDrawer mazeDrawer;
 
     public StateGame(String name, String maze_filename) {
         super(name);

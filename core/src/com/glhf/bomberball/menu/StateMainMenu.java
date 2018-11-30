@@ -1,20 +1,24 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import com.glhf.bomberball.Graphics;
 
-import static com.glhf.bomberball.Graphics.GUI.get;
 
 public class StateMainMenu extends State {
 
     //Attributes
-    private TextureAtlas.AtlasRegion test1;
-    private TextureRegion region1;
-    private TextureAtlas.AtlasRegion test2;
-    private TextureRegion region2;
-    private TextureAtlas.AtlasRegion test3;
-    private TextureRegion region3;
+    private TextureAtlas.AtlasRegion solo;
+    private TextureAtlas.AtlasRegion multi;
+    private TextureAtlas.AtlasRegion parametre;
+    private TextureAtlas.AtlasRegion erreur;
+    private final int X_BUTTON =200;
+    private final int Y_SOLO=300;
+    private final int Y_MULTI=200;
+    private final int Y_PARAM=100;
+    private final int X_SIZE=376;  //Note : les boutons à la rache font 376x183
+    private final int Y_SIZE=183;
+
 
     //Constructor
     public StateMainMenu(){
@@ -23,23 +27,38 @@ public class StateMainMenu extends State {
     }
     /*Loading textures*/
     public void settings(){
+
+        //Message d'erreur
+        erreur = Graphics.GUI.get("erreur");
         //BoutonSolo
-        get("BoutonSolo");
-        test1 = Graphics.GUI.get("BoutonSolo");
-        region1 = new TextureRegion(test1, 0, 0, 400, 100);
-
+        solo = Graphics.GUI.get("boutonSolo");
         //BoutonMulti
-        test2 = Graphics.GUI.get("BoutonMulti");
-        region2 = new TextureRegion(test2, 0, 0, 400, 100);
-
+        multi = Graphics.GUI.get("boutonMulti");
         //Bouton Paramètres
-        test3 = Graphics.GUI.get("BoutonParametres");
-        region3 = new TextureRegion(test3, 0, 0, 400, 100);
+        parametre = Graphics.GUI.get("boutonParametre");
     }
 
     public void draw(){
-        batch.draw(region1, 200, 400);
-        batch.draw(region2, 200, 300);
-        batch.draw(region3, 200, 200);
+        batch.begin();
+        batch.draw(solo, X_BUTTON, Y_SOLO);
+        batch.draw(multi, X_BUTTON, Y_MULTI);
+        batch.draw(parametre, X_BUTTON, Y_PARAM);
+        batch.end();
+    }
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int bouton) {
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_SOLO && y<Y_SOLO+Y_SIZE)
+        {
+            //TODO: On lance le jeu solo
+        }
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_MULTI && y<Y_MULTI+Y_SIZE)
+        {
+            //TODO: On lance le jeu multi
+        }
+        if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_PARAM && y<Y_PARAM+Y_SIZE)
+        {
+            //TODO: On lance les parametres
+        }
+        return false;
     }
 }

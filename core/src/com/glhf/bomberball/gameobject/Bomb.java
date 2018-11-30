@@ -1,5 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Maze;
 
 public class Bomb extends GameObject {
@@ -9,7 +10,7 @@ public class Bomb extends GameObject {
 
     public Bomb()
     {
-        //this.sprite = Textures.getAtlasRegion("Bomb");
+
     }
 
     //constructor
@@ -18,7 +19,7 @@ public class Bomb extends GameObject {
         // initially, bomb inflict 1 damage
         this.damage=1;
         this.range=range;
-        //this.appearance = Textures.get("Bomb");
+        sprite = Graphics.Sprites.get("bomb");
     }
 
     //method explode
@@ -31,7 +32,10 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                i=range;
             }
-            object.getDamage(damage);
+            if (object != null) {
+                object.getDamage(damage);
+                map.handleGameObjectDamage(object);
+            }
             i++;
         }
         i=1;
@@ -41,7 +45,10 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            object.getDamage(damage);
+            if (object != null) {
+                object.getDamage(damage);
+                map.handleGameObjectDamage(object);
+            }
             i++;
         }
         i=1;
@@ -51,7 +58,10 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            object.getDamage(damage);
+            if (object != null) {
+                object.getDamage(damage);
+                map.handleGameObjectDamage(object);
+            }
             i++;
         }
         i=1;
@@ -61,7 +71,10 @@ public class Bomb extends GameObject {
             if(object instanceof Wall){
                 i=range;
             }
-            object.getDamage(damage);
+            if (object != null) {
+                object.getDamage(damage);
+                map.handleGameObjectDamage(object);
+            }
             i++;
         }
         //version avec Coord (un Vector2 avec des int)
@@ -73,6 +86,6 @@ public class Bomb extends GameObject {
             }
         }
         */
-        map.handleDestruction();
+        //map.handleDestruction();
     }
 }
