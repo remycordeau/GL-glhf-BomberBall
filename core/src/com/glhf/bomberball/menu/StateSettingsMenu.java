@@ -21,7 +21,7 @@ public class StateSettingsMenu extends State {
     public void settings() {
         tmp = new Button(80, 75, 640, 451, "ComingSoon");
         State s = new StateMainMenu("MainMenu");
-        undo = new ButtonUndo(500, 0, 100, 100, s);
+        undo = new ButtonUndo(0, 0, 100, 100, s);
     }
 
     public void draw() {
