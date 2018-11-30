@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
 import com.glhf.bomberball.Game;
@@ -28,7 +29,8 @@ public class StateMultiMenu extends State {
         addPlayer = new Button(200, 0, 167, 100, "Plus");
 
         //Button Cancel
-        cancel = new ButtonUndo(400, 0, 100, 100);
+        State s = new StateMainMenu("MainMenu");
+        cancel = new ButtonUndo(400, 0, 100, 100, s);
 
         //Button Begin
         begin = new Button(160, 200, 400, 100, "BoutonMulti");
@@ -53,9 +55,7 @@ public class StateMultiMenu extends State {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        if(cancel.contains(x, y)) {
-            Game.setState(cancel.getState());
-        }
+        y = Constants.APP_HEIGHT - y;
         if(retrievePlayer.contains(x, y))
         {
             err=true;
@@ -72,6 +72,10 @@ public class StateMultiMenu extends State {
         if(begin_random.contains(x, y)) {
             err =true;
             //TODO: On lance le jeu solo
+        }
+
+        if(cancel.contains(x, y)){
+            Game.setState(cancel.getState());
         }
         return false;
     }

@@ -7,10 +7,9 @@ public class ButtonUndo extends Button {
     //Attribute
     State state;
 
-    public ButtonUndo(int x, int y, int width, int height){
+    public ButtonUndo(int x, int y, int width, int height, State state){
         super(x, y, width, height, "Retour");
-        State mstate = new StateMainMenu("main");
-        this.state = mstate;
+        this.state = state;
     }
 
     public State getState(){
