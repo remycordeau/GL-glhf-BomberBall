@@ -20,17 +20,28 @@ public abstract class GameObject {
 
     }
 
-    // constructor
+    /**
+     * constructor
+     * @param position_x x axis initial position
+     * @param position_y y axis initial position
+     */
     protected GameObject(int position_x, int position_y) {
         this.position_x = position_x;
         this.position_y = position_y;
     }
 
-    // getters and setters
+    /**
+     *
+     * @return actual x axis position of the gameObject
+     */
     public int getPositionX() {
         return position_x;
     }
 
+    /**
+     *
+     * @return actual y axis position of the gameObject
+     */
     public int getPositionY() {
         return position_y;
     }
@@ -39,9 +50,14 @@ public abstract class GameObject {
         batch.draw(sprite, position_x* Constants.BOX_WIDTH, position_y*Constants.BOX_HEIGHT);
     }
 
+    /**
+     * set a value for the x axis position
+     * @param position_x
+     */
     public void setPositionX(int position_x) {
         this.position_x = position_x;
     }
+
 
     public void setPositionY(int position_y) {
         this.position_y = position_y;
