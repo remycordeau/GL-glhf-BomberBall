@@ -29,6 +29,7 @@ public class Player extends Character {
         bonus_owned = new Hashtable<String, Integer>();
         bonus_owned.put("NumberBombBoost", 0);
         bonus_owned.put("SpeedBoost", 0);
+        bonus_owned.put("BombRangeBoost", 0);
         setAnimation(player_skin+"/idle");
     }
 
