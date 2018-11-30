@@ -3,6 +3,8 @@ package com.glhf.bomberball.gameobject;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
+import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.menu.DIRECTIONS;
 
 import java.util.Hashtable;
 
@@ -71,13 +73,17 @@ public class Player extends Character {
 
     /**
      * The player create a bomb and put it on the square given
-     * @param drop_position_x x axis position of the bomb
-     * @param drop_position_y y axis position of the bomb
+     * @param dir
      * @return a new Bomb
      */
-    public Bomb dropBomb(int drop_position_x, int drop_position_y){
-        number_bomb_remaining-=1;
-        return new Bomb(drop_position_x, drop_position_y, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+    public void dropBomb(DIRECTIONS dir) {
+        Cell dest_cell = cell.getAdjacentCell(dir);
+        if (dest_cell != null && dest_cell.isWalkable())
+        {
+            number_bomb_remaining--;
+            Bomb bomb = new Bomb(0, 0,initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+            dest_cell.addGameObject(bomb);
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Config;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.maze.Cell;
 
 import java.util.HashMap;
 
@@ -73,11 +74,13 @@ public class StateGameMulti extends StateGame{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 cell = mazeDrawer.screenPosToCell(screenX, screenY);
-        int cell_x = (int)cell.x;
-        int cell_y = (int)cell.y;
-        if (maze.isWalkable(cell_x, cell_y)) {
-            maze.addBomb(players[current_player_index].dropBomb(cell_x, cell_y));
+        Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
+        int cell_x = (int)cell_pos.x;
+        int cell_y = (int)cell_pos.y;
+        Player player = players[current_player_index];
+        DIRECTIONS dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        if (dir != null) {
+            players[current_player_index].dropBomb(dir);
         }
         return false;
     }

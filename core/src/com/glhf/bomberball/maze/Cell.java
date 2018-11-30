@@ -147,4 +147,14 @@ public class Cell {
         }
         return true;
     }
+
+    public DIRECTIONS getCellDir(Cell cell)
+    {
+        for (DIRECTIONS dir : DIRECTIONS.values()) {
+            if (adjacent_cells[dir.ordinal()] == cell) {
+                return dir;
+            }
+        }
+        return null;
+    }
 }

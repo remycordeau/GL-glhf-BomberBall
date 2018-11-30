@@ -70,18 +70,6 @@ public class Maze {
     }
 
     /**
-     * Moves a GameObject with a relative delta
-     * @param gameObject
-     * @param dx
-     * @param dy
-     */
-    public void moveGameObject(GameObject gameObject, int dx, int dy) {
-        cells[gameObject.getPositionX()][gameObject.getPositionY()].removeGameObject(gameObject);
-        gameObject.move(dx, dy);
-        cells[gameObject.getPositionX()][gameObject.getPositionY()].addGameObject(gameObject);
-    }
-
-    /**
      * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
      * @param bomb
      */

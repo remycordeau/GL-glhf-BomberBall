@@ -128,4 +128,9 @@ public abstract class GameObject {
     {
         this.cell = cell;
     }
+
+    public Cell getCell()
+    {
+        return this.cell;
+    }
 }
