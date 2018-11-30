@@ -4,7 +4,7 @@ import com.glhf.bomberball.Constants;
 
 import java.util.ArrayList;
 
-public class AgressiveEnemy extends Enemy {
+public class AggressiveEnemy extends Enemy {
     //attributes
     private int begin_position_x;
     private int begin_position_y;
@@ -17,13 +17,14 @@ public class AgressiveEnemy extends Enemy {
      * @param way
      * @return AggressiveEnemy
      */
-    public AgressiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
+    public AggressiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
         super(position_x, position_y);
         this.begin_position_x=position_x;
         this.begin_position_y=position_y;
         life = Constants.config_file.getAttribute("aggressiveEnemy_life");
         strength = Constants.config_file.getAttribute("aggressiveEnemy_strength");
         this.way = way;
+        //this.sprite = Textures.getAtlasRegion("AggressiveEnemy");
         //TODO set the animation of the aggressive enemy
     }
 
