@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.Game;
@@ -68,6 +69,7 @@ public class StateMainMenu extends State {
         }
 
         if(quit.contains(x,y)){
+            Gdx.app.exit();
         }
         return false;
     }
