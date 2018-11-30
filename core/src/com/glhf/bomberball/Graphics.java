@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Graphics {
 
     public static class Sprites {
-        private static TextureAtlas sprites_atlasTexture;;
+        private static TextureAtlas sprites_atlasTexture;
         private static HashMap<String, AtlasRegion> sprites_atlasRegions;
 
         private static void load()
@@ -26,7 +26,7 @@ public class Graphics {
         public static AtlasRegion get(String sprite_str)
         {
             if (!sprites_atlasRegions.containsKey(sprite_str)) {
-                System.err.println("Sprite " + sprite_str + " doesn't exists");
+                throw new RuntimeException("Sprite " + sprite_str + " doesn't exists");
             }
             return sprites_atlasRegions.get(sprite_str);
         }
@@ -52,14 +52,14 @@ public class Graphics {
         public static Array<AtlasRegion> get(String anim_str)
         {
             if (!anim_atlasRegions.containsKey(anim_str)) {
-                System.err.println("Animation " + anim_str + " doesn't exists");
+                throw new RuntimeException("Animation " + anim_str + " doesn't exists");
             }
             return anim_atlasRegions.get(anim_str);
         }
     }
 
     public static class GUI {
-        private static TextureAtlas gui_atlasTexture;;
+        private static TextureAtlas gui_atlasTexture;
         private static HashMap<String, AtlasRegion> gui_atlasRegions;
 
         private static void load()
@@ -76,7 +76,7 @@ public class Graphics {
         public static AtlasRegion get(String sprite_str)
         {
             if (!gui_atlasRegions.containsKey(sprite_str)) {
-                System.err.println("GUI element " + sprite_str + " doesn't exists");
+                throw new RuntimeException("GUI element " + sprite_str + " doesn't exists");
             }
             return gui_atlasRegions.get(sprite_str);
         }
