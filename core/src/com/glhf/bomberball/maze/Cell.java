@@ -22,15 +22,6 @@ public class Cell {
      */
     private ArrayList<GameObject> objects;
 
-/*
-    public Cell()
-    {
-        for (GameObject o : objects) {
-            o.setCell(this);
-        }
-    }
-*/
-
     /**
      * Cell constructor
      * @param maze cell's maze
@@ -53,6 +44,13 @@ public class Cell {
     public int getY()
     {
         return y;
+    }
+
+    public void init()
+    {
+        for (GameObject o : objects) {
+            o.setCell(this);
+        }
     }
 
     /**

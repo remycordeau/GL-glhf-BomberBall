@@ -21,8 +21,6 @@ public class Maze {
     private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
     private int nb_player_max;
 
-
-
     /**
      * Constructor for the Maze class
      */
@@ -60,6 +58,15 @@ public class Maze {
             }
         }
         nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
+    }
+
+    public void init()
+    {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                cells[x][y].init();
+            }
+        }
     }
 
     /**
