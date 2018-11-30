@@ -3,6 +3,7 @@ package com.glhf.bomberball.maze;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Wall;
 import com.glhf.bomberball.menu.DIRECTIONS;
@@ -116,13 +117,13 @@ public class Cell {
      * @param c the class to check
      * @return true if an object is instance of c
      */
-    public boolean hasGameObjectInstanceOf(Class c) {
+    public GameObject getGameObjectInstanceOf(Class c) {
         for(GameObject gameObject : objects){
             if(c.isInstance(gameObject)){
-                return true;
+                return gameObject;
             }
         }
-        return false;
+        return null;
     }
 
     public boolean isWalkable()
@@ -153,6 +154,14 @@ public class Cell {
             if (adjacent_cell != null) {
                 adjacent_cell.explode(dir, damage, range - 1);
             }
+        }
+    }
+
+    public void processEndTurn()
+    {
+        Bomb bomb = (Bomb)getGameObjectInstanceOf(Bomb.class);
+        if (bomb != null) {
+            bomb.explode();
         }
     }
 }

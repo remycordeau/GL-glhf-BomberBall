@@ -18,7 +18,6 @@ public class Maze {
     private Cell[][] cells;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
     private int nb_player_max;
 
     /**
@@ -67,16 +66,6 @@ public class Maze {
                 cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
             }
         }
-    }
-
-    /**
-     * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
-     * @param bomb
-     */
-    public void addBomb(Bomb bomb)
-    {
-        cells[bomb.getPositionX()][bomb.getPositionY()].addGameObject(bomb);
-        bombs.add(bomb);
     }
 
     /**
@@ -134,10 +123,11 @@ public class Maze {
      */
     public void processEndTurn()
     {
-        for (Bomb bomb : bombs) {
-            bomb.explode();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                cells[x][y].processEndTurn();
+            }
         }
-        bombs.clear();
     }
 
     /**

@@ -41,4 +41,10 @@ public class Bomb extends GameObject {
             cell.getAdjacentCell(dir).explode(dir, damage, range);
         }
     }
+
+    @Override
+    public void getDamage(int damage)
+    {
+
+    }
 }
