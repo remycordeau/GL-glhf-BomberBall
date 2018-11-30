@@ -42,7 +42,7 @@ public class Maze {
         height = h;
         width = w;
         position_start = new Vector2[4];
-        position_start[0]= new Vector2(0,1);
+        position_start[0]= new Vector2(0,0);
         position_start[1]= new Vector2(0,h-1);
         position_start[2]= new Vector2(w-1,0);
         position_start[3]= new Vector2(w-1,h-1);
@@ -64,8 +64,7 @@ public class Maze {
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                // TODO : ajouter les cellules adjacentes
-                cells[x][y].init(null, null, null, null);
+                cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y+1));
             }
         }
     }
@@ -235,12 +234,8 @@ public class Maze {
     }
 
     public Cell getCellAt(int x, int  y) {
-        try {
+        if(isCellInBounds(x, y))
             return cells[x][y];
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Cell (" + x + ", " +  y + ") out of bounds");
-        }
         return null;
     }
 }
