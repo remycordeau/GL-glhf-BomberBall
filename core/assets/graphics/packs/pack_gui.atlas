@@ -1,0 +1,13 @@
+
+pack_gui.png
+size: 32,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+crate
+  rotate: false
+  xy: 2, 2
+  size: 16, 22
+  orig: 16, 22
+  offset: 0, 0
+  index: -1
