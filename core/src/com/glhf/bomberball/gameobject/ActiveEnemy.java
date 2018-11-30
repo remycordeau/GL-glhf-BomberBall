@@ -10,7 +10,12 @@ public class ActiveEnemy extends Enemy {
 
     }
 
-    // constructor
+    /**
+     * constructor
+     * @param position_x
+     * @param position_y
+     * @return ActiveEnemy
+     */
     public ActiveEnemy(int position_x, int position_y) {
         super(position_x, position_y);
         strength = Constants.config_file.getAttribute("activeEnemy_strength");

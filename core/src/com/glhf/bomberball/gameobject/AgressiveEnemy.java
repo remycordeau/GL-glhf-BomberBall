@@ -10,18 +10,27 @@ public class AgressiveEnemy extends Enemy {
     private int begin_position_y;
 
 
-    // constructor
-
-    public AgressiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way, int begin_position_x, int begin_position_y) {
+    /**
+     * constructor
+     * @param position_x x axis initial position of the enemy
+     * @param position_y y axis initial position of the enemy
+     * @param way
+     * @return AggressiveEnemy
+     */
+    public AgressiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
         super(position_x, position_y);
-        this.begin_position_x=begin_position_x;
-        this.begin_position_y=begin_position_y;
+        this.begin_position_x=position_x;
+        this.begin_position_y=position_y;
         life = Constants.config_file.getAttribute("aggressiveEnemy_life");
         strength = Constants.config_file.getAttribute("aggressiveEnemy_strength");
         this.way = way;
         //this.sprite = Textures.getAtlasRegion("AgressiveEnemy");
     }
 
+    /**
+     * when the player is near the enemy, the enemy will follow the min way to the player
+     * @param way minimal way between the hunted player and the hunter enemy
+     */
     public void huntPlayer(ArrayList<Constants.moves> way) {
         // follow the minimal way to the player
         setWay(way);
