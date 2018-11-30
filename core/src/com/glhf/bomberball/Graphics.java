@@ -26,7 +26,7 @@ public class Graphics {
         public static AtlasRegion get(String sprite_str)
         {
             if (!sprites_atlasRegions.containsKey(sprite_str)) {
-                System.err.println("Sprite " + sprite_str + " doesn't exists");
+                throw new RuntimeException("Sprite " + sprite_str + " doesn't exists");
             }
             return sprites_atlasRegions.get(sprite_str);
         }
@@ -52,7 +52,7 @@ public class Graphics {
         public static Array<AtlasRegion> get(String anim_str)
         {
             if (!anim_atlasRegions.containsKey(anim_str)) {
-                System.err.println("Animation " + anim_str + " doesn't exists");
+                throw new RuntimeException("Animation " + anim_str + " doesn't exists");
             }
             return anim_atlasRegions.get(anim_str);
         }
