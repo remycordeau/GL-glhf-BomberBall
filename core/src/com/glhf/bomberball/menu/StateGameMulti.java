@@ -34,9 +34,9 @@ public class StateGameMulti extends StateGame{
     private void nextPlayer()
     {
         maze.processEndTurn();
-        while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive()) {
+        do {
             current_player_index = (current_player_index + 1) % maze.getNb_player_max();
-        }
+        } while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive());
         players[current_player_index].initiateTurn();
     }
 

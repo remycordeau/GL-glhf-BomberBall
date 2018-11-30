@@ -61,7 +61,7 @@ public class StateMainMenu extends State {
         }
         if(multi.contains(x, y))
         {
-            State state = new StateGameMulti("classic_maze_1.json");
+            State state = new StateMultiMenu("Menu Multi");
             Game.setState(state);
         }
         if(solo.contains(x, y)) {
