@@ -6,8 +6,6 @@ public class BonusWall extends DestructibleWall {
 
     private Bonus bonus;
 
-    // constructor
-
     protected BonusWall(int position_x, int position_y,Bonus bonus) {
         super(position_x, position_y);
         this.bonus=bonus;
