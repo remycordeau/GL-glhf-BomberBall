@@ -112,20 +112,6 @@ public class Cell {
         return objects;
     }
 
-    /**
-     * Search in the Cell if a GameObject is instance of a specific Class
-     * @param c the class to check
-     * @return true if an object is instance of c
-     */
-    public GameObject getGameObjectInstanceOf(Class c) {
-        for(GameObject gameObject : objects){
-            if(c.isInstance(gameObject)){
-                return gameObject;
-            }
-        }
-        return null;
-    }
-
     public boolean isWalkable()
     {
         for (GameObject o : objects) {
@@ -149,7 +135,7 @@ public class Cell {
     public void explode(DIRECTIONS dir, int damage, int range)
     {
         getDamage(damage);
-        if (range > 0 && dir != null) {
+        if (range > 1 && dir != null) {
             Cell adjacent_cell = getAdjacentCell(dir);
             if (adjacent_cell != null) {
                 adjacent_cell.explode(dir, damage, range - 1);
@@ -163,5 +149,19 @@ public class Cell {
         if (bomb != null) {
             bomb.explode();
         }
+    }
+
+    /**
+     * Search in the Cell if a GameObject is instance of a specific Class
+     * @param c the class to check
+     * @return true if an object is instance of c
+     */
+    public GameObject getGameObjectInstanceOf(Class c) {
+        for(GameObject gameObject : objects){
+            if(c.isInstance(gameObject)){
+                return gameObject;
+            }
+        }
+        return null;
     }
 }

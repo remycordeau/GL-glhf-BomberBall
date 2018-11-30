@@ -35,11 +35,14 @@ public class Bomb extends GameObject {
     }
 
     public void explode() {
-        cell.removeGameObject(this);
         cell.explode(null, damage, 0);
         for (DIRECTIONS dir : DIRECTIONS.values()) {
-            cell.getAdjacentCell(dir).explode(dir, damage, range);
+            Cell adjacent_cell = cell.getAdjacentCell(dir);
+            if (adjacent_cell != null) {
+                adjacent_cell.explode(dir, damage, range);
+            }
         }
+        cell.removeGameObject(this);
     }
 
     @Override
