@@ -29,6 +29,7 @@ public class Maze {
         if(gson==null) {
             createGson();
         }
+        nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
     }
 
     /**
@@ -192,7 +193,11 @@ public class Maze {
         }
     }
 
-
+    /**
+     * Inititiate a Maze from a Json file
+     * @param filename the name of the Json file
+     * @return Return an instance of maze corresponding to the Json file
+     */
     public static Maze fromJsonFile(String filename) {
         if(gson==null)createGson();
         try {
@@ -200,6 +205,10 @@ public class Maze {
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
 
+    /**
+     * Create a Json file from an instance of Maze
+     * @param filename the name of the Json file
+     */
     public void toJsonFile(String filename)
     {
         try {
@@ -210,10 +219,19 @@ public class Maze {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    public static Maze fromJson(String str) {
-        return gson.fromJson(str, Maze.class);
+    /**
+     * Inititiate a Maze from a Json formatted String
+     * @param jsonString the Json formatted String
+     * @return Return an instance of maze corresponding to the Json formatted String
+     */
+    public static Maze fromJson(String jsonString) {
+        return gson.fromJson(jsonString, Maze.class);
     }
 
+    /**
+     * Transform an instance of maze to a Json formatted String
+     * @return a Json formatted String corresponding to the instance of Maze
+     */
     public String toJson() {
         return gson.toJson(this);
     }
