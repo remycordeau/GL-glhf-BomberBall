@@ -74,15 +74,15 @@ public class Maze {
         tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
     }
 
+
+
     /**
      * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
-     * @param cell_x
-     * @param cell_y
+     * @param b
      */
-    public void putBombAt(int cell_x, int cell_y)
+    public void addBomb(Bomb b)
     {
-        Bomb b = new Bomb(cell_x, cell_y, 3);
-        tab[cell_x][cell_y] = b;
+        tab[b.getPositionX()][b.getPositionY()] = b;
         bombs.add(b);
     }
 
