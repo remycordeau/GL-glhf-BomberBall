@@ -125,7 +125,7 @@ public class Maze {
     public Player[] spawnPlayers() {
         Player[] players = new Player[4];
         String[] players_skins = {Constants.config_file.getStringAttribute("player1_skin"), Constants.config_file.getStringAttribute("player2_skin"), Constants.config_file.getStringAttribute("player3_skin"), Constants.config_file.getStringAttribute("player4_skin")};
-        for (int i = 0; i < Constants.NB_PLAYER_MAX; i++) {
+        for (int i = 0; i < Constants.config_file.getIntAttribute("nb_player_max"); i++) {
             Vector2 pos = position_start[i];
             players[i] = new Player((int) pos.x, (int) pos.y, players_skins[i]);
             tab[(int) pos.x][(int) pos.y] = players[i];
