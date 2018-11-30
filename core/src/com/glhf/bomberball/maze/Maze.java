@@ -135,8 +135,7 @@ public class Maze {
     public void processEndTurn()
     {
         for (Bomb bomb : bombs) {
-            bomb.explode(this);
-            cells[bomb.getPositionX()][bomb.getPositionY()].removeGameObject(bomb);
+            bomb.explode();
         }
         bombs.clear();
     }
@@ -157,6 +156,12 @@ public class Maze {
                 return false;
         }
         return true;
+    }
+
+    public Cell getCellAt(int x, int  y) {
+        if(isCellInBounds(x, y))
+            return cells[x][y];
+        return null;
     }
 
     /**
@@ -221,11 +226,5 @@ public class Maze {
                 .registerTypeAdapter(GameObject.class, new MazeTypeAdapter())
                 .setPrettyPrinting()
                 .create();
-    }
-
-    public Cell getCellAt(int x, int  y) {
-        if(isCellInBounds(x, y))
-            return cells[x][y];
-        return null;
     }
 }

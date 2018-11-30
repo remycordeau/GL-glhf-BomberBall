@@ -86,27 +86,6 @@ public class Cell {
     }
 
     /**
-     * Moves an object to another cell
-     * @param object object in cell to move
-     * @param dest_cell destination cell
-     */
-    public void moveObjectTo(GameObject object, Cell dest_cell)
-    {
-        /*if (objects.contains(object)) {
-            object.move(dest_cell);
-        } else {
-            System.err.println("Cannot move object not in cell");
-        }*/
-    }
-    /*
-    public void draw(SpriteBatch batch)
-    {
-        for (GameObject o : objects) {
-            batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
-        }
-    }*/
-
-    /**
      * Remove a GameObject from a Cell
      * @param gameObject the GameObject to be removed
      */
@@ -114,6 +93,14 @@ public class Cell {
         gameObject.setCell(null);
         objects.remove(gameObject);
     }
+
+    /*
+    public void draw(SpriteBatch batch)
+    {
+    for (GameObject o : objects) {
+    batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
+    }
+    }*/
 
     /**
      * Fonction non nécéssaire si la classe Cell s'affiche elle même
@@ -151,10 +138,21 @@ public class Cell {
     public DIRECTIONS getCellDir(Cell cell)
     {
         for (DIRECTIONS dir : DIRECTIONS.values()) {
-            if (adjacent_cells[dir.ordinal()] == cell) {
+            if (getAdjacentCell(dir) == cell) {
                 return dir;
             }
         }
         return null;
+    }
+
+    public void explode(DIRECTIONS dir, int damage, int range)
+    {
+        getDamage(damage);
+        if (range > 0 && dir != null) {
+            Cell adjacent_cell = getAdjacentCell(dir);
+            if (adjacent_cell != null) {
+                adjacent_cell.explode(dir, damage, range - 1);
+            }
+        }
     }
 }
