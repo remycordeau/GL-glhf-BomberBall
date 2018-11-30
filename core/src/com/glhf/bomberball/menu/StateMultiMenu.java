@@ -5,15 +5,14 @@ import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
-
-public class StateMainMenu extends State {
+public class StateMultiMenu extends State {
     //Attributes
     private Button solo;
     private Button multi;
     private Button parametres;
-    boolean solob = false;
+    private boolean solob=false;
     //Constructor
-    public StateMainMenu(String name){
+    public StateMultiMenu(String name){
         super(name);
         this.settings();
     }
@@ -29,28 +28,24 @@ public class StateMainMenu extends State {
     }
 
     public void draw(){
+        System.out.println("in");
         solo.draw(batch);
         multi.draw(batch);
         parametres.draw(batch);
-        /*if (solob)
+        if(solob)
         {
             batch.begin();
             batch.draw(Graphics.GUI.get("erreur"), 0, 0);
             batch.end();
-        }*/
+        }
     }
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        y = Constants.APP_HEIGHT - y;
         if(solo.contains(x, y)) {
-            solob = true;
-            batch.begin();
-            batch.draw(Graphics.GUI.get("erreur"), 0, 0);
-            batch.end();
+
+            solob=true;
             //TODO: On lance le jeu solo
-
-
         }
         if(multi.contains(x, y))
         {
@@ -62,4 +57,5 @@ public class StateMainMenu extends State {
         }
         return false;
     }
+
 }
