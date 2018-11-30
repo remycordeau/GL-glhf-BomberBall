@@ -14,7 +14,13 @@ public class Bomb extends GameObject {
 
     }
 
-    //constructor
+    /**
+     * constructor
+     * @param position_x x axis position of the bomb
+     * @param position_y y axis position of the bomb
+     * @param range number of squares reached by the bomb in the four directions ( north, east, sout, west)
+     * @return Bomb
+     */
     public Bomb(int position_x, int position_y, int range) {
         super(position_x, position_y);
         // initially, bomb inflict 1 damage
@@ -24,7 +30,10 @@ public class Bomb extends GameObject {
         sprite = Graphics.Sprites.get("bomb");
     }
 
-    //method explode
+    /**
+     * set damages to gameObjects on the reachable squares
+     * @param map the map where the bomb is
+     */
     public void explode(Maze map){
         int i=1;
         GameObject object;
