@@ -15,11 +15,12 @@ public class Maze {
     private int width;
     private Vector2[] position_start;
     private Vector2 position_end;
-    private Cell[][] tab;
+    private Cell[][] cells;
     private static Gson gson;
     private long seed; //défini les variations des textures
     private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
     private int nb_player_max;
+
 
     /**
      * Constructor for the Maze class
@@ -47,14 +48,14 @@ public class Maze {
         position_start[2]= new Vector2(w-1,0);
         position_start[3]= new Vector2(w-1,h-1);
         position_end = new Vector2(6,5);
-        tab = new Cell[width][height];
+        cells = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                tab[x][y] = new Cell(this, x, y);
+                cells[x][y] = new Cell(this, x, y);
                 if (Math.random() < 0.1)
-                    tab[x][y].addGameObject(new DestructibleWall(x, y));
+                    cells[x][y].addGameObject(new DestructibleWall(x, y));
                 if (x % 2 == 1 && y % 2 == 1)
-                    tab[x][y].addGameObject(new IndestructibleWall(x, y));
+                    cells[x][y].addGameObject(new IndestructibleWall(x, y));
             }
         }
         nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
@@ -66,23 +67,21 @@ public class Maze {
      * @param dx
      * @param dy
      */
-    public void moveGameObject(GameObject gameObject, int dx, int dy)
-    {
-        tab[gameObject.getPositionX()][gameObject.getPositionY()].removeGameObject(gameObject);
+    public void moveGameObject(GameObject gameObject, int dx, int dy) {
+        cells[gameObject.getPositionX()][gameObject.getPositionY()].removeGameObject(gameObject);
         gameObject.move(dx, dy);
-        tab[gameObject.getPositionX()][gameObject.getPositionY()].addGameObject(gameObject);
+        cells[gameObject.getPositionX()][gameObject.getPositionY()].addGameObject(gameObject);
     }
-
 
 
     /**
      * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
-     * @param b
+     * @param bomb
      */
-    public void addBomb(Bomb b)
+    public void addBomb(Bomb bomb)
     {
-        tab[b.getPositionX()][b.getPositionY()].addGameObject(b);
-        bombs.add(b);
+        cells[bomb.getPositionX()][bomb.getPositionY()].addGameObject(bomb);
+        bombs.add(bomb);
     }
 
     /**
@@ -130,7 +129,7 @@ public class Maze {
         for (int i = 0; i < nb_player_max; i++) {
             Vector2 pos = position_start[i];
             players[i] = new Player((int) pos.x, (int) pos.y, players_skins[i]);
-            tab[(int) pos.x][(int) pos.y].addGameObject(players[i]);
+            cells[(int) pos.x][(int) pos.y].addGameObject(players[i]);
         }
         return players;
     }
@@ -142,7 +141,7 @@ public class Maze {
     {
         for (Bomb bomb : bombs) {
             bomb.explode(this);
-            tab[bomb.getPositionX()][bomb.getPositionY()].removeGameObject(bomb);
+            cells[bomb.getPositionX()][bomb.getPositionY()].removeGameObject(bomb);
         }
         bombs.clear();
     }
@@ -229,7 +228,7 @@ public class Maze {
 
     public Cell getCellAt(int x, int  y) {
         try {
-            return tab[x][y];
+            return cells[x][y];
         }
         catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Cell (" + x + ", " +  y + ") out of bounds");
