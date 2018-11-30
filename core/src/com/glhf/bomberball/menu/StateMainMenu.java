@@ -48,9 +48,6 @@ public class StateMainMenu extends State {
     @Override
     public boolean touchDown(int x, int y, int pointer, int bouton) {
         //Doit afficer une erreur quand on clique mais ne se lance même pas ...
-        batch.begin();
-        batch.draw(erreur, 250, 250);
-        batch.end();
         if(x> X_BUTTON && x < X_BUTTON+X_SIZE && y> Y_SOLO && y<Y_SOLO+Y_SIZE)
         {
             //TODO: On lance le jeu solo

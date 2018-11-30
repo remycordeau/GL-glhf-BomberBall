@@ -10,8 +10,8 @@ public class IndestructibleWall extends Wall {
     }
 
     // constructor
-    public IndestructibleWall(int position_x, int position_y, int life) {
-        super(position_x, position_y,life);
+    public IndestructibleWall(int position_x, int position_y) {
+        super(position_x, position_y);
         this.sprite = Graphics.Sprites.get("wall");
     }
 

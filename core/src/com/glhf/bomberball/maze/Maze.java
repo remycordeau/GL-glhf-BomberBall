@@ -46,9 +46,9 @@ public class Maze {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (Math.random() < 0.1)
-                    tab[x][y] = new DestructibleWall(x, y, 1);
+                    tab[x][y] = new DestructibleWall(x, y);
                 if (x % 2 == 1 && y % 2 == 1)
-                    tab[x][y] = new IndestructibleWall(x, y, 1);
+                    tab[x][y] = new IndestructibleWall(x, y);
             }
         }
         tab[0][0] = new Bomb(0,0,1);
