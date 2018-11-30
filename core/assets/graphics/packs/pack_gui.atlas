@@ -1,19 +1,12 @@
 
 pack_gui.png
-size: 1024,512
+size: 512,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-BoutonAnnuler
-  rotate: false
-  xy: 380, 308
-  size: 400, 100
-  orig: 400, 100
-  offset: 0, 0
-  index: -1
 BoutonMulti
   rotate: false
-  xy: 380, 206
+  xy: 2, 206
   size: 400, 100
   orig: 400, 100
   offset: 0, 0
@@ -34,7 +27,7 @@ BoutonSolo
   index: -1
 erreur
   rotate: false
-  xy: 2, 225
+  xy: 2, 308
   size: 376, 183
   orig: 376, 183
   offset: 0, 0
