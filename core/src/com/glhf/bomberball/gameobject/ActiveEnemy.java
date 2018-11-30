@@ -21,6 +21,7 @@ public class ActiveEnemy extends Enemy {
         strength = Constants.config_file.getAttribute("activeEnemy_strength");
         life = Constants.config_file.getAttribute("activeEnemy_life");
         sprite = Graphics.Sprites.get("chort_idle_anim");
+        //TODO set the animation of the active enemy
         // way = plus long chemin;
     }
 

@@ -14,6 +14,6 @@ public class BombRangeBoost extends Bonus {
         super(position_x,position_y);
         //to get the bonus in player.bonus_owned
         name="BombRangeBoost";
-        //appearance
+        //TODO set the BombRangeBoost sprite
     }
 }

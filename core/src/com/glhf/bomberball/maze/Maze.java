@@ -31,7 +31,8 @@ public class Maze {
     }
 
     /**
-     * Constructor for the Maze class
+     * Constructor of Maze
+     * Generate a random Maze with a specific size
      * @param h hauteur
      * @param w largeur
      */
