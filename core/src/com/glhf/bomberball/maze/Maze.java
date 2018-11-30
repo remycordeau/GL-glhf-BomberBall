@@ -20,6 +20,7 @@ public class Maze {
     private static Gson gson;
     private long seed; //défini les variations des textures
     private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
+    private int nb_player_max;
 
     /**
      * Constructor for the Maze class
@@ -57,6 +58,7 @@ public class Maze {
         }
         tab[0][0] = new Bomb(0,0,1);
         tab[0][1] = new ActiveEnemy(0, 1);
+        nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
     }
 
     /**
@@ -119,13 +121,21 @@ public class Maze {
     }
 
     /**
+     * Getter for nb_player_max variable
+     * @return nb_playermax
+     */
+    public int getNb_player_max() {
+        return nb_player_max;
+    }
+
+    /**
      * Créer les joueurs dans le labyrynthe aux positions de départs
      * @return une liste des instances de classe des joueurs créés
      */
     public Player[] spawnPlayers() {
-        Player[] players = new Player[4];
+        Player[] players = new Player[nb_player_max];
         String[] players_skins = {Constants.config_file.getStringAttribute("player1_skin"), Constants.config_file.getStringAttribute("player2_skin"), Constants.config_file.getStringAttribute("player3_skin"), Constants.config_file.getStringAttribute("player4_skin")};
-        for (int i = 0; i < Constants.config_file.getIntAttribute("nb_player_max"); i++) {
+        for (int i = 0; i < nb_player_max; i++) {
             Vector2 pos = position_start[i];
             players[i] = new Player((int) pos.x, (int) pos.y, players_skins[i]);
             tab[(int) pos.x][(int) pos.y] = players[i];
