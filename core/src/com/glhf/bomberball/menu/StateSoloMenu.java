@@ -19,7 +19,7 @@ public class StateSoloMenu extends State {
 
     /*Loading textures*/
     public void settings() {
-        tmp = new Button(80, 75, 640, 451, "ComingSoon");
+        tmp = new Button(60, 0, 640, 451, "ComingSoon");
         State s = new StateMainMenu("MainMenu");
         undo = new ButtonUndo(0, 0, 100, 100, s);
     }
