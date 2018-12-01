@@ -1,6 +1,7 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ClassicButton;
@@ -16,6 +17,8 @@ public class StateMainMenu extends State {
     private ClassicButton parametres;
     private ClassicButton quit;
 
+    InputMultiplexer multiplexer = new InputMultiplexer();
+
     boolean solob = false;
     //Constructor
     public StateMainMenu(String name){
@@ -23,18 +26,29 @@ public class StateMainMenu extends State {
         this.settings();
     }
 
+    Runnable ModeMulti = new Runnable() {
+        public void run(){
+            State state = new StateMultiMenu("Menu Multi");
+            Game.setState(state);
+        }
+    };
+
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        solo = new ClassicButton(160, 400, 400, 100, "BoutonSolo", true, null);
+        solo = new ClassicButton(160, 400, 400, 100, "BoutonSolo", true);
         //BoutonMulti
-        multi = new ClassicButton(160, 300, 400, 100, "BoutonMulti", true, ModeMulti(););
+        multi = new ClassicButton(160, 300, 400, 100, "BoutonMulti", true);
+        multi.setAction(ModeMulti);
         //BoutonEditeur
-        editor = new ClassicButton(160, 200, 400, 100, "BoutonEditeur", true, null);
+        editor = new ClassicButton(160, 200, 400, 100, "BoutonEditeur", true);
         //BoutonParametres
-        parametres = new ClassicButton(160, 100, 400, 100, "BoutonParametres", true, null);
+        parametres = new ClassicButton(160, 100, 400, 100, "BoutonParametres", true);
         //BoutonQuitter
-        quit = new ClassicButton(160, 0, 400, 100, "BoutonQuitter", true, null);
+        quit = new ClassicButton(160, 0, 400, 100, "BoutonQuitter", true);
+
+        multiplexer.addProcessor(multi);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     public void draw(){
@@ -45,10 +59,6 @@ public class StateMainMenu extends State {
         quit.draw(batch);
     }
 
-    public void ModeMulti(){
-        State state = new StateMultiMenu("Menu Multi");
-        Game.setState(state);
-    }
 
     /*@Override
     public boolean touchDown(int x, int y, int pointer, int button) {

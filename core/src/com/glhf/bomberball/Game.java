@@ -65,6 +65,6 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
-		Gdx.input.setInputProcessor(state);
+		//Gdx.input.setInputProcessor(state);
 	}
 }
