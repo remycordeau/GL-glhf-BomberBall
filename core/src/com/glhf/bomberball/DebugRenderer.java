@@ -29,16 +29,16 @@ public class DebugRenderer {
     {
         float dh = height / n;
         float dw = width / n;
-        for (int y = 0; y < n; y++)
+        for (int y = 1; y < n; y++)
             DrawDebugLine(0, y * dh, width, y * dh);
-        for (int x = 0; x < n; x++)
+        for (int x = 1; x < n; x++)
             DrawDebugLine(x * dw, 0, x * dw, height);
     }
 
     private void DrawDebugLine(float x_0, float y_0, float x_1, float y_1)
     {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK); // Red line
+        shapeRenderer.setColor(Color.WHITE); // Red line
         shapeRenderer.line(x_0, y_0, x_1, y_1);
         shapeRenderer.end();
     }

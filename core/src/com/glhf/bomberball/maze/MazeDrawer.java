@@ -17,6 +17,8 @@ import javax.security.sasl.SaslServer;
  */
 public class MazeDrawer {
 
+    public enum Fit { BEST, WIDTH, HEIGHT }
+
     private Maze maze;
     private SpriteBatch batch;
     private int maze_width;
@@ -27,12 +29,14 @@ public class MazeDrawer {
     private float y_pos_offset;
     private float x_padding = 2.0f;
     private float y_padding = 4.0f;
+    private Fit fit;
 
-    public MazeDrawer(Maze maze, float x_minp, float x_maxp, float y_minp, float y_maxp)
+    public MazeDrawer(Maze maze, float x_minp, float x_maxp, float y_minp, float y_maxp, Fit fit)
     {
         this.maze = maze;
         maze_width = maze.getWidth();
         maze_height = maze.getHeight();
+        this.fit = fit;
 
         x_pos_offset = Constants.BOX_WIDTH;
         y_pos_offset = 2 * Constants.BOX_HEIGHT;
@@ -51,18 +55,28 @@ public class MazeDrawer {
         float height = Constants.BOX_HEIGHT * (maze.getHeight() + y_padding);
         float screen_ratio = (float)Constants.APP_WIDTH / (float)Constants.APP_HEIGHT;
         float maze_ratio = width / height;
-        float scaling = 1 / dy;
         float r = screen_ratio / maze_ratio;
-        // batch width => width * scaling * ratio * dx;
-        // batch height => height * scaling * dy;
 
+        float scaling = 1f;
+        float x_offset = 0f;
+        float y_offset = 0f;
+        if (fit == Fit.BEST) {
+            fit = (r > 1) ? Fit.HEIGHT : Fit.WIDTH;
+        }
+        if (fit == Fit.WIDTH) {
+            scaling = 1 / (dx * r);
+            y_offset = 0.5f + dy * height * scaling * (1 - r);
+        } else { // Fit.HEIGHT
+            scaling = 1 / (dy);
+            x_offset = 0.5f * dx * width * scaling * (r - 1);
+        }
         float width_scaled = width * scaling;
         float height_scaled = height * scaling;
+        // batch_width => dx * width * scaling * r
+        // batch_height => dy * height * scaling
 
         camera = new OrthographicCamera(width_scaled * r, height_scaled);
-        float x_offset = 0.5f * dx * width_scaled * (screen_ratio - 1);
-        //float x_offset = 0f;
-        camera.translate(width_scaled * r * (0.5f - x_minp) - x_offset, height_scaled * (0.5f - y_minp));
+        camera.translate(width_scaled * r * (0.5f - x_minp) - x_offset, height_scaled * (0.5f - y_minp) - y_offset);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
     }
