@@ -2,7 +2,6 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
@@ -16,10 +15,9 @@ public class Maze {
     private int width;
     private Vector2[] position_start;
     private Vector2 position_end;
-    private GameObject[][] tab;
+    private Cell[][] cells;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private ArrayList<Bomb> bombs = new ArrayList<Bomb>(); // contains all the bombs in the maze
     private int nb_player_max;
 
     /**
@@ -43,66 +41,31 @@ public class Maze {
         height = h;
         width = w;
         position_start = new Vector2[4];
-        position_start[0]= new Vector2(1,1);
-        position_start[1]= new Vector2(1,10);
-        position_start[2]= new Vector2(12,1);
-        position_start[3]= new Vector2(12,10);
+        position_start[0]= new Vector2(0,0);
+        position_start[1]= new Vector2(0,h-1);
+        position_start[2]= new Vector2(w-1,0);
+        position_start[3]= new Vector2(w-1,h-1);
         position_end = new Vector2(6,5);
-        tab = new GameObject[width][height];
+        cells = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                cells[x][y] = new Cell(x, y);
                 if (Math.random() < 0.1)
-                    tab[x][y] = new DestructibleWall(x, y);
+                    cells[x][y].addGameObject(new DestructibleWall());
                 if (x % 2 == 1 && y % 2 == 1)
-                    tab[x][y] = new IndestructibleWall(x, y);
+                    cells[x][y].addGameObject(new IndestructibleWall());
             }
         }
-        tab[0][0] = new Bomb(0,0,1);
-        tab[0][1] = new ActiveEnemy(0, 1);
         nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
     }
 
-    /**
-     * Moves a GameObject with a relative delta
-     * @param gameObject
-     * @param dx
-     * @param dy
-     */
-    public void moveGameObject(GameObject gameObject, int dx, int dy)
+    public void init()
     {
-        tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
-        gameObject.move(dx, dy);
-        tab[gameObject.getPositionX()][gameObject.getPositionY()] = gameObject;
-    }
-
-
-
-    /**
-     * Puts a Bomb at a specified position in the Maze and adds it to the bombs ArrayList
-     * @param b
-     */
-    public void addBomb(Bomb b)
-    {
-        tab[b.getPositionX()][b.getPositionY()] = b;
-        bombs.add(b);
-    }
-
-    /**
-     * returns a GameObject at a specified poition in the maze
-     * @param cell_x
-     * @param cell_y
-     * @return null if there's no GameObject at the specified position, else it returns the GameObject
-     */
-    public GameObject getGameObjectAt(int cell_x, int cell_y)
-    {
-        GameObject gameObject = null;
-        try {
-            gameObject = tab[cell_x][cell_y];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
+            }
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Cell (" + cell_x + ", " + cell_y + ") out of bounds");
-        }
-        return gameObject;
     }
 
     /**
@@ -138,8 +101,8 @@ public class Maze {
         String[] players_skins = {Constants.config_file.getStringAttribute("player1_skin"), Constants.config_file.getStringAttribute("player2_skin"), Constants.config_file.getStringAttribute("player3_skin"), Constants.config_file.getStringAttribute("player4_skin")};
         for (int i = 0; i < nb_player_max; i++) {
             Vector2 pos = position_start[i];
-            players[i] = new Player((int) pos.x, (int) pos.y, players_skins[i]);
-            tab[(int) pos.x][(int) pos.y] = players[i];
+            players[i] = new Player(players_skins[i]);
+            cells[(int) pos.x][(int) pos.y].addGameObject(players[i]);
         }
         return players;
     }
@@ -149,26 +112,17 @@ public class Maze {
      */
     public void processEndTurn()
     {
-        for (Bomb bomb : bombs) {
-            bomb.explode(this);
-            tab[bomb.getPositionX()][bomb.getPositionY()] = null;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                cells[x][y].processEndTurn();
+            }
         }
-        bombs.clear();
     }
 
-    /**
-     * Returns if a given cell is walkable
-     * @param cell_x
-     * @param cell_y
-     * @return
-     */
-    public boolean isWalkable(int cell_x, int cell_y)
-    {
-        if (!isCellInBounds(cell_x, cell_y)) {
-            return false;
-        }
-        GameObject gameObject = getGameObjectAt(cell_x, cell_y);
-        return gameObject == null || gameObject.isWalkable();
+    public Cell getCellAt(int x, int  y) {
+        if(isCellInBounds(x, y))
+            return cells[x][y];
+        return null;
     }
 
     /**
@@ -183,17 +137,6 @@ public class Maze {
     }
 
     /**
-     * Removes a given GameObject in the maze if it hasn't any life left
-     * @param gameObject
-     */
-    public void handleGameObjectDamage(GameObject gameObject)
-    {
-        if (gameObject != null && !gameObject.isAlive()) {
-            tab[gameObject.getPositionX()][gameObject.getPositionY()] = null;
-        }
-    }
-
-    /**
      * Inititiate a Maze from a Json file
      * @param filename the name of the Json file
      * @return Return an instance of maze corresponding to the Json file
@@ -201,7 +144,9 @@ public class Maze {
     public static Maze fromJsonFile(String filename) {
         if(gson==null)createGson();
         try {
-            return gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
+            Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE+filename)), Maze.class);
+            maze.init();
+            return maze;
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }
 
@@ -211,6 +156,7 @@ public class Maze {
      */
     public void toJsonFile(String filename)
     {
+        if(gson==null)createGson();
         try {
             Writer writer = new FileWriter(new File(Constants.PATH_MAZE + filename));
             writer.write(this.toJson());

@@ -12,16 +12,7 @@ public abstract class Character extends GameObject {
     protected Animation<TextureAtlas.AtlasRegion> animation;
 
     public Character() {
-
-    }
-
-    /**
-     * constructor
-     * @param position_x x axis initial position
-     * @param position_y y axis initial position
-     */
-    protected Character(int position_x, int position_y) {
-        super(position_x, position_y);
+        super();
         this.number_initial_moves = Constants.config_file.getIntAttribute("number_initial_move");
     }
 
@@ -39,57 +30,7 @@ public abstract class Character extends GameObject {
      * Initiate attribute number_move_remaining at the beginning of a turn
      */
     public void initiateTurn(){
-        number_move_remaining=number_initial_moves;
-    }
-
-    /**
-     * move function Right
-     */
-    public void moveRight(){
-        position_x+=1;
-        number_move_remaining-=1;
-    }
-
-    /**
-     * move function Left
-     */
-    public void moveLeft(){
-        position_x-=1;
-        number_move_remaining-=1;
-    }
-
-    /**
-     * move function Up
-     * origin of the labyrinthe top left corner
-     */
-    public void moveUp(){
-        position_y-=1;
-        number_move_remaining-=1;
-    }
-
-    /**
-     * move function Down
-     */
-    public void moveDown(){
-        position_y+=1;
-        number_move_remaining-=1;
-    }
-
-    /**
-     * move function, give number of move by x and by then move
-     * @param dx number of move by x
-     * @param dy number of move by y
-     */
-    public void move(int dx, int dy){
-        super.move(dx, dy);
-        number_move_remaining -= Math.abs(dx) + Math.abs(dy);
-    }
-
-    // call this method only if number_move_remaining is >=0 after the move, mouse
-    public void moveAt(int position_x, int position_y){
-        number_move_remaining -= Math.abs(position_x - this.position_x) + Math.abs(position_y - this.position_y);
-        setPositionX(position_x);
-        setPositionY(position_y);
+        number_move_remaining = number_initial_moves;
     }
 
     /**

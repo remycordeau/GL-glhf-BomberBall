@@ -9,18 +9,8 @@ public class AggressiveEnemy extends Enemy {
     private int begin_position_x;
     private int begin_position_y;
 
-
-    /**
-     * constructor
-     * @param position_x x axis initial position of the enemy
-     * @param position_y y axis initial position of the enemy
-     * @param way
-     * @return AggressiveEnemy
-     */
-    public AggressiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
-        super(position_x, position_y);
-        this.begin_position_x=position_x;
-        this.begin_position_y=position_y;
+    public AggressiveEnemy(ArrayList<Constants.moves> way) {
+        super();
         life = Constants.config_file.getIntAttribute("aggressiveEnemy_life");
         strength = Constants.config_file.getIntAttribute("aggressiveEnemy_strength");
         this.way = way;
@@ -37,6 +27,4 @@ public class AggressiveEnemy extends Enemy {
         setWay(way);
         followWay();
     }
-
-
 }

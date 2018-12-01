@@ -9,12 +9,10 @@ public class PassiveEnemy extends Enemy {
 
     /**
      * constructor
-     * @param position_x x axis initial position
-     * @param position_y y axis initial position
      * @param way the way the enemy will follow
      */
-    public PassiveEnemy(int position_x, int position_y, ArrayList<Constants.moves> way) {
-        super(position_x, position_y);
+    public PassiveEnemy( ArrayList<Constants.moves> way) {
+        super();
         life = Constants.config_file.getIntAttribute("passiveEnemy_life");
         strength = Constants.config_file.getIntAttribute("passiveEnemy_strength");
         this.way = way;
