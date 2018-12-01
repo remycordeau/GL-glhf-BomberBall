@@ -60,14 +60,7 @@ public abstract class GameObject {
 
     public boolean move(DIRECTIONS dir)
     {
-        try {
-        return moveToCell(cell.getAdjacentCell(dir)); }
-        catch (NullPointerException e)
-        {
-            System.out.println(cell);
-            System.err.println("err");
-        }
-        return false;
+        return moveToCell(getCell().getAdjacentCell(dir));
     }
 
     public boolean moveToCell(Cell dest_cell)
@@ -91,6 +84,10 @@ public abstract class GameObject {
 
     public Cell getCell()
     {
-        return this.cell;
+        if (cell != null) {
+            return this.cell;
+        } else {
+            throw new RuntimeException("GameObject's cell is null");
+        }
     }
 }

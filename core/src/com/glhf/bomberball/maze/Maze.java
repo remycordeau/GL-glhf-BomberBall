@@ -57,6 +57,7 @@ public class Maze {
             }
         }
         nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
+        init();
     }
 
     public void init()

@@ -34,6 +34,7 @@ public class Cell {
         this.x = x;
         this.y = y;
         objects = new ArrayList<GameObject>();
+        adjacent_cells = new Cell[DIRECTIONS.values().length];
     }
 
     public int getX()
