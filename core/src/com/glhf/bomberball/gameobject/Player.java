@@ -84,12 +84,13 @@ public class Player extends Character {
      * @return a new Bomb
      */
     public void dropBomb(DIRECTIONS dir) {
-        Cell dest_cell = cell.getAdjacentCell(dir);
-        if (dest_cell != null && dest_cell.isWalkable())
-        {
-            number_bomb_remaining--;
-            Bomb bomb = new Bomb(initial_bomb_range + bonus_owned.get("BombRangeBoost"));
-            dest_cell.addGameObject(bomb);
+        if (number_bomb_remaining > 0) {
+            Cell dest_cell = cell.getAdjacentCell(dir);
+            if (dest_cell != null && dest_cell.isWalkable()) {
+                number_bomb_remaining--;
+                Bomb bomb = new Bomb(initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+                dest_cell.addGameObject(bomb);
+            }
         }
     }
 
