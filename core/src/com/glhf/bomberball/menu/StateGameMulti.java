@@ -36,7 +36,7 @@ public class StateGameMulti extends StateGame{
         players[current_player_index].initiateTurn();
     }
 
-    @Override
+    /*@Override
     public boolean keyDown(int keycode) {
         //HashMap<Integer, String> inputs = Config.getInputs();
         //System.out.println("keyDown"+keycode);
@@ -56,7 +56,7 @@ public class StateGameMulti extends StateGame{
             case Input.Keys.SPACE:
                 nextPlayer();
                 break;
-        }
+        }*/
 //        if(inputs.keySet().contains(keycode)) {
 //            try {
 //                Player.class.getMethod(inputs.get(keycode)).invoke(players[turn_number % Constants.NB_PLAYER_MAX]);
@@ -64,10 +64,10 @@ public class StateGameMulti extends StateGame{
 //              catch (InvocationTargetException e) { e.printStackTrace(); }
 //              catch (NoSuchMethodException e) { e.printStackTrace(); }
 //        }
-        return false;
-    }
+        /*return false;
+    }*/
 
-    @Override
+    /*@Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
         int cell_x = (int)cell_pos.x;
@@ -78,7 +78,7 @@ public class StateGameMulti extends StateGame{
             players[current_player_index].dropBomb(dir);
         }
         return false;
-    }
+    }*/
 
 
 }

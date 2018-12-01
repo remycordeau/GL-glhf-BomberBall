@@ -26,15 +26,15 @@ public class StateMainMenu extends State {
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        solo = new ClassicButton(160, 400, 400, 100, "BoutonSolo", true);
+        solo = new ClassicButton(160, 400, 400, 100, "BoutonSolo", true, null);
         //BoutonMulti
-        multi = new ClassicButton(160, 300, 400, 100, "BoutonMulti", true);
+        multi = new ClassicButton(160, 300, 400, 100, "BoutonMulti", true, ModeMulti(););
         //BoutonEditeur
-        editor = new ClassicButton(160, 200, 400, 100, "BoutonEditeur", true);
+        editor = new ClassicButton(160, 200, 400, 100, "BoutonEditeur", true, null);
         //BoutonParametres
-        parametres = new ClassicButton(160, 100, 400, 100, "BoutonParametres", true);
+        parametres = new ClassicButton(160, 100, 400, 100, "BoutonParametres", true, null);
         //BoutonQuitter
-        quit = new ClassicButton(160, 0, 400, 100, "BoutonQuitter", true);
+        quit = new ClassicButton(160, 0, 400, 100, "BoutonQuitter", true, null);
     }
 
     public void draw(){
@@ -45,7 +45,12 @@ public class StateMainMenu extends State {
         quit.draw(batch);
     }
 
-    @Override
+    public void ModeMulti(){
+        State state = new StateMultiMenu("Menu Multi");
+        Game.setState(state);
+    }
+
+    /*@Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         y = Constants.APP_HEIGHT - y;
         if(solo.contains(x, y)) {
@@ -74,16 +79,5 @@ public class StateMainMenu extends State {
             Gdx.app.exit();
         }
         return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int x, int y){
-        solo.mouseMoved(x, y);
-        multi.mouseMoved(x, y);
-        editor.mouseMoved(x, y);
-        parametres.mouseMoved(x, y);
-        quit.mouseMoved(x, y);
-        return false;
-    }
-
+    }*/
 }

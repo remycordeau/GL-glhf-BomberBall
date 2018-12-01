@@ -26,10 +26,10 @@ public class StateMultiMenu extends State {
     /*Loading textures*/
     public void settings(){
         //Button retrievePlayer
-        retrievePlayer = new ClassicButton(100, 15, 20, 200, "Minus2", false);
+        retrievePlayer = new ClassicButton(100, 15, 20, 200, "Minus2", false, null);
 
         //Button addPlayer
-        addPlayer = new ClassicButton(200, 15, 20, 20, "Plus2", false);
+        addPlayer = new ClassicButton(200, 15, 20, 20, "Plus2", false, null);
 
         //Button numberPlayer
         numberPlayer = new SelectButton(137, 2, 50, 50, Constants.config_file.getIntAttribute("nb_player_max")+"");
@@ -39,10 +39,10 @@ public class StateMultiMenu extends State {
         cancel = new ButtonUndo(400, 0, 100, 100, s);
 
         //Button Begin
-        begin = new ClassicButton(160, 200, 400, 100, "BoutonMulti", true);
+        begin = new ClassicButton(160, 200, 400, 100, "BoutonMulti", true, null);
 
         //Button Beign Random
-        begin_random = new ClassicButton(160, 100, 400, 100, "BoutonMulti", true);
+        begin_random = new ClassicButton(160, 100, 400, 100, "BoutonMulti", true, null);
     }
 
     public void draw(){

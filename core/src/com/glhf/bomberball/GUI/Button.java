@@ -1,5 +1,6 @@
 package com.glhf.bomberball.GUI;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -7,21 +8,26 @@ import com.badlogic.gdx.math.Rectangle;
 import com.glhf.bomberball.Graphics;
 
 import javax.xml.soap.Text;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class Button extends Rectangle implements InputProcessor{
     //Attributes
     private TextureAtlas.AtlasRegion fixedSprite;
     private TextureAtlas.AtlasRegion sprite;
     private TextureAtlas.AtlasRegion shinySprite;
+    protected Function<Void, Void> action;
 
 
-    public Button(int x, int y, int width, int height, String s, boolean isShiny){
+    public Button(int x, int y, int width, int height, String s, boolean isShiny, Function<Void, Void> action){
         super(x, y, width, height);
         sprite = Graphics.GUI.get(s);
         if(isShiny) {
             fixedSprite = Graphics.GUI.get(s);
             shinySprite = Graphics.GUI.get(s+"Shiny");
         }
+        setAction(action);
+        Gdx.input.setInputProcessor(this);
     }
 
     public void draw(SpriteBatch batch){
@@ -52,6 +58,10 @@ public abstract class Button extends Rectangle implements InputProcessor{
         else{
             this.setSprite(Graphics.GUI.get(fixedSprite+""));
         }
+    }
+
+    public void setAction(Function<Void, Void> action){
+        this.action = action;
     }
 
     @Override
