@@ -1,6 +1,6 @@
 package com.glhf.bomberball.menu;
 
-public enum DIRECTIONS {
+public enum Directions {
     RIGHT,
     UP,
     LEFT,

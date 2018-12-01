@@ -1,15 +1,8 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.maze.Cell;
-import com.glhf.bomberball.menu.DIRECTIONS;
-
-import java.io.Serializable;
+import com.glhf.bomberball.menu.Directions;
 
 public abstract class GameObject {
 
@@ -58,7 +51,7 @@ public abstract class GameObject {
 
     public boolean isWalkable() { return false; }
 
-    public boolean move(DIRECTIONS dir)
+    public boolean move(Directions dir)
     {
         return moveToCell(getCell().getAdjacentCell(dir));
     }

@@ -3,10 +3,7 @@ package com.glhf.bomberball.gameobject;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Cell;
-import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.menu.DIRECTIONS;
-
-import java.util.ArrayList;
+import com.glhf.bomberball.menu.Directions;
 
 public class Bomb extends GameObject {
     // attributes
@@ -34,7 +31,7 @@ public class Bomb extends GameObject {
 
     public void explode() {
         cell.explode(null, damage, 0);
-        for (DIRECTIONS dir : DIRECTIONS.values()) {
+        for (Directions dir : Directions.values()) {
             Cell adjacent_cell = cell.getAdjacentCell(dir);
             if (adjacent_cell != null) {
                 adjacent_cell.explode(dir, damage, range);

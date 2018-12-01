@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
-import com.glhf.bomberball.menu.DIRECTIONS;
+import com.glhf.bomberball.menu.Directions;
 
 import java.util.Hashtable;
 
@@ -69,7 +69,7 @@ public class Player extends Character {
     }
 
     @Override
-    public boolean move(DIRECTIONS dir)
+    public boolean move(Directions dir)
     {
         if (number_move_remaining > 0 && super.move(dir)) {
             number_move_remaining--;
@@ -83,7 +83,7 @@ public class Player extends Character {
      * @param dir
      * @return a new Bomb
      */
-    public void dropBomb(DIRECTIONS dir) {
+    public void dropBomb(Directions dir) {
         if (number_bomb_remaining > 0) {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {

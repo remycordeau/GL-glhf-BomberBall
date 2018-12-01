@@ -1,12 +1,8 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Wall;
-import com.glhf.bomberball.menu.DIRECTIONS;
+import com.glhf.bomberball.menu.Directions;
 
 import java.util.ArrayList;
 
@@ -34,7 +30,7 @@ public class Cell {
         this.x = x;
         this.y = y;
         objects = new ArrayList<GameObject>();
-        adjacent_cells = new Cell[DIRECTIONS.values().length];
+        adjacent_cells = new Cell[Directions.values().length];
     }
 
     public int getX()
@@ -55,7 +51,7 @@ public class Cell {
         }
     }
 
-    public Cell getAdjacentCell(DIRECTIONS dir)
+    public Cell getAdjacentCell(Directions dir)
     {
         return adjacent_cells[dir.ordinal()];
     }
@@ -123,9 +119,9 @@ public class Cell {
         return true;
     }
 
-    public DIRECTIONS getCellDir(Cell cell)
+    public Directions getCellDir(Cell cell)
     {
-        for (DIRECTIONS dir : DIRECTIONS.values()) {
+        for (Directions dir : Directions.values()) {
             if (getAdjacentCell(dir) == cell) {
                 return dir;
             }
@@ -133,7 +129,7 @@ public class Cell {
         return null;
     }
 
-    public void explode(DIRECTIONS dir, int damage, int range)
+    public void explode(Directions dir, int damage, int range)
     {
         getDamage(damage);
         if (range > 1 && dir != null) {

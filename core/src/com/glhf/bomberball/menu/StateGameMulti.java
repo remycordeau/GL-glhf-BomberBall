@@ -19,7 +19,7 @@ public class StateGameMulti extends StateGame{
         players[0].initiateTurn();
     }
 
-    private void moveCurrentPlayer(DIRECTIONS dir)
+    private void moveCurrentPlayer(Directions dir)
     {
         players[current_player_index].move(dir);
     }
@@ -42,16 +42,16 @@ public class StateGameMulti extends StateGame{
         //System.out.println("keyDown"+keycode);
         switch (keycode){
             case Input.Keys.UP:
-                moveCurrentPlayer(DIRECTIONS.UP);
+                moveCurrentPlayer(Directions.UP);
                 break;
             case Input.Keys.RIGHT:
-                moveCurrentPlayer(DIRECTIONS.RIGHT);
+                moveCurrentPlayer(Directions.RIGHT);
                 break;
             case Input.Keys.DOWN:
-                moveCurrentPlayer(DIRECTIONS.DOWN);
+                moveCurrentPlayer(Directions.DOWN);
                 break;
             case Input.Keys.LEFT:
-                moveCurrentPlayer(DIRECTIONS.LEFT);
+                moveCurrentPlayer(Directions.LEFT);
                 break;
             case Input.Keys.SPACE:
                 nextPlayer();
@@ -73,7 +73,7 @@ public class StateGameMulti extends StateGame{
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
         Player player = players[current_player_index];
-        DIRECTIONS dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
             players[current_player_index].dropBomb(dir);
         }
