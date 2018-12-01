@@ -8,7 +8,7 @@ public class ButtonUndo extends Button {
     private State state;
 
     public ButtonUndo(int x, int y, int width, int height, State state){
-        super(x, y, width, height, "Retour");
+        super(x, y, width, height, "Retour", false);
         this.state = state;
     }
 

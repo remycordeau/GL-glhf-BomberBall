@@ -25,15 +25,15 @@ public class StateMainMenu extends State {
     /*Loading textures*/
     public void settings(){
         //BoutonSolo
-        solo = new Button(160, 400, 400, 100, "BoutonSolo");
+        solo = new Button(160, 400, 400, 100, "BoutonSolo", true);
         //BoutonMulti
-        multi = new Button(160, 300, 400, 100, "BoutonMulti");
+        multi = new Button(160, 300, 400, 100, "BoutonMulti", true);
         //BoutonEditeur
-        editor = new Button(160, 200, 400, 100, "BoutonEditeur");
+        editor = new Button(160, 200, 400, 100, "BoutonEditeur", true);
         //BoutonParametres
-        parametres = new Button(160, 100, 400, 100, "BoutonParametres");
+        parametres = new Button(160, 100, 400, 100, "BoutonParametres", true);
         //BoutonQuitter
-        quit = new Button(160, 0, 400, 100, "BoutonQuitter");
+        quit = new Button(160, 0, 400, 100, "BoutonQuitter", true);
     }
 
     public void draw(){
@@ -74,4 +74,22 @@ public class StateMainMenu extends State {
         }
         return false;
     }
+
+    @Override
+    public boolean mouseMoved(int x, int y){
+        y = Constants.APP_HEIGHT - y;
+
+        solo.alternativeSprite(x, y);
+
+        multi.alternativeSprite(x, y);
+
+        parametres.alternativeSprite(x, y);
+
+        editor.alternativeSprite(x, y);
+
+        quit.alternativeSprite(x, y);
+
+        return false;
+    }
+
 }

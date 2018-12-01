@@ -8,12 +8,12 @@ public class Constants {
     public static final int APP_HEIGHT = 480;
 
 
-    // constans for paths
+    // constants for paths
     public static final String PATH_ASSET         = "core/assets/";
     public static final String PATH_MAZE          = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE   = PATH_ASSET+"config.json";
     public static final String PATH_GAMEOBJECT    = PATH_ASSET+"Config/config.txt";
-    public static final String PATH_CONFIG_TMP        = PATH_ASSET+"Config/configtmp.txt";
+    public static final String PATH_CONFIG_TMP    = PATH_ASSET+"Config/configtmp.txt";
     public static final String PATH_GRAPHICS      = PATH_ASSET+"graphics/";
     public static final String PATH_PACKS         = PATH_GRAPHICS+"packs/";
     public static final String PATH_ATLAS_SPRITES = PATH_PACKS+"pack_sprites.atlas";
@@ -29,4 +29,5 @@ public class Constants {
 
     // constants to configure game objects
     public static ConfigFile config_file = new ConfigFile(Constants.PATH_GAMEOBJECT);
+
 }

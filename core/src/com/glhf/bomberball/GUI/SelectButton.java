@@ -8,7 +8,7 @@ public class SelectButton extends Button{
     private int nbPlayers;
 
     public SelectButton(int x, int y, int width, int height, String s){
-        super(x, y, width, height, s);
+        super(x, y, width, height, s, false);
         nbPlayers = Constants.config_file.getIntAttribute("nb_player_max");
         setSprite(Graphics.GUI.get(nbPlayers + ""));
 

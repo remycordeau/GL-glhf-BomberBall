@@ -25,10 +25,10 @@ public class StateMultiMenu extends State {
     /*Loading textures*/
     public void settings(){
         //Button retrievePlayer
-        retrievePlayer = new Button(100, 15, 20, 200, "Minus2");
+        retrievePlayer = new Button(100, 15, 20, 200, "Minus2", false);
 
         //Button addPlayer
-        addPlayer = new Button(200, 15, 20, 20, "Plus2");
+        addPlayer = new Button(200, 15, 20, 20, "Plus2", false);
 
         //Button numberPlayer
         numberPlayer = new SelectButton(137, 2, 50, 50, Constants.config_file.getIntAttribute("nb_player_max")+"");
@@ -38,10 +38,10 @@ public class StateMultiMenu extends State {
         cancel = new ButtonUndo(400, 0, 100, 100, s);
 
         //Button Begin
-        begin = new Button(160, 200, 400, 100, "BoutonMulti");
+        begin = new Button(160, 200, 400, 100, "BoutonMulti", false);
 
         //Button Beign Random
-        begin_random = new Button(160, 100, 400, 100, "BoutonMulti");
+        begin_random = new Button(160, 100, 400, 100, "BoutonMulti", false);
     }
 
     public void draw(){
@@ -67,7 +67,7 @@ public class StateMultiMenu extends State {
         {
             int newNumberOfPlayers;
             newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
-            if(newNumberOfPlayers > 1) {
+            if(newNumberOfPlayers > 2) {
                 newNumberOfPlayers--;
                 Constants.config_file.setIntAttribute("nb_player_max", newNumberOfPlayers);
                 numberPlayer.setNbPlayers(newNumberOfPlayers);
