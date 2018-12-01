@@ -7,17 +7,7 @@ public class ActiveEnemy extends Enemy {
     //attributes
 
     public ActiveEnemy() {
-
-    }
-
-    /**
-     * constructor
-     * @param position_x
-     * @param position_y
-     * @return ActiveEnemy
-     */
-    public ActiveEnemy(int position_x, int position_y) {
-        super(position_x, position_y);
+        super();
         strength = Constants.config_file.getIntAttribute("activeEnemy_strength");
         life = Constants.config_file.getIntAttribute("activeEnemy_life");
         sprite = Graphics.Sprites.get("chort_idle_anim");

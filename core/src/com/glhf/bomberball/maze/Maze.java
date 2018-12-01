@@ -51,9 +51,9 @@ public class Maze {
             for (int y = 0; y < height; y++) {
                 cells[x][y] = new Cell(x, y);
                 if (Math.random() < 0.1)
-                    cells[x][y].addGameObject(new DestructibleWall(x, y));
+                    cells[x][y].addGameObject(new DestructibleWall());
                 if (x % 2 == 1 && y % 2 == 1)
-                    cells[x][y].addGameObject(new IndestructibleWall(x, y));
+                    cells[x][y].addGameObject(new IndestructibleWall());
             }
         }
         nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
@@ -66,17 +66,6 @@ public class Maze {
                 cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
             }
         }
-    }
-
-    /**
-     * returns a GameObject at a specified poition in the maze
-     * @param cell_x
-     * @param cell_y
-     * @return null if there's no GameObject at the specified position, else it returns the GameObject
-     */
-    public ArrayList<GameObject> getGameObjectsAt(int cell_x, int cell_y)
-    {
-            return getCellAt(cell_x, cell_y).getObjects();
     }
 
     /**
@@ -112,7 +101,7 @@ public class Maze {
         String[] players_skins = {Constants.config_file.getStringAttribute("player1_skin"), Constants.config_file.getStringAttribute("player2_skin"), Constants.config_file.getStringAttribute("player3_skin"), Constants.config_file.getStringAttribute("player4_skin")};
         for (int i = 0; i < nb_player_max; i++) {
             Vector2 pos = position_start[i];
-            players[i] = new Player((int) pos.x, (int) pos.y, players_skins[i]);
+            players[i] = new Player(players_skins[i]);
             cells[(int) pos.x][(int) pos.y].addGameObject(players[i]);
         }
         return players;
@@ -128,24 +117,6 @@ public class Maze {
                 cells[x][y].processEndTurn();
             }
         }
-    }
-
-    /**
-     * Returns if a given cell is walkable
-     * @param cell_x
-     * @param cell_y
-     * @return
-     */
-    public boolean isWalkable(int cell_x, int cell_y)
-    {
-        if (!isCellInBounds(cell_x, cell_y)) {
-            return false;
-        }
-        for(GameObject gameObject : getGameObjectsAt(cell_x, cell_y)){
-            if(!gameObject.isWalkable())
-                return false;
-        }
-        return true;
     }
 
     public Cell getCellAt(int x, int  y) {

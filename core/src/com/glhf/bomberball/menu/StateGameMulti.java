@@ -2,12 +2,7 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Config;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.maze.Cell;
-
-import java.util.HashMap;
 
 public class StateGameMulti extends StateGame{
 
@@ -26,7 +21,7 @@ public class StateGameMulti extends StateGame{
 
     private void moveCurrentPlayer(DIRECTIONS dir)
     {
-        players[current_player_index].moveDir(dir);
+        players[current_player_index].move(dir);
     }
 
     /**

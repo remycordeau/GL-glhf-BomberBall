@@ -20,16 +20,13 @@ public class Bomb extends GameObject {
 
     /**
      * constructor
-     * @param position_x x axis position of the bomb
-     * @param position_y y axis position of the bomb
      * @param range number of squares reached by the bomb in the four directions ( north, east, sout, west)
      * @return Bomb
      */
-    public Bomb(int position_x, int position_y, int range) {
-        super(position_x, position_y);
+    public Bomb(int range) {
         // initially, bomb inflict 1 getDamage
-        this.damage=Constants.config_file.getIntAttribute("bomb_damage");
-        this.range=range;
+        this.damage = Constants.config_file.getIntAttribute("bomb_damage");
+        this.range = range;
         this.life = 1;
         sprite = Graphics.Sprites.get("bomb");
     }
