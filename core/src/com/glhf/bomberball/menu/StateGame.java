@@ -20,11 +20,10 @@ public abstract class StateGame extends State {
     }
 
     public void loadMaze(String filename) {
-        maze = new Maze(11, 13);
-        //maze = Maze.fromJsonFile(filename);
+        //maze = new Maze(11, 13);
+        maze = Maze.fromJsonFile(filename);
         //maze.toJsonFile("maze_0.json");
-        //mazeDrawer = new MazeDrawer(maze, 1/3f,2/3f, 1/3f, 2/3f, MazeDrawer.Fit.BEST);
-        mazeDrawer = new MazeDrawer(maze, 0f,1f, 0f, 1f, MazeDrawer.Fit.BEST);
+        mazeDrawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
     }
 
     public void draw() {

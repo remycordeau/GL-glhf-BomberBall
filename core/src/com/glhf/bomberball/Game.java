@@ -37,6 +37,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
         setState(new StateMainMenu("MainMenu"));
+        //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);
@@ -53,7 +54,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		state.draw();
-		//debugRenderer.drawLines(2);
+		//debugRenderer.drawLines(8);
         batch.end();
 	}
 	
