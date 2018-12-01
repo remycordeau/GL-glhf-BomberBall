@@ -3,17 +3,18 @@ package com.glhf.bomberball.menu;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
+import com.glhf.bomberball.GUI.ClassicButton;
 import com.glhf.bomberball.GUI.SelectButton;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public class StateMultiMenu extends State {
     //Attributes
-    private Button retrievePlayer;
-    private Button addPlayer;
+    private ClassicButton retrievePlayer;
+    private ClassicButton addPlayer;
     private SelectButton numberPlayer;
-    private Button begin;
-    private Button begin_random;
+    private ClassicButton begin;
+    private ClassicButton begin_random;
     private ButtonUndo cancel;
     private boolean err =false;
     //Constructor
@@ -25,10 +26,10 @@ public class StateMultiMenu extends State {
     /*Loading textures*/
     public void settings(){
         //Button retrievePlayer
-        retrievePlayer = new Button(100, 15, 20, 200, "Minus2", false);
+        retrievePlayer = new ClassicButton(100, 15, 20, 200, "Minus2", false);
 
         //Button addPlayer
-        addPlayer = new Button(200, 15, 20, 20, "Plus2", false);
+        addPlayer = new ClassicButton(200, 15, 20, 20, "Plus2", false);
 
         //Button numberPlayer
         numberPlayer = new SelectButton(137, 2, 50, 50, Constants.config_file.getIntAttribute("nb_player_max")+"");
@@ -38,10 +39,10 @@ public class StateMultiMenu extends State {
         cancel = new ButtonUndo(400, 0, 100, 100, s);
 
         //Button Begin
-        begin = new Button(160, 200, 400, 100, "BoutonMulti", false);
+        begin = new ClassicButton(160, 200, 400, 100, "BoutonMulti", true);
 
         //Button Beign Random
-        begin_random = new Button(160, 100, 400, 100, "BoutonMulti", false);
+        begin_random = new ClassicButton(160, 100, 400, 100, "BoutonMulti", true);
     }
 
     public void draw(){
@@ -103,5 +104,12 @@ public class StateMultiMenu extends State {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (err){err=false;}
         return super.touchUp(screenX, screenY, pointer, button);
+    }
+
+    @Override
+    public boolean mouseMoved(int x, int y){
+        begin.mouseMoved(x, y);
+        begin_random.mouseMoved(x, y);
+        return false;
     }
 }
