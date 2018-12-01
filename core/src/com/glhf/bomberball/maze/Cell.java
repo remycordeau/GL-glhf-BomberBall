@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.menu.Directions;
@@ -140,11 +141,20 @@ public class Cell {
         }
     }
 
+    /**
+     * Explodes all the bombs in the cell
+     */
     public void processEndTurn()
     {
-        Bomb bomb = (Bomb)getGameObjectInstanceOf(Bomb.class);
-        if (bomb != null) {
-            bomb.explode();
+        int i = 0;
+        GameObject o;
+        while (i < objects.size()) {
+            o = objects.get(i);
+            if (o instanceof Bomb) {
+                ((Bomb) o).explode();
+            } else {
+                i++;
+            }
         }
     }
 
