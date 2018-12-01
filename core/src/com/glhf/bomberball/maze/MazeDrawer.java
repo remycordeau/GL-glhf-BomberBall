@@ -60,8 +60,8 @@ public class MazeDrawer {
         float height_scaled = height * scaling;
 
         camera = new OrthographicCamera(width_scaled * r, height_scaled);
-        //float x_offset = 0.5f * dx * width_scaled * (screen_ratio - 1);
-        float x_offset = 0f;
+        float x_offset = 0.5f * dx * width_scaled * (screen_ratio - 1);
+        //float x_offset = 0f;
         camera.translate(width_scaled * r * (0.5f - x_minp) - x_offset, height_scaled * (0.5f - y_minp));
         camera.update();
         batch.setProjectionMatrix(camera.combined);
