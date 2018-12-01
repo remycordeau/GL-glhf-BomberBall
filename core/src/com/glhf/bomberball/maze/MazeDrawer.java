@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -10,6 +11,7 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 
 import javax.security.sasl.SaslServer;
+import java.util.ArrayList;
 
 /**
  * Class MazeDrawer
@@ -36,10 +38,8 @@ public class MazeDrawer {
     private int maze_height;
     private OrthographicCamera camera;
 
-    private float x_pos_offset;
-    private float y_pos_offset;
-    private float x_padding = 2.0f;
-    private float y_padding = 4.0f;
+    private int x_padding = 1;
+    private int y_padding = 2;
 
     /**
      * Constructor
@@ -55,8 +55,6 @@ public class MazeDrawer {
         this.maze = maze;
         maze_width = maze.getWidth();
         maze_height = maze.getHeight();
-        x_pos_offset = Constants.BOX_WIDTH;
-        y_pos_offset = 2 * Constants.BOX_HEIGHT;
 
         setupCamera(w_minp, w_maxp, h_minp, h_maxp, fit);
     }
@@ -76,8 +74,8 @@ public class MazeDrawer {
         float dw = w_maxp - w_minp;
         float dh = h_maxp - h_minp;
 
-        float maze_width_px = Constants.BOX_WIDTH * (maze.getWidth() + x_padding);
-        float maze_height_px = Constants.BOX_HEIGHT * (maze.getHeight() + y_padding);
+        float maze_width_px = Constants.BOX_WIDTH * (maze.getWidth() + 2 * x_padding);
+        float maze_height_px = Constants.BOX_HEIGHT * (maze.getHeight() + 2 * y_padding);
         float maze_aspect_ratio = maze_width_px / maze_height_px;
 
         float screen_width_px = (float)Constants.APP_WIDTH;
@@ -116,18 +114,40 @@ public class MazeDrawer {
         batch.begin();
         drawFloor();
         drawBackWall();
-        drawObjects();
+        drawCells();
         drawSideWalls();
         drawFrontWall();
         batch.end();
     }
 
-    private void drawObjects() {
+    private void drawCells() {
         for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
-                for(GameObject gameObject : maze.getCellAt(x, y).getObjects()){
-                    drawTextureInCell(gameObject.getSprite(), x, y);
-                }
+                drawCell(maze.getCellAt(x, y));
+            }
+        }
+    }
+
+    private void drawCell(Cell cell)
+    {
+        ArrayList<GameObject> gameObjects = cell.getObjects();
+        int n = gameObjects.size();
+        if (n == 0) {
+            return;
+        }
+
+        if (n == 1) {
+            drawTextureInCell(gameObjects.get(0).getSprite(), cell.getX(), cell.getY());
+        } else {
+            float offsetp_x;
+            float offsetp_y;
+            float dteta = 2 * (float)Math.PI / n;
+            float teta =  (n % 2) == 1 ? (float)Math.PI / 4f : 0.0f;
+            for (GameObject gameObject : gameObjects) {
+                offsetp_x = (float)Math.cos(teta) * (1 / 3f);
+                offsetp_y = (float)Math.sin(teta) * (1 / 3f);
+                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp_x, offsetp_y);
+                teta += dteta;
             }
         }
     }
@@ -151,6 +171,10 @@ public class MazeDrawer {
             drawTextureInCell(sprite_l, -1, y);
             drawTextureInCell(sprite_r, maze_width, y);
         }
+        drawTextureInCell(Graphics.Sprites.get("wall_side_top_left"), -1, maze_height + 1);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_left"), -1, maze_height);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_top_right"), maze_width, maze_height + 1);
+        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_right"), maze_width, maze_height);
     }
 
     private void drawBackWall()
@@ -161,11 +185,6 @@ public class MazeDrawer {
             drawTextureInCell(sprite_top, x, maze_height + 1);
             drawTextureInCell(sprite_mid, x, maze_height);
         }
-
-        drawTextureInCell(Graphics.Sprites.get("wall_side_top_left"), -1, maze_height + 1);
-        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_left"), -1, maze_height);
-        drawTextureInCell(Graphics.Sprites.get("wall_side_top_right"), maze_width, maze_height + 1);
-        drawTextureInCell(Graphics.Sprites.get("wall_side_mid_right"), maze_width, maze_height);
     }
 
     private void drawFrontWall()
@@ -184,12 +203,18 @@ public class MazeDrawer {
         drawTextureInCell(Graphics.Sprites.get("edge_right"), maze_width, -2);
     }
 
-    private void drawTextureInCell(AtlasRegion atlasRegion, int cell_x, int cell_y)
+    private void drawTextureInCell(AtlasRegion atlasRegion, int cell_x, int cell_y, float offsetp_x, float offsetp_y)
     {
         if (atlasRegion != null) {
-            Vector2 p = cellToBatchPos(cell_x, cell_y);
-            batch.draw(atlasRegion, p.x, p.y);
+            float x = ((cell_x + x_padding + offsetp_x) * Constants.BOX_WIDTH);
+            float y = ((cell_y + y_padding + offsetp_y) * Constants.BOX_HEIGHT);
+            batch.draw(atlasRegion, x, y);
         }
+    }
+
+    private void drawTextureInCell(AtlasRegion atlasRegion, int cell_x, int cell_y)
+    {
+        drawTextureInCell(atlasRegion, cell_x, cell_y, 0.0f, 0.0f);
     }
 
     /**
@@ -202,23 +227,10 @@ public class MazeDrawer {
     {
         Vector3 p = new Vector3(screen_x, screen_y, 0f);
         camera.unproject(p);
-        p.x = p.x - x_pos_offset;
-        p.y = p.y - y_pos_offset;
+        p.x = p.x - (Constants.BOX_WIDTH * x_padding);
+        p.y = p.y - (Constants.BOX_HEIGHT * y_padding);
         int cell_x = (int)Math.floor(p.x / Constants.BOX_WIDTH);
         int cell_y = (int)Math.floor(p.y / Constants.BOX_HEIGHT);
         return new Vector2(cell_x, cell_y);
-    }
-
-    /**
-     * Transforms cell position to batch position
-     * @param cell_x cell x position
-     * @param cell_y cell y position
-     * @return Position in batch
-     */
-    private Vector2 cellToBatchPos(int cell_x, int cell_y)
-    {
-        float x = (cell_x * Constants.BOX_WIDTH) + x_pos_offset;
-        float y = (cell_y * Constants.BOX_HEIGHT) + y_pos_offset;
-        return new Vector2(x, y);
     }
 }
