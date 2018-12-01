@@ -5,6 +5,7 @@ import com.glhf.bomberball.Graphics;
 public class IndestructibleWall extends Wall {
 
     public IndestructibleWall() {
+        super();
         this.sprite = Graphics.Sprites.get("wall");
     }
 

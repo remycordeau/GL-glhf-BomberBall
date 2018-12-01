@@ -21,6 +21,7 @@ public class Player extends Character {
      * @param player_skin path to the player sprites
      */
     public Player(String player_skin) {
+        super();
         life = Constants.config_file.getIntAttribute("player_life");
         number_initial_bombs = Constants.config_file.getIntAttribute("number_initial_bomb");
         initial_bomb_range = Constants.config_file.getIntAttribute("initial_bomb_range");
@@ -70,7 +71,7 @@ public class Player extends Character {
     @Override
     public boolean move(DIRECTIONS dir)
     {
-        if (super.move(dir)) {
+        if (number_move_remaining > 0 && super.move(dir)) {
             number_move_remaining--;
             return true;
         }

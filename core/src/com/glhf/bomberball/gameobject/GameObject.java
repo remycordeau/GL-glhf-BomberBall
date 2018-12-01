@@ -12,12 +12,14 @@ import com.glhf.bomberball.menu.DIRECTIONS;
 import java.io.Serializable;
 
 public abstract class GameObject {
-    protected transient AtlasRegion sprite; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
+
     protected int life;
 
+    protected transient AtlasRegion sprite; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
     protected transient Cell cell;
 
     protected GameObject() {
+
     }
 
     /**

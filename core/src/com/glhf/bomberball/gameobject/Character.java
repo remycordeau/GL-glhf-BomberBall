@@ -12,6 +12,7 @@ public abstract class Character extends GameObject {
     protected Animation<TextureAtlas.AtlasRegion> animation;
 
     public Character() {
+        super();
         this.number_initial_moves = Constants.config_file.getIntAttribute("number_initial_move");
     }
 

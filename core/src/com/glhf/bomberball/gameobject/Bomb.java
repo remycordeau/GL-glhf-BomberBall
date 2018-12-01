@@ -25,6 +25,7 @@ public class Bomb extends GameObject {
      */
     public Bomb(int range) {
         // initially, bomb inflict 1 getDamage
+        super();
         this.damage = Constants.config_file.getIntAttribute("bomb_damage");
         this.range = range;
         this.life = 1;

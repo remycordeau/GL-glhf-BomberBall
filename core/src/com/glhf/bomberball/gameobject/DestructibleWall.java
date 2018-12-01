@@ -9,6 +9,7 @@ public class DestructibleWall extends Wall {
      */
     public DestructibleWall()
     {
+        super();
         this.sprite = Graphics.Sprites.get("crate");
     }
 }

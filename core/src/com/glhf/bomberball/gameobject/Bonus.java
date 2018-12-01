@@ -7,6 +7,7 @@ public abstract class Bonus extends GameObject {
     protected String name;
 
     public Bonus() {
+        super();
         life = 1;
     }
 

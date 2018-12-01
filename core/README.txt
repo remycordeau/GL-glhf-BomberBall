@@ -1,4 +1,6 @@
 Touches en multi :
     (UP, LEFT, DOWN, RIGHT) déplacements
-    RIGHT_CLICK pose une bombe
+    LEFT_CLICK sur une case adjacente au joueur courant pose une bombe
     SPACE fini le tour
+
+ATTENTION : tuer tous les joueurs freeze le jeu
