@@ -25,13 +25,13 @@ public class StateMultiMenu extends State {
     /*Loading textures*/
     public void settings(){
         //Button retrievePlayer
-        retrievePlayer = new Button(100, 15, 167, 100, "Minus2");
+        retrievePlayer = new Button(100, 15, 20, 200, "Minus2");
 
         //Button addPlayer
-        addPlayer = new Button(200, 15, 167, 100, "Plus2");
+        addPlayer = new Button(200, 15, 20, 20, "Plus2");
 
         //Button numberPlayer
-        numberPlayer = new SelectButton(137, 2, 50, 50);
+        numberPlayer = new SelectButton(137, 2, 50, 50, Constants.config_file.getIntAttribute("nb_player_max")+"");
 
         //Button Cancel
         State s = new StateMainMenu("MainMenu");
@@ -45,10 +45,10 @@ public class StateMultiMenu extends State {
     }
 
     public void draw(){
-        cancel.draw(batch);
         retrievePlayer.draw(batch);
         addPlayer.draw(batch);
         numberPlayer.draw(batch);
+        cancel.draw(batch);
         begin.draw(batch);
         begin_random.draw(batch);
         if(err)
@@ -62,20 +62,29 @@ public class StateMultiMenu extends State {
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         y = Constants.APP_HEIGHT - y;
+
         if(retrievePlayer.contains(x, y))
         {
-            /*int newNumberOfPlayers;
+            int newNumberOfPlayers;
             newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
-            newNumberOfPlayers++;
-            Constants.config_file.setIntAttribute(newNumberOfPlayers);
-            numberPlayer.setSprite(Graphics.GUI.get(newNumberOfPlayers +""));
-            */
-            //TODO retirer un joueur et l'afficher
+            if(newNumberOfPlayers > 1) {
+                newNumberOfPlayers--;
+                Constants.config_file.setIntAttribute("nb_player_max", newNumberOfPlayers);
+                numberPlayer.setNbPlayers(newNumberOfPlayers);
+            }
         }
-        if(addPlayer.contains(x, y)) {
-            err=true;
-            //TODO: On lance les parametres
+
+        if(addPlayer.contains(x, y))
+        {
+            int newNumberOfPlayers;
+            newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
+            if(newNumberOfPlayers < 4) {
+                newNumberOfPlayers++;
+                Constants.config_file.setIntAttribute("nb_player_max", newNumberOfPlayers);
+                numberPlayer.setNbPlayers(newNumberOfPlayers);
+            }
         }
+
         if(begin.contains(x, y)) {
             State state = new StateGameMulti("classic_maze_1.json");
             Game.setState(state);

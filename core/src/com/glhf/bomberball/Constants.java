@@ -13,6 +13,7 @@ public class Constants {
     public static final String PATH_MAZE          = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE   = PATH_ASSET+"config.json";
     public static final String PATH_GAMEOBJECT    = PATH_ASSET+"Config/config.txt";
+    public static final String PATH_CONFIG_TMP        = PATH_ASSET+"Config/configtmp.txt";
     public static final String PATH_GRAPHICS      = PATH_ASSET+"graphics/";
     public static final String PATH_PACKS         = PATH_GRAPHICS+"packs/";
     public static final String PATH_ATLAS_SPRITES = PATH_PACKS+"pack_sprites.atlas";
