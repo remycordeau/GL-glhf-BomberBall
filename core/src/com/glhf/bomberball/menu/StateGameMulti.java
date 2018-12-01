@@ -2,11 +2,7 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Config;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
-
-import java.util.HashMap;
 
 public class StateGameMulti extends StateGame{
 
@@ -23,12 +19,9 @@ public class StateGameMulti extends StateGame{
         players[0].initiateTurn();
     }
 
-    private void moveCurrentPlayer(int dx, int dy)
+    private void moveCurrentPlayer(Directions dir)
     {
-        Player p = players[current_player_index];
-        if (maze.isWalkable(p.getPositionX() + dx, p.getPositionY() + dy) && p.getNumberMoveRemaining() > 0) {
-            maze.moveGameObject(p, dx, dy);
-        }
+        players[current_player_index].move(dir);
     }
 
     /**
@@ -39,7 +32,7 @@ public class StateGameMulti extends StateGame{
         maze.processEndTurn();
         do {
             current_player_index = (current_player_index + 1) % maze.getNb_player_max();
-        } while (!players[(current_player_index+1) % maze.getNb_player_max()].isAlive());
+        } while (!players[current_player_index].isAlive());
         players[current_player_index].initiateTurn();
     }
 
@@ -49,16 +42,16 @@ public class StateGameMulti extends StateGame{
         //System.out.println("keyDown"+keycode);
         switch (keycode){
             case Input.Keys.UP:
-                moveCurrentPlayer(0,1);
+                moveCurrentPlayer(Directions.UP);
                 break;
             case Input.Keys.RIGHT:
-                moveCurrentPlayer(1,0);
+                moveCurrentPlayer(Directions.RIGHT);
                 break;
             case Input.Keys.DOWN:
-                moveCurrentPlayer(0,-1);
+                moveCurrentPlayer(Directions.DOWN);
                 break;
             case Input.Keys.LEFT:
-                moveCurrentPlayer(-1,0);
+                moveCurrentPlayer(Directions.LEFT);
                 break;
             case Input.Keys.SPACE:
                 nextPlayer();
@@ -76,11 +69,13 @@ public class StateGameMulti extends StateGame{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 cell = mazeDrawer.screenPosToCell(screenX, screenY);
-        int cell_x = (int)cell.x;
-        int cell_y = (int)cell.y;
-        if (maze.isWalkable(cell_x, cell_y)) {
-            maze.addBomb(players[current_player_index].dropBomb(cell_x, cell_y));
+        Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
+        int cell_x = (int)cell_pos.x;
+        int cell_y = (int)cell_pos.y;
+        Player player = players[current_player_index];
+        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        if (dir != null) {
+            players[current_player_index].dropBomb(dir);
         }
         return false;
     }

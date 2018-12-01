@@ -8,8 +8,8 @@ public class NumberBombBoost extends Bonus {
      * @param position_y y axis initial position
      */
     public NumberBombBoost(int position_x, int position_y){
-        super(position_x, position_y);
-        name="NumberBombBoost";
+        super();
+        name = "NumberBombBoost";
         //TODO set the sprite of the NumberBombBoost
     }
 }

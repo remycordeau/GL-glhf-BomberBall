@@ -1,6 +1,5 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -10,11 +9,10 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 
-/*
-    Class MazeDrawer
-
-    Vue du modèle Maze. Affiche le labyrinthe à l'écran.
-*/
+/**
+ * Class MazeDrawer
+ * Vue du modèle Maze. Affiche le labyrinthe à l'écran.
+ */
 public class MazeDrawer {
 
     private Maze maze;
@@ -79,9 +77,8 @@ public class MazeDrawer {
     private void drawObjects() {
         for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
-                GameObject gameobject = maze.getGameObjectAt(x, y);
-                if (gameobject != null) {
-                    drawTextureInCell(gameobject.getSprite(), x, y);
+                for(GameObject gameObject : maze.getCellAt(x, y).getObjects()){
+                    drawTextureInCell(gameObject.getSprite(), x, y);
                 }
             }
         }

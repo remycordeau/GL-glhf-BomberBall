@@ -12,17 +12,9 @@ public abstract class Enemy extends Character {
     protected ArrayList<Constants.moves> way;
     protected int actual_move;
 
-    public Enemy() {
 
-    }
-
-    /**
-     * constructor
-     * @param position_x x axis initial position
-     * @param position_y y axis initial position
-     */
-    protected Enemy(int position_x, int position_y) {
-        super(position_x, position_y);
+    protected Enemy() {
+        super();
         this.actual_move = 0;
     }
 
@@ -45,8 +37,9 @@ public abstract class Enemy extends Character {
     /**
      * the enemy has to follow the way he receveid
      */
+    // TODO : réecrire followWay
     public void followWay() {
-        switch (way.get(actual_move)) {
+        /*switch (way.get(actual_move)) {
             case UP:
                 this.moveUp();
             case DOWN:
@@ -56,6 +49,6 @@ public abstract class Enemy extends Character {
             case RIGHT:
                 this.moveRight();
         }
-        actual_move += 1;
+        actual_move += 1;*/
     }
 }

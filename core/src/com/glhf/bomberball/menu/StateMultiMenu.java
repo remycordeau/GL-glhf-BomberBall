@@ -86,7 +86,7 @@ public class StateMultiMenu extends State {
         }
 
         if(begin.contains(x, y)) {
-            State state = new StateGameMulti("classic_maze_1.json");
+            State state = new StateGameMulti("maze_0.json");
             Game.setState(state);
         }
         if(begin_random.contains(x, y)) {
