@@ -17,7 +17,7 @@ public abstract class StateGame extends State {
     }
 
     public void loadMaze(String maze_name) {
-        //new Maze(11, 13).export("maze_0");
+        //new Maze(11, 13).export(maze_name);
         maze = Maze.importMaze(maze_name);
         mazeDrawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
     }

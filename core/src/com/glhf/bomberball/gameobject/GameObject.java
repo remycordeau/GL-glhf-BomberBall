@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
 
@@ -32,6 +33,8 @@ public abstract class GameObject {
     public int getY() {
         return cell.getY();
     }
+
+    public void initialize() { }
 
     /**
      * modification of the life of the gameObject

@@ -8,6 +8,7 @@ import com.glhf.bomberball.Graphics;
 public abstract class Character extends GameObject {
 
     protected int initial_moves = 5;
+    protected String skin = "knight_m";
 
     protected transient int moves_remaining;
 
@@ -15,9 +16,21 @@ public abstract class Character extends GameObject {
 
     public Character(String skin, int life, int initial_moves) {
         super(life);
+        this.skin = skin;
         this.initial_moves = initial_moves;
         this.moves_remaining = initial_moves;
-        setAnimation(skin + "/idle");
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        setAnimation("idle");
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
+        setAnimation("idle");
     }
 
     public void setInitialMoves(int initial_moves) {
@@ -30,7 +43,7 @@ public abstract class Character extends GameObject {
      */
     protected void setAnimation(String animation_name)
     {
-        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(animation_name), Animation.PlayMode.LOOP);
+        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
     /**

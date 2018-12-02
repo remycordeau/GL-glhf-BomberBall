@@ -6,37 +6,42 @@ import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.Player;
 
+import java.util.ArrayList;
+
 public class StateGameMulti extends StateGame{
 
-    private Player[] players;
-    private int current_player_index;
-    private int turn_number;
+    private ArrayList<Player> players;
+    private Player current_player;
     private GameMultiConfig config;
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
         config = Config.importConfig("config_multi", GameMultiConfig.class);
-        current_player_index = 0;
-        turn_number = 1;
-        players = maze.spawnPlayers(config);
-        players[0].initiateTurn();
+        players = maze.getPlayers();
+        current_player = players.get(0);
+        current_player.initiateTurn();
     }
 
-    private void moveCurrentPlayer(Directions dir)
+    private void moveCurrentPlayer(Directions dir) {
+        current_player.move(dir);
+    }
+
+    private void endTurn()
     {
-        players[current_player_index].move(dir);
+        maze.processEndTurn();
+        nextPlayer();
     }
 
     /**
      * gives the next player after a turn. If the next player is dead, choose the following player.
      */
-    private void nextPlayer()
-    {
-        maze.processEndTurn();
+    private void nextPlayer() {
+        int i = players.indexOf(current_player);
         do {
-            current_player_index = (current_player_index + 1) % config.player_count;
-        } while (!players[current_player_index].isAlive());
-        players[current_player_index].initiateTurn();
+            i = (i + 1) % players.size();
+        } while (!players.get(i).isAlive());
+        current_player = players.get(i);
+        current_player.initiateTurn();
     }
 
     @Override
@@ -57,7 +62,7 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(Directions.LEFT);
                 break;
             case Input.Keys.SPACE:
-                nextPlayer();
+                endTurn();
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
@@ -75,10 +80,9 @@ public class StateGameMulti extends StateGame{
         Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
-        Player player = players[current_player_index];
-        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
-            players[current_player_index].dropBomb(dir);
+            current_player.dropBomb(dir);
         }
         return false;
     }

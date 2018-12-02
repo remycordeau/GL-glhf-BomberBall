@@ -2,20 +2,19 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Maze {
 
     private String title;
     private int height;
     private int width;
-    private Vector2[] position_start;
     private Cell[][] cells;
 
     private GameConfig config;
@@ -32,11 +31,6 @@ public class Maze {
         title = "Classic";
         height = h;
         width = w;
-        position_start = new Vector2[4];
-        position_start[0]= new Vector2(0,0);
-        position_start[1]= new Vector2(0,h-1);
-        position_start[2]= new Vector2(w-1,0);
-        position_start[3]= new Vector2(w-1,h-1);
         cells = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -49,6 +43,10 @@ public class Maze {
                 }
             }
         }
+        cells[0][0].addGameObject(new Player("knight_m", 1, 5, 1, 3));
+        cells[0][h-1].addGameObject(new Player("knight_f", 1, 5, 1, 3));
+        cells[w-1][0].addGameObject(new Player("elf_m", 1, 5, 1, 3));
+        cells[w-1][h-1].addGameObject(new Player("wizzard_f", 1, 5, 1, 3));
         setupCells();
     }
 
@@ -77,18 +75,12 @@ public class Maze {
         return width;
     }
 
-    /**
-     * Créer les joueurs dans le labyrynthe aux positions de départs
-     * @return une liste des instances de classe des joueurs créés
-     */
-    public Player[] spawnPlayers(GameMultiConfig config) {
-
-        Player[] players = new Player[config.player_count];
-        String[] players_skins = config.player_skins;
-        for (int i = 0; i < config.player_count; i++) {
-            Vector2 pos = position_start[i];
-            players[i] = new Player(players_skins[i], config.player_life, config.initial_player_moves, config.initial_bomb_number, config.initial_bomb_range);
-            cells[(int) pos.x][(int) pos.y].addGameObject(players[i]);
+    public ArrayList<Player> getPlayers() {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                players.addAll(cells[x][y].getInstancesOf(Player.class));
+            }
         }
         return players;
     }

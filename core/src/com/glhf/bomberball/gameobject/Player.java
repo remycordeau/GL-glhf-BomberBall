@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
+import com.google.gson.InstanceCreator;
 
+import java.lang.reflect.Type;
 import java.util.Hashtable;
 
 public class Player extends Character {
@@ -26,14 +28,20 @@ public class Player extends Character {
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
 
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
         bonus_owned = new Hashtable<String, Integer>();
         bonus_owned.put("NumberBombBoost", 0);
         bonus_owned.put("SpeedBoost", 0);
         bonus_owned.put("BombRangeBoost", 0);
     }
 
-    public void setInitialBombNumber() {
-
+    public void setInitialBombNumber(int initial_bomb_number) {
+        this.initial_bomb_number = initial_bomb_number;
     }
 
     @Override
@@ -95,3 +103,4 @@ public class Player extends Character {
         return true;
     }
 }
+

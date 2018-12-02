@@ -15,7 +15,11 @@ public class MazeTypeAdapter implements JsonSerializer<Object>, JsonDeserializer
         String className = jsonObj.get(CLASS_META_KEY).getAsString();
         try {
             Class<?> clz = Class.forName(className);
-            return gson.fromJson(jsonElement, clz);
+            Object o = gson.fromJson(jsonElement, clz);
+            if (o instanceof GameObject) {
+                ((GameObject) o).initialize();
+            }
+            return o;
         } catch (ClassNotFoundException e) {
             throw new JsonParseException(e);
         }

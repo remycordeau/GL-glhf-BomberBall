@@ -1,4 +1,4 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.maze;
 
 import com.glhf.bomberball.maze.Cell;
 

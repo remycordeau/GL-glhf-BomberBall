@@ -109,14 +109,6 @@ public class Cell {
         objects.remove(gameObject);
     }
 
-    /*
-    public void draw(SpriteBatch batch)
-    {
-    for (GameObject o : objects) {
-    batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
-    }
-    }*/
-
     /**
      * Fonction non nécéssaire si la classe Cell s'affiche elle même
      * TODO remove this function
@@ -162,29 +154,24 @@ public class Cell {
      */
     public void processEndTurn()
     {
-        int i = 0;
-        GameObject o;
-        while (i < objects.size()) {
-            o = objects.get(i);
-            if (o instanceof Bomb) {
-                ((Bomb) o).explode();
-            } else {
-                i++;
-            }
+        for (Bomb b : this.getInstancesOf(Bomb.class)) {
+            b.explode();
         }
     }
 
     /**
-     * Search in the Cell if a GameObject is instance of a specific Class
-     * @param c the class to check
-     * @return true if an object is instance of c
+     * Search in cell for gameObjects instances of specified class.
+     * @param c Class to extract
+     * @param <T>
+     * @return All gameObjects in cell instances of c
      */
-    public GameObject getGameObjectInstanceOf(Class c) {
-        for(GameObject gameObject : objects){
-            if(c.isInstance(gameObject)){
-                return gameObject;
+    public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> c) {
+        ArrayList<T> instances = new ArrayList<T>();
+        for(GameObject o : objects){
+            if(c.isInstance(o)){
+                instances.add(c.cast(o));
             }
         }
-        return null;
+        return instances;
     }
 }
