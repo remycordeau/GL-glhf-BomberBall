@@ -1,6 +1,8 @@
 package com.glhf.bomberball.config;
 
-public abstract class GameConfig extends ConfigTmp {
+public abstract class GameConfig extends Config {
+
+    public GameConfig() {}
 
     public int wall_life = 1;
 

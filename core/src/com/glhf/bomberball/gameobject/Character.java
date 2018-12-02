@@ -11,9 +11,11 @@ public abstract class Character extends GameObject {
     protected int number_initial_moves;
     protected Animation<TextureAtlas.AtlasRegion> animation;
 
-    public Character() {
-        super();
-        this.number_initial_moves = Constants.config_file.getIntAttribute("number_initial_move");
+    public Character(String skin, int number_initial_moves) {
+        super(1);
+        this.number_initial_moves = number_initial_moves;
+        this.number_move_remaining = number_initial_moves;
+        setAnimation(skin+"/idle");
     }
 
     /**

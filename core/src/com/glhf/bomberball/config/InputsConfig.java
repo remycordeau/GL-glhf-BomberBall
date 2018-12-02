@@ -1,9 +1,8 @@
 package com.glhf.bomberball.config;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
-public class InputsConfig extends ConfigTmp {
+public class InputsConfig extends Config {
 
     public int move_up = Input.Keys.UP;
     public int move_left = Input.Keys.LEFT;

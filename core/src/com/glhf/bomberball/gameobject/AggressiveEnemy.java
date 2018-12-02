@@ -9,12 +9,10 @@ public class AggressiveEnemy extends Enemy {
     private int begin_position_x;
     private int begin_position_y;
 
-    public AggressiveEnemy(ArrayList<Constants.moves> way) {
-        super();
-        life = Constants.config_file.getIntAttribute("aggressiveEnemy_life");
-        strength = Constants.config_file.getIntAttribute("aggressiveEnemy_strength");
+    public AggressiveEnemy(ArrayList<Constants.moves> way, String skin) {
+        super(skin, 5);
+        this.strength = 1;
         this.way = way;
-        //this.sprite = Textures.getAtlasRegion("AggressiveEnemy");
         //TODO set the animation of the aggressive enemy
     }
 

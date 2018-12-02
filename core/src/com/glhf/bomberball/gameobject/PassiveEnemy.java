@@ -11,10 +11,10 @@ public class PassiveEnemy extends Enemy {
      * constructor
      * @param way the way the enemy will follow
      */
-    public PassiveEnemy( ArrayList<Constants.moves> way) {
-        super();
-        life = Constants.config_file.getIntAttribute("passiveEnemy_life");
-        strength = Constants.config_file.getIntAttribute("passiveEnemy_strength");
+    public PassiveEnemy( ArrayList<Constants.moves> way, String skin) {
+        super(skin, 5);
+        this.life = life;
+        this.strength = strength;
         this.way = way;
         //TODO set the animation of the passive enemy
     }
