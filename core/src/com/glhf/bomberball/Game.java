@@ -2,18 +2,13 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.menu.*;
+import com.glhf.bomberball.menu.State;
+import com.glhf.bomberball.menu.TitleMenu;
 
 import java.util.HashMap;
 
@@ -63,6 +58,6 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
-		Gdx.input.setInputProcessor(state);
+		state.setInputProcessor();
 	}
 }

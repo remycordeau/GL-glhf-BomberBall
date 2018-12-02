@@ -1,16 +1,16 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Constants;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
+import com.glhf.bomberball.Game;
 
 public class TitleMenu extends State{
 
@@ -35,31 +35,9 @@ public class TitleMenu extends State{
 
 
     public void create() {
-
-        initialize();
-        table.addListener(new ClickListener(){
-            public void clicked(InputEvent event,float x,float y){
-                System.out.println("Button clicked");
-            }
-        });
-
-
-
-    }
-
-
-    public void draw()
-    {
-        stage.draw();
-
-    }
-
-    public void initialize(){
-
         stage = new Stage();
         table = new Table();
         table.setFillParent(true);
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
         button_atlas = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
@@ -70,10 +48,17 @@ public class TitleMenu extends State{
         //textButtonStyle.down = skin.getDrawable("down-button");
         //textButtonStyle.checked = skin.getDrawable("checked-button");
         solo_button = new TextButton("Solo", style);
+        solo_button.addListener(new SetStateListener(new StateSoloMenu("Menu solo")));
         multi_button = new TextButton("Multi", style);
+        multi_button.addListener(new SetStateListener(new StateGameMulti("maze_0.json")));
         map_editor_button = new TextButton("Map Editor", style);
+        //map_editor_button.addListener(new SetStateListener(new StateEditor())));
         settings_button = new TextButton("Settings", style);
+        settings_button.addListener(new SetStateListener(new StateSettingsMenu("Menu paramètres")));
         quit_button = new TextButton("Quit", style);
+        quit_button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) { Gdx.app.exit(); }
+        });
         table.add(solo_button);
         table.row();
         table.add(multi_button);
@@ -86,9 +71,35 @@ public class TitleMenu extends State{
         stage.addActor(table);
     }
 
+    @Override
+    public void setInputProcessor() {
+        Gdx.input.setInputProcessor(stage); //ne pas enlevé
+    }
+
+    public void draw()
+    {
+        stage.draw();
+
+    }
+
+    public void initialize(){
+
+
+    }
+
     public void resize(int width, int height){
         stage.getViewport().update(width,height,true);
     }
 
+    public class SetStateListener extends ChangeListener {
+        private State state;
+        public SetStateListener(State state){
+            this.state = state;
+        }
 
+        @Override
+        public void changed(ChangeEvent event, Actor actor) {
+            Game.setState(state);
+        }
+    }
 }

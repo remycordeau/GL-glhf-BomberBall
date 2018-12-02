@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -18,6 +19,10 @@ public abstract class State implements InputProcessor {
     //Methods
     public State getState(){
         return this;
+    }
+
+    public void setInputProcessor() {
+        Gdx.input.setInputProcessor(this);
     }
 
     public String getState_name() {
