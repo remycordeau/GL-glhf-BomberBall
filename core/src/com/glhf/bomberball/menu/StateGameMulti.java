@@ -13,8 +13,8 @@ public class StateGameMulti extends StateGame{
     private int turn_number;
     private GameMultiConfig config;
 
-    public StateGameMulti(String maze_filename) {
-        super(maze_filename);
+    public StateGameMulti(String maze_name) {
+        super(maze_name);
         config = Config.importConfig("config_multi", GameMultiConfig.class);
         current_player_index = 0;
         turn_number = 1;

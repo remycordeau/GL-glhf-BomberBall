@@ -5,15 +5,13 @@ import com.glhf.bomberball.Constants;
 import java.util.ArrayList;
 
 public class AggressiveEnemy extends Enemy {
-    //attributes
+
     private int begin_position_x;
     private int begin_position_y;
 
-    public AggressiveEnemy(ArrayList<Constants.moves> way, String skin) {
-        super(skin, 5);
-        this.strength = 1;
-        this.way = way;
-        //TODO set the animation of the aggressive enemy
+    public AggressiveEnemy(String skin, int life, int initial_moves, int strength) {
+        super(skin, life, initial_moves, strength);
+        //this.way = way;
     }
 
     /**

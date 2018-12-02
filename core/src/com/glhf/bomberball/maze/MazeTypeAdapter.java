@@ -5,7 +5,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-public class MazeTypeAdapter implements JsonSerializer<Object>, JsonDeserializer<Object>{
+public class MazeTypeAdapter implements JsonSerializer<Object>, JsonDeserializer<Object> {
     private static Gson gson = new Gson();
     private static final String CLASS_META_KEY = "_class";
 
@@ -21,10 +21,9 @@ public class MazeTypeAdapter implements JsonSerializer<Object>, JsonDeserializer
         }
     }
 
-
     @Override
     public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonSerializationContext) {
-        System.out.println(object);
+        //System.out.println(object);
         JsonElement jsonEle = gson.toJsonTree(object);
         jsonEle.getAsJsonObject().addProperty(CLASS_META_KEY, object.getClass().getCanonicalName());
         return jsonEle;

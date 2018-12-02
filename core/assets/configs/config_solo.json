@@ -7,9 +7,9 @@
   "aggressiveEnemy_life": 1,
   "aggressiveEnemy_strength": 1,
   "wall_life": 1,
-  "bomb_inital_number": 1,
-  "bomb_inital_range": 3,
+  "initial_bomb_number": 1,
+  "initial_bomb_range": 3,
   "bomb_damage": 1,
   "player_life": 1,
-  "player_inital_moves": 5
+  "initial_player_moves": 5
 }
