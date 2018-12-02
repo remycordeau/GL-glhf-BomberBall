@@ -11,8 +11,8 @@ public abstract class GameObject {
     protected transient AtlasRegion sprite; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
     protected transient Cell cell;
 
-    protected GameObject() {
-
+    protected GameObject(int life) {
+        this.life = life;
     }
 
     /**

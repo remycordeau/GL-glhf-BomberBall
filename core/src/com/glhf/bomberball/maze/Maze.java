@@ -2,11 +2,13 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.config.Config;
+import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class Maze {
 
@@ -18,7 +20,6 @@ public class Maze {
     private Cell[][] cells;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private transient int nb_player_max;
 
     /**
      * Constructor for the Maze class
@@ -27,7 +28,6 @@ public class Maze {
         if(gson==null) {
             createGson();
         }
-        nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
     }
 
     /**
@@ -56,7 +56,6 @@ public class Maze {
                     cells[x][y].addGameObject(new IndestructibleWall());
             }
         }
-        nb_player_max = Constants.config_file.getIntAttribute("nb_player_max");
         init();
     }
 
@@ -86,23 +85,16 @@ public class Maze {
     }
 
     /**
-     * Getter for nb_player_max variable
-     * @return nb_playermax
-     */
-    public int getNb_player_max() {
-        return nb_player_max;
-    }
-
-    /**
      * Créer les joueurs dans le labyrynthe aux positions de départs
      * @return une liste des instances de classe des joueurs créés
      */
-    public Player[] spawnPlayers() {
-        Player[] players = new Player[nb_player_max];
-        String[] players_skins = {Constants.config_file.getStringAttribute("player1_skin"), Constants.config_file.getStringAttribute("player2_skin"), Constants.config_file.getStringAttribute("player3_skin"), Constants.config_file.getStringAttribute("player4_skin")};
-        for (int i = 0; i < nb_player_max; i++) {
+    public Player[] spawnPlayers(GameMultiConfig config) {
+
+        Player[] players = new Player[config.player_count];
+        String[] players_skins = config.player_skins;
+        for (int i = 0; i < config.player_count; i++) {
             Vector2 pos = position_start[i];
-            players[i] = new Player(players_skins[i]);
+            players[i] = new Player(players_skins[i], config.player_inital_moves, config.bomb_inital_number, config.bomb_inital_range);
             cells[(int) pos.x][(int) pos.y].addGameObject(players[i]);
         }
         return players;

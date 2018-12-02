@@ -20,16 +20,14 @@ public class Player extends Character {
      * constructor
      * @param player_skin path to the player sprites
      */
-    public Player(String player_skin) {
-        super();
-        life = Constants.config_file.getIntAttribute("player_life");
-        number_initial_bombs = Constants.config_file.getIntAttribute("number_initial_bomb");
-        initial_bomb_range = Constants.config_file.getIntAttribute("initial_bomb_range");
+    public Player(String player_skin, int number_initial_moves, int number_initial_bombs, int initial_bomb_range) {
+        super(player_skin, number_initial_moves);
+        this.number_initial_bombs = number_initial_bombs;
+        this.initial_bomb_range = initial_bomb_range;
         bonus_owned = new Hashtable<String, Integer>();
         bonus_owned.put("NumberBombBoost", 0);
         bonus_owned.put("SpeedBoost", 0);
         bonus_owned.put("BombRangeBoost", 0);
-        setAnimation(player_skin+"/idle");
     }
 
     /**
@@ -88,7 +86,7 @@ public class Player extends Character {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {
                 number_bomb_remaining--;
-                Bomb bomb = new Bomb(initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+                Bomb bomb = new Bomb(1, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
                 dest_cell.addGameObject(bomb);
             }
         }

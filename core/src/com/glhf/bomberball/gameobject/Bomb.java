@@ -12,7 +12,7 @@ public class Bomb extends GameObject {
 
     public Bomb()
     {
-
+        super(1);
     }
 
     /**
@@ -20,12 +20,11 @@ public class Bomb extends GameObject {
      * @param range number of squares reached by the bomb in the four directions ( north, east, sout, west)
      * @return Bomb
      */
-    public Bomb(int range) {
+    public Bomb(int damage, int range) {
         // initially, bomb inflict 1 getDamage
-        super();
-        this.damage = Constants.config_file.getIntAttribute("bomb_damage");
+        super(1);
+        this.damage = damage;
         this.range = range;
-        this.life = 1;
         sprite = Graphics.Sprites.get("bomb");
     }
 

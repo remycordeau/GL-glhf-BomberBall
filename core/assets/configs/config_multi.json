@@ -1,13 +1,15 @@
 {
   "player_count": 4,
-  "player_skin_0": "knight_m",
-  "player_skin_1": "knight_f",
-  "player_skin_2": "elf_m",
-  "player_skin_3": "wizzard_f",
+  "player_skins": [
+    "knight_m",
+    "knight_f",
+    "elf_m",
+    "wizzard_f"
+  ],
   "wall_life": 1,
   "bomb_inital_number": 1,
   "bomb_inital_range": 3,
   "bomb_damage": 1,
   "player_life": 1,
-  "player_inital_moves": 5
+  "player_inital_moves": 10
 }

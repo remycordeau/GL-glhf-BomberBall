@@ -26,7 +26,4 @@ public class Constants {
     // constants for enemies
     public enum moves {UP, DOWN, RIGHT, LEFT}
     public enum enemyState {ACTIVE, HUNTER}
-
-    // constants to configure game objects
-    public static ConfigFile config_file = new ConfigFile(Constants.PATH_GAMEOBJECT);
 }

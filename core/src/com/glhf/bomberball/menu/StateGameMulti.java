@@ -2,6 +2,8 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.config.Config;
+import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.Player;
 
 public class StateGameMulti extends StateGame{
@@ -9,13 +11,15 @@ public class StateGameMulti extends StateGame{
     private Player[] players;
     private int current_player_index;
     private int turn_number;
+    private GameMultiConfig config;
 
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
+        config = Config.importConfig("config_multi", GameMultiConfig.class);
         current_player_index = 0;
         turn_number = 1;
         loadMaze(maze_filename);
-        players = maze.spawnPlayers();
+        players = maze.spawnPlayers(config);
         players[0].initiateTurn();
     }
 
@@ -31,7 +35,7 @@ public class StateGameMulti extends StateGame{
     {
         maze.processEndTurn();
         do {
-            current_player_index = (current_player_index + 1) % maze.getNb_player_max();
+            current_player_index = (current_player_index + 1) % config.player_count;
         } while (!players[current_player_index].isAlive());
         players[current_player_index].initiateTurn();
     }

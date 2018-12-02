@@ -13,8 +13,8 @@ public abstract class Enemy extends Character {
     protected int actual_move;
 
 
-    protected Enemy() {
-        super();
+    protected Enemy(String skin, int number_initial_moves) {
+        super(skin, number_initial_moves);
         this.actual_move = 0;
     }
 

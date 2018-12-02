@@ -6,6 +6,8 @@ import com.glhf.bomberball.GUI.ButtonUndo;
 import com.glhf.bomberball.GUI.SelectButton;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.config.Config;
+import com.glhf.bomberball.config.GameMultiConfig;
 
 public class StateMultiMenu extends State {
     //Attributes
@@ -16,9 +18,11 @@ public class StateMultiMenu extends State {
     private Button begin_random;
     private ButtonUndo cancel;
     private boolean err =false;
+    private GameMultiConfig config;
     //Constructor
     public StateMultiMenu(String name){
         super(name);
+        config = Config.importConfig("config_multi", GameMultiConfig.class);
         this.settings();
     }
 
@@ -31,7 +35,7 @@ public class StateMultiMenu extends State {
         addPlayer = new Button(200, 15, 20, 20, "Plus2");
 
         //Button numberPlayer
-        numberPlayer = new SelectButton(137, 2, 50, 50, Constants.config_file.getIntAttribute("nb_player_max")+"");
+        numberPlayer = new SelectButton(137, 2, 50, 50, config.player_count+"");
 
         //Button Cancel
         State s = new StateMainMenu("MainMenu");
@@ -66,10 +70,10 @@ public class StateMultiMenu extends State {
         if(retrievePlayer.contains(x, y))
         {
             int newNumberOfPlayers;
-            newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
+            newNumberOfPlayers = config.player_count;
             if(newNumberOfPlayers > 1) {
                 newNumberOfPlayers--;
-                Constants.config_file.setIntAttribute("nb_player_max", newNumberOfPlayers);
+                config.player_count = newNumberOfPlayers;
                 numberPlayer.setNbPlayers(newNumberOfPlayers);
             }
         }
@@ -77,10 +81,10 @@ public class StateMultiMenu extends State {
         if(addPlayer.contains(x, y))
         {
             int newNumberOfPlayers;
-            newNumberOfPlayers = Constants.config_file.getIntAttribute("nb_player_max");
+            newNumberOfPlayers = config.player_count;
             if(newNumberOfPlayers < 4) {
                 newNumberOfPlayers++;
-                Constants.config_file.setIntAttribute("nb_player_max", newNumberOfPlayers);
+                config.player_count = newNumberOfPlayers;
                 numberPlayer.setNbPlayers(newNumberOfPlayers);
             }
         }

@@ -5,20 +5,30 @@ import com.google.gson.GsonBuilder;
 
 import java.io.*;
 
-public abstract class ConfigTmp {
+public abstract class Config {
 
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    protected static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public ConfigTmp() {}
+    public Config() {}
 
-    public static ConfigTmp importConfig(String name) {
+    /**
+     * Imports a config
+     * @param name Config file name
+     * @param c Class to serialize
+     * @return config class from config file
+     */
+    public static <T> T importConfig(String name, Class<T> c) {
         try {
-            return gson.fromJson(new FileReader("core/assets/configs/" + name + ".json"), ConfigTmp.class);
+            return gson.fromJson(new FileReader("core/assets/configs/" + name + ".json"), c);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Cannot import config : " + e.getMessage());
         }
     }
 
+    /**
+     * Exports a config
+     * @param name Config file name
+     */
     public void export(String name) {
         try {
             Writer writer = new FileWriter(new File("core/assets/configs/" + name + ".json"));

@@ -29,7 +29,6 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		Config.load();
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
