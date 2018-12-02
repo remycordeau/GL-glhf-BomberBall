@@ -18,7 +18,7 @@ public class Maze {
     private Cell[][] cells;
     private static Gson gson;
     private long seed; //défini les variations des textures
-    private int nb_player_max;
+    private transient int nb_player_max;
 
     /**
      * Constructor for the Maze class
