@@ -44,7 +44,7 @@ public class Cell {
         return y;
     }
 
-    public void init(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
+    public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
         for (GameObject o : objects) {

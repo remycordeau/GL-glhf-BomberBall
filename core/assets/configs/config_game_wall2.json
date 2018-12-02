@@ -1,0 +1,24 @@
+{
+  "wall_life": 2,
+  "initial_bomb_number": 1,
+  "initial_bomb_range": 3,
+  "bomb_damage": 1,
+  "player_life": 1,
+  "initial_player_moves": 5,
+  "player_count": 4,
+  "player_skins": [
+    "knight_m",
+    "knight_f",
+    "elf_m",
+    "wizzard_f"
+  ],
+  "activeEnemy_life": 1,
+  "activeEnemy_strength": 1,
+  "activeEnemy_moves": 5,
+  "passiveEnemy_life": 1,
+  "passiveEnemy_strength": 1,
+  "passiveEnemy_moves": 5,
+  "aggressiveEnemy_life": 1,
+  "aggressiveEnemy_strength": 1,
+  "aggressiveEnemy_moves": 5
+}

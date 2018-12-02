@@ -1,9 +1,5 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.glhf.bomberball.config.GameConfig;
-import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 

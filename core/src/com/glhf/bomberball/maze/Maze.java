@@ -1,23 +1,27 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.GameConfig;
-import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.google.gson.*;
 
+import javax.swing.text.Position;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Maze {
 
     private String title;
+    private ArrayList<Vector2> spawn_positions;
+    private int players_count;
     private int height;
     private int width;
     private Cell[][] cells;
 
-    private GameConfig config;
+    private transient GameConfig config;
     private static Gson gson;
 
     public Maze() {
@@ -32,6 +36,12 @@ public class Maze {
         height = h;
         width = w;
         cells = new Cell[width][height];
+        spawn_positions = new ArrayList<Vector2>(){};
+        spawn_positions.add(new Vector2(0, 0));
+        spawn_positions.add(new Vector2(0, h - 1));
+        spawn_positions.add(new Vector2(w - 1, 0f));
+        spawn_positions.add(new Vector2(w - 1, h - 1));
+        players_count = spawn_positions.size();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 cells[x][y] = new Cell(x, y);
@@ -43,20 +53,33 @@ public class Maze {
                 }
             }
         }
-        cells[0][0].addGameObject(new Player("knight_m", 1, 5, 1, 3));
-        cells[0][h-1].addGameObject(new Player("knight_f", 1, 5, 1, 3));
-        cells[w-1][0].addGameObject(new Player("elf_m", 1, 5, 1, 3));
-        cells[w-1][h-1].addGameObject(new Player("wizzard_f", 1, 5, 1, 3));
-        setupCells();
+        initialize();
     }
 
-    public void setupCells()
+    public void initialize()
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y].init(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
+                cells[x][y].initialize(getCellAt(x+1,y), getCellAt(x,y+1), getCellAt(x-1,y), getCellAt(x,y-1));
             }
         }
+    }
+
+    public ArrayList<Player> spawnPlayers(GameConfig config)
+    {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for (int i = 0; i < config.player_count; i++) {
+            Vector2 p = spawn_positions.get(i);
+            Player player = new Player(
+                    config.player_skins[i],
+                    config.player_life,
+                    config.initial_player_moves,
+                    config.initial_bomb_number,
+                    config.initial_bomb_range);
+            cells[(int)p.x][(int)p.y].addGameObject(player);
+            players.add(player);
+        }
+        return players;
     }
 
     /**
@@ -114,6 +137,21 @@ public class Maze {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
+    // TODO : bouger la méthode dans une autre classe
+    public void applyConfig(GameConfig config) {
+        ArrayList<GameObject> objects = new ArrayList<GameObject>();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                objects.addAll(cells[x][y].getObjects());
+            }
+        }
+        for (Object o : objects) {
+            if (o instanceof Wall) {
+                ((Wall) o).setLife(config.wall_life);
+            }
+        }
+    }
+
     private static void createGson() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(GameObject.class, new MazeTypeAdapter())
@@ -127,7 +165,7 @@ public class Maze {
         }
         try {
             Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE + name + ".json")), Maze.class);
-            maze.setupCells();
+            maze.initialize();
             return maze;
         } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
     }

@@ -3,7 +3,7 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
 
 import java.util.ArrayList;
@@ -12,12 +12,13 @@ public class StateGameMulti extends StateGame{
 
     private ArrayList<Player> players;
     private Player current_player;
-    private GameMultiConfig config;
+    private GameConfig config;
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
-        config = Config.importConfig("config_multi", GameMultiConfig.class);
-        players = maze.getPlayers();
+        config = Config.importConfig("config_game_wall2", GameConfig.class);
+        maze.applyConfig(config);
+        players = maze.spawnPlayers(config);
         current_player = players.get(0);
         current_player.initiateTurn();
     }

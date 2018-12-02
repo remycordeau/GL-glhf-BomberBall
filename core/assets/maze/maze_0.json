@@ -1,5 +1,24 @@
 {
   "title": "Classic",
+  "spawn_positions": [
+    {
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 10.0
+    },
+    {
+      "x": 12.0,
+      "y": 0.0
+    },
+    {
+      "x": 12.0,
+      "y": 10.0
+    }
+  ],
+  "players_count": 4,
   "height": 11,
   "width": 13,
   "cells": [
@@ -7,16 +26,7 @@
       {
         "x": 0,
         "y": 0,
-        "objects": [
-          {
-            "initial_bomb_number": 1,
-            "initial_bomb_range": 3,
-            "initial_moves": 5,
-            "skin": "knight_m",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.Player"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 0,
@@ -41,12 +51,7 @@
       {
         "x": 0,
         "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 0,
@@ -66,21 +71,17 @@
       {
         "x": 0,
         "y": 9,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 0,
         "y": 10,
-        "objects": [
-          {
-            "initial_bomb_number": 1,
-            "initial_bomb_range": 3,
-            "initial_moves": 5,
-            "skin": "knight_f",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.Player"
-          }
-        ]
+        "objects": []
       }
     ],
     [
@@ -184,22 +185,12 @@
       {
         "x": 2,
         "y": 3,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 2,
         "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 2,
@@ -209,12 +200,7 @@
       {
         "x": 2,
         "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 2,
@@ -353,12 +339,7 @@
       {
         "x": 4,
         "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 4,
@@ -502,12 +483,7 @@
       {
         "x": 6,
         "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 6,
@@ -621,12 +597,7 @@
       {
         "x": 8,
         "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 8,
@@ -641,12 +612,7 @@
       {
         "x": 8,
         "y": 3,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 8,
@@ -703,7 +669,12 @@
       {
         "x": 9,
         "y": 2,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 9,
@@ -718,12 +689,7 @@
       {
         "x": 9,
         "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 9,
@@ -775,11 +741,6 @@
       {
         "x": 10,
         "y": 0,
-        "objects": []
-      },
-      {
-        "x": 10,
-        "y": 1,
         "objects": [
           {
             "life": 1,
@@ -789,8 +750,18 @@
       },
       {
         "x": 10,
-        "y": 2,
+        "y": 1,
         "objects": []
+      },
+      {
+        "x": 10,
+        "y": 2,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 10,
@@ -805,12 +776,7 @@
       {
         "x": 10,
         "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 10,
@@ -830,17 +796,17 @@
       {
         "x": 10,
         "y": 9,
+        "objects": []
+      },
+      {
+        "x": 10,
+        "y": 10,
         "objects": [
           {
             "life": 1,
             "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
           }
         ]
-      },
-      {
-        "x": 10,
-        "y": 10,
-        "objects": []
       }
     ],
     [
@@ -929,16 +895,7 @@
       {
         "x": 12,
         "y": 0,
-        "objects": [
-          {
-            "initial_bomb_number": 1,
-            "initial_bomb_range": 3,
-            "initial_moves": 5,
-            "skin": "elf_m",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.Player"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 12,
@@ -953,12 +910,22 @@
       {
         "x": 12,
         "y": 3,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 12,
         "y": 4,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 12,
@@ -973,12 +940,7 @@
       {
         "x": 12,
         "y": 7,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 12,
@@ -993,16 +955,7 @@
       {
         "x": 12,
         "y": 10,
-        "objects": [
-          {
-            "initial_bomb_number": 1,
-            "initial_bomb_range": 3,
-            "initial_moves": 5,
-            "skin": "wizzard_f",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.Player"
-          }
-        ]
+        "objects": []
       }
     ]
   ]

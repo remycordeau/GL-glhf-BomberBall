@@ -9,8 +9,6 @@ public abstract class Config {
 
     protected static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public Config() {}
-
     /**
      * Imports a config
      * @param name Config file name
