@@ -13,10 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.menu.State;
-import com.glhf.bomberball.menu.StateGame;
-import com.glhf.bomberball.menu.StateGameMulti;
-import com.glhf.bomberball.menu.StateMainMenu;
+import com.glhf.bomberball.menu.*;
 
 import java.util.HashMap;
 
@@ -36,7 +33,7 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new StateMainMenu("MainMenu"));
+        setState(new TitleMenu("TitleMenu"));
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
