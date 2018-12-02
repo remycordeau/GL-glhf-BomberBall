@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.glhf.bomberball.CellEffect;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -20,6 +21,8 @@ public class Cell {
      * Objects in cell
      */
     private ArrayList<GameObject> objects;
+
+    private transient CellEffect cell_effect;
 
     /**
      * Cell constructor
@@ -43,6 +46,11 @@ public class Cell {
     {
         return y;
     }
+
+    public CellEffect getCellEffect() {
+        return this.cell_effect;
+    }
+
 
     public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
@@ -173,5 +181,13 @@ public class Cell {
             }
         }
         return instances;
+    }
+
+    public void setSelectEffect() {
+        cell_effect = new CellEffect("cell_select7");
+    }
+
+    public void removeEffect() {
+        cell_effect = null;
     }
 }

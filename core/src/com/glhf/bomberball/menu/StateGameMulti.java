@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.MazeTransversal;
 
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ public class StateGameMulti extends StateGame{
     private ArrayList<Player> players;
     private Player current_player;
     private GameConfig config;
+    private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
@@ -21,16 +24,31 @@ public class StateGameMulti extends StateGame{
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
         current_player.initiateTurn();
+        setRangeEffect();
+    }
+
+    private void setRangeEffect() {
+        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), current_player.getMovesRemaining());
+        for (Cell c : selected_cells) {
+            c.removeEffect();
+        }
+        selected_cells.clear();
+        for (Cell c : cells_in_range) {
+            c.setSelectEffect();
+            selected_cells.add(c);
+        }
     }
 
     private void moveCurrentPlayer(Directions dir) {
         current_player.move(dir);
+        setRangeEffect();
     }
 
     private void endTurn()
     {
         maze.processEndTurn();
         nextPlayer();
+        setRangeEffect();
     }
 
     /**

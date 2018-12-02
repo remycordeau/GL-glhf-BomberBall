@@ -28,6 +28,10 @@ public abstract class Character extends GameObject {
         setAnimation("idle");
     }
 
+    public int getMovesRemaining() {
+        return moves_remaining;
+    }
+
     public void setSkin(String skin) {
         this.skin = skin;
         setAnimation("idle");
