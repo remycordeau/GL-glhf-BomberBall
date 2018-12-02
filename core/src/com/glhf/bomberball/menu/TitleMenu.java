@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
@@ -16,7 +16,7 @@ public class TitleMenu extends State{
 
     //general attributes
     private Stage stage;
-    private Table table;
+    private VerticalGroup verticalGroup;
     private  TextureAtlas button_atlas;
     private Skin skin;
     private BitmapFont font;
@@ -36,8 +36,9 @@ public class TitleMenu extends State{
 
     public void create() {
         stage = new Stage();
-        table = new Table();
-        table.setFillParent(true);
+        verticalGroup = new VerticalGroup();
+        verticalGroup.setFillParent(true);
+        verticalGroup.center();
         font = new BitmapFont();
         skin = new Skin();
         button_atlas = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
@@ -59,16 +60,12 @@ public class TitleMenu extends State{
         quit_button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) { Gdx.app.exit(); }
         });
-        table.add(solo_button);
-        table.row();
-        table.add(multi_button);
-        table.row();
-        table.add(map_editor_button);
-        table.row();
-        table.add(settings_button);
-        table.row();
-        table.add(quit_button);
-        stage.addActor(table);
+        verticalGroup.addActor(solo_button);
+        verticalGroup.addActor(multi_button);
+        verticalGroup.addActor(map_editor_button);
+        verticalGroup.addActor(settings_button);
+        verticalGroup.addActor(quit_button);
+        stage.addActor(verticalGroup);
     }
 
     @Override
