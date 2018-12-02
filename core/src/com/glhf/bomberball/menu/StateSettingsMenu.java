@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
@@ -8,12 +9,12 @@ import com.glhf.bomberball.Graphics;
 
 public class StateSettingsMenu extends State {
     //Attributes
+    private SpriteBatch batch = new SpriteBatch();
     private Button tmp;
     private ButtonUndo undo;
 
     //Constructor
     public StateSettingsMenu(String name) {
-        super(name);
         this.settings();
     }
 

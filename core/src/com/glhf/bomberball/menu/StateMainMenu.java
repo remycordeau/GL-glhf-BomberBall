@@ -1,6 +1,8 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.Game;
@@ -14,11 +16,11 @@ public class StateMainMenu extends State {
     private Button editor;
     private Button parametres;
     private Button quit;
+    private SpriteBatch batch = new SpriteBatch();
 
     boolean solob = false;
     //Constructor
     public StateMainMenu(String name){
-        super(name);
         this.settings();
     }
 
