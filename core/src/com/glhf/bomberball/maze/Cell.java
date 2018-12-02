@@ -58,6 +58,22 @@ public class Cell {
     }
 
     /**
+     * @return List of all adjacent cells
+     * Discards null adjacent cells
+     */
+    public ArrayList<Cell> getAdjacentCells()
+    {
+        ArrayList<Cell> cells = new ArrayList<Cell>();
+        for (Directions dir : Directions.values()) {
+            Cell c = getAdjacentCell(dir);
+            if (c != null) {
+                cells.add(c);
+            }
+        }
+        return cells;
+    }
+
+    /**
      * Damages all GameObjects in cell
      * @param damage getDamage amount to apply
      */
