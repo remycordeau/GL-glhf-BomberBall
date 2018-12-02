@@ -37,7 +37,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
         //setState(new StateMainMenu("MainMenu"));
-		setState(new StateGameMulti("maze_test"));
+		setState(new StateGameMulti("maze_0"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);

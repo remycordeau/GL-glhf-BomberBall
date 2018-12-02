@@ -17,13 +17,8 @@ public abstract class StateGame extends State {
     }
 
     public void loadMaze(String maze_name) {
-        new GameMultiConfig().export("config_multi");
-        new GameSoloConfig().export("config_solo");
-        new Maze(11, 13).export("maze_test");
-        maze = Maze.importMaze("maze_test");
-        //maze = Maze.classicMaze(11, 13);
-        //maze.toJsonFile("maze_0.json");
-        //maze = Maze.importMaze("maze_0");
+        //new Maze(11, 13).export("maze_0");
+        maze = Maze.importMaze(maze_name);
         mazeDrawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
     }
 
