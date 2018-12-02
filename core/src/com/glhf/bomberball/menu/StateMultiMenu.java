@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
@@ -19,9 +20,10 @@ public class StateMultiMenu extends State {
     private ButtonUndo cancel;
     private boolean err =false;
     private GameMultiConfig config;
+    private SpriteBatch batch = new SpriteBatch();
+
     //Constructor
     public StateMultiMenu(String name){
-        super(name);
         config = Config.importConfig("config_multi", GameMultiConfig.class);
         this.settings();
     }

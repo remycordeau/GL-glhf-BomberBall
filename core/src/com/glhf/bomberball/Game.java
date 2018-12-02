@@ -35,8 +35,8 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new StateMainMenu("MainMenu"));
-        //setState(new StateGameMulti("maze_0.json"));
+        //setState(new StateMainMenu("MainMenu"));
+        setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);
@@ -51,10 +51,15 @@ public class Game extends ApplicationAdapter {
 	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
+
 		state.draw();
-		//debugRenderer.drawLines(8);
+
+		// Uncomment to draw debug
+		/*
+		batch.begin();
+		debugRenderer.drawLines(8);
         batch.end();
+        */
 	}
 	
 	@Override

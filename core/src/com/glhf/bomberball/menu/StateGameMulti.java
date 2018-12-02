@@ -14,11 +14,10 @@ public class StateGameMulti extends StateGame{
     private GameMultiConfig config;
 
     public StateGameMulti(String maze_filename) {
-        super("GameMulti", maze_filename);
+        super(maze_filename);
         config = Config.importConfig("config_multi", GameMultiConfig.class);
         current_player_index = 0;
         turn_number = 1;
-        loadMaze(maze_filename);
         players = maze.spawnPlayers(config);
         players[0].initiateTurn();
     }
