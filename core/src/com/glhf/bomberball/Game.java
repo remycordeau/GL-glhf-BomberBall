@@ -61,13 +61,16 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
+		float delta = Gdx.graphics.getDeltaTime();
+	    Game.time_elapsed += delta;
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		state.draw();
 		//debugRenderer.drawLines(8);
         batch.end();
+		stage.act(delta);
+        stage.draw();
 	}
 	
 	@Override
