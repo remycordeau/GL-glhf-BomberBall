@@ -53,6 +53,11 @@ public class Game extends ApplicationAdapter {
 		//sound.loop();
 	}
 
+	public void resize (int width, int height) {
+		// See below for what true means.
+		stage.getViewport().update(width, height, true);
+	}
+
 	@Override
 	public void render () {
 	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
@@ -68,6 +73,7 @@ public class Game extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		font.dispose();
+		stage.dispose();
 	}
 
 	public static void setState(State etat){
