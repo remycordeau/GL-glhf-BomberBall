@@ -1,5 +1,6 @@
 package com.glhf.bomberball.menu;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.Button;
 import com.glhf.bomberball.GUI.ButtonUndo;
@@ -16,6 +17,7 @@ public class StateMultiMenu extends State {
     private Button begin_random;
     private ButtonUndo cancel;
     private boolean err =false;
+
     //Constructor
     public StateMultiMenu(String name){
         super(name);

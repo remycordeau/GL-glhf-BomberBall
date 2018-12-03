@@ -2,6 +2,7 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.glhf.bomberball.gameobject.Player;
 
 public class StateGameMulti extends StateGame{
@@ -9,6 +10,8 @@ public class StateGameMulti extends StateGame{
     private Player[] players;
     private int current_player_index;
     private int turn_number;
+    private Group info_player;
+    private Group action_player;
 
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
@@ -17,6 +20,9 @@ public class StateGameMulti extends StateGame{
         loadMaze(maze_filename);
         players = maze.spawnPlayers();
         players[0].initiateTurn();
+        for (Player p : this.players) {
+            info_player.addActor(new PlayerInfo(p));
+        }
     }
 
     private void moveCurrentPlayer(Directions dir)

@@ -2,8 +2,9 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public abstract class State implements InputProcessor {
+public abstract class State extends Actor implements InputProcessor {
     protected SpriteBatch batch;
 
     //Attributes

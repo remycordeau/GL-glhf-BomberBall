@@ -36,13 +36,14 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		stage = new Stage(new StretchViewport(720, 480));
+		stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
 		Gdx.input.setInputProcessor(stage);
 		Config.load();
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
         setState(new StateMainMenu("MainMenu"));
+        stage.addActor(state);
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
