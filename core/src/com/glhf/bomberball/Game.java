@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
@@ -21,6 +24,7 @@ import com.glhf.bomberball.menu.StateMainMenu;
 import java.util.HashMap;
 
 public class Game extends ApplicationAdapter {
+	private Stage stage;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private HashMap<String, Texture> textures;
@@ -32,6 +36,8 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		stage = new Stage(new StretchViewport(720, 480));
+		Gdx.input.setInputProcessor(stage);
 		Config.load();
 		Graphics.load();
 		batch = new SpriteBatch();

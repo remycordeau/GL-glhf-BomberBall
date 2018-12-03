@@ -27,6 +27,6 @@ player3_skin elf_m
 player4_skin wizzard_f
 
 #GAME CONFIG
-nb_player_max 4
+nb_player_max 3
 
 #END
