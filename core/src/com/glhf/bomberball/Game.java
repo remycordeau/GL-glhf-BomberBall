@@ -25,12 +25,9 @@ import java.util.HashMap;
 
 public class Game extends ApplicationAdapter {
 	private Stage stage;
-	private SpriteBatch batch;
 	private BitmapFont font;
 	private HashMap<String, Texture> textures;
 	private static State state;
-
-    private DebugRenderer debugRenderer;
 
     public static float time_elapsed;
 
@@ -40,14 +37,12 @@ public class Game extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 		Config.load();
 		Graphics.load();
-		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new StateMainMenu("MainMenu"));
+        this.setState(new StateMainMenu("MainMenu"));
         stage.addActor(state);
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
-        debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;
 
 		//Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET+"sounds/musics/test.mp3"));
@@ -55,7 +50,6 @@ public class Game extends ApplicationAdapter {
 	}
 
 	public void resize (int width, int height) {
-		// See below for what true means.
 		stage.getViewport().update(width, height, true);
 	}
 
@@ -65,23 +59,21 @@ public class Game extends ApplicationAdapter {
 	    Game.time_elapsed += delta;
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
+		/* to remove
 		state.draw();
 		//debugRenderer.drawLines(8);
-        batch.end();
+        */
 		stage.act(delta);
-        stage.draw();
+		stage.draw();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
 		font.dispose();
 		stage.dispose();
 	}
 
-	public static void setState(State etat){
-		state = etat;
-		Gdx.input.setInputProcessor(state);
+	public static void setState(State state){
+		Game.state = state;
 	}
 }

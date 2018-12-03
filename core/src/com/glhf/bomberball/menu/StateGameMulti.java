@@ -3,10 +3,11 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
 
-public class StateGameMulti extends StateGame{
+public class StateGameMulti extends StateGame {
 
     private Player[] players;
     private int current_player_index;
@@ -25,8 +26,17 @@ public class StateGameMulti extends StateGame{
             info_player.addActor(new PlayerInfo(p));
         }
         info_player.setTransform(true);
+        info_player.setSize(Constants.APP_WIDTH/5, Constants.APP_HEIGHT); // a ajuster
         info_player.setPosition(0,0);
         //TODO faire la barre action player
+    }
+
+    @Override
+    public void draw() {
+        info_player.draw(this.batch, 1);
+        action_player.draw(this.batch, 1);
+        maze_drawer.drawMaze();
+        //TODO faire du mazeDrawer un actor pour faciliter la disposition avec les ui : pouvoir faire mazeDrawer.setPosition()
     }
 
     private void moveCurrentPlayer(Directions dir)
@@ -41,7 +51,7 @@ public class StateGameMulti extends StateGame{
     {
         maze.processEndTurn();
         do {
-            current_player_index = (current_player_index + 1) % maze.getNb_player_max();
+            current_player_index = (current_player_index + 1) % this.maze.getNb_player_max();
         } while (!players[current_player_index].isAlive());
         players[current_player_index].initiateTurn();
     }
@@ -79,11 +89,11 @@ public class StateGameMulti extends StateGame{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
+        Vector2 cell_pos = this.maze_drawer.screenPosToCell(screenX, screenY);
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
         Player player = players[current_player_index];
-        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        Directions dir = player.getCell().getCellDir(this.maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
             players[current_player_index].dropBomb(dir);
         }
