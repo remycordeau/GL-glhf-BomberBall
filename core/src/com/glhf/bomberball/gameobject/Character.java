@@ -3,6 +3,7 @@ package com.glhf.bomberball.gameobject;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
@@ -48,6 +49,13 @@ public abstract class Character extends GameObject {
     protected void setAnimation(String animation_name)
     {
         animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
+    }
+
+
+    @Override
+    public TextureAtlas.AtlasRegion getSprite()
+    {
+        return animation.getKeyFrame(Game.time_elapsed);
     }
 
     /**

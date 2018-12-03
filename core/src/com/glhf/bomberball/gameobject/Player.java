@@ -44,12 +44,6 @@ public class Player extends Character {
         this.initial_bomb_number = initial_bomb_number;
     }
 
-    @Override
-    public AtlasRegion getSprite()
-    {
-        return animation.getKeyFrame(Game.time_elapsed);
-    }
-
     /**
      * initiate the turn of the player, initialize the number of bombs and the number of moves
      */
