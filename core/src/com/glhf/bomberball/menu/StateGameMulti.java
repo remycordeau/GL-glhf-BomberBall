@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.interfaceMulti.PlayerInfo;
 
 public class StateGameMulti extends StateGame{
 
@@ -23,6 +24,9 @@ public class StateGameMulti extends StateGame{
         for (Player p : this.players) {
             info_player.addActor(new PlayerInfo(p));
         }
+        info_player.setTransform(true);
+        info_player.setPosition(0,0);
+        //TODO faire la barre action player
     }
 
     private void moveCurrentPlayer(Directions dir)
