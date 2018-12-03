@@ -7,19 +7,18 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.GUI.SkinButton;
 import com.glhf.bomberball.Game;
-//import com.glhf.bomberball.Button;
 
 public class TitleMenu extends State{
 
     //general attributes
     private Stage stage;
-    private Table table;
+    private VerticalGroup verticalGroup;
     private  TextureAtlas button_atlas;
     private Skin skin;
     private BitmapFont font;
@@ -38,8 +37,9 @@ public class TitleMenu extends State{
 
     public void create() {
         stage = new Stage();
-        table = new Table();
-        table.setFillParent(true);
+        verticalGroup = new VerticalGroup();
+        verticalGroup.setFillParent(true);
+        verticalGroup.center();
         font = new BitmapFont();
         skin = new Skin();
         button_atlas = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
@@ -48,16 +48,12 @@ public class TitleMenu extends State{
         style.font = font;
         initializeButtons();
         addListeners();
-        table.add(solo_button).height(35);
-        table.row();
-        table.add(multi_button).height(35);
-        table.row();
-        table.add(map_editor_button).height(35);
-        table.row();
-        table.add(settings_button).height(35);
-        table.row();
-        table.add(quit_button).height(35);
-        stage.addActor(table);
+        verticalGroup.addActor(solo_button);
+        verticalGroup.addActor(multi_button);
+        verticalGroup.addActor(map_editor_button);
+        verticalGroup.addActor(settings_button);
+        verticalGroup.addActor(quit_button);
+        stage.addActor(verticalGroup);
     }
 
     @Override
