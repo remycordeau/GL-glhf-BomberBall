@@ -19,7 +19,7 @@ public class StateGameMulti extends StateGame{
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
-        config = Config.importConfig("config_game_wall2", GameConfig.class);
+        config = Config.importConfig("config_game", GameConfig.class);
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);

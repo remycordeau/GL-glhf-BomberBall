@@ -26,7 +26,7 @@ public class MazeTransversal {
             while (!active_queue.isEmpty()) {
                 Cell c = active_queue.poll();
                 for (Cell other : c.getAdjacentCells()) {
-                    if (!cells.contains(other)) {
+                    if (!cells.contains(other) && other.isWalkable()) {
                         inactive_queue.add(other);
                         cells.add(other);
                     }
