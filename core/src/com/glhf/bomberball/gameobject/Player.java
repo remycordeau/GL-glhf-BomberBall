@@ -1,39 +1,49 @@
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
+import com.google.gson.InstanceCreator;
 
+import java.lang.reflect.Type;
 import java.util.Hashtable;
 
 public class Player extends Character {
-    //attributes
-    private int number_bomb_remaining;
-    private int number_initial_bombs;
-    private int initial_bomb_range;
-    //bonus owned
-    private Hashtable<String, Integer> bonus_owned;
 
-    /**
-     * constructor
-     * @param player_skin path to the player sprites
-     */
-    public Player(String player_skin, int number_initial_moves, int number_initial_bombs, int initial_bomb_range) {
-        super(player_skin, number_initial_moves);
-        this.number_initial_bombs = number_initial_bombs;
+    private int initial_bomb_number;
+    private int initial_bomb_range;
+
+    private transient int bombs_remaining;
+
+    private transient Hashtable<String, Integer> bonus_owned;
+
+    public Player(String player_skin,
+                  int life,
+                  int initial_moves,
+                  int initial_bomb_number,
+                  int initial_bomb_range)
+    {
+        super(player_skin, life, initial_moves);
+        this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
+
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
         bonus_owned = new Hashtable<String, Integer>();
         bonus_owned.put("NumberBombBoost", 0);
         bonus_owned.put("SpeedBoost", 0);
         bonus_owned.put("BombRangeBoost", 0);
     }
 
-    /**
-     * sprite getter
-     * @return the sprite of the player
-     */
+    public void setInitialBombNumber(int initial_bomb_number) {
+        this.initial_bomb_number = initial_bomb_number;
+    }
+
     @Override
     public AtlasRegion getSprite()
     {
@@ -46,31 +56,15 @@ public class Player extends Character {
     @Override
     public void initiateTurn() {
         super.initiateTurn();
-        number_initial_moves += bonus_owned.get("SpeedBoost");
-        number_bomb_remaining = number_initial_bombs + bonus_owned.get("NumberBombBoost");
-    }
-
-    /**
-     *
-     * @return number_bomb_remaining
-     */
-    public int getNumberBombRemaining() {
-        return number_bomb_remaining;
-    }
-
-    /**
-     *
-     * @param number_bomb_remaining
-     */
-    public void setNumberBombRemaining(int number_bomb_remaining) {
-        this.number_bomb_remaining = number_bomb_remaining;
+        initial_moves += bonus_owned.get("SpeedBoost");
+        bombs_remaining = initial_bomb_number + bonus_owned.get("NumberBombBoost");
     }
 
     @Override
     public boolean move(Directions dir)
     {
-        if (number_move_remaining > 0 && super.move(dir)) {
-            number_move_remaining--;
+        if (moves_remaining > 0 && super.move(dir)) {
+            moves_remaining--;
             return true;
         }
         return false;
@@ -82,10 +76,10 @@ public class Player extends Character {
      * @return a new Bomb
      */
     public void dropBomb(Directions dir) {
-        if (number_bomb_remaining > 0) {
+        if (bombs_remaining > 0) {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {
-                number_bomb_remaining--;
+                bombs_remaining--;
                 Bomb bomb = new Bomb(1, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
                 dest_cell.addGameObject(bomb);
             }
@@ -109,3 +103,4 @@ public class Player extends Character {
         return true;
     }
 }
+

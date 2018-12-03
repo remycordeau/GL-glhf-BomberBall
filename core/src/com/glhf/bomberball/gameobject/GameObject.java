@@ -1,35 +1,40 @@
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
 
 public abstract class GameObject {
 
-    protected int life;
+    protected int life = 1;
 
-    protected transient AtlasRegion sprite; //transient permet d'éviter d'écrire l'objet texture dans le fichier json
+    protected transient AtlasRegion sprite;
     protected transient Cell cell;
 
     protected GameObject(int life) {
         this.life = life;
     }
 
-    /**
-     *
-     * @return actual x axis position of the gameObject
-     */
+    public AtlasRegion getSprite() { return this.sprite; }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
     public int getX() {
         return cell.getX();
     }
 
-    /**
-     *
-     * @return actual y axis position of the gameObject
-     */
     public int getY() {
         return cell.getY();
     }
+
+    public void initialize() { }
 
     /**
      * modification of the life of the gameObject
@@ -38,8 +43,6 @@ public abstract class GameObject {
     public void getDamage(int damage){
         life -= damage;
     }
-
-    public AtlasRegion getSprite() { return this.sprite; }
 
     /**
      * to know if an object has been destroyed or not

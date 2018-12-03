@@ -1,19 +1,13 @@
 package com.glhf.bomberball.gameobject;
 
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
 
 public class Bomb extends GameObject {
-    // attributes
+
     private int damage;
     private int range;
-
-    public Bomb()
-    {
-        super(1);
-    }
 
     /**
      * constructor

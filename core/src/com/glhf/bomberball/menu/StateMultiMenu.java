@@ -8,7 +8,7 @@ import com.glhf.bomberball.GUI.SelectButton;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameConfig;
 
 public class StateMultiMenu extends State {
     //Attributes
@@ -19,12 +19,12 @@ public class StateMultiMenu extends State {
     private Button begin_random;
     private ButtonUndo cancel;
     private boolean err =false;
-    private GameMultiConfig config;
+    private GameConfig config;
     private SpriteBatch batch = new SpriteBatch();
 
     //Constructor
     public StateMultiMenu(String name){
-        config = Config.importConfig("config_multi", GameMultiConfig.class);
+        config = Config.importConfig("config_multi", GameConfig.class);
         this.settings();
     }
 

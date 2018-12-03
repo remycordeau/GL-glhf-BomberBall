@@ -1,9 +1,8 @@
 package com.glhf.bomberball.GUI;
 
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameConfig;
 
 public class SelectButton extends Button{
     //Attributes
@@ -11,7 +10,7 @@ public class SelectButton extends Button{
 
     public SelectButton(int x, int y, int width, int height, String s){
         super(x, y, width, height, s);
-        GameMultiConfig config = Config.importConfig("config_multi", GameMultiConfig.class);
+        GameConfig config = Config.importConfig("config_multi", GameConfig.class);
         nbPlayers = config.player_count;
         setSprite(Graphics.GUI.get(nbPlayers + ""));
 

@@ -3,40 +3,64 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.MazeTransversal;
+
+import java.util.ArrayList;
 
 public class StateGameMulti extends StateGame{
 
-    private Player[] players;
-    private int current_player_index;
-    private int turn_number;
-    private GameMultiConfig config;
+    private ArrayList<Player> players;
+    private Player current_player;
+    private GameConfig config;
+    private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
 
-    public StateGameMulti(String maze_filename) {
-        super(maze_filename);
-        config = Config.importConfig("config_multi", GameMultiConfig.class);
-        current_player_index = 0;
-        turn_number = 1;
+    public StateGameMulti(String maze_name) {
+        super(maze_name);
+        config = Config.importConfig("config_game_wall2", GameConfig.class);
+        maze.applyConfig(config);
         players = maze.spawnPlayers(config);
-        players[0].initiateTurn();
+        current_player = players.get(0);
+        current_player.initiateTurn();
+        setRangeEffect();
     }
 
-    private void moveCurrentPlayer(Directions dir)
+    private void setRangeEffect() {
+        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), current_player.getMovesRemaining());
+        for (Cell c : selected_cells) {
+            c.removeEffect();
+        }
+        selected_cells.clear();
+        for (Cell c : cells_in_range) {
+            c.setSelectEffect();
+            selected_cells.add(c);
+        }
+    }
+
+    private void moveCurrentPlayer(Directions dir) {
+        current_player.move(dir);
+        setRangeEffect();
+    }
+
+    private void endTurn()
     {
-        players[current_player_index].move(dir);
+        maze.processEndTurn();
+        nextPlayer();
+        setRangeEffect();
     }
 
     /**
      * gives the next player after a turn. If the next player is dead, choose the following player.
      */
-    private void nextPlayer()
-    {
-        maze.processEndTurn();
+    private void nextPlayer() {
+        int i = players.indexOf(current_player);
         do {
-            current_player_index = (current_player_index + 1) % config.player_count;
-        } while (!players[current_player_index].isAlive());
-        players[current_player_index].initiateTurn();
+            i = (i + 1) % players.size();
+        } while (!players.get(i).isAlive());
+        current_player = players.get(i);
+        current_player.initiateTurn();
     }
 
     @Override
@@ -57,7 +81,7 @@ public class StateGameMulti extends StateGame{
                 moveCurrentPlayer(Directions.LEFT);
                 break;
             case Input.Keys.SPACE:
-                nextPlayer();
+                endTurn();
                 break;
         }
 //        if(inputs.keySet().contains(keycode)) {
@@ -75,10 +99,9 @@ public class StateGameMulti extends StateGame{
         Vector2 cell_pos = mazeDrawer.screenPosToCell(screenX, screenY);
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
-        Player player = players[current_player_index];
-        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
-            players[current_player_index].dropBomb(dir);
+            current_player.dropBomb(dir);
         }
         return false;
     }

@@ -12,8 +12,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.menu.*;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.menu.State;
+import com.glhf.bomberball.menu.StateGame;
+import com.glhf.bomberball.menu.StateGameMulti;
+import com.glhf.bomberball.menu.StateMainMenu;
 
 import java.util.HashMap;
 
@@ -32,8 +37,8 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new TitleMenu("TitleMenu"));
-        //setState(new StateGameMulti("maze_0.json"));
+        //setState(new StateMainMenu("MainMenu"));
+		setState(new StateGameMulti("maze_0"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);
@@ -48,10 +53,15 @@ public class Game extends ApplicationAdapter {
 	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
+
 		state.draw();
-		//debugRenderer.drawLines(8);
+
+		// Uncomment to draw debug
+		/*
+		batch.begin();
+		debugRenderer.drawLines(8);
         batch.end();
+        */
 	}
 	
 	@Override

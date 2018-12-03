@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.glhf.bomberball.CellEffect;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -130,6 +131,11 @@ public class MazeDrawer {
 
     private void drawCell(Cell cell)
     {
+        CellEffect cell_effect = cell.getCellEffect();
+        if (cell_effect != null) {
+            drawTextureInCell(cell_effect.getSprite(), cell.getX(), cell.getY());
+        }
+
         ArrayList<GameObject> gameObjects = cell.getObjects();
         int n = gameObjects.size();
         if (n == 0) {

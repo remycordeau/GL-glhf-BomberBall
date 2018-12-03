@@ -1,8 +1,6 @@
 {
   "title": "Classic",
-  "height": 11,
-  "width": 13,
-  "position_start": [
+  "spawn_positions": [
     {
       "x": 0.0,
       "y": 0.0
@@ -20,10 +18,9 @@
       "y": 10.0
     }
   ],
-  "position_end": {
-    "x": 6.0,
-    "y": 5.0
-  },
+  "players_count": 4,
+  "height": 11,
+  "width": 13,
   "cells": [
     [
       {
@@ -34,22 +31,12 @@
       {
         "x": 0,
         "y": 1,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 0,
         "y": 2,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 0,
@@ -59,12 +46,7 @@
       {
         "x": 0,
         "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 0,
@@ -89,7 +71,12 @@
       {
         "x": 0,
         "y": 9,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 0,
@@ -176,12 +163,7 @@
       {
         "x": 1,
         "y": 10,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       }
     ],
     [
@@ -233,12 +215,7 @@
       {
         "x": 2,
         "y": 9,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 2,
@@ -250,12 +227,7 @@
       {
         "x": 3,
         "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 3,
@@ -357,7 +329,12 @@
       {
         "x": 4,
         "y": 4,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 4,
@@ -387,12 +364,7 @@
       {
         "x": 4,
         "y": 10,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       }
     ],
     [
@@ -521,7 +493,12 @@
       {
         "x": 6,
         "y": 8,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 6,
@@ -598,12 +575,7 @@
       {
         "x": 7,
         "y": 8,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 7,
@@ -625,12 +597,7 @@
       {
         "x": 8,
         "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 8,
@@ -767,19 +734,19 @@
       {
         "x": 9,
         "y": 10,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       }
     ],
     [
       {
         "x": 10,
         "y": 0,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 10,
@@ -789,7 +756,12 @@
       {
         "x": 10,
         "y": 2,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 10,
@@ -829,7 +801,12 @@
       {
         "x": 10,
         "y": 10,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       }
     ],
     [
@@ -933,32 +910,32 @@
       {
         "x": 12,
         "y": 3,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 12,
         "y": 4,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 12,
         "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 12,
         "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 12,
@@ -981,6 +958,5 @@
         "objects": []
       }
     ]
-  ],
-  "seed": 0
+  ]
 }

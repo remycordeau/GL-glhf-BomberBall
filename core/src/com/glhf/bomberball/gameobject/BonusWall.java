@@ -11,7 +11,7 @@ public class BonusWall extends DestructibleWall {
      */
     protected BonusWall(Bonus bonus) {
         super();
-        this.bonus=bonus;
+        this.bonus = bonus;
         //TODO set the BonusWall sprite
     }
 }

@@ -6,64 +6,54 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
-    //attributes
-    protected int number_move_remaining;
-    protected int number_initial_moves;
-    protected Animation<TextureAtlas.AtlasRegion> animation;
 
-    public Character(String skin, int number_initial_moves) {
-        super(1);
-        this.number_initial_moves = number_initial_moves;
-        this.number_move_remaining = number_initial_moves;
-        setAnimation(skin+"/idle");
+    protected int initial_moves = 5;
+    protected String skin = "knight_m";
+
+    protected transient int moves_remaining;
+
+    protected transient Animation<TextureAtlas.AtlasRegion> animation;
+
+    public Character(String skin, int life, int initial_moves) {
+        super(life);
+        this.skin = skin;
+        this.initial_moves = initial_moves;
+        this.moves_remaining = initial_moves;
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        setAnimation("idle");
+    }
+
+    public int getMovesRemaining() {
+        return moves_remaining;
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
+        setAnimation("idle");
+    }
+
+    public void setInitialMoves(int initial_moves) {
+        this.initial_moves = initial_moves;
     }
 
     /**
      * set the animation of the character
-     * @param animation_str path to the animation
+     * @param animation_name animation name
      */
-    protected void setAnimation(String animation_str)
+    protected void setAnimation(String animation_name)
     {
-        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(animation_str), Animation.PlayMode.LOOP);
+        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
-    // method initiate turn
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */
-    public void initiateTurn(){
-        number_move_remaining = number_initial_moves;
-    }
-
-    /**
-     *
-     * @return playerLife
-     */
-    public int getLife() {
-        return life;
-    }
-
-    /**
-     *
-     * @return number of moves remaining
-     */
-    public int getNumberMoveRemaining() {
-        return number_move_remaining;
-    }
-
-    /**
-     * set a value for the attribute life
-     * @param life value of life wanted
-     */
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    /**
-     * set a value for the attribute nomber of move remaining
-     * @param number_move_remaining
-     */
-    public void setNumberMoveRemaining(int number_move_remaining) {
-        this.number_move_remaining = number_move_remaining;
+    public void initiateTurn() {
+        moves_remaining = initial_moves;
     }
 }

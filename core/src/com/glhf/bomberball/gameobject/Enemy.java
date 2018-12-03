@@ -7,14 +7,15 @@ import com.glhf.bomberball.gameobject.Player;
 import java.util.ArrayList;
 
 public abstract class Enemy extends Character {
-    //attributes
-    protected int strength;
-    protected ArrayList<Constants.moves> way;
-    protected int actual_move;
 
+    protected int strength = 1;
 
-    protected Enemy(String skin, int number_initial_moves) {
-        super(skin, number_initial_moves);
+    protected transient  int actual_move;
+    protected transient ArrayList<Constants.moves> way;
+
+    protected Enemy(String skin, int life, int initial_moves, int strength) {
+        super(skin, life, initial_moves);
+        this.strength = strength;
         this.actual_move = 0;
     }
 

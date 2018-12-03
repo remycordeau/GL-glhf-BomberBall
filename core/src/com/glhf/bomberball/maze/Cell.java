@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.glhf.bomberball.CellEffect;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -20,6 +21,8 @@ public class Cell {
      * Objects in cell
      */
     private ArrayList<GameObject> objects;
+
+    private transient CellEffect cell_effect;
 
     /**
      * Cell constructor
@@ -44,7 +47,12 @@ public class Cell {
         return y;
     }
 
-    public void init(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
+    public CellEffect getCellEffect() {
+        return this.cell_effect;
+    }
+
+
+    public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
         for (GameObject o : objects) {
@@ -109,14 +117,6 @@ public class Cell {
         objects.remove(gameObject);
     }
 
-    /*
-    public void draw(SpriteBatch batch)
-    {
-    for (GameObject o : objects) {
-    batch.draw(o.getSprite(), x * Constants.BOX_WIDTH, y * Constants.BOX_HEIGHT);
-    }
-    }*/
-
     /**
      * Fonction non nécéssaire si la classe Cell s'affiche elle même
      * TODO remove this function
@@ -162,29 +162,32 @@ public class Cell {
      */
     public void processEndTurn()
     {
-        int i = 0;
-        GameObject o;
-        while (i < objects.size()) {
-            o = objects.get(i);
-            if (o instanceof Bomb) {
-                ((Bomb) o).explode();
-            } else {
-                i++;
-            }
+        for (Bomb b : this.getInstancesOf(Bomb.class)) {
+            b.explode();
         }
     }
 
     /**
-     * Search in the Cell if a GameObject is instance of a specific Class
-     * @param c the class to check
-     * @return true if an object is instance of c
+     * Search in cell for gameObjects instances of specified class.
+     * @param c Class to extract
+     * @param <T>
+     * @return All gameObjects in cell instances of c
      */
-    public GameObject getGameObjectInstanceOf(Class c) {
-        for(GameObject gameObject : objects){
-            if(c.isInstance(gameObject)){
-                return gameObject;
+    public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> c) {
+        ArrayList<T> instances = new ArrayList<T>();
+        for(GameObject o : objects){
+            if(c.isInstance(o)){
+                instances.add(c.cast(o));
             }
         }
-        return null;
+        return instances;
+    }
+
+    public void setSelectEffect() {
+        cell_effect = new CellEffect("cell_select7");
+    }
+
+    public void removeEffect() {
+        cell_effect = null;
     }
 }
