@@ -2,6 +2,7 @@ package com.glhf.bomberball.interfaceMulti;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
 public class PlayerInfo extends Actor {
@@ -16,6 +17,8 @@ public class PlayerInfo extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        batch.draw(player.getSprite(),0,0);
+        batch.draw(Graphics.Sprites.get("bomb"),5, 0);
 
     }
 }
