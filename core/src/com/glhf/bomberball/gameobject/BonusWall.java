@@ -1,17 +1,21 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Graphics;
+
 public class BonusWall extends DestructibleWall {
 
-    //attributes
     private Bonus bonus;
+
+    public BonusWall() {
+        super();
+    }
 
     /**
      * constructor
      * @param bonus which bonus is inside the wall
      */
-    protected BonusWall(Bonus bonus) {
+    public BonusWall(Bonus bonus) {
         super();
         this.bonus = bonus;
-        //TODO set the BonusWall sprite
     }
 }

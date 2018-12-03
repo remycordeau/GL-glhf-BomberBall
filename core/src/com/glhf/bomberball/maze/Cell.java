@@ -89,11 +89,8 @@ public class Cell {
     {
         for (int i = 0; i < objects.size(); ) {
             GameObject o = objects.get(i);
-            o.getDamage(damage);
-            if (o.isAlive()) {
+            if (!o.getDamage(damage)) {
                 i++;
-            } else{
-                objects.remove(o);
             }
         }
     }

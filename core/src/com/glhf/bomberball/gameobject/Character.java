@@ -53,7 +53,5 @@ public abstract class Character extends GameObject {
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */
-    public void initiateTurn() {
-        moves_remaining = initial_moves;
-    }
+    public void initiateTurn() { moves_remaining = initial_moves; }
 }

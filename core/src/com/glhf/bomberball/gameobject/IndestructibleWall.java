@@ -14,5 +14,5 @@ public class IndestructibleWall extends Wall {
      * @param damage
      */
     @Override
-    public void getDamage(int damage){}
+    public boolean getDamage(int damage){ return false; }
 }

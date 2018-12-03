@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.glhf.bomberball.CellEffect;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.gameobject.Bonus;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Player;
 

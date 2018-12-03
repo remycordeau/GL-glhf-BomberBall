@@ -53,6 +53,7 @@ public class Maze {
                 }
             }
         }
+        getCellAt(2, 2).addGameObject(new Bonus("SpeedBoost"));
         initialize();
     }
 

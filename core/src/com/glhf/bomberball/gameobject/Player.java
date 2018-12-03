@@ -55,9 +55,9 @@ public class Player extends Character {
      */
     @Override
     public void initiateTurn() {
-        super.initiateTurn();
         initial_moves += bonus_owned.get("SpeedBoost");
         bombs_remaining = initial_bomb_number + bonus_owned.get("NumberBombBoost");
+        moves_remaining = initial_moves;
     }
 
     @Override
@@ -91,10 +91,13 @@ public class Player extends Character {
      * @param bonus the bonus to loot
      */
     public void lootBonus(Bonus bonus) {
-        if (this.bonus_owned.contains(bonus.getName())) {
-            this.bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);
-        } else {
-            this.bonus_owned.put(bonus.getName(), 1);
+        bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);
+    }
+
+    public void interactWithCell(Cell cell) {
+        for (Bonus b : cell.getInstancesOf(Bonus.class)) {
+            cell.removeGameObject(b);
+            this.lootBonus(b);
         }
     }
 
