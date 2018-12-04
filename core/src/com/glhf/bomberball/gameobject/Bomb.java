@@ -34,5 +34,5 @@ public class Bomb extends GameObject {
     }
 
     @Override
-    public boolean getDamage(int damage){ return false; }
+    public void getDamage(int damage){ }
 }

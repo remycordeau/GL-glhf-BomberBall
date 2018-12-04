@@ -36,13 +36,15 @@ public abstract class GameObject {
 
     public void initialize() { }
 
-    public boolean getDamage(int damage){
+    public void getDamage(int damage){
         life -= damage;
         if (life <= 0) {
-            cell.removeGameObject(this);
-            return true;
+            this.dispose();
         }
-        return false;
+    }
+
+    public void dispose() {
+        cell.removeGameObject(this);
     }
 
     /**

@@ -51,9 +51,11 @@ public class Maze {
                 else if (Math.random() < 0.1) {
                     cells[x][y].addGameObject(new DestructibleWall());
                 }
+                else if (Math.random() < 0.05) {
+                    cells[x][y].addGameObject(new BonusWall(new Bonus("SpeedBoost")));
+                }
             }
         }
-        getCellAt(2, 2).addGameObject(new Bonus("SpeedBoost"));
         initialize();
     }
 

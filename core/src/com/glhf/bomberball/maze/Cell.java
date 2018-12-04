@@ -57,6 +57,7 @@ public class Cell {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
         for (GameObject o : objects) {
             o.setCell(this);
+            o.initialize();
         }
     }
 
@@ -87,11 +88,9 @@ public class Cell {
      */
     public void getDamage(int damage)
     {
-        for (int i = 0; i < objects.size(); ) {
-            GameObject o = objects.get(i);
-            if (!o.getDamage(damage)) {
-                i++;
-            }
+        ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(objects);
+        for (GameObject o : gameObjects) {
+            o.getDamage(damage);
         }
     }
 

@@ -11,11 +11,13 @@ public class Bonus extends GameObject {
     public Bonus(String name) {
         super(1);
         this.name = name;
+        initialize();
     }
 
     @Override
     public void initialize() {
         super.initialize();
+        System.err.println("in");
         this.sprite = Graphics.Sprites.get("flask_big_green");
     }
 
