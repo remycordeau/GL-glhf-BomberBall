@@ -17,7 +17,6 @@ public class Bonus extends GameObject {
     @Override
     public void initialize() {
         super.initialize();
-        System.err.println("in");
         this.sprite = Graphics.Sprites.get("flask_big_green");
     }
 
