@@ -1,7 +1,6 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,23 +26,23 @@ public class TitleMenu extends StateMenu{
     }
 
     public void initializeButtons(){
-        TextButton textButton = new TextButton("Solo", style);
+        TextButton textButton = new TextButton("Solo", textButton_style);
         textButton.addListener(new SetStateListener(new StateSoloMenu()));
         centerButtons.addActor(textButton);
 
-        textButton = new TextButton("Multiplayer", style);
+        textButton = new TextButton("Multiplayer", textButton_style);
         textButton.addListener(new SetStateListener(new StateSoloMenu()));
         centerButtons.addActor(textButton);
 
-        textButton = new TextButton("Map Editor", style);
+        textButton = new TextButton("Map Editor", textButton_style);
         textButton.addListener(new SetStateListener(new StateSoloMenu()));
         centerButtons.addActor(textButton);
 
-        textButton = new TextButton("Settings", style);
+        textButton = new TextButton("Settings", textButton_style);
         textButton.addListener(new SetStateListener(new StateSoloMenu()));
         centerButtons.addActor(textButton);
 
-        textButton = new TextButton("Quit", style);
+        textButton = new TextButton("Quit", textButton_style);
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
