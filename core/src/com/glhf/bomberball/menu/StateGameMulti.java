@@ -26,6 +26,8 @@ public class StateGameMulti extends StateGame {
         loadMaze(maze_filename,1/3f, 1,1/8f,1);
         players = maze.spawnPlayers();
         players[0].initiateTurn();
+        // initiate info_player group
+        info_player = new VerticalGroup();
         for (Player p : this.players) {
             info_player.addActor(new PlayerInfo(p));
         }

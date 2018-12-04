@@ -36,14 +36,14 @@ public class StateMainMenu extends State {
         quit = new Button(160, 0, 400, 100, "BoutonQuitter");
     }
 
+    /* to be remove : the super method will be used */
     @Override
     public void draw(){
-        /*solo.draw(batch);
+        solo.draw(batch);
         multi.draw(batch);
         editor.draw(batch);
         parametres.draw(batch);
-        quit.draw(batch);*/
-        stage.draw();
+        quit.draw(batch);
     }
 
     @Override

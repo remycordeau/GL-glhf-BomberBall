@@ -26,6 +26,7 @@ public abstract class StateGame extends State {
         maze_drawer = new MazeDrawer(maze, w_minp, w_maxp, h_minp, h_maxp, MazeDrawer.Fit.BEST);
     }
 
+    @Override
     public void draw() {
         super.draw();
         maze_drawer.drawMaze();
