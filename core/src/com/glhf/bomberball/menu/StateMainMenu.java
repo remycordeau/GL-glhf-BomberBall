@@ -36,6 +36,7 @@ public class StateMainMenu extends State {
         quit = new Button(160, 0, 400, 100, "BoutonQuitter");
     }
 
+    @Override
     public void draw(){
         solo.draw(batch);
         multi.draw(batch);

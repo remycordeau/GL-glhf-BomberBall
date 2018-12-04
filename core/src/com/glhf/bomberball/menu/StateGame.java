@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public abstract class StateGame extends State {
     protected Maze maze;
-    protected MazeDrawer mazeDrawer;
+    protected MazeDrawer maze_drawer;
 
     public StateGame(String name, String maze_filename) {
         super(name);
@@ -23,10 +23,10 @@ public abstract class StateGame extends State {
         //maze = new Maze(11, 13);
         maze = Maze.fromJsonFile(filename);
         //maze.toJsonFile("maze_0.json");
-        mazeDrawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
+        maze_drawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
     }
 
     public void draw() {
-        mazeDrawer.drawMaze();
+        maze_drawer.drawMaze();
     }
 }
