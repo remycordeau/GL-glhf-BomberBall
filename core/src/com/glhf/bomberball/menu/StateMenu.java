@@ -26,9 +26,4 @@ public abstract class StateMenu extends State{
         stage.addActor(centerButtons);
         Gdx.input.setInputProcessor(stage);
     }
-
-    @Override
-    public void draw() {
-        stage.draw();
-    }
 }
