@@ -9,6 +9,7 @@ import com.glhf.bomberball.Constants;
 
 public abstract class State extends Actor implements InputProcessor {
     protected Stage stage;
+    protected SpriteBatch batch;
 
     //Attributes
     private String state_name;
@@ -17,6 +18,7 @@ public abstract class State extends Actor implements InputProcessor {
     public State(String e){
         state_name = e;
         stage=new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
+        batch = new SpriteBatch();
     }
 
     //Methods
