@@ -19,7 +19,7 @@ public class StateGameMulti extends StateGame{
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
-        config = Config.importConfig("config_game_wall2", GameConfig.class);
+        config = Config.importConfig("config_game", GameConfig.class);
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
@@ -48,7 +48,6 @@ public class StateGameMulti extends StateGame{
     {
         maze.processEndTurn();
         nextPlayer();
-        setRangeEffect();
     }
 
     /**
@@ -61,6 +60,7 @@ public class StateGameMulti extends StateGame{
         } while (!players.get(i).isAlive());
         current_player = players.get(i);
         current_player.initiateTurn();
+        setRangeEffect();
     }
 
     @Override
@@ -102,6 +102,7 @@ public class StateGameMulti extends StateGame{
         Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
             current_player.dropBomb(dir);
+            setRangeEffect();
         }
         return false;
     }

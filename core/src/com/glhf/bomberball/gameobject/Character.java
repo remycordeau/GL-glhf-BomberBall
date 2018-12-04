@@ -3,6 +3,7 @@ package com.glhf.bomberball.gameobject;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
@@ -50,10 +51,15 @@ public abstract class Character extends GameObject {
         animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
+
+    @Override
+    public TextureAtlas.AtlasRegion getSprite()
+    {
+        return animation.getKeyFrame(Game.time_elapsed);
+    }
+
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */
-    public void initiateTurn() {
-        moves_remaining = initial_moves;
-    }
+    public void initiateTurn() { moves_remaining = initial_moves; }
 }

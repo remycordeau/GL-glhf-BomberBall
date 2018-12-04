@@ -36,12 +36,13 @@ public abstract class GameObject {
 
     public void initialize() { }
 
-    /**
-     * modification of the life of the gameObject
-     * @param damage
-     */
-    public void getDamage(int damage){
+    public boolean getDamage(int damage){
         life -= damage;
+        if (life <= 0) {
+            cell.removeGameObject(this);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -68,10 +69,13 @@ public abstract class GameObject {
         else if (dest_cell.isWalkable()) {
             cell.removeGameObject(this);
             dest_cell.addGameObject(this);
+            this.interactWithCell(dest_cell);
             moved = true;
         }
         return moved;
     }
+
+    public void interactWithCell(Cell cell) { }
 
     public void setCell(Cell cell)
     {

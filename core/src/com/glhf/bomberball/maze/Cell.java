@@ -89,11 +89,8 @@ public class Cell {
     {
         for (int i = 0; i < objects.size(); ) {
             GameObject o = objects.get(i);
-            o.getDamage(damage);
-            if (o.isAlive()) {
+            if (!o.getDamage(damage)) {
                 i++;
-            } else{
-                objects.remove(o);
             }
         }
     }
@@ -148,11 +145,14 @@ public class Cell {
 
     public void explode(Directions dir, int damage, int range)
     {
+        boolean propagate = this.isWalkable();
         getDamage(damage);
-        if (range > 1 && dir != null) {
-            Cell adjacent_cell = getAdjacentCell(dir);
-            if (adjacent_cell != null) {
-                adjacent_cell.explode(dir, damage, range - 1);
+        if (propagate) {
+            if (range > 1 && dir != null) {
+                Cell adjacent_cell = getAdjacentCell(dir);
+                if (adjacent_cell != null) {
+                    adjacent_cell.explode(dir, damage, range - 1);
+                }
             }
         }
     }
