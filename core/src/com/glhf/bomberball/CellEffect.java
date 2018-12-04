@@ -1,18 +1,19 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class CellEffect {
 
-    private AtlasRegion sprite;
+    protected transient Animation<AtlasRegion> animation;
 
-    public CellEffect(String sprite)
+    public CellEffect(String animation_name)
     {
-        this.sprite = Graphics.Sprites.get(sprite);
+        animation = new Animation<AtlasRegion>(0.07f, Graphics.Anims.get("cell/" + animation_name), Animation.PlayMode.LOOP_PINGPONG);
     }
 
     public AtlasRegion getSprite() {
-        return sprite;
+        return animation.getKeyFrame(Game.time_elapsed);
     }
 }

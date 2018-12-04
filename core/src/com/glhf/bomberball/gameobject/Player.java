@@ -49,9 +49,8 @@ public class Player extends Character {
      */
     @Override
     public void initiateTurn() {
-        initial_moves += bonus_owned.get("SpeedBoost");
         bombs_remaining = initial_bomb_number + bonus_owned.get("NumberBombBoost");
-        moves_remaining = initial_moves;
+        moves_remaining = initial_moves + bonus_owned.get("SpeedBoost");
     }
 
     @Override

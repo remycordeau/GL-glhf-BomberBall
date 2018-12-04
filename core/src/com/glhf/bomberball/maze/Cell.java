@@ -171,7 +171,7 @@ public class Cell {
      * Search in cell for gameObjects instances of specified class.
      * @param c Class to extract
      * @param <T>
-     * @return All gameObjects in cell instances of c
+     * @return All gameObjects in cell, instances of c
      */
     public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> c) {
         ArrayList<T> instances = new ArrayList<T>();
@@ -184,7 +184,7 @@ public class Cell {
     }
 
     public void setSelectEffect() {
-        cell_effect = new CellEffect("cell_select7");
+        cell_effect = new CellEffect("cell_select");
     }
 
     public void removeEffect() {
