@@ -12,9 +12,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateGame;
@@ -24,56 +21,52 @@ import com.glhf.bomberball.menu.StateMainMenu;
 import java.util.HashMap;
 
 public class Game extends ApplicationAdapter {
-	private Stage stage;
+	private SpriteBatch batch;
 	private BitmapFont font;
 	private HashMap<String, Texture> textures;
 	private static State state;
+
+    private DebugRenderer debugRenderer;
 
     public static float time_elapsed;
 
 	@Override
 	public void create () {
-		stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
-		Gdx.input.setInputProcessor(stage);
 		Config.load();
 		Graphics.load();
+		batch = new SpriteBatch();
 		font = new BitmapFont();
-        this.setState(new StateMainMenu("MainMenu"));
-        stage.addActor(state);
+        setState(new StateMainMenu("MainMenu"));
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
+        debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;
 
 		//Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET+"sounds/musics/test.mp3"));
 		//sound.loop();
 	}
 
-	public void resize (int width, int height) {
-		stage.getViewport().update(width, height, true);
-	}
 
 	@Override
 	public void render () {
-		float delta = Gdx.graphics.getDeltaTime();
-	    Game.time_elapsed += delta;
+	    Game.time_elapsed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		/* to remove
+		batch.begin();
 		state.draw();
 		//debugRenderer.drawLines(8);
-        */
-		stage.act(delta);
-		stage.draw();
+        batch.end();
 	}
 	
 	@Override
 	public void dispose () {
+		batch.dispose();
 		font.dispose();
-		stage.dispose();
 	}
 
-	public static void setState(State state){
-		Game.state = state;
+	public static void setState(State etat){
+		state = etat;
+		Gdx.input.setInputProcessor(state);
 	}
 }

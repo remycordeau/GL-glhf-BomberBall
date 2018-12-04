@@ -3,17 +3,20 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
+import com.glhf.bomberball.maze.MazeDrawer;
 
 public class StateGameMulti extends StateGame {
 
     private Player[] players;
     private int current_player_index;
     private int turn_number;
-    private Group info_player;
-    private Group action_player;
+    private VerticalGroup info_player;
+    private HorizontalGroup action_player;
 
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
@@ -29,14 +32,6 @@ public class StateGameMulti extends StateGame {
         info_player.setSize(Constants.APP_WIDTH/5, Constants.APP_HEIGHT); // a ajuster
         info_player.setPosition(0,0);
         //TODO faire la barre action player
-    }
-
-    @Override
-    public void draw() {
-        info_player.draw(this.batch, 1);
-        action_player.draw(this.batch, 1);
-        maze_drawer.drawMaze();
-        //TODO faire du mazeDrawer un actor pour faciliter la disposition avec les ui : pouvoir faire mazeDrawer.setPosition()
     }
 
     private void moveCurrentPlayer(Directions dir)

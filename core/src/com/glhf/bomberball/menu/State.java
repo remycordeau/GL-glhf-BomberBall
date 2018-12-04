@@ -3,9 +3,12 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.glhf.bomberball.Constants;
 
 public abstract class State extends Actor implements InputProcessor {
-    protected SpriteBatch batch;
+    protected Stage stage;
 
     //Attributes
     private String state_name;
@@ -13,7 +16,7 @@ public abstract class State extends Actor implements InputProcessor {
     //Constructors
     public State(String e){
         state_name = e;
-        batch = new SpriteBatch();
+        stage=new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
     }
 
     //Methods
@@ -29,7 +32,9 @@ public abstract class State extends Actor implements InputProcessor {
         state_name = new_state;
     }
 
-    public abstract void draw();
+    public void draw(){
+        stage.draw();
+    }
 
     @Override
     public boolean keyDown(int keycode) {

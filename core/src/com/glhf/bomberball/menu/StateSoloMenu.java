@@ -25,8 +25,9 @@ public class StateSoloMenu extends State {
     }
 
     public void draw() {
-        tmp.draw(batch);
-        undo.draw(batch);
+        /*tmp.draw(batch);
+        undo.draw(batch);*/
+        stage.draw();
     }
 
     @Override

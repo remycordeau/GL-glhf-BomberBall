@@ -47,7 +47,7 @@ public class StateMultiMenu extends State {
     }
 
     public void draw(){
-        retrievePlayer.draw(batch);
+        /*retrievePlayer.draw(batch);
         addPlayer.draw(batch);
         numberPlayer.draw(batch);
         cancel.draw(batch);
@@ -58,7 +58,8 @@ public class StateMultiMenu extends State {
             batch.begin();
             batch.draw(Graphics.GUI.get("erreur"), 0, 0);
             batch.end();
-        }
+        }*/
+        stage.draw();
     }
 
     @Override

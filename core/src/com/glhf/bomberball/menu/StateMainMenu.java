@@ -38,11 +38,12 @@ public class StateMainMenu extends State {
 
     @Override
     public void draw(){
-        solo.draw(batch);
+        /*solo.draw(batch);
         multi.draw(batch);
         editor.draw(batch);
         parametres.draw(batch);
-        quit.draw(batch);
+        quit.draw(batch);*/
+        stage.draw();
     }
 
     @Override

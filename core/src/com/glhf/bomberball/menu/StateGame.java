@@ -27,6 +27,7 @@ public abstract class StateGame extends State {
     }
 
     public void draw() {
+        super.draw();
         maze_drawer.drawMaze();
     }
 }
