@@ -1,5 +1,7 @@
 package com.glhf.bomberball;
 
+import java.io.File;
+
 public class Constants {
     // textures properties
     public static final int BOX_WIDTH = 16;
@@ -13,8 +15,9 @@ public class Constants {
     public static final String PATH_MAZE          = PATH_ASSET+"maze/";
     public static final String PATH_CONFIG_FILE   = PATH_ASSET+"config.json";
     public static final String PATH_GAMEOBJECT    = PATH_ASSET+"Config/config.txt";
-    public static final String PATH_CONFIG_TMP        = PATH_ASSET+"Config/configtmp.txt";
+    public static final String PATH_CONFIG_TMP    = PATH_ASSET+"Config/configtmp.txt";
     public static final String PATH_GRAPHICS      = PATH_ASSET+"graphics/";
+    public static final String PATH_FONTS         = PATH_GRAPHICS+"fonts/";
     public static final String PATH_PACKS         = PATH_GRAPHICS+"packs/";
     public static final String PATH_ATLAS_SPRITES = PATH_PACKS+"pack_sprites.atlas";
     public static final String PATH_ATLAS_ANIMS   = PATH_PACKS+"pack_animations.atlas";
@@ -27,6 +30,7 @@ public class Constants {
     public enum moves {UP, DOWN, RIGHT, LEFT}
     public enum enemyState {ACTIVE, HUNTER}
 
+    //TODO remove
     // constants to configure game objects
     public static ConfigFile config_file = new ConfigFile(Constants.PATH_GAMEOBJECT);
 }

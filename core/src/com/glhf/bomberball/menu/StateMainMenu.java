@@ -18,12 +18,11 @@ public class StateMainMenu extends State {
     boolean solob = false;
     //Constructor
     public StateMainMenu(String name){
-        super(name);
         this.settings();
     }
 
     /*Loading textures*/
-    public void settings(){
+    public void settings() {
         //BoutonSolo
         solo = new Button(160, 400, 400, 100, "BoutonSolo");
         //BoutonMulti
@@ -34,44 +33,5 @@ public class StateMainMenu extends State {
         parametres = new Button(160, 100, 400, 100, "BoutonParametres");
         //BoutonQuitter
         quit = new Button(160, 0, 400, 100, "BoutonQuitter");
-    }
-
-    public void draw(){
-        solo.draw(batch);
-        multi.draw(batch);
-        editor.draw(batch);
-        parametres.draw(batch);
-        quit.draw(batch);
-    }
-
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-        y = Constants.APP_HEIGHT - y;
-        if(solo.contains(x, y)) {
-            State state = new StateSoloMenu("Menu Solo");
-            Game.setState(state);
-            //TODO: On lance le jeu solo
-        }
-
-        if(editor.contains(x,y)) {
-
-        }
-
-        if(multi.contains(x, y))
-        {
-            State state = new StateMultiMenu("Menu Multi");
-            Game.setState(state);
-        }
-
-        if(parametres.contains(x, y))
-        {
-            State state = new StateSettingsMenu("Menu Paramètres");
-            Game.setState(state);
-        }
-
-        if(quit.contains(x,y)){
-            Gdx.app.exit();
-        }
-        return false;
     }
 }

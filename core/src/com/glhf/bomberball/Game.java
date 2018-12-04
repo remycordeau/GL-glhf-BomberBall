@@ -28,7 +28,7 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new TitleMenu("TitleMenu"));
+        setState(new TitleMenu());
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
@@ -58,6 +58,5 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
-		state.setInputProcessor();
 	}
 }
