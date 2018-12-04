@@ -72,9 +72,9 @@ public class TitleMenu extends State{
         Texture texture_background =  new Texture(Gdx.files.internal("core/assets/graphics/gui/Solobutton.png"));
         solo_button = new SkinButton(texture_up,texture_down,texture_background);
 
-        texture_up = new Texture(Gdx.files.internal("core/assets/graphics/gui/boutonMulti.png"));
-        texture_down =  new Texture(Gdx.files.internal("core/assets/graphics/gui/boutonMulti.png"));
-        texture_background =  new Texture(Gdx.files.internal("core/assets/graphics/gui/boutonMulti.png"));
+        texture_up = new Texture(Gdx.files.internal("core/assets/graphics/gui/BoutonMulti.png"));
+        texture_down =  new Texture(Gdx.files.internal("core/assets/graphics/gui/BoutonMulti.png"));
+        texture_background =  new Texture(Gdx.files.internal("core/assets/graphics/gui/BoutonMulti.png"));
         multi_button = new SkinButton(texture_up,texture_down,texture_background);
 
         texture_up = new Texture(Gdx.files.internal("core/assets/graphics/gui/boutonMap.png"));
