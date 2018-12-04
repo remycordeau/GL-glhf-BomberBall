@@ -3,6 +3,7 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.glhf.bomberball.Constants;
@@ -22,16 +23,19 @@ public class StateGameMulti extends StateGame {
         super("GameMulti", maze_filename);
         current_player_index = 0;
         turn_number = 1;
-        loadMaze(maze_filename);
+        loadMaze(maze_filename,1/3f, 1,1/8f,1);
         players = maze.spawnPlayers();
         players[0].initiateTurn();
         for (Player p : this.players) {
             info_player.addActor(new PlayerInfo(p));
         }
         info_player.setTransform(true);
-        info_player.setSize(Constants.APP_WIDTH/5, Constants.APP_HEIGHT); // a ajuster
+        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
         info_player.setPosition(0,0);
-        //TODO faire la barre action player
+        this.stage.addActor(info_player);
+        //:TODO action player bar
+        //action_player.addActor(new Button());
+
     }
 
     private void moveCurrentPlayer(Directions dir)

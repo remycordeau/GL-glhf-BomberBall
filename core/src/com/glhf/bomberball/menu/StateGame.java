@@ -16,14 +16,14 @@ public abstract class StateGame extends State {
 
     public StateGame(String name, String maze_filename) {
         super(name);
-        loadMaze(maze_filename);
+        loadMaze(maze_filename,0f,1f,0f,1f);
     }
 
-    public void loadMaze(String filename) {
+    public void loadMaze(String filename, float w_minp, float w_maxp, float h_minp, float h_maxp) {
         //maze = new Maze(11, 13);
         maze = Maze.fromJsonFile(filename);
         //maze.toJsonFile("maze_0.json");
-        maze_drawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
+        maze_drawer = new MazeDrawer(maze, w_minp, w_maxp, h_minp, h_maxp, MazeDrawer.Fit.BEST);
     }
 
     public void draw() {
