@@ -17,7 +17,7 @@ public class PlayerInfo extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(player.getSprite(),0,0);
-        batch.draw(Graphics.Sprites.get("bomb"),5, 0);
-        batch.draw(Graphics.Sprites.get("full_heart"),10,0);
+        batch.draw(Graphics.Sprites.get("bomb"),10, 0);
+        //batch.draw(Graphics.Sprites.get("full_heart"),10,0);
     }
 }

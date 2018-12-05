@@ -7,17 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Constants;
 
-public abstract class State extends Actor implements InputProcessor {
+public abstract class State implements InputProcessor {
     protected Stage stage;
-    protected SpriteBatch batch;
-
+    protected SpriteBatch batch; //to be remove
     //Attributes
     private String state_name;
 
     //Constructors
     public State(String e){
         state_name = e;
-        stage=new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
+        stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
         batch = new SpriteBatch();
     }
 

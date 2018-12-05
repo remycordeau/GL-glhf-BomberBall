@@ -3,9 +3,7 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
@@ -26,6 +24,8 @@ public class StateGameMulti extends StateGame {
         loadMaze(maze_filename,1/3f, 1,1/8f,1);
         players = maze.spawnPlayers();
         players[0].initiateTurn();
+        // initiate info_player group
+        info_player = new VerticalGroup();
         for (Player p : this.players) {
             info_player.addActor(new PlayerInfo(p));
         }
@@ -34,8 +34,10 @@ public class StateGameMulti extends StateGame {
         info_player.setPosition(0,0);
         this.stage.addActor(info_player);
         //:TODO action player bar
-        //action_player.addActor(new Button());
-
+        /*action_player = new HorizontalGroup();
+        action_player.addActor(new TextButton("déplacement", new Skin()));
+        action_player.addActor(new TextButton("poser une bombe", new Skin()));
+        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
     }
 
     private void moveCurrentPlayer(Directions dir)

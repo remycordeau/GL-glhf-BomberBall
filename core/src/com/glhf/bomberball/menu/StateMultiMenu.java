@@ -46,7 +46,9 @@ public class StateMultiMenu extends State {
         begin_random = new Button(160, 100, 400, 100, "BoutonMulti");
     }
 
-    public void draw(){
+
+    /* the following needs to be remove : the super method will be used */
+    public void draw() {
         retrievePlayer.draw(batch);
         addPlayer.draw(batch);
         numberPlayer.draw(batch);
@@ -59,7 +61,6 @@ public class StateMultiMenu extends State {
             batch.draw(Graphics.GUI.get("erreur"), 0, 0);
             batch.end();
         }
-        //stage.draw();
     }
 
     @Override
