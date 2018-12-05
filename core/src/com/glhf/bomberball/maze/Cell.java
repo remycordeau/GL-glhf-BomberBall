@@ -177,7 +177,7 @@ public class Cell {
     }
 
     public void setSelectEffect() {
-        cell_effect = new CellEffect("cell_select");
+        cell_effect = new CellEffect("cell/explo/center");
     }
 
     public void removeEffect() {
