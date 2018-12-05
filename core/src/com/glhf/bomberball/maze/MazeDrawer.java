@@ -146,7 +146,7 @@ public class MazeDrawer {
         float offsetp_y = 0.0f;
         if (n == 1) {
             GameObject o = gameObjects.get(0);
-            offsetp_y = (Player.class.isInstance(o)) ? 1/3f : 0.0f;
+            offsetp_y = (o instanceof Player) ? 1/3f : 0.0f;
             drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp_x, offsetp_y);
         } else {
 
