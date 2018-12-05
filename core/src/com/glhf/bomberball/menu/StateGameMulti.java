@@ -1,7 +1,10 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.glhf.bomberball.gameobject.Player;
 
 public class StateGameMulti extends StateGame{
@@ -36,3 +39,5 @@ public class StateGameMulti extends StateGame{
         players[current_player_index].initiateTurn();
     }
 }
+
+

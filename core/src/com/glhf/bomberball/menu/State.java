@@ -22,4 +22,8 @@ public abstract class State {
     public void draw() {
         stage.draw();
     }
+
+    public void setInputProcessor(){
+        Gdx.input.setInputProcessor(stage);
+    }
 }

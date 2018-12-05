@@ -58,5 +58,6 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
+		state.setInputProcessor();
 	}
 }

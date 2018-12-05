@@ -31,15 +31,15 @@ public class TitleMenu extends StateMenu{
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Multiplayer", textButton_style);
-        textButton.addListener(new SetStateListener(new StateSoloMenu()));
+        textButton.addListener(new SetStateListener(new StateGameMulti("maze_0.json")));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Map Editor", textButton_style);
-        textButton.addListener(new SetStateListener(new StateSoloMenu()));
+        //textButton.addListener(new SetStateListener(new StateEditorMenu()));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Settings", textButton_style);
-        textButton.addListener(new SetStateListener(new StateSoloMenu()));
+        textButton.addListener(new SetStateListener(new StateSettingsMenu()));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Quit", textButton_style);
