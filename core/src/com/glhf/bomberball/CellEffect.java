@@ -10,7 +10,7 @@ public class CellEffect {
 
     public CellEffect(String animation_name)
     {
-        animation = new Animation<AtlasRegion>(0.07f, Graphics.Anims.get("cell/" + animation_name), Animation.PlayMode.LOOP_PINGPONG);
+        animation = new Animation<AtlasRegion>(0.07f, Graphics.Anims.get(animation_name), Animation.PlayMode.LOOP_PINGPONG);
     }
 
     public AtlasRegion getSprite() {
