@@ -1,35 +1,51 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.gameobject.GameObject;
 
 public class Bonus extends GameObject {
 
-    protected String name;
+    public enum Type {
+        SPEED,
+        BOMB_RANGE,
+        BOMB_NUMBER
+    }
 
-    public Bonus(String name) {
+    private Type type;
+
+    public Bonus(Type type) {
         super(1);
-        this.name = name;
-        initialize();
+        this.type = type;
     }
 
     @Override
     public void initialize() {
-        super.initialize();
-        this.sprite = Graphics.Sprites.get("flask_big_green");
-    }
-
-    /**
-     *
-     * @return Name of the bonus
-     */
-    public String getName(){
-        return name;
+        switch (type) {
+            case SPEED:
+                sprite = Graphics.Sprites.get("flask_big_green");
+                break;
+            case BOMB_RANGE:
+                sprite = Graphics.Sprites.get("flask_big_red");
+                break;
+            case BOMB_NUMBER:
+                sprite = Graphics.Sprites.get("flask_big_blue");
+                break;
+        }
     }
 
     @Override
-    public boolean isWalkable() {
-        return true;
+    public boolean isWalkable() { return true; }
+
+    public void applyEffect(Player player) {
+        switch (type) {
+            case SPEED:
+                player.bonus_moves++;
+                break;
+            case BOMB_RANGE:
+                player.bonus_bomb_range++;
+                break;
+            case BOMB_NUMBER:
+                player.bonus_bomb_number++;
+                break;
+        }
     }
 }

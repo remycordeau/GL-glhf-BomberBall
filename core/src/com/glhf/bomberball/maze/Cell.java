@@ -51,7 +51,6 @@ public class Cell {
         return this.cell_effect;
     }
 
-
     public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
@@ -84,7 +83,7 @@ public class Cell {
 
     /**
      * Damages all GameObjects in cell
-     * @param damage getDamage amount to apply
+     * @param damage amount to apply
      */
     public void getDamage(int damage)
     {
@@ -96,7 +95,7 @@ public class Cell {
 
     /**
      * Add a GameObject to a Cell
-     * @param gameObject the GameObject to be inserted
+     * @param gameObject gameObject to be added
      */
     public void addGameObject(GameObject gameObject)
     {
@@ -106,18 +105,13 @@ public class Cell {
 
     /**
      * Remove a GameObject from a Cell
-     * @param gameObject the GameObject to be removed
+     * @param gameObject gameObject to be removed
      */
     public void removeGameObject(GameObject gameObject) {
         gameObject.setCell(null);
         objects.remove(gameObject);
     }
 
-    /**
-     * Fonction non nécéssaire si la classe Cell s'affiche elle même
-     * TODO remove this function
-     * @return objects
-     */
     public ArrayList<GameObject> getObjects() {
         return objects;
     }

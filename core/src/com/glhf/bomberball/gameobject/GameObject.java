@@ -22,10 +22,6 @@ public abstract class GameObject {
         this.life = life;
     }
 
-    public int getLife() {
-        return life;
-    }
-
     public int getX() {
         return cell.getX();
     }
