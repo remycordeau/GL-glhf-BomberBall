@@ -26,13 +26,11 @@ public class StateGameMulti extends StateGame {
         players[0].initiateTurn();
         // initiate info_player group
         info_player = new VerticalGroup();
+        this.stage.addActor(info_player);
+        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
         for (Player p : this.players) {
             info_player.addActor(new PlayerInfo(p));
         }
-        info_player.setTransform(true);
-        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
-        info_player.setPosition(0,0);
-        this.stage.addActor(info_player);
         //:TODO action player bar
         /*action_player = new HorizontalGroup();
         action_player.addActor(new TextButton("déplacement", new Skin()));
