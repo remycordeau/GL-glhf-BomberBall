@@ -1,8 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.maze.Cell;
 
 public class BonusWall extends GameObject {
 

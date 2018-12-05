@@ -1,7 +1,5 @@
-package com.glhf.bomberball.maze;
+package com.glhf.bomberball.maze.cell;
 
-import com.glhf.bomberball.CellEffect;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.menu.Directions;
@@ -148,6 +146,7 @@ public class Cell {
                 }
             }
         }
+        this.setExplosionEffect(dir, range);
     }
 
     /**
@@ -177,7 +176,11 @@ public class Cell {
     }
 
     public void setSelectEffect() {
-        cell_effect = new CellEffect("cell/explo/center");
+        cell_effect = new SelectEffect(this);
+    }
+
+    private void setExplosionEffect(Directions dir, int range) {
+        cell_effect = new ExplosionEffect(this, dir, range);
     }
 
     public void removeEffect() {

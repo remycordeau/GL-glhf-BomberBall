@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.maze.MazeTransversal;
 
 import java.util.ArrayList;
