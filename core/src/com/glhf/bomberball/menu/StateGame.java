@@ -16,7 +16,7 @@ public abstract class StateGame extends State {
 
     public StateGame(String maze_filename) {
         super();
-        loadMaze(maze_filename,0f,1f,0f,1f);
+        loadMaze(maze_filename,1/3f,1f,2/10f,1f);
         stage.addListener(new GameInputListener());
     }
 
