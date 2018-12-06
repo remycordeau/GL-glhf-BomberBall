@@ -1,14 +1,9 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Constants;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class State {
     protected Stage stage;
@@ -20,17 +15,17 @@ public abstract class State {
         stage.addListener(inputHandler);
 
 
-        inputHandler.registerKey(InputHandler.Events.MOUSE_RIGHT, new Runnable() {
+        /*inputHandler.registerKey(InputHandler.Action.BUTTON_RIGHT, new Runnable() {
             @Override
             public void run() {
             }
         });
 
-        inputHandler.registerKey(InputHandler.Events.MOUSE_LEFT, new Runnable() {
+        inputHandler.registerKey(InputHandler.Action.BUTTON_LEFT, new Runnable() {
             @Override
             public void run() {
             }
-        });
+        });*/
     }
 
     //Methods

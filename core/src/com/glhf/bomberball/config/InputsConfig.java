@@ -1,23 +1,36 @@
 package com.glhf.bomberball.config;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.glhf.bomberball.menu.InputHandler;
-import com.glhf.bomberball.menu.InputHandler.Events;
+import com.glhf.bomberball.menu.InputHandler.KeyAction;
 
 import java.util.HashMap;
 
 public class InputsConfig extends Config {
 
-    public int move_up = Input.Keys.UP;
-    public int move_left = Input.Keys.LEFT;
-    public int move_down = Input.Keys.DOWN;
-    public int move_right = Input.Keys.RIGHT;
-
-    private HashMap<Events, Integer> map;
+    private HashMap<Integer, KeyAction> keycodes_actions;
 
     public InputsConfig() {
-        map = new HashMap<Events, Integer>();
-        map.put(Events.KEY_DOWN, Input.Keys.DOWN);
+        keycodes_actions = new HashMap<Integer, KeyAction>();
+    }
+
+    public static InputsConfig defaultConfig() {
+        InputsConfig c = new InputsConfig();
+
+        c.addCodeAction(Input.Keys.DOWN, KeyAction.KEY_DOWN);
+        c.addCodeAction(Input.Keys.UP, KeyAction.KEY_UP);
+        c.addCodeAction(Input.Keys.LEFT, KeyAction.KEY_LEFT);
+        c.addCodeAction(Input.Keys.RIGHT, KeyAction.KEY_RIGHT);
+        c.addCodeAction(Input.Keys.SPACE, KeyAction.KEY_SPACE);
+
+        return c;
+    }
+
+    public KeyAction getKeyActionCode(int code) {
+        return keycodes_actions.get(code);
+    }
+
+    private void addCodeAction(int code, KeyAction action) {
+        keycodes_actions.put(code, action);
     }
 }
