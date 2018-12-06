@@ -28,9 +28,11 @@ public class StateGameMulti extends StateGame {
         players[0].initiateTurn();
         // initiate info_player group
         info_player = new VerticalGroup();
+        info_player.space(10f); //ptere à retirer avec scaling
         info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
         for (Player p : this.players) {
             PlayerInfo pi= new PlayerInfo(p);
+            pi.space(10f);
             info_player.addActor(pi);
         }
         this.stage.addActor(info_player);

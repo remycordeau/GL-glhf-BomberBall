@@ -3,6 +3,7 @@ package com.glhf.bomberball.interfaceMulti;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
@@ -23,8 +24,9 @@ public class PlayerInfo extends HorizontalGroup {
     public PlayerInfo(Player player){
         this.player = player;
         info_player = new VerticalGroup();
+        info_player.align(Align.left); // PQ CA MARCHE PAS PTN
         info_player.setDebug(true);
-        heart_group = new HorizontalGroup().space(10f);
+        heart_group = new HorizontalGroup();
         bonus_group = new HorizontalGroup().space(10f);
         player_profil = new Image(player.getSprite());
         this.addActor(player_profil);
@@ -47,8 +49,8 @@ public class PlayerInfo extends HorizontalGroup {
         int number_bomb_remaining = player.getNumberBombRemaining();
         int number_speed_remaining = player.getNumberMoveRemaining();
         int number_range_boost = player.getNumberBonus("BombRangeBoost")+player.getInitialBombRange();
-        bonus_group.addActor(new Image(Graphics.Sprites.get("bomb")));
         bonus_group.addActor(new Image(Graphics.Sprites.get("gift_01a")));
+        bonus_group.addActor(new Image(Graphics.Sprites.get("bomb")));
         bonus_group.addActor(new Image(Graphics.Sprites.get("bow_02a")));
     }
 
