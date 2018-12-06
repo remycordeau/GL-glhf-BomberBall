@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
@@ -39,16 +40,34 @@ public class PlayerInfo extends HorizontalGroup {
     private HorizontalGroup heart_group;
     private HorizontalGroup bonus_group;
 
+    private Image player_profil;
 
     /**
      * constructor
      */
     public PlayerInfo(Player player){
-        this.player=player;
-        PlayerPic player_profil = new PlayerPic(player);
-        PlayerInfoBonus player_info_bonus = new PlayerInfoBonus(player);
+        this.player = player;
+        info_player = new VerticalGroup();
+        heart_group = new HorizontalGroup();
+        player_profil = new Image(player.getSprite());
         this.addActor(player_profil);
+        this.addActor(info_player);
         info_player.addActor(heart_group);
-        info_player.addActor(bonus_group);
+        this.addHeart();
+        //info_player.addActor(bonus_group);
     }
+
+    private void addHeart(){
+        for(int i=2; i<=player.getLife()+1; i++) {
+            heart_group.addActor(new Image(Graphics.Sprites.get("ui_heart_full")));
+        }
+    }
+
+    private void addBonus(){
+        int number_bomb_boost;
+        int number_speed_boost;
+        int number_range_boost;
+
+    }
+
 }
