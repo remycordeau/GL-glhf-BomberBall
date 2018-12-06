@@ -22,17 +22,4 @@ public abstract class StateMenu extends State{
         stage.addActor(centerButtons);
         Gdx.input.setInputProcessor(stage);
     }
-
-
-    public class SetStateListener extends ChangeListener {
-        private State state;
-        public SetStateListener(State state){
-            this.state = state;
-        }
-
-        @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            Game.setState(state);
-        }
-    }
 }
