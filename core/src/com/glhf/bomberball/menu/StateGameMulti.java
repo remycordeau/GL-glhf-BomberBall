@@ -2,6 +2,7 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
@@ -32,84 +33,28 @@ public class StateGameMulti extends StateGame {
         setSelectEffect();
 
         stage.addActor(new InterfaceMulti(players));
-//        // initiate info_player group
-//        //info_player = new VerticalGroup();
-//        info_player = new Group();
-//        //info_player.space(10f); //ptere à retirer avec scaling
-//        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
-//        info_player.setDebug(true); //TODO remove when scaling is ok
-//        for (int i=0; i<players.size(); i++) {
-//            PlayerInfo pi= new PlayerInfo(players.get(i));
-//            //pi.space(10f);
-//            info_player.addActor(pi);
-//            pi.setSize((Constants.APP_WIDTH/3)-20f, Constants.APP_HEIGHT/4-20f);
-//            pi.setPosition(10f, (3-i)*Constants.APP_HEIGHT/4+10f);
-//            pi.setDebug(true); //TODO remove when scaling is ok
-//        }
-//        this.stage.addActor(info_player);
-//        //:TODO action player bar
-//        /*action_player = new HorizontalGroup();
-//        action_player.addActor(new TextButton("déplacement", new Skin()));
-//        action_player.addActor(new TextButton("poser une bombe", new Skin()));
-//        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
 
-        inputHandler.registerKeyAction(KeyAction.KEY_SPACE, new Runnable() {
-            @Override
-            public void run() {
-                endTurn();
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_UP, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.UP);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_DOWN, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.DOWN);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_LEFT, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.LEFT);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_RIGHT, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.RIGHT);
-            }
-        });
+        registerActionsHandlers();
+    }
 
-//        inputHandler.registerKeyAction(Action.BUTTON_LEFT, new Runnable() {
-//            @Override
-//            public void run() {
-//                Vector2 cell_pos = maze_drawer.screenPosToCell(inputHandler.getScreenX(), inputHandler.getScreenY());
-//                int cell_x = (int)cell_pos.x;
-//                int cell_y = (int)cell_pos.y;
-//                Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
-//                if (dir != null) {
-//                    current_player.dropBomb(dir);
-//                }
-//            }
-//        });
-//
-//        inputHandler.registerKeyAction(Action.BUTTON_RIGHT, new Runnable() {
-//            @Override
-//            public void run() {
-//                Vector2 cell_pos = maze_drawer.screenPosToCell(inputHandler.getScreenX(), inputHandler.getScreenY());
-//                int cell_x = (int)cell_pos.x;
-//                int cell_y = (int)cell_pos.y;
-//                Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
-//                if (dir != null) {
-//                    current_player.dropBomb(dir);
-//                }
-//            }
-//        });
+    private void registerActionsHandlers() {
+        inputHandler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
+        inputHandler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        inputHandler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        inputHandler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+        inputHandler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> { dropBombAt(x, y);});
+    }
 
+    public void dropBombAt(float x, float y) {
+        y = Constants.APP_HEIGHT - y;
+        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
+        int cell_x = (int)cell_pos.x;
+        int cell_y = (int)cell_pos.y;
+        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        if (dir != null) {
+            current_player.dropBomb(dir);
+        }
     }
 
     private void clearSelectEffect() {
