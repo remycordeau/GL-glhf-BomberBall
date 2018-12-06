@@ -13,6 +13,8 @@ public class Player extends Character {
     private int number_bomb_remaining;
     private int number_initial_bombs;
     private int initial_bomb_range;
+
+
     //bonus owned
     private Hashtable<String, Integer> bonus_owned;
 
@@ -66,6 +68,17 @@ public class Player extends Character {
      */
     public void setNumberBombRemaining(int number_bomb_remaining) {
         this.number_bomb_remaining = number_bomb_remaining;
+    }
+    public Hashtable<String, Integer> getBonus_owned() {
+        return bonus_owned;
+    }
+
+    public int getInitialBombRange() {
+        return initial_bomb_range;
+    }
+
+    public int getNumberBonus(String bonus){
+        return bonus_owned.get(bonus);
     }
 
     @Override
