@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.menu.StateMainMenu;
@@ -32,6 +33,8 @@ public class Game extends ApplicationAdapter {
         setState(new StateMainMenu());
 //		setState(new StateGameMulti("maze_0"));
 		font.setColor(Color.RED);
+
+		new InputsConfig().export("inputs");
 
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;

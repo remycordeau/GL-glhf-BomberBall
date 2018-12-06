@@ -19,6 +19,7 @@ public abstract class State {
         stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
         stage.addListener(inputHandler);
 
+
         inputHandler.registerKey(InputHandler.Events.MOUSE_RIGHT, new Runnable() {
             @Override
             public void run() {

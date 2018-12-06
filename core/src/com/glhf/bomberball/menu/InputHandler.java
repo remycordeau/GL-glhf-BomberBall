@@ -5,13 +5,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 
-class InputHandler extends InputListener {
-    private int screenX;
-    private int screenY;
-
-    enum Events{
+public class InputHandler extends InputListener {
+    public enum Events{
         KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_SPACE,MOUSE_LEFT,MOUSE_RIGHT
     }
+
+    private int screenX;
+    private int screenY;
 
     private Runnable[] runnables = new Runnable[Events.values().length];
 
@@ -49,7 +49,7 @@ class InputHandler extends InputListener {
         return false;
     }
 
-    //inputHandler.registerKey(() -> {moveCurrentPlayer(Direction.UP)})
+    //inputHandler.register(() -> {moveCurrentPlayer(Direction.UP)})
     public void registerKey(Events e, Runnable r){
         runnables[e.ordinal()] = r;
     }
