@@ -5,5 +5,9 @@
     "21": "KEY_LEFT",
     "22": "KEY_RIGHT",
     "62": "KEY_SPACE"
+  },
+  "buttoncodes_actions": {
+    "0": "BUTTON_LEFT",
+    "1": "BUTTON_RIGHT"
   }
 }

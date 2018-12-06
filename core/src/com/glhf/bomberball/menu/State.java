@@ -13,19 +13,6 @@ public abstract class State {
     public State(){
         stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
         stage.addListener(inputHandler);
-
-
-        /*inputHandler.registerKey(InputHandler.Action.BUTTON_RIGHT, new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-
-        inputHandler.registerKey(InputHandler.Action.BUTTON_LEFT, new Runnable() {
-            @Override
-            public void run() {
-            }
-        });*/
     }
 
     //Methods
