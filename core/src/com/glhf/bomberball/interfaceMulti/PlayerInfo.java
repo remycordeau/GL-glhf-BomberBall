@@ -1,5 +1,7 @@
 package com.glhf.bomberball.interfaceMulti;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -14,35 +16,35 @@ public class PlayerInfo extends Group {
     //attributes
     private Player player;
 
-    private VerticalGroup info_player;
+    //private VerticalGroup info_player;
+    private Group info_player;
     private HorizontalGroup heart_group;
     private HorizontalGroup bonus_group;
 
-    private Image player_profil;
+    private TextureRegion player_profil;
 
     /**
      * constructor
      */
     public PlayerInfo(Player player){
         this.player = player;
-        info_player = new VerticalGroup();
-        info_player.align(Align.left); // PQ CA MARCHE PAS PTN
+        //info_player = new VerticalGroup();
+        info_player = new Group();
         info_player.setDebug(true);
+
+        /*heart_group = new HorizontalGroup();
         heart_group = new HorizontalGroup();
-        info_player.left(); // PQ CA MARCHE PAS
-        info_player.setDebug(true);
-        heart_group = new HorizontalGroup();
-        heart_group.left();
-        bonus_group = new HorizontalGroup().space(10f);
-        player_profil = new Image(player.getSprite());
-        this.addActor(player_profil);
-        this.addActor(info_player);
+        bonus_group = new HorizontalGroup().space(10f);*/
+
+        player_profil = player.getSprite();
+        //this.addActor(player_profil);
+        /*this.addActor(info_player);
         info_player.addActor(heart_group);
         heart_group.setDebug(true);
         this.addHeart();
         info_player.addActor(bonus_group);
         bonus_group.setDebug(true);
-        this.addBonus();
+        this.addBonus();*/
     }
 
     private void addHeart(){
@@ -63,4 +65,9 @@ public class PlayerInfo extends Group {
         bonus_group.addActor(new Image(Graphics.Sprites.get("bow_02a")));
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        float ratio = this.getHeight()/player_profil.getRegionHeight();
+        batch.draw(player_profil, this.getX()+10f, this.getY()+10f, player_profil.getRegionWidth()*ratio, this.getHeight());
+    }
 }

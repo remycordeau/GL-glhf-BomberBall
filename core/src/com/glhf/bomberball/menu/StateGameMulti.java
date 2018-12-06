@@ -1,6 +1,7 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
