@@ -2,21 +2,31 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
-import com.glhf.bomberball.maze.MazeDrawer;
 
 public class StateGameMulti extends StateGame {
 
     private Player[] players;
     private int current_player_index;
     private int turn_number;
-    private VerticalGroup info_player;
+    private VerticalGroup sidebar_info_player;
+    private VerticalGroup intern_info_player1;
+    private HorizontalGroup player_profil1;
+    private VerticalGroup intern_info_player2;
+    private HorizontalGroup player_profil2;
+    private VerticalGroup intern_info_player3;
+    private HorizontalGroup player_profil3;
+    private VerticalGroup intern_info_player4;
+    private HorizontalGroup player_profil4;
     private HorizontalGroup action_player;
 
+    /**
+     * create the sideBar on the left of the screen
+     * @param maze_filename
+     */
     public StateGameMulti(String maze_filename) {
         super("GameMulti", maze_filename);
         current_player_index = 0;
@@ -24,12 +34,14 @@ public class StateGameMulti extends StateGame {
         loadMaze(maze_filename,1/3f, 1,1/8f,1);
         players = maze.spawnPlayers();
         players[0].initiateTurn();
-        // initiate info_player group
-        info_player = new VerticalGroup();
-        this.stage.addActor(info_player);
-        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
+        // initiate sidebar_info_player group
+        sidebar_info_player = new VerticalGroup();
+        this.stage.addActor(sidebar_info_player);
+        sidebar_info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
         for (Player p : this.players) {
-            info_player.addActor(new PlayerInfo(p));
+            //playerInfo extends an horizontal group
+            HorizontalGroup player_profil= new  PlayerInfo(p);
+            sidebar_info_player.addActor(new PlayerInfo(p));
         }
         //:TODO action player bar
         /*action_player = new HorizontalGroup();
