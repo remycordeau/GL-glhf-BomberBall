@@ -7,12 +7,16 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 
-import javax.xml.soap.Text;
 
 public class StateMultiMenu extends StateMenu {
     //Attributes
     private StateMainMenu mainMenu;
-    private String previewFile="maze_0.json";
+    private int previewMapNumber=0;
+
+
+
+    public static int maxMaze=0;   //TODO: Trouver une façon plus élégante de connaître le nombre max de labyrinthe proposé pour jouer. Il faut augmenter ce nombre à chaque fois qu'on veut rajouter un labyritnhe
+    private String previewFile="maze_"+previewMapNumber+".json";
     protected HorizontalGroup previewButtons;
     protected TextButton nextMapButton;
     protected TextButton previousMapButton;
@@ -24,6 +28,7 @@ public class StateMultiMenu extends StateMenu {
         this.mainMenu = mainMenu;
         initializeButtons();
     }
+
 
     public void initializeButtons(){
         playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
@@ -44,9 +49,28 @@ public class StateMultiMenu extends StateMenu {
         previewButtons=new HorizontalGroup();
         previewButtons.setFillParent(true);
         nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
+        nextMapButton.addListener(new ChangePreviewListener(1,this));
         previousMapButton = new TextButton("<", Graphics.GUI.getSkin());
+        previousMapButton.addListener(new ChangePreviewListener(-1,this));
         previewButtons.addActor(previousMapButton);
         previewButtons.addActor(nextMapButton);
         stage.addActor(previewButtons);
+    }
+
+    // Getter
+    public int getPreviewMapNumber() {
+        return previewMapNumber;
+    }
+    public static int getMaxMaze() {
+        return maxMaze;
+    }
+
+    // Setter
+    public void setPreviewMapNumber(int previewMapNumber) {
+        this.previewMapNumber = previewMapNumber;
+    }
+
+    public void setPreviewFile(String previewFile) {
+        this.previewFile = previewFile;
     }
 }
