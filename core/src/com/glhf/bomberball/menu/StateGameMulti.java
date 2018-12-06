@@ -2,7 +2,6 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
