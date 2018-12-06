@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -88,9 +89,15 @@ public class Graphics {
             skin.add("default", textButtonStyle);
 
             //
-            LabelStyle labelStyle = new LabelStyle(); //TODO au lieu de faire des textButton_style pour chaque élément créer un skin général
+            LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);
+
+            //
+            SliderStyle sliderStyle = new SliderStyle();
+            sliderStyle.knob = new TextureRegionDrawable(Sprites.get("bomb"));
+            sliderStyle.background = new TextureRegionDrawable(Sprites.get("bomb"));
+            skin.add("default-horizontal", sliderStyle);
 
             //
             ListStyle listStyle = new ListStyle();

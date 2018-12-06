@@ -9,17 +9,24 @@ import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public class StateMultiMenu extends StateMenu {
+    //Attributes
+    StateMainMenu mainMenu;
 
     //Constructor
-    public StateMultiMenu()
+    public StateMultiMenu(StateMainMenu mainMenu)
     {
         super();
+        this.mainMenu = mainMenu;
         initializeButtons();
     }
 
     public void initializeButtons(){
         TextButton textButton = new TextButton("Jouer", Graphics.GUI.getSkin());
         textButton.addListener(new SetStateListener(new StateGameMulti("maze_0.json")));
+        centerButtons.addActor(textButton);
+
+        textButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(mainMenu));
         centerButtons.addActor(textButton);
     }
 }

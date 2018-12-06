@@ -44,11 +44,7 @@ public class StateSettingsMenu extends StateMenu {
         private Slider value;
         public ParameterInt(String name, float min, float max, float step) {
             super(name);
-            SliderStyle style = new SliderStyle(); //TODO au lieu de faire des textButton_style pour chaque élément créer un skin général
-            style.knob = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.background = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-
-            value = new Slider(min, max, step, false, style);
+            value = new Slider(min, max, step, false, Graphics.GUI.getSkin());
             addActor(value);
         }
     }
