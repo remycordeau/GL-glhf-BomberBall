@@ -10,15 +10,12 @@ import com.glhf.bomberball.Constants;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public abstract class State implements InputProcessor {
+public abstract class State {
     protected Stage stage;
     protected SpriteBatch batch; //to be remove
-    //Attributes
-    private String state_name;
 
     //Constructors
-    public State(String e){
-        state_name = e;
+    public State(){
         stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
         batch = new SpriteBatch();
     }
@@ -32,49 +29,6 @@ public abstract class State implements InputProcessor {
         stage.draw();
     }
 
-    public void draw(){
-        stage.draw();
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }
     public void setInputProcessor(){
         Gdx.input.setInputProcessor(stage);
     }

@@ -81,13 +81,6 @@ public class Player extends Character {
         return bonus_owned.get(bonus);
     }
 
-    public int getNumberBonus(String bonus){
-        return bonus_owned.get(bonus);
-    }
-
-    public int getInitialBombRange(){
-        return initial_bomb_range;
-    }
 
     @Override
     public boolean move(Directions dir)
