@@ -21,6 +21,8 @@ public class PlayerInfo extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(player.getSprite(), this.getX(), this.getY());
         batch.draw(Graphics.Sprites.get("bomb"),this.getX()+20f, this.getY());
-        //batch.draw(Graphics.Sprites.get("full_heart"),10,0);
+        for(int i=2; i<=(player.getLife()+1); i++) {
+            batch.draw(Graphics.Sprites.get("ui_heart_full"), this.getX() + i*20f, this.getY());
+        }
     }
 }
