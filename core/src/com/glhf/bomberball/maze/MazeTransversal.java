@@ -1,6 +1,6 @@
 package com.glhf.bomberball.maze;
 
-import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.cell.Cell;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -26,7 +26,7 @@ public class MazeTransversal {
             while (!active_queue.isEmpty()) {
                 Cell c = active_queue.poll();
                 for (Cell other : c.getAdjacentCells()) {
-                    if (!cells.contains(other)) {
+                    if (!cells.contains(other) && other.isWalkable()) {
                         inactive_queue.add(other);
                         cells.add(other);
                     }

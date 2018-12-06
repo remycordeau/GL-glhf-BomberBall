@@ -1,16 +1,15 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.json.GameObjectTypeAdapter;
+import com.glhf.bomberball.maze.cell.Cell;
 import com.google.gson.*;
 
-import javax.swing.text.Position;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Maze {
 
@@ -50,6 +49,9 @@ public class Maze {
                 }
                 else if (Math.random() < 0.1) {
                     cells[x][y].addGameObject(new DestructibleWall());
+                }
+                else if (Math.random() < 0.05) {
+                    cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.SPEED)));
                 }
             }
         }
@@ -137,7 +139,7 @@ public class Maze {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
-    // TODO : bouger la méthode dans une autre classe
+    // TODO : bouger la méthode dans une autre classe ?
     public void applyConfig(GameConfig config) {
         ArrayList<GameObject> objects = new ArrayList<GameObject>();
         for (int x = 0; x < width; x++) {
@@ -154,7 +156,7 @@ public class Maze {
 
     private static void createGson() {
         gson = new GsonBuilder()
-                .registerTypeAdapter(GameObject.class, new MazeTypeAdapter())
+                .registerTypeHierarchyAdapter(GameObject.class, new GameObjectTypeAdapter())
                 .setPrettyPrinting()
                 .create();
     }

@@ -1,7 +1,5 @@
-package com.glhf.bomberball.maze;
+package com.glhf.bomberball.maze.cell;
 
-import com.glhf.bomberball.CellEffect;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.menu.Directions;
@@ -51,12 +49,12 @@ public class Cell {
         return this.cell_effect;
     }
 
-
     public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
         for (GameObject o : objects) {
             o.setCell(this);
+            o.initialize();
         }
     }
 
@@ -83,25 +81,19 @@ public class Cell {
 
     /**
      * Damages all GameObjects in cell
-     * @param damage getDamage amount to apply
+     * @param damage amount to apply
      */
     public void getDamage(int damage)
     {
-        int i = 0;
-        while (i < objects.size()) {
-            GameObject o = objects.get(i);
+        ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(objects);
+        for (GameObject o : gameObjects) {
             o.getDamage(damage);
-            if (o.isAlive()) {
-                i++;
-            } else{
-                objects.remove(o);
-            }
         }
     }
 
     /**
      * Add a GameObject to a Cell
-     * @param gameObject the GameObject to be inserted
+     * @param gameObject gameObject to be added
      */
     public void addGameObject(GameObject gameObject)
     {
@@ -111,18 +103,13 @@ public class Cell {
 
     /**
      * Remove a GameObject from a Cell
-     * @param gameObject the GameObject to be removed
+     * @param gameObject gameObject to be removed
      */
     public void removeGameObject(GameObject gameObject) {
         gameObject.setCell(null);
         objects.remove(gameObject);
     }
 
-    /**
-     * Fonction non nécéssaire si la classe Cell s'affiche elle même
-     * TODO remove this function
-     * @return objects
-     */
     public ArrayList<GameObject> getObjects() {
         return objects;
     }
@@ -149,13 +136,17 @@ public class Cell {
 
     public void explode(Directions dir, int damage, int range)
     {
-        this.getDamage(damage);
-        if (range > 1 && dir != null) {
-            Cell adjacent_cell = getAdjacentCell(dir);
-            if (adjacent_cell != null) {
-                adjacent_cell.explode(dir, damage, range - 1);
+        boolean propagate = this.isWalkable();
+        getDamage(damage);
+        if (propagate) {
+            if (range > 1 && dir != null) {
+                Cell adjacent_cell = getAdjacentCell(dir);
+                if (adjacent_cell != null) {
+                    adjacent_cell.explode(dir, damage, range - 1);
+                }
             }
         }
+        this.setExplosionEffect(dir, propagate ? range : 1);
     }
 
     /**
@@ -172,7 +163,7 @@ public class Cell {
      * Search in cell for gameObjects instances of specified class.
      * @param c Class to extract
      * @param <T>
-     * @return All gameObjects in cell instances of c
+     * @return All gameObjects in cell, instances of c
      */
     public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> c) {
         ArrayList<T> instances = new ArrayList<T>();
@@ -185,7 +176,11 @@ public class Cell {
     }
 
     public void setSelectEffect() {
-        cell_effect = new CellEffect("cell_select7");
+        cell_effect = new SelectEffect(this);
+    }
+
+    private void setExplosionEffect(Directions dir, int range) {
+        cell_effect = new ExplosionEffect(this, dir, range);
     }
 
     public void removeEffect() {

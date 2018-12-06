@@ -3,6 +3,7 @@ package com.glhf.bomberball.gameobject;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
@@ -32,15 +33,6 @@ public abstract class Character extends GameObject {
         return moves_remaining;
     }
 
-    public void setSkin(String skin) {
-        this.skin = skin;
-        setAnimation("idle");
-    }
-
-    public void setInitialMoves(int initial_moves) {
-        this.initial_moves = initial_moves;
-    }
-
     /**
      * set the animation of the character
      * @param animation_name animation name
@@ -53,7 +45,16 @@ public abstract class Character extends GameObject {
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */
-    public void initiateTurn() {
-        moves_remaining = initial_moves;
+    public void initiateTurn() { moves_remaining = initial_moves; }
+
+    @Override
+    public TextureAtlas.AtlasRegion getSprite()
+    {
+        return animation.getKeyFrame(Game.time_elapsed);
+    }
+
+    @Override
+    public boolean isWalkable(){
+        return true;
     }
 }
