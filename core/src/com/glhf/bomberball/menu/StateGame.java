@@ -1,12 +1,5 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 
@@ -17,7 +10,6 @@ public abstract class StateGame extends State {
     public StateGame(String maze_filename) {
         super();
         loadMaze(maze_filename,1/3f,1f,2/10f,1f);
-        stage.addListener(new GameInputListener());
     }
 
     public void loadMaze(String filename, float w_minp, float w_maxp, float h_minp, float h_maxp) {
@@ -33,20 +25,7 @@ public abstract class StateGame extends State {
         maze_drawer.drawMaze();
     }
 
-    class GameInputListener extends InputListener {
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            System.err.println("Click ! --> Gestion des inputs à faire"); //TODO Gestion des inputs à faire
-            return false; //super.touchDown(event, x, y, pointer, button);
-        }
-
-        @Override
-        public boolean keyDown(InputEvent event, int keycode) {
-            System.err.println("keyDown ! --> Gestion des inputs à faire"); //TODO Gestion des inputs à faire
-            return super.keyDown(event, keycode);
-        }
-    }
-/*
+    /*
     @Override
     public boolean keyDown(int keycode) {
         //HashMap<Integer, String> inputs = Config.getInputs();
