@@ -54,7 +54,7 @@ public class PlayerInfo extends HorizontalGroup {
     private void addBonus(){
         int number_bomb_remaining = player.getNumberBombRemaining();
         int number_speed_remaining = player.getNumberMoveRemaining();
-        int number_range_boost = player.getNumberBonus("BombRangeBoost")+player.getInitialBombRange();
+        int number_range_boost = player.getBombRange();
         bonus_group.addActor(new Image(Graphics.Sprites.get("gift_01a")));
         bonus_group.addActor(new Image(Graphics.Sprites.get("bomb")));
         bonus_group.addActor(new Image(Graphics.Sprites.get("bow_02a")));

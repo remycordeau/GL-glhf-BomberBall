@@ -24,7 +24,7 @@ public class StateMultiMenu extends StateMenu {
 
     public void initializeButtons(){
         TextButton textButton = new TextButton("Jouer", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(new StateGameMulti("maze_0.json")));
+        textButton.addListener(new SetStateListener(new StateGameMulti("maze_0")));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Retour", Graphics.GUI.getSkin());

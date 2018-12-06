@@ -20,7 +20,6 @@ public abstract class StateMenu extends State{
         centerButtons.center();
 
         stage.addActor(centerButtons);
-        Gdx.input.setInputProcessor(stage);
     }
 
 

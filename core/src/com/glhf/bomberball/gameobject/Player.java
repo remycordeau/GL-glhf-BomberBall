@@ -1,13 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
-import com.google.gson.InstanceCreator;
-
-import java.lang.reflect.Type;
-import java.util.Hashtable;
 
 public class Player extends Character {
 
@@ -15,6 +9,10 @@ public class Player extends Character {
     private int initial_bomb_range;
 
     private transient int bombs_remaining;
+
+    public transient int bonus_bomb_number = 0;
+    public transient int bonus_bomb_range = 0;
+    public transient int bonus_moves = 0;
 
     public Player(String player_skin,
                   int life,
@@ -25,27 +23,12 @@ public class Player extends Character {
         super(player_skin, life, initial_moves);
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
-
         initialize();
     }
 
     @Override
     public void initialize() {
         super.initialize();
-        bonus_owned = new Hashtable<String, Integer>();
-        bonus_owned.put("NumberBombBoost", 0);
-        bonus_owned.put("SpeedBoost", 0);
-        bonus_owned.put("BombRangeBoost", 0);
-    }
-
-    public void setInitialBombNumber(int initial_bomb_number) {
-        this.initial_bomb_number = initial_bomb_number;
-    }
-
-    @Override
-    public AtlasRegion getSprite()
-    {
-        return animation.getKeyFrame(Game.time_elapsed);
     }
 
     /**
@@ -53,22 +36,9 @@ public class Player extends Character {
      */
     @Override
     public void initiateTurn() {
-        super.initiateTurn();
-        initial_moves += bonus_owned.get("SpeedBoost");
-        bombs_remaining = initial_bomb_number + bonus_owned.get("NumberBombBoost");
+        moves_remaining = initial_moves + bonus_moves;
+        bombs_remaining = initial_bomb_number + bonus_bomb_number;
     }
-    public Hashtable<String, Integer> getBonus_owned() {
-        return bonus_owned;
-    }
-
-    public int getInitialBombRange() {
-        return initial_bomb_range;
-    }
-
-    public int getNumberBonus(String bonus){
-        return bonus_owned.get(bonus);
-    }
-
 
     @Override
     public boolean move(Directions dir)
@@ -90,27 +60,29 @@ public class Player extends Character {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {
                 bombs_remaining--;
-                Bomb bomb = new Bomb(1, initial_bomb_range + bonus_owned.get("BombRangeBoost"));
+                Bomb bomb = new Bomb(1, initial_bomb_range + bonus_bomb_range);
                 dest_cell.addGameObject(bomb);
             }
         }
     }
 
-    /**
-     * The player loot the bonus and add it to its bonus_owned attribute
-     * @param bonus the bonus to loot
-     */
-    public void lootBonus(Bonus bonus) {
-        if (this.bonus_owned.contains(bonus.getName())) {
-            this.bonus_owned.put(bonus.getName(), bonus_owned.get(bonus.getName()) + 1);
-        } else {
-            this.bonus_owned.put(bonus.getName(), 1);
+    public void interactWithCell(Cell cell) {
+        for (Bonus bonus : cell.getInstancesOf(Bonus.class)) {
+            bonus.dispose();
+            bonus.applyEffect(this);
         }
     }
 
-    @Override
-    public boolean isWalkable(){
-        return true;
+    public int getNumberBombRemaining() {
+        return bombs_remaining;
+    }
+
+    public int getNumberMoveRemaining() {
+        return moves_remaining;
+    }
+
+    public int getBombRange() {
+        return bonus_bomb_range+initial_bomb_range;
     }
 }
 

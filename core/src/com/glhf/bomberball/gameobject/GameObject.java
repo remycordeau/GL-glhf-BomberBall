@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.menu.Directions;
 
@@ -22,10 +21,6 @@ public abstract class GameObject {
         this.life = life;
     }
 
-    public int getLife() {
-        return life;
-    }
-
     public int getX() {
         return cell.getX();
     }
@@ -36,12 +31,15 @@ public abstract class GameObject {
 
     public void initialize() { }
 
-    /**
-     * modification of the life of the gameObject
-     * @param damage
-     */
     public void getDamage(int damage){
         life -= damage;
+        if (life <= 0) {
+            this.dispose();
+        }
+    }
+
+    public void dispose() {
+        cell.removeGameObject(this);
     }
 
     /**
@@ -56,7 +54,7 @@ public abstract class GameObject {
 
     public boolean move(Directions dir)
     {
-        return moveToCell(this.getCell().getAdjacentCell(dir));
+        return moveToCell(getCell().getAdjacentCell(dir));
     }
 
     public boolean moveToCell(Cell dest_cell)
@@ -68,10 +66,13 @@ public abstract class GameObject {
         else if (dest_cell.isWalkable()) {
             cell.removeGameObject(this);
             dest_cell.addGameObject(this);
+            this.interactWithCell(dest_cell);
             moved = true;
         }
         return moved;
     }
+
+    public void interactWithCell(Cell cell) { }
 
     public void setCell(Cell cell)
     {
@@ -85,5 +86,9 @@ public abstract class GameObject {
         } else {
             throw new RuntimeException("GameObject's cell is null");
         }
+    }
+
+    public int getLife(){
+        return life;
     }
 }
