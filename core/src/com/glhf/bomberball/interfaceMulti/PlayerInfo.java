@@ -1,5 +1,6 @@
 package com.glhf.bomberball.interfaceMulti;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
@@ -8,7 +9,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
-public class PlayerInfo extends HorizontalGroup {
+public class PlayerInfo extends Group {
 
     //attributes
     private Player player;

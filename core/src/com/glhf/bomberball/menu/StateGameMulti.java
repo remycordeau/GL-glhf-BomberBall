@@ -42,15 +42,17 @@ public class StateGameMulti extends StateGame {
         current_player.initiateTurn();
         setSelectEffect();
         // initiate info_player group
-        info_player = new VerticalGroup();
+        //info_player = new VerticalGroup();
+        info_player = new Group();
         //info_player.space(10f); //ptere à retirer avec scaling
         info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
         info_player.setDebug(true); //TODO remove when scaling is ok
-        for (Player p : this.players) {
-            PlayerInfo pi= new PlayerInfo(p);
-            pi.space(10f);
+        for (int i=0; i<players.size(); i++) {
+            PlayerInfo pi= new PlayerInfo(players.get(i));
+            //pi.space(10f);
             info_player.addActor(pi);
-            pi.setPosition(0, 3*Constants.APP_HEIGHT/4);
+            pi.setSize((Constants.APP_WIDTH/3)-20f, Constants.APP_HEIGHT/4-20f);
+            pi.setPosition(10f, (3-i)*Constants.APP_HEIGHT/4+10f);
             pi.setDebug(true); //TODO remove when scaling is ok
         }
         this.stage.addActor(info_player);
