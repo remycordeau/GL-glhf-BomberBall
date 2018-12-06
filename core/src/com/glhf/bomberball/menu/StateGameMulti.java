@@ -53,36 +53,11 @@ public class StateGameMulti extends StateGame {
 //        action_player.addActor(new TextButton("poser une bombe", new Skin()));
 //        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
 
-        inputHandler.registerKeyAction(KeyAction.KEY_SPACE, new Runnable() {
-            @Override
-            public void run() {
-                endTurn();
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_UP, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.UP);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_DOWN, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.DOWN);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_LEFT, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.LEFT);
-            }
-        });
-        inputHandler.registerKeyAction(KeyAction.KEY_RIGHT, new Runnable() {
-            @Override
-            public void run() {
-                moveCurrentPlayer(Directions.RIGHT);
-            }
-        });
+        inputHandler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
+        inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        inputHandler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        inputHandler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        inputHandler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
 
 //        inputHandler.registerKeyAction(Action.BUTTON_LEFT, new Runnable() {
 //            @Override
