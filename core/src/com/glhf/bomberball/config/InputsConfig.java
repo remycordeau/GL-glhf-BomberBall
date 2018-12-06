@@ -9,8 +9,10 @@ import java.util.HashMap;
 
 /**
  * class InputsConfig
+ *
  * Defines all inputs key codes and button codes
  * Used by InputHandler class
+ *
  * @author nayala
  */
 public class InputsConfig extends Config {
@@ -81,5 +83,21 @@ public class InputsConfig extends Config {
      */
     public InputHandler.ButtonAction getButtonActionCode(int button_code) {
         return buttoncodes_actions.get(button_code);
+    }
+
+    /**
+     * @param key_code
+     * @return key_code is assigned to a KeyAction
+     */
+    public boolean isKeyCodeAssigned(int key_code) {
+        return keycodes_actions.containsKey(key_code);
+    }
+
+    /**
+     * @param button_code
+     * @return button_code is assigned to a ButtonCode
+     */
+    public boolean isButtonCodeAssigned(int button_code) {
+        return buttoncodes_actions.containsKey(button_code);
     }
 }

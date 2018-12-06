@@ -31,18 +31,22 @@ public class InputHandler extends InputListener {
 
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
-        KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
-        if (handler != null) {
-            handler.handle();
+        if (inputs_config.isKeyCodeAssigned(keycode)) {
+            KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
+            if (handler != null) {
+                handler.handle();
+            }
         }
         return false;
     }
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
-        if (handler != null) {
-            handler.handle(x, y);
+        if (inputs_config.isButtonCodeAssigned(button)) {
+            ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
+            if (handler != null) {
+                handler.handle(x, y);
+            }
         }
         return false;
     }
