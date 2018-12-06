@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
@@ -44,9 +45,10 @@ public class PlayerInfo extends HorizontalGroup {
     }
 
     private void addHeart(){
+        heart_group.setSize(heart_group.getParent().getWidth(), heart_group.getParent().getHeight());
         for(int i=2; i<=player.getLife()+1; i++) {
             Image ui_heart_full = new Image(Graphics.Sprites.get("ui_heart_full"));
-
+            ui_heart_full.setScaling(Scaling.fill);
             heart_group.addActor(ui_heart_full);
         }
     }

@@ -24,7 +24,8 @@ import java.util.ArrayList;
 
 public class StateGameMulti extends StateGame {
 
-    private final VerticalGroup info_player;
+    //private final VerticalGroup info_player;
+    private final Group info_player;
     private ArrayList<Player> players;
     private Player current_player;
     private GameConfig config;
@@ -42,12 +43,15 @@ public class StateGameMulti extends StateGame {
         setSelectEffect();
         // initiate info_player group
         info_player = new VerticalGroup();
-        info_player.space(10f); //ptere à retirer avec scaling
+        //info_player.space(10f); //ptere à retirer avec scaling
         info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
+        info_player.setDebug(true); //TODO remove when scaling is ok
         for (Player p : this.players) {
             PlayerInfo pi= new PlayerInfo(p);
             pi.space(10f);
             info_player.addActor(pi);
+            pi.setPosition(0, 3*Constants.APP_HEIGHT/4);
+            pi.setDebug(true); //TODO remove when scaling is ok
         }
         this.stage.addActor(info_player);
         //:TODO action player bar
