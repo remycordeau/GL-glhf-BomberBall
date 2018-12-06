@@ -68,6 +68,14 @@ public class Player extends Character {
         this.number_bomb_remaining = number_bomb_remaining;
     }
 
+    public int getNumberBonus(String bonus){
+        return bonus_owned.get(bonus);
+    }
+
+    public int getInitialBombRange(){
+        return initial_bomb_range;
+    }
+
     @Override
     public boolean move(Directions dir)
     {
