@@ -87,7 +87,8 @@ public class Cell {
      */
     public void getDamage(int damage)
     {
-        for (int i = 0; i < objects.size(); ) {
+        int i = 0;
+        while (i < objects.size()) {
             GameObject o = objects.get(i);
             o.getDamage(damage);
             if (o.isAlive()) {
@@ -148,7 +149,7 @@ public class Cell {
 
     public void explode(Directions dir, int damage, int range)
     {
-        getDamage(damage);
+        this.getDamage(damage);
         if (range > 1 && dir != null) {
             Cell adjacent_cell = getAdjacentCell(dir);
             if (adjacent_cell != null) {

@@ -16,8 +16,6 @@ public class Player extends Character {
 
     private transient int bombs_remaining;
 
-    private transient Hashtable<String, Integer> bonus_owned;
-
     public Player(String player_skin,
                   int life,
                   int initial_moves,
@@ -59,6 +57,18 @@ public class Player extends Character {
         initial_moves += bonus_owned.get("SpeedBoost");
         bombs_remaining = initial_bomb_number + bonus_owned.get("NumberBombBoost");
     }
+    public Hashtable<String, Integer> getBonus_owned() {
+        return bonus_owned;
+    }
+
+    public int getInitialBombRange() {
+        return initial_bomb_range;
+    }
+
+    public int getNumberBonus(String bonus){
+        return bonus_owned.get(bonus);
+    }
+
 
     @Override
     public boolean move(Directions dir)

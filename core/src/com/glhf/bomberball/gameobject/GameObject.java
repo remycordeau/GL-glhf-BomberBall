@@ -56,7 +56,7 @@ public abstract class GameObject {
 
     public boolean move(Directions dir)
     {
-        return moveToCell(getCell().getAdjacentCell(dir));
+        return moveToCell(this.getCell().getAdjacentCell(dir));
     }
 
     public boolean moveToCell(Cell dest_cell)

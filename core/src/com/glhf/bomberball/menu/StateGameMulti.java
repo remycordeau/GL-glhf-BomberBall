@@ -1,16 +1,25 @@
 package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.glhf.bomberball.Constants;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Cell;
 import com.glhf.bomberball.maze.MazeTransversal;
 
 import java.util.ArrayList;
 
-public class StateGameMulti extends StateGame{
+public class StateGameMulti extends StateGame {
 
     private ArrayList<Player> players;
     private Player current_player;
@@ -25,6 +34,21 @@ public class StateGameMulti extends StateGame{
         current_player = players.get(0);
         current_player.initiateTurn();
         setRangeEffect();
+        // initiate info_player group
+        info_player = new VerticalGroup();
+        info_player.space(10f); //ptere à retirer avec scaling
+        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
+        for (Player p : this.players) {
+            PlayerInfo pi= new PlayerInfo(p);
+            pi.space(10f);
+            info_player.addActor(pi);
+        }
+        this.stage.addActor(info_player);
+        //:TODO action player bar
+        /*action_player = new HorizontalGroup();
+        action_player.addActor(new TextButton("déplacement", new Skin()));
+        action_player.addActor(new TextButton("poser une bombe", new Skin()));
+        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
     }
 
     private void setRangeEffect() {
@@ -37,7 +61,7 @@ public class StateGameMulti extends StateGame{
             c.setSelectEffect();
             selected_cells.add(c);
         }
-    }
+
 
     private void moveCurrentPlayer(Directions dir) {
         current_player.move(dir);
