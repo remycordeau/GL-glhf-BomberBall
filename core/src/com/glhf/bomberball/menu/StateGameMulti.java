@@ -9,6 +9,7 @@ import com.glhf.bomberball.Constants;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
+import com.glhf.bomberball.interfaces.InterfaceMulti;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.menu.InputHandler.Events;
@@ -18,13 +19,11 @@ import java.util.ArrayList;
 public class StateGameMulti extends StateGame {
 
     //private final VerticalGroup info_player;
-    private final Group info_player;
+    //private final Group info_player;
     private ArrayList<Player> players;
     private Player current_player;
     private GameConfig config;
     private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
-
-    private boolean processInput = true;
 
     public StateGameMulti(String maze_name) {
         super(maze_name);
@@ -34,26 +33,28 @@ public class StateGameMulti extends StateGame {
         current_player = players.get(0);
         current_player.initiateTurn();
         setSelectEffect();
-        // initiate info_player group
-        //info_player = new VerticalGroup();
-        info_player = new Group();
-        //info_player.space(10f); //ptere à retirer avec scaling
-        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
-        info_player.setDebug(true); //TODO remove when scaling is ok
-        for (int i=0; i<players.size(); i++) {
-            PlayerInfo pi= new PlayerInfo(players.get(i));
-            //pi.space(10f);
-            info_player.addActor(pi);
-            pi.setSize((Constants.APP_WIDTH/3)-20f, Constants.APP_HEIGHT/4-20f);
-            pi.setPosition(10f, (3-i)*Constants.APP_HEIGHT/4+10f);
-            pi.setDebug(true); //TODO remove when scaling is ok
-        }
-        this.stage.addActor(info_player);
-        //:TODO action player bar
-        /*action_player = new HorizontalGroup();
-        action_player.addActor(new TextButton("déplacement", new Skin()));
-        action_player.addActor(new TextButton("poser une bombe", new Skin()));
-        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
+
+        stage.addActor(new InterfaceMulti(stage, players));
+//        // initiate info_player group
+//        //info_player = new VerticalGroup();
+//        info_player = new Group();
+//        //info_player.space(10f); //ptere à retirer avec scaling
+//        info_player.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT); // à ajuster
+//        info_player.setDebug(true); //TODO remove when scaling is ok
+//        for (int i=0; i<players.size(); i++) {
+//            PlayerInfo pi= new PlayerInfo(players.get(i));
+//            //pi.space(10f);
+//            info_player.addActor(pi);
+//            pi.setSize((Constants.APP_WIDTH/3)-20f, Constants.APP_HEIGHT/4-20f);
+//            pi.setPosition(10f, (3-i)*Constants.APP_HEIGHT/4+10f);
+//            pi.setDebug(true); //TODO remove when scaling is ok
+//        }
+//        this.stage.addActor(info_player);
+//        //:TODO action player bar
+//        /*action_player = new HorizontalGroup();
+//        action_player.addActor(new TextButton("déplacement", new Skin()));
+//        action_player.addActor(new TextButton("poser une bombe", new Skin()));
+//        action_player.addActor(new TextButton("fin de tour", new Skin()));*/
 
         inputHandler.registerKey(Events.KEY_SPACE, new Runnable() {
             @Override
@@ -138,14 +139,12 @@ public class StateGameMulti extends StateGame {
 
     private void endTurn()
     {
-        processInput = false;
         clearSelectEffect();
         maze.processEndTurn();
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 nextPlayer();
-                processInput = true;
             }
         }, 0.5f);
     }
