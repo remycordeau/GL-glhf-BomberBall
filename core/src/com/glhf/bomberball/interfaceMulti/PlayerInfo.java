@@ -10,7 +10,7 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
-public class PlayerInfo extends Group { // i don't know why it doesn't work if it extends a HorizontalGroup
+public class PlayerInfo extends HorizontalGroup {
     /*
     //attributes
     private Player player;
@@ -36,6 +36,8 @@ public class PlayerInfo extends Group { // i don't know why it doesn't work if i
     private Player player;
 
     private VerticalGroup info_player;
+    private HorizontalGroup heart_group;
+    private HorizontalGroup bonus_group;
 
 
     /**
@@ -43,10 +45,10 @@ public class PlayerInfo extends Group { // i don't know why it doesn't work if i
      */
     public PlayerInfo(Player player){
         this.player=player;
-        //this.info_player= new VerticalGroup();
         PlayerPic player_profil = new PlayerPic(player);
         PlayerInfoBonus player_info_bonus = new PlayerInfoBonus(player);
         this.addActor(player_profil);
-        this.addActor(player_info_bonus);
+        info_player.addActor(heart_group);
+        info_player.addActor(bonus_group);
     }
 }

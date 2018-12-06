@@ -17,14 +17,11 @@ public class PlayerPic extends Actor {
         this.player=p;
         TextureAtlas.AtlasRegion atlas_region = player.getSprite();
         this.setBounds(atlas_region.getRegionX(), atlas_region.getRegionY(), atlas_region.getRegionWidth(), atlas_region.getRotatedPackedHeight());
+
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(player.getSprite(), this.getX(), this.getY());
-        /*batch.draw(Graphics.Sprites.get("bomb"),this.getX()+20f, this.getY());
-        for(int i=2; i<=player.getLife()+1; i++) {
-            batch.draw(Graphics.Sprites.get("ui_heart_full"), this.getX() + i*20f, this.getY());
-        }*/
     }
 }
