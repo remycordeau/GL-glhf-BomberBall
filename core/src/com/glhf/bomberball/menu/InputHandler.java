@@ -10,11 +10,19 @@ public class InputHandler extends InputListener {
         KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_SPACE,MOUSE_LEFT,MOUSE_RIGHT
     }
 
+    private int screenX;
+    private int screenY;
+
     private Runnable[] runnables = new Runnable[Events.values().length];
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         System.err.println("Click ! --> Gestion des inputs à faire"); //TODO Gestion des inputs à faire
+        setScreenX((int) x);
+        setScreenY((int) y);
+        runnables[Events.MOUSE_LEFT.ordinal()].run();
+        runnables[Events.MOUSE_RIGHT.ordinal()].run();
+
         return false; //super.touchDown(event, x, y, pointer, button);
     }
 
@@ -44,5 +52,24 @@ public class InputHandler extends InputListener {
     //inputHandler.register(() -> {moveCurrentPlayer(Direction.UP)})
     public void register(Events e, Runnable r){
         runnables[e.ordinal()] = r;
+    }
+    public void registerMouse(Events e, int x, int y, Runnable r){
+        runnables[e.ordinal()] = r;
+    }
+
+    public int getScreenX() {
+        return screenX;
+    }
+
+    public int getScreenY() {
+        return screenY;
+    }
+
+    public void setScreenX(int x){
+        this.screenX = x;
+    }
+
+    public void setScreenY(int y){
+        this.screenX = y;
     }
 }
