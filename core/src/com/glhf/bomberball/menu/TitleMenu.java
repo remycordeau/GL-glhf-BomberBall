@@ -12,13 +12,6 @@ import com.glhf.bomberball.Game;
 
 public class TitleMenu extends StateMenu{
 
-    //general attributes
-    private Stage stage;
-    private VerticalGroup verticalGroup;
-    private  TextureAtlas button_atlas;
-    private Skin skin;
-
-
     public TitleMenu()
     {
         super();
@@ -52,17 +45,4 @@ public class TitleMenu extends StateMenu{
         centerButtons.addActor(textButton);
 
     }
-
-    public class SetStateListener extends ChangeListener {
-        private State state;
-        public SetStateListener(State state){
-            this.state = state;
-        }
-
-        @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            Game.setState(state);
-        }
-    }
-
 }
