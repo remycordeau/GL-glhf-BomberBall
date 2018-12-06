@@ -26,6 +26,7 @@ public class StateMultiMenu extends StateMenu {
     public StateMultiMenu(StateMainMenu mainMenu) {
         super();
         this.mainMenu = mainMenu;
+        this.showPreview();
         initializeButtons();
     }
 
@@ -37,10 +38,6 @@ public class StateMultiMenu extends StateMenu {
         cancelButton.addListener(new SetStateListener(mainMenu));
         centerButtons.addActor(cancelButton);
 
-        // Display of the preview
-            //TODO: arriver à afficher le labyrinthe ...
-        Maze maze = Maze.fromJsonFile(previewFile);
-        maze_drawer = new MazeDrawer(maze, 0.75f,1f,0.75f,1f, MazeDrawer.Fit.BEST);
 
         //Buttons to chose the maze you want to play in
             //TODO: Placer les boutons à droite et à gauche de l'écran (utiliser deux horizontal group différents ?)
@@ -55,6 +52,17 @@ public class StateMultiMenu extends StateMenu {
         stage.addActor(previewButtons);
     }
 
+    @Override
+    public void draw() {
+        super.draw();
+        maze_drawer.drawMaze();
+    }
+
+    public void showPreview()
+    {
+        Maze maze = Maze.fromJsonFile(previewFile);
+        maze_drawer = new MazeDrawer(maze, 0.75f,1f,0.75f,1f, MazeDrawer.Fit.BEST);
+    }
     // Getter
     public int getPreviewMapNumber() {
         return previewMapNumber;
@@ -72,9 +80,5 @@ public class StateMultiMenu extends StateMenu {
         this.previewFile = previewFile;
     }
 
-    @Override
-    public void draw() {
-        super.draw();
-        maze_drawer.drawMaze();
-    }
+
 }
