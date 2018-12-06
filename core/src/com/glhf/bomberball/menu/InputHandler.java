@@ -4,6 +4,21 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.glhf.bomberball.config.InputsConfig;
 
+/**
+ * class InputHandler
+ *
+ * Class to handle inputs, use it to register input action handlers.
+ *
+ * Example :
+ *
+ * inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> { keyUpHandler() })
+ * to register an action on KEY_UP
+ *
+ * inputHandler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> { buttonLeftHandler(x, y) })
+ * to register an action on BUTTON_LEFT
+ *
+ * @author nayala
+ */
 public class InputHandler extends InputListener {
 
     private InputsConfig inputs_config;
