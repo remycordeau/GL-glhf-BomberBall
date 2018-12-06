@@ -40,7 +40,7 @@ public class StateMultiMenu extends StateMenu {
 
 
         //Buttons to chose the maze you want to play in
-            //TODO: Placer les boutons à droite et à gauche de l'écran (utiliser deux horizontal group différents ?)
+            //TODO: Placer les boutons à droite et à gauche de l'écran (utiliser une table ?)
         previewButtons=new HorizontalGroup();
         previewButtons.setFillParent(true);
         nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
@@ -52,16 +52,15 @@ public class StateMultiMenu extends StateMenu {
         stage.addActor(previewButtons);
     }
 
+    public void showPreview()
+    {
+        Maze maze = Maze.fromJsonFile(previewFile);
+        maze_drawer = new MazeDrawer(maze, 0f,1f,0.5f,1f, MazeDrawer.Fit.BEST);
+    }
     @Override
     public void draw() {
         super.draw();
         maze_drawer.drawMaze();
-    }
-
-    public void showPreview()
-    {
-        Maze maze = Maze.fromJsonFile(previewFile);
-        maze_drawer = new MazeDrawer(maze, 0.75f,1f,0.75f,1f, MazeDrawer.Fit.BEST);
     }
     // Getter
     public int getPreviewMapNumber() {

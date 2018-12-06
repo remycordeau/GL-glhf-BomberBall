@@ -30,6 +30,6 @@ public class ChangePreviewListener extends ChangeListener {
             state.setPreviewMapNumber(newMapNumber);
             state.setPreviewFile("maze_"+newMapNumber+".json");
         }
-
+        state.showPreview();
     }
 }
