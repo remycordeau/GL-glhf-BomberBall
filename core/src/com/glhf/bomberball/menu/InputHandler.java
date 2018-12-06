@@ -50,7 +50,7 @@ public class InputHandler extends InputListener {
     }
 
     //inputHandler.register(() -> {moveCurrentPlayer(Direction.UP)})
-    public void register(Events e, Runnable r){
+    public void registerKey(Events e, Runnable r){
         runnables[e.ordinal()] = r;
     }
     public void registerMouse(Events e, int x, int y, Runnable r){
