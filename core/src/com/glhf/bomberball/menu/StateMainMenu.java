@@ -3,77 +3,50 @@ package com.glhf.bomberball.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.GUI.Button;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
+import java.awt.*;
 
-public class StateMainMenu extends State {
-    //Attributes
-    private Button solo;
-    private Button multi;
-    private Button editor;
-    private Button parametres;
-    private Button quit;
-    private SpriteBatch batch = new SpriteBatch();
+public class StateMainMenu extends StateMenu{
 
-    boolean solob = false;
-    //Constructor
-    public StateMainMenu(String name){
-        this.settings();
+    public StateMainMenu()
+    {
+        super();
+        initializeButtons();
     }
 
-    /*Loading textures*/
-    public void settings(){
-        //BoutonSolo
-        solo = new Button(160, 400, 400, 100, "BoutonSolo");
-        //BoutonMulti
-        multi = new Button(160, 300, 400, 100, "BoutonMulti");
-        //BoutonEditeur
-        editor = new Button(160, 200, 400, 100, "BoutonEditeur");
-        //BoutonParametres
-        parametres = new Button(160, 100, 400, 100, "BoutonParametres");
-        //BoutonQuitter
-        quit = new Button(160, 0, 400, 100, "BoutonQuitter");
-    }
+    public void initializeButtons(){
+        TextButton textButton = new TextButton("Solo", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(new StateSoloMenu(this)));
+        centerButtons.addActor(textButton);
 
-    public void draw(){
-        solo.draw(batch);
-        multi.draw(batch);
-        editor.draw(batch);
-        parametres.draw(batch);
-        quit.draw(batch);
-    }
+        textButton = new TextButton("Multiplayer", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(new StateMultiMenu(this)));
+        centerButtons.addActor(textButton);
 
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-        y = Constants.APP_HEIGHT - y;
-        if(solo.contains(x, y)) {
-            State state = new StateSoloMenu("Menu Solo");
-            Game.setState(state);
-            //TODO: On lance le jeu solo
-        }
+        textButton = new TextButton("Map Editor", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(new StateMapEditorMenu(this)));
+        centerButtons.addActor(textButton);
 
-        if(editor.contains(x,y)) {
+        textButton = new TextButton("Settings", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(new StateSettingsMenu()));
+        centerButtons.addActor(textButton);
 
-        }
-
-        if(multi.contains(x, y))
-        {
-            State state = new StateMultiMenu("Menu Multi");
-            Game.setState(state);
-        }
-
-        if(parametres.contains(x, y))
-        {
-            State state = new StateSettingsMenu("Menu Paramètres");
-            Game.setState(state);
-        }
-
-        if(quit.contains(x,y)){
-            Gdx.app.exit();
-        }
-        return false;
+        textButton = new TextButton("Quit", Graphics.GUI.getSkin());
+        textButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.exit();
+            }
+        });
+        centerButtons.addActor(textButton);
     }
 }

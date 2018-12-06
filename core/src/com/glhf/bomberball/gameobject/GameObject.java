@@ -1,8 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Game;
-import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.menu.Directions;
 
 public abstract class GameObject {
@@ -36,13 +35,19 @@ public abstract class GameObject {
 
     public void initialize() { }
 
-    public boolean getDamage(int damage){
+    /**
+     * modification of the life of the gameObject
+     * @param damage
+     */
+    public void getDamage(int damage){
         life -= damage;
         if (life <= 0) {
-            cell.removeGameObject(this);
-            return true;
+            this.dispose();
         }
-        return false;
+    }
+
+    public void dispose() {
+        cell.removeGameObject(this);
     }
 
     /**

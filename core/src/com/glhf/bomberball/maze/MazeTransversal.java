@@ -1,6 +1,6 @@
 package com.glhf.bomberball.maze;
 
-import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.cell.Cell;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

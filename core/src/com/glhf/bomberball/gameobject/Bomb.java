@@ -1,7 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.maze.Cell;
+import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.menu.Directions;
 
 public class Bomb extends GameObject {
@@ -34,5 +34,5 @@ public class Bomb extends GameObject {
     }
 
     @Override
-    public boolean getDamage(int damage){ return false; }
+    public void getDamage(int damage){ }
 }

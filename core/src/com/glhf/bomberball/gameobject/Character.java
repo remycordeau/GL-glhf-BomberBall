@@ -33,15 +33,6 @@ public abstract class Character extends GameObject {
         return moves_remaining;
     }
 
-    public void setSkin(String skin) {
-        this.skin = skin;
-        setAnimation("idle");
-    }
-
-    public void setInitialMoves(int initial_moves) {
-        this.initial_moves = initial_moves;
-    }
-
     /**
      * set the animation of the character
      * @param animation_name animation name
@@ -51,6 +42,10 @@ public abstract class Character extends GameObject {
         animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
+    /**
+     * Initiate attribute number_move_remaining at the beginning of a turn
+     */
+    public void initiateTurn() { moves_remaining = initial_moves; }
 
     @Override
     public TextureAtlas.AtlasRegion getSprite()
@@ -58,8 +53,8 @@ public abstract class Character extends GameObject {
         return animation.getKeyFrame(Game.time_elapsed);
     }
 
-    /**
-     * Initiate attribute number_move_remaining at the beginning of a turn
-     */
-    public void initiateTurn() { moves_remaining = initial_moves; }
+    @Override
+    public boolean isWalkable(){
+        return true;
+    }
 }

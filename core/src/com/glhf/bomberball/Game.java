@@ -2,22 +2,14 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.menu.State;
-import com.glhf.bomberball.menu.StateGame;
-import com.glhf.bomberball.menu.StateGameMulti;
 import com.glhf.bomberball.menu.StateMainMenu;
 
 import java.util.HashMap;
@@ -37,8 +29,8 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        //setState(new StateMainMenu("MainMenu"));
-		setState(new StateGameMulti("maze_0"));
+        setState(new StateMainMenu());
+//		setState(new StateGameMulti("maze_0"));
 		font.setColor(Color.RED);
 
         debugRenderer = new DebugRenderer(batch);
@@ -47,6 +39,7 @@ public class Game extends ApplicationAdapter {
 		//Sound sound = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET+"sounds/musics/test.mp3"));
 		//sound.loop();
 	}
+
 
 	@Override
 	public void render () {
@@ -72,6 +65,6 @@ public class Game extends ApplicationAdapter {
 
 	public static void setState(State etat){
 		state = etat;
-		Gdx.input.setInputProcessor(state);
+		state.setInputProcessor();
 	}
 }

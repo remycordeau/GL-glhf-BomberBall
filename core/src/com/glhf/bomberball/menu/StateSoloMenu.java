@@ -1,43 +1,28 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.GUI.Button;
-import com.glhf.bomberball.GUI.ButtonUndo;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
 
-import java.sql.BatchUpdateException;
-
-public class StateSoloMenu extends State {
+public class StateSoloMenu extends StateMenu {
     //Attributes
-    private Button tmp;
-    private ButtonUndo undo;
-    private SpriteBatch batch = new SpriteBatch();
+    StateMainMenu mainMenu;
 
     //Constructor
-    public StateSoloMenu(String name) {
-        this.settings();
+    public StateSoloMenu(StateMainMenu mainMenu) {
+        super();
+        this.mainMenu = mainMenu;
+        initializeButtons();
     }
 
-    /*Loading textures*/
-    public void settings() {
-        tmp = new Button(60, 0, 640, 451, "ComingSoon");
-        State s = new StateMainMenu("MainMenu");
-        undo = new ButtonUndo(0, 0, 100, 100, s);
+    public void initializeButtons() {
+        TextButton textButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        textButton.addListener(new SetStateListener(mainMenu));
+        centerButtons.addActor(textButton);
     }
 
-    public void draw() {
-        tmp.draw(batch);
-        undo.draw(batch);
-    }
-
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-        y = Constants.APP_HEIGHT - y;
-        if(undo.contains(x, y)){
-            Game.setState(undo.getState());
-        }
-        return false;
-    }
 }
