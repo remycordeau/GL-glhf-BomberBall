@@ -18,6 +18,7 @@ import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.maze.MazeTransversal;
+import com.glhf.bomberball.menu.InputHandler.Events;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,13 @@ public class StateGameMulti extends StateGame {
         action_player.addActor(new TextButton("déplacement", new Skin()));
         action_player.addActor(new TextButton("poser une bombe", new Skin()));
         action_player.addActor(new TextButton("fin de tour", new Skin()));*/
+
+        inputHandler.register(Events.KEY_SPACE, new Runnable() {
+            @Override
+            public void run() {
+                endTurn();
+            }
+        });
     }
 
     private void clearSelectEffect() {

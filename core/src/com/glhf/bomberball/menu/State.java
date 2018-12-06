@@ -12,10 +12,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class State {
     protected Stage stage;
+    InputHandler inputHandler = new InputHandler();
 
     //Constructors
     public State(){
         stage = new Stage(new StretchViewport(Constants.APP_WIDTH, Constants.APP_HEIGHT));
+        stage.addListener(inputHandler);
     }
 
     //Methods
