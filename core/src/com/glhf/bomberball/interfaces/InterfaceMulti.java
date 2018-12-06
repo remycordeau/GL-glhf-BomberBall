@@ -15,8 +15,7 @@ public class InterfaceMulti extends Table {
     private Stage stage;
     private ArrayList<Player> players;
 
-    public InterfaceMulti(Stage stage, ArrayList<Player> players) {
-        this.stage = stage;
+    public InterfaceMulti(ArrayList<Player> players) {
         this.players = players;
 
         build();

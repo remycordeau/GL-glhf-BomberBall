@@ -34,7 +34,7 @@ public class StateGameMulti extends StateGame {
         current_player.initiateTurn();
         setSelectEffect();
 
-        stage.addActor(new InterfaceMulti(stage, players));
+        stage.addActor(new InterfaceMulti(players));
 //        // initiate info_player group
 //        //info_player = new VerticalGroup();
 //        info_player = new Group();
