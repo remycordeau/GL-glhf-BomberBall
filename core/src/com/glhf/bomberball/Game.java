@@ -34,7 +34,7 @@ public class Game extends ApplicationAdapter {
 //		setState(new StateGameMulti("maze_0"));
 		font.setColor(Color.RED);
 
-		new InputsConfig().export("inputs");
+		InputsConfig.defaultConfig().export("default_inputs");
 
         debugRenderer = new DebugRenderer(batch);
         Game.time_elapsed = 0;

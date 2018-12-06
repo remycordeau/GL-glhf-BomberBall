@@ -1,9 +1,0 @@
-{
-  "move_up": 19,
-  "move_left": 21,
-  "move_down": 20,
-  "move_right": 22,
-  "map": {
-    "KEY_DOWN": 20
-  }
-}

@@ -1,75 +1,64 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-
+import com.glhf.bomberball.config.InputsConfig;
 
 public class InputHandler extends InputListener {
-    public enum Events{
-        KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_SPACE,MOUSE_LEFT,MOUSE_RIGHT
+
+    private InputsConfig inputs_config;
+
+    public enum KeyAction {
+        KEY_UP,
+        KEY_DOWN,
+        KEY_LEFT,
+        KEY_RIGHT,
+        KEY_SPACE
     }
 
-    private int screenX;
-    private int screenY;
+    public enum ButtonAction {
+        BUTTON_LEFT,
+        BUTTON_RIGHT
+    }
 
-    private Runnable[] runnables = new Runnable[Events.values().length];
+    private KeyActionHandler[] key_handlers = new KeyActionHandler[KeyAction.values().length];
+    private ButtonActionHandler[] button_handlers = new ButtonActionHandler[KeyAction.values().length];
 
-    @Override
-    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        System.err.println("Click ! --> Gestion des inputs à faire"); //TODO Gestion des inputs à faire
-        setScreenX((int) x);
-        setScreenY((int) y);
-        runnables[Events.MOUSE_LEFT.ordinal()].run();
-        runnables[Events.MOUSE_RIGHT.ordinal()].run();
-
-        return false; //super.touchDown(event, x, y, pointer, button);
+    public InputHandler() {
+        // TODO : importer la bonne config d'inputs
+        inputs_config = InputsConfig.defaultConfig();
     }
 
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
-        switch (keycode){
-            case Input.Keys.UP:
-                runnables[Events.KEY_UP.ordinal()].run();
-                break;
-            case Input.Keys.RIGHT:
-                runnables[Events.KEY_RIGHT.ordinal()].run();
-                break;
-            case Input.Keys.DOWN:
-                runnables[Events.KEY_DOWN.ordinal()].run();
-                break;
-            case Input.Keys.LEFT:
-                runnables[Events.KEY_LEFT.ordinal()].run();
-                break;
-            case Input.Keys.SPACE:
-                runnables[Events.KEY_SPACE.ordinal()].run();
-                break;
+        KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
+        if (handler != null) {
+            handler.handle();
         }
-
         return false;
     }
 
-    //inputHandler.register(() -> {moveCurrentPlayer(Direction.UP)})
-    public void registerKey(Events e, Runnable r){
-        runnables[e.ordinal()] = r;
-    }
-    public void registerMouse(Events e, int x, int y, Runnable r){
-        runnables[e.ordinal()] = r;
-    }
-
-    public int getScreenX() {
-        return screenX;
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
+        if (handler != null) {
+            handler.handle(x, y);
+        }
+        return false;
     }
 
-    public int getScreenY() {
-        return screenY;
+    public void registerKeyAction(KeyAction key_action, KeyActionHandler key_handler) {
+        key_handlers[key_action.ordinal()] = key_handler;
+    }
+    public void registerButtonAction(ButtonAction button_action, ButtonActionHandler button_handler) {
+        button_handlers[button_action.ordinal()] = button_handler;
     }
 
-    public void setScreenX(int x){
-        this.screenX = x;
+    public interface KeyActionHandler {
+        void handle();
     }
 
-    public void setScreenY(int y){
-        this.screenX = y;
+    public interface ButtonActionHandler {
+        void handle(float x, float y);
     }
 }
