@@ -1,19 +1,11 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.glhf.bomberball.Constants;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.interfaceMulti.PlayerInfo;
 import com.glhf.bomberball.maze.cell.Cell;
@@ -62,12 +54,63 @@ public class StateGameMulti extends StateGame {
         action_player.addActor(new TextButton("poser une bombe", new Skin()));
         action_player.addActor(new TextButton("fin de tour", new Skin()));*/
 
-        inputHandler.register(Events.KEY_SPACE, new Runnable() {
+        inputHandler.registerKey(Events.KEY_SPACE, new Runnable() {
             @Override
             public void run() {
                 endTurn();
             }
         });
+        inputHandler.registerKey(Events.KEY_UP, new Runnable() {
+            @Override
+            public void run() {
+                moveCurrentPlayer(Directions.UP);
+            }
+        });
+        inputHandler.registerKey(Events.KEY_DOWN, new Runnable() {
+            @Override
+            public void run() {
+                moveCurrentPlayer(Directions.DOWN);
+            }
+        });
+        inputHandler.registerKey(Events.KEY_LEFT, new Runnable() {
+            @Override
+            public void run() {
+                moveCurrentPlayer(Directions.LEFT);
+            }
+        });
+        inputHandler.registerKey(Events.KEY_RIGHT, new Runnable() {
+            @Override
+            public void run() {
+                moveCurrentPlayer(Directions.RIGHT);
+            }
+        });
+
+        inputHandler.registerKey(Events.MOUSE_LEFT, new Runnable() {
+            @Override
+            public void run() {
+                Vector2 cell_pos = maze_drawer.screenPosToCell(inputHandler.getScreenX(), inputHandler.getScreenY());
+                int cell_x = (int)cell_pos.x;
+                int cell_y = (int)cell_pos.y;
+                Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+                if (dir != null) {
+                    current_player.dropBomb(dir);
+                }
+            }
+        });
+
+        inputHandler.registerKey(Events.MOUSE_RIGHT, new Runnable() {
+            @Override
+            public void run() {
+                Vector2 cell_pos = maze_drawer.screenPosToCell(inputHandler.getScreenX(), inputHandler.getScreenY());
+                int cell_x = (int)cell_pos.x;
+                int cell_y = (int)cell_pos.y;
+                Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+                if (dir != null) {
+                    current_player.dropBomb(dir);
+                }
+            }
+        });
+
     }
 
     private void clearSelectEffect() {
