@@ -51,6 +51,7 @@ public class PlayerInfo extends HorizontalGroup {
         info_player.addActor(heart_group);
         this.addHeart();
         info_player.addActor(bonus_group);
+        this.addBonus();
     }
 
     private void addHeart(){
@@ -63,7 +64,9 @@ public class PlayerInfo extends HorizontalGroup {
         int number_bomb_remaining = player.getNumberBombRemaining();
         int number_speed_remaining = player.getNumberMoveRemaining();
         int number_range_boost = player.getNumberBonus("BombRangeBoost")+player.getInitialBombRange();
-
+        bonus_group.addActor(new Image(Graphics.Sprites.get("bomb")));
+        bonus_group.addActor(new Image(Graphics.Sprites.get("gift_01a")));
+        bonus_group.addActor(new Image(Graphics.Sprites.get("bow_02a")));
     }
 
 }
