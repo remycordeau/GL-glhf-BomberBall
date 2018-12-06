@@ -23,15 +23,15 @@ public class StateMainMenu extends StateMenu{
 
     public void initializeButtons(){
         TextButton textButton = new TextButton("Solo", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(new StateSoloMenu()));
+        textButton.addListener(new SetStateListener(new StateSoloMenu(this)));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Multiplayer", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(new StateMultiMenu()));
+        textButton.addListener(new SetStateListener(new StateMultiMenu(this)));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Map Editor", Graphics.GUI.getSkin());
-        //textButton.addListener(new SetStateListener(new StateEditorMenu()));
+        textButton.addListener(new SetStateListener(new StateMapEditorMenu(this)));
         centerButtons.addActor(textButton);
 
         textButton = new TextButton("Settings", Graphics.GUI.getSkin());
