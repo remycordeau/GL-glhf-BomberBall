@@ -17,7 +17,7 @@ public class ExplosionEffect extends CellEffect {
         super(cell);
         time_start = Game.time_elapsed;
         animation = new Animation<AtlasRegion>(
-                0.09f,
+                0.07f,
                 Graphics.Anims.get("cell/explo/" + getAnimation(dir, range)),
                 Animation.PlayMode.NORMAL);
     }
@@ -35,7 +35,7 @@ public class ExplosionEffect extends CellEffect {
         if (!animation.isAnimationFinished(t)) {
             return animation.getKeyFrame(t);
         } else{
-            dispose();
+            selfRemove();
             return null;
         }
     }

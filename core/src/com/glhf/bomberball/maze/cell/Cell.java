@@ -146,7 +146,7 @@ public class Cell {
                 }
             }
         }
-        this.setExplosionEffect(dir, range);
+        this.setExplosionEffect(dir, propagate ? range : 1);
     }
 
     /**

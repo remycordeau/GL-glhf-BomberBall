@@ -20,7 +20,7 @@ public abstract class CellEffect {
         return animation.getKeyFrame(Game.time_elapsed);
     }
 
-    public void dispose() {
+    public void selfRemove() {
         cell.removeEffect();
     }
 }
