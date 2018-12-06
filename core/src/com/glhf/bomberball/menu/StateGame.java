@@ -14,23 +14,24 @@ import java.util.HashMap;
 
 public abstract class StateGame extends State {
     protected Maze maze;
-    protected MazeDrawer mazeDrawer;
+    protected MazeDrawer maze_drawer;
 
-    public StateGame(String maze_filename) {
-        loadMaze(maze_filename);
+    public StateGame(String name, String maze_filename) {
+        super(name);
+        loadMaze(maze_filename,0f,1f,0f,1f);
     }
 
-    public void loadMaze(String filename) {
+    public void loadMaze(String filename, float w_minp, float w_maxp, float h_minp, float h_maxp) {
         //maze = new Maze(11, 13);
         maze = Maze.fromJsonFile(filename);
         //maze.toJsonFile("maze_0.json");
-        mazeDrawer = new MazeDrawer(maze, 0f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
-
-        stage.addListener(new GameInputListener());
+        maze_drawer = new MazeDrawer(maze, w_minp, w_maxp, h_minp, h_maxp, MazeDrawer.Fit.BEST);
     }
 
+    @Override
     public void draw() {
-        mazeDrawer.drawMaze();
+        super.draw();
+        maze_drawer.drawMaze();
     }
 
 

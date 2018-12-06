@@ -39,6 +39,7 @@ public class Game extends ApplicationAdapter {
 		//sound.loop();
 	}
 
+
 	@Override
 	public void render () {
 	    Game.time_elapsed += Gdx.graphics.getDeltaTime();

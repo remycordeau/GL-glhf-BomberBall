@@ -24,6 +24,9 @@ public class PlayerInfo extends HorizontalGroup {
     public PlayerInfo(Player player){
         this.player = player;
         info_player = new VerticalGroup();
+        info_player.align(Align.left); // PQ CA MARCHE PAS PTN
+        info_player.setDebug(true);
+        heart_group = new HorizontalGroup();
         info_player.left(); // PQ CA MARCHE PAS
         info_player.setDebug(true);
         heart_group = new HorizontalGroup();

@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.menu.StateMenu.SetStateListener;
 
 public class StateMultiMenu extends StateMenu {
 
