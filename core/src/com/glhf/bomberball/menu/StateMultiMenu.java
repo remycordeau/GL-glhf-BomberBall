@@ -13,7 +13,7 @@ public class StateMultiMenu extends StateMenu {
     private StateMainMenu mainMenu;
     private int previewMapNumber=0;
 
-
+    private MazeDrawer maze_drawer;
 
     public static int maxMaze=0;   //TODO: Trouver une façon plus élégante de connaître le nombre max de labyrinthe proposé pour jouer. Il faut augmenter ce nombre à chaque fois qu'on veut rajouter un labyritnhe
     private String previewFile="maze_"+previewMapNumber+".json";
@@ -29,7 +29,6 @@ public class StateMultiMenu extends StateMenu {
         initializeButtons();
     }
 
-
     public void initializeButtons(){
         playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
         playButton.addListener(new SetStateListener(new StateGameMulti(previewFile)));
@@ -41,8 +40,7 @@ public class StateMultiMenu extends StateMenu {
         // Display of the preview
             //TODO: arriver à afficher le labyrinthe ...
         Maze maze = Maze.fromJsonFile(previewFile);
-        MazeDrawer maze_drawer = new MazeDrawer(maze, 0f,1f,0f,1f, MazeDrawer.Fit.BEST);
-        maze_drawer.drawMaze();
+        maze_drawer = new MazeDrawer(maze, 0.75f,1f,0.75f,1f, MazeDrawer.Fit.BEST);
 
         //Buttons to chose the maze you want to play in
             //TODO: Placer les boutons à droite et à gauche de l'écran (utiliser deux horizontal group différents ?)
@@ -72,5 +70,11 @@ public class StateMultiMenu extends StateMenu {
 
     public void setPreviewFile(String previewFile) {
         this.previewFile = previewFile;
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
+        maze_drawer.drawMaze();
     }
 }
