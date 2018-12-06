@@ -28,7 +28,7 @@ public class InterfaceMulti extends Table {
             this.add(new PlayerWidget(player)).grow();
             this.row();
         }
-        this.setDebug(true, true);
+        //this.setDebug(true, true);
     }
 
     class PlayerWidget extends Table {
@@ -86,6 +86,9 @@ public class InterfaceMulti extends Table {
             Label number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.LabelStyleMulti.getStyle());
             Label number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.LabelStyleMulti.getStyle());
             Label bomb_range = new Label("x"+player.getBombRange(), Graphics.LabelStyleMulti.getStyle());
+            number_moves.setAlignment(Align.center);
+            number_bombs.setAlignment(Align.center);
+            bomb_range.setAlignment(Align.center);
             this.add(number_moves).grow().space(10);
             this.add(number_bombs).grow().space(10);
             this.add(bomb_range).grow().space(10);
