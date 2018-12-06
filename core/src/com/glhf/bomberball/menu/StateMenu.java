@@ -13,11 +13,7 @@ import com.glhf.bomberball.Game;
 public abstract class StateMenu extends State{
     protected VerticalGroup centerButtons;
 
-    protected TextButtonStyle textButton_style;
-
     public StateMenu() {
-        textButton_style = new TextButtonStyle();
-        textButton_style.font = new BitmapFont(new FileHandle(Constants.PATH_FONTS+"UniDreamLED.fnt"));
 
         centerButtons = new VerticalGroup();
         centerButtons.setFillParent(true);

@@ -27,9 +27,7 @@ public class StateSettingsMenu extends StateMenu {
             super();
             left();
 
-            LabelStyle style = new LabelStyle(); //TODO au lieu de faire des textButton_style pour chaque élément créer un skin général
-            style.font = textButton_style.font;
-            label = new Label(name, style);
+            label = new Label(name, Graphics.GUI.getSkin());
             addActor(label);
         }
     }
@@ -37,23 +35,7 @@ public class StateSettingsMenu extends StateMenu {
         private SelectBox<String> value;
         public ParameterString(String name) {
             super(name);
-            SelectBoxStyle style = new SelectBoxStyle();
-            style.font = textButton_style.font;
-            style.fontColor = Color.BLUE;
-            style.background = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.listStyle = new ListStyle();
-            style.listStyle.font = textButton_style.font;
-            style.listStyle.fontColorSelected = Color.WHITE;
-            style.listStyle.fontColorUnselected = Color.RED;
-            style.listStyle.selection = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.listStyle.background = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.scrollStyle = new ScrollPaneStyle();
-            style.scrollStyle.background = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.scrollStyle.hScroll = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.scrollStyle.hScrollKnob = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.scrollStyle.vScroll = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            style.scrollStyle.vScrollKnob = new TextureRegionDrawable(Graphics.Sprites.get("bomb"));
-            value = new SelectBox<String>(style);
+            value = new SelectBox<String>(Graphics.GUI.getSkin());
             value.setItems("test1","test2","test3","test4");
             addActor(value);
         }

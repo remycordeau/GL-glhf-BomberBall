@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.glhf.bomberball.menu.State;
-import com.glhf.bomberball.menu.TitleMenu;
+import com.glhf.bomberball.menu.StateMainMenu;
 
 import java.util.HashMap;
 
@@ -28,7 +28,7 @@ public class Game extends ApplicationAdapter {
 		Graphics.load();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-        setState(new TitleMenu());
+        setState(new StateMainMenu());
         //setState(new StateGameMulti("maze_0.json"));
 		font.setColor(Color.RED);
 
