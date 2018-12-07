@@ -54,6 +54,8 @@ public class StateMultiMenu extends StateMenu {
 
     public void showPreview()
     {
+//        Maze maze = new Maze(11, 13);
+//        maze.export(previewFile);
         Maze maze = Maze.importMaze(previewFile);
         maze_drawer = new MazeDrawer(maze, 0f,1f,0.5f,1f, MazeDrawer.Fit.BEST);
     }
