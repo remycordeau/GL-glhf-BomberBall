@@ -144,7 +144,7 @@ public class Maze {
         ArrayList<GameObject> objects = new ArrayList<GameObject>();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                objects.addAll(cells[x][y].getObjects());
+                objects.addAll(cells[x][y].getGameObjects());
             }
         }
         for (Object o : objects) {

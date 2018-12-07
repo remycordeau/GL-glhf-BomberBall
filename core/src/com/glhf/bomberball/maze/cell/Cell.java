@@ -8,24 +8,32 @@ import java.util.ArrayList;
 
 /**
  * Maze's main component, represents a cell in a maze.
+ *
+ * @author nayala
  */
 public class Cell {
 
     private int x;
     private int y;
-    private transient Cell[] adjacent_cells;
 
     /**
-     * Objects in cell
+     * GameObjects in cell
      */
     private ArrayList<GameObject> objects;
 
+    /**
+     * Adjacent cells in maze.
+     * [RIGHT, UP, LEFT, DOWN]
+     */
+    private transient Cell[] adjacent_cells;
+
     private transient CellEffect cell_effect;
+
 
     /**
      * Cell constructor
-     * @param x position x in maze
-     * @param y position y in maze
+     * @param x x coordinates in maze
+     * @param y coordinates in maze
      */
     public Cell(int x, int y)
     {
@@ -35,20 +43,13 @@ public class Cell {
         adjacent_cells = new Cell[Directions.values().length];
     }
 
-    public int getX()
-    {
-        return x;
-    }
-
-    public int getY()
-    {
-        return y;
-    }
-
-    public CellEffect getCellEffect() {
-        return this.cell_effect;
-    }
-
+    /**
+     * Initializes this cell (gives a cell a local view of the maze)
+     * @param cell_right right adjacent cell (null if none)
+     * @param cell_up    up adjacent cell    (null if none)
+     * @param cell_left  left adjacent cell  (null if none)
+     * @param cell_down  down adjacent cell  (null if none)
+     */
     public void initialize(Cell cell_right, Cell cell_up, Cell cell_left, Cell cell_down)
     {
         this.adjacent_cells = new Cell[] {cell_right, cell_up, cell_left, cell_down};
@@ -58,9 +59,32 @@ public class Cell {
         }
     }
 
-    public Cell getAdjacentCell(Directions dir)
+    /*========== Getters ========*/
+
+    public int getY() { return y; }
+
+    public int getX() { return x; }
+
+    public ArrayList<GameObject> getGameObjects() { return objects; }
+
+    public Cell getAdjacentCell(Directions dir) { return adjacent_cells[dir.ordinal()]; }
+
+    public CellEffect getCellEffect() { return this.cell_effect; }
+
+    /*===========================*/
+
+    /**
+     * @param cell
+     * @return Returns the direction of cell if cell is an adjacent cell (null instead)
+     */
+    public Directions getCellDir(Cell cell)
     {
-        return adjacent_cells[dir.ordinal()];
+        for (Directions dir : Directions.values()) {
+            if (getAdjacentCell(dir) == cell) {
+                return dir;
+            }
+        }
+        return null;
     }
 
     /**
@@ -81,19 +105,17 @@ public class Cell {
 
     /**
      * Damages all GameObjects in cell
-     * @param damage amount to apply
+     * @param damage Damage amount to apply
      */
     public void getDamage(int damage)
     {
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(objects);
-        for (GameObject o : gameObjects) {
-            o.getDamage(damage);
-        }
+        gameObjects.forEach((o) -> {o.getDamage(damage);});
     }
 
     /**
-     * Add a GameObject to a Cell
-     * @param gameObject gameObject to be added
+     * Add a GameObject to the cell
+     * @param gameObject GameObject to add
      */
     public void addGameObject(GameObject gameObject)
     {
@@ -102,18 +124,17 @@ public class Cell {
     }
 
     /**
-     * Remove a GameObject from a Cell
-     * @param gameObject gameObject to be removed
+     * Remove a GameObject from the cell
+     * @param gameObject GameObject to remove
      */
     public void removeGameObject(GameObject gameObject) {
         gameObject.setCell(null);
         objects.remove(gameObject);
     }
 
-    public ArrayList<GameObject> getObjects() {
-        return objects;
-    }
-
+    /**
+     * @return Returns true if that cell is walkable (false instead)
+     */
     public boolean isWalkable()
     {
         for (GameObject o : objects) {
@@ -124,16 +145,13 @@ public class Cell {
         return true;
     }
 
-    public Directions getCellDir(Cell cell)
-    {
-        for (Directions dir : Directions.values()) {
-            if (getAdjacentCell(dir) == cell) {
-                return dir;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * Explodes the cell (recursive)
+     * @param dir propagation direction
+     * @param damage damage to apply to gameObjects
+     * @param range propagation range (1 means no further propagation)
+     * The explosion stops when it encounters a non walkable object.
+     */
     public void explode(Directions dir, int damage, int range)
     {
         boolean propagate = this.isWalkable();
@@ -150,7 +168,7 @@ public class Cell {
     }
 
     /**
-     * Explodes all the bombs in the cell
+     * Processes end turn, explodes all the bombs in the cell.
      */
     public void processEndTurn()
     {
@@ -161,29 +179,40 @@ public class Cell {
 
     /**
      * Search in cell for gameObjects instances of specified class.
-     * @param c Class to extract
+     * @param clz Class to extract
      * @param <T>
-     * @return All gameObjects in cell, instances of c
+     * @return All gameObjects in cell, instances of c.
      */
-    public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> c) {
+    public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> clz) {
         ArrayList<T> instances = new ArrayList<T>();
         for(GameObject o : objects){
-            if(c.isInstance(o)){
-                instances.add(c.cast(o));
+            if(clz.isInstance(o)){
+                instances.add(clz.cast(o));
             }
         }
         return instances;
     }
 
+    /**
+     * Removes current cell effect.
+     */
+    public void removeEffect() {
+        cell_effect = null;
+    }
+
+    /**
+     * Sets the select effect on the cell
+     */
     public void setSelectEffect() {
         cell_effect = new SelectEffect(this);
     }
 
+    /**
+     * Sets the explosion effect on the cell
+     * @param dir explosion's direction
+     * @param range explosion's range
+     */
     private void setExplosionEffect(Directions dir, int range) {
         cell_effect = new ExplosionEffect(this, dir, range);
-    }
-
-    public void removeEffect() {
-        cell_effect = null;
     }
 }
