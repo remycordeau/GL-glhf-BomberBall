@@ -18,17 +18,17 @@ public class ChangePreviewListener extends ChangeListener {
         if (newMapNumber==-1)
         {
             state.setPreviewMapNumber(newMapNumber);
-            state.setPreviewFile("maze_"+newMapNumber+".json");
+            state.setPreviewFile("maze_"+newMapNumber);
         }
         else if(newMapNumber>state.getMaxMaze())
         {
             state.setPreviewMapNumber(newMapNumber);
-            state.setPreviewFile("maze_"+newMapNumber+".json");
+            state.setPreviewFile("maze_"+newMapNumber);
         }
         else
         {
             state.setPreviewMapNumber(newMapNumber);
-            state.setPreviewFile("maze_"+newMapNumber+".json");
+            state.setPreviewFile("maze_"+newMapNumber);
         }
         state.showPreview();
     }
