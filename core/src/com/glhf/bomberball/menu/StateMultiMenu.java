@@ -15,7 +15,7 @@ public class StateMultiMenu extends StateMenu {
 
     private MazeDrawer maze_drawer;
 
-    public static int maxMaze=0;   //TODO: Trouver une façon plus élégante de connaître le nombre max de labyrinthe proposé pour jouer. Il faut augmenter ce nombre à chaque fois qu'on veut rajouter un labyritnhe
+    public static int maxMaze=6;   //TODO: Trouver une façon plus élégante de connaître le nombre max de labyrinthe proposé pour jouer. Il faut augmenter ce nombre à chaque fois qu'on veut rajouter un labyritnhe
     private String previewFile="maze_"+previewMapNumber;
     protected HorizontalGroup previewButtons;
     protected TextButton nextMapButton;
