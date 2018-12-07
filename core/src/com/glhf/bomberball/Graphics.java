@@ -2,6 +2,8 @@ package com.glhf.bomberball;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -79,6 +81,11 @@ public class Graphics {
             skin = new Skin();
 
             //
+            Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
+            skin.add("white", white);
+            skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
+            
+            //
             skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
             //load font
@@ -96,8 +103,8 @@ public class Graphics {
 
             //
             SliderStyle sliderStyle = new SliderStyle();
-            sliderStyle.knob = new TextureRegionDrawable(Sprites.get("bomb"));
-            sliderStyle.background = new TextureRegionDrawable(Sprites.get("bomb"));
+            sliderStyle.knob = skin.get("bomb", TextureRegionDrawable.class);
+            sliderStyle.background = skin.getDrawable("white");
             skin.add("default-horizontal", sliderStyle);
 
             //
@@ -105,24 +112,24 @@ public class Graphics {
             listStyle.font = font;
             listStyle.fontColorSelected = Color.WHITE;
             listStyle.fontColorUnselected = Color.RED;
-            listStyle.selection = new TextureRegionDrawable(Sprites.get("bomb"));
-            listStyle.background = new TextureRegionDrawable(Sprites.get("bomb"));
+            listStyle.selection = skin.get("bomb", TextureRegionDrawable.class);
+            listStyle.background = skin.getDrawable("white");
             skin.add("default", listStyle);
 
             //
             ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
-            scrollStyle.background = new TextureRegionDrawable(Sprites.get("bomb"));
-            scrollStyle.hScroll = new TextureRegionDrawable(Sprites.get("bomb"));
-            scrollStyle.hScrollKnob = new TextureRegionDrawable(Sprites.get("bomb"));
-            scrollStyle.vScroll = new TextureRegionDrawable(Sprites.get("bomb"));
-            scrollStyle.vScrollKnob = new TextureRegionDrawable(Sprites.get("bomb"));
+            scrollStyle.background = skin.getDrawable("white");
+            scrollStyle.hScroll = skin.getDrawable("white");
+            scrollStyle.hScrollKnob = skin.get("bomb", TextureRegionDrawable.class);
+            scrollStyle.vScroll = skin.getDrawable("white");
+            scrollStyle.vScrollKnob = skin.get("bomb", TextureRegionDrawable.class);
             skin.add("default", scrollStyle);
 
             //
             SelectBoxStyle selectBoxStyle = new SelectBoxStyle();
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
-            selectBoxStyle.background = new TextureRegionDrawable(Sprites.get("bomb"));
+            selectBoxStyle.background = skin.getDrawable("white");
             selectBoxStyle.listStyle = skin.get(ListStyle.class);
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);
