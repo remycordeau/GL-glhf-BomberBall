@@ -1,4 +1,4 @@
-package com.glhf.bomberball.interfaces;
+package com.glhf.bomberball.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,24 +11,20 @@ import com.glhf.bomberball.gameobject.Player;
 
 import java.util.ArrayList;
 
-public class InterfaceMulti extends Table {
+public class PlayersWidget extends Table {
 
     private ArrayList<Player> players;
 
-    public InterfaceMulti(ArrayList<Player> players) {
+    public PlayersWidget(ArrayList<Player> players) {
         this.players = players;
-
         build();
     }
 
     private void build() {
-        this.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT);
-
         for (Player player : players) {
             this.add(new PlayerWidget(player)).grow();
             this.row();
         }
-        //this.setDebug(true, true);
     }
 
     class PlayerWidget extends Table {

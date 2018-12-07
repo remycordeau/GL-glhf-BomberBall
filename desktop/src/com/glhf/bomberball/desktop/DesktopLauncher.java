@@ -3,17 +3,14 @@ package com.glhf.bomberball.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Game;
-import com.badlogic.gdx.tools.texturepacker.TexturePacker;
-import com.glhf.bomberball.TMP.GameTMP;
-
-import javax.xml.soap.Text;
+import com.glhf.bomberball.Bomberball;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Constants.APP_WIDTH;
 		config.height = Constants.APP_HEIGHT;
+		config.resizable = true;
 
 		/*
         TexturePacker.process(Constants.PATH_GRAPHICS+"animations", Constants.PATH_PACKS, "pack_animations");
@@ -21,6 +18,6 @@ public class DesktopLauncher {
         TexturePacker.process(Constants.PATH_GRAPHICS+"gui", Constants.PATH_PACKS, "pack_gui");
         */
 
-		new LwjglApplication(new GameTMP(), config);
+		new LwjglApplication(new Bomberball(), config);
 	}
 }

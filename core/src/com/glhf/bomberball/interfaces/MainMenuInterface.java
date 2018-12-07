@@ -1,28 +1,26 @@
-package com.glhf.bomberball.TMP;
+package com.glhf.bomberball.interfaces;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.screens.GameMultiScreen;
 
-public class MenuStage extends Stage {
+public class MainMenuInterface extends AbstractInterface {
 
     Table table;
 
-    public MenuStage() {
-        super(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+    public MainMenuInterface() {
+        super();
         table = new Table();
         table.setFillParent(true);
 
         addButtons();
 
-        table.setDebug(true, true);
         this.addActor(table);
     }
 
@@ -36,9 +34,9 @@ public class MenuStage extends Stage {
         table.add(b).grow().row();
 
         b = new TextButton("Quit", Graphics.GUI.getSkin());
-        b.addListener(new ChangeListener() {
+        b.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });

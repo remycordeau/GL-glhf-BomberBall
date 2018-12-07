@@ -2,7 +2,7 @@ package com.glhf.bomberball.maze.cell;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.glhf.bomberball.Game;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.menu.Directions;
 
@@ -15,7 +15,7 @@ public class ExplosionEffect extends CellEffect {
 
     public ExplosionEffect(Cell cell, Directions dir, int range) {
         super(cell);
-        time_start = Game.time_elapsed;
+        time_start = Bomberball.time_elapsed;
         animation = new Animation<AtlasRegion>(
                 0.07f,
                 Graphics.Anims.get("cell/explo/" + getAnimation(dir, range)),
@@ -31,7 +31,7 @@ public class ExplosionEffect extends CellEffect {
 
     @Override
     public AtlasRegion getSprite() {
-        float t = Game.time_elapsed - time_start;
+        float t = Bomberball.time_elapsed - time_start;
         if (!animation.isAnimationFinished(t)) {
             return animation.getKeyFrame(t);
         } else{
