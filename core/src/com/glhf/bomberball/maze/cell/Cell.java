@@ -200,10 +200,18 @@ public class Cell {
         cell_effect = null;
     }
 
+    /**
+     * Sets the select effect on the cell
+     */
     public void setSelectEffect() {
         cell_effect = new SelectEffect(this);
     }
 
+    /**
+     * Sets the explosion effect on the cell
+     * @param dir explosion's direction
+     * @param range explosion's range
+     */
     private void setExplosionEffect(Directions dir, int range) {
         cell_effect = new ExplosionEffect(this, dir, range);
     }
