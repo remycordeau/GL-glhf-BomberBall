@@ -17,11 +17,13 @@ public class ChangePreviewListener extends ChangeListener {
         int newMapNumber=state.getPreviewMapNumber() + incrementation;
         if (newMapNumber==-1)
         {
+            newMapNumber=state.getPreviewMapNumber();
             state.setPreviewMapNumber(newMapNumber);
             state.setPreviewFile("maze_"+newMapNumber);
         }
         else if(newMapNumber>state.getMaxMaze())
         {
+            newMapNumber=0;
             state.setPreviewMapNumber(newMapNumber);
             state.setPreviewFile("maze_"+newMapNumber);
         }
