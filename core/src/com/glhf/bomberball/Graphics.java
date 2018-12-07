@@ -1,6 +1,5 @@
 package com.glhf.bomberball;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -9,8 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
@@ -91,14 +88,8 @@ public class Graphics {
             //
             skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
-            //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
-
-            /* Génération de la BitmapFont avec FreeTypeFontGenerator */
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
-            FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-            parameter.size = 64;
-            BitmapFont font = generator.generateFont(parameter);
-            generator.dispose();
+            //load font
+            BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "UniDreamLED.fnt"));
 
             //
             TextButtonStyle textButtonStyle = new TextButtonStyle();
@@ -154,7 +145,7 @@ public class Graphics {
 
         private static void load() {
             style = new LabelStyle();
-            BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
+            BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "UniDreamLED.fnt"));
             font.getData().setScale(0.5f);
             style.font = font;
         }
