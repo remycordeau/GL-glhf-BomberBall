@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
@@ -130,14 +131,28 @@ public class Graphics {
         public static Skin getSkin(){
             return skin;
         }
+    }
 
+    public static class LabelStyleMulti {
+        private static LabelStyle style;
 
+        private static void load() {
+            style = new LabelStyle();
+            BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "UniDreamLED.fnt"));
+            font.getData().setScale(0.5f);
+            style.font = font;
+        }
+
+        public static LabelStyle getStyle() {
+            return style;
+        }
     }
 
     public static void load() {
         Graphics.Sprites.load();
         Graphics.Anims.load();
         Graphics.GUI.load();
+        Graphics.LabelStyleMulti.load();
     }
 
 }

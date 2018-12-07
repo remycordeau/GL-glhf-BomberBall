@@ -7,16 +7,33 @@ import com.glhf.bomberball.menu.InputHandler.KeyAction;
 
 import java.util.HashMap;
 
+/**
+ * class InputsConfig
+ *
+ * Defines all inputs key codes and button codes
+ * Used by InputHandler class
+ *
+ * @author nayala
+ */
 public class InputsConfig extends Config {
 
+    /** Map to convert key codes to actions */
     private HashMap<Integer, KeyAction> keycodes_actions;
+    /** Map to convert button codes to actions */
     private HashMap<Integer, ButtonAction> buttoncodes_actions;
 
+    /**
+     * Default constructor
+     */
     public InputsConfig() {
         keycodes_actions = new HashMap<Integer, KeyAction>();
         buttoncodes_actions = new HashMap<Integer, ButtonAction>();
     }
 
+    /**
+     * Method to generate the default InputsConfig class
+     * @return default inputs configuration class
+     */
     public static InputsConfig defaultConfig() {
         InputsConfig c = new InputsConfig();
 
@@ -32,19 +49,55 @@ public class InputsConfig extends Config {
         return c;
     }
 
-    public KeyAction getKeyActionCode(int code) {
-        return keycodes_actions.get(code);
+    /**
+     * Links a key code with a KeyAction
+     * @param key_code
+     * @param action
+     */
+    private void addKeyCodeAction(int key_code, KeyAction action) {
+        keycodes_actions.put(key_code, action);
     }
 
-    public ButtonAction getButtonActionCode(int code) {
-        return buttoncodes_actions.get(code);
+    /**
+     * Links a button code with a KeyAction
+     * @param button_code
+     * @param action
+     */
+    private void addButtonCodeAction(int button_code, ButtonAction action) {
+        buttoncodes_actions.put(button_code, action);
     }
 
-    private void addKeyCodeAction(int code, KeyAction action) {
-        keycodes_actions.put(code, action);
+    /**
+     * Converts key codes to InputHandler.KeyActions
+     * @param key_code
+     * @return KeyAction corresponding to key_code
+     */
+    public InputHandler.KeyAction getKeyActionCode(int key_code) {
+        return keycodes_actions.get(key_code);
     }
 
-    private void addButtonCodeAction(int code, ButtonAction action) {
-        buttoncodes_actions.put(code, action);
+    /**
+     * Converts button codes to InputHandler.ButtonActions
+     * @param button_code
+     * @return KeyAction corresponding to key_code
+     */
+    public InputHandler.ButtonAction getButtonActionCode(int button_code) {
+        return buttoncodes_actions.get(button_code);
+    }
+
+    /**
+     * @param key_code
+     * @return key_code is assigned to a KeyAction
+     */
+    public boolean isKeyCodeAssigned(int key_code) {
+        return keycodes_actions.containsKey(key_code);
+    }
+
+    /**
+     * @param button_code
+     * @return button_code is assigned to a ButtonCode
+     */
+    public boolean isButtonCodeAssigned(int button_code) {
+        return buttoncodes_actions.containsKey(button_code);
     }
 }
