@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -42,6 +43,13 @@ public class MazeDrawer {
     private int x_padding = 1;
     private int y_padding = 2;
 
+    private float w_minp;
+    private float w_maxp;
+    private float h_minp;
+    private float h_maxp;
+
+    private Fit fit;
+
     /**
      * Constructor
      * @param maze Maze to draw
@@ -54,21 +62,23 @@ public class MazeDrawer {
     public MazeDrawer(Maze maze, float w_minp, float w_maxp, float h_minp, float h_maxp, Fit fit)
     {
         this.maze = maze;
+
+        this.w_minp = w_minp;
+        this.w_maxp = w_maxp;
+        this.h_minp = h_minp;
+        this.h_maxp = h_maxp;
+        this.fit = fit;
+
         maze_width = maze.getWidth();
         maze_height = maze.getHeight();
 
-        setupCamera(w_minp, w_maxp, h_minp, h_maxp, fit);
+        updateView(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     /**
-     * Setups the camera to draw the maze in the specified bounds
-     * @param w_minp lower width bound in the screen (in percent)
-     * @param w_maxp upper width bound in the screen (in percent)
-     * @param h_minp lower height bound in the screen (in percent)
-     * @param h_maxp upper height bound in the screen (in percent)
-     * @param fit Fitting mode
+     * Setups the camera to draw the maze in the specified bounds.
      */
-    private void setupCamera(float w_minp, float w_maxp, float h_minp, float h_maxp, Fit fit)
+    public void updateView(int width, int height)
     {
         batch = new SpriteBatch();
 
@@ -79,8 +89,8 @@ public class MazeDrawer {
         float maze_height_px = Constants.BOX_HEIGHT * (maze.getHeight() + 2 * y_padding);
         float maze_aspect_ratio = maze_width_px / maze_height_px;
 
-        float screen_width_px = (float)Constants.APP_WIDTH;
-        float screen_height_px = (float)Constants.APP_HEIGHT;
+        float screen_width_px = width;
+        float screen_height_px = height;
         float screen_aspect_ratio = screen_width_px / screen_height_px;
 
         float r = screen_aspect_ratio / maze_aspect_ratio;
@@ -91,10 +101,7 @@ public class MazeDrawer {
         float cam_x_offset = 0f;
         float cam_y_offset = 0f;
 
-        if (fit == Fit.BEST) {
-            fit = (r > 1) ? Fit.HEIGHT : Fit.WIDTH;
-        }
-        if (fit == Fit.WIDTH) {
+        if (fit == Fit.WIDTH || (fit == Fit.BEST && r < 1)) {
             cam_width = maze_width_px * width_scaling;
             cam_height = cam_width * (1 / screen_aspect_ratio);
             cam_y_offset = ((cam_height * dh) - (maze_height_px * height_scaling * dh)) / 2f;

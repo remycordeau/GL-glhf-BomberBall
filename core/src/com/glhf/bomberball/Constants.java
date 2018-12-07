@@ -9,7 +9,6 @@ public class Constants {
     public static final int APP_WIDTH = 960;  // 16:9
     public static final int APP_HEIGHT = 540; // 16:9
 
-
     // constans for paths
     public static final String PATH_ASSET         = "core/assets/";
     public static final String PATH_MAZE          = PATH_ASSET+"maze/";
