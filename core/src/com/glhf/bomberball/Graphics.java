@@ -94,6 +94,9 @@ public class Graphics {
             //
             TextButtonStyle textButtonStyle = new TextButtonStyle();
             textButtonStyle.font = font;
+            textButtonStyle.fontColor = Color.WHITE;
+            textButtonStyle.overFontColor = Color.GRAY;
+            textButtonStyle.downFontColor = Color.RED;
             skin.add("default", textButtonStyle);
 
             //
