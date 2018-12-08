@@ -1,17 +1,12 @@
 package com.glhf.bomberball.screens;
 
-import com.glhf.bomberball.interfaces.AbstractInterface;
-import com.glhf.bomberball.interfaces.MainMenuInterface;
+import com.glhf.bomberball.ui.MainMenuUI;
 
 public class MainMenuScreen extends AbstractScreen {
 
     public MainMenuScreen() {
         super();
-        setInterface(new MainMenuInterface());
+        addUI(new MainMenuUI());
     }
 
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
 }

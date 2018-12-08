@@ -6,7 +6,7 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.interfaces.MultiInterface;
+import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.maze.MazeTransversal;
@@ -26,9 +26,9 @@ public class GameMultiScreen extends AbstractScreen {
     private Player current_player;
     private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
 
-    public GameMultiScreen() {
+    public GameMultiScreen(Maze maze) {
         super();
-        maze = Maze.importMaze("maze_0");
+        this.maze = maze;
         maze_drawer = new MazeDrawer(maze, 1/3f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
 
         config = Config.importConfig("config_game", GameConfig.class);
@@ -40,7 +40,7 @@ public class GameMultiScreen extends AbstractScreen {
 
         registerActionsHandlers();
 
-        setInterface(new MultiInterface(players));
+        addUI(new MultiUI(players));
     }
 
     @Override

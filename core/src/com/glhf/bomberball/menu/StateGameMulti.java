@@ -6,7 +6,7 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.widgets.PlayersWidget;
+import com.glhf.bomberball.ui.PlayersInfoUI;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.maze.MazeTransversal;
 
@@ -32,7 +32,7 @@ public class StateGameMulti extends StateGame {
         current_player.initiateTurn();
         setSelectEffect();
 
-        stage.addActor(new PlayersWidget(players));
+        stage.addActor(new PlayersInfoUI(players));
 
         registerActionsHandlers();
     }

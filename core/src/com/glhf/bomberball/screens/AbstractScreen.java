@@ -1,44 +1,43 @@
 package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.glhf.bomberball.interfaces.AbstractInterface;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.menu.InputHandler;
 
 public abstract class AbstractScreen implements Screen {
 
     protected InputHandler inputHandler;
-
-    private AbstractInterface main_interface;
+    private Stage stage;
 
     public AbstractScreen() {
         inputHandler = new InputHandler();
-    }
-
-    public void setInterface(AbstractInterface I) {
-        main_interface = I;
-        main_interface.addListener(inputHandler);
-        Gdx.input.setInputProcessor(main_interface);
+        stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage.setDebugAll(Bomberball.debug);
+        stage.addListener(inputHandler);
     }
 
     public void registerActionsHandlers() { }
+
+    public void addUI(Actor ui) {
+        stage.addActor(ui);
+    }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (main_interface != null) {
-            main_interface.draw();
-        }
+        stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        main_interface.getViewport().update(width, height, true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -48,11 +47,15 @@ public abstract class AbstractScreen implements Screen {
     public void resume() { }
 
     @Override
-    public void show() { }
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
+    }
 
     @Override
     public void hide() { }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+        stage.dispose();
+    }
 }
