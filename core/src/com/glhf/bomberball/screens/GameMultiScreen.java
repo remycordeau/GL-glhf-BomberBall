@@ -1,4 +1,4 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
@@ -6,25 +6,31 @@ import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.ui.PlayersInfoUI;
-import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.ui.MultiUI;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.maze.MazeTransversal;
+import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.menu.Directions;
+import com.glhf.bomberball.menu.InputHandler.KeyAction;
+import com.glhf.bomberball.menu.InputHandler.ButtonAction;
 
 import java.util.ArrayList;
 
-import static com.glhf.bomberball.menu.InputHandler.*;
+public class GameMultiScreen extends AbstractScreen {
 
-public class StateGameMulti extends StateGame {
-
-    //private final VerticalGroup info_player;
-    //private final Group info_player;
+    private Maze maze;
+    private MazeDrawer maze_drawer;
+    private GameConfig config;
     private ArrayList<Player> players;
     private Player current_player;
-    private GameConfig config;
     private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
 
-    public StateGameMulti(String maze_name) {
-        super(maze_name);
+    public GameMultiScreen(Maze maze) {
+        super();
+        this.maze = maze;
+        maze_drawer = new MazeDrawer(maze, 1/3f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
+
         config = Config.importConfig("config_game", GameConfig.class);
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
@@ -32,12 +38,13 @@ public class StateGameMulti extends StateGame {
         current_player.initiateTurn();
         setSelectEffect();
 
-        stage.addActor(new PlayersInfoUI(players));
-
         registerActionsHandlers();
+
+        addUI(new MultiUI(players));
     }
 
-    private void registerActionsHandlers() {
+    @Override
+    public void registerActionsHandlers() {
         inputHandler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
         inputHandler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
         inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
@@ -102,5 +109,17 @@ public class StateGameMulti extends StateGame {
         current_player = players.get(i);
         current_player.initiateTurn();
         setSelectEffect();
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        maze_drawer.drawMaze();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        maze_drawer.updateView(width, height);
     }
 }

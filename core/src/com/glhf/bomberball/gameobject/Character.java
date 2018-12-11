@@ -2,8 +2,7 @@ package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Game;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 
 public abstract class Character extends GameObject {
@@ -50,7 +49,7 @@ public abstract class Character extends GameObject {
     @Override
     public TextureAtlas.AtlasRegion getSprite()
     {
-        return animation.getKeyFrame(Game.time_elapsed);
+        return animation.getKeyFrame(Bomberball.time_elapsed);
     }
 
     @Override

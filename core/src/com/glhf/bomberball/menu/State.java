@@ -15,7 +15,7 @@ import com.glhf.bomberball.Constants;
 public abstract class State
 {
     /**
-     * scene2d.Stage to draw interfaces.
+     * scene2d.Stage to draw ui.
      */
     protected Stage stage;
 

@@ -1,34 +1,22 @@
-package com.glhf.bomberball.interfaces;
+package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
-import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
 import java.util.ArrayList;
 
-public class InterfaceMulti extends Table {
+public class PlayersInfoUI extends Table {
 
-    private ArrayList<Player> players;
-
-    public InterfaceMulti(ArrayList<Player> players) {
-        this.players = players;
-
-        build();
-    }
-
-    private void build() {
-        this.setSize(Constants.APP_WIDTH/3, Constants.APP_HEIGHT);
-
+    public PlayersInfoUI(ArrayList<Player> players) {
         for (Player player : players) {
             this.add(new PlayerWidget(player)).grow();
             this.row();
         }
-        //this.setDebug(true, true);
     }
 
     class PlayerWidget extends Table {
