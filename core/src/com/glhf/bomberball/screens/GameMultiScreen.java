@@ -110,15 +110,4 @@ public class GameMultiScreen extends AbstractScreen {
         current_player.initiateTurn();
         setSelectEffect();
     }
-
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        maze_drawer.updateView(width, height);
-    }
 }
