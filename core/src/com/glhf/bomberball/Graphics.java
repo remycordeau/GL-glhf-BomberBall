@@ -21,8 +21,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
+import java.awt.*;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 public class Graphics {
 
@@ -164,7 +167,9 @@ public class Graphics {
         }
 
         public static void scaleFont() {
-            skin.getFont("default").getData().setScale(Gdx.graphics.getWidth() / initial_height);
+            for (ObjectMap.Entry<String, BitmapFont> f : skin.getAll(BitmapFont.class)) {
+                f.value.getData().setScale(Gdx.graphics.getHeight() / initial_height);
+            }
         }
     }
 
