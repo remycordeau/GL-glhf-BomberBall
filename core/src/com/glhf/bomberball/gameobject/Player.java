@@ -1,9 +1,15 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.menu.Directions;
+import com.glhf.bomberball.ui.PlayerObserver;
+
+import java.util.ArrayList;
 
 public class Player extends Character {
+
+    private ArrayList<PlayerObserver> observers;
 
     private int initial_bomb_number;
     private int initial_bomb_range;
@@ -38,6 +44,7 @@ public class Player extends Character {
     public void initiateTurn() {
         moves_remaining = initial_moves + bonus_moves;
         bombs_remaining = initial_bomb_number + bonus_bomb_number;
+        this.notifyObservers();
     }
 
     @Override
@@ -45,6 +52,7 @@ public class Player extends Character {
     {
         if (moves_remaining > 0 && super.move(dir)) {
             moves_remaining--;
+            this.notifyObservers();
             return true;
         }
         return false;
@@ -62,6 +70,7 @@ public class Player extends Character {
                 bombs_remaining--;
                 Bomb bomb = new Bomb(1, initial_bomb_range + bonus_bomb_range);
                 dest_cell.addGameObject(bomb);
+                this.notifyObservers();
             }
         }
     }
@@ -83,6 +92,16 @@ public class Player extends Character {
 
     public int getBombRange() {
         return bonus_bomb_range+initial_bomb_range;
+    }
+
+    public void addObserver(PlayerObserver observer) {
+        this.observers.add(observer);
+    }
+
+    private void notifyObservers() {
+        for (PlayerObserver observer : this.observers) {
+            observer.update();
+        }
     }
 }
 
