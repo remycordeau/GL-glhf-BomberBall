@@ -131,7 +131,11 @@ public class Graphics {
             generator.dispose();
 
             NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
-            TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, font);
+            TextButtonStyle textButtonStyle = new TextButtonStyle();
+            textButtonStyle.up = patch;
+            textButtonStyle.down = patch;
+            textButtonStyle.over = patch;
+            textButtonStyle.checked = patch;
             textButtonStyle.font = font;
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;

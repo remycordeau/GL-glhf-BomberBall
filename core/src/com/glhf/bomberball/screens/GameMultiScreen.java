@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class GameMultiScreen extends GameScreen {
 
-    private GameConfig config;
+    private GameMultiConfig config;
     private ArrayList<Player> players;
     private Player current_player;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
@@ -27,7 +28,7 @@ public class GameMultiScreen extends GameScreen {
     public GameMultiScreen(Maze maze) {
         super(maze);
 
-        config = Config.importConfig("config_game", GameConfig.class);
+        config = Config.importConfig("config_game", GameMultiConfig.class);
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
