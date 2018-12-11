@@ -1,0 +1,13 @@
+{
+  "keycodes_actions": {
+    "19": "KEY_UP",
+    "20": "KEY_DOWN",
+    "21": "KEY_LEFT",
+    "22": "KEY_RIGHT",
+    "62": "KEY_SPACE"
+  },
+  "buttoncodes_actions": {
+    "0": "BUTTON_LEFT",
+    "1": "BUTTON_RIGHT"
+  }
+}

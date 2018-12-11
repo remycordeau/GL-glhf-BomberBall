@@ -18,20 +18,6 @@ public abstract class StateMenu extends State{
         centerButtons = new VerticalGroup();
         centerButtons.setFillParent(true);
         centerButtons.center();
-
         stage.addActor(centerButtons);
-    }
-
-
-    public class SetStateListener extends ChangeListener {
-        private State state;
-        public SetStateListener(State state){
-            this.state = state;
-        }
-
-        @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            Game.setState(state);
-        }
     }
 }

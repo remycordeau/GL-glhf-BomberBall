@@ -2,6 +2,7 @@ package com.glhf.bomberball.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.menu.listener.SetStateListener;
 
 public class StateMapEditorMenu extends StateMenu{
     //Attributes

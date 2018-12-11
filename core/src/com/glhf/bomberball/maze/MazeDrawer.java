@@ -136,7 +136,7 @@ public class MazeDrawer {
             drawTextureInCell(cell_effect.getSprite(), cell.getX(), cell.getY());
         }
 
-        ArrayList<GameObject> gameObjects = cell.getObjects();
+        ArrayList<GameObject> gameObjects = cell.getGameObjects();
         int n = gameObjects.size();
         if (n == 0) {
             return;

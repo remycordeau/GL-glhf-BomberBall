@@ -1,75 +1,125 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.glhf.bomberball.config.InputsConfig;
 
-
+/**
+ * class InputHandler
+ *
+ * Class to handle inputs, use it to register input handlers on actions.
+ *
+ * Example :
+ *
+ * inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> { keyUpHandler() })
+ * to register keyUpHandler as an handler on KEY_UP action
+ *
+ * inputHandler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> { buttonLeftHandler(x, y) })
+ * to register buttonLeftHandler as an handler on BUTTON_LEFT action
+ *
+ * @author nayala
+ */
 public class InputHandler extends InputListener {
-    public enum Events{
-        KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_SPACE,MOUSE_LEFT,MOUSE_RIGHT
+
+    /**
+     * InputsConfig class to link actions to codes
+     */
+    private InputsConfig inputs_config;
+
+    /**
+     * KeyActions
+     * All registrable key actions
+     */
+    public enum KeyAction {
+        KEY_UP,
+        KEY_DOWN,
+        KEY_LEFT,
+        KEY_RIGHT,
+        KEY_SPACE
     }
 
-    private int screenX;
-    private int screenY;
-
-    private Runnable[] runnables = new Runnable[Events.values().length];
-
-    @Override
-    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        System.err.println("Click ! --> Gestion des inputs à faire"); //TODO Gestion des inputs à faire
-        setScreenX((int) x);
-        setScreenY((int) y);
-        runnables[Events.MOUSE_LEFT.ordinal()].run();
-        runnables[Events.MOUSE_RIGHT.ordinal()].run();
-
-        return false; //super.touchDown(event, x, y, pointer, button);
+    /**
+     * Buttons
+     * All registrable button actions
+     */
+    public enum ButtonAction {
+        BUTTON_LEFT,
+        BUTTON_RIGHT
     }
 
+    private KeyActionHandler[] key_handlers = new KeyActionHandler[KeyAction.values().length];
+    private ButtonActionHandler[] button_handlers = new ButtonActionHandler[KeyAction.values().length];
+
+    /**
+     * Default constructor
+     * Creates an InputHandler with default input codes configurations
+     */
+    public InputHandler() {
+        // TODO : importer la bonne config d'inputs
+        inputs_config = InputsConfig.defaultConfig();
+    }
+
+    /**
+     * You shouln't use this method
+     */
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
-        switch (keycode){
-            case Input.Keys.UP:
-                runnables[Events.KEY_UP.ordinal()].run();
-                break;
-            case Input.Keys.RIGHT:
-                runnables[Events.KEY_RIGHT.ordinal()].run();
-                break;
-            case Input.Keys.DOWN:
-                runnables[Events.KEY_DOWN.ordinal()].run();
-                break;
-            case Input.Keys.LEFT:
-                runnables[Events.KEY_LEFT.ordinal()].run();
-                break;
-            case Input.Keys.SPACE:
-                runnables[Events.KEY_SPACE.ordinal()].run();
-                break;
+        if (inputs_config.isKeyCodeAssigned(keycode)) {
+            KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
+            if (handler != null) {
+                handler.handle();
+            }
         }
-
         return false;
     }
 
-    //inputHandler.register(() -> {moveCurrentPlayer(Direction.UP)})
-    public void registerKey(Events e, Runnable r){
-        runnables[e.ordinal()] = r;
-    }
-    public void registerMouse(Events e, int x, int y, Runnable r){
-        runnables[e.ordinal()] = r;
-    }
-
-    public int getScreenX() {
-        return screenX;
-    }
-
-    public int getScreenY() {
-        return screenY;
+    /**
+     * You shouln't use this method
+     */
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        if (inputs_config.isButtonCodeAssigned(button)) {
+            ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
+            if (handler != null) {
+                handler.handle(x, y);
+            }
+        }
+        return false;
     }
 
-    public void setScreenX(int x){
-        this.screenX = x;
+    /**
+     * Registers a key action.
+     * @param key_action action to register
+     * @param key_handler handler to call when key_action is triggered
+     */
+    public void registerKeyAction(KeyAction key_action, KeyActionHandler key_handler) {
+        key_handlers[key_action.ordinal()] = key_handler;
     }
 
-    public void setScreenY(int y){
-        this.screenX = y;
+    /**
+     * Registers a button action.
+     * @param button_action action to register
+     * @param button_handler handler to call when button_action is triggered
+     */
+    public void registerButtonAction(ButtonAction button_action, ButtonActionHandler button_handler) {
+        button_handlers[button_action.ordinal()] = button_handler;
+    }
+
+    /**
+     * Interface to handle key actions.
+     * Use lambda functions :
+     * KeyActionHandler key_handler = () -> { handle_key_action(); };
+     */
+    public interface KeyActionHandler {
+        void handle();
+    }
+
+    /**
+     * Interface to handle button actions.
+     * Use lambda functions :
+     * KeyActionHandler button_handler = (x, y) -> { handle_button_action(x, y); };
+     */
+    public interface ButtonActionHandler {
+        void handle(float x, float y);
     }
 }

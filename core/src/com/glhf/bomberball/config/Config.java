@@ -5,6 +5,19 @@ import com.google.gson.GsonBuilder;
 
 import java.io.*;
 
+/**
+ * abstract class Config
+ *
+ * Class to store configs
+ * Extend Config to create a new type of config file
+ *
+ * Example :
+ * class <ConfigClass> extends Config { [...] }
+ * <ConfigClass> config = Config.importConfig("config name", <ConfigClass>) imports a config
+ * config.export("config name") exports a config
+ *
+ * @author nayala
+ */
 public abstract class Config {
 
     protected static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -12,7 +25,7 @@ public abstract class Config {
     /**
      * Imports a config
      * @param name Config file name
-     * @param c Class to serialize
+     * @param c Config class to serialize
      * @return config class from config file
      */
     public static <T> T importConfig(String name, Class<T> c) {

@@ -1,34 +1,85 @@
 package com.glhf.bomberball.menu;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.glhf.bomberball.menu.listener.*;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.Game;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeDrawer;
+
 
 public class StateMultiMenu extends StateMenu {
     //Attributes
-    StateMainMenu mainMenu;
+    private StateMainMenu mainMenu;
+    private int previewMapNumber=0;
 
-    //Constructor
-    public StateMultiMenu(StateMainMenu mainMenu)
-    {
+    private MazeDrawer maze_drawer;
+
+    public static int maxMaze=6;   //TODO: Trouver une façon plus élégante de connaître le nombre max de labyrinthe proposé pour jouer. Il faut augmenter ce nombre à chaque fois qu'on veut rajouter un labyritnhe
+    private String previewFile="maze_"+previewMapNumber;
+    protected HorizontalGroup previewButtons;
+    protected TextButton nextMapButton;
+    protected TextButton previousMapButton;
+    protected TextButton playButton;
+    protected TextButton cancelButton;
+
+    public StateMultiMenu(StateMainMenu mainMenu) {
         super();
         this.mainMenu = mainMenu;
+        this.showPreview();
         initializeButtons();
     }
 
     public void initializeButtons(){
-        TextButton textButton = new TextButton("Jouer", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(new StateGameMulti("maze_0")));
-        centerButtons.addActor(textButton);
+        playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
+        playButton.addListener(new SetStateListener(new StateGameMulti(previewFile)));
+        centerButtons.addActor(playButton);
+        cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        cancelButton.addListener(new SetStateListener(mainMenu));
+        centerButtons.addActor(cancelButton);
 
-        textButton = new TextButton("Retour", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(mainMenu));
-        centerButtons.addActor(textButton);
+
+        //Buttons to chose the maze you want to play in
+            //TODO: Placer les boutons à droite et à gauche de l'écran (utiliser une table ?)
+        previewButtons=new HorizontalGroup();
+        previewButtons.setFillParent(true);
+        nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
+        nextMapButton.addListener(new ChangePreviewListener(1,this));
+        previousMapButton = new TextButton("<", Graphics.GUI.getSkin());
+        previousMapButton.addListener(new ChangePreviewListener(-1,this));
+        previewButtons.addActor(previousMapButton);
+        previewButtons.addActor(nextMapButton);
+        stage.addActor(previewButtons);
     }
+
+    public void showPreview()
+    {
+//        Maze maze = new Maze(11, 13);
+//        maze.export(previewFile);
+        Maze maze = Maze.importMaze(previewFile);
+        maze_drawer = new MazeDrawer(maze, 0f,1f,0.5f,1f, MazeDrawer.Fit.BEST);
+    }
+    @Override
+    public void draw() {
+        super.draw();
+        maze_drawer.drawMaze();
+    }
+    // Getter
+    public int getPreviewMapNumber() {
+        return previewMapNumber;
+    }
+    public static int getMaxMaze() {
+        return maxMaze;
+    }
+
+    // Setter
+    public void setPreviewMapNumber(int previewMapNumber) {
+        this.previewMapNumber = previewMapNumber;
+    }
+
+    public void setPreviewFile(String previewFile) {
+        this.previewFile = previewFile;
+    }
+
+
 }
