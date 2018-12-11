@@ -32,6 +32,7 @@ public abstract class AbstractScreen implements Screen {
         Gdx.gl.glClearColor(34/255f, 34/255f, 34/255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
