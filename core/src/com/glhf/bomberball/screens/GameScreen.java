@@ -1,27 +1,23 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 
-public abstract class StateGame extends State {
+public abstract class GameScreen extends AbstractScreen {
     protected Maze maze;
     protected MazeDrawer maze_drawer;
 
-    public StateGame(String maze_filename) {
+    public GameScreen(Maze maze) {
         super();
-        loadMaze(maze_filename,1/3f,1f,2/10f,1f);
-    }
-
-    public void loadMaze(String filename, float w_minp, float w_maxp, float h_minp, float h_maxp) {
 //        maze = new Maze(11, 13);
 //        maze.export(filename);
-        maze = Maze.importMaze(filename);
-        maze_drawer = new MazeDrawer(maze, w_minp, w_maxp, h_minp, h_maxp, MazeDrawer.Fit.BEST);
+        this.maze = maze;
+        this.maze_drawer = new MazeDrawer(maze,1/3f,1f,2/10f,1f, MazeDrawer.Fit.BEST);
     }
 
     @Override
-    public void draw() {
-        super.draw();
+    protected void registerActionsHandlers() {
+        super.registerActionsHandlers();
     }
 
     /*

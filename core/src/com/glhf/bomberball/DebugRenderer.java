@@ -1,5 +1,6 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,8 +20,8 @@ public class DebugRenderer {
     public DebugRenderer(SpriteBatch batch)
     {
         this.batch = batch;
-        width = Constants.APP_WIDTH;
-        height = Constants.APP_HEIGHT;
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
         shapeRenderer = new ShapeRenderer();
     }
 

@@ -1,15 +1,15 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 
-public abstract class StateMenu extends State{
+public abstract class MenuScreen extends AbstractScreen {
     protected VerticalGroup centerButtons;
 
-    public StateMenu() {
+    public MenuScreen() {
 
         centerButtons = new VerticalGroup();
         centerButtons.setFillParent(true);
         centerButtons.center();
-        stage.addActor(centerButtons);
+        addUI(centerButtons);
     }
 }

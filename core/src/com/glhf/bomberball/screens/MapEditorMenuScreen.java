@@ -1,22 +1,19 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.menu.listener.SetStateListener;
 
-public class StateMapEditorMenu extends StateMenu{
+public class MapEditorMenuScreen extends MenuScreen {
     //Attributes
-    StateMainMenu mainMenu;
 
-    public StateMapEditorMenu(StateMainMenu mainMenu){
+    public MapEditorMenuScreen(){
         super();
-        this.mainMenu = mainMenu;
         initializeButtons();
     }
 
     public void initializeButtons() {
         TextButton textButton = new TextButton("Retour", Graphics.GUI.getSkin());
-        textButton.addListener(new SetStateListener(mainMenu));
+        textButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
         centerButtons.addActor(textButton);
     }
 }

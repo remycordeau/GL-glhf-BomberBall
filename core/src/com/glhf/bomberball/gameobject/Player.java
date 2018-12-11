@@ -6,6 +6,7 @@ import com.glhf.bomberball.menu.Directions;
 import com.glhf.bomberball.ui.PlayerObserver;
 
 import java.util.ArrayList;
+import com.glhf.bomberball.Directions;
 
 public class Player extends Character {
 

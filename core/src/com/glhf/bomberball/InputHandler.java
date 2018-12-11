@@ -1,4 +1,4 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;

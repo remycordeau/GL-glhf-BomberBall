@@ -18,9 +18,9 @@ public class AggressiveEnemy extends Enemy {
      * when the player is near the enemy, the enemy will follow the min way to the player
      * @param way minimal way between the hunted player and the hunter enemy
      */
-    public void huntPlayer(ArrayList<Constants.moves> way) {
-        // follow the minimal way to the player
-        setWay(way);
-        followWay();
-    }
+//    public void huntPlayer(ArrayList<Constants.moves> way) {
+//        // follow the minimal way to the player
+//        setWay(way);
+//        followWay();
+//    }
 }
