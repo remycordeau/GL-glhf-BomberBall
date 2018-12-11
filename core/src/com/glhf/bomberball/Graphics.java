@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -19,7 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -81,12 +84,28 @@ public class Graphics {
 
     public static class GUI {
         private static Skin skin;
-
+        private static TextureAtlas gui_atlasTexture;
+        private static HashMap<String, AtlasRegion> gui_atlasRegions;
         private static float initial_height;
 
         private static void load()
         {
             initial_height = Gdx.graphics.getHeight();
+            loadAtlas();
+            loadSkin();
+        }
+
+        public static Skin getSkin(){
+            return skin;
+        }
+
+        public static void scaleFont() {
+            for (ObjectMap.Entry<String, BitmapFont> f : skin.getAll(BitmapFont.class)) {
+                f.value.getData().setScale(Gdx.graphics.getHeight() / initial_height);
+            }
+        }
+
+        private static void loadSkin() {
 
             skin = new Skin();
 
@@ -94,7 +113,7 @@ public class Graphics {
             Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
             skin.add("white", white);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
-            
+
             //
             skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
@@ -106,13 +125,13 @@ public class Graphics {
             parameter.size = 32;
             BitmapFont font = generator.generateFont(parameter);
             skin.add("small", font);
-            parameter.size = 64;
+            parameter.size = 52;
             font = generator.generateFont(parameter);
             skin.add("default", font);
             generator.dispose();
 
-            //
-            TextButtonStyle textButtonStyle = new TextButtonStyle();
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
+            TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, font);
             textButtonStyle.font = font;
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
@@ -162,14 +181,23 @@ public class Graphics {
             skin.add("default", selectBoxStyle);
         }
 
-        public static Skin getSkin(){
-            return skin;
+        private static void loadAtlas()
+        {
+            gui_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_GUI);
+            gui_atlasRegions = new HashMap<String, AtlasRegion>();
+            for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
+                gui_atlasRegions.put(atlasRegion.name, atlasRegion);
+                System.out.println("GUI element" + atlasRegion.name + " loaded");
+            }
+            System.out.println(gui_atlasRegions.size() + " gui elements succesfully loaded");
         }
 
-        public static void scaleFont() {
-            for (ObjectMap.Entry<String, BitmapFont> f : skin.getAll(BitmapFont.class)) {
-                f.value.getData().setScale(Gdx.graphics.getHeight() / initial_height);
+        public static AtlasRegion get(String sprite_str)
+        {
+            if (!gui_atlasRegions.containsKey(sprite_str)) {
+                throw new RuntimeException("GUI element " + sprite_str + " doesn't exists");
             }
+            return gui_atlasRegions.get(sprite_str);
         }
     }
 
