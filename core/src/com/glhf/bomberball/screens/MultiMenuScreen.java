@@ -14,8 +14,8 @@ public class MultiMenuScreen extends AbstractScreen {
 
     public MultiMenuScreen() {
         setPreviewMaze();
-
         this.addUI(new MultiMenuUI(this));
+        this.addUI(maze_preview);
     }
 
     public void nextMaze() {
@@ -31,17 +31,5 @@ public class MultiMenuScreen extends AbstractScreen {
     private void setPreviewMaze() {
         maze = Maze.importMaze("maze_" + maze_id);
         maze_preview = new MazeDrawer(maze, 0.25f, 0.75f, 1/3f, 1f, MazeDrawer.Fit.BEST);
-    }
-
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-        maze_preview.drawMaze();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        maze_preview.updateView(width, height);
     }
 }

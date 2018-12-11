@@ -114,7 +114,6 @@ public class GameMultiScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        maze_drawer.drawMaze();
     }
 
     @Override

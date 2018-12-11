@@ -22,7 +22,6 @@ public abstract class StateGame extends State {
     @Override
     public void draw() {
         super.draw();
-        maze_drawer.drawMaze();
     }
 
     /*

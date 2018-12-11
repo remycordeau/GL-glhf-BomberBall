@@ -25,8 +25,17 @@ public class MainMenuUI extends Table {
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
+        b = new TextButton("Solo", Graphics.GUI.getSkin());
+        this.add(b).grow().row();
+
         b = new TextButton("Multiplayer", skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
+        this.add(b).grow().row();
+
+        b = new TextButton("Map Editor", Graphics.GUI.getSkin());
+        this.add(b).grow().row();
+
+        b = new TextButton("Settings", Graphics.GUI.getSkin());
         this.add(b).grow().row();
 
         b = new TextButton("Quit", Graphics.GUI.getSkin());
