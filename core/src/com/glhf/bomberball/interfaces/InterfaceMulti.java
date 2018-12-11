@@ -71,8 +71,8 @@ public class InterfaceMulti extends Table {
 
     class BonusWidget extends Table {
         public BonusWidget(Player player) {
-            Image bonus_0 = new Image(Graphics.Sprites.get("bow_02a"));
-            Image bonus_1 = new Image(Graphics.Sprites.get("bow_02a"));
+            Image bonus_0 = new Image(Graphics.Sprites.get("gift_01a"));
+            Image bonus_1 = new Image(Graphics.Sprites.get("bomb"));
             Image bonus_2 = new Image(Graphics.Sprites.get("bow_02a"));
             bonus_0.setScaling(Scaling.fit);
             bonus_1.setScaling(Scaling.fit);
