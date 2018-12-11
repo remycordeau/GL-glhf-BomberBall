@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.*;
-import com.glhf.bomberball.json.GameObjectTypeAdapter;
+import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.google.gson.*;
 
