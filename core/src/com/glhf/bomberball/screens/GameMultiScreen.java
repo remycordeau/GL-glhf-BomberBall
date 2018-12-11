@@ -20,16 +20,16 @@ import java.util.ArrayList;
 public class GameMultiScreen extends AbstractScreen {
 
     private Maze maze;
-    private MazeDrawer maze_drawer;
     private GameConfig config;
     private ArrayList<Player> players;
     private Player current_player;
     private ArrayList<Cell> selected_cells = new ArrayList<Cell>();
 
+    MazeDrawer maze_preview;
+
     public GameMultiScreen(Maze maze) {
         super();
         this.maze = maze;
-        maze_drawer = new MazeDrawer(maze, 1/3f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
 
         config = Config.importConfig("config_game", GameConfig.class);
         maze.applyConfig(config);
@@ -41,6 +41,9 @@ public class GameMultiScreen extends AbstractScreen {
         registerActionsHandlers();
 
         addUI(new MultiUI(players));
+
+        maze_preview = new MazeDrawer(maze, 1/3f, 1f, 0f, 1f, MazeDrawer.Fit.BEST);
+        addUI(maze_preview);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class GameMultiScreen extends AbstractScreen {
 
     public void dropBombAt(float x, float y) {
         y = Constants.APP_HEIGHT - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
+        Vector2 cell_pos = maze_preview.screenPosToCell((int)x, (int)y);
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
         Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
