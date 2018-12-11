@@ -94,10 +94,11 @@ public class Graphics {
             //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
 
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
+            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
             FreeTypeFontParameter parameter = new FreeTypeFontParameter();
             parameter.size = 64;
             BitmapFont font = generator.generateFont(parameter);
+            skin.add("default", font);
             generator.dispose();
 
             //
@@ -157,7 +158,8 @@ public class Graphics {
 
         private static void load() {
             style = new LabelStyle();
-            BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
+            //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
+            BitmapFont font = Graphics.GUI.getSkin().getFont("default");
             font.getData().setScale(0.5f);
             style.font = font;
         }

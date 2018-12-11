@@ -6,9 +6,8 @@ public class Constants {
     // textures properties
     public static final int BOX_WIDTH = 16;
     public static final int BOX_HEIGHT = 16;
-    public static final int APP_WIDTH = 960;  // 16:9
-    public static final int APP_HEIGHT = 540; // 16:9
-
+    public static final int APP_WIDTH = 900;
+    public static final int APP_HEIGHT = 600;
 
     // constans for paths
     public static final String PATH_ASSET         = "core/assets/";
