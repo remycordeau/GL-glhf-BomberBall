@@ -4,12 +4,17 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Bomberball;
+import com.glhf.bomberball.config.AppConfig;
+import com.glhf.bomberball.config.Config;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		AppConfig app_config = Config.importConfig("config_app", AppConfig.class);
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Constants.APP_WIDTH;
-		config.height = Constants.APP_HEIGHT;
+		config.width = app_config.screen_width;
+		config.height = app_config.scree_height;
+		config.fullscreen = app_config.fullscreen;
 		config.resizable = true;
 
 		/*

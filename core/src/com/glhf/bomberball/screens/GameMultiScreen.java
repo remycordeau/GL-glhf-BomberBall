@@ -1,5 +1,6 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Constants;
@@ -41,16 +42,16 @@ public class GameMultiScreen extends GameScreen {
 
     @Override
     public void registerActionsHandlers() {
-        inputHandler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
-        inputHandler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
-        inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
-        inputHandler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
-        inputHandler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
-        inputHandler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> dropBombAt(x, y));
+        input_handler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
+        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+        input_handler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> dropBombAt(x, y));
     }
 
     public void dropBombAt(float x, float y) {
-        y = Constants.APP_HEIGHT - y;
+        y = Gdx.graphics.getHeight() - y;
         Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
         int cell_x = (int)cell_pos.x;
         int cell_y = (int)cell_pos.y;
