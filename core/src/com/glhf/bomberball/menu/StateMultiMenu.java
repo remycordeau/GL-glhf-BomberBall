@@ -62,7 +62,6 @@ public class StateMultiMenu extends StateMenu {
     @Override
     public void draw() {
         super.draw();
-        maze_drawer.drawMaze();
     }
     // Getter
     public int getPreviewMapNumber() {

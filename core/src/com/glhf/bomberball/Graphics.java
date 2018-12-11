@@ -79,8 +79,12 @@ public class Graphics {
     public static class GUI {
         private static Skin skin;
 
+        private static float initial_height;
+
         private static void load()
         {
+            initial_height = Gdx.graphics.getHeight();
+
             skin = new Skin();
 
             //
@@ -96,8 +100,11 @@ public class Graphics {
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
             FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-            parameter.size = 64;
+            parameter.size = 32;
             BitmapFont font = generator.generateFont(parameter);
+            skin.add("small", font);
+            parameter.size = 64;
+            font = generator.generateFont(parameter);
             skin.add("default", font);
             generator.dispose();
 
@@ -113,6 +120,10 @@ public class Graphics {
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);
+            //
+            labelStyle = new LabelStyle();
+            labelStyle.font = skin.getFont("small");
+            skin.add("small", labelStyle);
 
             //
             SliderStyle sliderStyle = new SliderStyle();
@@ -151,21 +162,9 @@ public class Graphics {
         public static Skin getSkin(){
             return skin;
         }
-    }
 
-    public static class LabelStyleMulti {
-        private static LabelStyle style;
-
-        private static void load() {
-            style = new LabelStyle();
-            //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
-            BitmapFont font = Graphics.GUI.getSkin().getFont("default");
-            font.getData().setScale(0.5f);
-            style.font = font;
-        }
-
-        public static LabelStyle getStyle() {
-            return style;
+        public static void scaleFont() {
+            skin.getFont("default").getData().setScale(Gdx.graphics.getWidth() / initial_height);
         }
     }
 
@@ -173,7 +172,6 @@ public class Graphics {
         Graphics.Sprites.load();
         Graphics.Anims.load();
         Graphics.GUI.load();
-        Graphics.LabelStyleMulti.load();
     }
 
 }

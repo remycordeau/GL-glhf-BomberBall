@@ -2,10 +2,13 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.glhf.bomberball.maze.cell.CellEffect;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.Graphics;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
  * View of the class Maze model
  * Use it to draw a Maze on the screen
  */
-public class MazeDrawer {
+public class MazeDrawer extends Actor {
 
     /**
      * Fit mode when drawing in the specified bounds
@@ -35,7 +38,7 @@ public class MazeDrawer {
     }
 
     private Maze maze;
-    private SpriteBatch batch;
+    private Batch batch;
     private int maze_width;
     private int maze_height;
     private OrthographicCamera camera;
@@ -114,18 +117,27 @@ public class MazeDrawer {
         camera = new OrthographicCamera(cam_width, cam_height);
         camera.translate((cam_width * (0.5f - w_minp)) - cam_x_offset, (cam_height * (0.5f - h_minp)) - cam_y_offset);
         camera.update();
-        batch.setProjectionMatrix(camera.combined);
+        //batch.setProjectionMatrix(camera.combined);
     }
 
-    public void drawMaze()
-    {
-        batch.begin();
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+        maze_width = maze.getWidth();
+        maze_height = maze.getHeight();
+        updateView(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        this.batch = batch;
+        Matrix4 tmp = batch.getProjectionMatrix();
+        batch.setProjectionMatrix(camera.combined);
         drawFloor();
         drawBackWall();
         drawCells();
         drawSideWalls();
         drawFrontWall();
-        batch.end();
+        batch.setProjectionMatrix(tmp);
     }
 
     private void drawCells() {

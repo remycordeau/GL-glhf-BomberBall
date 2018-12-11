@@ -3,6 +3,8 @@ package com.glhf.bomberball.ui;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeDrawer;
 
 import java.util.ArrayList;
 

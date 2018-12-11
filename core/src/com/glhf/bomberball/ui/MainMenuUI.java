@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.screens.MultiMenuScreen;
@@ -16,6 +17,10 @@ public class MainMenuUI extends Table {
 
     public MainMenuUI() {
         this.setFillParent(true);
+        this.padLeft(Value.percentWidth(0.25f));
+        this.padRight(Value.percentWidth(0.25f));
+        this.padTop(Value.percentHeight(0.2f));
+        this.padBottom(Value.percentHeight(0.2f));
 
         addButtons();
     }
@@ -25,8 +30,17 @@ public class MainMenuUI extends Table {
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
+        b = new TextButton("Solo", Graphics.GUI.getSkin());
+        this.add(b).grow().row();
+
         b = new TextButton("Multiplayer", skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
+        this.add(b).grow().row();
+
+        b = new TextButton("Map Editor", Graphics.GUI.getSkin());
+        this.add(b).grow().row();
+
+        b = new TextButton("Settings", Graphics.GUI.getSkin());
         this.add(b).grow().row();
 
         b = new TextButton("Quit", Graphics.GUI.getSkin());
