@@ -18,7 +18,6 @@ public abstract class StateMenu extends State{
         centerButtons = new VerticalGroup();
         centerButtons.setFillParent(true);
         centerButtons.center();
-
         stage.addActor(centerButtons);
     }
 }
