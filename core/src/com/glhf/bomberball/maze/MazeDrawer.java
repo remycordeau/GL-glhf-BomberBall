@@ -120,6 +120,13 @@ public class MazeDrawer extends Actor {
         //batch.setProjectionMatrix(camera.combined);
     }
 
+    public void setMaze(Maze maze) {
+        this.maze = maze;
+        maze_width = maze.getWidth();
+        maze_height = maze.getHeight();
+        updateView(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         this.batch = batch;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
@@ -16,12 +17,17 @@ public class MultiMenuUI extends Table {
 
     MultiMenuScreen screen;
 
+    MazeDrawer maze_preview;
+
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
         this.padTop(Value.percentHeight(0.75f));
         this.setFillParent(true);
 
         initializeButtons();
+
+        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  1/3f, 1f, MazeDrawer.Fit.BEST);
+        this.add(maze_preview);
     }
 
     public void initializeButtons(){
@@ -30,6 +36,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextMaze();
+                maze_preview.setMaze(screen.maze);
             }
         });
 
@@ -38,6 +45,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
+                maze_preview.setMaze(screen.maze);
             }
         });
 
