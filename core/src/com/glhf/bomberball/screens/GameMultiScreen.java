@@ -32,13 +32,14 @@ public class GameMultiScreen extends GameScreen {
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
-        current_player.initiateTurn();
         setSelectEffect();
 
         registerActionsHandlers();
 
         addUI(new MultiUI(players));
         addUI(maze_drawer);
+
+        current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
     }
 
     @Override
