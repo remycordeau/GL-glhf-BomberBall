@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Bomberball;
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.menu.InputHandler;
 
 public abstract class AbstractScreen implements Screen {
@@ -50,6 +51,7 @@ public abstract class AbstractScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        Graphics.GUI.scaleFont();
     }
 
     @Override

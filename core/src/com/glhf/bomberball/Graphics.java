@@ -79,8 +79,12 @@ public class Graphics {
     public static class GUI {
         private static Skin skin;
 
+        private static float initial_height;
+
         private static void load()
         {
+            initial_height = Gdx.graphics.getHeight();
+
             skin = new Skin();
 
             //
@@ -157,6 +161,10 @@ public class Graphics {
 
         public static Skin getSkin(){
             return skin;
+        }
+
+        public static void scaleFont() {
+            skin.getFont("default").getData().setScale(Gdx.graphics.getWidth() / initial_height);
         }
     }
 
