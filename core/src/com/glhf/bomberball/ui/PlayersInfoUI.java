@@ -71,9 +71,9 @@ public class PlayersInfoUI extends Table {
     class NumberBonusWidget extends Table {
         public NumberBonusWidget(Player player) {
             this.pad(5);
-            Label number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.LabelStyleMulti.getStyle());
-            Label number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.LabelStyleMulti.getStyle());
-            Label bomb_range = new Label("x"+player.getBombRange(), Graphics.LabelStyleMulti.getStyle());
+            Label number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.GUI.getSkin(), "small");
+            Label number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.GUI.getSkin(), "small");
+            Label bomb_range = new Label("x"+player.getBombRange(), Graphics.GUI.getSkin(), "small");
             number_moves.setAlignment(Align.center);
             number_bombs.setAlignment(Align.center);
             bomb_range.setAlignment(Align.center);
