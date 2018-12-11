@@ -1,8 +1,10 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
@@ -33,12 +35,16 @@ public class PlayersInfoUI extends PlayerObserver {
     }
 
     class PlayerWidget extends Table {
-        private Image player_skin;
+        private Player player;
+        private boolean previous_player_state;
+        private AnimationActor player_skin;
         private PlayerInfoWidget player_info;
 
         public PlayerWidget(Player player) {
             this.pad(20);
-            player_skin = new Image(player.getSprite());
+            this.player = player;
+            this.previous_player_state = player.isActive();
+            player_skin = new AnimationActor(player.getAnimation());
             player_skin.setScaling(Scaling.fit);
             this.add(player_skin).grow();
             player_info = new PlayerInfoWidget(player);
@@ -46,7 +52,13 @@ public class PlayersInfoUI extends PlayerObserver {
         }
 
         public void update() {
-            //change image with animation
+            if (player.isActive() && !previous_player_state) {
+                previous_player_state = true;
+                player_skin.mustMove(true);
+            } else if (!player.isActive() && previous_player_state) {
+                previous_player_state = false;
+                player_skin.mustMove(false);
+            }
             player_info.update();
         }
     }

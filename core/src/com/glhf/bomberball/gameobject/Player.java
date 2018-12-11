@@ -9,6 +9,7 @@ import com.glhf.bomberball.Directions;
 public class Player extends Character {
 
     private ArrayList<PlayerObserver> observers;
+    private boolean active;
 
     private int initial_bomb_number;
     private int initial_bomb_range;
@@ -27,6 +28,7 @@ public class Player extends Character {
     {
         super(player_skin, life, initial_moves);
         this.observers = new ArrayList<PlayerObserver>();
+        this.active = false;
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
         initialize();
@@ -42,6 +44,7 @@ public class Player extends Character {
      */
     @Override
     public void initiateTurn() {
+        active = true;
         moves_remaining = initial_moves + bonus_moves;
         bombs_remaining = initial_bomb_number + bonus_bomb_number;
         this.notifyObservers();
@@ -92,6 +95,14 @@ public class Player extends Character {
 
     public int getBombRange() {
         return bonus_bomb_range+initial_bomb_range;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean b) {
+        this.active = b;
     }
 
     public void addObserver(PlayerObserver observer) {
