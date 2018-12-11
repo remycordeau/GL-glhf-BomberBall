@@ -1,8 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.menu.Directions;
 import com.glhf.bomberball.ui.PlayerObserver;
 
 import java.util.ArrayList;
@@ -28,6 +26,7 @@ public class Player extends Character {
                   int initial_bomb_range)
     {
         super(player_skin, life, initial_moves);
+        this.observers = new ArrayList<PlayerObserver>();
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
         initialize();

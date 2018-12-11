@@ -16,6 +16,7 @@ public class PlayersInfoUI extends PlayerObserver {
 
     public PlayersInfoUI(ArrayList<Player> players) {
         super(players);
+        wplayers = new ArrayList<>();
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
             this.wplayers.add(pw);
@@ -76,6 +77,7 @@ public class PlayersInfoUI extends PlayerObserver {
         public HeartsWidget(Player player) {
             this.pad(5);
             this.player = player;
+            this.hearts = new ArrayList<Image>();
             for (int i=0; i<player.getLife(); i++) {
                 Image heart = new Image(Graphics.Sprites.get("ui_heart_full"));
                 heart.setScaling(Scaling.fit);
