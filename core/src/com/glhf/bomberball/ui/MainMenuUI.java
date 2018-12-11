@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.screens.MultiMenuScreen;
@@ -16,6 +17,10 @@ public class MainMenuUI extends Table {
 
     public MainMenuUI() {
         this.setFillParent(true);
+        this.padLeft(Value.percentWidth(0.25f));
+        this.padRight(Value.percentWidth(0.25f));
+        this.padTop(Value.percentHeight(0.2f));
+        this.padBottom(Value.percentHeight(0.2f));
 
         addButtons();
     }
