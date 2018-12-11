@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
+import com.glhf.bomberball.screens.GameMultiScreen;
+import com.glhf.bomberball.screens.ScreenChangeListener;
 
 
 public class StateMultiMenu extends StateMenu {
@@ -32,7 +34,7 @@ public class StateMultiMenu extends StateMenu {
 
     public void initializeButtons(){
         playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
-        playButton.addListener(new SetStateListener(new StateGameMulti(previewFile)));
+        playButton.addListener(new ScreenChangeListener(GameMultiScreen.class));
         centerButtons.addActor(playButton);
         cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new SetStateListener(mainMenu));

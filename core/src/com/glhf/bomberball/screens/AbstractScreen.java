@@ -20,9 +20,10 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.setDebugAll(Bomberball.debug);
         stage.addListener(inputHandler);
+        registerActionsHandlers();
     }
 
-    public void registerActionsHandlers() { }
+    protected void registerActionsHandlers() { }
 
     public void addUI(Actor ui) {
         stage.addActor(ui);
