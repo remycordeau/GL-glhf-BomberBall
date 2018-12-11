@@ -1,21 +1,12 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.Selection;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 
-public class StateSettingsMenu extends StateMenu {
+public class SettingsMenuScreen extends MenuScreen {
 
     //Constructor
-    public StateSettingsMenu() {
+    public SettingsMenuScreen() {
         super();
         centerButtons.addActor(new ParameterString("skin of player1"));
         centerButtons.addActor(new ParameterInt("number of players", 1, 4, 1));
@@ -35,7 +26,7 @@ public class StateSettingsMenu extends StateMenu {
         private SelectBox<String> value;
         public ParameterString(String name) {
             super(name);
-            value = new SelectBox<String>(Graphics.GUI.getSkin());
+            value = new SelectBox<>(Graphics.GUI.getSkin());
             value.setItems("test1","test2","test3","test4");
             addActor(value);
         }

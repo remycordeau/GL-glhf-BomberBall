@@ -1,9 +1,9 @@
 package com.glhf.bomberball.config;
 
 import com.badlogic.gdx.Input;
-import com.glhf.bomberball.menu.InputHandler;
-import com.glhf.bomberball.menu.InputHandler.ButtonAction;
-import com.glhf.bomberball.menu.InputHandler.KeyAction;
+import com.glhf.bomberball.InputHandler;
+import com.glhf.bomberball.InputHandler.ButtonAction;
+import com.glhf.bomberball.InputHandler.KeyAction;
 
 import java.util.HashMap;
 
@@ -26,8 +26,8 @@ public class InputsConfig extends Config {
      * Default constructor
      */
     public InputsConfig() {
-        keycodes_actions = new HashMap<Integer, KeyAction>();
-        buttoncodes_actions = new HashMap<Integer, ButtonAction>();
+        keycodes_actions = new HashMap<>();
+        buttoncodes_actions = new HashMap<>();
     }
 
     /**

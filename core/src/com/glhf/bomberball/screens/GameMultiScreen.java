@@ -8,12 +8,11 @@ import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.menu.Directions;
-import com.glhf.bomberball.menu.InputHandler.KeyAction;
-import com.glhf.bomberball.menu.InputHandler.ButtonAction;
+import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.InputHandler.KeyAction;
+import com.glhf.bomberball.InputHandler.ButtonAction;
 
 import java.util.ArrayList;
 

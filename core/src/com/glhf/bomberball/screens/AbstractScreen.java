@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.menu.InputHandler;
+import com.glhf.bomberball.InputHandler;
 
 public abstract class AbstractScreen implements Screen {
 

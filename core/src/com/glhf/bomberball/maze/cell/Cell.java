@@ -2,7 +2,7 @@ package com.glhf.bomberball.maze.cell;
 
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.menu.Directions;
+import com.glhf.bomberball.Directions;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class Cell {
     {
         this.x = x;
         this.y = y;
-        objects = new ArrayList<GameObject>();
+        objects = new ArrayList<>();
         adjacent_cells = new Cell[Directions.values().length];
     }
 
@@ -93,7 +93,7 @@ public class Cell {
      */
     public ArrayList<Cell> getAdjacentCells()
     {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
         for (Directions dir : Directions.values()) {
             Cell c = getAdjacentCell(dir);
             if (c != null) {
@@ -109,7 +109,7 @@ public class Cell {
      */
     public void getDamage(int damage)
     {
-        ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(objects);
+        ArrayList<GameObject> gameObjects = new ArrayList<>(objects);
         gameObjects.forEach((o) -> {o.getDamage(damage);});
     }
 
@@ -184,7 +184,7 @@ public class Cell {
      * @return All gameObjects in cell, instances of c.
      */
     public <T extends GameObject> ArrayList<T> getInstancesOf(Class<T> clz) {
-        ArrayList<T> instances = new ArrayList<T>();
+        ArrayList<T> instances = new ArrayList<>();
         for(GameObject o : objects){
             if(clz.isInstance(o)){
                 instances.add(clz.cast(o));

@@ -3,7 +3,6 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.glhf.bomberball.menu.State;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
 public class Bomberball extends Game {
@@ -29,8 +28,5 @@ public class Bomberball extends Game {
 
 	public static void changeScreen(Screen screen) {
 		instance.setScreen(screen);
-	}
-
-	public static void setState(State etat){
 	}
 }

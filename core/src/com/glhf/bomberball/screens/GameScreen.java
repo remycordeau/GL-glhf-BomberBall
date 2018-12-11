@@ -2,7 +2,6 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
-import com.glhf.bomberball.menu.State;
 
 public abstract class GameScreen extends AbstractScreen {
     protected Maze maze;

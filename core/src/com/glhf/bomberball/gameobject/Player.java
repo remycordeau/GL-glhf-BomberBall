@@ -1,7 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.menu.Directions;
+import com.glhf.bomberball.Directions;
 
 public class Player extends Character {
 

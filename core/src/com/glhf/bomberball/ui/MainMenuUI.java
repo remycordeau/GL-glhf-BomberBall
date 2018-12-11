@@ -9,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.screens.MultiMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
-import com.glhf.bomberball.screens.GameMultiScreen;
+import com.glhf.bomberball.screens.*;
 
 public class MainMenuUI extends Table {
 
@@ -31,6 +29,7 @@ public class MainMenuUI extends Table {
         Skin skin = Graphics.GUI.getSkin();
 
         b = new TextButton("Solo", Graphics.GUI.getSkin());
+        b.addListener(new ScreenChangeListener(SoloMenuScreen.class));
         this.add(b).grow().row();
 
         b = new TextButton("Multiplayer", skin);
@@ -38,9 +37,11 @@ public class MainMenuUI extends Table {
         this.add(b).grow().row();
 
         b = new TextButton("Map Editor", Graphics.GUI.getSkin());
+        b.addListener(new ScreenChangeListener(MapEditorMenuScreen.class));
         this.add(b).grow().row();
 
         b = new TextButton("Settings", Graphics.GUI.getSkin());
+        b.addListener(new ScreenChangeListener(SettingsMenuScreen.class));
         this.add(b).grow().row();
 
         b = new TextButton("Quit", Graphics.GUI.getSkin());

@@ -2,7 +2,7 @@ package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.menu.Directions;
+import com.glhf.bomberball.Directions;
 
 public abstract class GameObject {
 

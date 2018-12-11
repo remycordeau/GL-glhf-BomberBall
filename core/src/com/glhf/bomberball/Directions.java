@@ -1,4 +1,4 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball;
 
 public enum Directions {
     RIGHT,
