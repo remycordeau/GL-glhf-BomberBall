@@ -2,6 +2,7 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
@@ -16,7 +17,11 @@ public class MultiUI extends Table {
         PlayersInfoUI left_ui = new PlayersInfoUI(players);
         left_ui.padRight(Value.percentWidth(2/3f));
         left_ui.setFillParent(true);
-
+        ActionPlayerUI bottom_ui = new ActionPlayerUI();
+        bottom_ui.padLeft(Value.percentWidth(1/3f));
+        bottom_ui.setFillParent(true);
+        bottom_ui.align(Align.right);
         this.addActor(left_ui);
+        this.addActor(bottom_ui);
     }
 }

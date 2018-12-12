@@ -15,8 +15,11 @@ public class ActionPlayerUI extends Table {
      * constructor
      */
     public ActionPlayerUI(){
-        this.reachable_squares_move = new TextButton("Ou se déplacer ?", Graphics.GUI.getSkin());
-        this.reachable_squares_bomb = new TextButton("Ou poser la bombe ?", Graphics.GUI.getSkin());
-        this.endTurn= new TextButton("Fin de tour", Graphics.GUI.getSkin());
+        this.reachable_squares_move = new TextButton("a", Graphics.GUI.getSkin());
+        this.reachable_squares_bomb = new TextButton("b", Graphics.GUI.getSkin());
+        this.endTurn= new TextButton("c", Graphics.GUI.getSkin());
+        this.addActor(reachable_squares_bomb);
+        this.addActor(reachable_squares_move);
+        this.addActor(endTurn);
     }
 }
