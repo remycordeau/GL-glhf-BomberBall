@@ -35,7 +35,11 @@ public class InputHandler extends InputListener {
         KEY_DOWN,
         KEY_LEFT,
         KEY_RIGHT,
-        KEY_SPACE
+        KEY_SPACE,
+        KEY_DROP_RIGHT,
+        KEY_DROP_UP,
+        KEY_DROP_LEFT,
+        KEY_DROP_DOWN
     }
 
     /**
@@ -56,8 +60,8 @@ public class InputHandler extends InputListener {
      * Creates an InputHandler with default input codes configurations
      */
     public InputHandler() {
-        // TODO : importer la bonne config d'inputs
         inputs_config = InputsConfig.defaultConfig();
+        inputs_config.export("default_inputs");
     }
 
     /**

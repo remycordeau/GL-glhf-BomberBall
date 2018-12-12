@@ -10,13 +10,17 @@ public class AnimationActor extends Image {
     private boolean move;
 
     public AnimationActor(Animation<TextureAtlas.AtlasRegion> animation) {
-        super(animation.getKeyFrame(Bomberball.time_elapsed));
+        super(animation.getKeyFrame(0));
         this.animation = animation;
         this.move = false;
     }
 
     public void mustMove(boolean move) {
+
         this.move = move;
+        if (!move) {
+            this.setDrawable(new SpriteDrawable(new Sprite(animation.getKeyFrame(0))));
+        }
     }
 
     @Override
