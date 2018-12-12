@@ -20,8 +20,8 @@ public class ActionPlayerUI extends Table {
      */
     public ActionPlayerUI(GameMultiScreen screen){
         this.screen=screen;
-        this.reachable_squares_move = new TextButton("Bombe [b]", Graphics.GUI.getSkin(), "small");
-        this.reachable_squares_bomb = new TextButton("Déplacement [d]", Graphics.GUI.getSkin(),"small");
+        this.reachable_squares_move = new TextButton("Déplacement [d]", Graphics.GUI.getSkin(), "small");
+        this.reachable_squares_bomb = new TextButton("Bombe [b]", Graphics.GUI.getSkin(),"small");
         this.endTurn= new TextButton("Fin de tour [f]", Graphics.GUI.getSkin(),"small");
         // TODO : ajout des listeners sur les différents boutons
         reachable_squares_move.addListener(new ClickListener(){
@@ -35,6 +35,12 @@ public class ActionPlayerUI extends Table {
             public void clicked(InputEvent event, float x, float y){
                 screen.setBombMode();
             }
+        });
+        endTurn.addListener(new ClickListener(){
+           @Override
+           public void clicked(InputEvent event, float x, float y){
+               screen.setEndTurnMode();
+           }
         });
         this.add(reachable_squares_bomb).growX();
         this.add(reachable_squares_move).growX();
