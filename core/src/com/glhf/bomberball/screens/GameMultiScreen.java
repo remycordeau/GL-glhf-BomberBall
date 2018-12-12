@@ -157,6 +157,7 @@ public class GameMultiScreen extends GameScreen {
         current_player = players.get(i);
         current_player.initiateTurn();
         setSelectEffect(current_player.getNumberMoveRemaining());
+        setMoveMode();
         input_handler.lock(false);
     }
 }
