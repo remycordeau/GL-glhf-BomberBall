@@ -1,9 +1,13 @@
 {
   "keycodes_actions": {
+    "146": "KEY_DROP_DOWN",
     "19": "KEY_UP",
     "20": "KEY_DOWN",
+    "148": "KEY_DROP_LEFT",
     "21": "KEY_LEFT",
     "22": "KEY_RIGHT",
+    "150": "KEY_DROP_RIGHT",
+    "152": "KEY_DROP_UP",
     "62": "KEY_SPACE"
   },
   "buttoncodes_actions": {

@@ -42,6 +42,10 @@ public class InputsConfig extends Config {
         c.addKeyCodeAction(Input.Keys.LEFT, KeyAction.KEY_LEFT);
         c.addKeyCodeAction(Input.Keys.RIGHT, KeyAction.KEY_RIGHT);
         c.addKeyCodeAction(Input.Keys.SPACE, KeyAction.KEY_SPACE);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_4, KeyAction.KEY_DROP_LEFT);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_8, KeyAction.KEY_DROP_UP);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_6, KeyAction.KEY_DROP_RIGHT);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_2, KeyAction.KEY_DROP_DOWN);
 
         c.addButtonCodeAction(Input.Buttons.LEFT, ButtonAction.BUTTON_LEFT);
         c.addButtonCodeAction(Input.Buttons.RIGHT, ButtonAction.BUTTON_RIGHT);
