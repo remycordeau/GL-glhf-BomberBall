@@ -29,8 +29,8 @@ public class GameMultiScreen extends GameScreen {
     public GameMultiScreen(Maze maze) {
         super(maze);
 
-        config = Config.importConfig("config_game", GameMultiConfig.class);
-        maze.applyConfig(config);
+        config = GameMultiConfig.get("config_game_multi");
+        //maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
         setSelectEffect();

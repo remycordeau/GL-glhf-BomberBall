@@ -11,7 +11,7 @@ import com.glhf.bomberball.maze.Maze;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		AppConfig app_config = Config.importConfig("config_app", AppConfig.class);
+		AppConfig app_config = AppConfig.get("config_app");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = app_config.screen_width;
