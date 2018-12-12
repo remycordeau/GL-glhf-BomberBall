@@ -4,11 +4,13 @@ import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.PlayerObserver;
 
 import java.util.ArrayList;
+import java.util.Observer;
+
 import com.glhf.bomberball.Directions;
 
 public class Player extends Character {
 
-    private ArrayList<PlayerObserver> observers;
+    private ArrayList<Observer> observers;
     private boolean active;
 
     private int initial_bomb_number;
@@ -27,7 +29,7 @@ public class Player extends Character {
                   int initial_bomb_range)
     {
         super(player_skin, life, initial_moves);
-        this.observers = new ArrayList<PlayerObserver>();
+        this.observers = new ArrayList<Observer>();
         this.active = false;
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
@@ -105,13 +107,13 @@ public class Player extends Character {
         this.active = b;
     }
 
-    public void addObserver(PlayerObserver observer) {
+    public void addObserver(Observer observer) {
         this.observers.add(observer);
     }
 
     private void notifyObservers() {
-        for (PlayerObserver observer : this.observers) {
-            observer.update();
+        for (Observer observer : this.observers) {
+            observer.update(null, this);
         }
     }
 }
