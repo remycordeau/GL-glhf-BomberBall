@@ -19,12 +19,10 @@ public class AnimationActor extends Image {
         this.move = move;
     }
 
-
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void act(float delta) {
         if (move) {
             this.setDrawable(new SpriteDrawable(new Sprite(animation.getKeyFrame(Bomberball.time_elapsed))));
         }
-        super.draw(batch, parentAlpha);
     }
 }

@@ -11,6 +11,8 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class PlayersInfoUI extends PlayerObserver {
 
@@ -34,7 +36,7 @@ public class PlayersInfoUI extends PlayerObserver {
         }
     }
 
-    class PlayerWidget extends Table {
+    class PlayerWidget extends Table /*implements Observer*/ {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
@@ -49,6 +51,7 @@ public class PlayersInfoUI extends PlayerObserver {
             this.add(player_skin).grow();
             player_info = new PlayerInfoWidget(player);
             this.add(player_info).grow();
+            // player.addObserver(this);
         }
 
         public void update() {
@@ -61,6 +64,11 @@ public class PlayersInfoUI extends PlayerObserver {
             }
             player_info.update();
         }
+
+//        @Override
+//        public void update(Observable observable, Object o) {
+//
+//        }
     }
 
     class PlayerInfoWidget extends Table {

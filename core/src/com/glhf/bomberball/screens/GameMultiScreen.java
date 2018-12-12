@@ -3,6 +3,7 @@ package com.glhf.bomberball.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameConfig;
@@ -87,6 +88,7 @@ public class GameMultiScreen extends GameScreen {
 
     private void endTurn()
     {
+        input_handler.lock(true);
         clearSelectEffect();
         maze.processEndTurn();
         current_player.setActive(false);
@@ -102,6 +104,18 @@ public class GameMultiScreen extends GameScreen {
      * gives the next player after a turn. If the next player is dead, choose the following player.
      */
     private void nextPlayer() {
+        int dead_players_count = 0;
+        for (Player p : players) {
+            if (!p.isAlive()) {
+                dead_players_count++;
+            }
+        }
+        System.err.println(dead_players_count);
+        if (dead_players_count >= players.size() - 1) {
+            Bomberball.changeScreen(new MainMenuScreen());
+            return;
+        }
+
         int i = players.indexOf(current_player);
         do {
             i = (i + 1) % players.size();
@@ -109,5 +123,6 @@ public class GameMultiScreen extends GameScreen {
         current_player = players.get(i);
         current_player.initiateTurn();
         setSelectEffect();
+        input_handler.lock(false);
     }
 }
