@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.InputHandler.ActionHandler;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
@@ -14,8 +13,6 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.Directions;
-import com.glhf.bomberball.InputHandler.KeyAction;
-import com.glhf.bomberball.InputHandler.ButtonAction;
 
 import java.util.ArrayList;
 
@@ -45,19 +42,19 @@ public class GameMultiScreen extends GameScreen {
 
     @Override
     public void registerActionsHandlers() {
-        input_handler.registerKeyAction(KeyAction.KEY_BOMB, () -> this.setBombMode());
-        input_handler.registerKeyAction(KeyAction.KEY_MOVE, () -> this.setMoveMode());
-        input_handler.registerKeyAction(KeyAction.KEY_ENDTURN, () -> endTurn());
-        input_handler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
-        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
-        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
-        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
-        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
-        input_handler.registerKeyAction(KeyAction.KEY_DROP_UP, () -> dropBomb(Directions.UP));
-        input_handler.registerKeyAction(KeyAction.KEY_DROP_LEFT, () -> dropBomb(Directions.LEFT));
-        input_handler.registerKeyAction(KeyAction.KEY_DROP_RIGHT, () -> dropBomb(Directions.RIGHT));
-        input_handler.registerKeyAction(KeyAction.KEY_DROP_DOWN, () -> dropBomb(Directions.DOWN));
-        input_handler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> dropBombAt(x, y));
+        input_handler.registerActionHandler(Action.KEY_BOMB, () -> this.setBombMode());
+        input_handler.registerActionHandler(Action.KEY_MOVE, () -> this.setMoveMode());
+        input_handler.registerActionHandler(Action.KEY_ENDTURN, () -> endTurn());
+        input_handler.registerActionHandler(Action.KEY_SPACE, () -> endTurn());
+        input_handler.registerActionHandler(Action.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        input_handler.registerActionHandler(Action.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        input_handler.registerActionHandler(Action.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        input_handler.registerActionHandler(Action.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+        input_handler.registerActionHandler(Action.KEY_DROP_UP, () -> dropBomb(Directions.UP));
+        input_handler.registerActionHandler(Action.KEY_DROP_LEFT, () -> dropBomb(Directions.LEFT));
+        input_handler.registerActionHandler(Action.KEY_DROP_RIGHT, () -> dropBomb(Directions.RIGHT));
+        input_handler.registerActionHandler(Action.KEY_DROP_DOWN, () -> dropBomb(Directions.DOWN));
+        input_handler.registerActionHandler(Action.MOUSE_LEFT, (x, y) -> dropBombAt(x, y));
     }
 
     public void dropBombAt(float x, float y) {
@@ -97,19 +94,19 @@ public class GameMultiScreen extends GameScreen {
     public void setBombMode(){
         this.clearSelectEffect();
         this.setSelectEffect(1);
-        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> dropBomb(Directions.DOWN));
-        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> dropBomb(Directions.UP));
-        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> dropBomb(Directions.LEFT));
-        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> dropBomb(Directions.RIGHT));
+        input_handler.registerActionHandler(Action.KEY_DOWN, () -> dropBomb(Directions.DOWN));
+        input_handler.registerActionHandler(Action.KEY_UP, () -> dropBomb(Directions.UP));
+        input_handler.registerActionHandler(Action.KEY_LEFT, () -> dropBomb(Directions.LEFT));
+        input_handler.registerActionHandler(Action.KEY_RIGHT, () -> dropBomb(Directions.RIGHT));
     }
 
     public void setMoveMode(){
         this.clearSelectEffect();
         this.setSelectEffect(current_player.getNumberMoveRemaining());
-        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
-        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
-        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
-        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+        input_handler.registerActionHandler(Action.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        input_handler.registerActionHandler(Action.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        input_handler.registerActionHandler(Action.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        input_handler.registerActionHandler(Action.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
     }
 
 

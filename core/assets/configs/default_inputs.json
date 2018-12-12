@@ -14,7 +14,7 @@
     "30": "KEY_BOMB"
   },
   "buttoncodes_actions": {
-    "0": "BUTTON_LEFT",
-    "1": "BUTTON_RIGHT"
+    "0": "MOUSE_LEFT",
+    "1": "MOUSE_RIGHT"
   }
 }

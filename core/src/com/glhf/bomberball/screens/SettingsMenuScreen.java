@@ -6,9 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
-import com.glhf.bomberball.InputHandler.ButtonAction;
-import com.glhf.bomberball.InputHandler.KeyAction;
-import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.config.InputsConfig;
 
 import java.lang.reflect.Field;
@@ -88,9 +86,9 @@ public class SettingsMenuScreen extends AbstractScreen {
 
         public ParameterInput(Object o, Integer f) {
             Label label = new Label("Aaaah", Graphics.GUI.getSkin(), "small");
-            if(o instanceof ButtonAction)
+            if(o instanceof InputHandler.Action)
                 label.setText(o.toString());
-            if(o instanceof KeyAction)
+            if(o instanceof InputHandler.Action)
                 label.setText(o.toString());
             TextButton textButton = new TextButton("code:"+f, Graphics.GUI.getSkin(), "small");
             textButton.addListener(new ChangeInputListener(o, f));

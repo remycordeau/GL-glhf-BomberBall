@@ -1,9 +1,7 @@
 package com.glhf.bomberball.config;
 
 import com.badlogic.gdx.Input;
-import com.glhf.bomberball.InputHandler;
-import com.glhf.bomberball.InputHandler.ButtonAction;
-import com.glhf.bomberball.InputHandler.KeyAction;
+import com.glhf.bomberball.InputHandler.Action;
 
 import java.util.HashMap;
 
@@ -18,9 +16,9 @@ import java.util.HashMap;
 public class InputsConfig extends Config {
 
     /** Map to convert key codes to actions */
-    public HashMap<Integer, KeyAction> keycodes_actions;
+    public HashMap<Integer, Action> keycodes_actions;
     /** Map to convert button codes to actions */
-    public HashMap<Integer, ButtonAction> buttoncodes_actions;
+    public HashMap<Integer, Action> buttoncodes_actions;
 
     /**
      * Default constructor
@@ -37,22 +35,22 @@ public class InputsConfig extends Config {
     public static InputsConfig defaultConfig() {
         InputsConfig c = new InputsConfig();
 
-        c.addKeyCodeAction(Input.Keys.DOWN, KeyAction.KEY_DOWN);
-        c.addKeyCodeAction(Input.Keys.UP, KeyAction.KEY_UP);
-        c.addKeyCodeAction(Input.Keys.LEFT, KeyAction.KEY_LEFT);
-        c.addKeyCodeAction(Input.Keys.RIGHT, KeyAction.KEY_RIGHT);
-        c.addKeyCodeAction(Input.Keys.SPACE, KeyAction.KEY_SPACE);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_4, KeyAction.KEY_DROP_LEFT);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_8, KeyAction.KEY_DROP_UP);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_6, KeyAction.KEY_DROP_RIGHT);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_2, KeyAction.KEY_DROP_DOWN);
-        c.addKeyCodeAction(Input.Keys.D, KeyAction.KEY_MOVE);
-        c.addKeyCodeAction(Input.Keys.B, KeyAction.KEY_BOMB);
-        c.addKeyCodeAction(Input.Keys.F, KeyAction.KEY_ENDTURN);
+        c.addKeyCodeAction(Input.Keys.DOWN, Action.KEY_DOWN);
+        c.addKeyCodeAction(Input.Keys.UP, Action.KEY_UP);
+        c.addKeyCodeAction(Input.Keys.LEFT, Action.KEY_LEFT);
+        c.addKeyCodeAction(Input.Keys.RIGHT, Action.KEY_RIGHT);
+        c.addKeyCodeAction(Input.Keys.SPACE, Action.KEY_SPACE);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_4, Action.KEY_DROP_LEFT);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_8, Action.KEY_DROP_UP);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_6, Action.KEY_DROP_RIGHT);
+        c.addKeyCodeAction(Input.Keys.NUMPAD_2, Action.KEY_DROP_DOWN);
+        c.addKeyCodeAction(Input.Keys.D, Action.KEY_MOVE);
+        c.addKeyCodeAction(Input.Keys.B, Action.KEY_BOMB);
+        c.addKeyCodeAction(Input.Keys.F, Action.KEY_ENDTURN);
 
 
-        c.addButtonCodeAction(Input.Buttons.LEFT, ButtonAction.BUTTON_LEFT);
-        c.addButtonCodeAction(Input.Buttons.RIGHT, ButtonAction.BUTTON_RIGHT);
+        c.addButtonCodeAction(Input.Buttons.LEFT, Action.MOUSE_LEFT);
+        c.addButtonCodeAction(Input.Buttons.RIGHT, Action.MOUSE_RIGHT);
 
         return c;
     }
@@ -62,44 +60,44 @@ public class InputsConfig extends Config {
     }
 
     /**
-     * Links a key code with a KeyAction
+     * Links a key code with a Action
      * @param key_code
      * @param action
      */
-    private void addKeyCodeAction(int key_code, KeyAction action) {
+    private void addKeyCodeAction(int key_code, Action action) {
         keycodes_actions.put(key_code, action);
     }
 
     /**
-     * Links a button code with a KeyAction
+     * Links a button code with a Action
      * @param button_code
      * @param action
      */
-    private void addButtonCodeAction(int button_code, ButtonAction action) {
+    private void addButtonCodeAction(int button_code, Action action) {
         buttoncodes_actions.put(button_code, action);
     }
 
     /**
      * Converts key codes to InputHandler.KeyActions
      * @param key_code
-     * @return KeyAction corresponding to key_code
+     * @return Action corresponding to key_code
      */
-    public InputHandler.KeyAction getKeyActionCode(int key_code) {
+    public Action getKeyActionCode(int key_code) {
         return keycodes_actions.get(key_code);
     }
 
     /**
      * Converts button codes to InputHandler.ButtonActions
      * @param button_code
-     * @return KeyAction corresponding to key_code
+     * @return Action corresponding to key_code
      */
-    public InputHandler.ButtonAction getButtonActionCode(int button_code) {
+    public Action getButtonActionCode(int button_code) {
         return buttoncodes_actions.get(button_code);
     }
 
     /**
      * @param key_code
-     * @return key_code is assigned to a KeyAction
+     * @return key_code is assigned to a Action
      */
     public boolean isKeyCodeAssigned(int key_code) {
         return keycodes_actions.containsKey(key_code);
