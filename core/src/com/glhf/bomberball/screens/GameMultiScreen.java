@@ -110,7 +110,6 @@ public class GameMultiScreen extends GameScreen {
                 dead_players_count++;
             }
         }
-        System.err.println(dead_players_count);
         if (dead_players_count >= players.size() - 1) {
             Bomberball.changeScreen(new MainMenuScreen());
             return;
