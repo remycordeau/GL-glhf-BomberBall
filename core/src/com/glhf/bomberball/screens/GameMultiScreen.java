@@ -45,6 +45,9 @@ public class GameMultiScreen extends GameScreen {
 
     @Override
     public void registerActionsHandlers() {
+        input_handler.registerKeyAction(KeyAction.KEY_BOMB, () -> this.setBombMode());
+        input_handler.registerKeyAction(KeyAction.KEY_MOVE, () -> this.setMoveMode());
+        input_handler.registerKeyAction(KeyAction.KEY_ENDTURN, () -> endTurn());
         input_handler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
         input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
         input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
@@ -92,6 +95,7 @@ public class GameMultiScreen extends GameScreen {
 
     // Methods to change the mod when click on a button in ActionPlayer bar
     public void setBombMode(){
+        this.clearSelectEffect();
         this.setSelectEffect(1);
         input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> dropBomb(Directions.DOWN));
         input_handler.registerKeyAction(KeyAction.KEY_UP, () -> dropBomb(Directions.UP));
@@ -100,6 +104,7 @@ public class GameMultiScreen extends GameScreen {
     }
 
     public void setMoveMode(){
+        this.clearSelectEffect();
         this.setSelectEffect(current_player.getNumberMoveRemaining());
         input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
         input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
@@ -107,9 +112,6 @@ public class GameMultiScreen extends GameScreen {
         input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
     }
 
-    public void setEndTurnMode(){
-        input_handler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
-    }
 
     ////////////////////////////////////////////////////////////////////////////
 
@@ -119,7 +121,7 @@ public class GameMultiScreen extends GameScreen {
         setSelectEffect(current_player.getNumberMoveRemaining());
     }
 
-    private void endTurn()
+    public void endTurn()
     {
         input_handler.lock(true);
         clearSelectEffect();

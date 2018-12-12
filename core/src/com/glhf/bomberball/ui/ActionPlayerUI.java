@@ -39,7 +39,7 @@ public class ActionPlayerUI extends Table {
         endTurn.addListener(new ClickListener(){
            @Override
            public void clicked(InputEvent event, float x, float y){
-               screen.setEndTurnMode();
+               screen.endTurn();
            }
         });
         this.add(reachable_squares_bomb).growX();

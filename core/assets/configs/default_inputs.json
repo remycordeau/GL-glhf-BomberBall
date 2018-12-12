@@ -1,6 +1,8 @@
 {
   "keycodes_actions": {
+    "32": "KEY_MOVE",
     "146": "KEY_DROP_DOWN",
+    "34": "KEY_ENDTURN",
     "19": "KEY_UP",
     "20": "KEY_DOWN",
     "148": "KEY_DROP_LEFT",
@@ -8,7 +10,8 @@
     "22": "KEY_RIGHT",
     "150": "KEY_DROP_RIGHT",
     "152": "KEY_DROP_UP",
-    "62": "KEY_SPACE"
+    "62": "KEY_SPACE",
+    "30": "KEY_BOMB"
   },
   "buttoncodes_actions": {
     "0": "BUTTON_LEFT",
