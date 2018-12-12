@@ -8,21 +8,22 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.menu.InputHandler;
+import com.glhf.bomberball.InputHandler;
 
 public abstract class AbstractScreen implements Screen {
 
-    protected InputHandler inputHandler;
+    protected InputHandler input_handler;
     private Stage stage;
 
     public AbstractScreen() {
-        inputHandler = new InputHandler();
+        input_handler = new InputHandler();
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.setDebugAll(Bomberball.debug);
-        stage.addListener(inputHandler);
+        stage.addListener(input_handler);
+        registerActionsHandlers();
     }
 
-    public void registerActionsHandlers() { }
+    protected void registerActionsHandlers() { }
 
     public void addUI(Actor ui) {
         stage.addActor(ui);

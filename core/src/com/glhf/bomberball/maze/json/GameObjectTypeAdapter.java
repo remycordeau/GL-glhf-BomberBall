@@ -1,7 +1,5 @@
-package com.glhf.bomberball.json;
+package com.glhf.bomberball.maze.json;
 
-import com.glhf.bomberball.gameobject.Bonus;
-import com.glhf.bomberball.gameobject.BonusWall;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.google.gson.*;
 

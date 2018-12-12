@@ -41,6 +41,10 @@ public abstract class Character extends GameObject {
         animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
+    public Animation<TextureAtlas.AtlasRegion> getAnimation() {
+        return animation;
+    }
+
     /**
      * Initiate attribute number_move_remaining at the beginning of a turn
      */

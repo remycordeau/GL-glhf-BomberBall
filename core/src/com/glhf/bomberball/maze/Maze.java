@@ -3,8 +3,10 @@ package com.glhf.bomberball.maze;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.Constants;
 import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
-import com.glhf.bomberball.json.GameObjectTypeAdapter;
+import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.google.gson.*;
 
@@ -67,21 +69,34 @@ public class Maze {
         }
     }
 
-    public ArrayList<Player> spawnPlayers(GameConfig config)
+
+    public Player spawnPlayer(GameSoloConfig config)
+    {
+        Vector2 p = spawn_positions.get(0);
+        Player player = spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
+        return player;
+    }
+
+    public ArrayList<Player> spawnPlayers(GameMultiConfig config)
     {
         ArrayList<Player> players = new ArrayList<Player>();
         for (int i = 0; i < config.player_count; i++) {
             Vector2 p = spawn_positions.get(i);
-            Player player = new Player(
-                    config.player_skins[i],
-                    config.player_life,
-                    config.initial_player_moves,
-                    config.initial_bomb_number,
-                    config.initial_bomb_range);
-            cells[(int)p.x][(int)p.y].addGameObject(player);
+            Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
             players.add(player);
         }
         return players;
+    }
+
+    private Player spawnPlayer(GameConfig config, String player_skin, Cell cell) {
+        Player player = new Player(
+                player_skin,
+                config.player_life,
+                config.initial_player_moves,
+                config.initial_bomb_number,
+                config.initial_bomb_range);
+        cell.addGameObject(player);
+        return player;
     }
 
     /**

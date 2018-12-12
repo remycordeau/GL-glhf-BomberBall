@@ -13,19 +13,9 @@ public class GameConfig extends Config {
     // Player
     public int player_life = 1;
     public int initial_player_moves = 5;
-    public int player_count = 4;
-    public String[] player_skins = {"knight_m", "knight_f", "elf_m", "wizzard_f"};
-
-    // Enemies
-    public int activeEnemy_life = 1;
-    public int activeEnemy_strength = 1;
-    public int activeEnemy_moves = 5;
-
-    public int passiveEnemy_life = 1;
-    public int passiveEnemy_strength = 1;
-    public int passiveEnemy_moves = 5;
-
-    public int aggressiveEnemy_life = 1;
-    public int aggressiveEnemy_strength = 1;
-    public int aggressiveEnemy_moves = 5;
+    public String[] player_skins_list = {
+            "knight_m",
+            "knight_f",
+            "elf_m",
+            "wizzard_f"};
 }

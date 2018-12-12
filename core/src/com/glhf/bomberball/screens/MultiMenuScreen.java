@@ -9,7 +9,7 @@ public class MultiMenuScreen extends AbstractScreen {
     public Maze maze;
 
     private int maze_id = 0;
-    private final int maze_count = 6;
+    private final int maze_count = 7;
 
     public MultiMenuScreen() {
         maze = Maze.importMaze("maze_" + maze_id);

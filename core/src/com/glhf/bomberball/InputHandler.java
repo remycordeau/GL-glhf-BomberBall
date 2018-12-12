@@ -1,4 +1,4 @@
-package com.glhf.bomberball.menu;
+package com.glhf.bomberball;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -49,6 +49,7 @@ public class InputHandler extends InputListener {
 
     private KeyActionHandler[] key_handlers = new KeyActionHandler[KeyAction.values().length];
     private ButtonActionHandler[] button_handlers = new ButtonActionHandler[KeyAction.values().length];
+    private boolean locked;
 
     /**
      * Default constructor
@@ -64,7 +65,7 @@ public class InputHandler extends InputListener {
      */
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
-        if (inputs_config.isKeyCodeAssigned(keycode)) {
+        if (!locked && inputs_config.isKeyCodeAssigned(keycode)) {
             KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
             if (handler != null) {
                 handler.handle();
@@ -78,7 +79,7 @@ public class InputHandler extends InputListener {
      */
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        if (inputs_config.isButtonCodeAssigned(button)) {
+        if (!locked && inputs_config.isButtonCodeAssigned(button)) {
             ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
             if (handler != null) {
                 handler.handle(x, y);
@@ -121,5 +122,9 @@ public class InputHandler extends InputListener {
      */
     public interface ButtonActionHandler {
         void handle(float x, float y);
+    }
+
+    public void lock(boolean locked) {
+        this.locked = locked;
     }
 }
