@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
@@ -113,6 +115,10 @@ public class Graphics {
             Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
             skin.add("white", white);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
+            skin.add("checkboxOff", new TextureRegionDrawable(GUI.get("checkboxOff")));
+            skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
+
+            skin.add("default", Color.WHITE);
 
             //
             skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
@@ -136,11 +142,13 @@ public class Graphics {
             textButtonStyle.down = patch;
             textButtonStyle.over = patch;
             textButtonStyle.checked = patch;
-            textButtonStyle.font = font;
+            textButtonStyle.font = skin.getFont("default");
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.downFontColor = Color.RED;
             skin.add("default", textButtonStyle);
+            textButtonStyle.font = skin.getFont("small");
+            skin.add("small", textButtonStyle);
 
             //
             LabelStyle labelStyle = new LabelStyle();
@@ -183,6 +191,14 @@ public class Graphics {
             selectBoxStyle.listStyle = skin.get(ListStyle.class);
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);
+
+            //
+            CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
+            checkBoxStyle.checkboxOff = skin.get("checkboxOff", TextureRegionDrawable.class);
+            checkBoxStyle.checkboxOn = skin.get("checkboxOn", TextureRegionDrawable.class);
+            checkBoxStyle.font = skin.getFont("default");
+            checkBoxStyle.fontColor = skin.getColor("default");
+            skin.add("default", checkBoxStyle);
         }
 
         private static void loadAtlas()
