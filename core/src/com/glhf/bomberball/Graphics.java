@@ -143,6 +143,16 @@ public class Graphics {
             skin.add("default", textButtonStyle);
 
             //
+            textButtonStyle.up = patch;
+            textButtonStyle.down = patch;
+            textButtonStyle.over = patch;
+            textButtonStyle.checked = patch;
+            textButtonStyle.font = skin.getFont("small");
+            textButtonStyle.fontColor = Color.WHITE;
+            textButtonStyle.overFontColor = Color.GRAY;
+            textButtonStyle.downFontColor = Color.RED;
+            skin.add("small", textButtonStyle);
+            //
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);

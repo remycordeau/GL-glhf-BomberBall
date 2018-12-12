@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.ui.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.Observer;
@@ -49,6 +48,11 @@ public class Player extends Character {
         active = true;
         moves_remaining = initial_moves + bonus_moves;
         bombs_remaining = initial_bomb_number + bonus_bomb_number;
+        this.notifyObservers();
+    }
+
+    public void endTurn() {
+        active = false;
         this.notifyObservers();
     }
 
@@ -101,11 +105,6 @@ public class Player extends Character {
 
     public boolean isActive() {
         return active;
-    }
-
-    public void setActive(boolean b) {
-        this.active = b;
-        notifyObservers();
     }
 
     public void addObserver(Observer observer) {

@@ -33,11 +33,11 @@ public class GameMultiScreen extends GameScreen {
         maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
-        setSelectEffect();
+        //setSelectEffect();
 
         registerActionsHandlers();
 
-        addUI(new MultiUI(players));
+        addUI(new MultiUI(players, this));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -45,11 +45,18 @@ public class GameMultiScreen extends GameScreen {
 
     @Override
     public void registerActionsHandlers() {
+        input_handler.registerKeyAction(KeyAction.KEY_BOMB, () -> this.setBombMode());
+        input_handler.registerKeyAction(KeyAction.KEY_MOVE, () -> this.setMoveMode());
+        input_handler.registerKeyAction(KeyAction.KEY_ENDTURN, () -> endTurn());
         input_handler.registerKeyAction(KeyAction.KEY_SPACE, () -> endTurn());
         input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
         input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
         input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
         input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+        input_handler.registerKeyAction(KeyAction.KEY_DROP_UP, () -> dropBomb(Directions.UP));
+        input_handler.registerKeyAction(KeyAction.KEY_DROP_LEFT, () -> dropBomb(Directions.LEFT));
+        input_handler.registerKeyAction(KeyAction.KEY_DROP_RIGHT, () -> dropBomb(Directions.RIGHT));
+        input_handler.registerKeyAction(KeyAction.KEY_DROP_DOWN, () -> dropBomb(Directions.DOWN));
         input_handler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> dropBombAt(x, y));
     }
 
@@ -60,10 +67,14 @@ public class GameMultiScreen extends GameScreen {
         int cell_y = (int)cell_pos.y;
         Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
-            current_player.dropBomb(dir);
+            dropBomb(dir);
             clearSelectEffect();
-            setSelectEffect();
+            setSelectEffect(current_player.getNumberMoveRemaining());
         }
+    }
+
+    private void dropBomb(Directions dir) {
+        current_player.dropBomb(dir);
     }
 
     private void clearSelectEffect() {
@@ -73,27 +84,49 @@ public class GameMultiScreen extends GameScreen {
         selected_cells.clear();
     }
 
-    private void setSelectEffect() {
-        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), current_player.getMovesRemaining());
+    private void setSelectEffect(int range) {
+        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), range);
         for (Cell c : cells_in_range) {
             c.setSelectEffect();
             selected_cells.add(c);
         }
+
     }
 
+    // Methods to change the mod when click on a button in ActionPlayer bar
+    public void setBombMode(){
+        this.clearSelectEffect();
+        this.setSelectEffect(1);
+        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> dropBomb(Directions.DOWN));
+        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> dropBomb(Directions.UP));
+        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> dropBomb(Directions.LEFT));
+        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> dropBomb(Directions.RIGHT));
+    }
+
+    public void setMoveMode(){
+        this.clearSelectEffect();
+        this.setSelectEffect(current_player.getNumberMoveRemaining());
+        input_handler.registerKeyAction(KeyAction.KEY_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        input_handler.registerKeyAction(KeyAction.KEY_UP, () -> moveCurrentPlayer(Directions.UP));
+        input_handler.registerKeyAction(KeyAction.KEY_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////
 
     private void moveCurrentPlayer(Directions dir) {
         current_player.move(dir);
         clearSelectEffect();
-        setSelectEffect();
+        setSelectEffect(current_player.getNumberMoveRemaining());
     }
 
-    private void endTurn()
+    public void endTurn()
     {
         input_handler.lock(true);
         clearSelectEffect();
         maze.processEndTurn();
-        current_player.setActive(false);
+        current_player.endTurn();
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
@@ -123,7 +156,7 @@ public class GameMultiScreen extends GameScreen {
         } while (!players.get(i).isAlive());
         current_player = players.get(i);
         current_player.initiateTurn();
-        setSelectEffect();
+        setSelectEffect(current_player.getNumberMoveRemaining());
         input_handler.lock(false);
     }
 }
