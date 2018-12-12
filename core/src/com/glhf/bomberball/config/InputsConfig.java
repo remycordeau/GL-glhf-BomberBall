@@ -18,14 +18,14 @@ import java.util.HashMap;
 public class InputsConfig extends Config {
 
     /** Map to convert key codes to actions */
-    private HashMap<Integer, KeyAction> keycodes_actions;
+    public HashMap<Integer, KeyAction> keycodes_actions;
     /** Map to convert button codes to actions */
-    private HashMap<Integer, ButtonAction> buttoncodes_actions;
+    public HashMap<Integer, ButtonAction> buttoncodes_actions;
 
     /**
      * Default constructor
      */
-    public InputsConfig() {
+    private InputsConfig() {
         keycodes_actions = new HashMap<>();
         buttoncodes_actions = new HashMap<>();
     }
@@ -46,11 +46,19 @@ public class InputsConfig extends Config {
         c.addKeyCodeAction(Input.Keys.NUMPAD_8, KeyAction.KEY_DROP_UP);
         c.addKeyCodeAction(Input.Keys.NUMPAD_6, KeyAction.KEY_DROP_RIGHT);
         c.addKeyCodeAction(Input.Keys.NUMPAD_2, KeyAction.KEY_DROP_DOWN);
+        c.addKeyCodeAction(Input.Keys.D, KeyAction.KEY_MOVE);
+        c.addKeyCodeAction(Input.Keys.B, KeyAction.KEY_BOMB);
+        c.addKeyCodeAction(Input.Keys.F, KeyAction.KEY_ENDTURN);
+
 
         c.addButtonCodeAction(Input.Buttons.LEFT, ButtonAction.BUTTON_LEFT);
         c.addButtonCodeAction(Input.Buttons.RIGHT, ButtonAction.BUTTON_RIGHT);
 
         return c;
+    }
+
+    public static InputsConfig get() {
+        return get("default_inputs", InputsConfig.class);
     }
 
     /**

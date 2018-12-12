@@ -10,7 +10,7 @@ public abstract class GameScreen extends AbstractScreen {
     public GameScreen(Maze maze) {
         super();
 //        maze = new Maze(11, 13);
-//        maze.export(filename);
+//        maze.exportConfig(filename);
         this.maze = maze;
         this.maze_drawer = new MazeDrawer(maze,1/3f,1f,2/10f,1f, MazeDrawer.Fit.BEST);
     }

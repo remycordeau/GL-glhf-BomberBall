@@ -39,7 +39,10 @@ public class InputHandler extends InputListener {
         KEY_DROP_RIGHT,
         KEY_DROP_UP,
         KEY_DROP_LEFT,
-        KEY_DROP_DOWN
+        KEY_DROP_DOWN,
+        KEY_MOVE,
+        KEY_ENDTURN,
+        KEY_BOMB
     }
 
     /**
