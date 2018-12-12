@@ -64,7 +64,7 @@ public class InputHandler extends InputListener {
      */
     public InputHandler() {
         inputs_config = InputsConfig.defaultConfig();
-        inputs_config.export("default_inputs");
+        inputs_config.exportConfig("default_inputs");
     }
 
     /**

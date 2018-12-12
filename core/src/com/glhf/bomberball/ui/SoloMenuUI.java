@@ -4,11 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.screens.InfiniteMenuScreen;
+import com.glhf.bomberball.screens.InfiniteModeScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.screens.StoryMenuScreen;
-import com.glhf.bomberball.ui.SoloMenuUI;
 
 public class SoloMenuUI extends Table {
 
@@ -33,7 +32,7 @@ public class SoloMenuUI extends Table {
         this.add(story_button).row();
 
         infinite_button = new TextButton("Infinite Mode", Graphics.GUI.getSkin());
-        infinite_button.addListener(new ScreenChangeListener(InfiniteMenuScreen.class));
+        infinite_button.addListener(new ScreenChangeListener(InfiniteModeScreen.class));
         this.add(infinite_button).row();
 
         back_button = new TextButton("Back to main menu",Graphics.GUI.getSkin());
