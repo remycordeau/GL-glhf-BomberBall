@@ -20,7 +20,7 @@ public class SoloMenuScreen extends MenuScreen {
         centerButtons.addActor(story_button);
 
         infinite_button = new TextButton("Infinite Mode", Graphics.GUI.getSkin());
-        infinite_button.addListener(new ScreenChangeListener(InfiniteMenuScreen.class));
+        infinite_button.addListener(new ScreenChangeListener(InfiniteModeScreen.class));
         centerButtons.addActor(infinite_button);
 
         centerButtons.space(20);
