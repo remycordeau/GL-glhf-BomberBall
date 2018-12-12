@@ -91,7 +91,7 @@ public class GameMultiScreen extends GameScreen {
         input_handler.lock(true);
         clearSelectEffect();
         maze.processEndTurn();
-        current_player.setActive(false);
+        current_player.endTurn();
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {

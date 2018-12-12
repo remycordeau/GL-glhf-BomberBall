@@ -51,6 +51,11 @@ public class Player extends Character {
         this.notifyObservers();
     }
 
+    public void endTurn() {
+        active = false;
+        this.notifyObservers();
+    }
+
     @Override
     public boolean move(Directions dir)
     {
@@ -100,11 +105,6 @@ public class Player extends Character {
 
     public boolean isActive() {
         return active;
-    }
-
-    public void setActive(boolean b) {
-        this.active = b;
-        notifyObservers();
     }
 
     public void addObserver(Observer observer) {
