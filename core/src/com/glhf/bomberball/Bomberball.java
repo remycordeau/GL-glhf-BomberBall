@@ -9,7 +9,7 @@ public class Bomberball extends Game {
 
 	public static Bomberball instance;
     public static float time_elapsed;
-    public static boolean debug = true;
+    public static boolean debug = false;
 
 	@Override
 	public void create() {

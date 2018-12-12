@@ -61,6 +61,8 @@ public class GameMultiScreen extends GameScreen {
         Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
             current_player.dropBomb(dir);
+            clearSelectEffect();
+            setSelectEffect();
         }
     }
 
@@ -110,7 +112,6 @@ public class GameMultiScreen extends GameScreen {
                 dead_players_count++;
             }
         }
-        System.err.println(dead_players_count);
         if (dead_players_count >= players.size() - 1) {
             Bomberball.changeScreen(new MainMenuScreen());
             return;

@@ -14,29 +14,17 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class PlayersInfoUI extends PlayerObserver {
-
-    private ArrayList<PlayerWidget> wplayers;
+public class PlayersInfoUI extends Table {
 
     public PlayersInfoUI(ArrayList<Player> players) {
-        super(players);
-        wplayers = new ArrayList<>();
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
-            this.wplayers.add(pw);
             this.add(pw).grow();
             this.row();
         }
     }
 
-    @Override
-    public void update() {
-        for (PlayerWidget pw : wplayers) {
-            pw.update();
-        }
-    }
-
-    class PlayerWidget extends Table /*implements Observer*/ {
+    class PlayerWidget extends Table implements Observer {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
@@ -51,10 +39,15 @@ public class PlayersInfoUI extends PlayerObserver {
             this.add(player_skin).grow();
             player_info = new PlayerInfoWidget(player);
             this.add(player_info).grow();
-            // player.addObserver(this);
+            player.addObserver(this);
         }
 
         public void update() {
+
+        }
+
+        @Override
+        public void update(Observable observable, Object o) {
             if (player.isActive() && !previous_player_state) {
                 previous_player_state = true;
                 player_skin.mustMove(true);
@@ -64,11 +57,6 @@ public class PlayersInfoUI extends PlayerObserver {
             }
             player_info.update();
         }
-
-//        @Override
-//        public void update(Observable observable, Object o) {
-//
-//        }
     }
 
     class PlayerInfoWidget extends Table {
