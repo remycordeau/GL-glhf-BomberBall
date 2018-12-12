@@ -1,10 +1,8 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
@@ -42,10 +40,6 @@ public class PlayersInfoUI extends Table {
             player.addObserver(this);
         }
 
-        public void update() {
-
-        }
-
         @Override
         public void update(Observable observable, Object o) {
             if (player.isActive() && !previous_player_state) {
@@ -55,36 +49,27 @@ public class PlayersInfoUI extends Table {
                 previous_player_state = false;
                 player_skin.mustMove(false);
             }
-            player_info.update();
         }
     }
 
     class PlayerInfoWidget extends Table {
         private HeartsWidget player_hearts;
-        private NumberBonusWidget player_bonus;
 
         public PlayerInfoWidget(Player player) {
             player_hearts = new HeartsWidget(player);
             this.add(player_hearts).grow();
             this.row();
-            this.add(new ImageBonusWidget()).grow();
-            this.row();
-            player_bonus = new NumberBonusWidget(player);
-            this.add(player_bonus).grow();
-        }
-
-        public void update() {
-            player_hearts.update();
-            player_bonus.update();
+            this.add(new BonusWidget(player)).grow();
         }
     }
 
-    class HeartsWidget extends Table {
+    class HeartsWidget extends Table implements Observer {
         private Player player;
         private ArrayList<Image> hearts;
         public HeartsWidget(Player player) {
             this.pad(5);
             this.player = player;
+            player.addObserver(this);
             this.hearts = new ArrayList<Image>();
             for (int i=0; i<player.getLife(); i++) {
                 Image heart = new Image(Graphics.Sprites.get("ui_heart_full"));
@@ -95,7 +80,8 @@ public class PlayersInfoUI extends Table {
             }
         }
 
-        public void update() {
+        @Override
+        public void update(Observable observable, Object o) {
             while (player.getLife() < hearts.size()) {
                 hearts.get(hearts.size()-1).remove();
                 hearts.remove(hearts.size()-1);
@@ -103,29 +89,28 @@ public class PlayersInfoUI extends Table {
         }
     }
 
-    class ImageBonusWidget extends Table {
-        public ImageBonusWidget() {
-            this.pad(5);
-            Image number_moves = new Image(Graphics.Sprites.get("gift_01a"));
-            Image number_bombs = new Image(Graphics.Sprites.get("bomb"));
-            Image bomb_range = new Image(Graphics.Sprites.get("bow_02a"));
-            number_moves.setScaling(Scaling.fit);
-            number_bombs.setScaling(Scaling.fit);
-            bomb_range.setScaling(Scaling.fit);
-            this.add(number_moves).grow().space(10);
-            this.add(number_bombs).grow().space(10);
-            this.add(bomb_range).grow().space(10);
-        }
-    }
-
-    class NumberBonusWidget extends Table {
+    class BonusWidget extends Table implements Observer {
         private Player player;
         private Label number_moves;
         private Label number_bombs;
         private Label bomb_range;
-        public NumberBonusWidget(Player player) {
+        public BonusWidget(Player player) {
             this.pad(5);
             this.player = player;
+            player.addObserver(this);
+            //ajout des icones
+            Image number_moves_image = new Image(Graphics.Sprites.get("gift_01a"));
+            Image number_bombs_image = new Image(Graphics.Sprites.get("bomb"));
+            Image bomb_range_image = new Image(Graphics.Sprites.get("bow_02a"));
+            number_moves_image.setScaling(Scaling.fit);
+            number_bombs_image.setScaling(Scaling.fit);
+            bomb_range_image.setScaling(Scaling.fit);
+            this.add(number_moves_image).grow().space(10);
+            this.add(number_bombs_image).grow().space(10);
+            this.add(bomb_range_image).grow().space(10);
+            //retour ligne
+            this.row();
+            //ajout des nombres
             number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.GUI.getSkin(), "small");
             number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.GUI.getSkin(), "small");
             bomb_range = new Label("x"+player.getBombRange(), Graphics.GUI.getSkin(), "small");
@@ -137,7 +122,8 @@ public class PlayersInfoUI extends Table {
             this.add(bomb_range).grow().space(10);
         }
 
-        public void update() {
+        @Override
+        public void update(Observable observable, Object o) {
             number_moves.setText("x"+player.getNumberMoveRemaining());
             number_bombs.setText("x"+player.getNumberBombRemaining());
             bomb_range.setText("x"+player.getBombRange());

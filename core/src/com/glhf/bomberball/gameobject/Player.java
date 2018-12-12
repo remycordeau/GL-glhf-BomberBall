@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.ui.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.Observer;
