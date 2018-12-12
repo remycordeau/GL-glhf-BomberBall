@@ -1,23 +1,35 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.screens.GameMultiScreen;
 
 public class ActionPlayerUI extends Table {
     //attributes
     TextButton reachable_squares_move;
     TextButton reachable_squares_bomb;
     TextButton endTurn;
-
+    GameMultiScreen screen;
     /**
      * constructor
      */
-    public ActionPlayerUI(){
+    public ActionPlayerUI(GameMultiScreen screen){
+        this.screen=screen;
         this.reachable_squares_move = new TextButton("Bombe [b]", Graphics.GUI.getSkin(), "small");
         this.reachable_squares_bomb = new TextButton("Déplacement [d]", Graphics.GUI.getSkin(),"small");
         this.endTurn= new TextButton("Fin de tour [f]", Graphics.GUI.getSkin(),"small");
+        // TODO : ajout des listeners sur les différents boutons
+        reachable_squares_move.addListener(new ClickListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return super.touchDown(event, x, y, pointer, button);
+
+            }
+        });
         this.add(reachable_squares_bomb).growX();
         this.add(reachable_squares_move).growX();
         this.add(endTurn).growX();

@@ -37,7 +37,7 @@ public class GameMultiScreen extends GameScreen {
 
         registerActionsHandlers();
 
-        addUI(new MultiUI(players));
+        addUI(new MultiUI(players, this));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -77,8 +77,13 @@ public class GameMultiScreen extends GameScreen {
             c.setSelectEffect();
             selected_cells.add(c);
         }
+
     }
 
+    // Methods to change the mod when click on a button in ActionPlayer bar
+    public void setBombEffect(){
+        //this.setSelectEffect(current_player.getMovesRemaining());
+    }
 
     private void moveCurrentPlayer(Directions dir) {
         current_player.move(dir);
@@ -121,6 +126,7 @@ public class GameMultiScreen extends GameScreen {
         } while (!players.get(i).isAlive());
         current_player = players.get(i);
         current_player.initiateTurn();
+        //setSelectEffect();
         setSelectEffect();
         input_handler.lock(false);
     }
