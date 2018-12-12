@@ -105,6 +105,7 @@ public class Player extends Character {
 
     public void setActive(boolean b) {
         this.active = b;
+        notifyObservers();
     }
 
     public void addObserver(Observer observer) {
