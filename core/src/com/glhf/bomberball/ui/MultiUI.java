@@ -20,7 +20,7 @@ public class MultiUI extends Table {
         ActionPlayerUI bottom_ui = new ActionPlayerUI();
         bottom_ui.padLeft(Value.percentWidth(1/3f));
         bottom_ui.setFillParent(true);
-        bottom_ui.align(Align.right);
+        bottom_ui.align(Align.bottom);
         this.addActor(left_ui);
         this.addActor(bottom_ui);
     }
