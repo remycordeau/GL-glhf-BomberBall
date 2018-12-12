@@ -1,5 +1,6 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -25,9 +26,8 @@ public class ActionPlayerUI extends Table {
         // TODO : ajout des listeners sur les différents boutons
         reachable_squares_move.addListener(new ClickListener(){
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return super.touchDown(event, x, y, pointer, button);
-
+            public void clicked(InputEvent event, float x, float y) {
+                screen.setMoveMode();
             }
         });
         this.add(reachable_squares_bomb).growX();
