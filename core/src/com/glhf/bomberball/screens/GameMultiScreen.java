@@ -61,6 +61,8 @@ public class GameMultiScreen extends GameScreen {
         Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
         if (dir != null) {
             current_player.dropBomb(dir);
+            clearSelectEffect();
+            setSelectEffect();
         }
     }
 
