@@ -26,18 +26,17 @@ public class MultiMenuUI extends Table {
         this.padTop(Value.percentHeight(0.2f));
         this.setFillParent(true);
         initializeButtons();
-        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  1/2f, 1f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
 
     public void initializeButtons(){
-        Value spacing_map_button = Value.percentHeight(0.5f);
 
         // SELECTION OF THE MAP
 
         Table selectMap = new Table();
 
-        this.add(selectMap).align(Align.center).spaceBottom(spacing_map_button).grow();
+        this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
         this.row();
         TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -56,18 +55,6 @@ public class MultiMenuUI extends Table {
             }
         });
 
-        //ADDING THE BUTTONS TO THE TABLE
-        selectMap.add(previousMapButton).spaceRight(0.5f);
-        selectMap.add(nextMapButton).spaceRight(0.5f);
-
-        //CREATING A PREVIEW FOR THE PLAYERS
-        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP));
-        p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
-    // Changer les horizontal group par table
-        Table selectPlayer = new Table();
 
         // BOUTONS POUR LANCER LE JEU
         VerticalGroup buttons = new VerticalGroup();
@@ -84,6 +71,19 @@ public class MultiMenuUI extends Table {
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
         buttons.addActor(playButton);
         buttons.addActor(cancelButton);
+        //ADDING THE BUTTONS TO THE TABLE
+        selectMap.add(previousMapButton);
+        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(5f));
+
+        //CREATING A PREVIEW FOR THE PLAYERS
+        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP));
+        p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
+        // Changer les horizontal group par table
+        Table selectPlayer = new Table();
+
 
         //Adding an image for each player
         selectPlayer.add(p1).grow();
@@ -91,10 +91,6 @@ public class MultiMenuUI extends Table {
         selectPlayer.add(buttons).grow();
         selectPlayer.add(p3).grow();
         selectPlayer.add(p4).grow();
-        selectPlayer.align(Align.center);
-        //selectPlayer.expand();
         this.add(selectPlayer).grow();
-        this.row();
-
     }
 }
