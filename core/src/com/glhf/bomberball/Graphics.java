@@ -146,6 +146,13 @@ public class Graphics {
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);
+
+            //
+            labelStyle = new LabelStyle();
+            labelStyle.font = font;
+            labelStyle.fontColor = Color.GREEN;
+            skin.add("Title", labelStyle);
+
             //
             labelStyle = new LabelStyle();
             labelStyle.font = skin.getFont("small");
