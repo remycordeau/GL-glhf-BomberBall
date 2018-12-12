@@ -35,7 +35,7 @@ public class ActionPlayerUI extends Table {
             public void clicked(InputEvent event, float x, float y){
                 screen.setBombMode();
             }
-        })
+        });
         this.add(reachable_squares_bomb).growX();
         this.add(reachable_squares_move).growX();
         this.add(endTurn).growX();
