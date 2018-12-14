@@ -1,6 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -152,7 +153,9 @@ public class MazeDrawer extends Actor {
     {
         CellEffect cell_effect = cell.getCellEffect();
         if (cell_effect != null) {
+            batch.setColor(cell_effect.getColor());
             drawTextureInCell(cell_effect.getSprite(), cell.getX(), cell.getY());
+            batch.setColor(Color.WHITE);
         }
 
         ArrayList<GameObject> gameObjects = cell.getGameObjects();
