@@ -8,13 +8,13 @@ import java.util.LinkedList;
 public class MazeTransversal {
 
     /**
-     * Returns all cells whitin a specified range from a cell
+     * Returns all reacheable cells whitin a specified range from a cell
      * @param cell_origin
      * @param range
-     * @return cells whithin range of cell_origin
+     * @return reacheable cells whithin range of cell_origin
      * Breadth First Search algorithm (BFS) stopping at depth range
      */
-    public static ArrayList<Cell> getCellsInRange(Cell cell_origin, int range) {
+    public static ArrayList<Cell> getReacheableCellsInRange(Cell cell_origin, int range) {
         ArrayList<Cell> cells = new ArrayList<Cell>();
         LinkedList<Cell> active_queue = new LinkedList<Cell>();
         LinkedList<Cell> inactive_queue = new LinkedList<Cell>();
@@ -33,6 +33,7 @@ public class MazeTransversal {
                 }
             }
             depth++;
+
             active_queue = inactive_queue;
             inactive_queue = new LinkedList<Cell>();
         }

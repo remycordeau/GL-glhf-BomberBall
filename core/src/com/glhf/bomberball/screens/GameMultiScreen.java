@@ -78,7 +78,7 @@ public class GameMultiScreen extends GameScreen {
 
     private void setBombEffect() {
         clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), 1);
+        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), 1);
         cells_in_range.remove(current_player.getCell());
         for (Cell c : cells_in_range) {
             c.setSelectEffect(Color.RED);
@@ -88,7 +88,7 @@ public class GameMultiScreen extends GameScreen {
 
     private void setMoveEffect() {
         clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getCellsInRange(current_player.getCell(), current_player.getNumberMoveRemaining());
+        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), current_player.getNumberMoveRemaining());
         for (Cell c : cells_in_range) {
             c.setSelectEffect(Color.WHITE);
             selected_cells.add(c);
