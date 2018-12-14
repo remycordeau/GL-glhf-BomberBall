@@ -6,10 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.screens.InfiniteMenuScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
-import com.glhf.bomberball.screens.StoryMenuScreen;
 
 public class StoryMenuUI extends Table {
 
