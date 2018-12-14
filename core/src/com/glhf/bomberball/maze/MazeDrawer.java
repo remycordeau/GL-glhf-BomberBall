@@ -164,20 +164,21 @@ public class MazeDrawer extends Actor {
             return;
         }
 
-        float offsetp_x = 0.0f;
-        float offsetp_y = 0.0f;
+        Vector2 offsetp;
         if (n == 1) {
             GameObject o = gameObjects.get(0);
-            offsetp_y = (o instanceof Player) ? 1/3f : 0.0f;
-            drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp_x, offsetp_y);
+            offsetp = o.getOffset();
+            offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
+            drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
         } else {
 
             float dteta = 2 * (float)Math.PI / n;
             float teta =  (float)Math.PI / 4f;
             for (GameObject gameObject : gameObjects) {
-                offsetp_x = (float)Math.cos(teta) * (1 / 3f);
-                offsetp_y = (float)Math.sin(teta) * (1 / 3f) + (1/3f);
-                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp_x, offsetp_y);
+                offsetp = gameObject.getOffset();
+                offsetp.x += (float)Math.cos(teta) * (1 / 3f);
+                offsetp.y += (float)Math.sin(teta) * (1 / 3f) + (1/3f);
+                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
                 teta += dteta;
             }
         }
