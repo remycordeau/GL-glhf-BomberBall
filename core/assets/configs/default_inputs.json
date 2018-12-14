@@ -1,20 +1,28 @@
 {
-  "keycodes_actions": {
-    "32": "KEY_MOVE",
-    "146": "KEY_DROP_DOWN",
-    "34": "KEY_ENDTURN",
-    "19": "KEY_UP",
-    "20": "KEY_DOWN",
-    "148": "KEY_DROP_LEFT",
-    "21": "KEY_LEFT",
-    "22": "KEY_RIGHT",
-    "150": "KEY_DROP_RIGHT",
-    "152": "KEY_DROP_UP",
-    "62": "KEY_SPACE",
-    "30": "KEY_BOMB"
+  "input_map": {
+    "K152": "DROP_BOMB_UP",
+    "K150": "DROP_BOMB_RIGHT",
+    "M0": "DROP_BOMB",
+    "K62": "ENDTURN",
+    "K40": "DROP_BOMB",
+    "K20": "MOVE_DOWN",
+    "K148": "DROP_BOMB_LEFT",
+    "K30": "MODE_BOMB",
+    "K22": "MOVE_RIGHT",
+    "K146": "DROP_BOMB_DOWN",
+    "K21": "MOVE_LEFT",
+    "K32": "MODE_MOVE",
+    "K34": "ENDTURN",
+    "K67": "MENU_GO_BACK",
+    "K19": "MOVE_UP"
   },
-  "buttoncodes_actions": {
-    "0": "MOUSE_LEFT",
-    "1": "MOUSE_RIGHT"
-  }
+  "profiles": [
+    {},
+    {
+      "K19": "DROP_BOMB_UP",
+      "K20": "DROP_BOMB_DOWN",
+      "K22": "DROP_BOMB_RIGHT",
+      "K21": "DROP_BOMB_LEFT"
+    }
+  ]
 }

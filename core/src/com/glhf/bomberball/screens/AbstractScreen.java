@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.InputHandler;
+import com.glhf.bomberball.InputHandler.Action;
 
 public abstract class AbstractScreen implements Screen {
 
@@ -23,7 +24,9 @@ public abstract class AbstractScreen implements Screen {
         registerActionsHandlers();
     }
 
-    protected void registerActionsHandlers() { }
+    protected void registerActionsHandlers() {
+        input_handler.registerActionHandler(Action.MENU_GO_BACK, () -> Bomberball.changeScreen(new MainMenuScreen()));
+    }
 
     public void addUI(Actor ui) {
         stage.addActor(ui);

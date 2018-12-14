@@ -1,8 +1,10 @@
 package com.glhf.bomberball.config;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.glhf.bomberball.InputHandler.Action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,16 +18,24 @@ import java.util.HashMap;
 public class InputsConfig extends Config {
 
     /** Map to convert key codes to actions */
-    public HashMap<Integer, Action> keycodes_actions;
-    /** Map to convert button codes to actions */
-    public HashMap<Integer, Action> buttoncodes_actions;
+    public HashMap<String, Action> input_map;
+    public ArrayList<HashMap<String, Action>> profiles;
+
+    private InputProfile inputProfile;
+
+    public enum InputProfile {
+        MOVE,
+        BOMB
+    }
 
     /**
      * Default constructor
      */
     private InputsConfig() {
-        keycodes_actions = new HashMap<>();
-        buttoncodes_actions = new HashMap<>();
+        input_map = new HashMap<>();
+        profiles = new ArrayList<>();
+        for(InputProfile profile : InputProfile.values())
+            profiles.add(new HashMap<>());
     }
 
     /**
@@ -35,22 +45,28 @@ public class InputsConfig extends Config {
     public static InputsConfig defaultConfig() {
         InputsConfig c = new InputsConfig();
 
-        c.addKeyCodeAction(Input.Keys.DOWN, Action.KEY_DOWN);
-        c.addKeyCodeAction(Input.Keys.UP, Action.KEY_UP);
-        c.addKeyCodeAction(Input.Keys.LEFT, Action.KEY_LEFT);
-        c.addKeyCodeAction(Input.Keys.RIGHT, Action.KEY_RIGHT);
-        c.addKeyCodeAction(Input.Keys.SPACE, Action.KEY_SPACE);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_4, Action.KEY_DROP_LEFT);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_8, Action.KEY_DROP_UP);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_6, Action.KEY_DROP_RIGHT);
-        c.addKeyCodeAction(Input.Keys.NUMPAD_2, Action.KEY_DROP_DOWN);
-        c.addKeyCodeAction(Input.Keys.D, Action.KEY_MOVE);
-        c.addKeyCodeAction(Input.Keys.B, Action.KEY_BOMB);
-        c.addKeyCodeAction(Input.Keys.F, Action.KEY_ENDTURN);
+        c.addKeyCodeAction(Keys.DOWN, Action.MOVE_DOWN);
+        c.addKeyCodeAction(Keys.UP, Action.MOVE_UP);
+        c.addKeyCodeAction(Keys.LEFT, Action.MOVE_LEFT);
+        c.addKeyCodeAction(Keys.RIGHT, Action.MOVE_RIGHT);
+        c.addKeyCodeAction(Keys.LEFT, Action.DROP_BOMB_LEFT, InputProfile.BOMB);
+        c.addKeyCodeAction(Keys.UP, Action.DROP_BOMB_UP, InputProfile.BOMB);
+        c.addKeyCodeAction(Keys.RIGHT, Action.DROP_BOMB_RIGHT, InputProfile.BOMB);
+        c.addKeyCodeAction(Keys.DOWN, Action.DROP_BOMB_DOWN, InputProfile.BOMB);
+        c.addKeyCodeAction(Keys.NUMPAD_4, Action.DROP_BOMB_LEFT);
+        c.addKeyCodeAction(Keys.NUMPAD_8, Action.DROP_BOMB_UP);
+        c.addKeyCodeAction(Keys.NUMPAD_6, Action.DROP_BOMB_RIGHT);
+        c.addKeyCodeAction(Keys.NUMPAD_2, Action.DROP_BOMB_DOWN);
+        c.addKeyCodeAction(Keys.D, Action.MODE_MOVE);
+        c.addKeyCodeAction(Keys.B, Action.MODE_BOMB);
+        c.addKeyCodeAction(Keys.F, Action.ENDTURN);
+        c.addKeyCodeAction(Keys.SPACE, Action.ENDTURN);
+        c.addKeyCodeAction(Keys.L, Action.DROP_BOMB);
+        c.addKeyCodeAction(Keys.DEL, Action.MENU_GO_BACK);
 
 
-        c.addButtonCodeAction(Input.Buttons.LEFT, Action.MOUSE_LEFT);
-        c.addButtonCodeAction(Input.Buttons.RIGHT, Action.MOUSE_RIGHT);
+        c.addButtonCodeAction(Buttons.LEFT, Action.DROP_BOMB);
+        //c.addButtonCodeAction(Buttons.RIGHT, Action.DROP_BOMB);
 
         return c;
     }
@@ -65,34 +81,59 @@ public class InputsConfig extends Config {
      * @param action
      */
     private void addKeyCodeAction(int key_code, Action action) {
-        keycodes_actions.put(key_code, action);
+        input_map.put("K"+key_code, action);
     }
 
     /**
      * Links a button code with a Action
-     * @param button_code
+     * @param mouse_button_code
      * @param action
      */
-    private void addButtonCodeAction(int button_code, Action action) {
-        buttoncodes_actions.put(button_code, action);
+    private void addButtonCodeAction(int mouse_button_code, Action action) {
+        input_map.put("M"+mouse_button_code, action);
     }
 
     /**
-     * Converts key codes to InputHandler.KeyActions
+     * Links a key code with a Action depending on an InputProfile
+     * @param key_code
+     * @param action
+     */
+    private void addKeyCodeAction(int key_code, Action action, InputProfile profile) {
+        profiles.get(profile.ordinal()).put("K"+key_code, action);
+    }
+
+    /**
+     * Links a button code with a Action depending on an InputProfile
+     * @param mouse_button_code
+     * @param action
+     */
+    private void addButtonCodeAction(int mouse_button_code, Action action, InputProfile profile) {
+        profiles.get(profile.ordinal()).put("M"+mouse_button_code, action);
+    }
+
+    /**
+     * Converts key codes to Actions
      * @param key_code
      * @return Action corresponding to key_code
      */
     public Action getKeyActionCode(int key_code) {
-        return keycodes_actions.get(key_code);
+        String key = "K" + key_code;
+        if(inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key))
+            return profiles.get(inputProfile.ordinal()).get(key);
+        return input_map.get(key);
     }
 
     /**
-     * Converts button codes to InputHandler.ButtonActions
+     * Converts button codes to Actions
      * @param button_code
      * @return Action corresponding to key_code
      */
     public Action getButtonActionCode(int button_code) {
-        return buttoncodes_actions.get(button_code);
+        String key = "M" + button_code;
+        if(inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) {
+            return profiles.get(inputProfile.ordinal()).get(key);
+        }
+        return input_map.get(key);
     }
 
     /**
@@ -100,7 +141,8 @@ public class InputsConfig extends Config {
      * @return key_code is assigned to a Action
      */
     public boolean isKeyCodeAssigned(int key_code) {
-        return keycodes_actions.containsKey(key_code);
+        String key = "K" + key_code;
+        return (inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) || input_map.containsKey(key);
     }
 
     /**
@@ -108,6 +150,11 @@ public class InputsConfig extends Config {
      * @return button_code is assigned to a ButtonCode
      */
     public boolean isButtonCodeAssigned(int button_code) {
-        return buttoncodes_actions.containsKey(button_code);
+        String key = "M" + button_code;
+        return (inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) || input_map.containsKey(key);
+    }
+
+    public void setInputProfile(InputProfile inputProfile) {
+        this.inputProfile = inputProfile;
     }
 }
