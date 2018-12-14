@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze.cell;
 
+import com.badlogic.gdx.graphics.Color;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.Directions;
@@ -202,9 +203,10 @@ public class Cell {
 
     /**
      * Sets the select effect on the cell
+     * @param color tint color
      */
-    public void setSelectEffect() {
-        cell_effect = new SelectEffect(this);
+    public void setSelectEffect(Color color) {
+        cell_effect = new SelectEffect(this, color);
     }
 
     /**

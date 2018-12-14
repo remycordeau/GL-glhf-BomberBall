@@ -3,6 +3,7 @@ package com.glhf.bomberball.ui;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Bomberball;
 
 public class AnimationActor extends Image {
@@ -11,6 +12,7 @@ public class AnimationActor extends Image {
 
     public AnimationActor(Animation<TextureAtlas.AtlasRegion> animation) {
         super(animation.getKeyFrame(0));
+        this.setScaling(Scaling.fit);
         this.animation = animation;
         this.move = false;
     }
