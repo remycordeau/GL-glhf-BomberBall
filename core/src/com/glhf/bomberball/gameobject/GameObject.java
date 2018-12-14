@@ -17,6 +17,10 @@ public abstract class GameObject {
     private transient Vector2 offsetVec;
     private transient int frames_left;
 
+    public GameObject(){
+        offsetVec = new Vector2();
+    }
+
     protected GameObject(int life) {
         this.life = life;
         offsetVec = new Vector2();
