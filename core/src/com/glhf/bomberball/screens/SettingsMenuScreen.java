@@ -1,21 +1,28 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler;
+import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.InputsConfig;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
 public class SettingsMenuScreen extends AbstractScreen {
 
     //Constructor
-    public SettingsMenuScreen() throws IllegalAccessException {
+    public SettingsMenuScreen() {
         super();
         Table table = new Table();
         addUI(table);
@@ -51,13 +58,11 @@ public class SettingsMenuScreen extends AbstractScreen {
 
         //ajout de chaque paramètre pour inputs
         InputsConfig inputsConfig = InputsConfig.get();
-        for (Field field : InputsConfig.class.getDeclaredFields()) {
-            assert field.getType().equals(HashMap.class);
-            HashMap<Integer, Object> map = (HashMap<Integer, Object> ) field.get(inputsConfig);
-            for(Integer f : map.keySet()){
-                inputsParams.add(new ParameterInput(map.get(f), f)).growX().row();
-            }
+        HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
+        for(Action a : map.keySet()){
+            inputsParams.add(new ParameterInput(a, map.get(a))).growX().row();
         }
+
         table.add(inputsPane).grow().colspan(2).row();
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
@@ -82,24 +87,22 @@ public class SettingsMenuScreen extends AbstractScreen {
         }
     }
 
-    private class ParameterInput extends HorizontalGroup {
+    private class ParameterInput extends Table {
 
-        public ParameterInput(Object o, Integer f) {
-            Label label = new Label("Aaaah", Graphics.GUI.getSkin(), "small");
-            if(o instanceof InputHandler.Action)
-                label.setText(o.toString());
-            if(o instanceof InputHandler.Action)
-                label.setText(o.toString());
-            TextButton textButton = new TextButton("code:"+f, Graphics.GUI.getSkin(), "small");
-            textButton.addListener(new ChangeInputListener(o, f));
-            addActor(label);
-            addActor(textButton);
+        public ParameterInput(Action a, String[] codes) {
+            Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "small");
+            add(label);
+            for(String code: codes) {
+                TextButton textButton = new TextButton("code:" + code, Graphics.GUI.getSkin(), "small");
+                textButton.addListener(new ChangeInputListener(a, code));
+                add(textButton);
+            }
         }
 
         private class ChangeInputListener extends InputListener {
             private InputsConfig config = InputsConfig.get();
             private Object o;
-            public ChangeInputListener(Object o, Integer f) {
+            public ChangeInputListener(Object o, String f) {
                 this.o = o;
             }
 

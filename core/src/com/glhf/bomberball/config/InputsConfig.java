@@ -4,7 +4,6 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.glhf.bomberball.InputHandler.Action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,12 +17,15 @@ import java.util.HashMap;
 public class InputsConfig extends Config {
 
     /** Map to convert key codes to actions */
-    public HashMap<String, Action> input_map;
-    public ArrayList<HashMap<String, Action>> profiles;
+    private HashMap<String, Action[]> map_code_to_action;
 
-    private InputProfile inputProfile;
+    private transient HashMap<Action, String[]> map_action_to_code;
+    private transient boolean has_input_map_changed;
+
+    private transient InputProfile input_profile;
 
     public enum InputProfile {
+        DEFAULT,
         MOVE,
         BOMB
     }
@@ -32,10 +34,9 @@ public class InputsConfig extends Config {
      * Default constructor
      */
     private InputsConfig() {
-        input_map = new HashMap<>();
-        profiles = new ArrayList<>();
-        for(InputProfile profile : InputProfile.values())
-            profiles.add(new HashMap<>());
+        map_code_to_action = new HashMap<>();
+        input_profile = InputProfile.DEFAULT;
+        has_input_map_changed=true;
     }
 
     /**
@@ -80,8 +81,8 @@ public class InputsConfig extends Config {
      * @param key_code
      * @param action
      */
-    private void addKeyCodeAction(int key_code, Action action) {
-        input_map.put("K"+key_code, action);
+    public void addKeyCodeAction(int key_code, Action action) {
+        addKeyCodeAction(key_code, action, InputProfile.DEFAULT );
     }
 
     /**
@@ -89,17 +90,18 @@ public class InputsConfig extends Config {
      * @param mouse_button_code
      * @param action
      */
-    private void addButtonCodeAction(int mouse_button_code, Action action) {
-        input_map.put("M"+mouse_button_code, action);
+    public void addButtonCodeAction(int mouse_button_code, Action action) {
+        addButtonCodeAction(mouse_button_code, action, InputProfile.DEFAULT );
     }
+
 
     /**
      * Links a key code with a Action depending on an InputProfile
      * @param key_code
      * @param action
      */
-    private void addKeyCodeAction(int key_code, Action action, InputProfile profile) {
-        profiles.get(profile.ordinal()).put("K"+key_code, action);
+    public void addKeyCodeAction(int key_code, Action action, InputProfile profile) {
+        addAction(getIDForKeyCode(key_code), action, profile );
     }
 
     /**
@@ -107,8 +109,8 @@ public class InputsConfig extends Config {
      * @param mouse_button_code
      * @param action
      */
-    private void addButtonCodeAction(int mouse_button_code, Action action, InputProfile profile) {
-        profiles.get(profile.ordinal()).put("M"+mouse_button_code, action);
+    public void addButtonCodeAction(int mouse_button_code, Action action, InputProfile profile) {
+        addAction(getIDForMouseButtonCode(mouse_button_code), action, profile );
     }
 
     /**
@@ -116,11 +118,8 @@ public class InputsConfig extends Config {
      * @param key_code
      * @return Action corresponding to key_code
      */
-    public Action getKeyActionCode(int key_code) {
-        String key = "K" + key_code;
-        if(inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key))
-            return profiles.get(inputProfile.ordinal()).get(key);
-        return input_map.get(key);
+    public Action getKeyCodeAction(int key_code) {
+        return getAction(getIDForKeyCode(key_code));
     }
 
     /**
@@ -128,12 +127,8 @@ public class InputsConfig extends Config {
      * @param button_code
      * @return Action corresponding to key_code
      */
-    public Action getButtonActionCode(int button_code) {
-        String key = "M" + button_code;
-        if(inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) {
-            return profiles.get(inputProfile.ordinal()).get(key);
-        }
-        return input_map.get(key);
+    public Action getButtonCodeAction(int button_code) {
+        return getAction(getIDForMouseButtonCode(button_code));
     }
 
     /**
@@ -141,8 +136,7 @@ public class InputsConfig extends Config {
      * @return key_code is assigned to a Action
      */
     public boolean isKeyCodeAssigned(int key_code) {
-        String key = "K" + key_code;
-        return (inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) || input_map.containsKey(key);
+        return getKeyCodeAction(key_code) != null;
     }
 
     /**
@@ -150,11 +144,58 @@ public class InputsConfig extends Config {
      * @return button_code is assigned to a ButtonCode
      */
     public boolean isButtonCodeAssigned(int button_code) {
-        String key = "M" + button_code;
-        return (inputProfile!=null && profiles.get(inputProfile.ordinal()).containsKey(key)) || input_map.containsKey(key);
+        return getButtonCodeAction(button_code) != null;
     }
 
-    public void setInputProfile(InputProfile inputProfile) {
-        this.inputProfile = inputProfile;
+    public void setInputProfile(InputProfile input_profile) {
+        this.input_profile = input_profile;
+    }
+
+    public HashMap<Action, String[]> getReversedInputMap(){
+        if(has_input_map_changed)
+            reverseInputMap();
+        return map_action_to_code;
+    }
+
+    //private functions =============
+
+    private void addAction(String code_id, Action action, InputProfile profile){
+        has_input_map_changed=true;
+        if(!map_code_to_action.containsKey(code_id)) {
+            map_code_to_action.put(code_id, new Action[InputProfile.values().length]);
+        }
+        map_code_to_action.get(code_id)[profile.ordinal()] = action;
+    }
+
+    private Action getAction(String key) {
+        if(map_code_to_action.containsKey(key)){
+            Action[] actions = map_code_to_action.get(key);
+            if(actions[input_profile.ordinal()] != null)
+                return actions[input_profile.ordinal()];
+            return actions[InputProfile.DEFAULT.ordinal()];
+        }
+        return null;
+    }
+
+    private String getIDForKeyCode(int key_code){
+        return "K"+key_code;
+    }
+    private String getIDForMouseButtonCode(int mouse_button_code){
+        return "M"+mouse_button_code;
+    }
+
+    private void reverseInputMap() {
+        map_action_to_code = new HashMap<Action, String[]>();
+        for(String code : map_code_to_action.keySet()){
+            Action[] actions = map_code_to_action.get(code);
+            for(int i=0; i<InputProfile.values().length; i++){
+                if(actions[i]==null)continue;
+                if(!map_action_to_code.containsKey(actions[i])) {
+                    map_action_to_code.put(actions[i], new String[InputProfile.values().length]);
+                }
+                map_action_to_code.get(actions[i])[i] = code;
+            }
+        }
+        has_input_map_changed = false;
     }
 }

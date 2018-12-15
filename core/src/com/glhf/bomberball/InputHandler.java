@@ -65,7 +65,7 @@ public class InputHandler extends InputListener {
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
         if (!locked && inputs_config.isKeyCodeAssigned(keycode)) {
-            ActionHandler handler = this.handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
+            ActionHandler handler = this.handlers[inputs_config.getKeyCodeAction(keycode).ordinal()];
             if(handler != null){
                 handler.handle(event);
             }
@@ -79,7 +79,7 @@ public class InputHandler extends InputListener {
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         if (!locked && inputs_config.isButtonCodeAssigned(button)) {
-            ActionHandler handler = this.handlers[inputs_config.getButtonActionCode(button).ordinal()];
+            ActionHandler handler = this.handlers[inputs_config.getButtonCodeAction(button).ordinal()];
             if(handler != null){
                 handler.handle(event);
             }

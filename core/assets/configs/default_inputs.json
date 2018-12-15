@@ -1,28 +1,79 @@
 {
-  "input_map": {
-    "K152": "DROP_BOMB_UP",
-    "K150": "DROP_BOMB_RIGHT",
-    "M0": "DROP_BOMB",
-    "K62": "ENDTURN",
-    "K40": "DROP_BOMB",
-    "K20": "MOVE_DOWN",
-    "K148": "DROP_BOMB_LEFT",
-    "K30": "MODE_BOMB",
-    "K22": "MOVE_RIGHT",
-    "K146": "DROP_BOMB_DOWN",
-    "K21": "MOVE_LEFT",
-    "K32": "MODE_MOVE",
-    "K34": "ENDTURN",
-    "K67": "MENU_GO_BACK",
-    "K19": "MOVE_UP"
-  },
-  "profiles": [
-    {},
-    {
-      "K19": "DROP_BOMB_UP",
-      "K20": "DROP_BOMB_DOWN",
-      "K22": "DROP_BOMB_RIGHT",
-      "K21": "DROP_BOMB_LEFT"
-    }
-  ]
+  "map_code_to_action": {
+    "K152": [
+      "DROP_BOMB_UP",
+      null,
+      null
+    ],
+    "K150": [
+      "DROP_BOMB_RIGHT",
+      null,
+      null
+    ],
+    "M0": [
+      "DROP_BOMB",
+      null,
+      null
+    ],
+    "K62": [
+      "ENDTURN",
+      null,
+      null
+    ],
+    "K40": [
+      "DROP_BOMB",
+      null,
+      null
+    ],
+    "K20": [
+      "MOVE_DOWN",
+      null,
+      "DROP_BOMB_DOWN"
+    ],
+    "K148": [
+      "DROP_BOMB_LEFT",
+      null,
+      null
+    ],
+    "K30": [
+      "MODE_BOMB",
+      null,
+      null
+    ],
+    "K22": [
+      "MOVE_RIGHT",
+      null,
+      "DROP_BOMB_RIGHT"
+    ],
+    "K146": [
+      "DROP_BOMB_DOWN",
+      null,
+      null
+    ],
+    "K21": [
+      "MOVE_LEFT",
+      null,
+      "DROP_BOMB_LEFT"
+    ],
+    "K32": [
+      "MODE_MOVE",
+      null,
+      null
+    ],
+    "K34": [
+      "ENDTURN",
+      null,
+      null
+    ],
+    "K67": [
+      "MENU_GO_BACK",
+      null,
+      null
+    ],
+    "K19": [
+      "MOVE_UP",
+      null,
+      "DROP_BOMB_UP"
+    ]
+  }
 }
