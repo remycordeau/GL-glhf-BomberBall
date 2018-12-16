@@ -1,16 +1,23 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 
 
 public class VictoryMenuUI extends Table {
+    private int previous_maze_id;
 
-    public VictoryMenuUI(Player player) {
+    public VictoryMenuUI(Player player, int maze_id) {
+        this.previous_maze_id = maze_id;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.35f));
         this.padRight(Value.percentWidth(0.35f));
@@ -36,6 +43,12 @@ public class VictoryMenuUI extends Table {
         Value spacing = Value.percentHeight(0.20f);
 
         b = new TextButton("Rejouer", skin);
+        b.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Bomberball.changeScreen(new GameMultiScreen(Maze.importMaze("maze_" + previous_maze_id), previous_maze_id));
+            }
+        });
         this.add(b).growX().space(spacing).row();
 
         b = new TextButton("Menu multijoueur", skin);
