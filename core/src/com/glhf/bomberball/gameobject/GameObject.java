@@ -1,3 +1,11 @@
+/* abstract class GameObject
+
+    class mère de tous les objets qui évoluent dans le labyrinthe
+
+    Un GameObject a une vie, un sprite (fixe ou animation) et voit la cell dans laquelle il se trouve
+
+ */
+
 package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -44,6 +52,9 @@ public abstract class GameObject {
         return cell.getY();
     }
 
+    /**
+     * used for the initialisation of the different subclasses. Needed because of the deserialization.
+     */
     public void initialize() { }
 
     /**
@@ -57,6 +68,9 @@ public abstract class GameObject {
         }
     }
 
+    /**
+     * remove the GameObject from its cell
+     */
     public void dispose() {
         cell.removeGameObject(this);
     }
@@ -69,13 +83,28 @@ public abstract class GameObject {
         return life > 0;
     }
 
+    /**
+     * a GameObject is walkable if a character can walk on it.
+     * a non walkable GameObject will stop the bombs explosions
+     * @return boolean if a GameObject is walkable
+     */
     public boolean isWalkable() { return false; }
 
+    /**
+     * move the GameObject to an adjacent cell.
+     * @param dir RIGTH, UP, LEFT or DOWN
+     * @return boolean if the GameObject can move to the specified direction
+     */
     public boolean move(Directions dir)
     {
         return moveToCell(getCell().getAdjacentCell(dir));
     }
 
+    /**
+     * move the GameObject to the cell pointed by dest_cell
+     * @param dest_cell the cell you want the GameObject to move to.
+     * @return boolean if the GameObject can move to dest_cell
+     */
     public boolean moveToCell(Cell dest_cell)
     {
         boolean moved;
@@ -91,7 +120,12 @@ public abstract class GameObject {
         return moved;
     }
 
+    /**
+     * function used in a strategy design pattern, see subclasses for the different effects
+     * @param cell  the cell the GameObject interact with
+     */
     public void interactWithCell(Cell cell) { }
+
 
     public void setCell(Cell cell)
     {
