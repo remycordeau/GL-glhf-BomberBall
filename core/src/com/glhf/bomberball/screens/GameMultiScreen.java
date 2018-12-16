@@ -139,14 +139,25 @@ public class GameMultiScreen extends GameScreen {
      * gives the next player after a turn. If the next player is dead, choose the following player.
      */
     private void nextPlayer() {
-        int dead_players_count = 0;
+        //int dead_players_count = 0;
+        Player winner = null;
+        boolean is_last = true;
         for (Player p : players) {
-            if (!p.isAlive()) {
+            /*if (!p.isAlive()) {
                 dead_players_count++;
+            }*/
+            if (winner == null && p.isAlive()) {
+                winner = p;
+            } else if (p.isAlive()) {
+                is_last = false;
             }
         }
-        if (dead_players_count >= players.size() - 1) {
+        /*if (dead_players_count >= players.size() - 1) {
             Bomberball.changeScreen(new MainMenuScreen());
+            return;
+        }*/
+        if (is_last) {
+            Bomberball.changeScreen(new VictoryMenuScreen(winner));
             return;
         }
 
