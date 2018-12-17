@@ -1,5 +1,7 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -11,6 +13,7 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.utils.Resolutions;
 
@@ -54,7 +57,21 @@ public class SettingsMenuScreen extends AbstractScreen {
 
         contents[0] = new Table();
         contents[0].add(new ParameterScreenSize()).growX().row();
-        contents[0].add(new CheckBox("fullscreen", Graphics.GUI.getSkin())).growX().row();
+        CheckBox fullscreen = new CheckBox("fullscreen", GUI.getSkin());
+        fullscreen.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+                final AppConfig config = AppConfig.get();
+                if(((CheckBox)actor).isChecked())
+                    Gdx.graphics.setFullscreenMode(displayMode);
+                else
+                    Bomberball.resizeWindow(config.resolution);
+                config.fullscreen = ((CheckBox)actor).isChecked();
+                config.exportConfig();
+            }
+        });
+        contents[0].add(fullscreen).growX().row();
 
         //ajout de chaque paramètre pour inputs
         InputsConfig inputsConfig = InputsConfig.get();
@@ -105,6 +122,9 @@ public class SettingsMenuScreen extends AbstractScreen {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     Bomberball.resizeWindow(value.getSelected());
+                    final AppConfig config = AppConfig.get();
+                    config.resolution = value.getSelected();
+                    config.exportConfig();
                 }
             });
             this.addActor(value);
