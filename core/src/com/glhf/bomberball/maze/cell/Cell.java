@@ -3,7 +3,7 @@ package com.glhf.bomberball.maze.cell;
 import com.badlogic.gdx.graphics.Color;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
 

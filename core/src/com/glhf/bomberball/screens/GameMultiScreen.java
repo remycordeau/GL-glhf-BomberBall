@@ -13,7 +13,7 @@ import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
 

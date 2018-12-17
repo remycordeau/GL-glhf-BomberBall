@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 public class ExplosionEffect extends CellEffect {
 

@@ -1,13 +1,19 @@
 package com.glhf.bomberball.config;
 
-public class AppConfig extends Config {
+import com.glhf.bomberball.utils.Constants;
+import com.glhf.bomberball.utils.Resolutions;
 
-    public int screen_width = 960;
-    public int scree_height = 540;
+public class AppConfig extends Config {
 
     public boolean fullscreen = false;
 
-    public static AppConfig get(String config_app) {
-        return get(config_app, AppConfig.class);
+    public Resolutions resolution = Resolutions.LOW;
+
+    public static AppConfig get() {
+        return get(Constants.DEFAULT_CONFIG_APP, AppConfig.class);
+    }
+
+    public void exportConfig(){
+        exportConfig(Constants.DEFAULT_CONFIG_APP);
     }
 }

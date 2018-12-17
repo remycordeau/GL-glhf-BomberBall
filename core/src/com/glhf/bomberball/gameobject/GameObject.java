@@ -2,9 +2,9 @@ package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 public abstract class GameObject {
 

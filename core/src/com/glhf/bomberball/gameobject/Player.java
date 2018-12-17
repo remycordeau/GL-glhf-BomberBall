@@ -5,7 +5,7 @@ import com.glhf.bomberball.maze.cell.Cell;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 public class Player extends Character {
 

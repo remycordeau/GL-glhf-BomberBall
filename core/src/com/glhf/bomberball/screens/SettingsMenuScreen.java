@@ -6,11 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.InputsConfig;
+import com.glhf.bomberball.utils.Resolutions;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -25,48 +27,62 @@ public class SettingsMenuScreen extends AbstractScreen {
     public SettingsMenuScreen() {
         super();
         Table table = new Table();
-        addUI(table);
         table.setFillParent(true);
-        Table inputsParams = new Table();
-        ScrollPane inputsPane = new ScrollPane(inputsParams);
-        Table appParams = new Table();
-        ScrollPane appPane = new ScrollPane(appParams);
-        TextButton labelGeneral = new TextButton("general", Graphics.GUI.getSkin());
-        labelGeneral.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                table.removeActor(inputsPane);
-                table.addActorAt(2, appPane);
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        table.add(labelGeneral).growX();
-        TextButton labelInputs = new TextButton("inputs", Graphics.GUI.getSkin());
-        labelInputs.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                table.removeActor(appPane);
-                table.addActorAt(2, inputsPane);
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        table.add(labelInputs).growX().row();
+        addUI(table);
 
-        appParams.add(new ParameterScreenSize()).growX().row();
-        appParams.add(new CheckBox("fullscreen", Graphics.GUI.getSkin())).growX().row();
-        table.add(appPane).grow().colspan(2).row();
+
+        final int NB_TABS = 2;
+        TextButton[] labels = new TextButton[NB_TABS];
+        Stack stack = new Stack();
+        Table[] contents = new Table[NB_TABS];
+
+        final ClickListener listener = new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                for(int i=0; i<NB_TABS; i++)
+                    contents[i].setVisible(labels[i].isChecked());
+                stack.swapActor(0,1);
+            }
+        };
+
+        labels[0] = new TextButton("general", Graphics.GUI.getSkin());
+        labels[0].addListener(listener);
+
+        labels[1] = new TextButton("inputs", Graphics.GUI.getSkin());
+        labels[1].addListener(listener);
+
+        contents[0] = new Table();
+        contents[0].add(new ParameterScreenSize()).growX().row();
+        contents[0].add(new CheckBox("fullscreen", Graphics.GUI.getSkin())).growX().row();
 
         //ajout de chaque paramètre pour inputs
         InputsConfig inputsConfig = InputsConfig.get();
         HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
+        contents[1] = new Table();
         for(Action a : map.keySet()){
-            new ParameterInput(inputsParams,a, map.get(a));
+            new ParameterInput(contents[1],a, map.get(a));
         }
 
-        table.add(inputsPane).grow().colspan(2).row();
+        ButtonGroup<TextButton> buttonGroup = new ButtonGroup<>();
+        for(int i=0; i<NB_TABS; i++) {
+            table.add(labels[i]).growX();
+            buttonGroup.add(labels[i]);
+        }
+        table.row();
+        for(int i=0; i<NB_TABS; i++)
+            stack.add(new ScrollPane(contents[i]));
+        table.add(stack).colspan(NB_TABS).growX().row();
+
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
-        table.add(cancelButton).colspan(2).growX();
+        table.add(cancelButton).colspan(NB_TABS).growX();
+
+        stack.swapActor(0,1);
+        labels[0].setChecked(true);
+        contents[1].setVisible(false);
+        buttonGroup.setMaxCheckCount(1);
+        buttonGroup.setMinCheckCount(1);
     }
 
     public abstract class Parameter extends HorizontalGroup {
@@ -83,7 +99,15 @@ public class SettingsMenuScreen extends AbstractScreen {
     private class ParameterScreenSize extends Parameter {
         public ParameterScreenSize() {
             super("screen size");
-
+            SelectBox<Resolutions> value = new SelectBox<Resolutions>(Graphics.GUI.getSkin());
+            value.setItems(Resolutions.values());
+            value.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Bomberball.resizeWindow(value.getSelected());
+                }
+            });
+            this.addActor(value);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

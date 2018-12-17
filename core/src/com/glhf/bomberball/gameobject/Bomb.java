@@ -2,7 +2,7 @@ package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.Directions;
+import com.glhf.bomberball.utils.Directions;
 
 public class Bomb extends GameObject {
 

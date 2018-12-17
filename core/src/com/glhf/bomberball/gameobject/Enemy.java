@@ -1,11 +1,5 @@
 package com.glhf.bomberball.gameobject;
 
-import com.glhf.bomberball.Constants;
-import com.glhf.bomberball.gameobject.Character;
-import com.glhf.bomberball.gameobject.Player;
-
-import java.util.ArrayList;
-
 public abstract class Enemy extends Character {
 
     protected int strength = 1;

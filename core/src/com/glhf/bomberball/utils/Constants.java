@@ -1,4 +1,4 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.utils;
 
 import java.io.File;
 
@@ -19,4 +19,6 @@ public class Constants {
 
     // others constants
     public static final int NB_ANIMATION_FRAMES = 5;
+    public static final String DEFAULT_CONFIG_APP = "config_app";
+    public static final String DEFAULT_CONFIG_INPUTS = "default_inputs";
 }

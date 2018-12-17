@@ -1,7 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.config.GameSoloConfig;

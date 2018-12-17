@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.glhf.bomberball.maze.cell.CellEffect;
-import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Player;
