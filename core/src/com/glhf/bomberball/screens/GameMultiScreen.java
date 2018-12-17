@@ -23,9 +23,11 @@ public class GameMultiScreen extends GameScreen {
     private ArrayList<Player> players;
     private Player current_player;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
+    private int maze_id;
 
-    public GameMultiScreen(Maze maze) {
+    public GameMultiScreen(Maze maze, int maze_id) {
         super(maze);
+        this.maze_id = maze_id;
 
         config = GameMultiConfig.get("config_game_multi");
         //maze.applyConfig(config);
@@ -139,14 +141,17 @@ public class GameMultiScreen extends GameScreen {
      * gives the next player after a turn. If the next player is dead, choose the following player.
      */
     private void nextPlayer() {
-        int dead_players_count = 0;
+        Player winner = null;
+        boolean is_last = true;
         for (Player p : players) {
-            if (!p.isAlive()) {
-                dead_players_count++;
+            if (winner == null && p.isAlive()) {
+                winner = p;
+            } else if (p.isAlive()) {
+                is_last = false;
             }
         }
-        if (dead_players_count >= players.size() - 1) {
-            Bomberball.changeScreen(new MainMenuScreen());
+        if (is_last) {
+            Bomberball.changeScreen(new VictoryMenuScreen(winner, this.maze_id));
             return;
         }
 
