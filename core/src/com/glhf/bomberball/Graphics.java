@@ -128,48 +128,56 @@ public class Graphics {
             parameter.size = 32;
             BitmapFont font = generator.generateFont(parameter);
             skin.add("small", font);
-            parameter.size = 52;
+            parameter.size = 26;
+            font = generator.generateFont(parameter);
+            skin.add("very_small", font);
+            parameter.size = 38;
             font = generator.generateFont(parameter);
             skin.add("default", font);
             generator.dispose();
 
+            //==========TextButtonStyle
             NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
-            TextButtonStyle textButtonStyle = new TextButtonStyle();
-            textButtonStyle.up = patch;
-            textButtonStyle.down = patch;
-            textButtonStyle.over = patch;
-            textButtonStyle.checked = patch.tint(Color.RED);
-            textButtonStyle.font = skin.getFont("default");
+            TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.downFontColor = Color.RED;
             skin.add("default", textButtonStyle);
+
+            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("small");
             skin.add("small", textButtonStyle);
 
-            //
+            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            textButtonStyle.font = skin.getFont("very_small");
+            skin.add("input_select", textButtonStyle);
+
+            //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);
 
-            //
-            labelStyle = new LabelStyle();
+            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
+            labelStyle.font = skin.getFont("small");
+            skin.add("small", labelStyle);
+
+            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
+            labelStyle.font = skin.getFont("very_small");
+            skin.add("very_small", labelStyle);
+
+            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
             labelStyle.font = font;
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
 
-            //
-            labelStyle = new LabelStyle();
-            labelStyle.font = skin.getFont("small");
-            skin.add("small", labelStyle);
 
-            //
+            //=======SliderStyle
             SliderStyle sliderStyle = new SliderStyle();
             sliderStyle.knob = skin.get("bomb", TextureRegionDrawable.class);
             sliderStyle.background = skin.getDrawable("white");
             skin.add("default-horizontal", sliderStyle);
 
-            //
+            //=======ListStyle
             ListStyle listStyle = new ListStyle();
             listStyle.font = font;
             listStyle.fontColorSelected = Color.WHITE;
@@ -178,7 +186,7 @@ public class Graphics {
             listStyle.background = skin.getDrawable("white");
             skin.add("default", listStyle);
 
-            //
+            //=======ScrollPaneStyle
             ScrollPaneStyle scrollStyle = new ScrollPaneStyle();
             scrollStyle.background = skin.getDrawable("white");
             scrollStyle.hScroll = skin.getDrawable("white");
@@ -187,8 +195,8 @@ public class Graphics {
             scrollStyle.vScrollKnob = skin.get("bomb", TextureRegionDrawable.class);
             skin.add("default", scrollStyle);
 
-            //
-            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();
+            //========SelectBoxStyle
+            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
             selectBoxStyle.background = skin.getDrawable("white");
@@ -196,7 +204,7 @@ public class Graphics {
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);
 
-            //
+            //=======CheckBoxStyle
             CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
             checkBoxStyle.checkboxOff = skin.get("checkboxOff", TextureRegionDrawable.class);
             checkBoxStyle.checkboxOn = skin.get("checkboxOn", TextureRegionDrawable.class);

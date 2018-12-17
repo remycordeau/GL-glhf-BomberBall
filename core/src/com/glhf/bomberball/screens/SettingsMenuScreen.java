@@ -29,6 +29,8 @@ public class SettingsMenuScreen extends AbstractScreen {
     //Constructor
     public SettingsMenuScreen() {
         super();
+        AppConfig appConfig = AppConfig.get();
+        InputsConfig inputsConfig = InputsConfig.get();
         Table table = new Table();
         table.setFillParent(true);
         addUI(table);
@@ -58,11 +60,12 @@ public class SettingsMenuScreen extends AbstractScreen {
         contents[0] = new Table();
         contents[0].add(new ParameterScreenSize()).growX().row();
         CheckBox fullscreen = new CheckBox("fullscreen", GUI.getSkin());
+        fullscreen.setChecked(appConfig.fullscreen);
         fullscreen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-                final AppConfig config = AppConfig.get();
+                AppConfig config = AppConfig.get();
                 if(((CheckBox)actor).isChecked())
                     Gdx.graphics.setFullscreenMode(displayMode);
                 else
@@ -74,7 +77,6 @@ public class SettingsMenuScreen extends AbstractScreen {
         contents[0].add(fullscreen).growX().row();
 
         //ajout de chaque paramètre pour inputs
-        InputsConfig inputsConfig = InputsConfig.get();
         HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
         contents[1] = new Table();
         for(Action a : map.keySet()){
@@ -89,7 +91,7 @@ public class SettingsMenuScreen extends AbstractScreen {
         table.row();
         for(int i=0; i<NB_TABS; i++)
             stack.add(new ScrollPane(contents[i]));
-        table.add(stack).colspan(NB_TABS).growX().row();
+        table.add(stack).colspan(NB_TABS).grow().row();
 
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
@@ -114,15 +116,16 @@ public class SettingsMenuScreen extends AbstractScreen {
     }
 
     private class ParameterScreenSize extends Parameter {
+        AppConfig config = AppConfig.get();
         public ParameterScreenSize() {
             super("screen size");
             SelectBox<Resolutions> value = new SelectBox<Resolutions>(Graphics.GUI.getSkin());
             value.setItems(Resolutions.values());
+            value.setSelected(config.resolution);
             value.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     Bomberball.resizeWindow(value.getSelected());
-                    final AppConfig config = AppConfig.get();
                     config.resolution = value.getSelected();
                     config.exportConfig();
                 }
@@ -134,10 +137,10 @@ public class SettingsMenuScreen extends AbstractScreen {
     private class ParameterInput {
 
         public ParameterInput(Table table, Action a, String[] codes) {
-            Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "small");
+            Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "very_small");
             table.add(label).growX();
             for(String code: codes) {
-                TextButton textButton = new TextButton("code:" + code, Graphics.GUI.getSkin(), "small");
+                TextButton textButton = new TextButton("code:" + code, Graphics.GUI.getSkin(), "input_select");
                 textButton.addListener(new ChangeInputListener(a, code));
                 table.add(textButton).growX();
             }
