@@ -60,7 +60,7 @@ public class SettingsMenuScreen extends AbstractScreen {
         InputsConfig inputsConfig = InputsConfig.get();
         HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
         for(Action a : map.keySet()){
-            inputsParams.add(new ParameterInput(a, map.get(a))).growX().row();
+            new ParameterInput(inputsParams,a, map.get(a));
         }
 
         table.add(inputsPane).grow().colspan(2).row();
@@ -87,16 +87,17 @@ public class SettingsMenuScreen extends AbstractScreen {
         }
     }
 
-    private class ParameterInput extends Table {
+    private class ParameterInput {
 
-        public ParameterInput(Action a, String[] codes) {
+        public ParameterInput(Table table, Action a, String[] codes) {
             Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "small");
-            add(label);
+            table.add(label).growX();
             for(String code: codes) {
                 TextButton textButton = new TextButton("code:" + code, Graphics.GUI.getSkin(), "small");
                 textButton.addListener(new ChangeInputListener(a, code));
-                add(textButton);
+                table.add(textButton).growX();
             }
+            table.row();
         }
 
         private class ChangeInputListener extends InputListener {
