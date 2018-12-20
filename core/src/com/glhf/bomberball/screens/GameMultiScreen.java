@@ -48,7 +48,7 @@ public class GameMultiScreen extends GameScreen {
         input_handler.registerActionHandler(Action.MODE_BOMB, this::setBombMode);
         input_handler.registerActionHandler(Action.MODE_MOVE, this::setMoveMode);
         input_handler.registerActionHandler(Action.ENDTURN, this::endTurn);
-        input_handler.registerActionHandler(Action.DROP_BOMB, this::dropBombAt);
+        input_handler.registerActionHandler(Action.DROP_BOMB, (x, y) -> dropBombAt(x, y));
         input_handler.registerActionHandler(Action.MOVE_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
         input_handler.registerActionHandler(Action.MOVE_UP, () -> moveCurrentPlayer(Directions.UP));
         input_handler.registerActionHandler(Action.MOVE_LEFT, () -> moveCurrentPlayer(Directions.LEFT));

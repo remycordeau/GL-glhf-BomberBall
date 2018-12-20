@@ -75,6 +75,9 @@ public class InputsConfig extends Config {
     public static InputsConfig get() {
         return get("default_inputs", InputsConfig.class);
     }
+    public void exportConfig() {
+        exportConfig("default_inputs");
+    }
 
     /**
      * Links a key code with a Action
@@ -157,15 +160,24 @@ public class InputsConfig extends Config {
         return map_action_to_code;
     }
 
-    //private functions =============
-
-    private void addAction(String code_id, Action action, InputProfile profile){
+    public void addAction(String code_id, Action action, InputProfile profile){
         has_input_map_changed=true;
         if(!map_code_to_action.containsKey(code_id)) {
             map_code_to_action.put(code_id, new Action[InputProfile.values().length]);
         }
         map_code_to_action.get(code_id)[profile.ordinal()] = action;
     }
+
+
+    public void delAction(String code_id, InputProfile profile){
+        addAction(code_id, null,  profile);
+        for(Action a : map_code_to_action.get(code_id))
+            if(a!=null)
+                return;
+        map_code_to_action.remove(code_id);
+    }
+
+    //private functions =============
 
     private Action getAction(String key) {
         if(map_code_to_action.containsKey(key)){
@@ -177,10 +189,10 @@ public class InputsConfig extends Config {
         return null;
     }
 
-    private String getIDForKeyCode(int key_code){
+    public static String getIDForKeyCode(int key_code){
         return "K"+key_code;
     }
-    private String getIDForMouseButtonCode(int mouse_button_code){
+    public static String getIDForMouseButtonCode(int mouse_button_code){
         return "M"+mouse_button_code;
     }
 

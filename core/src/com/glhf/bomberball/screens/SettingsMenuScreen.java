@@ -2,10 +2,13 @@ package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Bomberball;
@@ -15,16 +18,23 @@ import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
+import com.glhf.bomberball.config.InputsConfig.InputProfile;
 import com.glhf.bomberball.utils.Resolutions;
+import com.glhf.bomberball.utils.WaitNextInput;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
 public class SettingsMenuScreen extends AbstractScreen {
+
+    private final EventListener button_listener;
+    private final Table[] contents;
+    private final TextButton[] labels;
+    private final ButtonGroup<InputButton> inputsButtonGroup;
+    private final ClickListener labels_listener;
+    private InputProcessor tmp;
 
     //Constructor
     public SettingsMenuScreen() {
@@ -35,13 +45,14 @@ public class SettingsMenuScreen extends AbstractScreen {
         table.setFillParent(true);
         addUI(table);
 
+//        input_handler.setSettingsMenuScreen(this);
 
         final int NB_TABS = 2;
-        TextButton[] labels = new TextButton[NB_TABS];
+        labels = new TextButton[NB_TABS];
         Stack stack = new Stack();
-        Table[] contents = new Table[NB_TABS];
+        contents = new Table[NB_TABS];
 
-        final ClickListener listener = new ClickListener() {
+        labels_listener = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -51,11 +62,24 @@ public class SettingsMenuScreen extends AbstractScreen {
             }
         };
 
+        SettingsMenuScreen self = this;
+        button_listener = new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                final TextButton textButton = (TextButton) event.getListenerActor();
+                textButton.setText("?");
+                textButton.setChecked(true);
+                tmp = Gdx.input.getInputProcessor();
+                Gdx.input.setInputProcessor(new WaitNextInput(self));
+                return true;
+            }
+        };
+
         labels[0] = new TextButton("general", Graphics.GUI.getSkin());
-        labels[0].addListener(listener);
+        labels[0].addListener(labels_listener);
 
         labels[1] = new TextButton("inputs", Graphics.GUI.getSkin());
-        labels[1].addListener(listener);
+        labels[1].addListener(labels_listener);
 
         contents[0] = new Table();
         contents[0].add(new ParameterScreenSize()).growX().row();
@@ -79,14 +103,26 @@ public class SettingsMenuScreen extends AbstractScreen {
         //ajout de chaque paramètre pour inputs
         HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
         contents[1] = new Table();
+        inputsButtonGroup = new ButtonGroup<>();
+        inputsButtonGroup.setMaxCheckCount(1);
+        inputsButtonGroup.setMinCheckCount(1);
         for(Action a : map.keySet()){
-            new ParameterInput(contents[1],a, map.get(a));
+            Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "very_small");
+            contents[1].add(label).growX();
+            for(int i=0; i<map.get(a).length; i++) {
+                String id = map.get(a)[i];
+                InputButton textButton = new InputButton(id, a, i);
+                textButton.addListener(button_listener);
+                contents[1].add(textButton).growX();
+                inputsButtonGroup.add(textButton);
+            }
+            contents[1].row();
         }
 
-        ButtonGroup<TextButton> buttonGroup = new ButtonGroup<>();
+        ButtonGroup<TextButton> labelsButtonGroup = new ButtonGroup<>();
         for(int i=0; i<NB_TABS; i++) {
             table.add(labels[i]).growX();
-            buttonGroup.add(labels[i]);
+            labelsButtonGroup.add(labels[i]);
         }
         table.row();
         for(int i=0; i<NB_TABS; i++)
@@ -100,8 +136,26 @@ public class SettingsMenuScreen extends AbstractScreen {
         stack.swapActor(0,1);
         labels[0].setChecked(true);
         contents[1].setVisible(false);
-        buttonGroup.setMaxCheckCount(1);
-        buttonGroup.setMinCheckCount(1);
+        labelsButtonGroup.setMaxCheckCount(1);
+        labelsButtonGroup.setMinCheckCount(1);
+    }
+
+    public void setIdReceived(String code) {
+        Gdx.input.setInputProcessor(tmp);
+        final InputButton button = inputsButtonGroup.getChecked();
+        inputsButtonGroup.uncheckAll();
+        String esc = InputsConfig.getIDForKeyCode(Keys.ESCAPE);
+        InputsConfig inputsConfig = InputsConfig.get();
+        //if(code.equals(esc)) code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
+        if(code.equals(esc)){
+            code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
+            button.setText("");
+            inputsConfig.delAction(code, InputProfile.values()[button.numProfile]);
+        }else {
+            button.setText(code);
+            inputsConfig.addAction(code, button.action, InputProfile.values()[button.numProfile]);
+        }
+        inputsConfig.exportConfig();
     }
 
     public abstract class Parameter extends HorizontalGroup {
@@ -133,35 +187,6 @@ public class SettingsMenuScreen extends AbstractScreen {
             this.addActor(value);
         }
     }
-
-    private class ParameterInput {
-
-        public ParameterInput(Table table, Action a, String[] codes) {
-            Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "very_small");
-            table.add(label).growX();
-            for(String code: codes) {
-                TextButton textButton = new TextButton("code:" + code, Graphics.GUI.getSkin(), "input_select");
-                textButton.addListener(new ChangeInputListener(a, code));
-                table.add(textButton).growX();
-            }
-            table.row();
-        }
-
-        private class ChangeInputListener extends InputListener {
-            private InputsConfig config = InputsConfig.get();
-            private Object o;
-            public ChangeInputListener(Object o, String f) {
-                this.o = o;
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //TODO spash screen
-                System.out.println("spash screen de gestion des inputs a faire");
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        }
-    }
     public class ParameterString extends Parameter {
         private SelectBox<String> value;
         public ParameterString(String name) {
@@ -187,6 +212,17 @@ public class SettingsMenuScreen extends AbstractScreen {
             value.addActor(label);
             value.addActor(slider);
             addActor(value);
+        }
+    }
+
+    private class InputButton extends TextButton {
+        public Action action;
+        public int numProfile;
+
+        public InputButton(String id, Action action, int numProfile) {
+            super(id, Graphics.GUI.getSkin(), "input_select");
+            this.action = action;
+            this.numProfile = numProfile;
         }
     }
 }

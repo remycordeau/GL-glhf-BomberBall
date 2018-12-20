@@ -150,6 +150,7 @@ public class Graphics {
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
+            textButtonStyle.checked = patch.tint(Color.RED);
             skin.add("input_select", textButtonStyle);
 
             //========LabelStyle
