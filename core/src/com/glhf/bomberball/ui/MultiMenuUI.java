@@ -90,7 +90,7 @@ public class MultiMenuUI extends Table {
         //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
         //Adding an image for each player to the table
         Table selectPlayer = new Table();
-        selectPlayer.add(p1).grow();
+        selectPlayer.add(p1).size(Value.percentHeight(3f),Value.percentHeight(3f)).grow();
         selectPlayer.add(p2).grow();
         selectPlayer.add(buttons).grow();
         selectPlayer.add(p3).grow();

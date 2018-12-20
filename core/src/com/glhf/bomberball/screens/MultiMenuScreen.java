@@ -19,7 +19,7 @@ public class MultiMenuScreen extends AbstractScreen {
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_m/idle"), Animation.PlayMode.LOOP)),
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP)),
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_f/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("skelet/idle"), Animation.PlayMode.LOOP)) // Le personnage ayant cette animation ne sera pas inclus dans
+            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("no_player/idle"), Animation.PlayMode.LOOP)) // Le personnage ayant cette animation ne sera pas inclus dans
     };
 
     private int maze_id = 0;
