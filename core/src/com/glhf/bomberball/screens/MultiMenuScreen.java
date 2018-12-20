@@ -11,24 +11,15 @@ import com.glhf.bomberball.ui.MultiMenuUI;
 public class MultiMenuScreen extends AbstractScreen {
 
     public Maze maze;
-    public AnimationActor[] selectPlayer=
-            {
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_m/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_f/idle"), Animation.PlayMode.LOOP)),
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("no_player/idle"), Animation.PlayMode.LOOP)) // Le personnage ayant cette animation ne sera pas inclus dans
-    };
+    public static String[] selectPlayer= {"knight_m", "knight_f","elf_f", "elf_m","wizzard_m", "wizzard_f", "no_player"};
 
     private int maze_id = 0;
     private final int maze_count = 7;
 
-    public int p1_id=0;
-    public int p2_id=2;
-    public int p3_id=4;
-    public int p4_id=6;
+    public static int p1_id=0;
+    public static int p2_id=1;
+    public static int p3_id=2;
+    public static int p4_id=4;
 
     public MultiMenuScreen() {
         maze = Maze.importMaze("maze_" + maze_id);
@@ -45,12 +36,11 @@ public class MultiMenuScreen extends AbstractScreen {
         maze = Maze.importMaze("maze_" + maze_id);
     }
     public void nextP1(){
-        System.out.println("Clic sur P1: ancien p1_id ="+ p1_id);
         do {
             p1_id++;
             if (p1_id==6) { p1_id=0;}
         } while(p1_id==p2_id || p1_id==p3_id || p1_id==p4_id);
-        System.out.println("Clic sur P1: nouveau p1_id ="+ p1_id);
+        System.out.println("Nouveau skin : "+ selectPlayer[p1_id]);
     }
     public void nextP2(){
         do {

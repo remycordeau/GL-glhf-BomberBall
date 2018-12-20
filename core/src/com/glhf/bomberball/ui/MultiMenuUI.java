@@ -1,5 +1,7 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -75,7 +77,7 @@ public class MultiMenuUI extends Table {
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
-        p1 = new ImageButton(screen.selectPlayer[screen.p1_id].getDrawable());
+        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -83,9 +85,9 @@ public class MultiMenuUI extends Table {
                 updateP1();
             }
         });
-        AnimationActor p2 = screen.selectPlayer[screen.p2_id];
-        AnimationActor p3 = screen.selectPlayer[screen.p3_id];
-        AnimationActor p4 = screen.selectPlayer[screen.p4_id];
+        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP));
         //The next line is only to animate the players
         //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
         //Adding an image for each player to the table
