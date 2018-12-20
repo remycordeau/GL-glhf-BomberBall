@@ -51,31 +51,24 @@ public class MultiMenuScreen extends AbstractScreen {
             if (p1_id==6) { p1_id=0;}
         } while(p1_id==p2_id || p1_id==p3_id || p1_id==p4_id);
         System.out.println("Clic sur P1: nouveau p1_id ="+ p1_id);
-
     }
     public void nextP2(){
-        p2_id++;
-        while (p2_id==p1_id || p2_id==p3_id || p2_id==p4_id)
-        {
+        do {
             p2_id++;
             if (p2_id==6) { p2_id=0;}
-        }
+        } while (p2_id==p1_id || p2_id==p3_id || p2_id==p4_id);
     }
     public void nextP3(){
-        p3_id++;
-        while (p3_id==p2_id || p1_id==p3_id || p3_id==p4_id)
-        {
+        do {
             p3_id++;
             if (p3_id==7) { p3_id=0;}
-        }
+        } while (p3_id==p2_id || p1_id==p3_id || p3_id==p4_id || p3_id!=selectPlayer.length);
     }
     public void nextP4(){
-        p4_id++;
-        while (p4_id==p2_id || p4_id==p3_id || p3_id==p4_id)
-        {
+        do{
             p4_id++;
             if (p4_id==7) { p4_id=0;}
-        }
+        } while (p4_id==p2_id || p4_id==p3_id || p3_id==p4_id || p4_id!=selectPlayer.length);
     }
 
     public int getMazeId() {
