@@ -1,7 +1,5 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -19,6 +17,7 @@ public class MultiMenuUI extends Table {
     MultiMenuScreen screen;
 
     MazeDrawer maze_preview;
+    ImageButton p1;
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
@@ -30,7 +29,7 @@ public class MultiMenuUI extends Table {
     }
 
     public void initializeButtons(){
-
+        System.out.println("test");
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
         TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -76,12 +75,19 @@ public class MultiMenuUI extends Table {
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
-        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP));
+        p1 = new ImageButton(screen.selectPlayer[screen.p1_id].getDrawable());
+        p1.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP1();
+                updateP1();
+            }
+        });
+        AnimationActor p2 = screen.selectPlayer[screen.p2_id];
+        AnimationActor p3 = screen.selectPlayer[screen.p3_id];
+        AnimationActor p4 = screen.selectPlayer[screen.p4_id];
         //The next line is only to animate the players
-        p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
+        //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
         //Adding an image for each player to the table
         Table selectPlayer = new Table();
         selectPlayer.add(p1).grow();
@@ -90,5 +96,10 @@ public class MultiMenuUI extends Table {
         selectPlayer.add(p3).grow();
         selectPlayer.add(p4).grow();
         this.add(selectPlayer).grow();
+    }
+    public void updateP1()
+    {
+        System.out.println("Update !");
+        // TODO : Faire une fonction pour afficher le nouveau skin de p1
     }
 }

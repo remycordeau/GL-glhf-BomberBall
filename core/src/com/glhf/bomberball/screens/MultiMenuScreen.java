@@ -13,10 +13,10 @@ public class MultiMenuScreen extends AbstractScreen {
     public Maze maze;
     public AnimationActor[] selectPlayer=
             {
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP)),   //0
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP)),   //1
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP)),  //2
-            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_m/idle"), Animation.PlayMode.LOOP)),  //3
+            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_m/idle"), Animation.PlayMode.LOOP)),
+            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("knight_f/idle"), Animation.PlayMode.LOOP)),
+            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_f/idle"), Animation.PlayMode.LOOP)),
+            new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("elf_m/idle"), Animation.PlayMode.LOOP)),
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_m/idle"), Animation.PlayMode.LOOP)),
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("wizzard_f/idle"), Animation.PlayMode.LOOP)),
             new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("skelet/idle"), Animation.PlayMode.LOOP)) // Le personnage ayant cette animation ne sera pas inclus dans
@@ -45,12 +45,13 @@ public class MultiMenuScreen extends AbstractScreen {
         maze = Maze.importMaze("maze_" + maze_id);
     }
     public void nextP1(){
-        p1_id++;
-        while (p1_id==p2_id || p1_id==p3_id || p1_id==p4_id)
-        {
+        System.out.println("Clic sur P1: ancien p1_id ="+ p1_id);
+        do {
             p1_id++;
             if (p1_id==6) { p1_id=0;}
-        }
+        } while(p1_id==p2_id || p1_id==p3_id || p1_id==p4_id);
+        System.out.println("Clic sur P1: nouveau p1_id ="+ p1_id);
+
     }
     public void nextP2(){
         p2_id++;
@@ -73,7 +74,7 @@ public class MultiMenuScreen extends AbstractScreen {
         while (p4_id==p2_id || p4_id==p3_id || p3_id==p4_id)
         {
             p4_id++;
-            if (p4_id==6) { p4_id=0;}
+            if (p4_id==7) { p4_id=0;}
         }
     }
 
