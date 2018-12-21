@@ -1,7 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.config.GameSoloConfig;
@@ -154,20 +154,19 @@ public class Maze {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
 
-    // TODO : bouger la méthode dans une autre classe ?
-    public void applyConfig(GameConfig config) {
-        ArrayList<GameObject> objects = new ArrayList<GameObject>();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                objects.addAll(cells[x][y].getGameObjects());
-            }
-        }
-        for (Object o : objects) {
-            if (o instanceof Wall) {
-                ((Wall) o).setLife(config.wall_life);
-            }
-        }
-    }
+//    public void applyConfig(GameConfig config) {
+//        ArrayList<GameObject> objects = new ArrayList<GameObject>();
+//        for (int x = 0; x < width; x++) {
+//            for (int y = 0; y < height; y++) {
+//                objects.addAll(cells[x][y].getGameObjects());
+//            }
+//        }
+//        for (Object o : objects) {
+//            if (o instanceof Wall) {
+//                ((Wall) o).setLife(config.wall_life);
+//            }
+//        }
+//    }
 
     private static void createGson() {
         gson = new GsonBuilder()

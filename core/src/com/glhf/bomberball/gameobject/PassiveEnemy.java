@@ -1,9 +1,5 @@
 package com.glhf.bomberball.gameobject;
 
-import com.glhf.bomberball.Constants;
-
-import java.util.ArrayList;
-
 
 public class PassiveEnemy extends Enemy {
 

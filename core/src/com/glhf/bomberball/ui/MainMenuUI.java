@@ -1,7 +1,6 @@
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -39,7 +38,7 @@ public class MainMenuUI extends Table {
         this.add(b).growX().space(spacing).row();
 
         b = new TextButton("Map Editor", Graphics.GUI.getSkin());
-        b.addListener(new ScreenChangeListener(MapEditorMenuScreen.class));
+        b.addListener(new ScreenChangeListener(MapEditorScreen.class));
         this.add(b).growX().space(spacing).row();
 
         b = new TextButton("Settings", Graphics.GUI.getSkin());

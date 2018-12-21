@@ -3,7 +3,9 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.utils.Resolutions;
 
 public class Bomberball extends Game {
 
@@ -28,5 +30,11 @@ public class Bomberball extends Game {
 
 	public static void changeScreen(Screen screen) {
 		instance.setScreen(screen);
+	}
+
+	public static void resizeWindow(Resolutions res){
+		instance.resize(res.width, res.height);
+		Gdx.graphics.setWindowedMode(res.width, res.height);
+		//TODO résoudre le problème lors du changement de résolutions (résolution du texte et autre)
 	}
 }

@@ -3,6 +3,7 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.glhf.bomberball.config.InputsConfig;
+import com.glhf.bomberball.config.InputsConfig.InputProfile;
 
 /**
  * class InputHandler
@@ -11,11 +12,11 @@ import com.glhf.bomberball.config.InputsConfig;
  *
  * Example :
  *
- * inputHandler.registerKeyAction(KeyAction.KEY_UP, () -> { keyUpHandler() })
- * to register keyUpHandler as an handler on KEY_UP action
+ * inputHandler.registerActionHandler(Action.MOVE_UP, () -> { keyUpHandler() })
+ * to register keyUpHandler as an handler on MOVE_UP action
  *
- * inputHandler.registerButtonAction(ButtonAction.BUTTON_LEFT, (x, y) -> { buttonLeftHandler(x, y) })
- * to register buttonLeftHandler as an handler on BUTTON_LEFT action
+ * inputHandler.registerButtonAction(Action.DROP_BOMB, (x, y) -> { buttonLeftHandler(x, y) })
+ * to register buttonLeftHandler as an handler on DROP_BOMB action
  *
  * @author nayala
  */
@@ -30,32 +31,23 @@ public class InputHandler extends InputListener {
      * KeyActions
      * All registrable key actions
      */
-    public enum KeyAction {
-        KEY_UP,
-        KEY_DOWN,
-        KEY_LEFT,
-        KEY_RIGHT,
-        KEY_SPACE,
-        KEY_DROP_RIGHT,
-        KEY_DROP_UP,
-        KEY_DROP_LEFT,
-        KEY_DROP_DOWN,
-        KEY_MOVE,
-        KEY_ENDTURN,
-        KEY_BOMB
+    public enum Action {
+        MOVE_UP,
+        MOVE_DOWN,
+        MOVE_LEFT,
+        MOVE_RIGHT,
+        DROP_BOMB_RIGHT,
+        DROP_BOMB_UP,
+        DROP_BOMB_LEFT,
+        DROP_BOMB_DOWN,
+        ENDTURN,
+        MODE_BOMB,
+        MODE_MOVE,
+        DROP_BOMB,
+        MENU_GO_BACK
     }
 
-    /**
-     * Buttons
-     * All registrable button actions
-     */
-    public enum ButtonAction {
-        BUTTON_LEFT,
-        BUTTON_RIGHT
-    }
-
-    private KeyActionHandler[] key_handlers = new KeyActionHandler[KeyAction.values().length];
-    private ButtonActionHandler[] button_handlers = new ButtonActionHandler[KeyAction.values().length];
+    private ActionHandler[] handlers = new ActionHandler[Action.values().length];
     private boolean locked;
 
     /**
@@ -63,8 +55,10 @@ public class InputHandler extends InputListener {
      * Creates an InputHandler with default input codes configurations
      */
     public InputHandler() {
-        inputs_config = InputsConfig.defaultConfig();
-        inputs_config.export("default_inputs");
+//        inputs_config = InputsConfig.defaultConfig();
+//        inputs_config.exportConfig("default_inputs");
+        inputs_config = InputsConfig.get();
+
     }
 
     /**
@@ -73,9 +67,9 @@ public class InputHandler extends InputListener {
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
         if (!locked && inputs_config.isKeyCodeAssigned(keycode)) {
-            KeyActionHandler handler = key_handlers[inputs_config.getKeyActionCode(keycode).ordinal()];
-            if (handler != null) {
-                handler.handle();
+            ActionHandler handler = this.handlers[inputs_config.getKeyCodeAction(keycode).ordinal()];
+            if(handler != null){
+                handler.handle(event);
             }
         }
         return false;
@@ -87,9 +81,9 @@ public class InputHandler extends InputListener {
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         if (!locked && inputs_config.isButtonCodeAssigned(button)) {
-            ButtonActionHandler handler = button_handlers[inputs_config.getButtonActionCode(button).ordinal()];
-            if (handler != null) {
-                handler.handle(x, y);
+            ActionHandler handler = this.handlers[inputs_config.getButtonCodeAction(button).ordinal()];
+            if(handler != null){
+                handler.handle(event);
             }
         }
         return false;
@@ -97,38 +91,49 @@ public class InputHandler extends InputListener {
 
     /**
      * Registers a key action.
-     * @param key_action action to register
-     * @param key_handler handler to call when key_action is triggered
+     * @param action action to register
+     * @param handler handler to call when action is triggered
      */
-    public void registerKeyAction(KeyAction key_action, KeyActionHandler key_handler) {
-        key_handlers[key_action.ordinal()] = key_handler;
+    public void registerActionHandler(Action action, KeyActionHandler handler) {
+        handlers[action.ordinal()] = new ActionHandler(handler);
     }
-
-    /**
-     * Registers a button action.
-     * @param button_action action to register
-     * @param button_handler handler to call when button_action is triggered
-     */
-    public void registerButtonAction(ButtonAction button_action, ButtonActionHandler button_handler) {
-        button_handlers[button_action.ordinal()] = button_handler;
+    public void registerActionHandler(Action action, ClickActionHandler handler) {
+        handlers[action.ordinal()] = new ActionHandler(handler);
     }
 
     /**
      * Interface to handle key actions.
      * Use lambda functions :
-     * KeyActionHandler key_handler = () -> { handle_key_action(); };
+     * ActionHandler key_handler = () -> { handle_key_action(); };
      */
     public interface KeyActionHandler {
         void handle();
     }
-
-    /**
-     * Interface to handle button actions.
-     * Use lambda functions :
-     * KeyActionHandler button_handler = (x, y) -> { handle_button_action(x, y); };
-     */
-    public interface ButtonActionHandler {
+    public interface ClickActionHandler{
         void handle(float x, float y);
+    }
+
+    public class ActionHandler {
+        KeyActionHandler keyActionHandler;
+        ClickActionHandler clickActionHandler;
+        public ActionHandler(KeyActionHandler keyActionHandler) {
+            this.keyActionHandler = keyActionHandler;
+        }
+        public ActionHandler(ClickActionHandler clickActionHandler) {
+            this.clickActionHandler = clickActionHandler;
+        }
+        public void handle(InputEvent e){
+            if(clickActionHandler != null){
+                clickActionHandler.handle(e.getStageX(), e.getStageY());
+            }
+            if(keyActionHandler != null){
+                keyActionHandler.handle();
+            }
+        }
+    }
+
+    public void setInputProfile(InputProfile profile) {
+        inputs_config.setInputProfile(profile);
     }
 
     public void lock(boolean locked) {

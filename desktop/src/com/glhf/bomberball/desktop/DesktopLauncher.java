@@ -3,19 +3,17 @@ package com.glhf.bomberball.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
-import com.glhf.bomberball.Constants;
+import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.AppConfig;
-import com.glhf.bomberball.config.Config;
-import com.glhf.bomberball.maze.Maze;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		AppConfig app_config = Config.importConfig("config_app", AppConfig.class);
+		AppConfig app_config = AppConfig.get();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = app_config.screen_width;
-		config.height = app_config.scree_height;
+		config.width = app_config.resolution.width;
+		config.height = app_config.resolution.height;
 		config.fullscreen = app_config.fullscreen;
 		config.resizable = true;
 

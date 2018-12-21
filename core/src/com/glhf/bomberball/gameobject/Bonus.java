@@ -12,6 +12,10 @@ public class Bonus extends GameObject {
 
     private Type type;
 
+    public Bonus() {
+        super();
+    }
+
     public Bonus(Type type) {
         super(1);
         this.type = type;
