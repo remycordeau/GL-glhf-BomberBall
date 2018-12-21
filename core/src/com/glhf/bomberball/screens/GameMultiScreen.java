@@ -103,6 +103,7 @@ public class GameMultiScreen extends GameScreen {
         input_handler.registerKeyAction(KeyAction.KEY_RIGHT, () -> dropBomb(Directions.RIGHT));
     }
 
+
     public void setMoveMode(){
         this.clearSelectEffect();
         this.setSelectEffect(current_player.getNumberMoveRemaining());
