@@ -17,5 +17,6 @@ public class GameConfig extends Config {
             "knight_m",
             "knight_f",
             "elf_m",
-            "wizzard_f"};
+            "wizzard_f"
+    };
 }
