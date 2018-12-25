@@ -20,6 +20,10 @@ public class MultiMenuUI extends Table {
 
     MazeDrawer maze_preview;
     ImageButton p1;
+    ImageButton p2;
+    ImageButton p3;
+    ImageButton p4;
+
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
@@ -31,7 +35,7 @@ public class MultiMenuUI extends Table {
     }
 
     public void initializeButtons(){
-        System.out.println("test");
+        System.out.println("Initialization of the Multi Menu");
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
         TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -77,7 +81,7 @@ public class MultiMenuUI extends Table {
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
-        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -85,14 +89,39 @@ public class MultiMenuUI extends Table {
                 updateP1();
             }
         });
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP));
+
+        p2 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP2();
+                updateP2();
+            }
+        });
+
+        p3 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP3();
+                updateP3();
+            }
+        });
+
+        p4 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p4.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP4();
+                updateP4();
+            }
+        });
+
         //The next line is only to animate the players
         //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
         //Adding an image for each player to the table
         Table selectPlayer = new Table();
-        selectPlayer.add(p1).size(Value.percentHeight(3f),Value.percentHeight(3f)).grow();
+        selectPlayer.add(p1).grow();
         selectPlayer.add(p2).grow();
         selectPlayer.add(buttons).grow();
         selectPlayer.add(p3).grow();
@@ -101,7 +130,22 @@ public class MultiMenuUI extends Table {
     }
     public void updateP1()
     {
-        System.out.println("Update !");
+        System.out.println("Update p1 !");
+        // TODO : Faire une fonction pour afficher le nouveau skin de p1
+    }
+    public void updateP2()
+    {
+        System.out.println("Update p2 !");
+        // TODO : Faire une fonction pour afficher le nouveau skin de p1
+    }
+    public void updateP3()
+    {
+        System.out.println("Update p3 !");
+        // TODO : Faire une fonction pour afficher le nouveau skin de p1
+    }
+    public void updateP4()
+    {
+        System.out.println("Update p4 !");
         // TODO : Faire une fonction pour afficher le nouveau skin de p1
     }
 }
