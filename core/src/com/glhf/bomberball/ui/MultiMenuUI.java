@@ -17,7 +17,6 @@ import com.glhf.bomberball.screens.ScreenChangeListener;
 public class MultiMenuUI extends Table {
 
     MultiMenuScreen screen;
-
     MazeDrawer maze_preview;
     ImageButton p1;
     ImageButton p2;
@@ -27,9 +26,26 @@ public class MultiMenuUI extends Table {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        this.padTop(Value.percentHeight(0.2f));
         this.setFillParent(true);
+        this.initialize();
+
+    }
+
+    public void initialize()
+    {
+        this.padTop(Value.percentHeight(0.2f));
         initializeButtons();
+        initializeMazePreview();
+    }
+
+    public void update()
+    {
+        System.out.println("Update !");
+        this.clear();
+        this.initialize();}
+
+    public void initializeMazePreview ()
+    {
         maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
@@ -86,7 +102,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP1();
-                updateP1();
+                update();
             }
         });
 
@@ -95,7 +111,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP2();
-                updateP2();
+                update();
             }
         });
 
@@ -104,7 +120,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP3();
-                updateP3();
+                update();
             }
         });
 
@@ -113,7 +129,7 @@ public class MultiMenuUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP4();
-                updateP4();
+                update();
             }
         });
 
@@ -128,24 +144,6 @@ public class MultiMenuUI extends Table {
         selectPlayer.add(p4).grow();
         this.add(selectPlayer).grow();
     }
-    public void updateP1()
-    {
-        System.out.println("Update p1 !");
-        // TODO : Faire une fonction pour afficher le nouveau skin de p1
-    }
-    public void updateP2()
-    {
-        System.out.println("Update p2 !");
-        // TODO : Faire une fonction pour afficher le nouveau skin de p1
-    }
-    public void updateP3()
-    {
-        System.out.println("Update p3 !");
-        // TODO : Faire une fonction pour afficher le nouveau skin de p1
-    }
-    public void updateP4()
-    {
-        System.out.println("Update p4 !");
-        // TODO : Faire une fonction pour afficher le nouveau skin de p1
-    }
+
+
 }
