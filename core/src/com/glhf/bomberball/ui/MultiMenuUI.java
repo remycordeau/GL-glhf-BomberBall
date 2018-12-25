@@ -16,42 +16,38 @@ import com.glhf.bomberball.screens.ScreenChangeListener;
 
 public class MultiMenuUI extends Table {
 
-    MultiMenuScreen screen;
-    MazeDrawer maze_preview;
-    ImageButton p1;
-    ImageButton p2;
-    ImageButton p3;
-    ImageButton p4;
+    private MultiMenuScreen screen;
+    private MazeDrawer maze_preview;
 
+    //TODO : Comprendre pourquoi lors de la réinitialisation, la table change de forme
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        this.setFillParent(true);
-        this.initialize();
-
+        this.update();
     }
 
-    public void initialize()
+    private void initialize()
     {
         System.out.println("Initialization of the Multi Menu");
+        this.setFillParent(true);
         this.padTop(Value.percentHeight(0.2f));
         initializeButtons();
         initializeMazePreview();
     }
 
-    public void update()
+    private void update()
     {
         System.out.println("Update !");
         this.clear();
         this.initialize();}
 
-    public void initializeMazePreview ()
+    private void initializeMazePreview ()
     {
         maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
 
-    public void initializeButtons(){
+    private void initializeButtons(){
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
         TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -78,7 +74,7 @@ public class MultiMenuUI extends Table {
         this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
         this.row();
 
-        // BOUTONS POUR LANCER LE JEU
+        // BUTTON TO LOAD THE GAME
         VerticalGroup buttons = new VerticalGroup();
 
         TextButton playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
@@ -88,15 +84,31 @@ public class MultiMenuUI extends Table {
                 Bomberball.changeScreen(new GameMultiScreen(screen.maze, screen.getMazeId()));
             }
         });
+        // BUTTON TO CHOOSE A RANDOM MAZE
 
-        //ADDING THE BUTTONS TO THE TABLE
+        TextButton randomMapButton = new TextButton("Carte Aléatoire", Graphics.GUI.getSkin());
+        randomMapButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.randomMaze();
+                maze_preview.setMaze(screen.maze);
+            }
+        });
+        // BUTTON TO EXIT THE MENU
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
+
+        //ADDING THE BUTTONS TO THE TABLE
         buttons.addActor(playButton);
+        buttons.addActor(randomMapButton);
         buttons.addActor(cancelButton);
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
+        ImageButton p1;
+        ImageButton p2;
+        ImageButton p4;
+        ImageButton p3;
         p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p1.addListener(new ChangeListener() {
             @Override
@@ -135,9 +147,8 @@ public class MultiMenuUI extends Table {
 
         //The next line is only to animate the players
         //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
-        //Adding an image for each player to the table
         Table selectPlayer = new Table();
-        //TODO : How to change the size of these fcking buttons ???
+        //TODO : Comment changer la taille des boutons ???
         selectPlayer.add(p1).grow();
         selectPlayer.add(p2).grow();
         selectPlayer.add(buttons).grow();

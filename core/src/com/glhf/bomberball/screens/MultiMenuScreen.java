@@ -29,10 +29,18 @@ public class MultiMenuScreen extends AbstractScreen {
     public void nextMaze() {
         maze_id = (maze_id + 1) % maze_count;
         maze = Maze.importMaze("maze_" + maze_id);
+        System.out.println("New maze = "+ maze_id);
     }
 
     public void previousMaze() {
         maze_id = (maze_id + maze_count - 1) % maze_count;
+        maze = Maze.importMaze("maze_" + maze_id);
+        System.out.println("New maze = "+ maze_id);
+    }
+    public void randomMaze()
+    {
+        maze_id = (int)(Math.random() * maze_count);
+        System.out.println("Selecting a random Maze, new Maze number = " + maze_id);
         maze = Maze.importMaze("maze_" + maze_id);
     }
     public void nextP1(){
