@@ -9,7 +9,7 @@ public class StoryMenuScreen extends MenuScreen {
 
     public Maze maze;
     private int maze_id = 0;
-    private final int maze_count = 7;
+    private final int maze_count = 7; //number of levels in the story mode
 
     public StoryMenuScreen(){
         super();
@@ -33,9 +33,20 @@ public class StoryMenuScreen extends MenuScreen {
         maze = Maze.importMaze("maze_" + maze_id);
     }
 
+    /**
+     * selects the maze of the specified parameter
+     * @param i
+     */
+    public void getMaze(int i)
+    {
+        maze_id = i;
+        maze = Maze.importMaze("maze_" + maze_id);
+    }
+
     public int getMazeId(){
         return maze_id;
     }
 
+    public int getMazeCount(){ return this.maze_count; }
 
 }
