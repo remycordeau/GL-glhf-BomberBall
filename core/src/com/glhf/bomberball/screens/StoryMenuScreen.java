@@ -3,16 +3,22 @@ package com.glhf.bomberball.screens;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryMenuUI;
 
-import static java.lang.Math.abs;
-
 public class StoryMenuScreen extends MenuScreen {
 
     public Maze maze;
     private int maze_id = 0;
     private final int maze_count = 7; //number of levels in the story mode
+    private boolean[] level_unlocked; //inform if the level is locked or not
 
     public StoryMenuScreen(){
         super();
+        level_unlocked = new boolean[maze_count];
+        level_unlocked[maze_id] = true; // first level always unlocked
+        level_unlocked[maze_id + 1] = true; // second level unlocked
+        for(int i = 2;i < maze_count;i++)
+        {
+            level_unlocked[i] = false; // default : all the other levels are locked
+        }
         maze = Maze.importMaze("maze_" + maze_id);
         addUI(new StoryMenuUI(this));
     }
@@ -43,10 +49,29 @@ public class StoryMenuScreen extends MenuScreen {
         maze = Maze.importMaze("maze_" + maze_id);
     }
 
+    /**
+     * informs if the specified level is locked or not
+     * @param i
+     * @return true if the level is unlocked, false otherwise
+     */
+    public boolean isLevelUnlocked(int i){
+        return level_unlocked[i];
+    }
+
+    // getters and setters
+
     public int getMazeId(){
         return maze_id;
     }
 
     public int getMazeCount(){ return this.maze_count; }
+
+    /**
+     * sets the state of a specified level to unlocked
+     * @param i
+     */
+    public void setLevelUnlocked(int i){
+        level_unlocked[i] = true;
+    }
 
 }
