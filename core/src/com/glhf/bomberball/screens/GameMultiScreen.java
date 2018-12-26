@@ -29,7 +29,7 @@ public class GameMultiScreen extends GameScreen {
         super(maze);
         this.maze_id = maze_id;
 
-        config = GameMultiConfig.get("config_game_multi");
+        config = new GameMultiConfig();
         //maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
