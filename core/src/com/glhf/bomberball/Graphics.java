@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -148,6 +149,12 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("small");
             skin.add("small", textButtonStyle);
 
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_10patch.png"), 16, 16, 16, 16));
+            textButtonStyle = new TextButtonStyle(patch2,patch2,patch2,skin.getFont("default"));
+            textButtonStyle.overFontColor = Color.GRAY;
+            textButtonStyle.fontColor = Color.WHITE;
+            skin.add("locked level",textButtonStyle);
+
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
             textButtonStyle.checked = patch.tint(Color.RED);
@@ -233,6 +240,7 @@ public class Graphics {
             return gui_atlasRegions.get(sprite_str);
         }
     }
+
 
     public static void load() {
         Graphics.Sprites.load();

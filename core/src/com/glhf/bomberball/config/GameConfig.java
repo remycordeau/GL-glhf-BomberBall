@@ -13,9 +13,9 @@ public class GameConfig extends Config {
     // Player
     public int player_life = 1;
     public int initial_player_moves = 5;
-    public String[] player_skins_list = {
+    /*public String[] player_skins_list = {
             "knight_m",
             "knight_f",
             "elf_m",
-            "wizzard_f"};
+            "wizzard_f"};*/
 }

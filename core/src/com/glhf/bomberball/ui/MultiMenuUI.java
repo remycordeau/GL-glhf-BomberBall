@@ -16,22 +16,38 @@ import com.glhf.bomberball.screens.ScreenChangeListener;
 
 public class MultiMenuUI extends Table {
 
-    MultiMenuScreen screen;
+    private MultiMenuScreen screen;
+    private MazeDrawer maze_preview;
 
-    MazeDrawer maze_preview;
-    ImageButton p1;
+    //TODO : Comprendre pourquoi lors de la réinitialisation, la table change de forme
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        this.padTop(Value.percentHeight(0.2f));
+        this.update();
+    }
+
+    private void initialize()
+    {
+        System.out.println("Initialization of the Multi Menu");
         this.setFillParent(true);
+        this.padTop(Value.percentHeight(0.2f));
         initializeButtons();
+        initializeMazePreview();
+    }
+
+    private void update()
+    {
+        System.out.println("Update !");
+        this.clear();
+        this.initialize();}
+
+    private void initializeMazePreview ()
+    {
         maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
 
-    public void initializeButtons(){
-        System.out.println("test");
+    private void initializeButtons(){
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
         TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -58,7 +74,7 @@ public class MultiMenuUI extends Table {
         this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
         this.row();
 
-        // BOUTONS POUR LANCER LE JEU
+        // BUTTON TO LOAD THE GAME
         VerticalGroup buttons = new VerticalGroup();
 
         TextButton playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
@@ -68,40 +84,78 @@ public class MultiMenuUI extends Table {
                 Bomberball.changeScreen(new GameMultiScreen(screen.maze, screen.getMazeId()));
             }
         });
+        // BUTTON TO CHOOSE A RANDOM MAZE
 
-        //ADDING THE BUTTONS TO THE TABLE
+        TextButton randomMapButton = new TextButton("Carte Aléatoire", Graphics.GUI.getSkin());
+        randomMapButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.randomMaze();
+                maze_preview.setMaze(screen.maze);
+            }
+        });
+        // BUTTON TO EXIT THE MENU
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
+
+        //ADDING THE BUTTONS TO THE TABLE
         buttons.addActor(playButton);
+        buttons.addActor(randomMapButton);
         buttons.addActor(cancelButton);
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
-        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        ImageButton p1;
+        ImageButton p2;
+        ImageButton p4;
+        ImageButton p3;
+        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP1();
-                updateP1();
+                update();
             }
         });
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP));
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.selectPlayer[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP));
+
+        p2 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP2();
+                update();
+            }
+        });
+
+        p3 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP3();
+                update();
+            }
+        });
+
+        p4 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p4.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                screen.nextP4();
+                update();
+            }
+        });
+
         //The next line is only to animate the players
         //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
-        //Adding an image for each player to the table
         Table selectPlayer = new Table();
-        selectPlayer.add(p1).size(Value.percentHeight(3f),Value.percentHeight(3f)).grow();
+        //TODO : Comment changer la taille des boutons ???
+        selectPlayer.add(p1).grow();
         selectPlayer.add(p2).grow();
         selectPlayer.add(buttons).grow();
         selectPlayer.add(p3).grow();
         selectPlayer.add(p4).grow();
         this.add(selectPlayer).grow();
     }
-    public void updateP1()
-    {
-        System.out.println("Update !");
-        // TODO : Faire une fonction pour afficher le nouveau skin de p1
-    }
+
+
 }

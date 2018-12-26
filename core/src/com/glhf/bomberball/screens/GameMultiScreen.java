@@ -29,7 +29,7 @@ public class GameMultiScreen extends GameScreen {
         super(maze);
         this.maze_id = maze_id;
 
-        config = GameMultiConfig.get("config_game_multi");
+        config = new GameMultiConfig();
         //maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
@@ -73,7 +73,9 @@ public class GameMultiScreen extends GameScreen {
     }
 
     private void dropBomb(Directions dir) {
-        current_player.dropBomb(dir);
+        if (current_player.dropBomb(dir)) {
+            this.setMoveMode();
+        }
         setBombEffect();
     }
 
