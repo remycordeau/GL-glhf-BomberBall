@@ -76,7 +76,6 @@ public class GameMultiScreen extends GameScreen {
         if (current_player.dropBomb(dir)) {
             this.setMoveMode();
         }
-        setBombEffect();
     }
 
     private void clearCellsEffect() {
