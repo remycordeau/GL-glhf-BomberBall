@@ -73,7 +73,9 @@ public class GameMultiScreen extends GameScreen {
     }
 
     private void dropBomb(Directions dir) {
-        current_player.dropBomb(dir);
+        if (current_player.dropBomb(dir)) {
+            this.setMoveMode();
+        }
         setBombEffect();
     }
 

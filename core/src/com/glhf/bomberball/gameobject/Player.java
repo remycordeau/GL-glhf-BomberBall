@@ -70,9 +70,10 @@ public class Player extends Character {
     /**
      * The player create a bomb and put it on the square given
      * @param dir
-     * @return a new Bomb
+     * @return if the bomb has been dropped
      */
-    public void dropBomb(Directions dir) {
+    public boolean dropBomb(Directions dir) {
+        boolean dropped = false;
         if (bombs_remaining > 0) {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {
@@ -80,8 +81,10 @@ public class Player extends Character {
                 Bomb bomb = new Bomb(1, initial_bomb_range + bonus_bomb_range);
                 dest_cell.addGameObject(bomb);
                 this.notifyObservers();
+                dropped = true;
             }
         }
+        return dropped;
     }
 
     public void interactWithCell(Cell cell) {
