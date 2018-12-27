@@ -14,8 +14,7 @@ public class StoryMenuScreen extends MenuScreen {
         super();
         level_unlocked = new boolean[maze_count];
         level_unlocked[maze_id] = true; // first level always unlocked
-        level_unlocked[maze_id + 1] = true; // second level unlocked
-        for(int i = 2;i < maze_count;i++)
+        for(int i = 1;i < maze_count;i++)
         {
             level_unlocked[i] = false; // default : all the other levels are locked
         }
