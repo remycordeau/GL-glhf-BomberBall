@@ -1,38 +1,78 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.screens.ScreenChangeListener;
-import com.glhf.bomberball.screens.SettingsMenuScreen;
-import com.glhf.bomberball.screens.SoloMenuScreen;
+import com.glhf.bomberball.config.Config;
+import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.screens.*;
 
 public class InfiniteModeUI extends Table {
 
+    private InfiniteModeScreen screen;
+    private Label label;
+    private int highscore;
+    private GameSoloConfig config;
+    private Maze maze;
+
     public InfiniteModeUI() {
-        this.padBottom(Value.percentHeight(0.25f));
-//        this.padLeft(Value.percentWidth(0.25f));
-//        this.padRight(Value.percentWidth(0.25f));
+        config = new GameSoloConfig();
+        maze = Maze.importMaze("maze_" + 1);
+        highscore = config.highscore;
+
         this.setFillParent(true);
-        addButtons();
+        this.addButtons();
     }
 
     private void addButtons(){
-        TextButton b;
-        CheckBox c;
 
+        //Title
+        label = new Label("Mode Infini", Graphics.GUI.getSkin(), "Title");
+        label.setAlignment(Align.center);
+        label.setFontScale(1.5f, 1.5f);
+        this.add(label).padBottom(Value.percentHeight(0.8f)).row();
+
+        //CheckBoxes
+        CheckBox box1;
+        CheckBox box2;
+        CheckBox box3;
         Skin skin = Graphics.GUI.getSkin();
 
         Value spacing = Value.percentHeight(0.5f);
 
-        b = new TextButton("Menu de personnalisation du mode infini", skin);
-        this.add(b).space(spacing).row();
+        box1 = new CheckBox("Sans Bonus", skin);
+        box2 = new CheckBox("Nombre de tours limite", skin);
+        box3 = new CheckBox("Cartes aléatoires", skin);
 
-        c = new CheckBox("Sans Bonus", skin);
+        TextButton back;
+        back = new TextButton("Retour", skin);
+        back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
-        this.add(c).space(spacing).row();
+        TextButton play;
+        play = new TextButton("Jouer", skin);
+        play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
-        b = new TextButton("Retour", skin);
-        b.addListener(new ScreenChangeListener(SoloMenuScreen.class));
-        this.add(b).left();
+        Label lab;
+        lab = new Label("Highscore :" + this.highscore, skin, "default");
+
+        HorizontalGroup horizontal = new HorizontalGroup();
+        horizontal.align(Align.center);
+        horizontal.addActor(back);
+        horizontal.space(25);
+        horizontal.addActor(play);
+        horizontal.space(25);
+        horizontal.addActor(lab);
+
+        //Adding to the screen1
+        this.add(box1).space(spacing).row();
+        this.add(box2).space(spacing).row();
+        this.add(box3).space(spacing).row();
+
+        this.add(horizontal).padTop(Value.percentHeight(0.8f));
+
     }
 }
