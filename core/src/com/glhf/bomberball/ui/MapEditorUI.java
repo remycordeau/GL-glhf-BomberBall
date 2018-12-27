@@ -48,12 +48,20 @@ public class MapEditorUI extends Table {
             super(null);
             content = new Table();
             this.setWidget(content);
-            for (int i = 0; i < 30; i++) {
+            Image destructible_wall = new Image(Graphics.Sprites.get("crate"));
+            Image wall = new Image(Graphics.Sprites.get("wall"));
+            destructible_wall.setScaling(Scaling.fit);
+            content.add(destructible_wall).height(75).growX();
+            content.row();
+            wall.setScaling(Scaling.fit);
+            content.add(wall).height(75).growX();
+            content.row();
+            /*for (int i = 0; i < 30; i++) {
                 Image image = new Image(Graphics.Sprites.get("crate"));
                 image.setScaling(Scaling.fit);
                 content.add(image).height(75).growX();
                 content.row();
-            }
+            }*/
         }
     }
 }
