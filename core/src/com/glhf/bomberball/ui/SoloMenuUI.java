@@ -17,11 +17,6 @@ public class SoloMenuUI extends Table {
         super();
 
         this.setFillParent(true);
-        this.padLeft(Value.percentWidth(0.25f));
-        this.padRight(Value.percentWidth(0.25f));
-        this.padTop(Value.percentHeight(0.1f));
-        this.padBottom(Value.percentHeight(0.1f));
-
         initializeButtons();
     }
 
@@ -29,16 +24,16 @@ public class SoloMenuUI extends Table {
 
         story_button = new TextButton("Story Mode", Graphics.GUI.getSkin());
         story_button.addListener(new ScreenChangeListener(StoryMenuScreen.class));
-        this.add(story_button).row();
+        this.add(story_button).expandX().row();
 
         infinite_button = new TextButton("Infinite Mode", Graphics.GUI.getSkin());
         infinite_button.addListener(new ScreenChangeListener(InfiniteModeScreen.class));
-        this.add(infinite_button).row();
+        this.add(infinite_button).spaceTop(Value.percentHeight(1f)).row();
 
         back_button = new TextButton("Back to main menu",Graphics.GUI.getSkin());
         back_button.getLabel().setFontScale(0.8f,0.8f);
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
-        this.add(back_button).row();
+        this.add(back_button).spaceTop(Value.percentHeight(3f)).row();
     }
 
 }
