@@ -3,6 +3,7 @@ package com.glhf.bomberball.config;
 public class GameSoloConfig extends GameConfig {
 
     public String player_skin = "knight_m";
+    public int highscore = 145970;
 
     // Enemies
     public int activeEnemy_life = 1;
