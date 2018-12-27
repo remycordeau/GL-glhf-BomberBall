@@ -15,7 +15,7 @@ import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.StoryMenuScreen;
-import sun.java2d.windows.GDIRenderer;
+//import sun.java2d.windows.GDIRenderer;
 
 public class EndLevelUI extends Table {
 
