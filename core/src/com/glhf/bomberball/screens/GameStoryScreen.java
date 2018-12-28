@@ -8,6 +8,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.config.InputsConfig.InputProfile;
+import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
@@ -155,8 +156,14 @@ public class GameStoryScreen extends GameScreen {
             }
         }
         if (is_last) {
-            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
-            return;
+            if(maze_id + 1 < screen.getMazeCount()){
+                Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+                return;
+            }
+            if(maze_id + 1 == screen.getMazeCount()){ // if the player has completed the last level
+                Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
+                return;
+            }
         }
 
         int i = players.indexOf(current_player);
