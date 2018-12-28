@@ -33,7 +33,6 @@ public class EndLevelUI extends Table {
         screen.setLevelUnlocked(next_level); // unlocks next level
         StoryMenuUI.unlockLevel(next_level + 1); //updates the ui with the unlocked level
         addButtons();
-
     }
 
     private void addButtons() {
