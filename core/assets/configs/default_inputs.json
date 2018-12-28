@@ -12,7 +12,17 @@
     ],
     "M0": [
       "DROP_BOMB",
+      "MOVE_RIGHT",
+      null
+    ],
+    "M1": [
       null,
+      "MOVE_RIGHT",
+      null
+    ],
+    "K112": [
+      null,
+      "MOVE_RIGHT",
       null
     ],
     "K62": [
