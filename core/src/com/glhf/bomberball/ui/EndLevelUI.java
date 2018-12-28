@@ -22,7 +22,7 @@ public class EndLevelUI extends Table {
     private TextButton next,replay_level,back_menu_button,back_level_button;
     private Label victory, unlocked;
     private Table buttons;
-    private StoryMenuScreen screen;
+    private static StoryMenuScreen screen;
     private int previous_level;
     private int next_level;
 
@@ -92,5 +92,9 @@ public class EndLevelUI extends Table {
         });
         buttons.add(back_menu_button).spaceTop(Value.percentHeight(0.2f)).row();
         this.add(buttons);
+    }
+
+    public static StoryMenuScreen getUpdatedStoryScreen(){
+        return screen;
     }
 }
