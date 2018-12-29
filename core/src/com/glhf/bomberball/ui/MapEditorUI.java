@@ -6,16 +6,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MapEditorScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 
+import javax.swing.*;
+
 public class MapEditorUI extends Table {
     private Screen screen;
     private Maze maze;
     private MazeDrawer maze_preview;
+    // selected cell to put an object on it
+    private Cell selected_cell;
 
     public MapEditorUI(MapEditorScreen screen)
     {
@@ -34,11 +39,13 @@ public class MapEditorUI extends Table {
     public void initializeButtons() {
         TextButton bouton_retour = new TextButton("Retour", Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
-
-        this.add(new ObjectsWidget()).grow();
-        this.row();
+        TextButton destructible_wall = new TextButton("Caisse", Graphics.GUI.getSkin());
+        this.add(destructible_wall).grow();
+        /*this.add(new ObjectsWidget()).grow();
+        this.row();*/
         this.add(bouton_retour).grow();
     }
+
 
     class ObjectsWidget extends ScrollPane {
 
