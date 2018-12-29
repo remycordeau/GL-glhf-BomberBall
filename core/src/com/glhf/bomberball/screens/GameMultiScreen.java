@@ -111,6 +111,7 @@ public class GameMultiScreen extends GameScreen {
         input_handler.setInputProfile(InputProfile.BOMB);
     }
 
+
     public void setMoveMode(){
         setMoveEffect();
         input_handler.setInputProfile(InputProfile.MOVE);
