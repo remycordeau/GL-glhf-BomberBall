@@ -44,7 +44,9 @@ public class InputHandler extends InputListener {
         MODE_BOMB,
         MODE_MOVE,
         DROP_BOMB,
-        MENU_GO_BACK
+        MENU_GO_BACK,
+        DROP_INDESTRUCTIBLEWALL,
+        DROP_DESTRUCTIBLEWALL
     }
 
     private ActionHandler[] handlers = new ActionHandler[Action.values().length];

@@ -6,10 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.gameobject.DestructibleWall;
 import com.glhf.bomberball.gameobject.GameObject;
+import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -63,6 +67,17 @@ public class MapEditorUI extends Table {
             ImageButton indestructible_wall = new ImageButton(new TextureRegionDrawable(Graphics.Sprites.get("wall")));
             content.add(indestructible_wall).height(75).growX();
             content.row();
+            //TODO: add listeners on the buttons
+            destructible_wall.addListener(new ClickListener(){
+                public void clicked(){
+                    maze.getCellAt(x,y).addGameObject(new DestructibleWall());
+                }
+            });
+            indestructible_wall.addListener(new ClickListener(){
+                public void clicked(){
+                    maze.getCellAt(x,y).addGameObject(new IndestructibleWall());
+                }
+            });
             /*for (int i = 0; i < 30; i++) {
                 Image image = new Image(Graphics.Sprites.get("crate"));
                 image.setScaling(Scaling.fit);
