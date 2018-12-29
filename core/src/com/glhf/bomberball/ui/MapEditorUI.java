@@ -69,12 +69,12 @@ public class MapEditorUI extends Table {
             content.row();
             //TODO: add listeners on the buttons
             destructible_wall.addListener(new ClickListener(){
-                public void clicked(){
+                public void clicked(int x, int y){
                     maze.getCellAt(x,y).addGameObject(new DestructibleWall());
                 }
             });
             indestructible_wall.addListener(new ClickListener(){
-                public void clicked(){
+                public void clicked(int x, int y){
                     maze.getCellAt(x,y).addGameObject(new IndestructibleWall());
                 }
             });
