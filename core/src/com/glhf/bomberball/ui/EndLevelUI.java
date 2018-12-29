@@ -11,10 +11,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.screens.GameMultiScreen;
-import com.glhf.bomberball.screens.GameStoryScreen;
-import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.StoryMenuScreen;
+import com.glhf.bomberball.screens.*;
 //import sun.java2d.windows.GDIRenderer;
 
 public class EndLevelUI extends Table {
@@ -22,7 +19,7 @@ public class EndLevelUI extends Table {
     private TextButton next,replay_level,back_menu_button,back_level_button;
     private Label victory, unlocked;
     private Table buttons;
-    private StoryMenuScreen screen;
+    private static StoryMenuScreen screen;
     private int previous_level;
     private int next_level;
 
@@ -33,14 +30,9 @@ public class EndLevelUI extends Table {
         this.screen = screen;
         this.previous_level = maze_id;
         this.next_level = previous_level +1;
-        if(next_level < screen.getMazeCount()){ // if we're not at the last level
-            screen.setLevelUnlocked(next_level); // unlocks next level
-            StoryMenuUI.unlockLevel(next_level + 1); //updates the ui with the unlocked level
-            addButtons();
-        }
-        else{ //TODO implement end of story mode screen and death screen and resolve the fact that when we go back to main menu, the progression is erased (due to the new)
-            //Bomberball.changeScreen(new EndStoryScreen());
-        }
+        screen.setLevelUnlocked(next_level); // unlocks next level
+        StoryMenuUI.unlockLevel(next_level + 1); //updates the ui with the unlocked level
+        addButtons();
     }
 
     private void addButtons() {
@@ -92,5 +84,9 @@ public class EndLevelUI extends Table {
         });
         buttons.add(back_menu_button).spaceTop(Value.percentHeight(0.2f)).row();
         this.add(buttons);
+    }
+
+    public static StoryMenuScreen getUpdatedStoryScreen(){
+        return screen;
     }
 }
