@@ -2,8 +2,11 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -22,6 +25,7 @@ public class MapEditorUI extends Table {
     // selected cell to put an object on it
     private Cell selected_cell;
 
+
     public MapEditorUI(MapEditorScreen screen)
     {
         this.screen = screen;
@@ -39,10 +43,8 @@ public class MapEditorUI extends Table {
     public void initializeButtons() {
         TextButton bouton_retour = new TextButton("Retour", Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
-        TextButton destructible_wall = new TextButton("Caisse", Graphics.GUI.getSkin());
-        this.add(destructible_wall).grow();
-        /*this.add(new ObjectsWidget()).grow();
-        this.row();*/
+        this.add(new ObjectsWidget()).grow();
+        this.row();
         this.add(bouton_retour).grow();
     }
 
@@ -55,13 +57,11 @@ public class MapEditorUI extends Table {
             super(null);
             content = new Table();
             this.setWidget(content);
-            Image destructible_wall = new Image(Graphics.Sprites.get("crate"));
-            Image wall = new Image(Graphics.Sprites.get("wall"));
-            destructible_wall.setScaling(Scaling.fit);
+            ImageButton destructible_wall = new ImageButton(new TextureRegionDrawable(Graphics.Sprites.get("crate")));
             content.add(destructible_wall).height(75).growX();
             content.row();
-            wall.setScaling(Scaling.fit);
-            content.add(wall).height(75).growX();
+            ImageButton indestructible_wall = new ImageButton(new TextureRegionDrawable(Graphics.Sprites.get("wall")));
+            content.add(indestructible_wall).height(75).growX();
             content.row();
             /*for (int i = 0; i < 30; i++) {
                 Image image = new Image(Graphics.Sprites.get("crate"));
