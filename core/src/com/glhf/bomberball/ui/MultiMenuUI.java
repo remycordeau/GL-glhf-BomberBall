@@ -23,6 +23,7 @@ public class MultiMenuUI extends Table {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
+        this.initialize();
         this.update();
     }
 
@@ -109,7 +110,7 @@ public class MultiMenuUI extends Table {
         ImageButton p2;
         ImageButton p4;
         ImageButton p3;
-        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -118,7 +119,7 @@ public class MultiMenuUI extends Table {
             }
         });
 
-        p2 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p2 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -127,7 +128,7 @@ public class MultiMenuUI extends Table {
             }
         });
 
-        p3 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p3 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p3.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -136,7 +137,7 @@ public class MultiMenuUI extends Table {
             }
         });
 
-        p4 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
+        p4 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
         p4.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
