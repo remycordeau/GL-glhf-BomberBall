@@ -57,7 +57,7 @@ public class InfiniteModeUI extends Table {
         play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         Label lab;
-        lab = new Label("Highscore :" + this.highscore, skin, "default");
+        lab = new Label("Highscore : " + this.highscore, skin, "default");
 
         HorizontalGroup horizontal = new HorizontalGroup();
         horizontal.align(Align.center);
