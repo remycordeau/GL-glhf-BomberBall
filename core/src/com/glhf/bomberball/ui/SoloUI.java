@@ -1,3 +1,7 @@
+/**
+ * @author : Rémy
+ * creates the user interface when the user is playing a level in the story mode
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
