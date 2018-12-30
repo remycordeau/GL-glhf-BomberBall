@@ -1,3 +1,7 @@
+/**
+ * @author : Rémy
+ * creates and displays the user interface when a player dies
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
@@ -32,6 +36,9 @@ public class DeadUI extends Table {
         addButtons();
     }
 
+    /**
+     * initializes and adds all the buttons to the ui. Also adds listeners to these buttons if necessary.
+     */
     private void addButtons() {
 
         AnimationActor player_animation = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("mort/idle"), Animation.PlayMode.LOOP));

@@ -49,6 +49,10 @@ public class ActionPlayerUI extends Table {
         this.pad(5);
     }
 
+    /**
+     * constructor for the solo mode
+     * @param screen
+     */
     public ActionPlayerUI(GameStoryScreen screen) {
 
         this.story_screen=screen;
