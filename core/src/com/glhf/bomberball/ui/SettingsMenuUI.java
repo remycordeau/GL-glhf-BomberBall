@@ -20,6 +20,7 @@ import com.glhf.bomberball.config.InputsConfig.InputProfile;
 import com.glhf.bomberball.screens.AbstractScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 import com.glhf.bomberball.utils.WaitNextInput;
 
@@ -32,16 +33,15 @@ public class SettingsMenuUI extends Table {
     private final TextButton[] labels;
     private final ButtonGroup<InputButton> inputsButtonGroup;
     private final ClickListener labels_listener;
-    private InputProcessor tmp;
+    private SettingsMenuScreen screen;
 
     //Constructor
-    public SettingsMenuUI() {
+    public SettingsMenuUI(SettingsMenuScreen screen) {
         super();
+        this.screen = screen;
         AppConfig appConfig = AppConfig.get();
         InputsConfig inputsConfig = InputsConfig.get();
-        Table table = new Table();
-        table.setFillParent(true);
-        addActor(table);
+        this.setFillParent(true);
 
 //        input_handler.setSettingsMenuScreen(this);
 
@@ -60,15 +60,13 @@ public class SettingsMenuUI extends Table {
             }
         };
 
-        SettingsMenuUI self = this;
         button_listener = new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                final TextButton textButton = (TextButton) event.getListenerActor();
-                textButton.setText("?");
-                textButton.setChecked(true);
-                tmp = Gdx.input.getInputProcessor();
-                Gdx.input.setInputProcessor(new WaitNextInput(self));
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int b) {
+                final InputButton button = (InputButton) event.getListenerActor();
+                button.setText("?");
+                button.setChecked(true);
+                screen.listenInputs(button);
                 return true;
             }
         };
@@ -119,17 +117,17 @@ public class SettingsMenuUI extends Table {
 
         ButtonGroup<TextButton> labelsButtonGroup = new ButtonGroup<>();
         for(int i=0; i<NB_TABS; i++) {
-            table.add(labels[i]).growX();
+            this.add(labels[i]).growX();
             labelsButtonGroup.add(labels[i]);
         }
-        table.row();
+        this.row();
         for(int i=0; i<NB_TABS; i++)
             stack.add(new ScrollPane(contents[i]));
-        table.add(stack).colspan(NB_TABS).grow().row();
+        this.add(stack).colspan(NB_TABS).grow().row();
 
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
-        table.add(cancelButton).colspan(NB_TABS).growX();
+        this.add(cancelButton).colspan(NB_TABS).growX();
 
         stack.swapActor(0,1);
         labels[0].setChecked(true);
@@ -138,22 +136,8 @@ public class SettingsMenuUI extends Table {
         labelsButtonGroup.setMinCheckCount(1);
     }
 
-    public void setIdReceived(String code) {
-        Gdx.input.setInputProcessor(tmp);
-        final InputButton button = inputsButtonGroup.getChecked();
+    public void uncheckAllInputButtons() {
         inputsButtonGroup.uncheckAll();
-        String esc = InputsConfig.getIDForKeyCode(Keys.ESCAPE);
-        InputsConfig inputsConfig = InputsConfig.get();
-        //if(code.equals(esc)) code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
-        if(code.equals(esc)){
-            code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
-            button.setText("");
-            inputsConfig.delAction(code, InputProfile.values()[button.numProfile]);
-        }else {
-            button.setText(code);
-            inputsConfig.addAction(code, button.action, InputProfile.values()[button.numProfile]);
-        }
-        inputsConfig.exportConfig();
     }
 
     public abstract class Parameter extends HorizontalGroup {
@@ -213,7 +197,7 @@ public class SettingsMenuUI extends Table {
         }
     }
 
-    private class InputButton extends TextButton {
+    public class InputButton extends TextButton {
         public Action action;
         public int numProfile;
 

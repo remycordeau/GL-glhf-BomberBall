@@ -49,7 +49,7 @@ public class MainMenuUI extends Table {
         this.add(b).growX().space(spacing).row();
 
         b = new TextButton("Settings", Graphics.GUI.getSkin());
-        b.addListener(new ScreenChangeListener(SettingsMenuUI.class));
+        b.addListener(new ScreenChangeListener(SettingsMenuScreen.class));
         this.add(b).growX().space(spacing).row();
 
         b = new TextButton("Quit", Graphics.GUI.getSkin());
