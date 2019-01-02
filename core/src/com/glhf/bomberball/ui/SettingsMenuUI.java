@@ -1,10 +1,9 @@
-package com.glhf.bomberball.screens;
+package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -14,20 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
-import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.config.InputsConfig.InputProfile;
+import com.glhf.bomberball.screens.AbstractScreen;
+import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.utils.Resolutions;
 import com.glhf.bomberball.utils.WaitNextInput;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
-
-public class SettingsMenuScreen extends AbstractScreen {
+public class SettingsMenuUI extends Table {
 
     private final EventListener button_listener;
     private final Table[] contents;
@@ -37,13 +35,13 @@ public class SettingsMenuScreen extends AbstractScreen {
     private InputProcessor tmp;
 
     //Constructor
-    public SettingsMenuScreen() {
+    public SettingsMenuUI() {
         super();
         AppConfig appConfig = AppConfig.get();
         InputsConfig inputsConfig = InputsConfig.get();
         Table table = new Table();
         table.setFillParent(true);
-        addUI(table);
+        addActor(table);
 
 //        input_handler.setSettingsMenuScreen(this);
 
@@ -62,7 +60,7 @@ public class SettingsMenuScreen extends AbstractScreen {
             }
         };
 
-        SettingsMenuScreen self = this;
+        SettingsMenuUI self = this;
         button_listener = new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

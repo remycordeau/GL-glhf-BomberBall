@@ -1,13 +1,12 @@
 package com.glhf.bomberball.utils;
 
 import com.badlogic.gdx.InputProcessor;
-import com.glhf.bomberball.InputHandler;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.screens.SettingsMenuScreen;
+import com.glhf.bomberball.ui.SettingsMenuUI;
 
 public class WaitNextInput implements InputProcessor {
-    SettingsMenuScreen screen;
-    public WaitNextInput(SettingsMenuScreen screen) {
+    SettingsMenuUI screen;
+    public WaitNextInput(SettingsMenuUI screen) {
         this.screen = screen;
     }
 
