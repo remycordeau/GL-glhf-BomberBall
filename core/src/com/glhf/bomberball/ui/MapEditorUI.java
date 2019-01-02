@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -69,12 +70,17 @@ public class MapEditorUI extends Table {
             content.row();
             //TODO: add listeners on the buttons
             destructible_wall.addListener(new ClickListener(){
-                public void clicked(){
+                @Override
+                public void clicked(InputEvent event, float xf, float yf) {
+                    int x = 0;
+                    int y = 0; //TODO trouvé les coords de la case
                     maze.getCellAt(x,y).addGameObject(new DestructibleWall());
                 }
             });
             indestructible_wall.addListener(new ClickListener(){
-                public void clicked(){
+                public void clicked(InputEvent event, float xf, float yf){
+                    int x = 0;
+                    int y = 0; //TODO trouvé les coords de la case
                     maze.getCellAt(x,y).addGameObject(new IndestructibleWall());
                 }
             });
