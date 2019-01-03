@@ -67,6 +67,7 @@ public class InputsConfig extends Config {
 
 
         c.addButtonCodeAction(Buttons.LEFT, Action.DROP_BOMB);
+        c.addButtonCodeAction(Buttons.LEFT, Action.DROP_SELECTED_OBJECT);
         //c.addButtonCodeAction(Buttons.RIGHT, Action.DROP_BOMB);
 
         return c;

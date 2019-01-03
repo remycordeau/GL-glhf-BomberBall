@@ -18,6 +18,7 @@ import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -66,10 +67,8 @@ public class GameStoryScreen extends GameScreen {
 
     public void dropBombAt(float x, float y) {
         y = Gdx.graphics.getHeight() - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
-        int cell_x = (int)cell_pos.x;
-        int cell_y = (int)cell_pos.y;
-        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        VectorInt2 cell_pos = maze_drawer.screenPosToCell(x, y);
+        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_pos.x, cell_pos.y));
         if (dir != null) {
             dropBomb(dir);
             clearCellsEffect();
