@@ -1,3 +1,6 @@
+/**
+ * @author : Rémy
+ * creates the interface of the story mode (level selection) */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -121,8 +124,7 @@ public class StoryMenuUI extends Table {
 
     /**
      * changes the texture and allows preview of the level when the button is clicked
-     *
-     * @param i
+     * @param i the id of the level that will be unlocked
      */
     public static void unlockLevel(int i) {
         screen.setLevelUnlocked(i - 1);

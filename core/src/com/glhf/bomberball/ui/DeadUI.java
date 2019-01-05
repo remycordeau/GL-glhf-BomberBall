@@ -1,7 +1,13 @@
+/**
+ * @author : Rémy
+ * creates and displays the user interface when a player dies
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -30,8 +36,16 @@ public class DeadUI extends Table {
         addButtons();
     }
 
+    /**
+     * initializes and adds all the buttons to the ui. Also adds listeners to these buttons if necessary.
+     */
     private void addButtons() {
 
+        AnimationActor player_animation = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("mort/idle"), Animation.PlayMode.LOOP));
+        player_animation.mustMove(true);
+        this.add(player_animation).grow().row();
+
+        // Buttons
         dead = new Label("Wasted !", Graphics.GUI.getSkin());
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);

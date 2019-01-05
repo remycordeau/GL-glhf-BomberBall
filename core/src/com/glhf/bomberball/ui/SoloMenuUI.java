@@ -1,3 +1,7 @@
+/**
+ * @author : Rémy
+ * creates the solo interface. Displays the choice between solo and infnite modes.
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -24,6 +28,9 @@ public class SoloMenuUI extends Table {
         initializeButtons();
     }
 
+    /**
+     * initializes and adds the buttons to the ui. Also adds listeners to these buttons if necessary.
+     */
     private void initializeButtons() {
 
         story_button = new TextButton("Story Mode", Graphics.GUI.getSkin());

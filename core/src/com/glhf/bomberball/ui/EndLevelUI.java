@@ -1,3 +1,8 @@
+/**
+ * @author : Rémy
+ * create and displays the user interface when a player completes a level
+ */
+
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,6 +40,9 @@ public class EndLevelUI extends Table {
         addButtons();
     }
 
+    /**
+     * initializes and adds all the buttons to the interface. Also adds listeners to these buttons if needed.
+     */
     private void addButtons() {
 
         // labels
@@ -86,6 +94,10 @@ public class EndLevelUI extends Table {
         this.add(buttons);
     }
 
+    /**
+     * getter for the StoryMenuScreen
+     * @return StoryMenuScreen
+     */
     public static StoryMenuScreen getUpdatedStoryScreen(){
         return screen;
     }

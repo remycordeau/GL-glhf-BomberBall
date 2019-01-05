@@ -67,6 +67,7 @@ public class InputsConfig extends Config {
 
 
         c.addButtonCodeAction(Buttons.LEFT, Action.DROP_BOMB);
+        c.addButtonCodeAction(Buttons.LEFT, Action.DROP_SELECTED_OBJECT);
         //c.addButtonCodeAction(Buttons.RIGHT, Action.DROP_BOMB);
 
         return c;
@@ -171,6 +172,8 @@ public class InputsConfig extends Config {
 
     public void delAction(String code_id, InputProfile profile){
         addAction(code_id, null,  profile);
+
+        //if there is no more action for a key, the key is removed
         for(Action a : map_code_to_action.get(code_id))
             if(a!=null)
                 return;

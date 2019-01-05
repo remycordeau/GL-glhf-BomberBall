@@ -7,22 +7,26 @@ import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.GameMultiConfig;
+import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.config.InputsConfig.InputProfile;
 import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.gameobject.Enemy;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
 public class GameStoryScreen extends GameScreen {
 
-    private GameMultiConfig config;
-    private ArrayList<Player> players;
-    private Player current_player;
+    private GameSoloConfig config;
+    private Player player;
+    private ArrayList<Enemy> enemies;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
     private StoryMenuScreen screen;
@@ -32,16 +36,15 @@ public class GameStoryScreen extends GameScreen {
         this.maze_id = maze_id;
         this.screen = screen;
 
-        config = new GameMultiConfig();
+        config = new GameSoloConfig();
         //maze.applyConfig(config);
-        players = maze.spawnPlayers(config);
-        current_player = players.get(0);
+        player = maze.spawnPlayer(config);
         //setSelectEffect();
 
-        //addUI(new MultiUI(players, this));
+        addUI(new SoloUI(player,this));
         addUI(maze_drawer);
 
-        current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
+        player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
     }
 
@@ -64,10 +67,8 @@ public class GameStoryScreen extends GameScreen {
 
     public void dropBombAt(float x, float y) {
         y = Gdx.graphics.getHeight() - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
-        int cell_x = (int)cell_pos.x;
-        int cell_y = (int)cell_pos.y;
-        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        VectorInt2 cell_pos = maze_drawer.screenPosToCell(x, y);
+        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_pos.x, cell_pos.y));
         if (dir != null) {
             dropBomb(dir);
             clearCellsEffect();
@@ -76,7 +77,7 @@ public class GameStoryScreen extends GameScreen {
     }
 
     private void dropBomb(Directions dir) {
-        if (current_player.dropBomb(dir)) {
+        if (player.dropBomb(dir)) {
             this.setMoveMode();
         }
         setBombEffect();
@@ -91,8 +92,8 @@ public class GameStoryScreen extends GameScreen {
 
     private void setBombEffect() {
         clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), 1);
-        cells_in_range.remove(current_player.getCell());
+        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(player.getCell(), 1);
+        cells_in_range.remove(player.getCell());
         for (Cell c : cells_in_range) {
             c.setSelectEffect(Color.RED);
             selected_cells.add(c);
@@ -101,7 +102,7 @@ public class GameStoryScreen extends GameScreen {
 
     private void setMoveEffect() {
         clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), current_player.getNumberMoveRemaining());
+        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(player.getCell(), player.getNumberMoveRemaining());
         for (Cell c : cells_in_range) {
             c.setSelectEffect(Color.WHITE);
             selected_cells.add(c);
@@ -123,7 +124,7 @@ public class GameStoryScreen extends GameScreen {
     ////////////////////////////////////////////////////////////////////////////
 
     private void moveCurrentPlayer(Directions dir) {
-        current_player.move(dir);
+        player.move(dir);
         clearCellsEffect();
         setMoveEffect();
     }
@@ -133,7 +134,7 @@ public class GameStoryScreen extends GameScreen {
         input_handler.lock(true);
         clearCellsEffect();
         maze.processEndTurn();
-        current_player.endTurn();
+        player.endTurn();
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
@@ -147,15 +148,10 @@ public class GameStoryScreen extends GameScreen {
      */
     private void nextPlayer() {
         Player winner = null;
-        boolean is_last = true;
-        for (Player p : players) {
-            if (winner == null && p.isAlive()) {
-                winner = p;
-            } else if (p.isAlive()) {
-                is_last = false;
-            }
+        if(!player.isAlive()){
+            Bomberball.changeScreen(new DeadScreen(screen,maze_id));
         }
-        if (is_last) {
+        else{
             if(maze_id + 1 < screen.getMazeCount()){
                 Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
                 return;
@@ -166,14 +162,9 @@ public class GameStoryScreen extends GameScreen {
             }
         }
 
-        int i = players.indexOf(current_player);
-        do {
-            i = (i + 1) % players.size();
-        } while (!players.get(i).isAlive());
-        current_player = players.get(i);
-        current_player.initiateTurn();
+        /*current_player.initiateTurn();
         setMoveEffect();
         setMoveMode();
-        input_handler.lock(false);
+        input_handler.lock(false);*/
     }
 }

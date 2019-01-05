@@ -1,3 +1,7 @@
+/**
+ * @author : Rémy
+ * creates the interface when a player completed the whole story mode
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -29,6 +33,9 @@ public class EndStoryUI extends Table {
         addButtons();
     }
 
+    /**
+     * initializes and adds the buttons to the interface. Also adds listeners to these buttons if necessary.
+     */
     private void addButtons() {
 
         //Labels

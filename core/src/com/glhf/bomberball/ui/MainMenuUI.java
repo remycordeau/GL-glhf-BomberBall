@@ -1,3 +1,7 @@
+/**
+ * @author : Rémy
+ * creates the user interface for the title menu. Displays all the features available in the game.
+ */
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
@@ -22,6 +26,9 @@ public class MainMenuUI extends Table {
         addButtons();
     }
 
+    /**
+     * creates and adds buttons to the interface. Also adds listeners to these buttons if necessary.
+     */
     private void addButtons()
     {
         TextButton b;

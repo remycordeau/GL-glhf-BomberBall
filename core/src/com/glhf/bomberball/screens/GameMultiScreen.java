@@ -14,6 +14,7 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class GameMultiScreen extends GameScreen {
         super(maze);
         this.maze_id = maze_id;
 
-        config = new GameMultiConfig();
+        config = new GameMultiConfig(); //Previously : config=GameMultiConfig.get("config game multi");
         //maze.applyConfig(config);
         players = maze.spawnPlayers(config);
         current_player = players.get(0);
@@ -60,11 +61,8 @@ public class GameMultiScreen extends GameScreen {
     }
 
     public void dropBombAt(float x, float y) {
-        y = Gdx.graphics.getHeight() - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
-        int cell_x = (int)cell_pos.x;
-        int cell_y = (int)cell_pos.y;
-        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        VectorInt2 cell_pos = maze_drawer.screenPosToCell(x, y);
+        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_pos.x, cell_pos.y));
         if (dir != null) {
             dropBomb(dir);
             clearCellsEffect();
@@ -109,6 +107,7 @@ public class GameMultiScreen extends GameScreen {
         setBombEffect();
         input_handler.setInputProfile(InputProfile.BOMB);
     }
+
 
     public void setMoveMode(){
         setMoveEffect();
