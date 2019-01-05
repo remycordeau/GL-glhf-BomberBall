@@ -54,9 +54,13 @@ public class SettingsMenuUI extends Table {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                for(int i=0; i<NB_TABS; i++)
+                int selected_index=0;
+                for(int i=0; i<NB_TABS; i++) {
                     contents[i].setVisible(labels[i].isChecked());
-                stack.swapActor(0,1);
+                    if(labels[i].isChecked())
+                        selected_index=i;
+                }
+                stack.swapActor(stack.getChildren().get(NB_TABS-1),stack.findActor(""+selected_index));
             }
         };
 
@@ -121,8 +125,11 @@ public class SettingsMenuUI extends Table {
             labelsButtonGroup.add(labels[i]);
         }
         this.row();
-        for(int i=0; i<NB_TABS; i++)
-            stack.add(new ScrollPane(contents[i]));
+        for(int i=0; i<NB_TABS; i++) {
+            ScrollPane actor = new ScrollPane(contents[i]);
+            actor.setName(""+i);
+            stack.add(actor);
+        }
         this.add(stack).colspan(NB_TABS).grow().row();
 
         TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
