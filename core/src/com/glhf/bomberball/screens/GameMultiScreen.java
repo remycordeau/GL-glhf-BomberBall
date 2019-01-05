@@ -1,13 +1,11 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
+import com.glhf.bomberball.config.InputsConfig.KeyPriority;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
@@ -106,13 +104,13 @@ public class GameMultiScreen extends GameScreen {
     // Methods to change the mod when click on a button in ActionPlayer bar
     public void setBombMode(){
         setBombEffect();
-        input_handler.setInputProfile(InputProfile.BOMB);
+//        input_handler.setInputProfile(KeyPriority.BOMB);
     }
 
 
     public void setMoveMode(){
         setMoveEffect();
-        input_handler.setInputProfile(InputProfile.MOVE);
+//        input_handler.setInputProfile(KeyPriority.MOVE);
     }
 
 

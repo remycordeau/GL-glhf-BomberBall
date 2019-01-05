@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
+import com.glhf.bomberball.config.InputsConfig.KeyPriority;
 import com.glhf.bomberball.ui.SettingsMenuUI;
 import com.glhf.bomberball.ui.SettingsMenuUI.InputButton;
 import com.glhf.bomberball.utils.WaitNextInput;
@@ -30,10 +30,10 @@ public class SettingsMenuScreen extends AbstractScreen{
         if(code.equals(esc)){
             code = inputsConfig.getIdList()[button.action.ordinal()][button.numProfile];
             button.setText("");
-            inputsConfig.delAction(code, InputProfile.values()[button.numProfile]);
+            inputsConfig.resetInput(code, KeyPriority.values()[button.numProfile]);
         }else {
             button.setText(code);
-            inputsConfig.addAction(code, button.action, InputProfile.values()[button.numProfile]);
+            inputsConfig.setInput(button.action, KeyPriority.values()[button.numProfile], code);
         }
         button=null;
         inputsConfig.exportConfig();
