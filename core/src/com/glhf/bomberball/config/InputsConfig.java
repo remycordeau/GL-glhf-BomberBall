@@ -4,7 +4,9 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.glhf.bomberball.InputHandler.Action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * class InputsConfig
@@ -16,27 +18,21 @@ import java.util.HashMap;
  */
 public class InputsConfig extends Config {
 
+    private String[][] id_list;
+
     /** Map to convert key codes to actions */
-    private HashMap<String, Action[]> map_code_to_action;
+    private transient HashMap<String, List<Action>> map_code_to_action;
 
-    private transient String[][] id_list;
-    private transient boolean has_id_list_changed;
-
-    private transient InputProfile input_profile;
-
-    public enum InputProfile {
-        DEFAULT,
-        MOVE,
-        BOMB
+    public enum KeyPriority {
+        PRIMARY,
+        SECONDARY
     }
 
     /**
      * Default constructor
      */
     private InputsConfig() {
-        map_code_to_action = new HashMap<>();
-        input_profile = InputProfile.DEFAULT;
-        has_id_list_changed =true;
+        id_list = new String[Action.values().length][KeyPriority.values().length];
     }
 
     /**
@@ -46,35 +42,33 @@ public class InputsConfig extends Config {
     public static InputsConfig defaultConfig() {
         InputsConfig c = new InputsConfig();
 
-        c.addKeyCodeAction(Keys.DOWN, Action.MOVE_DOWN);
-        c.addKeyCodeAction(Keys.UP, Action.MOVE_UP);
-        c.addKeyCodeAction(Keys.LEFT, Action.MOVE_LEFT);
-        c.addKeyCodeAction(Keys.RIGHT, Action.MOVE_RIGHT);
-        c.addKeyCodeAction(Keys.LEFT, Action.DROP_BOMB_LEFT, InputProfile.BOMB);
-        c.addKeyCodeAction(Keys.UP, Action.DROP_BOMB_UP, InputProfile.BOMB);
-        c.addKeyCodeAction(Keys.RIGHT, Action.DROP_BOMB_RIGHT, InputProfile.BOMB);
-        c.addKeyCodeAction(Keys.DOWN, Action.DROP_BOMB_DOWN, InputProfile.BOMB);
-        c.addKeyCodeAction(Keys.NUMPAD_4, Action.DROP_BOMB_LEFT);
-        c.addKeyCodeAction(Keys.NUMPAD_8, Action.DROP_BOMB_UP);
-        c.addKeyCodeAction(Keys.NUMPAD_6, Action.DROP_BOMB_RIGHT);
-        c.addKeyCodeAction(Keys.NUMPAD_2, Action.DROP_BOMB_DOWN);
-        c.addKeyCodeAction(Keys.D, Action.MODE_MOVE);
-        c.addKeyCodeAction(Keys.B, Action.MODE_BOMB);
-        c.addKeyCodeAction(Keys.F, Action.ENDTURN);
-        c.addKeyCodeAction(Keys.SPACE, Action.ENDTURN);
-        c.addKeyCodeAction(Keys.L, Action.DROP_BOMB);
-        c.addKeyCodeAction(Keys.DEL, Action.MENU_GO_BACK);
+        c.setInputKeyCode(Action.MOVE_DOWN, Keys.DOWN);
+        c.setInputKeyCode(Action.MOVE_UP, Keys.UP);
+        c.setInputKeyCode(Action.MOVE_LEFT, Keys.LEFT);
+        c.setInputKeyCode(Action.MOVE_RIGHT, Keys.RIGHT);
+        c.setInputKeyCode(Action.DROP_BOMB_LEFT, Keys.NUMPAD_4);
+        c.setInputKeyCode(Action.DROP_BOMB_UP, Keys.NUMPAD_8);
+        c.setInputKeyCode(Action.DROP_BOMB_RIGHT, Keys.NUMPAD_6);
+        c.setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
+        c.setInputKeyCode(Action.MODE_MOVE, Keys.D);
+        c.setInputKeyCode(Action.MODE_BOMB, Keys.B);
+        c.setInputKeyCode(Action.ENDTURN, Keys.F);
+        c.setInputKeyCode(Action.ENDTURN, Keys.SPACE);
+        c.setInputKeyCode(Action.DROP_BOMB, Keys.L);
+        c.setInputKeyCode(Action.MENU_GO_BACK, Keys.DEL);
 
 
-        c.addButtonCodeAction(Buttons.LEFT, Action.DROP_BOMB);
-        c.addButtonCodeAction(Buttons.LEFT, Action.DROP_SELECTED_OBJECT);
-        //c.addButtonCodeAction(Buttons.RIGHT, Action.DROP_BOMB);
+        c.setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
+        c.setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
+        //c.setInputButtonCode(Buttons.RIGHT, Action.DROP_BOMB);
 
         return c;
     }
 
     public static InputsConfig get() {
-        return get("default_inputs", InputsConfig.class);
+        InputsConfig inputsConfig = get("default_inputs", InputsConfig.class);
+        inputsConfig.updateReversedMap();
+        return inputsConfig;
     }
     public void exportConfig() {
         exportConfig("default_inputs");
@@ -82,47 +76,47 @@ public class InputsConfig extends Config {
 
     /**
      * Links a key code with a Action
-     * @param key_code
      * @param action
+     * @param key_code
      */
-    public void addKeyCodeAction(int key_code, Action action) {
-        addKeyCodeAction(key_code, action, InputProfile.DEFAULT );
+    public void setInputKeyCode(Action action, int key_code) {
+        setInputKeyCode(action, key_code, KeyPriority.PRIMARY);
     }
 
     /**
      * Links a button code with a Action
-     * @param mouse_button_code
      * @param action
+     * @param mouse_button_code
      */
-    public void addButtonCodeAction(int mouse_button_code, Action action) {
-        addButtonCodeAction(mouse_button_code, action, InputProfile.DEFAULT );
+    public void setInputButtonCode(Action action, int mouse_button_code) {
+        setInputButtonCode(action, mouse_button_code, KeyPriority.PRIMARY);
     }
 
-
     /**
-     * Links a key code with a Action depending on an InputProfile
+     * Links a key code with a Action depending on KeyPriority
+     * @param action
      * @param key_code
-     * @param action
      */
-    public void addKeyCodeAction(int key_code, Action action, InputProfile profile) {
-        addAction(getIDForKeyCode(key_code), action, profile );
+    public void setInputKeyCode(Action action, int key_code, KeyPriority priority) {
+        setInput(action, priority, getIDForKeyCode(key_code));
     }
 
     /**
-     * Links a button code with a Action depending on an InputProfile
-     * @param mouse_button_code
+     * Links a button code with a Action depending on KeyPriority
      * @param action
+     * @param mouse_button_code
      */
-    public void addButtonCodeAction(int mouse_button_code, Action action, InputProfile profile) {
-        addAction(getIDForMouseButtonCode(mouse_button_code), action, profile );
+    public void setInputButtonCode(Action action, int mouse_button_code, KeyPriority priority) {
+        setInput(action, priority, getIDForMouseButtonCode(mouse_button_code));
     }
+
 
     /**
      * Converts key codes to Actions
      * @param key_code
      * @return Action corresponding to key_code
      */
-    public Action getKeyCodeAction(int key_code) {
+    public List<Action> getKeyCodeActions(int key_code) {
         return getAction(getIDForKeyCode(key_code));
     }
 
@@ -131,7 +125,7 @@ public class InputsConfig extends Config {
      * @param button_code
      * @return Action corresponding to key_code
      */
-    public Action getButtonCodeAction(int button_code) {
+    public List<Action> getButtonCodeActions(int button_code) {
         return getAction(getIDForMouseButtonCode(button_code));
     }
 
@@ -140,7 +134,7 @@ public class InputsConfig extends Config {
      * @return key_code is assigned to a Action
      */
     public boolean isKeyCodeAssigned(int key_code) {
-        return getKeyCodeAction(key_code) != null;
+        return getKeyCodeActions(key_code).size() > 0;
     }
 
     /**
@@ -148,48 +142,37 @@ public class InputsConfig extends Config {
      * @return button_code is assigned to a ButtonCode
      */
     public boolean isButtonCodeAssigned(int button_code) {
-        return getButtonCodeAction(button_code) != null;
-    }
-
-    public void setInputProfile(InputProfile input_profile) {
-        this.input_profile = input_profile;
+        return getButtonCodeActions(button_code).size() > 0;
     }
 
     public String[][] getIdList(){
-        if(has_id_list_changed)
-            reverseInputMap();
         return id_list;
     }
 
-    public void addAction(String code_id, Action action, InputProfile profile){
-        has_id_list_changed =true;
-        if(!map_code_to_action.containsKey(code_id)) {
-            map_code_to_action.put(code_id, new Action[InputProfile.values().length]);
-        }
-        map_code_to_action.get(code_id)[profile.ordinal()] = action;
+    public void setInput(Action action, KeyPriority priority, String code_id){
+        id_list[action.ordinal()][priority.ordinal()] = code_id;
+        updateReversedMap();
+        exportConfig();
     }
 
 
-    public void delAction(String code_id, InputProfile profile){
-        addAction(code_id, null,  profile);
+    public void resetInput(String code_id, KeyPriority profile){
+        setInput(null, profile, code_id);
 
-        //if there is no more action for a key, the key is removed
-        for(Action a : map_code_to_action.get(code_id))
-            if(a!=null)
-                return;
-        map_code_to_action.remove(code_id);
+//        //if there is no more action for a key, the key is removed
+//        for(Action a : map_code_to_action.get(code_id))
+//            if(a!=null)
+//                return;
+//        map_code_to_action.remove(code_id);
     }
 
     //private functions =============
 
-    private Action getAction(String key) {
-        if(map_code_to_action.containsKey(key)){
-            Action[] actions = map_code_to_action.get(key);
-            if(actions[input_profile.ordinal()] != null)
-                return actions[input_profile.ordinal()];
-            return actions[InputProfile.DEFAULT.ordinal()];
+    private List<Action> getAction(String key) {
+        if(map_code_to_action.containsKey(key)) {
+            return map_code_to_action.get(key);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public static String getIDForKeyCode(int key_code){
@@ -199,15 +182,17 @@ public class InputsConfig extends Config {
         return "M"+mouse_button_code;
     }
 
-    private void reverseInputMap() {
-        id_list = new String[Action.values().length][InputProfile.values().length];
-        for(String code : map_code_to_action.keySet()){
-            Action[] actions = map_code_to_action.get(code);
-            for(int i=0; i<InputProfile.values().length; i++){
-                if(actions[i]==null)continue;
-                id_list[actions[i].ordinal()][i] = code;
+    private void updateReversedMap() {
+        map_code_to_action = new HashMap<>();
+        for(Action a : Action.values()){
+            for(KeyPriority p : KeyPriority.values()){
+                String id = id_list[a.ordinal()][p.ordinal()];
+                if(id==null)continue;
+                if(!map_code_to_action.containsKey(id)) {
+                    map_code_to_action.put(id, new ArrayList<Action>());
+                }
+                map_code_to_action.get(id).add(a);
             }
         }
-        has_id_list_changed = false;
     }
 }
