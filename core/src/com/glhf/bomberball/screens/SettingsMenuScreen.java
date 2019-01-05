@@ -26,9 +26,9 @@ public class SettingsMenuScreen extends AbstractScreen{
         ui.uncheckAllInputButtons();
         String esc = InputsConfig.getIDForKeyCode(Input.Keys.ESCAPE);
         InputsConfig inputsConfig = InputsConfig.get();
-        //if(code.equals(esc)) code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
+        //if(code.equals(esc)) code = inputsConfig.getIdList().get(button.action)[button.numProfile];
         if(code.equals(esc)){
-            code = inputsConfig.getReversedInputMap().get(button.action)[button.numProfile];
+            code = inputsConfig.getIdList()[button.action.ordinal()][button.numProfile];
             button.setText("");
             inputsConfig.delAction(code, InputProfile.values()[button.numProfile]);
         }else {

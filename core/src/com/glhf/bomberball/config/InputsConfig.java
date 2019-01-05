@@ -19,8 +19,8 @@ public class InputsConfig extends Config {
     /** Map to convert key codes to actions */
     private HashMap<String, Action[]> map_code_to_action;
 
-    private transient HashMap<Action, String[]> map_action_to_code;
-    private transient boolean has_input_map_changed;
+    private transient String[][] id_list;
+    private transient boolean has_id_list_changed;
 
     private transient InputProfile input_profile;
 
@@ -36,7 +36,7 @@ public class InputsConfig extends Config {
     private InputsConfig() {
         map_code_to_action = new HashMap<>();
         input_profile = InputProfile.DEFAULT;
-        has_input_map_changed=true;
+        has_id_list_changed =true;
     }
 
     /**
@@ -155,14 +155,14 @@ public class InputsConfig extends Config {
         this.input_profile = input_profile;
     }
 
-    public HashMap<Action, String[]> getReversedInputMap(){
-        if(has_input_map_changed)
+    public String[][] getIdList(){
+        if(has_id_list_changed)
             reverseInputMap();
-        return map_action_to_code;
+        return id_list;
     }
 
     public void addAction(String code_id, Action action, InputProfile profile){
-        has_input_map_changed=true;
+        has_id_list_changed =true;
         if(!map_code_to_action.containsKey(code_id)) {
             map_code_to_action.put(code_id, new Action[InputProfile.values().length]);
         }
@@ -200,17 +200,14 @@ public class InputsConfig extends Config {
     }
 
     private void reverseInputMap() {
-        map_action_to_code = new HashMap<Action, String[]>();
+        id_list = new String[Action.values().length][InputProfile.values().length];
         for(String code : map_code_to_action.keySet()){
             Action[] actions = map_code_to_action.get(code);
             for(int i=0; i<InputProfile.values().length; i++){
                 if(actions[i]==null)continue;
-                if(!map_action_to_code.containsKey(actions[i])) {
-                    map_action_to_code.put(actions[i], new String[InputProfile.values().length]);
-                }
-                map_action_to_code.get(actions[i])[i] = code;
+                id_list[actions[i].ordinal()][i] = code;
             }
         }
-        has_input_map_changed = false;
+        has_id_list_changed = false;
     }
 }

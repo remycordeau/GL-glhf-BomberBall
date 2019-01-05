@@ -2,8 +2,6 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -16,13 +14,10 @@ import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
-import com.glhf.bomberball.screens.AbstractScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
-import com.glhf.bomberball.utils.WaitNextInput;
 
 import java.util.*;
 
@@ -101,17 +96,21 @@ public class SettingsMenuUI extends Table {
         contents[0].add(fullscreen).growX().row();
 
         //ajout de chaque paramètre pour inputs
-        HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
+        String[][] id_list = inputsConfig.getIdList();
         contents[1] = new Table();
         inputsButtonGroup = new ButtonGroup<>();
         inputsButtonGroup.setMaxCheckCount(1);
         inputsButtonGroup.setMinCheckCount(1);
-        for(Action a : map.keySet()){
+        contents[1].add(new Label("Action", Graphics.GUI.getSkin())).growX();
+        contents[1].add(new Label("Primary", Graphics.GUI.getSkin())).growX();
+        contents[1].add(new Label("Secondary", Graphics.GUI.getSkin())).growX().row();
+        for(int i=0; i<Action.values().length; i++){
+            Action a = Action.values()[i];
             Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "very_small");
             contents[1].add(label).growX();
-            for(int i=0; i<map.get(a).length; i++) {
-                String id = map.get(a)[i];
-                InputButton textButton = new InputButton(id, a, i);
+            for(int j=0; j<id_list[i].length; j++) {
+                String id = id_list[i][j];
+                InputButton textButton = new InputButton(id, a, j);
                 textButton.addListener(button_listener);
                 contents[1].add(textButton).growX();
                 inputsButtonGroup.add(textButton);
