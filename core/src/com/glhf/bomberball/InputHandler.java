@@ -57,8 +57,8 @@ public class InputHandler extends InputListener {
      * Creates an InputHandler with default input codes configurations
      */
     public InputHandler() {
-//        inputs_config = InputsConfig.defaultConfig();
-//        inputs_config.exportConfig("default_inputs");
+        inputs_config = InputsConfig.defaultConfig();
+        inputs_config.exportConfig("default_inputs");
         inputs_config = InputsConfig.get();
 
     }
