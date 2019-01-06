@@ -139,10 +139,12 @@ public class Graphics {
 
             //==========TextButtonStyle
             NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_disable_9patch.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.downFontColor = Color.RED;
+            textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
@@ -152,10 +154,8 @@ public class Graphics {
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
             textButtonStyle.checked = patch.tint(Color.RED);
-            textButtonStyle.disabled = patch.tint(Color.BLUE);
             skin.add("input_select", textButtonStyle);
 
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_10patch.png"), 16, 16, 16, 16));
             textButtonStyle = new TextButtonStyle(patch2,patch2,patch2,skin.getFont("default"));
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.fontColor = Color.WHITE;
