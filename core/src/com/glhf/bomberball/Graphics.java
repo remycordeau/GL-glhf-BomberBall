@@ -149,16 +149,17 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("small");
             skin.add("small", textButtonStyle);
 
+            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            textButtonStyle.font = skin.getFont("very_small");
+            textButtonStyle.checked = patch.tint(Color.RED);
+            textButtonStyle.disabled = patch.tint(Color.BLUE);
+            skin.add("input_select", textButtonStyle);
+
             NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_10patch.png"), 16, 16, 16, 16));
             textButtonStyle = new TextButtonStyle(patch2,patch2,patch2,skin.getFont("default"));
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.fontColor = Color.WHITE;
             skin.add("locked level",textButtonStyle);
-
-            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
-            textButtonStyle.font = skin.getFont("very_small");
-            textButtonStyle.checked = patch.tint(Color.RED);
-            skin.add("input_select", textButtonStyle);
 
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();

@@ -19,8 +19,6 @@ import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 
-import java.util.*;
-
 public class SettingsMenuUI extends Table {
 
     private final EventListener button_listener;
@@ -205,12 +203,12 @@ public class SettingsMenuUI extends Table {
 
     public class InputButton extends TextButton {
         public Action action;
-        public int numProfile;
+        public int priority;
 
-        public InputButton(String id, Action action, int numProfile) {
+        public InputButton(String id, Action action, int priority) {
             super(id, Graphics.GUI.getSkin(), "input_select");
             this.action = action;
-            this.numProfile = numProfile;
+            this.priority = priority;
         }
     }
 }

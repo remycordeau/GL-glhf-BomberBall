@@ -156,8 +156,8 @@ public class InputsConfig extends Config {
     }
 
 
-    public void resetInput(String code_id, KeyPriority profile){
-        setInput(null, profile, code_id);
+    public void resetInput(Action action, KeyPriority profile){
+        setInput(action, profile, null);
 
 //        //if there is no more action for a key, the key is removed
 //        for(Action a : map_code_to_action.get(code_id))

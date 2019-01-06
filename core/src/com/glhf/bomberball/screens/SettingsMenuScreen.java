@@ -26,14 +26,14 @@ public class SettingsMenuScreen extends AbstractScreen{
         ui.uncheckAllInputButtons();
         String esc = InputsConfig.getIDForKeyCode(Input.Keys.ESCAPE);
         InputsConfig inputsConfig = InputsConfig.get();
-        //if(code.equals(esc)) code = inputsConfig.getIdList().get(button.action)[button.numProfile];
+        //if(code.equals(esc)) code = inputsConfig.getIdList().get(button.action)[button.priority];
         if(code.equals(esc)){
-            code = inputsConfig.getIdList()[button.action.ordinal()][button.numProfile];
+            code = inputsConfig.getIdList()[button.action.ordinal()][button.priority];
             button.setText("");
-            inputsConfig.resetInput(code, KeyPriority.values()[button.numProfile]);
+            inputsConfig.resetInput(button.action, KeyPriority.values()[button.priority]);
         }else {
             button.setText(code);
-            inputsConfig.setInput(button.action, KeyPriority.values()[button.numProfile], code);
+            inputsConfig.setInput(button.action, KeyPriority.values()[button.priority], code);
         }
         button=null;
         inputsConfig.exportConfig();
