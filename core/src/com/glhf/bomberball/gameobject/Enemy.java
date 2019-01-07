@@ -1,16 +1,21 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.utils.Directions;
+
+import java.util.ArrayList;
+
 public abstract class Enemy extends Character {
 
     protected int strength = 1;
 
-    protected transient  int actual_move;
-    //protected transient ArrayList<Constants.moves> way;
+    //protected transient  int actual_move; //transcient to deserialize
+    protected transient ArrayList<Directions> way;
 
-    protected Enemy(String skin, int life, int initial_moves, int strength) {
+    protected Enemy(String skin, int life, int initial_moves, int strength, ArrayList<Directions> way) {
         super(skin, life, initial_moves);
         this.strength = strength;
-        this.actual_move = 0;
+        this.way = way;
+
     }
 
     /**
@@ -25,9 +30,9 @@ public abstract class Enemy extends Character {
      * give a way to follow to the enemy
      * @param way
      */
-//    public void setWay(ArrayList<Constants.moves> way) {
-//        this.way = way;
-//    }
+    public void setWay(ArrayList<Directions> way) {
+       this.way = way;
+    }
 
     /**
      * the enemy has to follow the way he receveid
