@@ -26,9 +26,18 @@ public class Node {
             return ancestors;
         }
 
+        public Cell getMatching_cell(){
+        return matching_cell;
+    }
+
         public Node getSons(int index){return  sons[index];}
 
-        public Directions get_direction_from_ancestor(Cell ancestor){
+    /**
+     * this method gives the direction follow from the previous cell to reach the current cell
+     * @param ancestor
+     * @return Direction
+     */
+    public Directions get_direction_from_ancestor(Cell ancestor){
             for(Directions d : Directions.values()){
                 if(ancestor.getAdjacentCell(d) == matching_cell ){
                     return d;
@@ -37,11 +46,11 @@ public class Node {
             return null;
         }
 
-        public Cell getMatching_cell(){
-            return matching_cell;
-        }
-
-        public ArrayList<Directions> get_longest_way(){
+    /**
+     * recursive method that gives the longest way for an initial cell (the matching_cell)
+     * @return the sequence of UP, RIGHT, DOWN, LEFT for the longest way
+     */
+    public ArrayList<Directions> get_longest_way(){
             ArrayList<Directions> current_longest_way = new ArrayList<Directions>();
             current_longest_way.add(get_direction_from_ancestor(ancestors.get(ancestors.size()-1)));
             ArrayList<Directions> current_counting;
