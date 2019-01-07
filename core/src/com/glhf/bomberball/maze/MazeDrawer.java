@@ -16,6 +16,7 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -255,14 +256,15 @@ public class MazeDrawer extends Actor {
      * @param screen_y screen y position
      * @return Corresponding cell position in maze
      */
-    public Vector2 screenPosToCell(int screen_x, int screen_y)
+    public VectorInt2 screenPosToCell(float screen_x, float screen_y)
     {
+        screen_y = Gdx.graphics.getHeight() - screen_y;
         Vector3 p = new Vector3(screen_x, screen_y, 0f);
         camera.unproject(p);
         p.x = p.x - (Constants.BOX_WIDTH * x_padding);
         p.y = p.y - (Constants.BOX_HEIGHT * y_padding);
         int cell_x = (int)Math.floor(p.x / Constants.BOX_WIDTH);
         int cell_y = (int)Math.floor(p.y / Constants.BOX_HEIGHT);
-        return new Vector2(cell_x, cell_y);
+        return new VectorInt2(cell_x, cell_y);
     }
 }
