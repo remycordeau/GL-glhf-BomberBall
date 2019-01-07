@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.utils.Constants;
+import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
 
@@ -11,9 +12,9 @@ public class ActiveEnemy extends Enemy {
         this.setWay(this.find_way());
     }
 
-    private ArrayList<Constants.moves> find_way(){
+    private ArrayList<Directions> find_way(){
         this.getCell();
-
+        return null; // temporaire
     }
 
 }
