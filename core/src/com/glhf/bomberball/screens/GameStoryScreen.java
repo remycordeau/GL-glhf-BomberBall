@@ -2,22 +2,19 @@ package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
-import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.config.GameSoloConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
-import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.config.InputsConfig.KeyPriority;
 import com.glhf.bomberball.gameobject.Enemy;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -66,10 +63,8 @@ public class GameStoryScreen extends GameScreen {
 
     public void dropBombAt(float x, float y) {
         y = Gdx.graphics.getHeight() - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
-        int cell_x = (int)cell_pos.x;
-        int cell_y = (int)cell_pos.y;
-        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
+        VectorInt2 cell_pos = maze_drawer.screenPosToCell(x, y);
+        Directions dir = player.getCell().getCellDir(maze.getCellAt(cell_pos.x, cell_pos.y));
         if (dir != null) {
             dropBomb(dir);
             clearCellsEffect();
@@ -113,12 +108,12 @@ public class GameStoryScreen extends GameScreen {
     // Methods to change the mod when click on a button in ActionPlayer bar
     public void setBombMode(){
         setBombEffect();
-        input_handler.setInputProfile(InputProfile.BOMB);
+//        input_handler.setInputProfile(KeyPriority.BOMB);
     }
 
     public void setMoveMode(){
         setMoveEffect();
-        input_handler.setInputProfile(InputProfile.MOVE);
+//        input_handler.setInputProfile(KeyPriority.MOVE);
     }
 
 

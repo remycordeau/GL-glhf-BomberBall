@@ -3,7 +3,8 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
+
+import java.util.List;
 
 /**
  * class InputHandler
@@ -45,8 +46,7 @@ public class InputHandler extends InputListener {
         MODE_MOVE,
         DROP_BOMB,
         MENU_GO_BACK,
-        DROP_INDESTRUCTIBLEWALL,
-        DROP_DESTRUCTIBLEWALL
+        DROP_SELECTED_OBJECT
     }
 
     private ActionHandler[] handlers = new ActionHandler[Action.values().length];
@@ -69,9 +69,11 @@ public class InputHandler extends InputListener {
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
         if (!locked && inputs_config.isKeyCodeAssigned(keycode)) {
-            ActionHandler handler = this.handlers[inputs_config.getKeyCodeAction(keycode).ordinal()];
-            if(handler != null){
-                handler.handle(event);
+            for(Action a : inputs_config.getKeyCodeActions(keycode)) {
+                ActionHandler handler = this.handlers[a.ordinal()];
+                if (handler != null) {
+                    handler.handle(event);
+                }
             }
         }
         return false;
@@ -83,9 +85,11 @@ public class InputHandler extends InputListener {
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         if (!locked && inputs_config.isButtonCodeAssigned(button)) {
-            ActionHandler handler = this.handlers[inputs_config.getButtonCodeAction(button).ordinal()];
-            if(handler != null){
-                handler.handle(event);
+            for(Action a : inputs_config.getButtonCodeActions(button)) {
+                ActionHandler handler = this.handlers[a.ordinal()];
+                if (handler != null) {
+                    handler.handle(event);
+                }
             }
         }
         return false;
@@ -132,10 +136,6 @@ public class InputHandler extends InputListener {
                 keyActionHandler.handle();
             }
         }
-    }
-
-    public void setInputProfile(InputProfile profile) {
-        inputs_config.setInputProfile(profile);
     }
 
     public void lock(boolean locked) {
