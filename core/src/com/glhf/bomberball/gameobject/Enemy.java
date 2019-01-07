@@ -54,7 +54,12 @@ public abstract class Enemy extends Character {
         actual_move += 1;*/
     }
 
-
+    /**
+     * this method gives the "root" of a kind of tree which represents the different available ways from an initial position
+     * @param ancestors
+     * @param initial_position
+     * @return Node
+     */
     public Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){
         int i;
         Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
@@ -86,6 +91,11 @@ public abstract class Enemy extends Character {
         return ways;
     }
 
+    /**
+     * this method gives the longest way that the active enemy will folow, chose the longest path
+     * @param initial_node
+     * @return ArrayList<Cell> a path
+     */
     public ArrayList<Cell> longest_way(Node initial_node){
         ArrayList<Cell> longest = new ArrayList<>();
         ArrayList<Cell> current = new ArrayList<>();
