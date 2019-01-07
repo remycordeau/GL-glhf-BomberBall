@@ -48,10 +48,6 @@ public class GameMultiScreen extends GameScreen {
         input_handler.registerActionHandler(Action.MODE_MOVE, this::setMoveMode);
         input_handler.registerActionHandler(Action.ENDTURN, this::endTurn);
         input_handler.registerActionHandler(Action.DROP_BOMB, (x, y) -> dropBombAt(x, y));
-        input_handler.registerActionHandler(Action.MOVE_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
-        input_handler.registerActionHandler(Action.MOVE_UP, () -> moveCurrentPlayer(Directions.UP));
-        input_handler.registerActionHandler(Action.MOVE_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
-        input_handler.registerActionHandler(Action.MOVE_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
         input_handler.registerActionHandler(Action.DROP_BOMB_DOWN, () -> dropBomb(Directions.DOWN));
         input_handler.registerActionHandler(Action.DROP_BOMB_UP, () -> dropBomb(Directions.UP));
         input_handler.registerActionHandler(Action.DROP_BOMB_LEFT, () -> dropBomb(Directions.LEFT));
@@ -104,13 +100,19 @@ public class GameMultiScreen extends GameScreen {
     // Methods to change the mod when click on a button in ActionPlayer bar
     public void setBombMode(){
         setBombEffect();
-//        input_handler.setInputProfile(KeyPriority.BOMB);
+        input_handler.registerActionHandler(Action.MOVE_DOWN, () -> dropBomb(Directions.DOWN));
+        input_handler.registerActionHandler(Action.MOVE_UP, () -> dropBomb(Directions.UP));
+        input_handler.registerActionHandler(Action.MOVE_LEFT, () -> dropBomb(Directions.LEFT));
+        input_handler.registerActionHandler(Action.MOVE_RIGHT, () -> dropBomb(Directions.RIGHT));
     }
 
 
     public void setMoveMode(){
         setMoveEffect();
-//        input_handler.setInputProfile(KeyPriority.MOVE);
+        input_handler.registerActionHandler(Action.MOVE_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
+        input_handler.registerActionHandler(Action.MOVE_UP, () -> moveCurrentPlayer(Directions.UP));
+        input_handler.registerActionHandler(Action.MOVE_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
+        input_handler.registerActionHandler(Action.MOVE_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
     }
 
 
