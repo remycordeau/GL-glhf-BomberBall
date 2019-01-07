@@ -6,7 +6,7 @@ public class AggressiveEnemy extends Enemy {
     private int begin_position_y;
 
     public AggressiveEnemy(String skin, int life, int initial_moves, int strength) {
-        super(skin, life, initial_moves, strength);
+        super(skin, life, initial_moves, strength,null);
         //this.way = way;
     }
 
