@@ -21,7 +21,13 @@ public class AggressiveEnemy extends Enemy {
     }
 
 
-
+    /**
+     * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range
+     * this method is to be called at the beginning of the enemy's turn
+     * @param cell_origin
+     * @param range
+     * @return ArrayList<Directions>
+     */
     public static ArrayList<Directions> depth_graph_transversal(Cell cell_origin, int range) {
         ArrayList<Cell> cells = new ArrayList<Cell>();
         LinkedList<Cell> active_queue = new LinkedList<Cell>();

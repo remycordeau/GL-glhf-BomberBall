@@ -100,7 +100,8 @@ public abstract class Enemy extends Character {
     }
 
     /**
-     * gives the sequence of moves that the active enemy has to follow
+     * gives the sequence of moves that the active enemy has to follow, if its a cycle from the initial position, then
+     * does the cycle or revert his own path otherwise.
      * @param initial_node
      * @return ArrayList<Directions>
      */
