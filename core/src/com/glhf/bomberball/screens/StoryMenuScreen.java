@@ -67,6 +67,7 @@ public class StoryMenuScreen extends MenuScreen {
      */
     public void setLevelUnlocked(int i){
         config.level_unlocked[i] = true;
+        config.exportConfig();
     }
 
 }
