@@ -73,7 +73,7 @@ public class MapEditorUI extends Table {
             this.setActor(content);
             for (GameObject o : selectableObjects) {
                 ImageButton button = new ImageButton(new TextureRegionDrawable(o.getSprite()));
-                button.getImage().setScaling(Scaling.fit);
+                button.getImageCell().expand().fill();
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
