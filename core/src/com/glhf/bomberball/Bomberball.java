@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.screens.WelcomingMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 
 public class Bomberball extends Game {
@@ -19,7 +20,7 @@ public class Bomberball extends Game {
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
 		Translator.load("en");
-		changeScreen(new MainMenuScreen());
+		changeScreen(new WelcomingMenuScreen());
 	}
 
 	@Override
