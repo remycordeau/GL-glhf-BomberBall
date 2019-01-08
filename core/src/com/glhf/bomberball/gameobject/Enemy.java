@@ -106,10 +106,23 @@ public abstract class Enemy extends Character {
      */
     public ArrayList<Directions> longest_way_moves_sequence(Node initial_node){
         ArrayList<Directions> moves_sequence = new ArrayList<>();
+        ArrayList<Directions> moves_sequence_miror = new ArrayList<>();
         ArrayList<Cell> longest_way = new ArrayList<>();
         longest_way = this.longest_way(initial_node);
-        for(int i=0; i< longest_way.size()-1; i++){
-            moves_sequence.add(longest_way.get(i).getCellDir(longest_way.get(i+1)));
+        int longest_way_size = longest_way.size();
+        Directions next_direction;
+        Directions last_direction;
+        for(int i=0; i< longest_way_size-1; i++){
+            next_direction = longest_way.get(i).getCellDir(longest_way.get(i+1));
+            moves_sequence.add(next_direction);
+            moves_sequence_miror.add(0, Directions.values()[(next_direction.ordinal()+2)%4]);
+        }
+        last_direction = longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell());
+        if(longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell()) != null){
+            moves_sequence.add(last_direction);
+        }
+        else{
+            moves_sequence.addAll(moves_sequence_miror);
         }
         return moves_sequence;
     }
