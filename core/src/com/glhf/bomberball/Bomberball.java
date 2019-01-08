@@ -18,7 +18,6 @@ public class Bomberball extends Game {
 		instance = this;
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
-
 		changeScreen(new MainMenuScreen());
 	}
 

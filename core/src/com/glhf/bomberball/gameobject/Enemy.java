@@ -13,11 +13,11 @@ public abstract class Enemy extends Character {
     //protected transient  int actual_move; //transcient to deserialize
     protected transient ArrayList<Directions> way;
 
-    protected Enemy(String skin, int life, int initial_moves, int strength, ArrayList<Directions> way) {
+    protected int actual_move; //current index of path followed
+
+    protected Enemy(String skin, int life, int initial_moves, int strength) {
         super(skin, life, initial_moves);
         this.strength = strength;
-        this.way = way;
-
     }
 
     /**
@@ -39,19 +39,9 @@ public abstract class Enemy extends Character {
     /**
      * the enemy has to follow the way he receveid
      */
-    // TODO : réecrire followWay
     public void followWay() {
-        /*switch (way.get(actual_move)) {
-            case UP:
-                this.moveUp();
-            case DOWN:
-                this.moveDown();
-            case LEFT:
-                this.moveLeft();
-            case RIGHT:
-                this.moveRight();
-        }
-        actual_move += 1;*/
+        this.move(way.get(actual_move));
+        actual_move += 1;
     }
 
     /**
@@ -107,5 +97,34 @@ public abstract class Enemy extends Character {
         }
         longest.add(0, initial_node.getMatching_cell());
         return longest;
+    }
+
+    /**
+     * gives the sequence of moves that the active enemy has to follow, if its a cycle from the initial position, then
+     * does the cycle or revert his own path otherwise.
+     * @param initial_node
+     * @return ArrayList<Directions>
+     */
+    public ArrayList<Directions> longest_way_moves_sequence(Node initial_node){
+        ArrayList<Directions> moves_sequence = new ArrayList<>();
+        ArrayList<Directions> moves_sequence_miror = new ArrayList<>();
+        ArrayList<Cell> longest_way = new ArrayList<>();
+        longest_way = this.longest_way(initial_node);
+        int longest_way_size = longest_way.size();
+        Directions next_direction;
+        Directions last_direction;
+        for(int i=0; i< longest_way_size-1; i++){
+            next_direction = longest_way.get(i).getCellDir(longest_way.get(i+1));
+            moves_sequence.add(next_direction);
+            moves_sequence_miror.add(0, Directions.values()[(next_direction.ordinal()+2)%4]);
+        }
+        last_direction = longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell());
+        if(longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell()) != null){
+            moves_sequence.add(last_direction);
+        }
+        else{
+            moves_sequence.addAll(moves_sequence_miror);
+        }
+        return moves_sequence;
     }
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class PassiveEnemy extends Enemy {
 
     public PassiveEnemy(String skin, int life, int initial_moves, int strength, ArrayList<Directions> way) {
-        super(skin, life, initial_moves, strength, way);
+        super(skin, life, initial_moves, strength);
+        this.setWay(way);
     }
 }
