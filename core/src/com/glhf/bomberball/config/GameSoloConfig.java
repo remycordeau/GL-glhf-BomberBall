@@ -29,4 +29,17 @@ public class GameSoloConfig extends GameConfig {
     public void exportConfig() {
         exportConfig("config_game_solo");
     }
+
+    /**
+     * resets all the levels to the initial state (only the first level is unlocked) and saves it in the config file.
+     */
+    public void resetLevels()
+    {
+        level_unlocked[0] = true;
+        for(int i = 1; i<level_unlocked.length; i++)
+        {
+            level_unlocked[i] = false;
+        }
+        exportConfig();
+    }
 }
