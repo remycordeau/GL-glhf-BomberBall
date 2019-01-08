@@ -78,23 +78,21 @@ public class StoryMenuUI extends Table {
         levels = new TextButton[nb_levels];
         horizontal = new HorizontalGroup();
 
-        for (int i = 1; i < nb_levels; i++) {
-            levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
+        for (int i = 0; i < nb_levels; i++) {
+            levels[i] = new TextButton(Integer.toString(i + 1), Graphics.GUI.getSkin());
             int finalI = i;
-            levels[i - 1].setDisabled(!screen.isLevelUnlocked(i - 1));
-            levels[i - 1].addListener(new ChangeListener() {
+            levels[i].setDisabled(!screen.isLevelUnlocked(i));
+            levels[i].addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    screen.getMaze(finalI - 1);
+                    screen.getMaze(finalI);
                     level_preview.setMaze(screen.maze);
                 }
             });
-            horizontal.addActor(levels[i - 1]);
+            horizontal.addActor(levels[i]);
             horizontal.space(25);
 
         }
-        levels[nb_levels - 1] = new TextButton(Integer.toString(nb_levels), Graphics.GUI.getSkin(), "locked level");
-        horizontal.addActor(levels[nb_levels - 1]);
         buttons.add(horizontal).spaceBottom(Value.percentHeight(0.5f)).row();
 
         // Play and quit buttons
