@@ -120,8 +120,8 @@ public class StoryMenuUI extends Table {
      * @param i the id of the level that will be unlocked
      */
     public static void unlockLevel(int i) {
-        screen.setLevelUnlocked(i - 1);
-        levels[i - 1].setDisabled(false);
+        screen.setLevelUnlocked(i);
+        levels[i].setDisabled(false);
     }
 }
 
