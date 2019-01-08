@@ -40,7 +40,8 @@ public class MultiMenuUI extends Table {
     {
         System.out.println("Update !");
         this.clear();
-        this.initialize();}
+        initialize();
+    }
 
     private void initializeMazePreview ()
     {
