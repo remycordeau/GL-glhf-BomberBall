@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.*;
 
@@ -26,7 +27,7 @@ public class StoryMenuUI extends Table {
     public StoryMenuUI(StoryMenuScreen screen) {
 
         super();
-        this.screen = screen;
+        StoryMenuUI.screen = screen;
         this.setFillParent(true);
         level_selection = new Table();
         addButtons();
@@ -41,7 +42,7 @@ public class StoryMenuUI extends Table {
 
         // Title
 
-        label = new Label("Level Selection", Graphics.GUI.getSkin(), "Title");
+        label = new Label(Translator.translate("Level Selection"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.7f, 1.7f);
         this.add(label).row();
@@ -97,7 +98,7 @@ public class StoryMenuUI extends Table {
 
         // Play and quit buttons
 
-        play_button = new TextButton("Play Selected Level", Graphics.GUI.getSkin());
+        play_button = new TextButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
         play_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -108,7 +109,7 @@ public class StoryMenuUI extends Table {
         });
         buttons.add(play_button).row();
 
-        back_button = new TextButton("Back to title menu", Graphics.GUI.getSkin());
+        back_button = new TextButton(Translator.translate("Back to title menu"), Graphics.GUI.getSkin());
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         back_button.getLabel().setFontScale(0.8f, 0.8f);
         buttons.add(back_button).spaceTop(Value.percentHeight(0.9f));

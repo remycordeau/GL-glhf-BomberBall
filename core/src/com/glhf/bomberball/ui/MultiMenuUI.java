@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -79,7 +80,7 @@ public class MultiMenuUI extends Table {
         // BUTTON TO LOAD THE GAME
         VerticalGroup buttons = new VerticalGroup();
 
-        TextButton playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
+        TextButton playButton = new TextButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -88,7 +89,7 @@ public class MultiMenuUI extends Table {
         });
         // BUTTON TO CHOOSE A RANDOM MAZE
 
-        TextButton randomMapButton = new TextButton("Carte Aléatoire", Graphics.GUI.getSkin());
+        TextButton randomMapButton = new TextButton(Translator.translate("Carte Aléatoire"), Graphics.GUI.getSkin());
         randomMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -97,7 +98,7 @@ public class MultiMenuUI extends Table {
             }
         });
         // BUTTON TO EXIT THE MENU
-        TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        TextButton cancelButton = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
         //ADDING THE BUTTONS TO THE TABLE
@@ -110,7 +111,7 @@ public class MultiMenuUI extends Table {
         //CREATING A PREVIEW FOR THE PLAYERS
 
 
-        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p1_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id]+"/idle"), Animation.PlayMode.LOOP));
         p1.mustMove(true);
         TextButton Bp1 = new TextButton("P1", Graphics.GUI.getSkin());
         Bp1.addListener(new ChangeListener() {
@@ -126,7 +127,7 @@ public class MultiMenuUI extends Table {
         Vp1.row();
         Vp1.add(Bp1);
 
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p2_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id]+"/idle"), Animation.PlayMode.LOOP));
         p2.mustMove(true);
         TextButton Bp2 = new TextButton("P2", Graphics.GUI.getSkin());
         Bp2.addListener(new ChangeListener() {
@@ -142,7 +143,7 @@ public class MultiMenuUI extends Table {
         Vp2.row();
         Vp2.add(Bp2);
 
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
         p3.mustMove(true);
         TextButton Bp3 = new TextButton("P3", Graphics.GUI.getSkin());
         Bp3.addListener(new ChangeListener() {
@@ -158,7 +159,7 @@ public class MultiMenuUI extends Table {
         Vp3.row();
         Vp3.add(Bp3);
 
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.playable[screen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
         p4.mustMove(true);
         TextButton Bp4 = new TextButton("P4", Graphics.GUI.getSkin());
         Bp4.addListener(new ChangeListener() {

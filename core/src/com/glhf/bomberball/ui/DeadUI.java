@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameStoryScreen;
@@ -46,12 +47,12 @@ public class DeadUI extends Table {
         this.add(player_animation).grow().row();
 
         // Buttons
-        dead = new Label("Wasted !", Graphics.GUI.getSkin());
+        dead = new Label(Translator.translate("Wasted !"), Graphics.GUI.getSkin());
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
         this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
 
-        replay = new TextButton("Retry level",Graphics.GUI.getSkin());
+        replay = new TextButton(Translator.translate("Retry level"),Graphics.GUI.getSkin());
         replay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -60,7 +61,7 @@ public class DeadUI extends Table {
         });
         this.add(replay).spaceTop(Value.percentHeight(0.9f)).row();
 
-        back_story_menu = new TextButton("Back to level selection",Graphics.GUI.getSkin());
+        back_story_menu = new TextButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -69,7 +70,7 @@ public class DeadUI extends Table {
         });
         this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        ragequit = new TextButton("Ragequit ?",Graphics.GUI.getSkin());
+        ragequit = new TextButton(Translator.translate("Ragequit ?"),Graphics.GUI.getSkin());
         ragequit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
