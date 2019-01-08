@@ -79,24 +79,19 @@ public class StoryMenuUI extends Table {
         horizontal = new HorizontalGroup();
 
         for (int i = 1; i < nb_levels; i++) {
-            if (!screen.isLevelUnlocked(i - 1)) { // if the level is locked, initializes it with the appropriate style
-                levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin(), "locked level");
-                horizontal.addActor(levels[i - 1]);
-                horizontal.space(25);
-            } else // if the level is already unlocked, the button has the default style
-            {
-                levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
-                int finalI = i;
-                levels[i - 1].addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        screen.getMaze(finalI - 1);
-                        level_preview.setMaze(screen.maze);
-                    }
-                });
-                horizontal.addActor(levels[i - 1]);
-                horizontal.space(25);
-            }
+            levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
+            int finalI = i;
+            levels[i - 1].setDisabled(!screen.isLevelUnlocked(i - 1));
+            levels[i - 1].addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    screen.getMaze(finalI - 1);
+                    level_preview.setMaze(screen.maze);
+                }
+            });
+            horizontal.addActor(levels[i - 1]);
+            horizontal.space(25);
+
         }
         levels[nb_levels - 1] = new TextButton(Integer.toString(nb_levels), Graphics.GUI.getSkin(), "locked level");
         horizontal.addActor(levels[nb_levels - 1]);
@@ -128,16 +123,7 @@ public class StoryMenuUI extends Table {
      */
     public static void unlockLevel(int i) {
         screen.setLevelUnlocked(i - 1);
-        horizontal.removeActor(levels[i - 1]);
-        levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
-        horizontal.addActorAfter(levels[i - 2], levels[i - 1]);
-        levels[i - 1].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                screen.getMaze(i - 1);
-                level_preview.setMaze(screen.maze);
-            }
-        });
+        levels[i - 1].setDisabled(false);
     }
 }
 
