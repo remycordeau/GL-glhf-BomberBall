@@ -36,7 +36,7 @@ public class EndLevelUI extends Table {
         this.previous_level = maze_id;
         this.next_level = previous_level +1;
         screen.setLevelUnlocked(next_level); // unlocks next level
-        StoryMenuUI.unlockLevel(next_level + 1); //updates the ui with the unlocked level
+        StoryMenuUI.unlockLevel(next_level); //updates the ui with the unlocked level
         addButtons();
     }
 

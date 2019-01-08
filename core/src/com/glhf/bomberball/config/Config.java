@@ -45,10 +45,19 @@ public abstract class Config {
      */
     private static <T extends Config> T importConfig(String name, Class<T> c) {
         try {
-            return gson.fromJson(new FileReader(Constants.PATH_CONFIGS + name + ".json"), c);
+            String fileName = Constants.PATH_CONFIGS + name + ".json";
+            if(!new File(fileName).exists()) {
+                c.newInstance().exportConfig(name);
+            }
+            return gson.fromJson(new FileReader(fileName), c);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Cannot import config : " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**

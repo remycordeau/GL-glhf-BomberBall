@@ -1,16 +1,23 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.Node;
+
+import java.util.ArrayList;
+
 public abstract class Enemy extends Character {
 
     protected int strength = 1;
 
-    protected transient  int actual_move;
-    //protected transient ArrayList<Constants.moves> way;
+    //protected transient  int actual_move; //transcient to deserialize
+    protected transient ArrayList<Directions> way;
 
-    protected Enemy(String skin, int life, int initial_moves, int strength) {
+    protected Enemy(String skin, int life, int initial_moves, int strength, ArrayList<Directions> way) {
         super(skin, life, initial_moves);
         this.strength = strength;
-        this.actual_move = 0;
+        this.way = way;
+
     }
 
     /**
@@ -25,9 +32,9 @@ public abstract class Enemy extends Character {
      * give a way to follow to the enemy
      * @param way
      */
-//    public void setWay(ArrayList<Constants.moves> way) {
-//        this.way = way;
-//    }
+    public void setWay(ArrayList<Directions> way) {
+       this.way = way;
+    }
 
     /**
      * the enemy has to follow the way he receveid
@@ -45,5 +52,60 @@ public abstract class Enemy extends Character {
                 this.moveRight();
         }
         actual_move += 1;*/
+    }
+
+    /**
+     * this method gives the "root" of a kind of tree which represents the different available ways from an initial position
+     * @param ancestors
+     * @param initial_position
+     * @return Node
+     */
+    public Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){
+        int i;
+        Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
+        Directions direction = Directions.UP;
+        Cell current_adjacent_cell;
+        ArrayList<Cell> family = new ArrayList<>(ancestors);
+        family.add(ways.getMatching_cell());
+        for(i=0; i<4; i++){ // because, all cells have 4 adjacent cells
+            // stop condition no walkable adjacent cell or all adjacent way in acestors
+            switch (i){
+                case 0 : direction = Directions.UP;
+                    break;
+                case 1 : direction = Directions.RIGHT;
+                    break;
+                case 2 : direction = Directions.DOWN;
+                    break;
+                case 3 : direction = Directions.LEFT;
+                    break;
+            }
+            current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(direction);
+            //stop condition
+            if(! current_adjacent_cell.isWalkable() || ways.getAncestors().contains(current_adjacent_cell)){
+                ways.setSons(null, i);
+            }
+            else{
+                ways.setSons(construct_ways(family, current_adjacent_cell), i);
+            }
+        }
+        return ways;
+    }
+
+    /**
+     * this method gives the longest way that the active enemy will folow, chose the longest path
+     * @param initial_node
+     * @return ArrayList<Cell> a path
+     */
+    public ArrayList<Cell> longest_way(Node initial_node){
+        ArrayList<Cell> longest = new ArrayList<>();
+        ArrayList<Cell> current = new ArrayList<>();
+        for(int i=0; i<4; i++){
+                current = longest_way(initial_node.getSons(i));
+                if (current.size() > longest.size()) {
+                    longest = current;
+                }
+        }
+        longest.add(0, initial_node.getMatching_cell());
+        return longest;
     }
 }

@@ -1,5 +1,7 @@
 package com.glhf.bomberball.screens;
 
+import com.glhf.bomberball.config.GameConfig;
+import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryMenuUI;
 
@@ -7,17 +9,11 @@ public class StoryMenuScreen extends MenuScreen {
 
     public Maze maze;
     private int maze_id = 0;
-    private final int maze_count = 7; //number of levels in the story mode
-    private boolean[] level_unlocked; //inform if the level is locked or not
+    private GameSoloConfig config;
 
     public StoryMenuScreen(){
         super();
-        level_unlocked = new boolean[maze_count];
-        level_unlocked[maze_id] = true; // first level always unlocked
-        for(int i = 1;i < maze_count;i++)
-        {
-            level_unlocked[i] = false; // default : all the other levels are locked
-        }
+        config = GameSoloConfig.get();
         maze = Maze.importMaze("maze_" + maze_id);
         addUI(new StoryMenuUI(this));
     }
@@ -26,7 +22,7 @@ public class StoryMenuScreen extends MenuScreen {
      * Change the maze to the next one in the maze list
      */
     public void nextMaze(){
-        maze_id = (maze_id + 1) % maze_count;
+        maze_id = (maze_id + 1) % GameConfig.maze_count;
         maze = Maze.importMaze("maze_" + maze_id);
     }
 
@@ -34,7 +30,7 @@ public class StoryMenuScreen extends MenuScreen {
      * Change the maze to the previous one in the maze list
      */
     public void previousMaze(){
-        maze_id = (maze_count + maze_id - 1) % maze_count;
+        maze_id = (GameConfig.maze_count + maze_id - 1) % GameConfig.maze_count;
         maze = Maze.importMaze("maze_" + maze_id);
     }
 
@@ -54,7 +50,7 @@ public class StoryMenuScreen extends MenuScreen {
      * @return true if the level is unlocked, false otherwise
      */
     public boolean isLevelUnlocked(int i){
-        return level_unlocked[i];
+        return config.level_unlocked[i];
     }
 
     // getters and setters
@@ -63,14 +59,15 @@ public class StoryMenuScreen extends MenuScreen {
         return maze_id;
     }
 
-    public int getMazeCount(){ return this.maze_count; }
+    public int getMazeCount(){ return GameConfig.maze_count; }
 
     /**
      * sets the state of a specified level to unlocked
      * @param i
      */
     public void setLevelUnlocked(int i){
-        level_unlocked[i] = true;
+        config.level_unlocked[i] = true;
+        config.exportConfig();
     }
 
 }
