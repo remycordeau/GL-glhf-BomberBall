@@ -1,10 +1,14 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Audio;
 import com.glhf.bomberball.Bomberball;
@@ -14,6 +18,7 @@ import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.utils.Constants;
 
 public class MultiMenuUI extends Table {
 
@@ -24,6 +29,8 @@ public class MultiMenuUI extends Table {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/MultiMenu.png")));
+        this.setBackground(texture);
         this.initialize();
     }
 
@@ -72,7 +79,7 @@ public class MultiMenuUI extends Table {
         //ADDING THE BUTTONS TO THE TABLE
         Table selectMap = new Table();
         selectMap.add(previousMapButton);
-        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(5f));
+        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(10f));
         this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
         this.row();
 
@@ -104,7 +111,7 @@ public class MultiMenuUI extends Table {
         buttons.addActor(playButton);
         buttons.addActor(randomMapButton);
         buttons.addActor(cancelButton);
-        buttons.center().pad(80f);
+        buttons.center().space(15f);
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
@@ -175,7 +182,6 @@ public class MultiMenuUI extends Table {
         Vp4.add(Bp4);
 
         Table selectPlayer = new Table();
-        //TODO : Comment changer la taille des boutons ???
         selectPlayer.add(Vp1).grow();
         selectPlayer.add(Vp2).grow();
         selectPlayer.add(buttons).grow();
