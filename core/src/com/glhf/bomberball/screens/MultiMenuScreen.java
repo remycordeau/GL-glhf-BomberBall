@@ -18,8 +18,8 @@ public class MultiMenuScreen extends AbstractScreen {
 
     public static int p1_id=0;
     public static int p2_id=1;
-    public static int p3_id=2;
-    public static int p4_id=4;
+    public static int p3_id=nb_Playable-1;
+    public static int p4_id=nb_Playable-1;
 
     public MultiMenuScreen() {
         maze = Maze.importMaze("maze_" + maze_id);

@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.screens.InfiniteModeScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
@@ -19,11 +21,10 @@ import com.glhf.bomberball.screens.StoryMenuScreen;
 public class SoloMenuUI extends Table {
 
     private TextButton infinite_button, story_button, back_button;
-    private StoryMenuScreen screen;
 
     public SoloMenuUI(){
         super();
-        this.screen = EndLevelUI.getUpdatedStoryScreen();
+        // GameSoloConfig.get("config_game_solo").resetLevels();
         this.setFillParent(true);
         initializeButtons();
     }
@@ -33,24 +34,21 @@ public class SoloMenuUI extends Table {
      */
     private void initializeButtons() {
 
-        story_button = new TextButton("Story Mode", Graphics.GUI.getSkin());
-        if(screen == null ){ // if the player never played story mode before (no StoryMenuScreen created)
-            story_button.addListener(new ScreenChangeListener(StoryMenuScreen.class));
-        } else{ // displays the updated screen from EndLevelUI (saves progression)
-            story_button.addListener(new ChangeListener() {
+        story_button = new TextButton(Translator.translate("Story Mode"), Graphics.GUI.getSkin());
+        story_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Bomberball.changeScreen(screen);
+                    Bomberball.changeScreen(new StoryMenuScreen());
                 }
             });
-        }
+
         this.add(story_button).expandX().row();
 
-        infinite_button = new TextButton("Infinite Mode", Graphics.GUI.getSkin());
+        infinite_button = new TextButton(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin());
         infinite_button.addListener(new ScreenChangeListener(InfiniteModeScreen.class));
         this.add(infinite_button).spaceTop(Value.percentHeight(1f)).row();
 
-        back_button = new TextButton("Back to main menu",Graphics.GUI.getSkin());
+        back_button = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
         back_button.getLabel().setFontScale(0.8f,0.8f);
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(back_button).spaceTop(Value.percentHeight(3f)).row();

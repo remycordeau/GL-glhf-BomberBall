@@ -2,8 +2,6 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -14,17 +12,13 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
-import com.glhf.bomberball.screens.AbstractScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
-import com.glhf.bomberball.utils.WaitNextInput;
-
-import java.util.*;
 
 public class SettingsMenuUI extends Table {
 
@@ -54,9 +48,13 @@ public class SettingsMenuUI extends Table {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                for(int i=0; i<NB_TABS; i++)
+                int selected_index=0;
+                for(int i=0; i<NB_TABS; i++) {
                     contents[i].setVisible(labels[i].isChecked());
-                stack.swapActor(0,1);
+                    if(labels[i].isChecked())
+                        selected_index=i;
+                }
+                stack.swapActor(stack.getChildren().get(NB_TABS-1),stack.findActor(""+selected_index));
             }
         };
 
@@ -71,10 +69,10 @@ public class SettingsMenuUI extends Table {
             }
         };
 
-        labels[0] = new TextButton("general", Graphics.GUI.getSkin());
+        labels[0] = new TextButton(Translator.translate("general"), Graphics.GUI.getSkin());
         labels[0].addListener(labels_listener);
 
-        labels[1] = new TextButton("inputs", Graphics.GUI.getSkin());
+        labels[1] = new TextButton(Translator.translate("inputs"), Graphics.GUI.getSkin());
         labels[1].addListener(labels_listener);
 
         contents[0] = new Table();
@@ -97,17 +95,21 @@ public class SettingsMenuUI extends Table {
         contents[0].add(fullscreen).growX().row();
 
         //ajout de chaque paramètre pour inputs
-        HashMap<Action,String[]> map = inputsConfig.getReversedInputMap();
+        String[][] id_list = inputsConfig.getIdList();
         contents[1] = new Table();
         inputsButtonGroup = new ButtonGroup<>();
         inputsButtonGroup.setMaxCheckCount(1);
         inputsButtonGroup.setMinCheckCount(1);
-        for(Action a : map.keySet()){
+        contents[1].add(new Label(Translator.translate("Action"), Graphics.GUI.getSkin())).growX();
+        contents[1].add(new Label(Translator.translate("Primary"), Graphics.GUI.getSkin())).growX();
+        contents[1].add(new Label(Translator.translate("Secondary"), Graphics.GUI.getSkin())).growX().row();
+        for(int i=0; i<Action.values().length; i++){
+            Action a = Action.values()[i];
             Label label = new Label(a.toString(), Graphics.GUI.getSkin(), "very_small");
             contents[1].add(label).growX();
-            for(int i=0; i<map.get(a).length; i++) {
-                String id = map.get(a)[i];
-                InputButton textButton = new InputButton(id, a, i);
+            for(int j=0; j<id_list[i].length; j++) {
+                String id = id_list[i][j];
+                InputButton textButton = new InputButton(id, a, j);
                 textButton.addListener(button_listener);
                 contents[1].add(textButton).growX();
                 inputsButtonGroup.add(textButton);
@@ -121,11 +123,14 @@ public class SettingsMenuUI extends Table {
             labelsButtonGroup.add(labels[i]);
         }
         this.row();
-        for(int i=0; i<NB_TABS; i++)
-            stack.add(new ScrollPane(contents[i]));
+        for(int i=0; i<NB_TABS; i++) {
+            ScrollPane actor = new ScrollPane(contents[i]);
+            actor.setName(""+i);
+            stack.add(actor);
+        }
         this.add(stack).colspan(NB_TABS).grow().row();
 
-        TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        TextButton cancelButton = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(cancelButton).colspan(NB_TABS).growX();
 
@@ -184,7 +189,7 @@ public class SettingsMenuUI extends Table {
             super(name);
             value = new HorizontalGroup();
             Slider slider = new Slider(min, max, step, false, GUI.getSkin());
-            Label label = new Label("0", GUI.getSkin());
+            Label label = new Label("", GUI.getSkin());
             slider.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -199,12 +204,14 @@ public class SettingsMenuUI extends Table {
 
     public class InputButton extends TextButton {
         public Action action;
-        public int numProfile;
+        public int priority;
+        public String input_id;
 
-        public InputButton(String id, Action action, int numProfile) {
-            super(id, Graphics.GUI.getSkin(), "input_select");
+        public InputButton(String input_id, Action action, int priority) {
+            super(Translator.getInputName(input_id), Graphics.GUI.getSkin(), "input_select");
             this.action = action;
-            this.numProfile = numProfile;
+            this.priority = priority;
+            this.input_id = input_id;
         }
     }
 }

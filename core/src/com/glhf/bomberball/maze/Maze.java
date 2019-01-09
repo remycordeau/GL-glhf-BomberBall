@@ -11,12 +11,14 @@ import com.glhf.bomberball.maze.cell.Cell;
 import com.google.gson.*;
 
 import java.io.*;
+import java.lang.Character;
 import java.util.ArrayList;
 
 public class Maze {
 
     private String title;
     private ArrayList<Vector2> spawn_positions;
+    private ArrayList<Enemy> enemies;
     private int players_count;
     private int height;
     private int width;
@@ -39,11 +41,12 @@ public class Maze {
         cells = new Cell[width][height];
         spawn_positions = new ArrayList<Vector2>(){};
         spawn_positions.add(new Vector2(0, 0));
-        spawn_positions.add(new Vector2(0, h - 1));
+        /*spawn_positions.add(new Vector2(0, h - 1));
         spawn_positions.add(new Vector2(w - 1, 0f));
         spawn_positions.add(new Vector2(w - 1, h - 1));
-        players_count = spawn_positions.size();
-        for (int x = 0; x < width; x++) {
+        players_count = spawn_positions.size();*/
+        cells[0][0].addGameObject(new ActiveEnemy("knight_m", 1, 5, 1));
+        for (int x = 1; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 cells[x][y] = new Cell(x, y);
                 if (x % 2 == 1 && y % 2 == 1) {

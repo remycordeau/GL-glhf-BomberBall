@@ -1,0 +1,28 @@
+{
+  "level_unlocked": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "player_skin": "knight_m",
+  "highscore": 145970,
+  "activeEnemy_life": 1,
+  "activeEnemy_strength": 1,
+  "activeEnemy_moves": 5,
+  "passiveEnemy_life": 1,
+  "passiveEnemy_strength": 1,
+  "passiveEnemy_moves": 5,
+  "aggressiveEnemy_life": 1,
+  "aggressiveEnemy_strength": 1,
+  "aggressiveEnemy_moves": 5,
+  "wall_life": 1,
+  "initial_bomb_number": 1,
+  "initial_bomb_range": 3,
+  "bomb_damage": 1,
+  "player_life": 1,
+  "initial_player_moves": 5
+}

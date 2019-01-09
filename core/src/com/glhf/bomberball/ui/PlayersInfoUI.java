@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
@@ -31,7 +32,7 @@ public class PlayersInfoUI extends Table {
     public PlayersInfoUI(Player player) {
             PlayerWidget pw = new PlayerWidget(player);
             this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
-            TextButton back = new TextButton("Back to main menu",Graphics.GUI.getSkin());
+            TextButton back = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
             back.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {

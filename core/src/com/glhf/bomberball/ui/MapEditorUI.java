@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.DestructibleWall;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.IndestructibleWall;
@@ -48,7 +49,7 @@ public class MapEditorUI extends Table {
     }
 
     public void initializeButtons() {
-        TextButton bouton_retour = new TextButton("Retour", Graphics.GUI.getSkin());
+        TextButton bouton_retour = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(new ObjectsWidget()).grow();
         this.row();
@@ -73,7 +74,7 @@ public class MapEditorUI extends Table {
             this.setActor(content);
             for (GameObject o : selectableObjects) {
                 ImageButton button = new ImageButton(new TextureRegionDrawable(o.getSprite()));
-                button.getImage().setScaling(Scaling.fit);
+                button.getImageCell().expand().fill();
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {

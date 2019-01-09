@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.*;
 
@@ -26,7 +27,7 @@ public class StoryMenuUI extends Table {
     public StoryMenuUI(StoryMenuScreen screen) {
 
         super();
-        this.screen = screen;
+        StoryMenuUI.screen = screen;
         this.setFillParent(true);
         level_selection = new Table();
         addButtons();
@@ -41,7 +42,7 @@ public class StoryMenuUI extends Table {
 
         // Title
 
-        label = new Label("Level Selection", Graphics.GUI.getSkin(), "Title");
+        label = new Label(Translator.translate("Level Selection"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.7f, 1.7f);
         this.add(label).row();
@@ -78,33 +79,26 @@ public class StoryMenuUI extends Table {
         levels = new TextButton[nb_levels];
         horizontal = new HorizontalGroup();
 
-        for (int i = 1; i < nb_levels; i++) {
-            if (!screen.isLevelUnlocked(i - 1)) { // if the level is locked, initializes it with the appropriate style
-                levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin(), "locked level");
-                horizontal.addActor(levels[i - 1]);
-                horizontal.space(25);
-            } else // if the level is already unlocked, the button has the default style
-            {
-                levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
-                int finalI = i;
-                levels[i - 1].addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        screen.getMaze(finalI - 1);
-                        level_preview.setMaze(screen.maze);
-                    }
-                });
-                horizontal.addActor(levels[i - 1]);
-                horizontal.space(25);
-            }
+        for (int i = 0; i < nb_levels; i++) {
+            levels[i] = new TextButton(Integer.toString(i + 1), Graphics.GUI.getSkin());
+            int finalI = i;
+            levels[i].setDisabled(!screen.isLevelUnlocked(i));
+            levels[i].addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    screen.getMaze(finalI);
+                    level_preview.setMaze(screen.maze);
+                }
+            });
+            horizontal.addActor(levels[i]);
+            horizontal.space(25);
+
         }
-        levels[nb_levels - 1] = new TextButton(Integer.toString(nb_levels), Graphics.GUI.getSkin(), "locked level");
-        horizontal.addActor(levels[nb_levels - 1]);
         buttons.add(horizontal).spaceBottom(Value.percentHeight(0.5f)).row();
 
         // Play and quit buttons
 
-        play_button = new TextButton("Play Selected Level", Graphics.GUI.getSkin());
+        play_button = new TextButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
         play_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -115,7 +109,7 @@ public class StoryMenuUI extends Table {
         });
         buttons.add(play_button).row();
 
-        back_button = new TextButton("Back to title menu", Graphics.GUI.getSkin());
+        back_button = new TextButton(Translator.translate("Back to title menu"), Graphics.GUI.getSkin());
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         back_button.getLabel().setFontScale(0.8f, 0.8f);
         buttons.add(back_button).spaceTop(Value.percentHeight(0.9f));
@@ -127,17 +121,8 @@ public class StoryMenuUI extends Table {
      * @param i the id of the level that will be unlocked
      */
     public static void unlockLevel(int i) {
-        screen.setLevelUnlocked(i - 1);
-        horizontal.removeActor(levels[i - 1]);
-        levels[i - 1] = new TextButton(Integer.toString(i), Graphics.GUI.getSkin());
-        horizontal.addActorAfter(levels[i - 2], levels[i - 1]);
-        levels[i - 1].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                screen.getMaze(i - 1);
-                level_preview.setMaze(screen.maze);
-            }
-        });
+        screen.setLevelUnlocked(i);
+        levels[i].setDisabled(false);
     }
 }
 
