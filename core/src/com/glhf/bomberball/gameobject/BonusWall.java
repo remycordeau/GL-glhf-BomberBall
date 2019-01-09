@@ -2,7 +2,7 @@ package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
 
-public class BonusWall extends Wall {
+public class BonusWall extends DestructibleWall {
 
     public Bonus bonus;
 
