@@ -13,25 +13,27 @@ import java.util.ArrayList;
 public class GameStoryScreen extends GameScreen {
 
     private GameSoloConfig config;
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Character> characters;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
     private StoryMenuScreen screen;
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
-        super(maze);
+        //super(maze);
+        super(new Maze(10,10));
         this.maze_id = maze_id;
         this.screen = screen;
 
         config = new GameSoloConfig();
         //maze.applyConfig(config);
-        current_player = maze.spawnPlayer(config);
+        //current_player = maze.spawnPlayer(config);
         //setSelectEffect();
+
 
         addUI(new SoloUI(current_player,this));
         addUI(maze_drawer);
 
-        current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
+        //current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
     }
 
