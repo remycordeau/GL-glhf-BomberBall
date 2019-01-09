@@ -3,6 +3,7 @@ package com.glhf.bomberball.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.config.InputsConfig.KeyPriority;
 import com.glhf.bomberball.ui.SettingsMenuUI;
@@ -32,7 +33,7 @@ public class SettingsMenuScreen extends AbstractScreen{
             button.setText("");
             inputsConfig.resetInput(button.action, KeyPriority.values()[button.priority]);
         }else {
-            button.setText(code);
+            button.setText(Translator.getInputName(code));
             inputsConfig.setInput(button.action, KeyPriority.values()[button.priority], code);
         }
         button=null;
