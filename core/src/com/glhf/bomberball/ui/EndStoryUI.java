@@ -10,10 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -46,7 +47,7 @@ public class EndStoryUI extends Table {
         this.add(do_next).spaceBottom(Value.percentHeight(0.9f)).row();
 
         //TextButtons
-        replay_level = new TextButton(Translator.translate("Replay last level"),Graphics.GUI.getSkin());
+        replay_level = new AudioButton(Translator.translate("Replay last level"),Graphics.GUI.getSkin());
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -55,7 +56,7 @@ public class EndStoryUI extends Table {
         });
         this.add(replay_level).spaceTop(Value.percentHeight(0.9f)).row();
 
-        back_story_menu = new TextButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
+        back_story_menu = new AudioButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -69,6 +70,7 @@ public class EndStoryUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Bomberball.changeScreen(new MainMenuScreen());
+                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(back_main_menu).spaceTop(Value.percentHeight(0.9f)).row();
