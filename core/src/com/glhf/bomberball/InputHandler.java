@@ -46,7 +46,8 @@ public class InputHandler extends InputListener {
         MODE_MOVE,
         DROP_BOMB,
         MENU_GO_BACK,
-        DROP_SELECTED_OBJECT
+        DROP_SELECTED_OBJECT,
+        NEXT_SCREEN
     }
 
     private ActionHandler[] handlers = new ActionHandler[Action.values().length];

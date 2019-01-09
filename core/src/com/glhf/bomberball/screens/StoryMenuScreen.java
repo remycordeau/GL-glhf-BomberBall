@@ -14,6 +14,7 @@ public class StoryMenuScreen extends MenuScreen {
     public StoryMenuScreen(){
         super();
         config = GameSoloConfig.get();
+        maze_id = config.last_level_played;
         maze = Maze.importMaze("maze_" + maze_id);
         addUI(new StoryMenuUI(this));
     }
@@ -42,6 +43,11 @@ public class StoryMenuScreen extends MenuScreen {
     {
         maze_id = i;
         maze = Maze.importMaze("maze_" + maze_id);
+    }
+
+    public Maze getMaze()
+    {
+        return maze;
     }
 
     /**
