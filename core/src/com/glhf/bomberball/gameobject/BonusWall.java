@@ -2,12 +2,12 @@ package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
 
-public class BonusWall extends GameObject {
+public class BonusWall extends Wall {
 
     public Bonus bonus;
 
     public BonusWall() {
-        super(1);
+        super();
     }
 
     /**
@@ -15,7 +15,7 @@ public class BonusWall extends GameObject {
      * @param bonus which bonus is inside the wall
      */
     public BonusWall(Bonus bonus) {
-        super(1);
+        super();
         this.bonus = bonus;
         initialize();
     }
