@@ -51,6 +51,7 @@ public class Player extends Character {
         this.notifyObservers();
     }
 
+    @Override
     public void endTurn() {
         active = false;
         this.notifyObservers();
