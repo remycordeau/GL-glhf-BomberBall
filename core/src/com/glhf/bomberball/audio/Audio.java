@@ -1,4 +1,4 @@
-package com.glhf.bomberball;
+package com.glhf.bomberball.audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

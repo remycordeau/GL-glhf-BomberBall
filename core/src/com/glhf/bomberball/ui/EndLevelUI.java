@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.gameobject.Bomb;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 //import sun.java2d.windows.GDIRenderer;
@@ -54,19 +54,20 @@ public class EndLevelUI extends Table {
 
         //buttons
         buttons = new Table();
-        next = new TextButton(Translator.translate("Play next level"), Graphics.GUI.getSkin());
+        next = new AudioButton(Translator.translate("Play next level"), Graphics.GUI.getSkin());
         next.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(next_level<8){
                     screen.nextMaze();
                     Bomberball.changeScreen(new GameStoryScreen(screen,screen.maze,screen.getMazeId()));
+                    Audio.CLICK_BUTTON.play();
                 }
             }
         });
         buttons.add(next).spaceTop(Value.percentHeight(0.2f)).row();
 
-        replay_level = new TextButton(Translator.translate("Replay level"),Graphics.GUI.getSkin());
+        replay_level = new AudioButton(Translator.translate("Replay level"),Graphics.GUI.getSkin());
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -75,7 +76,7 @@ public class EndLevelUI extends Table {
         });
         buttons.add(replay_level).spaceTop(Value.percentHeight(0.2f)).row();
 
-        back_level_button = new TextButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
+        back_level_button = new AudioButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
         back_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -84,7 +85,7 @@ public class EndLevelUI extends Table {
         });
         buttons.add(back_level_button).spaceTop(Value.percentHeight(0.2f)).row();
 
-        back_menu_button = new TextButton(Translator.translate("Back to title menu"),Graphics.GUI.getSkin());
+        back_menu_button = new AudioButton(Translator.translate("Back to title menu"),Graphics.GUI.getSkin());
         back_menu_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
