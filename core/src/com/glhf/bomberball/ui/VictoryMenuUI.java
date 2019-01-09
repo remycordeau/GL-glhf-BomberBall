@@ -1,8 +1,11 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
@@ -18,6 +21,8 @@ public class VictoryMenuUI extends Table {
     private int previous_maze_id;
 
     public VictoryMenuUI(Player player, int maze_id) {
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
+        this.setBackground(texture);
         this.previous_maze_id = maze_id;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.35f));
