@@ -39,7 +39,7 @@ public class MainMenuUI extends Table {
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
-        Value spacing = Value.percentHeight(0.10f);
+        Value spacing = Value.percentHeight(0.15f);
 
         Table Buttons = new Table();
 

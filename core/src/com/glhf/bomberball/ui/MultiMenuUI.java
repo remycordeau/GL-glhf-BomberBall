@@ -85,7 +85,7 @@ public class MultiMenuUI extends Table {
         this.row();
 
         // BUTTON TO LOAD THE GAME
-        VerticalGroup buttons = new VerticalGroup();
+        Table buttons = new Table();
 
         TextButton playButton = new AudioButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
@@ -109,10 +109,10 @@ public class MultiMenuUI extends Table {
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
         //ADDING THE BUTTONS TO THE TABLE
-        buttons.addActor(playButton);
-        buttons.addActor(randomMapButton);
-        buttons.addActor(cancelButton);
-        buttons.center().space(15f);
+        Value spacing = Value.percentHeight(0.2f);
+        buttons.add(playButton).space(spacing).row();
+        buttons.add(randomMapButton).space(spacing).row();
+        buttons.add(cancelButton).space(spacing);
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
@@ -131,7 +131,7 @@ public class MultiMenuUI extends Table {
         Table Vp1 = new Table();
         Vp1.add(p1).grow();
         Vp1.row();
-        Vp1.add(Bp1);
+        Vp1.add(Bp1).growX();
 
         AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id]+"/idle"), Animation.PlayMode.LOOP));
         p2.mustMove(true);
@@ -147,7 +147,7 @@ public class MultiMenuUI extends Table {
         Table Vp2 = new Table();
         Vp2.add(p2).grow();
         Vp2.row();
-        Vp2.add(Bp2);
+        Vp2.add(Bp2).growX();
 
         AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
         p3.mustMove(true);
@@ -162,7 +162,7 @@ public class MultiMenuUI extends Table {
         Table Vp3 = new Table();
         Vp3.add(p3).grow();
         Vp3.row();
-        Vp3.add(Bp3);
+        Vp3.add(Bp3).growX();
 
         AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
         p4.mustMove(true);
@@ -177,12 +177,12 @@ public class MultiMenuUI extends Table {
         Table Vp4 = new Table();
         Vp4.add(p4).grow();
         Vp4.row();
-        Vp4.add(Bp4);
+        Vp4.add(Bp4).growX();
 
         Table selectPlayer = new Table();
         selectPlayer.add(Vp1).grow();
         selectPlayer.add(Vp2).grow();
-        selectPlayer.add(buttons).grow();
+        selectPlayer.add(buttons).grow().spaceTop(Value.percentHeight(2f));
         selectPlayer.add(Vp3).grow();
         selectPlayer.add(Vp4).grow();
         this.add(selectPlayer).grow();
