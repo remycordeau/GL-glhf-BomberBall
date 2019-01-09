@@ -30,6 +30,7 @@ public abstract class Config {
      * @param c Config class to serialize
      * @return config class from config file
      */
+    @SuppressWarnings("unchecked")
     public static <T extends Config> T get(String config_name, Class<T> c){
         if(!configs.containsKey(config_name)){
             configs.put(config_name, importConfig(config_name, c));

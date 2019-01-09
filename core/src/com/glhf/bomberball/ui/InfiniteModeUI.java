@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.maze.Maze;
@@ -31,7 +32,7 @@ public class InfiniteModeUI extends Table {
     private void addButtons(){
 
         //Title
-        label = new Label("Mode Infini", Graphics.GUI.getSkin(), "Title");
+        label = new Label(Translator.translate("Mode Infini"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.5f, 1.5f);
         this.add(label).padBottom(Value.percentHeight(0.8f)).row();
@@ -49,15 +50,15 @@ public class InfiniteModeUI extends Table {
         box3 = new CheckBox("Cartes aléatoires", skin);
 
         TextButton back;
-        back = new TextButton("Retour", skin);
+        back = new TextButton(Translator.translate("Retour"), skin);
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
-        play = new TextButton("Jouer", skin);
+        play = new TextButton(Translator.translate("Jouer"), skin);
         play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         Label lab;
-        lab = new Label("Highscore :" + this.highscore, skin, "default");
+        lab = new Label(Translator.translate("Highscore :") + this.highscore, skin, "default");
 
         HorizontalGroup horizontal = new HorizontalGroup();
         horizontal.align(Align.center);

@@ -15,24 +15,11 @@ import com.glhf.bomberball.utils.Constants;
 
 public class WelcomingMenuUI extends Table {
 
-    public WelcomingMenuUI(){
+    public WelcomingMenuUI() {
         super();
         this.setFillParent(true);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS+"/gui/glhf.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/gui/glhf.png")));
         this.setBackground(texture);
-        addButtons();
     }
-
-    private void addButtons() {
-        TextButton play = new TextButton("Play", Graphics.GUI.getSkin());
-        play.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new MainMenuScreen());
-            }
-        });
-        this.add(play).spaceTop(Value.percentHeight(2f)).row();
-    }
-
 
 }

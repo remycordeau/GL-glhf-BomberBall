@@ -12,13 +12,14 @@ public class Bomberball extends Game {
 
 	public static Bomberball instance;
     public static float time_elapsed;
-    public static boolean debug = false;
+    public static boolean debug = true;
 
 	@Override
 	public void create() {
 		instance = this;
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
+		Translator.load("en");
 		changeScreen(new WelcomingMenuScreen());
 	}
 

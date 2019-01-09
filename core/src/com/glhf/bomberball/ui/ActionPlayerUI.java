@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.GameStoryScreen;
 
@@ -21,9 +22,9 @@ public class ActionPlayerUI extends Table {
      */
     public ActionPlayerUI(GameMultiScreen screen){
         this.screen=screen;
-        this.reachable_squares_move = new TextButton("Déplacement [d]", Graphics.GUI.getSkin(), "small");
-        this.reachable_squares_bomb = new TextButton("Bombe [b]", Graphics.GUI.getSkin(),"small");
-        this.endTurn= new TextButton("Fin de tour [f]", Graphics.GUI.getSkin(),"small");
+        this.reachable_squares_move = new TextButton(Translator.translate("Déplacement [d]"), Graphics.GUI.getSkin(), "small");
+        this.reachable_squares_bomb = new TextButton(Translator.translate("Bombe [b]"), Graphics.GUI.getSkin(),"small");
+        this.endTurn= new TextButton(Translator.translate("Fin de tour [f]"), Graphics.GUI.getSkin(),"small");
         // TODO : ajout des listeners sur les différents boutons
         reachable_squares_move.addListener(new ClickListener(){
             @Override
@@ -56,9 +57,9 @@ public class ActionPlayerUI extends Table {
     public ActionPlayerUI(GameStoryScreen screen) {
 
         this.story_screen=screen;
-        this.reachable_squares_move = new TextButton("Déplacement [d]", Graphics.GUI.getSkin(), "small");
-        this.reachable_squares_bomb = new TextButton("Bombe [b]", Graphics.GUI.getSkin(),"small");
-        this.endTurn= new TextButton("Fin de tour [f]", Graphics.GUI.getSkin(),"small");
+        this.reachable_squares_move = new TextButton(Translator.translate("Déplacement [d]"), Graphics.GUI.getSkin(), "small");
+        this.reachable_squares_bomb = new TextButton(Translator.translate("Bombe [b]"), Graphics.GUI.getSkin(),"small");
+        this.endTurn= new TextButton(Translator.translate("Fin de tour [f]"), Graphics.GUI.getSkin(),"small");
         // TODO : ajout des listeners sur les différents boutons
         reachable_squares_move.addListener(new ClickListener(){
             @Override

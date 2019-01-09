@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameMultiScreen;
@@ -25,9 +26,9 @@ public class VictoryMenuUI extends Table {
         this.padBottom(Value.percentHeight(0.1f));
 
         if (player == null) {
-            this.add(new Label("égalité ...", Graphics.GUI.getSkin(), "default")).row();
+            this.add(new Label(Translator.translate("égalité ..."), Graphics.GUI.getSkin(), "default")).row();
         } else {
-            this.add(new Label("VICTOIRE !", Graphics.GUI.getSkin(), "default")).row();
+            this.add(new Label(Translator.translate("VICTOIRE !"), Graphics.GUI.getSkin(), "default")).row();
             AnimationActor player_animation = new AnimationActor(player.getAnimation());
             player_animation.mustMove(true);
             this.add(player_animation).grow().row();
@@ -42,7 +43,7 @@ public class VictoryMenuUI extends Table {
 
         Value spacing = Value.percentHeight(0.20f);
 
-        b = new TextButton("Rejouer", skin);
+        b = new TextButton(Translator.translate("Rejouer"), skin);
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -51,11 +52,11 @@ public class VictoryMenuUI extends Table {
         });
         this.add(b).growX().space(spacing).row();
 
-        b = new TextButton("Menu multijoueur", skin);
+        b = new TextButton(Translator.translate("Menu multijoueur"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
         this.add(b).growX().space(spacing).row();
 
-        b = new TextButton("Menu principal", skin);
+        b = new TextButton(Translator.translate("Menu principal"), skin);
         b.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(b).growX();
     }

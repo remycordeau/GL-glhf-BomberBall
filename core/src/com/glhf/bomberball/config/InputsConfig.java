@@ -58,6 +58,9 @@ public class InputsConfig extends Config {
         c.setInputKeyCode(Action.MENU_GO_BACK, Keys.DEL);
 
 
+        c.setInputKeyCode(Action.NEXT_SCREEN, Keys.ENTER);
+
+
         c.setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
         c.setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
         //c.setInputButtonCode(Buttons.RIGHT, Action.DROP_BOMB);
