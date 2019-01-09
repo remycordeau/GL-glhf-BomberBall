@@ -1,6 +1,5 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,16 +9,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.glhf.bomberball.Audio;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
-import com.glhf.bomberball.utils.Constants;
 
 public class MultiMenuUI extends Table {
 
@@ -59,7 +58,7 @@ public class MultiMenuUI extends Table {
 
     private void initializeButtons(){
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
-        TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
+        TextButton nextMapButton = new AudioButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -74,6 +73,7 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 maze_preview.setMaze(screen.maze);
+                Audio.CLICK_BUTTON.play();
             }
         });
 
@@ -87,7 +87,7 @@ public class MultiMenuUI extends Table {
         // BUTTON TO LOAD THE GAME
         VerticalGroup buttons = new VerticalGroup();
 
-        TextButton playButton = new TextButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
+        TextButton playButton = new AudioButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -96,7 +96,7 @@ public class MultiMenuUI extends Table {
         });
         // BUTTON TO CHOOSE A RANDOM MAZE
 
-        TextButton randomMapButton = new TextButton(Translator.translate("Carte Aléatoire"), Graphics.GUI.getSkin());
+        TextButton randomMapButton = new AudioButton(Translator.translate("Carte Aléatoire"), Graphics.GUI.getSkin());
         randomMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -105,7 +105,7 @@ public class MultiMenuUI extends Table {
             }
         });
         // BUTTON TO EXIT THE MENU
-        TextButton cancelButton = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
+        TextButton cancelButton = new AudioButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
         //ADDING THE BUTTONS TO THE TABLE
@@ -120,13 +120,12 @@ public class MultiMenuUI extends Table {
 
         AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id]+"/idle"), Animation.PlayMode.LOOP));
         p1.mustMove(true);
-        TextButton Bp1 = new TextButton("P1", Graphics.GUI.getSkin());
+        TextButton Bp1 = new AudioButton("P1", Graphics.GUI.getSkin());
         Bp1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP1();
                 update();
-                Audio.CLICK_BUTTON.play();
             }
         });
         Table Vp1 = new Table();
@@ -152,13 +151,12 @@ public class MultiMenuUI extends Table {
 
         AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
         p3.mustMove(true);
-        TextButton Bp3 = new TextButton("P3", Graphics.GUI.getSkin());
+        TextButton Bp3 = new AudioButton("P3", Graphics.GUI.getSkin());
         Bp3.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP3();
                 update();
-                Audio.CLICK_BUTTON.play();
             }
         });
         Table Vp3 = new Table();
@@ -168,13 +166,12 @@ public class MultiMenuUI extends Table {
 
         AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
         p4.mustMove(true);
-        TextButton Bp4 = new TextButton("P4", Graphics.GUI.getSkin());
+        TextButton Bp4 = new AudioButton("P4", Graphics.GUI.getSkin());
         Bp4.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP4();
                 update();
-                Audio.CLICK_BUTTON.play();
             }
         });
         Table Vp4 = new Table();

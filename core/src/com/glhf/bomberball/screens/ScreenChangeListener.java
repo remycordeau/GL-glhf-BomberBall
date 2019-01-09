@@ -2,6 +2,7 @@ package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 
 public class ScreenChangeListener extends ChangeListener {
@@ -15,6 +16,7 @@ public class ScreenChangeListener extends ChangeListener {
     public void changed(ChangeEvent event, Actor actor) {
         try {
             Bomberball.changeScreen(screen_class.newInstance());
+            Audio.CLICK_BUTTON.play();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
