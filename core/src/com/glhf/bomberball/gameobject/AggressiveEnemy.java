@@ -16,10 +16,13 @@ public class AggressiveEnemy extends Enemy {
     public AggressiveEnemy(String skin, int life, int initial_moves, int strength, int hunting_range) {
         super(skin, life, initial_moves, strength);
         // active mode when created
-        this.way = this.longest_way_moves_sequence(new Node(null, this.getCell()));
         this.hunting_range = hunting_range;
     }
 
+    @Override
+    public void createAI() {
+        this.way = this.longest_way_moves_sequence(new Node(null, this.getCell()));
+    }
 
     /**
      * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range
