@@ -48,7 +48,7 @@ public class DeadUI extends Table {
         this.add(player_animation).grow().row();
 
         // Buttons
-        dead = new Label(Translator.translate("Perdu !"), Graphics.GUI.getSkin());
+        dead = new Label(Translator.translate("game lost"), Graphics.GUI.getSkin());
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
         this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
