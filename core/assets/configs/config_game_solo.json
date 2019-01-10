@@ -1,7 +1,7 @@
 {
   "level_unlocked": [
     true,
-    false,
+    true,
     false,
     false,
     false,
@@ -10,6 +10,7 @@
   ],
   "player_skin": "knight_m",
   "highscore": 145970,
+  "last_level_played": 0,
   "activeEnemy_life": 1,
   "activeEnemy_strength": 1,
   "activeEnemy_moves": 5,

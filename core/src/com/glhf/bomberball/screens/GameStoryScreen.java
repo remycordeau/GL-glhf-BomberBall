@@ -2,8 +2,8 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
-import com.glhf.bomberball.gameobject.Enemy;
-import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
@@ -20,20 +20,24 @@ public class GameStoryScreen extends GameScreen {
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
-        super(new Maze(10,10));
+        super(new Maze(11,13));
         this.maze_id = maze_id;
         this.screen = screen;
 
         config = new GameSoloConfig();
-        //maze.applyConfig(config);
-        //current_player = maze.spawnPlayer(config);
-        //setSelectEffect();
+        current_player = this.maze.spawnPlayer(config);
 
+        characters = new ArrayList<Character>();
+        characters.add(current_player);
+        ArrayList<Enemy> enemies = this.maze.getEnemies();
+        enemies.forEach(Enemy::createAI);
+        characters.addAll(enemies);
+        this.maze.export("testWithEnemies");
 
         addUI(new SoloUI(current_player,this));
         addUI(maze_drawer);
 
-        //current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
+        current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
     }
 
@@ -46,24 +50,33 @@ public class GameStoryScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
-        Player winner = null;
-        if(!current_player.isAlive()){
+        if(!current_player.isAlive()) {
             Bomberball.changeScreen(new DeadScreen(screen,maze_id));
+        } else if(maze_id + 1 < screen.getMazeCount()) { //TODO: change condition to character.size()==1 and character.get(0) instanceof Player
+            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+            return;
+        } else if(maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+            Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
+            return;
         }
-        else{
-            if(maze_id + 1 < screen.getMazeCount()){
-                Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
-                return;
-            }
-            if(maze_id + 1 == screen.getMazeCount()){ // if the current_player has completed the last level
-                Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
-                return;
+        // test if the current_player reached the door
+        boolean isIn = false;
+        for(GameObject o : current_player.getCell().getGameObjects()){
+            if(o instanceof Door){
+                isIn = true;
             }
         }
-
-        /*current_player.initiateTurn();
+        if(isIn){
+            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+        }
+        int i = characters.indexOf(current_character);
+        do {
+            i = (i + 1) % characters.size();
+        } while (!characters.get(i).isAlive());
+        current_character = characters.get(i);
+        current_character.initiateTurn();
         setMoveEffect();
         setMoveMode();
-        input_handler.lock(false);*/
+        input_handler.lock(false);  //TODO: voir ce que font les inputs lors du tour des ennemis
     }
 }

@@ -54,7 +54,7 @@ public class InfiniteModeUI extends Table {
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
-        play = new TextButton(Translator.translate("Jouer"), skin);
+        play = new TextButton(Translator.translate("Play"), skin);
         play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         Label lab;

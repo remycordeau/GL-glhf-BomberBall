@@ -12,4 +12,9 @@ public class PassiveEnemy extends Enemy {
         super(skin, life, initial_moves, strength);
         this.setWay(way);
     }
+
+    @Override
+    public void createAI() {
+
+    }
 }
