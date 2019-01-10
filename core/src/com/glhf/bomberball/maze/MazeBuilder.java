@@ -20,7 +20,7 @@ public class MazeBuilder {
     private static double probFreeCase;
 
     public static Maze createInfinityMaze(){
-        probFreeCase = 2.0/3;
+        probFreeCase = 1.0/3;
 
         maze = new Maze();
 

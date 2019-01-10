@@ -177,12 +177,9 @@ public class Maze{
         while (!queue.isEmpty()) {
             Cell c = queue.poll();
             for (Cell other : c.getAdjacentCells()) {
-                if (!cells.contains(other)) {
-                    queue.add(other);
-                    cells.add(other);
-                }else{
-                    for(GameObject go : other.getGameObjects()) {
-                        if (IndestructibleWall.class.isInstance(go)){
+                for(GameObject go : other.getGameObjects()) {
+                    if (!IndestructibleWall.class.isInstance(go)){
+                        if (!cells.contains(other)) {
                             queue.add(other);
                             cells.add(other);
                         }
