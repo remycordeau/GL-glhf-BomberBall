@@ -18,6 +18,7 @@ public class Maze {
 
     String title;
     ArrayList<Vector2> spawn_positions;
+    ArrayList<Vector2> enemy_spawn_positions;
     int height;
     int width;
     Cell[][] cells;
@@ -65,6 +66,22 @@ public class Maze {
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
+    }
+
+    public ArrayList<Enemy> spawnEnemies(GameSoloConfig config) {
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        for (int i = 0; i < enemy_spawn_positions.size(); i++) {
+            Vector2 p = enemy_spawn_positions.get(i);
+            Enemy enemy = spawnEnemy(config, cells[(int) p.x][(int) p.y]);
+            enemies.add(enemy);
+        }
+        return enemies;
+    }
+
+    public Enemy spawnEnemy(GameSoloConfig config, Cell cell) {
+        Enemy enemy = new ActiveEnemy("knight_m", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength);
+        cell.addGameObject(enemy);
+        return enemy;
     }
 
     /**
