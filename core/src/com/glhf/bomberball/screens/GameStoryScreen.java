@@ -70,6 +70,10 @@ public class GameStoryScreen extends GameScreen {
             }
         }
 
+        if(!current_player.isAlive()) {
+            Bomberball.changeScreen(new DeadScreen(screen,maze_id));
+        }
+
         current_player.initiateTurn();
         setMoveEffect();
         setMoveMode();
