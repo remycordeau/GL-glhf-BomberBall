@@ -1,9 +1,11 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.Graphics;
+
 public class Door extends GameObject {
 
     public Door(){
-        super(); //a door cannot be killed
+        super();
     }
 
     /**
@@ -12,4 +14,17 @@ public class Door extends GameObject {
      */
     @Override
     public void getDamage(int damage){}
+
+    @Override
+    public boolean isWalkable() { return true; }
+
+    @Override
+    public void initialize() {
+        sprite = Graphics.Sprites.get("doors_leaf_closed");
+    }
+
+    public void applyEffect() {
+        sprite = Graphics.Sprites.get("doors_leaf_open");
+
+    }
 }
