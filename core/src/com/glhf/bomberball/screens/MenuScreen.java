@@ -14,8 +14,6 @@ public abstract class MenuScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        if(! Audio.MAIN_MENU.isPlayed()) {
-            Audio.MAIN_MENU.playMusique();
-        }
+        Audio.MAIN_MENU.playMusique();
     }
 }
