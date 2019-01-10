@@ -23,6 +23,8 @@ public class VictoryMenuUI extends Table {
 
     public VictoryMenuUI(Player player, int maze_id) {
 
+        //Killing the song
+
         this.previous_maze_id = maze_id;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.35f));

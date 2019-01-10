@@ -21,7 +21,7 @@ public class Bomberball extends Game {
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
 		Translator.load("fr");
-		Audio.CLICK_PLAY.play();
+		Audio.MAIN_MENU.playloop();
 		//Audio.CLICK_PLAY.dispose();
 		changeScreen(new WelcomingMenuScreen());
 
