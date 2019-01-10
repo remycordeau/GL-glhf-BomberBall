@@ -23,7 +23,8 @@ public class BonusWall extends DestructibleWall {
     @Override
     public void initialize() {
         super.initialize();
-        this.sprite = Graphics.Sprites.get("crate_speed");
+        //this.sprite = Graphics.Sprites.get("crate_speed");
+        this.sprite = bonus.getSprite();
         bonus.initialize();
     }
 

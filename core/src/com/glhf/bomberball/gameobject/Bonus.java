@@ -36,6 +36,7 @@ public class Bonus extends GameObject {
         }
     }
 
+
     @Override
     public boolean isWalkable() { return true; }
 
