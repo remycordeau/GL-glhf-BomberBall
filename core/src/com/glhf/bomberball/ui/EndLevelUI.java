@@ -85,7 +85,7 @@ public class EndLevelUI extends Table {
         });
         buttons.add(back_level_button).spaceTop(Value.percentHeight(0.2f)).row();
 
-        back_menu_button = new AudioButton(Translator.translate("Back to title menu"),Graphics.GUI.getSkin());
+        back_menu_button = new AudioButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
         back_menu_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

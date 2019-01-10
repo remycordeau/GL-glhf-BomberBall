@@ -8,7 +8,8 @@ import com.badlogic.gdx.audio.Sound;
  * Example : Audio.CLICK_BUTTON.play() to play a song
  */
 public enum Audio {
-    CLICK_BUTTON("core/assets/sounds/SFX/click_button.wav");
+    CLICK_BUTTON("core/assets/sounds/SFX/click_button.wav"),
+    VICTORY("core/assets/sounds/SFX/victory.wav");
 
     public Sound sound;
     Audio(String path)

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.maze.MazeTransversal;
@@ -19,7 +18,6 @@ public abstract class GameScreen extends AbstractScreen {
     protected MazeDrawer maze_drawer;
 
     protected Player current_player;
-    protected Character current_character;  //TODO: à fusionner avec current_player
     protected ArrayList<Cell> selected_cells = new ArrayList<>();
 
     public GameScreen(Maze maze) {

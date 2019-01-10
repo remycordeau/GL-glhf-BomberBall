@@ -1,0 +1,52 @@
+#EndLevelUI
+"level unlocked"		:	"Niveau %d débloqué !"
+"level succeeded"		:	"Félicitations! Vous avez réussi niveau %d !"
+
+#SoloUI
+"mode movement button"	:	"Déplacement [%s]"
+"mode bombe button"		:	"Bombe [%s]"
+"endTurn button"		:	"Fin de tour [%s]"
+
+#SettingsMenuUI
+"Action"		:	"Action"
+"inputs"		:	"contrôles"
+"general"		:	"général"
+"Primary"		:	"Primary"
+"Secondary"		:	"Secondary"
+
+#Story Menus
+"Level Selection"	:	"Selection des niveaux"
+"Wasted !"		    :	"Wasted !"
+"égalité ..."		:	"égalité ..."
+"Lost!"				:	"Perdu!"
+"VICTORY!"			:	"VICTOIRE!"
+"All levels unlocked !"	:	"All levels unlocked !"
+"Play next level"		:	"Play next level"
+"Replay level"			:	"Replay level"
+"Replay last level"		:	"Replay last level"
+"Back to level selection"	:	"Back to level selection"
+"Retry level"			:	"Retry level"
+"Play Selected Level"	:	"Play Selected Level"
+"story mode congratulations"		:	"Congratulations ! You've completed the story mode !"
+
+#MainMenuUI
+"Multiplayer"	:	"Multijoueur"
+"Solo"		    :	"Solo"
+"Map Editor"	:	"Editeur de Carte"
+"Settings"		:	"Paramètres"
+"Quit"		    :	"Quitter"
+
+"Menu multijoueur"		:	"Menu multijoueur"
+"Back to main menu"		:	"Retour au menu principal"
+"Play"		            :	"Jouer"
+"Back"	        		:	"Retour"
+"Infinite Mode"		    :	"Mode infini"
+"Story Mode"		    :	"Mode histoire"
+"Replay"		        :	"Rejouer"
+
+#InfiniteMenuUI
+"Highscore :"			:	"Highscore :"
+
+"Random Maze"		:	"Carte Aléatoire"
+
+

@@ -40,7 +40,7 @@ public class InfiniteModeUI extends Table {
     private void addButtons(){
 
         //Title
-        label = new Label(Translator.translate("Mode Infini"), Graphics.GUI.getSkin(), "Title");
+        label = new Label(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.7f, 1.7f);
         this.add(label).row();
@@ -83,11 +83,11 @@ public class InfiniteModeUI extends Table {
 
         //Other buttons
         TextButton back;
-        back = new TextButton(Translator.translate("Retour"), skin);
+        back = new TextButton(Translator.translate("Back"), skin);
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
-        play = new TextButton(Translator.translate("Jouer"), skin);
+        play = new TextButton(Translator.translate("Play"), skin);
         play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
 
