@@ -1,44 +1,40 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.InputHandler.Action;
-import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.InputsConfig.InputProfile;
-import com.glhf.bomberball.gameobject.Bomb;
-import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.ui.MultiUI;
+import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.ui.SoloUI;
 
 import java.util.ArrayList;
 
 public class GameStoryScreen extends GameScreen {
 
-    private GameMultiConfig config;
-    private ArrayList<Player> players;
-    private Player current_player;
+    private GameSoloConfig config;
+    private ArrayList<Character> characters;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
     private StoryMenuScreen screen;
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
-        super(maze);
+        //super(maze);
+        super(new Maze(11,13));
         this.maze_id = maze_id;
         this.screen = screen;
 
-        config = new GameMultiConfig();
-        //maze.applyConfig(config);
-        players = maze.spawnPlayers(config);
-        current_player = players.get(0);
-        //setSelectEffect();
+        config = new GameSoloConfig();
+        current_player = this.maze.spawnPlayer(config);
 
-        //addUI(new MultiUI(players, this));
+        characters = new ArrayList<Character>();
+        characters.add(current_player);
+        ArrayList<Enemy> enemies = this.maze.getEnemies();
+        enemies.forEach(Enemy::createAI);
+        characters.addAll(enemies);
+        this.maze.export("testWithEnemies");
+
+        addUI(new SoloUI(current_player,this));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -48,132 +44,39 @@ public class GameStoryScreen extends GameScreen {
     @Override
     public void registerActionsHandlers() {
         super.registerActionsHandlers();
-        input_handler.registerActionHandler(Action.MODE_BOMB, this::setBombMode);
-        input_handler.registerActionHandler(Action.MODE_MOVE, this::setMoveMode);
-        input_handler.registerActionHandler(Action.ENDTURN, this::endTurn);
-        input_handler.registerActionHandler(Action.DROP_BOMB, (x, y) -> dropBombAt(x, y));
-        input_handler.registerActionHandler(Action.MOVE_DOWN, () -> moveCurrentPlayer(Directions.DOWN));
-        input_handler.registerActionHandler(Action.MOVE_UP, () -> moveCurrentPlayer(Directions.UP));
-        input_handler.registerActionHandler(Action.MOVE_LEFT, () -> moveCurrentPlayer(Directions.LEFT));
-        input_handler.registerActionHandler(Action.MOVE_RIGHT, () -> moveCurrentPlayer(Directions.RIGHT));
-        input_handler.registerActionHandler(Action.DROP_BOMB_DOWN, () -> dropBomb(Directions.DOWN));
-        input_handler.registerActionHandler(Action.DROP_BOMB_UP, () -> dropBomb(Directions.UP));
-        input_handler.registerActionHandler(Action.DROP_BOMB_LEFT, () -> dropBomb(Directions.LEFT));
-        input_handler.registerActionHandler(Action.DROP_BOMB_RIGHT, () -> dropBomb(Directions.RIGHT));
-    }
-
-    public void dropBombAt(float x, float y) {
-        y = Gdx.graphics.getHeight() - y;
-        Vector2 cell_pos = maze_drawer.screenPosToCell((int)x, (int)y);
-        int cell_x = (int)cell_pos.x;
-        int cell_y = (int)cell_pos.y;
-        Directions dir = current_player.getCell().getCellDir(maze.getCellAt(cell_x, cell_y));
-        if (dir != null) {
-            dropBomb(dir);
-            clearCellsEffect();
-            setMoveEffect();
-        }
-    }
-
-    private void dropBomb(Directions dir) {
-        if (current_player.dropBomb(dir)) {
-            this.setMoveMode();
-        }
-        setBombEffect();
-    }
-
-    private void clearCellsEffect() {
-        for (Cell c : selected_cells) {
-            c.removeEffect();
-        }
-        selected_cells.clear();
-    }
-
-    private void setBombEffect() {
-        clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), 1);
-        cells_in_range.remove(current_player.getCell());
-        for (Cell c : cells_in_range) {
-            c.setSelectEffect(Color.RED);
-            selected_cells.add(c);
-        }
-    }
-
-    private void setMoveEffect() {
-        clearCellsEffect();
-        ArrayList<Cell> cells_in_range = MazeTransversal.getReacheableCellsInRange(current_player.getCell(), current_player.getNumberMoveRemaining());
-        for (Cell c : cells_in_range) {
-            c.setSelectEffect(Color.WHITE);
-            selected_cells.add(c);
-        }
-    }
-
-    // Methods to change the mod when click on a button in ActionPlayer bar
-    public void setBombMode(){
-        setBombEffect();
-        input_handler.setInputProfile(InputProfile.BOMB);
-    }
-
-    public void setMoveMode(){
-        setMoveEffect();
-        input_handler.setInputProfile(InputProfile.MOVE);
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////
-
-    private void moveCurrentPlayer(Directions dir) {
-        current_player.move(dir);
-        clearCellsEffect();
-        setMoveEffect();
-    }
-
-    public void endTurn()
-    {
-        input_handler.lock(true);
-        clearCellsEffect();
-        maze.processEndTurn();
-        current_player.endTurn();
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                nextPlayer();
-            }
-        }, 0.5f);
     }
 
     /**
-     * gives the next player after a turn. If the next player is dead, choose the following player.
+     * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
-    private void nextPlayer() {
-        Player winner = null;
-        boolean is_last = true;
-        for (Player p : players) {
-            if (winner == null && p.isAlive()) {
-                winner = p;
-            } else if (p.isAlive()) {
-                is_last = false;
+    protected void nextPlayer() {
+        if(!current_player.isAlive()) {
+            Bomberball.changeScreen(new DeadScreen(screen,maze_id));
+        } else if(maze_id + 1 < screen.getMazeCount()) { //TODO: change condition to character.size()==1 and character.get(0) instanceof Player
+            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+            return;
+        } else if(maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+            Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
+            return;
+        }
+        // test if the current_player reached the door
+        boolean isIn = false;
+        for(GameObject o : current_player.getCell().getGameObjects()){
+            if(o instanceof Door){
+                isIn = true;
             }
         }
-        if (is_last) {
-            if(maze_id + 1 < screen.getMazeCount()){
-                Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
-                return;
-            }
-            if(maze_id + 1 == screen.getMazeCount()){ // if the player has completed the last level
-                Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
-                return;
-            }
+        if(isIn){
+            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
         }
-
-        int i = players.indexOf(current_player);
+        int i = characters.indexOf(current_character);
         do {
-            i = (i + 1) % players.size();
-        } while (!players.get(i).isAlive());
-        current_player = players.get(i);
-        current_player.initiateTurn();
+            i = (i + 1) % characters.size();
+        } while (!characters.get(i).isAlive());
+        current_character = characters.get(i);
+        current_character.initiateTurn();
         setMoveEffect();
         setMoveMode();
-        input_handler.lock(false);
+        input_handler.lock(false);  //TODO: voir ce que font les inputs lors du tour des ennemis
     }
 }

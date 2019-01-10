@@ -1,6 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
@@ -39,10 +40,10 @@ public class Maze {
         cells = new Cell[width][height];
         spawn_positions = new ArrayList<Vector2>(){};
         spawn_positions.add(new Vector2(0, 0));
-        spawn_positions.add(new Vector2(0, h - 1));
+        /*spawn_positions.add(new Vector2(0, h - 1));
         spawn_positions.add(new Vector2(w - 1, 0f));
         spawn_positions.add(new Vector2(w - 1, h - 1));
-        players_count = spawn_positions.size();
+        players_count = spawn_positions.size();*/
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 cells[x][y] = new Cell(x, y);
@@ -53,7 +54,10 @@ public class Maze {
                     cells[x][y].addGameObject(new DestructibleWall());
                 }
                 else if (Math.random() < 0.05) {
-                    cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.SPEED)));
+                    cells[x][y].addGameObject(new BonusWall(new Bonus(Type.SPEED)));
+                }
+                else if (Math.random() < 0.05) {
+                    cells[x][y].addGameObject(new ActiveEnemy("knight_m", 1, 5, 1));
                 }
             }
         }
@@ -152,6 +156,18 @@ public class Maze {
     private boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        for(Cell[] cell_column : cells){
+            for(Cell cell : cell_column){
+                for(GameObject o : cell.getGameObjects()){
+                    if(o instanceof Enemy) enemies.add((Enemy) o);
+                }
+            }
+        }
+        return enemies;
     }
 
 //    public void applyConfig(GameConfig config) {

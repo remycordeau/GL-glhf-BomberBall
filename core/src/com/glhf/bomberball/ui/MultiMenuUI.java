@@ -1,13 +1,19 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -23,7 +29,9 @@ public class MultiMenuUI extends Table {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        this.update();
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/MultiMenu.png")));
+        this.setBackground(texture);
+        this.initialize();
     }
 
     private void initialize()
@@ -39,7 +47,8 @@ public class MultiMenuUI extends Table {
     {
         System.out.println("Update !");
         this.clear();
-        this.initialize();}
+        initialize();
+    }
 
     private void initializeMazePreview ()
     {
@@ -49,7 +58,7 @@ public class MultiMenuUI extends Table {
 
     private void initializeButtons(){
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
-        TextButton nextMapButton = new TextButton(">", Graphics.GUI.getSkin());
+        TextButton nextMapButton = new AudioButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -64,20 +73,21 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 maze_preview.setMaze(screen.maze);
+                Audio.CLICK_BUTTON.play();
             }
         });
 
         //ADDING THE BUTTONS TO THE TABLE
         Table selectMap = new Table();
         selectMap.add(previousMapButton);
-        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(5f));
+        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(10f));
         this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
         this.row();
 
         // BUTTON TO LOAD THE GAME
-        VerticalGroup buttons = new VerticalGroup();
+        Table buttons = new Table();
 
-        TextButton playButton = new TextButton("Jouer", Graphics.GUI.getSkin());
+        TextButton playButton = new AudioButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -86,7 +96,7 @@ public class MultiMenuUI extends Table {
         });
         // BUTTON TO CHOOSE A RANDOM MAZE
 
-        TextButton randomMapButton = new TextButton("Carte Aléatoire", Graphics.GUI.getSkin());
+        TextButton randomMapButton = new AudioButton(Translator.translate("Carte Aléatoire"), Graphics.GUI.getSkin());
         randomMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -95,65 +105,86 @@ public class MultiMenuUI extends Table {
             }
         });
         // BUTTON TO EXIT THE MENU
-        TextButton cancelButton = new TextButton("Retour", Graphics.GUI.getSkin());
+        TextButton cancelButton = new AudioButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
         //ADDING THE BUTTONS TO THE TABLE
-        buttons.addActor(playButton);
-        buttons.addActor(randomMapButton);
-        buttons.addActor(cancelButton);
+        Value spacing = Value.percentHeight(0.2f);
+        buttons.add(playButton).space(spacing).row();
+        buttons.add(randomMapButton).space(spacing).row();
+        buttons.add(cancelButton).space(spacing);
 
 
         //CREATING A PREVIEW FOR THE PLAYERS
-        ImageButton p1;
-        ImageButton p2;
-        ImageButton p4;
-        ImageButton p3;
-        p1 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p1_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
-        p1.addListener(new ChangeListener() {
+
+
+        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id]+"/idle"), Animation.PlayMode.LOOP));
+        p1.mustMove(true);
+        TextButton Bp1 = new AudioButton("P1", Graphics.GUI.getSkin());
+        Bp1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP1();
                 update();
             }
         });
+        Table Vp1 = new Table();
+        Vp1.add(p1).grow();
+        Vp1.row();
+        Vp1.add(Bp1).growX();
 
-        p2 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p2_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
-        p2.addListener(new ChangeListener() {
+        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id]+"/idle"), Animation.PlayMode.LOOP));
+        p2.mustMove(true);
+        TextButton Bp2 = new TextButton("P2", Graphics.GUI.getSkin());
+        Bp2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP2();
                 update();
+                Audio.CLICK_BUTTON.play();
             }
         });
+        Table Vp2 = new Table();
+        Vp2.add(p2).grow();
+        Vp2.row();
+        Vp2.add(Bp2).growX();
 
-        p3 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p3_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
-        p3.addListener(new ChangeListener() {
+        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
+        p3.mustMove(true);
+        TextButton Bp3 = new AudioButton("P3", Graphics.GUI.getSkin());
+        Bp3.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP3();
                 update();
             }
         });
+        Table Vp3 = new Table();
+        Vp3.add(p3).grow();
+        Vp3.row();
+        Vp3.add(Bp3).growX();
 
-        p4 = new ImageButton(new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(screen.Playable[screen.p4_id] + "/idle"), Animation.PlayMode.LOOP)).getDrawable());
-        p4.addListener(new ChangeListener() {
+        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
+        p4.mustMove(true);
+        TextButton Bp4 = new AudioButton("P4", Graphics.GUI.getSkin());
+        Bp4.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP4();
                 update();
             }
         });
+        Table Vp4 = new Table();
+        Vp4.add(p4).grow();
+        Vp4.row();
+        Vp4.add(Bp4).growX();
 
-        //The next line is only to animate the players
-        //p1.mustMove(true);  p2.mustMove(true);  p3.mustMove(true);  p4.mustMove(true);
         Table selectPlayer = new Table();
-        //TODO : Comment changer la taille des boutons ???
-        selectPlayer.add(p1).grow();
-        selectPlayer.add(p2).grow();
-        selectPlayer.add(buttons).grow();
-        selectPlayer.add(p3).grow();
-        selectPlayer.add(p4).grow();
+        selectPlayer.add(Vp1).grow();
+        selectPlayer.add(Vp2).grow();
+        selectPlayer.add(buttons).grow().spaceTop(Value.percentHeight(2f));
+        selectPlayer.add(Vp3).grow();
+        selectPlayer.add(Vp4).grow();
         this.add(selectPlayer).grow();
     }
 

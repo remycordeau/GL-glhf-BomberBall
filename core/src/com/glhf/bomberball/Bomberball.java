@@ -5,21 +5,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.screens.WelcomingMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 
 public class Bomberball extends Game {
 
 	public static Bomberball instance;
     public static float time_elapsed;
-    public static boolean debug = true;
+    public static boolean debug = false;
 
 	@Override
 	public void create() {
 		instance = this;
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
-
-		changeScreen(new MainMenuScreen());
+		Translator.load("en");
+		changeScreen(new WelcomingMenuScreen());
 	}
 
 	@Override

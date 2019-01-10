@@ -1,12 +1,15 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.screens.MainMenuScreen;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -20,6 +23,23 @@ public class PlayersInfoUI extends Table {
             this.add(pw).grow();
             this.row();
         }
+    }
+
+    /**
+     * creates the info UI for the solo mode (only a single player)
+     * @param player
+     */
+    public PlayersInfoUI(Player player) {
+            PlayerWidget pw = new PlayerWidget(player);
+            this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
+            TextButton back = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
+            back.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Bomberball.changeScreen(new MainMenuScreen());
+                }
+            });
+            this.add(back);
     }
 
     class PlayerWidget extends Table implements Observer {
