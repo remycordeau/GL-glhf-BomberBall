@@ -37,8 +37,9 @@ public class Translator {
     public static String translate(String key, Object... objects){
         //TODO enlever la condition d'écriture
         if(!dictionary.containsKey(key)){
-            dictionary.put(key,key);
-            throw new RuntimeException(key+"unkown in translation file "+file_name+".txt");
+//            dictionary.put(key,key);
+            System.err.println(key+"unkown in translation file "+file_name+".txt");
+            return "ERR "+key;
 //            try {
 //                FileWriter fw = new FileWriter(Constants.PATH_TRANSLATIONS +"en.txt");
 //                for(String k : dictionary.keySet())

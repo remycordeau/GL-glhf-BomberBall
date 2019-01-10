@@ -130,7 +130,7 @@ public class SettingsMenuUI extends Table {
         }
         this.add(stack).colspan(NB_TABS).grow().row();
 
-        TextButton cancelButton = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
+        TextButton cancelButton = new TextButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(cancelButton).colspan(NB_TABS).growX();
 

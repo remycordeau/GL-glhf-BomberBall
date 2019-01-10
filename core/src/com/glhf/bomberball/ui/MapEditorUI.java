@@ -49,7 +49,7 @@ public class MapEditorUI extends Table {
     }
 
     public void initializeButtons() {
-        TextButton bouton_retour = new TextButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
+        TextButton bouton_retour = new TextButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(new ObjectsWidget()).grow();
         this.row();
