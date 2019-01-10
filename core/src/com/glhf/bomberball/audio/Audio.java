@@ -24,9 +24,8 @@ public enum Audio {
     }
 
     public void play() {
-        played=true;
-        sound.play();
-        System.out.println("Lancement de " + sound);}
+        sound.play();}
+
     public void stop() {
         this.sound.stop();
         played=false;
@@ -43,8 +42,13 @@ public enum Audio {
      * Permet de jouer une musique, ça va silence tous les autres sons et lancer la musique
      */
     public void playMusique(){
-        this.silence();
-        sound.loop(0.1f);
+        System.out.println("is played = "+ this.isPlayed());
+        if(! this.isPlayed()) {
+            this.silence();
+            sound.loop(0.1f);
+            played=true;
+        }
+
     }
 
 }
