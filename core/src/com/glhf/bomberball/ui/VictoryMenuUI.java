@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameMultiScreen;
@@ -37,6 +38,7 @@ public class VictoryMenuUI extends Table {
             AnimationActor player_animation = new AnimationActor(player.getAnimation());
             player_animation.mustMove(true);
             this.add(player_animation).grow().row();
+            Audio.VICTORY.play();
         }
 
         addButtons();
