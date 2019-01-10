@@ -16,12 +16,10 @@ public enum Audio {
     Audio(String path)
     {
         sound= Gdx.audio.newSound(Gdx.files.internal(path));
+        System.out.println("Sounds " + path + " loaded");
     }
 
-    public void play()
-    {
-        sound.play();
-    }
-
+    public void play() { sound.play(); }
+    public void dispose() { sound.dispose(); }
 
 }

@@ -58,7 +58,6 @@ public class DeadUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMaze("maze_" + maze_id),screen.getMazeId()));
-                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(replay).spaceTop(Value.percentHeight(0.9f)).row();
@@ -72,12 +71,11 @@ public class DeadUI extends Table {
         });
         this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        ragequit = new AudioButton(Translator.translate("Retour menu"),Graphics.GUI.getSkin());
+        ragequit = new AudioButton(Translator.translate("Quitter"),Graphics.GUI.getSkin());
         ragequit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
-                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(ragequit).spaceTop(Value.percentHeight(0.9f)).row();

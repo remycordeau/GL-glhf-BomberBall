@@ -3,6 +3,7 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.WelcomingMenuScreen;
@@ -20,7 +21,12 @@ public class Bomberball extends Game {
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
 		Translator.load("fr");
+		Audio.CLICK_PLAY.play();
+		//Audio.CLICK_PLAY.dispose();
 		changeScreen(new WelcomingMenuScreen());
+
+
+
 	}
 
 	@Override
