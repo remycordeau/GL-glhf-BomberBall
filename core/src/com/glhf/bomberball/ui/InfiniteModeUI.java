@@ -50,7 +50,7 @@ public class InfiniteModeUI extends Table {
         box3 = new CheckBox("Cartes aléatoires", skin);
 
         TextButton back;
-        back = new TextButton(Translator.translate("Retour"), skin);
+        back = new TextButton(Translator.translate("Back"), skin);
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;

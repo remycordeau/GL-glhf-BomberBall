@@ -33,8 +33,8 @@
 "Multiplayer"	:	"Multijoueur"
 "Solo"		    :	"Solo"
 "Map Editor"	:	"Editeur de Carte"
-"Settings"		:	"Paramètre"
-"Quit"		    :	"Quitter
+"Settings"		:	"Paramètres"
+"Quit"		    :	"Quitter"
 
 "Menu multijoueur"		:	"Menu multijoueur"
 "Back to main menu"		:	"Retour au menu principal"
