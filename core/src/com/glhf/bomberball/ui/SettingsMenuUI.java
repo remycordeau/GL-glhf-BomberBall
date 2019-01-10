@@ -16,7 +16,7 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 

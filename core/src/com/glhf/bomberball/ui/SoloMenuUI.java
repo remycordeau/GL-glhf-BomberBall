@@ -15,10 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.screens.InfiniteModeScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 
 

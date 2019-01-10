@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.Constants;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class StoryMenuUI extends Table {
 
