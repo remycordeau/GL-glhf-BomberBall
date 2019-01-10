@@ -87,7 +87,7 @@ public class MultiMenuUI extends Table {
         // BUTTON TO LOAD THE GAME
         Table buttons = new Table();
 
-        TextButton playButton = new AudioButton(Translator.translate("Jouer"), Graphics.GUI.getSkin());
+        TextButton playButton = new AudioButton(Translator.translate("Play"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

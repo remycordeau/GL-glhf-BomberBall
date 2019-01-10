@@ -12,9 +12,11 @@ import java.util.regex.Pattern;
 public class Translator {
 
     private static HashMap<String, String> dictionary;
+    private static String file_name;
 
     public static void load(String file_name){
         try {
+            Translator.file_name=file_name;
             String path = Constants.PATH_TRANSLATIONS +file_name+".txt";
             dictionary = new HashMap<>();
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), Charset.forName("UTF-8")));
@@ -36,12 +38,13 @@ public class Translator {
         //TODO enlever la condition d'écriture
         if(!dictionary.containsKey(key)){
             dictionary.put(key,key);
-            try {
-                FileWriter fw = new FileWriter(Constants.PATH_TRANSLATIONS +"en.txt");
-                for(String k : dictionary.keySet())
-                    fw.write("\""+k+"\"\t\t:\t\""+dictionary.get(k)+"\"\n");
-                fw.close();
-            } catch (IOException e) { e.printStackTrace(); }
+            throw new RuntimeException(key+"unkown in translation file "+file_name+".txt");
+//            try {
+//                FileWriter fw = new FileWriter(Constants.PATH_TRANSLATIONS +"en.txt");
+//                for(String k : dictionary.keySet())
+//                    fw.write("\""+k+"\"\t\t:\t\""+dictionary.get(k)+"\"\n");
+//                fw.close();
+//            } catch (IOException e) { e.printStackTrace(); }
         }
 
         return String.format(dictionary.get(key), objects);
