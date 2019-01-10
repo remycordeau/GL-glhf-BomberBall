@@ -5,17 +5,23 @@ import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class MazeBuilder {
     private static LinkedHashMap<Class<? extends Wall>, Double> availableWall;
     private static Maze maze;
     private static Random rand = new Random();
+    private static Cell posDoor;
+    private static double probFreeCase;
 
     public static Maze createInfinityMaze(){
+        probFreeCase = 1.0/3;
+
         maze = new Maze();
 
         maze.title = "Classic";
@@ -40,7 +46,8 @@ public class MazeBuilder {
 
         maze.cells = new Cell[maze.width][maze.height];
         initialiseCells();
-        maze.cells[maze.width-1][rand.nextInt(maze.height)].addGameObject(new Door());
+        int yDoor = rand.nextInt(maze.height);
+        maze.cells[maze.width-1][yDoor].addGameObject(new Door());
         initialiseWalls();
 
         maze.initialize();
@@ -64,13 +71,22 @@ public class MazeBuilder {
         for (int x = 0; x < maze.width; x++) {
             for (int y = 0; y < maze.height; y++) {
                 if(maze.spawn_positions.get(0).dst(x,y)<=1) continue;
-                if(Math.random() < 1.0/3 ){
-                    maze.cells[x][y].addGameObject(randomWall());
+                posDoor = maze.getposDoor();
+                if(x ==posDoor.getX() && (y == posDoor.getY())){
+                }
+                else{
+                     if(Math.random() < probFreeCase ) {
+                         maze.cells[x][y].addGameObject(randomWall());
+                     }
                 }
             }
         }
 
         //TODO : verification passage possible
+        Cell originPos = new Cell(0, 0);
+        if(maze.isReachableCell(originPos, posDoor)){
+                maze = createInfinityMaze();
+        }
     }
 
     private static Wall randomWall() {
