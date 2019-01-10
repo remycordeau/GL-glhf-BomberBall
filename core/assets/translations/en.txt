@@ -20,6 +20,7 @@
 "All levels unlocked !"		:	"All levels unlocked !"
 "Jouer"		:	"Jouer"
 "Settings"		:	"Settings"
+"égalité ..."		:	"égalité ..."
 "Secondary"		:	"Secondary"
 "Play next level"		:	"Play next level"
 "Menu principal"		:	"Menu principal"
