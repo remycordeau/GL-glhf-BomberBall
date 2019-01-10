@@ -22,8 +22,7 @@ public class VictoryMenuUI extends Table {
     private int previous_maze_id;
 
     public VictoryMenuUI(Player player, int maze_id) {
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
-        this.setBackground(texture);
+
         this.previous_maze_id = maze_id;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.35f));
@@ -33,11 +32,15 @@ public class VictoryMenuUI extends Table {
 
         if (player == null) {
             this.add(new Label(Translator.translate("égalité ..."), Graphics.GUI.getSkin(), "default")).row();
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
+            this.setBackground(texture);
         } else {
             this.add(new Label(Translator.translate("VICTOIRE !"), Graphics.GUI.getSkin(), "default")).row();
             AnimationActor player_animation = new AnimationActor(player.getAnimation());
             player_animation.mustMove(true);
             this.add(player_animation).grow().row();
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
+            this.setBackground(texture);
             Audio.VICTORY.play();
         }
 
