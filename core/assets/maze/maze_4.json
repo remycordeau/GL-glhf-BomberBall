@@ -668,7 +668,7 @@
         "objects": [
           {
             "bonus": {
-              "type": "SPEED",
+              "type": "BOMB_NUMBER",
               "life": 1
             },
             "life": 1,
@@ -687,7 +687,7 @@
         "objects": [
           {
             "bonus": {
-              "type": "SPEED",
+              "type": "BOMB_RANGE",
               "life": 1
             },
             "life": 1,
@@ -850,7 +850,7 @@
         "objects": [
           {
             "bonus": {
-              "type": "SPEED",
+              "type": "BOMB_NUMBER",
               "life": 1
             },
             "life": 1,
