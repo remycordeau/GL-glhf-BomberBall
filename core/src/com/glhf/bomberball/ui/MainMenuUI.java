@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
 
 public class MainMenuUI extends Table {
@@ -36,6 +38,10 @@ public class MainMenuUI extends Table {
      */
     private void addButtons()
     {
+        Maze maze = Maze.importMaze("maze_0");
+        Cell origin = new Cell(0, 0);
+        Cell test = new Cell(0, 1);
+        System.out.println("Le maze de test est finissable : " + maze.isReachableCell(origin, test));
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
