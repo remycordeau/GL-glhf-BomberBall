@@ -2,9 +2,8 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Character;
-import com.glhf.bomberball.gameobject.Enemy;
-import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
@@ -60,7 +59,16 @@ public class GameStoryScreen extends GameScreen {
             Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
             return;
         }
-
+        // test if the current_player reached the door
+        boolean isIn = false;
+        for(GameObject o : current_player.getCell().getGameObjects()){
+            if(o instanceof Door){
+                isIn = true;
+            }
+        }
+        if(isIn){
+            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+        }
         int i = characters.indexOf(current_character);
         do {
             i = (i + 1) % characters.size();
