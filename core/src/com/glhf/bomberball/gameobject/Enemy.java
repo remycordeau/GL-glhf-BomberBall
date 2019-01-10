@@ -125,8 +125,8 @@ public abstract class Enemy extends Character {
             moves_sequence.add(next_direction);
             moves_sequence_miror.add(0, Directions.values()[(next_direction.ordinal()+2)%4]);
         }
-        last_direction = longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell());
-        if(longest_way.get(longest_way_size).getCellDir(initial_node.getMatching_cell()) != null){
+        last_direction = longest_way.get(longest_way_size-1).getCellDir(initial_node.getMatching_cell());
+        if(longest_way.get(longest_way_size-1).getCellDir(initial_node.getMatching_cell()) != null){
             moves_sequence.add(last_direction);
         }
         else{

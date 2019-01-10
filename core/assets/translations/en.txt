@@ -18,6 +18,7 @@
 "Level Selection"	:	"Level Selection"
 "Ragequit ?"		:	"Ragequit ?"
 "Wasted !"		    :	"Wasted !"
+"égalité ..."		:	"égalité ..."
 "Lost!"				:	"Lost!"
 "VICTORY!"			:	"VICTORY!"
 "All levels unlocked !"	:	"All levels unlocked !"
