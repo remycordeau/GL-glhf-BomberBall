@@ -96,4 +96,8 @@ public class GameStoryScreen extends GameScreen {
             input_handler.lock(false);
         }
     }
+
+    public void disposeMusic(){
+        this.music.dispose();
+    }
 }

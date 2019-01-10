@@ -28,7 +28,7 @@
 "Back to level selection"	:	"Back to level selection"
 "Retry level"			:	"Retry level"
 "Play Selected Level"	:	"Play Selected Level"
-"story mode congratulations"		:	"Congratulations ! You've completed the story mode !"
+"story mode congratulations"		:	"Félicitations ! Vous avez terminé le mode histoire !"
 
 #MainMenuUI
 "Multiplayer"	:	"Multijoueur"
@@ -58,4 +58,12 @@
 "Replay level"      :   "Rejouer le niveau"
 "Back to level selection"       :   "Revenir à la sélection des niveaux"
 
+#StoryMenuUI (suite)
+"Play Selected Level"       :   "Jouer au niveau selectionné"
 
+#EndStoryScreen
+"All levels unlocked !"     :   "Vous avez débloqué tous les niveaux !"
+"Replay last level"         :   "Rejouer le dernier niveau"
+
+#DeadMenu
+"Quit"              :   "Quitter le jeu"
