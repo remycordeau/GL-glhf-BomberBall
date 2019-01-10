@@ -25,12 +25,11 @@ public class MazeBuilder {
         maze = new Maze();
 
         maze.title = "Classic";
-        maze.height = 9 + (int) (Math.random()*2)*2;
-        maze.width = 7 + (int) (Math.random()*2)*2;
+        maze.height = 7 + (int) (Math.random()*3)*2;
+        maze.width = 9 + (int) (Math.random()*3)*2;
 
-        ArrayList<Vector2> spawn_positions = new ArrayList<Vector2>();
-        spawn_positions.add(new Vector2(0, rand.nextInt(maze.height)));
-        maze.spawn_positions=spawn_positions;
+        maze.spawn_positions = new ArrayList<Vector2>();
+        maze.spawn_positions.add(new Vector2(0, rand.nextInt(maze.height)));
 
         //TODO: ajout des ennemis à refaire
         maze.enemy_spawn_positions = new ArrayList<>();
@@ -97,7 +96,7 @@ public class MazeBuilder {
                 double range_end = range_start + availableWall.get(c);
                 if (rand < range_end) {
                     GameObject o = c.newInstance();
-                    if(BonusWall.class.isInstance(o)){
+                    if(o instanceof BonusWall){
                         Bonus b = new Bonus(Type.SPEED);
                         o = new BonusWall(b);
                     }

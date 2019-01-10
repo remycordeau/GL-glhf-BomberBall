@@ -18,6 +18,8 @@
       "y": 10.0
     }
   ],
+  "enemy_spawn_positions": [
+  ],
   "players_count": 4,
   "height": 11,
   "width": 13,
@@ -37,14 +39,6 @@
         "x": 0,
         "y": 2,
         "objects": [
-          {
-            "bonus": {
-              "type": "SPEED",
-              "life": 1
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.BonusWall"
-          }
         ]
       },
       {
@@ -950,7 +944,12 @@
       {
         "x": 12,
         "y": 0,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.Door"
+          }
+        ]
       },
       {
         "x": 12,

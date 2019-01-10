@@ -18,6 +18,8 @@
       "y": 20.0
     }
   ],
+  "enemy_spawn_positions": [
+  ],
   "players_count": 4,
   "height": 21,
   "width": 21,
