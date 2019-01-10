@@ -73,8 +73,7 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 maze_preview.setMaze(screen.maze);
-                Audio.CLICK_BUTTON.play();
-            }
+           }
         });
 
         //ADDING THE BUTTONS TO THE TABLE
@@ -141,7 +140,6 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP2();
                 update();
-                Audio.CLICK_BUTTON.play();
             }
         });
         Table Vp2 = new Table();

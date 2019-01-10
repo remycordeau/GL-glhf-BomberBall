@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
@@ -23,6 +24,7 @@ import com.glhf.bomberball.screens.*;
 public class MainMenuUI extends Table {
 
     public MainMenuUI() {
+        Audio.MAIN_MENU.playMusique();
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));
         this.padRight(Value.percentWidth(0.25f));

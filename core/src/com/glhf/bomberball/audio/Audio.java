@@ -11,7 +11,8 @@ public enum Audio {
     CLICK_BUTTON("core/assets/sounds/click_button.wav"),
     VICTORY("core/assets/sounds/victory.wav"),
     CLICK_PLAY("core/assets/sounds/PlayLevelButtonTone.wav"),
-    MAIN_MENU("core/assets/sounds/MainMenu.mp3");
+    MAIN_MENU("core/assets/sounds/MainMenu.mp3"),
+    MULTI("core/assets/sounds/MultiSong.mp3");
 
     public Sound sound;
     Audio(String path)
@@ -21,15 +22,22 @@ public enum Audio {
     }
 
     public void play() {
-        this.silence();
-        sound.play(); }
-    public void dispose() { sound.dispose(); }
-    public void playloop(){ sound.loop();}
+        sound.play();
+        System.out.println("Lancement de " + sound);}
+    public void stop() { this.sound.stop(); }
     public void silence () {
         Audio[] a = Audio.values();
         for (Audio l : a) {
-            l.dispose();
+            l.stop();
         }
+    }
+
+    /**
+     * Permet de jouer une musique, ça va silence tous les autres sons et lancer la musique
+     */
+    public void playMusique(){
+        this.silence();
+        sound.loop();
     }
 
 }
