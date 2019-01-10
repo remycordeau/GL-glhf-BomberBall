@@ -1,5 +1,10 @@
 package com.glhf.bomberball.config;
 
+import com.glhf.bomberball.gameobject.DestructibleWall;
+import com.glhf.bomberball.gameobject.Wall;
+
+import java.util.ArrayList;
+
 public class GameSoloConfig extends GameConfig {
 
     public boolean[] level_unlocked = new boolean[maze_count]; //inform if the level is locked or not
