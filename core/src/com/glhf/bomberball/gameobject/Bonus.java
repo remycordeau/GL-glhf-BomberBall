@@ -36,6 +36,9 @@ public class Bonus extends GameObject {
         }
     }
 
+    public Type getType(){
+        return this.type;
+    }
 
     @Override
     public boolean isWalkable() { return true; }

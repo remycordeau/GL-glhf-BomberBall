@@ -470,7 +470,7 @@
         "objects": [
           {
             "bonus": {
-              "type": "SPEED",
+              "type": "BOMB_RANGE",
               "life": 1
             },
             "life": 1,
