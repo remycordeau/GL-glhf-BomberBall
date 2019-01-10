@@ -10,6 +10,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.Audio;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameMultiScreen;
@@ -22,9 +23,6 @@ public class VictoryMenuUI extends Table {
     private int previous_maze_id;
 
     public VictoryMenuUI(Player player, int maze_id) {
-
-        //Killing the song
-
         this.previous_maze_id = maze_id;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.35f));
@@ -54,7 +52,7 @@ public class VictoryMenuUI extends Table {
 
         Value spacing = Value.percentHeight(0.20f);
 
-        b = new TextButton(Translator.translate("Replay"), skin);
+        b = new AudioButton(Translator.translate("Replay"), skin);
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -63,11 +61,11 @@ public class VictoryMenuUI extends Table {
         });
         this.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Menu multijoueur"), skin);
+        b = new AudioButton(Translator.translate("Menu multijoueur"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
         this.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Back to main menu"), skin);
+        b = new AudioButton(Translator.translate("Back to main menu"), skin);
         b.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(b).growX();
     }

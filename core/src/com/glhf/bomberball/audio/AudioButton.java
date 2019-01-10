@@ -8,4 +8,8 @@ public class AudioButton extends TextButton {
         super(text, skin);
         this.addListener(new ListenerAudioButton());
     }
+
+    public AudioButton(String inputName, Skin skin, String input_select) {
+        super(inputName,skin,input_select);
+    }
 }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.Audio;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
@@ -51,23 +52,23 @@ public class MainMenuUI extends Table {
 
         Table Buttons = new Table();
 
-        b = new TextButton(Translator.translate("Solo"), Graphics.GUI.getSkin());
+        b = new AudioButton(Translator.translate("Solo"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(SoloMenuScreen.class));
         Buttons.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Multiplayer"), skin);
+        b = new AudioButton(Translator.translate("Multiplayer"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
         Buttons.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Map Editor"), Graphics.GUI.getSkin());
+        b = new AudioButton(Translator.translate("Map Editor"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(MapEditorScreen.class));
         Buttons.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Settings"), Graphics.GUI.getSkin());
+        b = new AudioButton(Translator.translate("Settings"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(SettingsMenuScreen.class));
         Buttons.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Quit"), Graphics.GUI.getSkin());
+        b = new AudioButton(Translator.translate("Quit"), Graphics.GUI.getSkin());
         b.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

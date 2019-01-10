@@ -25,7 +25,6 @@ public class GameStoryScreen extends GameScreen {
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
     private StoryMenuScreen screen;
-    private Sound music;
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
@@ -41,7 +40,7 @@ public class GameStoryScreen extends GameScreen {
         enemies.forEach(Enemy::createAI);
         this.maze.export("testWithEnemies");
 
-        addUI(new SoloUI(current_player,this));
+        addUI(new SoloUI(current_player, this));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -57,35 +56,33 @@ public class GameStoryScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
-        if(!current_player.isAlive()) {
+        if (!current_player.isAlive()) {
             Bomberball.changeScreen(new DeadScreen(screen, maze_id));
-            music.dispose();
-        }   if(maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
-            Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
+        }
+        if (maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+            Bomberball.changeScreen(new EndStoryScreen(screen, this.maze_id));
             return;
         }
         // test if the current_player reached the door
         boolean isIn = false;
-        for(GameObject o : current_player.getCell().getGameObjects()){
-            if(o instanceof Door){
+        for (GameObject o : current_player.getCell().getGameObjects()) {
+            if (o instanceof Door) {
                 isIn = true;
             }
         }
-        if(isIn){
-            Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
-            music.dispose();
+        if (isIn) {
+            Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
         }
 
-        for(Enemy enemy : enemies) {
-            if(enemy.isAlive()) {
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive()) {
                 enemy.initiateTurn();
                 enemy.followWay();
             }
         }
 
-        if(!current_player.isAlive()) {
-            Bomberball.changeScreen(new DeadScreen(screen,maze_id));
-            music.dispose();
+        if (!current_player.isAlive()) {
+            Bomberball.changeScreen(new DeadScreen(screen, maze_id));
         } else {
             current_player.initiateTurn();
             setMoveEffect();
@@ -94,7 +91,4 @@ public class GameStoryScreen extends GameScreen {
         }
     }
 
-    public void disposeMusic(){
-        this.music.dispose();
-    }
 }

@@ -44,7 +44,7 @@ public enum Audio {
      */
     public void playMusique(){
         this.silence();
-        sound.loop();
+        sound.loop(0.1f);
     }
 
 }

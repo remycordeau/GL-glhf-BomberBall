@@ -65,7 +65,7 @@ public class EndStoryUI extends Table {
         });
         this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        back_main_menu = new TextButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
+        back_main_menu = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_main_menu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

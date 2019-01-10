@@ -13,6 +13,7 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -40,9 +41,9 @@ public class SettingsMenuUI extends Table {
 //        input_handler.setSettingsMenuScreen(this);
 
         final int NB_TABS = 2;
-        labels = new TextButton[NB_TABS];
+        labels = new AudioButton[NB_TABS];
         Stack stack = new Stack();
-        contents = new Table[NB_TABS];
+        contents = new AudioButton[NB_TABS];
 
         labels_listener = new ClickListener() {
             @Override
@@ -69,10 +70,10 @@ public class SettingsMenuUI extends Table {
             }
         };
 
-        labels[0] = new TextButton(Translator.translate("general"), Graphics.GUI.getSkin());
+        labels[0] = new AudioButton(Translator.translate("general"), Graphics.GUI.getSkin());
         labels[0].addListener(labels_listener);
 
-        labels[1] = new TextButton(Translator.translate("inputs"), Graphics.GUI.getSkin());
+        labels[1] = new AudioButton(Translator.translate("inputs"), Graphics.GUI.getSkin());
         labels[1].addListener(labels_listener);
 
         contents[0] = new Table();
@@ -130,7 +131,7 @@ public class SettingsMenuUI extends Table {
         }
         this.add(stack).colspan(NB_TABS).grow().row();
 
-        TextButton cancelButton = new TextButton(Translator.translate("Back"), Graphics.GUI.getSkin());
+        TextButton cancelButton = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(cancelButton).colspan(NB_TABS).growX();
 
@@ -202,7 +203,7 @@ public class SettingsMenuUI extends Table {
         }
     }
 
-    public class InputButton extends TextButton {
+    public class InputButton extends AudioButton {
         public Action action;
         public int priority;
         public String input_id;

@@ -38,7 +38,6 @@ public class PlayersInfoUI extends Table {
             back.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    screen.disposeMusic();
                     Bomberball.changeScreen(new MainMenuScreen());
                 }
             });
