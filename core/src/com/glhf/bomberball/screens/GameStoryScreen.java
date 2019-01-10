@@ -2,7 +2,8 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
-import com.glhf.bomberball.gameobject.Character;
+import com.glhf.bomberball.gameobject.Enemy;
+import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
@@ -18,22 +19,26 @@ public class GameStoryScreen extends GameScreen {
     private StoryMenuScreen screen;
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
-        super(maze);
-        //super(new Maze(10,10));
+        //super(maze);
+        super(new Maze(10,10));
         this.maze_id = maze_id;
         this.screen = screen;
 
+        characters = new ArrayList<>();
+        characters.add(current_player);
+        ArrayList<Enemy> enemies = maze.getEnemies();
+        enemies.forEach(Enemy::createAI);
+        characters.addAll(enemies);
+        maze.export("testWithEnemies");
+
         config = new GameSoloConfig();
-        //maze.applyConfig(config);
         current_player = maze.spawnPlayer(config);
-        //TODO: faire une fonction spawnCharacters dans maze pour initialiser characters
-        //setSelectEffect();
 
 
         addUI(new SoloUI(current_player,this));
         addUI(maze_drawer);
 
-        //current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
+        current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
     }
 

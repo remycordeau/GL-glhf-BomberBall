@@ -44,18 +44,21 @@ public abstract class Enemy extends Character {
         actual_move += 1;
     }
 
+    public abstract void createAI();
+
     /**
      * this method gives the "root" of a kind of tree which represents the different available ways from an initial position
      * @param ancestors
      * @param initial_position
      * @return Node
      */
-    public Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){
+    public static Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){
         int i;
         Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
         Directions direction = Directions.UP;
         Cell current_adjacent_cell;
-        ArrayList<Cell> family = new ArrayList<>(ancestors);
+        //if ancestor is null create en empty family
+        ArrayList<Cell> family = (ancestors==null ? new ArrayList<>() : new ArrayList<>(ancestors));
         family.add(ways.getMatching_cell());
         for(i=0; i<4; i++){ // because, all cells have 4 adjacent cells
             // stop condition no walkable adjacent cell or all adjacent way in acestors
@@ -71,7 +74,9 @@ public abstract class Enemy extends Character {
             }
             current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(direction);
             //stop condition
-            if(! current_adjacent_cell.isWalkable() || ways.getAncestors().contains(current_adjacent_cell)){
+            if(current_adjacent_cell==null
+                    || !current_adjacent_cell.isWalkable()
+                    || (ways.getAncestors()!=null && ways.getAncestors().contains(current_adjacent_cell))){
                 ways.setSons(null, i);
             }
             else{

@@ -41,21 +41,23 @@ public class MainMenuUI extends Table {
 
         Value spacing = Value.percentHeight(0.15f);
 
+        Table Buttons = new Table();
+
         b = new TextButton(Translator.translate("Solo"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(SoloMenuScreen.class));
-        this.add(b).growX().space(spacing).row();
+        Buttons.add(b).growX().space(spacing).row();
 
         b = new TextButton(Translator.translate("Multiplayer"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
-        this.add(b).growX().space(spacing).row();
+        Buttons.add(b).growX().space(spacing).row();
 
         b = new TextButton(Translator.translate("Map Editor"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(MapEditorScreen.class));
-        this.add(b).growX().space(spacing).row();
+        Buttons.add(b).growX().space(spacing).row();
 
         b = new TextButton(Translator.translate("Settings"), Graphics.GUI.getSkin());
         b.addListener(new ScreenChangeListener(SettingsMenuScreen.class));
-        this.add(b).growX().space(spacing).row();
+        Buttons.add(b).growX().space(spacing).row();
 
         b = new TextButton(Translator.translate("Quit"), Graphics.GUI.getSkin());
         b.addListener(new ClickListener() {
@@ -64,6 +66,8 @@ public class MainMenuUI extends Table {
                 Gdx.app.exit();
             }
         });
-        this.add(b).growX();
+        Buttons.add(b).growX();
+
+        this.add(Buttons).padTop(10f);
     }
 }
