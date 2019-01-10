@@ -25,16 +25,15 @@ public class GameStoryScreen extends GameScreen {
         this.maze_id = maze_id;
         this.screen = screen;
 
+        config = new GameSoloConfig();
+        current_player = this.maze.spawnPlayer(config);
+
         characters = new ArrayList<Character>();
         characters.add(current_player);
-        ArrayList<Enemy> enemies = maze.getEnemies();
+        ArrayList<Enemy> enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
         characters.addAll(enemies);
         this.maze.export("testWithEnemies");
-
-        config = new GameSoloConfig();
-        current_player = maze.spawnPlayer(config);
-
 
         addUI(new SoloUI(current_player,this));
         addUI(maze_drawer);

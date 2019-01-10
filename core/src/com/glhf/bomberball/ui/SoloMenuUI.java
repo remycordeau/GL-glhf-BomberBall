@@ -20,7 +20,7 @@ import com.glhf.bomberball.screens.InfiniteModeScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.ScreenChangeListener;
 import com.glhf.bomberball.screens.StoryMenuScreen;
-import javafx.scene.control.Tab;
+
 
 public class SoloMenuUI extends Table {
 

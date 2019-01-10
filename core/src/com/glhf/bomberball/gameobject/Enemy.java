@@ -94,13 +94,15 @@ public abstract class Enemy extends Character {
     public ArrayList<Cell> longest_way(Node initial_node){
         ArrayList<Cell> longest = new ArrayList<>();
         ArrayList<Cell> current = new ArrayList<>();
-        for(int i=0; i<4; i++){
+        if(initial_node != null) {
+            for(int i=0; i<4; i++){
                 current = longest_way(initial_node.getSons(i));
-                if (current.size() > longest.size()) {
+                if (current != null && current.size() > longest.size()) {
                     longest = current;
                 }
+            }
+            longest.add(0, initial_node.getMatching_cell());
         }
-        longest.add(0, initial_node.getMatching_cell());
         return longest;
     }
 
