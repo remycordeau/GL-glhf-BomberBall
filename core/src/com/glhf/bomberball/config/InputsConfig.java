@@ -3,6 +3,7 @@ package com.glhf.bomberball.config;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.Translator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,6 +184,10 @@ public class InputsConfig extends Config {
     }
     public static String getIDForMouseButtonCode(int mouse_button_code){
         return "M"+mouse_button_code;
+    }
+
+    public String getInputName(Action action){
+        return Translator.getInputName(id_list[action.ordinal()][KeyPriority.PRIMARY.ordinal()]);
     }
 
     private void updateReversedMap() {

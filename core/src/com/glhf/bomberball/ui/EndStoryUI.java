@@ -41,7 +41,7 @@ public class EndStoryUI extends Table {
     private void addButtons() {
 
         //Labels
-        congrats = new Label(Translator.translate("Congratulations ! You've completed the story mode !"), Graphics.GUI.getSkin(),"Title");
+        congrats = new Label(Translator.translate("story mode congratulations"), Graphics.GUI.getSkin(),"Title");
         do_next = new Label(Translator.translate("All levels unlocked !"),Graphics.GUI.getSkin());
         this.add(congrats).spaceBottom(Value.percentHeight(0.9f)).row();
         this.add(do_next).spaceBottom(Value.percentHeight(0.9f)).row();
