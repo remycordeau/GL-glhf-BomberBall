@@ -60,8 +60,7 @@ public class Player extends Character {
     @Override
     public boolean move(Directions dir)
     {
-        if (moves_remaining > 0 && super.move(dir)) {
-            moves_remaining--;
+        if (super.move(dir)) {
             this.notifyObservers();
             return true;
         }
