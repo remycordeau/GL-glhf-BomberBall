@@ -1,5 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.Node;
@@ -40,10 +42,16 @@ public abstract class Enemy extends Character {
      * the enemy has to follow the way he receveid
      */
     public void followWay() {
-        while (moves_remaining > 0){
+        if (moves_remaining > 0){
             this.move(way.get(actual_move));
             interactWithCell(this.getCell());
             actual_move = (actual_move+1)%way.size();
+            Timer.schedule(new Task() {
+                @Override
+                public void run() {
+                    followWay();
+                }
+            }, 0.1f);
         }
     }
 
