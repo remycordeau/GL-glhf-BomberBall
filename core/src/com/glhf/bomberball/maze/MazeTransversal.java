@@ -5,7 +5,7 @@ import com.glhf.bomberball.maze.cell.Cell;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class MazeTransversal {
+public class MazeTransversal{
 
     /**
      * Returns all reacheable cells whitin a specified range from a cell
