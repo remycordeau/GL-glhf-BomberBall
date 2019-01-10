@@ -3,10 +3,10 @@
     true,
     true,
     true,
-    false,
-    false,
-    false,
-    false
+    true,
+    true,
+    true,
+    true
   ],
   "player_skin": "knight_m",
   "highscore": 145970,

@@ -1,5 +1,6 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -9,6 +10,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
 import java.util.ArrayList;
@@ -29,13 +31,14 @@ public class PlayersInfoUI extends Table {
      * creates the info UI for the solo mode (only a single player)
      * @param player
      */
-    public PlayersInfoUI(Player player) {
+    public PlayersInfoUI(Player player, GameStoryScreen screen) {
             PlayerWidget pw = new PlayerWidget(player);
             this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
             TextButton back = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
             back.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    screen.disposeMusic();
                     Bomberball.changeScreen(new MainMenuScreen());
                 }
             });

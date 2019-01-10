@@ -20,7 +20,7 @@ public class SoloUI extends Table {
 
         //TODO resolve bug with the directions keys
         this.setFillParent(true);
-        PlayersInfoUI left_ui = new PlayersInfoUI(player);
+        PlayersInfoUI left_ui = new PlayersInfoUI(player,screen);
         left_ui.padRight(Value.percentWidth(2/3f));
         left_ui.setFillParent(true);
         ActionPlayerUI bottom_ui = new ActionPlayerUI(screen);
