@@ -109,7 +109,7 @@ public class StoryMenuUI extends Table {
         });
         buttons.add(play_button).row();
 
-        back_button = new TextButton(Translator.translate("Back to title menu"), Graphics.GUI.getSkin());
+        back_button = new TextButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         back_button.getLabel().setFontScale(0.8f, 0.8f);
         buttons.add(back_button).spaceTop(Value.percentHeight(0.9f));

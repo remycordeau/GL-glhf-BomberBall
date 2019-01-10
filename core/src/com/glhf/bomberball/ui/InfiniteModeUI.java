@@ -32,7 +32,7 @@ public class InfiniteModeUI extends Table {
     private void addButtons(){
 
         //Title
-        label = new Label(Translator.translate("Mode Infini"), Graphics.GUI.getSkin(), "Title");
+        label = new Label(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.5f, 1.5f);
         this.add(label).padBottom(Value.percentHeight(0.8f)).row();
