@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.DestructibleWall;
+import com.glhf.bomberball.gameobject.Door;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.maze.Maze;
@@ -71,6 +72,7 @@ public class MapEditorUI extends Table {
             content = new Table();
             selectableObjects.add(new DestructibleWall());
             selectableObjects.add(new IndestructibleWall());
+            selectableObjects.add(new Door());
             this.setActor(content);
             for (GameObject o : selectableObjects) {
                 ImageButton button = new ImageButton(new TextureRegionDrawable(o.getSprite()));

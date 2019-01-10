@@ -23,7 +23,17 @@ public class BonusWall extends DestructibleWall {
     @Override
     public void initialize() {
         super.initialize();
-        this.sprite = Graphics.Sprites.get("crate_speed");
+        switch (this.bonus.getType()) {
+            case SPEED:
+                this.sprite = Graphics.Sprites.get("speedWall");
+                break;
+            case BOMB_RANGE:
+                this.sprite = Graphics.Sprites.get("rangeWall");
+                break;
+            case BOMB_NUMBER:
+                this.sprite = Graphics.Sprites.get("bombWall");
+                break;
+        }
         bonus.initialize();
     }
 
