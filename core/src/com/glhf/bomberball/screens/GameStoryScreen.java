@@ -27,7 +27,8 @@ public class GameStoryScreen extends GameScreen {
         config = new GameSoloConfig();
         current_player = this.maze.spawnPlayer(config);
 
-        enemies = this.maze.getEnemies();
+        //enemies = this.maze.getEnemies();
+        enemies = this.maze.spawnEnemies(new GameSoloConfig());
         enemies.forEach(Enemy::createAI);
         this.maze.export("testWithEnemies");
 
