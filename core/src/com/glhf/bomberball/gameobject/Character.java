@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.utils.Directions;
 
 public abstract class Character extends GameObject {
 
@@ -64,6 +65,14 @@ public abstract class Character extends GameObject {
     public void endTurn() {
     }
 
-
+    @Override
+    public boolean move(Directions dir)
+    {
+        if (moves_remaining > 0 && super.move(dir)) {
+            moves_remaining--;
+            return true;
+        }
+        return false;
+    }
 
 }
