@@ -17,7 +17,6 @@ public class ScreenChangeListener extends ChangeListener {
     public void changed(ChangeEvent event, Actor actor) {
         try {
             Bomberball.changeScreen(screen_class.newInstance());
-            Audio.CLICK_BUTTON.play();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
