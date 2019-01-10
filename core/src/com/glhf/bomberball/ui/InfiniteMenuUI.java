@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class InfiniteMenuUI extends Table {
 

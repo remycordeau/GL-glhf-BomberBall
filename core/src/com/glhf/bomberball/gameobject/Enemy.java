@@ -44,7 +44,6 @@ public abstract class Enemy extends Character {
     public void followWay() {
         if (moves_remaining > 0){
             this.move(way.get(actual_move));
-            interactWithCell(this.getCell());
             actual_move = (actual_move+1)%way.size();
             Timer.schedule(new Task() {
                 @Override

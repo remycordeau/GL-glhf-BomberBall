@@ -20,6 +20,7 @@ import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class MainMenuUI extends Table {
 
