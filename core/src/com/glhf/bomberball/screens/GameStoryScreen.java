@@ -2,6 +2,7 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.gameobject.Enemy;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
@@ -20,16 +21,16 @@ public class GameStoryScreen extends GameScreen {
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
-        super(new Maze(10,10));
+        super(new Maze(11,13));
         this.maze_id = maze_id;
         this.screen = screen;
 
-        characters = new ArrayList<>();
+        characters = new ArrayList<Character>();
         characters.add(current_player);
         ArrayList<Enemy> enemies = maze.getEnemies();
         enemies.forEach(Enemy::createAI);
         characters.addAll(enemies);
-        maze.export("testWithEnemies");
+        this.maze.export("testWithEnemies");
 
         config = new GameSoloConfig();
         current_player = maze.spawnPlayer(config);
