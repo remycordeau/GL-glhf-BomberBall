@@ -64,15 +64,12 @@ public class GameStoryScreen extends GameScreen {
         }
 
         for(Enemy enemy : enemies) {
-            enemy.initiateTurn();
-            enemy.followWay();
+            if(enemy.isAlive()) {
+                enemy.initiateTurn();
+                enemy.followWay();
+            }
         }
 
-        /*int i = enemies.indexOf(current_character);
-        do {
-            i = (i + 1) % enemies.size();
-        } while (!enemies.get(i).isAlive());
-        current_character = enemies.get(i);*/
         current_player.initiateTurn();
         setMoveEffect();
         setMoveMode();
