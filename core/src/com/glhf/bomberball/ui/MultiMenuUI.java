@@ -96,7 +96,7 @@ public class MultiMenuUI extends Table {
         });
         // BUTTON TO CHOOSE A RANDOM MAZE
 
-        TextButton randomMapButton = new AudioButton(Translator.translate("Carte Aléatoire"), Graphics.GUI.getSkin());
+        TextButton randomMapButton = new AudioButton(Translator.translate("Random Maze"), Graphics.GUI.getSkin());
         randomMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -105,7 +105,7 @@ public class MultiMenuUI extends Table {
             }
         });
         // BUTTON TO EXIT THE MENU
-        TextButton cancelButton = new AudioButton(Translator.translate("Retour"), Graphics.GUI.getSkin());
+        TextButton cancelButton = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         cancelButton.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
         //ADDING THE BUTTONS TO THE TABLE

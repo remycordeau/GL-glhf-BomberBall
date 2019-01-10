@@ -1,22 +1,21 @@
 #EndLevelUI
-"level unlocked"		:	"Level %d unlocked !"
-"level succeeded"		:	"Congratulations ! You've succeeded level %d !"
+"level unlocked"		:	"Niveau %d débloqué !"
+"level succeeded"		:	"Félicitations! Vous avez réussi niveau %d !"
 
 #SoloUI
-"mode movement button"		:	"Movement [%s]"
-"mode bombe button"		:	"Bomb [%s]"
-"endTurn button"		:	"End Turn [%s]"
+"mode movement button"	:	"Déplacement [%s]"
+"mode bombe button"		:	"Bombe [%s]"
+"endTurn button"		:	"Fin de tour [%s]"
 
 #SettingsMenuUI
 "Action"		:	"Action"
-"inputs"		:	"inputs"
-"general"		:	"general"
+"inputs"		:	"controlles"
+"general"		:	"général"
 "Primary"		:	"Primary"
 "Secondary"		:	"Secondary"
 
 #Story Menus
-"Level Selection"	:	"Level Selection"
-"Ragequit ?"		:	"Ragequit ?"
+"Level Selection"	:	"Selection des niveaux"
 "Wasted !"		    :	"Wasted !"
 "égalité ..."		:	"égalité ..."
 "Lost!"				:	"Lost!"
@@ -31,23 +30,23 @@
 "story mode congratulations"		:	"Congratulations ! You've completed the story mode !"
 
 #MainMenuUI
-"Multiplayer"	:	"Multiplayer"
+"Multiplayer"	:	"Multijoueur"
 "Solo"		    :	"Solo"
-"Map Editor"	:	"Map Editor"
-"Settings"		:	"Settings"
-"Quit"		    :	"Quit"
+"Map Editor"	:	"Editeur de Carte"
+"Settings"		:	"Paramètres"
+"Quit"		    :	"Quitter"
 
 "Menu multijoueur"		:	"Menu multijoueur"
-"Back to main menu"		:	"Back to main menu"
-"Play"		            :	"Play"
-"Back"	        		:	"Back"
-"Infinite Mode"		    :	"Infinite Mode"
-"Story Mode"		    :	"Story Mode"
-"Replay"		        :	"Replay"
+"Back to main menu"		:	"Retour au menu principal"
+"Play"		            :	"Jouer"
+"Back"	        		:	"Retour"
+"Infinite Mode"		    :	"Mode infini"
+"Story Mode"		    :	"Mode histoire"
+"Replay"		        :	"Rejouer"
 
 #InfiniteMenuUI
 "Highscore :"			:	"Highscore :"
 
-"Random Maze"		:	"Random Maze"
+"Random Maze"		:	"Carte Aléatoire"
 
 

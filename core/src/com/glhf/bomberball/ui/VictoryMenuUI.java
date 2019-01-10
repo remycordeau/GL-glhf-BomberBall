@@ -53,7 +53,7 @@ public class VictoryMenuUI extends Table {
 
         Value spacing = Value.percentHeight(0.20f);
 
-        b = new TextButton(Translator.translate("Rejouer"), skin);
+        b = new TextButton(Translator.translate("Replay"), skin);
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -66,7 +66,7 @@ public class VictoryMenuUI extends Table {
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
         this.add(b).growX().space(spacing).row();
 
-        b = new TextButton(Translator.translate("Menu principal"), skin);
+        b = new TextButton(Translator.translate("Back to main menu"), skin);
         b.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(b).growX();
     }

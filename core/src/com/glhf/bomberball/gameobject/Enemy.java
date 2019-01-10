@@ -40,9 +40,25 @@ public abstract class Enemy extends Character {
      * the enemy has to follow the way he receveid
      */
     public void followWay() {
-        this.move(way.get(actual_move));
-        actual_move += 1;
+        while (moves_remaining > 0){
+            this.move(way.get(actual_move));
+            interactWithCell(this.getCell());
+            actual_move = (actual_move+1)%way.size();
+        }
     }
+
+    @Override
+    public void interactWithCell(Cell cell) {
+        ArrayList<GameObject> goList = cell.getGameObjects();
+        for (GameObject go : goList) {
+            if (go instanceof Player) {
+                go.getDamage(strength);
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     public abstract void createAI();
 

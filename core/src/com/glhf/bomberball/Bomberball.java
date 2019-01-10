@@ -19,7 +19,7 @@ public class Bomberball extends Game {
 		instance = this;
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
-		Translator.load("en");
+		Translator.load("fr");
 		changeScreen(new WelcomingMenuScreen());
 	}
 
