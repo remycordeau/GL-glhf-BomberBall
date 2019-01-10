@@ -9,7 +9,8 @@ import com.badlogic.gdx.audio.Sound;
  */
 public enum Audio {
     CLICK_BUTTON("core/assets/sounds/SFX/click_button.wav"),
-    VICTORY("core/assets/sounds/SFX/victory.wav");
+    VICTORY("core/assets/sounds/SFX/victory.wav"),
+    CLICK_PLAY("core/assets/sounds/SFX/PlayLevelButtonTone.wav");
 
     public Sound sound;
     Audio(String path)

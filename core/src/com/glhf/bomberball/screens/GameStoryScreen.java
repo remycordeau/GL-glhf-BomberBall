@@ -1,5 +1,12 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.AudioDevice;
+import com.badlogic.gdx.audio.AudioRecorder;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
@@ -7,6 +14,7 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
+import com.glhf.bomberball.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -17,10 +25,14 @@ public class GameStoryScreen extends GameScreen {
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
     private StoryMenuScreen screen;
+    private Sound music;
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
         super(MazeBuilder.createInfinityMaze());
+        music = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET + "sounds/musics/StoryLevelTheme.mp3"));
+        music.play();
+        music.loop();
         this.maze_id = maze_id;
         this.screen = screen;
 
@@ -48,8 +60,9 @@ public class GameStoryScreen extends GameScreen {
      */
     protected void nextPlayer() {
         if(!current_player.isAlive()) {
-            Bomberball.changeScreen(new DeadScreen(screen,maze_id));
-        } else if(maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+            Bomberball.changeScreen(new DeadScreen(screen, maze_id));
+            music.dispose();
+        }   if(maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
             Bomberball.changeScreen(new EndStoryScreen(screen,this.maze_id));
             return;
         }
@@ -62,6 +75,7 @@ public class GameStoryScreen extends GameScreen {
         }
         if(isIn){
             Bomberball.changeScreen(new EndLevelScreen(screen,this.maze_id));
+            music.dispose();
         }
 
         for(Enemy enemy : enemies) {
@@ -73,6 +87,7 @@ public class GameStoryScreen extends GameScreen {
 
         if(!current_player.isAlive()) {
             Bomberball.changeScreen(new DeadScreen(screen,maze_id));
+            music.dispose();
         } else {
             current_player.initiateTurn();
             setMoveEffect();
