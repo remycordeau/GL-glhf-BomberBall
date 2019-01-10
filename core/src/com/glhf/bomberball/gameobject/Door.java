@@ -6,6 +6,7 @@ public class Door extends GameObject {
 
     public Door(){
         super();
+        this.sprite = Graphics.Sprites.get("floor_ladder");
     }
 
     /**
@@ -17,10 +18,5 @@ public class Door extends GameObject {
 
     @Override
     public boolean isWalkable() { return true; }
-
-    @Override
-    public void initialize() {
-        sprite = Graphics.Sprites.get("doors_leaf_closed");
-    }
 
 }
