@@ -9,7 +9,7 @@
 
 #SettingsMenuUI
 "Action"		:	"Action"
-"inputs"		:	"controlles"
+"inputs"		:	"contrôles"
 "general"		:	"général"
 "Primary"		:	"Primary"
 "Secondary"		:	"Secondary"
@@ -18,8 +18,8 @@
 "Level Selection"	:	"Selection des niveaux"
 "Wasted !"		    :	"Wasted !"
 "égalité ..."		:	"égalité ..."
-"Lost!"				:	"Lost!"
-"VICTORY!"			:	"VICTORY!"
+"Lost!"				:	"Perdu!"
+"VICTORY!"			:	"VICTOIRE!"
 "All levels unlocked !"	:	"All levels unlocked !"
 "Play next level"		:	"Play next level"
 "Replay level"			:	"Replay level"

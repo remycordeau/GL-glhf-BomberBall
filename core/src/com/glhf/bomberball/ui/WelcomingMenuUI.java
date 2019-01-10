@@ -18,7 +18,7 @@ public class WelcomingMenuUI extends Table {
     public WelcomingMenuUI() {
         super();
         this.setFillParent(true);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/gui/glhf.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/gui/welcomingScreen.jpg")));
         this.setBackground(texture);
     }
 
