@@ -23,8 +23,4 @@ public class Door extends GameObject {
         sprite = Graphics.Sprites.get("doors_leaf_closed");
     }
 
-    public void applyEffect() {
-        sprite = Graphics.Sprites.get("doors_leaf_open");
-
-    }
 }
