@@ -40,8 +40,10 @@ public abstract class Enemy extends Character {
      * the enemy has to follow the way he receveid
      */
     public void followWay() {
-        this.move(way.get(actual_move));
-        actual_move += 1;
+        while (moves_remaining > 0){
+            this.move(way.get(actual_move));
+            actual_move = (actual_move+1)%way.size();
+        }
     }
 
     public abstract void createAI();
