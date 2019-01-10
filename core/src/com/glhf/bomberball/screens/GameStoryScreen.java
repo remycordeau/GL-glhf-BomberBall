@@ -4,6 +4,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
 
@@ -19,7 +20,7 @@ public class GameStoryScreen extends GameScreen {
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
-        super(new Maze(11,13));
+        super(MazeBuilder.createInfinityMaze());
         this.maze_id = maze_id;
         this.screen = screen;
 

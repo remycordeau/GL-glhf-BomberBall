@@ -16,52 +16,16 @@ import java.util.ArrayList;
 
 public class Maze {
 
-    private String title;
-    private ArrayList<Vector2> spawn_positions;
-    private int players_count;
-    private int height;
-    private int width;
-    private Cell[][] cells;
+    String title;
+    ArrayList<Vector2> spawn_positions;
+    int height;
+    int width;
+    Cell[][] cells;
 
     private transient GameConfig config;
     private static Gson gson;
 
     public Maze() {
-        if(gson == null) {
-            createGson();
-        }
-    }
-
-    public Maze(int h, int w) {
-        super();
-        title = "Classic";
-        height = h;
-        width = w;
-        cells = new Cell[width][height];
-        spawn_positions = new ArrayList<Vector2>(){};
-        spawn_positions.add(new Vector2(0, 0));
-        /*spawn_positions.add(new Vector2(0, h - 1));
-        spawn_positions.add(new Vector2(w - 1, 0f));
-        spawn_positions.add(new Vector2(w - 1, h - 1));
-        players_count = spawn_positions.size();*/
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                cells[x][y] = new Cell(x, y);
-                if (x % 2 == 1 && y % 2 == 1) {
-                    cells[x][y].addGameObject(new IndestructibleWall());
-                }
-                else if (Math.random() < 0.1) {
-                    cells[x][y].addGameObject(new DestructibleWall());
-                }
-                else if (Math.random() < 0.05) {
-                    cells[x][y].addGameObject(new BonusWall(new Bonus(Type.SPEED)));
-                }
-                else if (Math.random() < 0.05) {
-                    cells[x][y].addGameObject(new ActiveEnemy("knight_m", 1, 5, 1));
-                }
-            }
-        }
-        initialize();
     }
 
     public void initialize()

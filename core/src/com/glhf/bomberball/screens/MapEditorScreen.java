@@ -19,7 +19,7 @@ public class MapEditorScreen extends AbstractScreen {
     public MapEditorScreen()
     {
         super();
-        this.maze = new Maze(11, 13);
+        this.maze = new Maze();
 
         ui = new MapEditorUI(this, maze);
         addUI(ui);
