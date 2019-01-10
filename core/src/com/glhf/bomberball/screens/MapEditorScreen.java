@@ -10,7 +10,7 @@ import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.MapEditorUI;
 import com.glhf.bomberball.utils.VectorInt2;
 
-public class MapEditorScreen extends AbstractScreen {
+public class MapEditorScreen extends MenuScreen {
 
     private final Maze maze;
     private final MapEditorUI ui;

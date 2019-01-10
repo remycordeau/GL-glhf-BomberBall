@@ -22,9 +22,6 @@ public class Bomberball extends Game {
 		Graphics.load();
 		Translator.load("fr");
 		changeScreen(new WelcomingMenuScreen());
-
-
-
 	}
 
 	@Override

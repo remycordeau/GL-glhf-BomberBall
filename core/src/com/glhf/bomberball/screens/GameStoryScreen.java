@@ -30,9 +30,6 @@ public class GameStoryScreen extends GameScreen {
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
         super(MazeBuilder.createInfinityMaze());
-        music = Gdx.audio.newSound(Gdx.files.internal(Constants.PATH_ASSET + "sounds/musics/StoryLevelTheme.mp3"));
-        music.play();
-        music.loop();
         this.maze_id = maze_id;
         this.screen = screen;
 

@@ -43,7 +43,6 @@ public class VictoryMenuUI extends Table {
             this.add(player_animation).grow().row();
             TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
             this.setBackground(texture);
-            Audio.VICTORY.play();
         }
 
         addButtons();

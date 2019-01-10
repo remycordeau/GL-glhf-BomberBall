@@ -1,15 +1,21 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.glhf.bomberball.audio.Audio;
 
 public abstract class MenuScreen extends AbstractScreen {
-    protected VerticalGroup centerButtons;
 
     public MenuScreen() {
 
-        centerButtons = new VerticalGroup();
-        centerButtons.setFillParent(true);
-        centerButtons.center();
-        addUI(centerButtons);
+    }
+
+    /**@author: Jyra
+     * On check si la musique est déjà joué et si non on la lance
+     */
+    @Override
+    public void show() {
+        super.show();
+        if(! Audio.MAIN_MENU.isPlayed()) {
+            Audio.MAIN_MENU.playMusique();
+        }
     }
 }

@@ -25,7 +25,6 @@ public class GameMultiScreen extends GameScreen {
 
     public GameMultiScreen(Maze maze, int maze_id) {
         super(maze);
-        Audio.MULTI.playMusique();
         this.maze_id = maze_id;
         config = new GameMultiConfig(); //Previously : config=GameMultiConfig.get("config game multi");
         //maze.applyConfig(config);

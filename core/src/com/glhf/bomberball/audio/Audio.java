@@ -15,22 +15,29 @@ public enum Audio {
     MULTI("core/assets/sounds/MultiSong.mp3");
 
     public Sound sound;
+    public Boolean played;
     Audio(String path)
     {
         sound= Gdx.audio.newSound(Gdx.files.internal(path));
         System.out.println("Sounds " + path + " loaded");
+        played=false;
     }
 
     public void play() {
+        played=true;
         sound.play();
         System.out.println("Lancement de " + sound);}
-    public void stop() { this.sound.stop(); }
-    public void silence () {
+    public void stop() {
+        this.sound.stop();
+        played=false;
+    }
+    public static void silence () {
         Audio[] a = Audio.values();
         for (Audio l : a) {
             l.stop();
         }
     }
+    public boolean isPlayed(){return this.played;}
 
     /**
      * Permet de jouer une musique, ça va silence tous les autres sons et lancer la musique

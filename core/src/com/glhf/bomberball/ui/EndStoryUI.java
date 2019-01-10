@@ -70,7 +70,6 @@ public class EndStoryUI extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Bomberball.changeScreen(new MainMenuScreen());
-                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(back_main_menu).spaceTop(Value.percentHeight(0.9f)).row();

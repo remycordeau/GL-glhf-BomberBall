@@ -24,7 +24,6 @@ import com.glhf.bomberball.screens.*;
 public class MainMenuUI extends Table {
 
     public MainMenuUI() {
-        Audio.MAIN_MENU.playMusique();
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));
         this.padRight(Value.percentWidth(0.25f));
