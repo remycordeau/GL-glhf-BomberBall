@@ -1,6 +1,7 @@
 #EndLevelUI
 "level unlocked"		:	"Niveau %d débloqué !"
-"level succeeded"		:	"Félicitations! Vous avez réussi niveau %d !"
+"level succeeded"       :   "Félicitations! Vous avez réussi niveau %d !"
+
 
 #SoloUI
 "mode movement button"	:	"Déplacement [%s]"
@@ -48,5 +49,13 @@
 "Highscore :"			:	"Highscore :"
 
 "Random Maze"		:	"Carte Aléatoire"
+
+#WelcomingMenu UI
+"Press [ENTER] to play"    :     "Appuyez sur [ENTREE] pour jouer"
+
+#EndLevelUI (suite)
+"Play next level"       :   "Jouer au niveau suivant"
+"Replay level"      :   "Rejouer le niveau"
+"Back to level selection"       :   "Revenir à la sélection des niveaux"
 
 

@@ -3,15 +3,21 @@
  * creates the interface of the story mode (level selection) */
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.Audio;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.*;
+import com.glhf.bomberball.utils.Constants;
 
 public class StoryMenuUI extends Table {
 
@@ -33,6 +39,8 @@ public class StoryMenuUI extends Table {
         addButtons();
         level_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f, 0.5f, 0.88f, MazeDrawer.Fit.BEST);
         this.add(level_preview);
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS+"/background/SoloMenu.png")));
+        this.setBackground(texture);
     }
 
     /**
@@ -98,12 +106,13 @@ public class StoryMenuUI extends Table {
 
         // Play and quit buttons
 
-        play_button = new TextButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
+        play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
         play_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (screen.isLevelUnlocked(screen.getMazeId())) { // allows to play the level only if it's unlocked
                     Bomberball.changeScreen(new GameStoryScreen(screen, screen.maze, screen.getMazeId()));
+                    Audio.CLICK_PLAY.play();
                 }
             }
         });
