@@ -49,4 +49,7 @@
 
 "Random Maze"		:	"Carte Aléatoire"
 
+#WelcomingMenu UI
+"Press [ENTER] to play"    :     "Appuyez sur [ENTREE] pour jouer"
+
 
