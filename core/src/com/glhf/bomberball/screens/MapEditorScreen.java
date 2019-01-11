@@ -1,8 +1,5 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.maze.Maze;
@@ -19,7 +16,7 @@ public class MapEditorScreen extends MenuScreen {
     public MapEditorScreen()
     {
         super();
-        this.maze = new Maze();
+        this.maze = new Maze(13, 11);
 
         ui = new MapEditorUI(this, maze);
         addUI(ui);
@@ -35,14 +32,15 @@ public class MapEditorScreen extends MenuScreen {
         try {
             VectorInt2 coords = ui.screenPosToCell(x,y);
             Cell cell = maze.getCellAt(coords.x, coords.y);
-            if(cell!=null && classSelected!=null)
+            if(cell != null && classSelected != null) {
+                cell.removeGameObjects();
                 cell.addGameObject(classSelected.newInstance());
+            }
         } catch (InstantiationException e) { e.printStackTrace(); }
           catch (IllegalAccessException e) { e.printStackTrace(); }
     }
 
     public <T extends GameObject> void select(Class<T> clazz){
         classSelected = clazz;
-        System.out.println(clazz.getName());
     }
 }

@@ -75,6 +75,13 @@ public class Cell {
     /*===========================*/
 
     /**
+     * @return true if the cell is empty (else otherwise)
+     */
+    public boolean isEmpty() {
+        return objects.isEmpty();
+    }
+
+    /**
      * @param cell
      * @return Returns the direction of cell if cell is an adjacent cell (null instead)
      */
@@ -131,6 +138,13 @@ public class Cell {
     public void removeGameObject(GameObject gameObject) {
         gameObject.setCell(null);
         objects.remove(gameObject);
+    }
+
+    /**
+     * Removes all objects from the cell
+     */
+    public void removeGameObjects() {
+        objects.clear();
     }
 
     /**

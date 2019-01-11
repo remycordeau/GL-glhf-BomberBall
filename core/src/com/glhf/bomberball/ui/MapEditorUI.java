@@ -6,10 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.gameobject.DestructibleWall;
-import com.glhf.bomberball.gameobject.Door;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.IndestructibleWall;
+import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.MainMenuScreen;
@@ -20,18 +17,16 @@ import com.glhf.bomberball.utils.VectorInt2;
 import java.util.ArrayList;
 
 public class MapEditorUI extends Table {
+
     private MapEditorScreen screen;
     private Maze maze;
     private MazeDrawer maze_preview;
-    // selected cell to put an object on it
-    private Cell selected_cell;
-
 
     public MapEditorUI(MapEditorScreen screen, Maze maze)
     {
         this.screen = screen;
 
-        this.maze=maze;
+        this.maze = maze;
         maze_preview = new MazeDrawer(maze, 0.0f, 0.9f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
 
         this.setFillParent(true);
@@ -53,20 +48,21 @@ public class MapEditorUI extends Table {
         return maze_preview.screenPosToCell(x ,y);
     }
 
-
     class ObjectsWidget extends ScrollPane {
 
-        private ArrayList<GameObject> selectableObjects = new ArrayList<>();
+        private ArrayList<GameObject> presets = new ArrayList<>();
         private Table content;
 
         public ObjectsWidget() {
             super(null);
             content = new Table();
-            selectableObjects.add(new DestructibleWall());
-            selectableObjects.add(new IndestructibleWall());
-            selectableObjects.add(new Door());
+            presets.add(new DestructibleWall());
+            presets.add(new BonusWall(new Bonus(Bonus.Type.SPEED)));
+            presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
+            presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
+            presets.add(new IndestructibleWall());
             this.setActor(content);
-            for (GameObject o : selectableObjects) {
+            for (GameObject o : presets) {
                 ImageButton button = new ImageButton(new TextureRegionDrawable(o.getSprite()));
                 button.getImageCell().expand().fill();
                 button.addListener(new ClickListener(){
