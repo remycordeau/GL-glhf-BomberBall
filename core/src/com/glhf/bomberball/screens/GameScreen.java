@@ -67,8 +67,8 @@ public abstract class GameScreen extends AbstractScreen {
     protected void dropBomb(Directions dir) {
         if (current_player.dropBomb(dir)) {
             this.setMoveMode();
+            this.setMoveEffect();
         }
-        setBombEffect();
     }
 
     protected void clearCellsEffect() {
