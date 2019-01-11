@@ -5,12 +5,15 @@
 
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
@@ -18,6 +21,8 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
+import com.glhf.bomberball.utils.Constants;
+import com.sun.org.apache.bcel.internal.classfile.Constant;
 //import sun.java2d.windows.GDIRenderer;
 
 public class EndLevelUI extends Table {
@@ -39,6 +44,8 @@ public class EndLevelUI extends Table {
         screen.setLevelUnlocked(next_level); // unlocks next level
         StoryMenuUI.unlockLevel(next_level); //updates the ui with the unlocked level
         addButtons();
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png")));
+        this.setBackground(background);
     }
 
     /**
