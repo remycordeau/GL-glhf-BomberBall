@@ -1,7 +1,7 @@
 package com.glhf.bomberball.utils;
 
 public enum Resolutions {
-    VERY_LOW	(560,	315),  // 16:9
+    //VERY_LOW	(560,	315),  // 16:9
     LOW			(800,	450),
     MEDIUM		(1040,	585),
     HIGH		(1760,	990),
