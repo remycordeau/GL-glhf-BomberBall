@@ -92,7 +92,7 @@ public class Maze{
     }
 
     public Enemy spawnEnemy(GameSoloConfig config, Cell cell) {
-        Enemy enemy = new ActiveEnemy("knight_m", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength);
+        Enemy enemy = new ActiveEnemy("black_knight", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength);
         cell.addGameObject(enemy);
         return enemy;
     }
