@@ -67,7 +67,9 @@ public abstract class Config {
      */
     public void exportConfig(String name) {
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_CONFIGS + name + ".json"));
+            File file = new File(Constants.PATH_CONFIGS + name + ".json");
+            if(!file.getParentFile().exists()) file.getParentFile().mkdirs(); //needed when file in a directory
+            Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
             configs.remove(name);
