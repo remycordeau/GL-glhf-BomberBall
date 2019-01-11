@@ -1,7 +1,9 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.HunterNode;
 import com.glhf.bomberball.utils.Node;
 
 import java.util.ArrayList;
@@ -67,4 +69,41 @@ public class AggressiveEnemy extends Enemy {
         }
         return null;
     }
+
+    public int compareTwoNodes(HunterNode n1, HunterNode n2){
+        if(n1.getHeuristic() < n2.getHeuristic()){
+            return 1;
+        }
+        else if(n1.getHeuristic() == n2.getHeuristic()){
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
+    closedList = File()
+    openList = FilePrioritaire(comparateur=compare2Noeuds)
+       openList.ajouter(depart)
+    tant que openList n'est pas vide
+    u = openList.depiler()
+    si u.x == objectif.x et u.y == objectif.y
+    reconstituerChemin(u)
+    terminer le programme
+    pour chaque voisin v de u dans g
+    si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
+    neRienFaire()
+    sinon
+    v.cout = u.cout +1
+    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
+                    openList.ajouter(v)
+            closedList.ajouter(u)
+    terminer le programme (avec erreur)*/
+
+    public void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
+
+    }
+
+
 }
