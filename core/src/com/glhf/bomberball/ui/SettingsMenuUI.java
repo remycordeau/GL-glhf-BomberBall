@@ -43,7 +43,7 @@ public class SettingsMenuUI extends Table {
         final int NB_TABS = 2;
         labels = new AudioButton[NB_TABS];
         Stack stack = new Stack();
-        contents = new AudioButton[NB_TABS];
+        contents = new Table[NB_TABS];
 
         labels_listener = new ClickListener() {
             @Override
