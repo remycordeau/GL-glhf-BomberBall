@@ -2,6 +2,7 @@ package com.glhf.bomberball.audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.glhf.bomberball.gameobject.Bonus;
 
 /**
  * @author jyra
@@ -14,21 +15,29 @@ public enum Audio {
     MAIN_MENU("core/assets/sounds/MainMenu.mp3"),
     MULTI("core/assets/sounds/MultiSong.mp3");
 
-    public Sound sound;
-    public Boolean played;
+    private Sound sound;
+    private Boolean played;
+    public final Boolean AUDIO_ENABLE = false;
     Audio(String path)
     {
-        sound= Gdx.audio.newSound(Gdx.files.internal(path));
-        System.out.println("Sounds " + path + " loaded");
-        played=false;
+        if(AUDIO_ENABLE) {
+            sound = Gdx.audio.newSound(Gdx.files.internal(path));
+            System.out.println("Sounds " + path + " loaded");
+            played = false;
+        }
     }
 
     public void play() {
-        sound.play();}
+        if (AUDIO_ENABLE) {
+            sound.play();
+        }
+    }
 
     public void stop() {
-        this.sound.stop();
-        played=false;
+        if(AUDIO_ENABLE) {
+            this.sound.stop();
+            played = false;
+        }
     }
     public static void silence () {
         Audio[] a = Audio.values();
@@ -36,19 +45,21 @@ public enum Audio {
             l.stop();
         }
     }
-    public boolean isPlayed(){return this.played;}
+    public boolean isPlayed(){
+        return this.played;
+    }
 
     /**
      * Permet de jouer une musique, ça va silence tous les autres sons et lancer la musique
      */
     public void playMusique(){
-        System.out.println("is played = "+ this.isPlayed());
-        if(! this.isPlayed()) {
-            this.silence();
-            sound.loop(0.1f);
-            played=true;
+        if(AUDIO_ENABLE) {
+            if (!this.isPlayed()) {
+                this.silence();
+                sound.loop(0.1f);
+                played = true;
+            }
         }
-
     }
 
 }
