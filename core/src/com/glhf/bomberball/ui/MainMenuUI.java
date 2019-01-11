@@ -19,6 +19,7 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
@@ -42,9 +43,10 @@ public class MainMenuUI extends Table {
     private void addButtons()
     {
         Maze mazex = Maze.importMaze("maze_0");
-        Cell origin = new Cell(0, 0);
-        Cell test = new Cell(0, 1);
-        System.out.println("Le maze de test est finissable : " + mazex.isReachableCell(origin, test));
+        mazex.initialize();;
+        Cell origin = mazex.getCellAt(0,0);
+        Cell test = mazex.getCellAt(0,1);
+        System.out.println("Le maze de test est finissable : " + MazeTransversal.isReachableCell(origin, test));
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 

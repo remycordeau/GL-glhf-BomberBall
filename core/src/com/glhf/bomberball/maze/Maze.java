@@ -164,24 +164,6 @@ public class Maze{
         return enemies;
     }
 
-    public Cell getposDoor(){
-        int xDoor = 0;
-        int yDoor = 0;
-        for(int x = 0; x<this.width; x++) {
-            for(int y = 0; y<this.height; y++){
-                Cell cell = cells[x][y];
-                for (GameObject go : cell.getGameObjects()) {
-                    if (Door.class.isInstance(go)) {
-                        xDoor = x;
-                        yDoor = y;
-                        break;
-                    }
-                }
-            }
-        }
-        Cell posDoor = new Cell(xDoor, yDoor);
-        return posDoor;
-    }
 
 //    public void applyConfig(GameConfig config) {
 //        ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -196,39 +178,6 @@ public class Maze{
 //            }
 //        }
 //    }
-
-    public static ArrayList<Cell> getReacheableCells(Cell cell_origin) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> queue = new LinkedList<Cell>();
-        cells.add(cell_origin);
-        queue.add(cell_origin);
-        while (!queue.isEmpty()) {
-            Cell c = queue.poll();
-            for (Cell other : c.getAdjacentCells()) {
-                for(GameObject go : other.getGameObjects()) {
-                    if (!IndestructibleWall.class.isInstance(go)){
-                        if (!cells.contains(other)) {
-                            queue.add(other);
-                            cells.add(other);
-                        }
-                    }
-                }
-            }
-        }
-        return cells;
-    }
-
-
-    public boolean isReachableCell(Cell cell_origin, Cell cell_final){
-        boolean isReachable = false;
-        ArrayList<Cell> reachableCases = this.getReacheableCells(cell_origin);
-        for (Cell cell : reachableCases) {
-            if (cell.getX() == cell_final.getX() && cell.getY() == cell_final.getY()) {
-                isReachable = true;
-            }
-        }
-        return isReachable;
-    }
 
     private static void createGson() {
         gson = new GsonBuilder()
