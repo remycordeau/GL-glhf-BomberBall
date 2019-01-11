@@ -75,6 +75,13 @@ public class Cell {
     /*===========================*/
 
     /**
+     * @return true if the cell is empty (else otherwise)
+     */
+    public boolean isEmpty() {
+        return objects.isEmpty();
+    }
+
+    /**
      * @param cell
      * @return Returns the direction of cell if cell is an adjacent cell (null instead)
      */
