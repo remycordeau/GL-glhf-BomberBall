@@ -15,6 +15,7 @@ import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Constants;
+import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
 
@@ -91,4 +92,13 @@ public class GameStoryScreen extends GameScreen {
         }
     }
 
+    /**
+     * enemies path is calculated everytime a bomb has been droped
+     * @param dir
+     */
+    @Override
+    protected void dropBomb(Directions dir) {
+        super.dropBomb(dir);
+        enemies.forEach(Enemy::createAI);
+    }
 }
