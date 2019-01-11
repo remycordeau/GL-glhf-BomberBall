@@ -25,13 +25,13 @@ public class Bonus extends GameObject {
     public void initialize() {
         switch (type) {
             case SPEED:
-                sprite = Graphics.Sprites.get("flask_big_green");
+                sprite = Graphics.Sprites.get("arrowSpeed");
                 break;
             case BOMB_RANGE:
-                sprite = Graphics.Sprites.get("flask_big_red");
+                sprite = Graphics.Sprites.get("flame");
                 break;
             case BOMB_NUMBER:
-                sprite = Graphics.Sprites.get("flask_big_blue");
+                sprite = Graphics.Sprites.get("bomb");
                 break;
         }
     }
