@@ -75,7 +75,7 @@ public abstract class Enemy extends Character {
      * @param initial_position
      * @return Node
      */
-    public static Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){
+    public static Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){ //TODO: dérecursiver
         int i;
         Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
         Directions direction = Directions.UP;

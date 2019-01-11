@@ -57,6 +57,7 @@ public class GameStoryScreen extends GameScreen {
      */
     protected void nextPlayer() {
         //TODO: wait the execution of all tasks in the Timer
+        while (task.isScheduled()); //marche pas encore
         if (!current_player.isAlive()) {
             Bomberball.changeScreen(new DeadScreen(screen, maze_id));
         }
