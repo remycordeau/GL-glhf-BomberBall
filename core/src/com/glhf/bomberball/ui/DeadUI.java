@@ -48,22 +48,21 @@ public class DeadUI extends Table {
         this.add(player_animation).grow().row();
 
         // Buttons
-        dead = new Label(Translator.translate("game lost"), Graphics.GUI.getSkin());
+        dead = new Label(Translator.translate("Wasted !"), Graphics.GUI.getSkin());
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
         this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
 
-        replay = new AudioButton(Translator.translate("Relancer"),Graphics.GUI.getSkin());
+        replay = new AudioButton(Translator.translate("Replay level"),Graphics.GUI.getSkin());
         replay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMaze("maze_" + maze_id),screen.getMazeId()));
-                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(replay).spaceTop(Value.percentHeight(0.9f)).row();
 
-        back_story_menu = new AudioButton(Translator.translate("Retour à le selection niveau"),Graphics.GUI.getSkin());
+        back_story_menu = new AudioButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -72,12 +71,11 @@ public class DeadUI extends Table {
         });
         this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        ragequit = new AudioButton(Translator.translate("Retour menu"),Graphics.GUI.getSkin());
+        ragequit = new AudioButton(Translator.translate("Quit"),Graphics.GUI.getSkin());
         ragequit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
-                Audio.CLICK_BUTTON.play();
             }
         });
         this.add(ragequit).spaceTop(Value.percentHeight(0.9f)).row();

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.config.InputsConfig.KeyPriority;
 import com.glhf.bomberball.gameobject.Player;
@@ -25,7 +26,6 @@ public class GameMultiScreen extends GameScreen {
     public GameMultiScreen(Maze maze, int maze_id) {
         super(maze);
         this.maze_id = maze_id;
-
         config = new GameMultiConfig(); //Previously : config=GameMultiConfig.get("config game multi");
         //maze.applyConfig(config);
         players = maze.spawnPlayers(config);

@@ -3,6 +3,7 @@ package com.glhf.bomberball.screens;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
@@ -26,6 +27,18 @@ public abstract class GameScreen extends AbstractScreen {
 //        maze.exportConfig(filename);
         this.maze = maze;
         this.maze_drawer = new MazeDrawer(maze,1/3f,1f,2/10f,1f, MazeDrawer.Fit.BEST);
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        Audio.silence();
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        Audio.MULTI.playMusique();
     }
 
     @Override

@@ -61,7 +61,6 @@ public class EndLevelUI extends Table {
                 if(next_level<8){
                     screen.nextMaze();
                     Bomberball.changeScreen(new GameStoryScreen(screen,screen.maze,screen.getMazeId()));
-                    Audio.CLICK_BUTTON.play();
                 }
             }
         });

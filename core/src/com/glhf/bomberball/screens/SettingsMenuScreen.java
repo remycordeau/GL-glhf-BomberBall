@@ -10,7 +10,7 @@ import com.glhf.bomberball.ui.SettingsMenuUI;
 import com.glhf.bomberball.ui.SettingsMenuUI.InputButton;
 import com.glhf.bomberball.utils.WaitNextInput;
 
-public class SettingsMenuScreen extends AbstractScreen{
+public class SettingsMenuScreen extends MenuScreen{
 
     private final SettingsMenuUI ui;
     private InputProcessor inputProcessorSave;

@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.Constants;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class StoryMenuUI extends Table {
 
@@ -112,13 +112,12 @@ public class StoryMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 if (screen.isLevelUnlocked(screen.getMazeId())) { // allows to play the level only if it's unlocked
                     Bomberball.changeScreen(new GameStoryScreen(screen, screen.maze, screen.getMazeId()));
-                    Audio.CLICK_PLAY.play();
                 }
             }
         });
         buttons.add(play_button).row();
 
-        back_button = new TextButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
+        back_button = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         back_button.getLabel().setFontScale(0.8f, 0.8f);
         buttons.add(back_button).spaceTop(Value.percentHeight(0.9f));

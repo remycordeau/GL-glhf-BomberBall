@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
@@ -18,7 +17,7 @@ import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class MultiMenuUI extends Table {
 
@@ -73,8 +72,7 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 maze_preview.setMaze(screen.maze);
-                Audio.CLICK_BUTTON.play();
-            }
+           }
         });
 
         //ADDING THE BUTTONS TO THE TABLE
@@ -141,7 +139,6 @@ public class MultiMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextP2();
                 update();
-                Audio.CLICK_BUTTON.play();
             }
         });
         Table Vp2 = new Table();

@@ -4,7 +4,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.ui.WelcomingMenuUI;
 
-public class WelcomingMenuScreen extends AbstractScreen {
+public class WelcomingMenuScreen extends MenuScreen {
 
     public WelcomingMenuScreen(){
         super();

@@ -9,7 +9,7 @@ import com.glhf.bomberball.ui.InfiniteModeUI;
 
 import java.util.ArrayList;
 
-public class InfiniteModeScreen extends AbstractScreen {
+public class InfiniteModeScreen extends MenuScreen {
     //attributes
     private GameMultiConfig config;
     private ArrayList<Character> characters; // one player and some enemies

@@ -8,7 +8,7 @@ import com.glhf.bomberball.ui.MultiMenuUI;
  * Class that contain the intelligence of the Multi Menu.
  * Extends AbstractScreen
  */
-public class MultiMenuScreen extends AbstractScreen {
+public class MultiMenuScreen extends MenuScreen {
 
     public Maze maze;
     public static String[] playable = {"knight_m", "knight_f","black_knight", "elf_f", "elf_m", "wizzard_m", "wizzard_f", "no_player"};
