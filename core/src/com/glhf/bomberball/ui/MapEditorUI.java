@@ -20,10 +20,10 @@ import com.glhf.bomberball.utils.VectorInt2;
 import java.util.ArrayList;
 
 public class MapEditorUI extends Table {
+
     private MapEditorScreen screen;
     private Maze maze;
     private MazeDrawer maze_preview;
-    // selected cell to put an object on it
     private Cell selected_cell;
 
 
@@ -31,7 +31,7 @@ public class MapEditorUI extends Table {
     {
         this.screen = screen;
 
-        this.maze=maze;
+        this.maze = maze;
         maze_preview = new MazeDrawer(maze, 0.0f, 0.9f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
 
         this.setFillParent(true);

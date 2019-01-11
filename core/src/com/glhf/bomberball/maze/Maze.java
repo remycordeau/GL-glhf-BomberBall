@@ -31,6 +31,18 @@ public class Maze{
     public Maze() {
     }
 
+    public Maze(int w, int h) {
+        this.height = h;
+        this.width = w;
+        cells = new Cell[w][h];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                cells[x][y] = new Cell(x, y);
+            }
+        }
+        initialize();
+    }
+
     public void initialize()
     {
         for (int x = 0; x < width; x++) {
@@ -39,7 +51,6 @@ public class Maze{
             }
         }
     }
-
 
     public Player spawnPlayer(GameSoloConfig config)
     {
