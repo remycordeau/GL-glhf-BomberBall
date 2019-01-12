@@ -24,7 +24,6 @@ public class InfiniteModeScreen extends MenuScreen {
         super();
         config = GameSoloConfig.get();
         maze = MazeBuilder.createInfinityMaze();
-        maze.initialize();
         addUI(new InfiniteModeUI(this));
     }
 

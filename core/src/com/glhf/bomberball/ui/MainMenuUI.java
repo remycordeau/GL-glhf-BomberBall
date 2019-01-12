@@ -42,11 +42,11 @@ public class MainMenuUI extends Table {
      */
     private void addButtons()
     {
-        Maze mazex = Maze.importMaze("maze_0");
-        mazex.initialize();
-        Cell origin = mazex.getCellAt(0,0);
-        Cell test = mazex.getCellAt(0,1);
-        System.out.println("Le maze de test est finissable : " + MazeTransversal.isReachableCell(origin, test));
+//        Maze mazex = Maze.importMaze("maze_0");
+//        mazex.initialize();
+//        Cell origin = mazex.getCellAt(0,0);
+//        Cell test = mazex.getCellAt(0,1);
+//        System.out.println("Le maze de test est finissable : " + MazeTransversal.isReachableCell(origin, test));
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
