@@ -93,10 +93,14 @@ public class GameStoryScreen extends GameScreen {
                 }
             }
 
-            current_player.initiateTurn();
-            setMoveEffect();
-            setMoveMode();
-            input_handler.lock(false);
+            try {
+                current_player.initiateTurn();
+                setMoveEffect();
+                setMoveMode();
+                input_handler.lock(false);
+            } catch (RuntimeException e) {
+                System.out.println("The player probably died");
+            }
         }
     }
 
