@@ -1,6 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
@@ -18,7 +19,7 @@ public class MazeBuilder {
     private static double probFreeCase;
 
     public static Maze createInfinityMaze(){
-        probFreeCase = 2.0/3;
+        probFreeCase = GameSoloConfig.get("config_game_solo").probFreeCase;
 
         maze = new Maze();
 
@@ -77,8 +78,6 @@ public class MazeBuilder {
                 }
             }
         }
-
-        //TODO : verification passage possible
         Cell originPos = maze.getCellAt(0, 0);
         if(!MazeTransversal.isReachableCell(originPos, cellDoor)){
             System.out.println("new Maze");

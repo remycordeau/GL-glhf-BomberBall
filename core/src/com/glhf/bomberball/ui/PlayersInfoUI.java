@@ -31,7 +31,7 @@ public class PlayersInfoUI extends Table {
      * creates the info UI for the solo mode (only a single player)
      * @param player
      */
-    public PlayersInfoUI(Player player, GameStoryScreen screen) {
+    public PlayersInfoUI(Player player) {
             PlayerWidget pw = new PlayerWidget(player);
             this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
             TextButton back = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());

@@ -10,13 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.gameobject.Enemy;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.screens.GameInfiniteScreen;
 import com.glhf.bomberball.screens.GameStoryScreen;
 
 import java.util.ArrayList;
 
-public class SoloUI extends Table {
+public class InfiniteUI extends Table {
 
-    public SoloUI( Player player, GameStoryScreen screen) {
+    public InfiniteUI( Player player, GameInfiniteScreen screen) {
 
         //TODO resolve bug with the directions keys
         this.setFillParent(true);

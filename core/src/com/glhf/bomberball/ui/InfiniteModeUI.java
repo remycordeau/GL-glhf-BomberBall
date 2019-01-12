@@ -4,8 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
@@ -17,9 +19,10 @@ public class InfiniteModeUI extends Table {
     private Label label;
     private int highscore;
     private GameSoloConfig config;
-    private Maze maze;
+    private Maze mazex;
 
-    public InfiniteModeUI() {
+    public InfiniteModeUI(InfiniteModeScreen screen) {
+        this.screen = screen;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));
         this.padRight(Value.percentWidth(0.25f));
@@ -27,7 +30,7 @@ public class InfiniteModeUI extends Table {
         this.padBottom(Value.percentHeight(0.1f));
 
         config = new GameSoloConfig();
-        maze = Maze.importMaze("maze_" + 1);
+        mazex = screen.maze;
         highscore = config.highscore;
 
         this.setFillParent(true);
@@ -84,8 +87,13 @@ public class InfiniteModeUI extends Table {
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
-        play = new TextButton(Translator.translate("Play"), skin);
-        play.addListener(new ScreenChangeListener(SoloMenuScreen.class));
+        play = new AudioButton(Translator.translate("Play"), Graphics.GUI.getSkin());
+        play.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Bomberball.changeScreen(new GameInfiniteScreen(screen, mazex));
+            }
+        });
 
 
         //Current Highscore
