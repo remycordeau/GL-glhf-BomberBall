@@ -3,9 +3,7 @@ package com.glhf.bomberball.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.glhf.bomberball.Bomberball;
@@ -23,17 +21,13 @@ import com.glhf.bomberball.utils.Resolutions;
 
 public class SettingsMenuUI extends Table {
 
-    private final EventListener button_listener;
     private final Table[] contents;
     private final TextButton[] labels;
     private final ButtonGroup<InputButton> inputsButtonGroup;
-    private final ClickListener labels_listener;
-    private SettingsMenuScreen screen;
 
     //Constructor
     public SettingsMenuUI(SettingsMenuScreen screen) {
         super();
-        this.screen = screen;
         AppConfig appConfig = AppConfig.get();
         InputsConfig inputsConfig = InputsConfig.get();
         this.setFillParent(true);
@@ -45,21 +39,21 @@ public class SettingsMenuUI extends Table {
         Stack stack = new Stack();
         contents = new Table[NB_TABS];
 
-        labels_listener = new ClickListener() {
+        ClickListener labels_listener = new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                int selected_index=0;
-                for(int i=0; i<NB_TABS; i++) {
+                int selected_index = 0;
+                for (int i = 0; i < NB_TABS; i++) {
                     contents[i].setVisible(labels[i].isChecked());
-                    if(labels[i].isChecked())
-                        selected_index=i;
+                    if (labels[i].isChecked())
+                        selected_index = i;
                 }
-                stack.swapActor(stack.getChildren().get(NB_TABS-1),stack.findActor(""+selected_index));
+                stack.swapActor(stack.getChildren().get(NB_TABS - 1), stack.findActor("" + selected_index));
             }
         };
 
-        button_listener = new ClickListener() {
+        EventListener button_listener = new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int b) {
                 final InputButton button = (InputButton) event.getListenerActor();
@@ -161,7 +155,7 @@ public class SettingsMenuUI extends Table {
         AppConfig config = AppConfig.get();
         public ParameterScreenSize() {
             super("screen size");
-            SelectBox<Resolutions> value = new SelectBox<Resolutions>(Graphics.GUI.getSkin());
+            SelectBox<Resolutions> value = new SelectBox<>(Graphics.GUI.getSkin());
             value.setItems(Resolutions.values());
             value.setSelected(config.resolution);
             value.addListener(new ChangeListener() {

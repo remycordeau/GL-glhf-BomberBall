@@ -2,7 +2,6 @@ package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
@@ -10,12 +9,10 @@ import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Maze{
 
@@ -56,13 +53,12 @@ public class Maze{
     public Player spawnPlayer(GameSoloConfig config)
     {
         Vector2 p = spawn_positions.get(0);
-        Player player = spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
-        return player;
+        return spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
     }
 
     public ArrayList<Player> spawnPlayers(GameMultiConfig config)
     {
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
         for (int i = 0; i < config.player_count; i++) {
             Vector2 p = spawn_positions.get(i);
             Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
@@ -84,8 +80,7 @@ public class Maze{
 
     public ArrayList<Enemy> spawnEnemies(GameSoloConfig config) {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        for (int i = 0; i < enemy_spawn_positions.size(); i++) {
-            Vector2 p = enemy_spawn_positions.get(i);
+        for (Vector2 p : enemy_spawn_positions) {
             Enemy enemy = spawnEnemy(config, cells[(int) p.x][(int) p.y]);
             enemies.add(enemy);
         }
@@ -115,7 +110,7 @@ public class Maze{
     }
 
     public ArrayList<Player> getPlayers() {
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 players.addAll(cells[x][y].getInstancesOf(Player.class));
@@ -154,7 +149,7 @@ public class Maze{
     }
 
     public ArrayList<Enemy> getEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        ArrayList<Enemy> enemies = new ArrayList<>();
         for(Cell[] cell_column : cells){
             for(Cell cell : cell_column){
                 for(GameObject o : cell.getGameObjects()){

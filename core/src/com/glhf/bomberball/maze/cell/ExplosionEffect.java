@@ -16,7 +16,7 @@ public class ExplosionEffect extends CellEffect {
     public ExplosionEffect(Cell cell, Directions dir, int range) {
         super(cell);
         time_start = Bomberball.time_elapsed;
-        animation = new Animation<AtlasRegion>(
+        animation = new Animation<>(
                 0.07f,
                 Graphics.Anims.get("cell/explo/" + getAnimation(dir, range)),
                 Animation.PlayMode.NORMAL);

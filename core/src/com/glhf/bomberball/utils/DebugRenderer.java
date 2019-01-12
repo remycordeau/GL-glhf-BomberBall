@@ -12,14 +12,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 */
 public class DebugRenderer {
 
-    private SpriteBatch batch;
     private float width;
     private float height;
     private ShapeRenderer shapeRenderer;
 
-    public DebugRenderer(SpriteBatch batch)
+    public DebugRenderer()
     {
-        this.batch = batch;
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         shapeRenderer = new ShapeRenderer();

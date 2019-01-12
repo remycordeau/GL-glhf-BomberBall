@@ -1,7 +1,6 @@
 package com.glhf.bomberball.gameobject;
 
 
-import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;

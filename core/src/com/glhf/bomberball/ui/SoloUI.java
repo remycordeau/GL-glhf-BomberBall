@@ -4,15 +4,11 @@
  */
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
-import com.glhf.bomberball.gameobject.Enemy;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.screens.GameStoryScreen;
-
-import java.util.ArrayList;
 
 public class SoloUI extends Table {
 

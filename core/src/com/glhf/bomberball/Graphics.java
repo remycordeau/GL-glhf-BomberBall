@@ -1,7 +1,6 @@
 package com.glhf.bomberball;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -39,7 +38,7 @@ public class Graphics {
         private static void load()
         {
             sprites_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_SPRITES));
-            sprites_atlasRegions = new HashMap<String, AtlasRegion>();
+            sprites_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : sprites_atlasTexture.getRegions()) {
                 sprites_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("Sprite " + atlasRegion.name + " loaded");
@@ -63,7 +62,7 @@ public class Graphics {
         private static void load()
         {
             anim_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_ANIMS));
-            anim_atlasRegions = new HashMap<String, Array<AtlasRegion>>();
+            anim_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : anim_atlasTexture.getRegions()) {
                 if (!anim_atlasRegions.containsKey(atlasRegion.name)) {
                     anim_atlasRegions.put(atlasRegion.name, anim_atlasTexture.findRegions(atlasRegion.name));
@@ -117,9 +116,6 @@ public class Graphics {
             skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
 
             skin.add("default", Color.WHITE);
-
-            //
-            skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
@@ -223,7 +219,7 @@ public class Graphics {
         private static void loadAtlas()
         {
             gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
-            gui_atlasRegions = new HashMap<String, AtlasRegion>();
+            gui_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
                 gui_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("GUI element" + atlasRegion.name + " loaded");

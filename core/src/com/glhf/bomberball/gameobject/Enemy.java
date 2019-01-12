@@ -123,7 +123,6 @@ public abstract class Enemy extends Character {
         return ways;
     }
 
-
     /**
      * this method gives the longest way that the active enemy will folow, chose the longest path
      * @param initial_node

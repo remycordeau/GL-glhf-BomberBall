@@ -2,7 +2,6 @@ package com.glhf.bomberball.audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.glhf.bomberball.gameobject.Bonus;
 import com.glhf.bomberball.utils.Constants;
 
 /**

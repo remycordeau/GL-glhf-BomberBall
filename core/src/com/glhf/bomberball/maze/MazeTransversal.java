@@ -16,9 +16,9 @@ public class MazeTransversal{
      * Breadth First Search algorithm (BFS) stopping at depth range
      */
     public static ArrayList<Cell> getReacheableCellsInRange(Cell cell_origin, int range) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> active_queue = new LinkedList<Cell>();
-        LinkedList<Cell> inactive_queue = new LinkedList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
+        LinkedList<Cell> active_queue = new LinkedList<>();
+        LinkedList<Cell> inactive_queue = new LinkedList<>();
         int depth = 0;
         cells.add(cell_origin);
         active_queue.add(cell_origin);
@@ -36,7 +36,7 @@ public class MazeTransversal{
             depth++;
 
             active_queue = inactive_queue;
-            inactive_queue = new LinkedList<Cell>();
+            inactive_queue = new LinkedList<>();
         }
         return cells;
     }
@@ -48,8 +48,8 @@ public class MazeTransversal{
      * Breadth First Search algorithm (BFS)
      */
     public static ArrayList<Cell> getReacheableCells(Cell cell_origin) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> queue = new LinkedList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
+        LinkedList<Cell> queue = new LinkedList<>();
         cells.add(cell_origin);
         queue.add(cell_origin);
         while (!queue.isEmpty()) {
@@ -65,8 +65,8 @@ public class MazeTransversal{
     }
 
     public static boolean isReachableCell(Cell cell_origin, Cell cell_final){
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> queue = new LinkedList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
+        LinkedList<Cell> queue = new LinkedList<>();
         cells.add(cell_origin);
         queue.add(cell_origin);
         while (!queue.isEmpty()) {

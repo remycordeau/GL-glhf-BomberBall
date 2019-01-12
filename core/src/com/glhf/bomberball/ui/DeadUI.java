@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
@@ -25,8 +24,6 @@ import com.glhf.bomberball.screens.StoryMenuScreen;
 
 public class DeadUI extends Table {
 
-    private Label dead;
-    private TextButton replay, back_story_menu,ragequit;
     private StoryMenuScreen screen;
     private int maze_id;
 
@@ -43,17 +40,17 @@ public class DeadUI extends Table {
      */
     private void addButtons() {
 
-        AnimationActor player_animation = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get("mort/idle"), Animation.PlayMode.LOOP));
+        AnimationActor player_animation = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get("mort/idle"), Animation.PlayMode.LOOP));
         player_animation.mustMove(true);
         this.add(player_animation).grow().row();
 
         // Buttons
-        dead = new Label(Translator.translate("Wasted !"), Graphics.GUI.getSkin());
+        Label dead = new Label(Translator.translate("Wasted !"), Graphics.GUI.getSkin());
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
         this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
 
-        replay = new AudioButton(Translator.translate("Replay level"),Graphics.GUI.getSkin());
+        TextButton replay = new AudioButton(Translator.translate("Replay level"), Graphics.GUI.getSkin());
         replay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -62,7 +59,7 @@ public class DeadUI extends Table {
         });
         this.add(replay).spaceTop(Value.percentHeight(0.9f)).row();
 
-        back_story_menu = new AudioButton(Translator.translate("Back to level selection"),Graphics.GUI.getSkin());
+        TextButton back_story_menu = new AudioButton(Translator.translate("Back to level selection"), Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -71,7 +68,7 @@ public class DeadUI extends Table {
         });
         this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        ragequit = new AudioButton(Translator.translate("Quit"),Graphics.GUI.getSkin());
+        TextButton ragequit = new AudioButton(Translator.translate("Quit"), Graphics.GUI.getSkin());
         ragequit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

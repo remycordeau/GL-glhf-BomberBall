@@ -1,7 +1,6 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.math.Vector2;
-import com.glhf.bomberball.config.Config;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
@@ -27,7 +26,7 @@ public class MazeBuilder {
         maze.height = 7 + (int) (Math.random()*3)*2;
         maze.width = 9 + (int) (Math.random()*3)*2;
 
-        maze.spawn_positions = new ArrayList<Vector2>();
+        maze.spawn_positions = new ArrayList<>();
         maze.spawn_positions.add(new Vector2(0, rand.nextInt(maze.height)));
 
         //TODO: ajout des ennemis à refaire
@@ -101,9 +100,7 @@ public class MazeBuilder {
                 }
                 range_start=range_end;
             }
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

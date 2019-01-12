@@ -4,8 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.GameMultiScreen;
 
 import java.util.ArrayList;

@@ -39,7 +39,7 @@ public abstract class Character extends GameObject {
      */
     protected void setAnimation(String animation_name)
     {
-        animation = new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
+        animation = new Animation<>(0.15f, Graphics.Anims.get(skin + "/" + animation_name), Animation.PlayMode.LOOP);
     }
 
     public Animation<TextureAtlas.AtlasRegion> getAnimation() {

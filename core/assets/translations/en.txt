@@ -16,7 +16,6 @@
 
 #Story Menus
 "Level Selection"	:	"Level Selection"
-"Ragequit ?"		:	"Ragequit ?"
 "Wasted !"		    :	"Wasted !"
 "égalité ..."		:	"égalité ..."
 "Lost!"				:	"Lost!"

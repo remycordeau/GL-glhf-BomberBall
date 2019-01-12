@@ -25,7 +25,7 @@ public class MapEditorScreen extends MenuScreen {
     @Override
     protected void registerActionsHandlers() {
         super.registerActionsHandlers();
-        input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, (x,y) -> dropSelectedObject(x, y));
+        input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, this::dropSelectedObject);
     }
 
     private void dropSelectedObject(float x, float y) {
@@ -36,8 +36,7 @@ public class MapEditorScreen extends MenuScreen {
                 cell.removeGameObjects();
                 cell.addGameObject(classSelected.newInstance());
             }
-        } catch (InstantiationException e) { e.printStackTrace(); }
-          catch (IllegalAccessException e) { e.printStackTrace(); }
+        } catch (InstantiationException | IllegalAccessException e) { e.printStackTrace(); }
     }
 
     public <T extends GameObject> void select(Class<T> clazz){
