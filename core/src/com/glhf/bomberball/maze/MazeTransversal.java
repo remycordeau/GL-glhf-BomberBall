@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.maze.cell.Cell;
 
 import java.util.ArrayList;
@@ -61,6 +62,28 @@ public class MazeTransversal{
             }
         }
         return cells;
+    }
+
+    public static boolean isReachableCell(Cell cell_origin, Cell cell_final){
+        ArrayList<Cell> cells = new ArrayList<Cell>();
+        LinkedList<Cell> queue = new LinkedList<Cell>();
+        cells.add(cell_origin);
+        queue.add(cell_origin);
+        while (!queue.isEmpty()) {
+            Cell c = queue.poll();
+            if (c.getX() == cell_final.getX() && c.getY() == cell_final.getY()) {
+                return true;
+            }
+            for (Cell other : c.getAdjacentCells()) {
+                if(other.getInstancesOf(IndestructibleWall.class).size() == 0){
+                    if (!cells.contains(other)) {
+                        queue.add(other);
+                        cells.add(other);
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.utils.Constants;
@@ -164,24 +165,6 @@ public class Maze{
         return enemies;
     }
 
-    public Cell getposDoor(){
-        int xDoor = 0;
-        int yDoor = 0;
-        for(int x = 0; x<this.width; x++) {
-            for(int y = 0; y<this.height; y++){
-                Cell cell = cells[x][y];
-                for (GameObject go : cell.getGameObjects()) {
-                    if (Door.class.isInstance(go)) {
-                        xDoor = x;
-                        yDoor = y;
-                        break;
-                    }
-                }
-            }
-        }
-        Cell posDoor = new Cell(xDoor, yDoor);
-        return posDoor;
-    }
 
 //    public void applyConfig(GameConfig config) {
 //        ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -197,39 +180,6 @@ public class Maze{
 //        }
 //    }
 
-    public static ArrayList<Cell> getReacheableCells(Cell cell_origin) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> queue = new LinkedList<Cell>();
-        cells.add(cell_origin);
-        queue.add(cell_origin);
-        while (!queue.isEmpty()) {
-            Cell c = queue.poll();
-            for (Cell other : c.getAdjacentCells()) {
-                for(GameObject go : other.getGameObjects()) {
-                    if (!IndestructibleWall.class.isInstance(go)){
-                        if (!cells.contains(other)) {
-                            queue.add(other);
-                            cells.add(other);
-                        }
-                    }
-                }
-            }
-        }
-        return cells;
-    }
-
-
-    public boolean isReachableCell(Cell cell_origin, Cell cell_final){
-        boolean isReachable = false;
-        ArrayList<Cell> reachableCases = this.getReacheableCells(cell_origin);
-        for (Cell cell : reachableCases) {
-            if (cell.getX() == cell_final.getX() && cell.getY() == cell_final.getY()) {
-                isReachable = true;
-            }
-        }
-        return isReachable;
-    }
-
     private static void createGson() {
         gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(GameObject.class, new GameObjectTypeAdapter())
@@ -241,11 +191,9 @@ public class Maze{
         if(gson==null) {
             createGson();
         }
-        try {
-            Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE + name + ".json")), Maze.class);
-            maze.initialize();
-            return maze;
-        } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE + name + ".json").readString(), Maze.class);
+        maze.initialize();
+        return maze;
     }
 
     public void export(String name)
@@ -254,7 +202,8 @@ public class Maze{
             createGson();
         }
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_MAZE + name + ".json"));
+            File file = Gdx.files.internal(Constants.PATH_MAZE + name + ".json").file();
+            Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
         } catch (IOException e) {

@@ -18,6 +18,8 @@ import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
+
 
 public class VictoryMenuUI extends Table {
     private int previous_maze_id;
@@ -32,14 +34,14 @@ public class VictoryMenuUI extends Table {
 
         if (player == null) {
             this.add(new Label(Translator.translate("égalité ..."), Graphics.GUI.getSkin(), "default")).row();
-            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/VictoryMenu.png")));
             this.setBackground(texture);
         } else {
             this.add(new Label(Translator.translate("VICTOIRE !"), Graphics.GUI.getSkin(), "default")).row();
             AnimationActor player_animation = new AnimationActor(player.getAnimation());
             player_animation.mustMove(true);
             this.add(player_animation).grow().row();
-            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/VictoryMenu.png")));
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/VictoryMenu.png")));
             this.setBackground(texture);
         }
 

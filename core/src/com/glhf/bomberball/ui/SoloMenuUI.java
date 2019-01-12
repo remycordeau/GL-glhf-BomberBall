@@ -21,6 +21,8 @@ import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
+
 
 public class SoloMenuUI extends Table {
 
@@ -30,7 +32,7 @@ public class SoloMenuUI extends Table {
         super();
         // GameSoloConfig.get("config_game_solo").resetLevels();
         this.setFillParent(true);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/StoryMenu.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/StoryMenu.png")));
         this.setBackground(texture);
         initializeButtons();
     }

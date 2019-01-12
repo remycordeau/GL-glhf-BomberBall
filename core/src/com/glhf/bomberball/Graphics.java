@@ -28,6 +28,8 @@ import com.glhf.bomberball.utils.Constants;
 
 import java.util.HashMap;
 
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
+
 public class Graphics {
 
     public static class Sprites {
@@ -36,7 +38,7 @@ public class Graphics {
 
         private static void load()
         {
-            sprites_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_SPRITES);
+            sprites_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_SPRITES));
             sprites_atlasRegions = new HashMap<String, AtlasRegion>();
             for (AtlasRegion atlasRegion : sprites_atlasTexture.getRegions()) {
                 sprites_atlasRegions.put(atlasRegion.name, atlasRegion);
@@ -60,7 +62,7 @@ public class Graphics {
 
         private static void load()
         {
-            anim_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_ANIMS);
+            anim_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_ANIMS));
             anim_atlasRegions = new HashMap<String, Array<AtlasRegion>>();
             for (AtlasRegion atlasRegion : anim_atlasTexture.getRegions()) {
                 if (!anim_atlasRegions.containsKey(atlasRegion.name)) {
@@ -119,10 +121,8 @@ public class Graphics {
             //
             skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
-            //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
-
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
+            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
             FreeTypeFontParameter parameter = new FreeTypeFontParameter();
             parameter.size = 32;
             BitmapFont font = generator.generateFont(parameter);
@@ -136,8 +136,8 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_disable_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_disable_9patch.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
@@ -222,7 +222,7 @@ public class Graphics {
 
         private static void loadAtlas()
         {
-            gui_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_GUI);
+            gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
             gui_atlasRegions = new HashMap<String, AtlasRegion>();
             for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
                 gui_atlasRegions.put(atlasRegion.name, atlasRegion);

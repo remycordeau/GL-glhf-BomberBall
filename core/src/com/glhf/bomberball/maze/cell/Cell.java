@@ -141,6 +141,13 @@ public class Cell {
     }
 
     /**
+     * Removes all objects from the cell
+     */
+    public void removeGameObjects() {
+        objects.clear();
+    }
+
+    /**
      * @return Returns true if that cell is walkable (false instead)
      */
     public boolean isWalkable()

@@ -8,8 +8,8 @@ public class Constants {
     public static final int BOX_HEIGHT = 16;
 
     // constants for paths
-    public static final String PATH_ASSET         = "core/assets/";
-    public static final String PATH_MAZE          = PATH_ASSET+"maze/";
+    public static final String PATH_ASSET         = "";
+    public static final String PATH_MAZE          = PATH_ASSET+"mazes/";
     public static final String PATH_GRAPHICS      = PATH_ASSET+"graphics/";
     public static final String PATH_CONFIGS       = PATH_ASSET+"configs/";
     public static final String PATH_TRANSLATIONS  = PATH_ASSET+"translations/";

@@ -19,9 +19,12 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class MainMenuUI extends Table {
 
@@ -31,7 +34,7 @@ public class MainMenuUI extends Table {
         this.padRight(Value.percentWidth(0.25f));
         this.padTop(Value.percentHeight(0.1f));
         this.padBottom(Value.percentHeight(0.1f));
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/MainMenu.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/MainMenu.png")));
         this.setBackground(texture);
         addButtons();
     }
@@ -42,9 +45,10 @@ public class MainMenuUI extends Table {
     private void addButtons()
     {
         Maze mazex = Maze.importMaze("maze_0");
-        Cell origin = new Cell(0, 0);
-        Cell test = new Cell(0, 1);
-        System.out.println("Le maze de test est finissable : " + mazex.isReachableCell(origin, test));
+        mazex.initialize();;
+        Cell origin = mazex.getCellAt(0,0);
+        Cell test = mazex.getCellAt(0,1);
+        System.out.println("Le maze de test est finissable : " + MazeTransversal.isReachableCell(origin, test));
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 

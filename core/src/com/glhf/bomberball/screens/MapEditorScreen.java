@@ -32,8 +32,10 @@ public class MapEditorScreen extends MenuScreen {
         try {
             VectorInt2 coords = ui.screenPosToCell(x,y);
             Cell cell = maze.getCellAt(coords.x, coords.y);
-            if(cell != null && cell.isEmpty() && classSelected != null)
+            if(cell != null && classSelected != null) {
+                cell.removeGameObjects();
                 cell.addGameObject(classSelected.newInstance());
+            }
         } catch (InstantiationException e) { e.printStackTrace(); }
           catch (IllegalAccessException e) { e.printStackTrace(); }
     }

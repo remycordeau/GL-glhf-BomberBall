@@ -1,6 +1,8 @@
 package com.glhf.bomberball;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.glhf.bomberball.utils.Constants;
 
 import java.io.*;
@@ -15,27 +17,22 @@ public class Translator {
     private static String file_name;
 
     public static void load(String file_name){
-        try {
-            Translator.file_name=file_name;
-            String path = Constants.PATH_TRANSLATIONS +file_name+".txt";
-            dictionary = new HashMap<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), Charset.forName("UTF-8")));
-            Pattern pattern = Pattern.compile("^\\s*\"(.*)\"\\s*:\\s*\"(.*)\"\\s*");
-            String line;
-            while ((line = br.readLine()) != null) {
-                if(line.matches("^\\s*$") || line.matches("^#.*")) continue;
-                Matcher m = pattern.matcher(line);
-                if(m.find())
-                    dictionary.put(m.group(1), m.group(2));
-                else
-                    throw new RuntimeException("File "+path+" wrongly formated");
-            }
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-          catch (IOException e) { e.printStackTrace(); }
+        Translator.file_name=file_name;
+        String path = Constants.PATH_TRANSLATIONS +file_name+".txt";
+        dictionary = new HashMap<>();
+        FileHandle br = Gdx.files.internal(path);
+        Pattern pattern = Pattern.compile("^\\s*\"(.*)\"\\s*:\\s*\"(.*)\"\\s*");
+        for(String line : br.readString().split("\n")) {
+            if(line.matches("^\\s*$") || line.matches("^#.*")) continue;
+            Matcher m = pattern.matcher(line);
+            if(m.find())
+                dictionary.put(m.group(1), m.group(2));
+            else
+                throw new RuntimeException("File "+path+" wrongly formated");
+        }
     }
 
     public static String translate(String key, Object... objects){
-        //TODO enlever la condition d'écriture
         if(!dictionary.containsKey(key)){
 //            dictionary.put(key,key);
             System.err.println(key+"unkown in translation file "+file_name+".txt");

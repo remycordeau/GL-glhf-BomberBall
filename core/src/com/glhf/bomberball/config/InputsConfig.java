@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.glhf.bomberball.config.InputsConfig.KeyPriority.SECONDARY;
+
 /**
  * class InputsConfig
  *
@@ -30,43 +32,34 @@ public class InputsConfig extends Config {
     }
 
     /**
-     * Default constructor
+     * Default constructor with the default inputs
      */
-    private InputsConfig() {
+    public InputsConfig() {
         id_list = new String[Action.values().length][KeyPriority.values().length];
-    }
 
-    /**
-     * Method to generate the default InputsConfig class
-     * @return default inputs configuration class
-     */
-    public static InputsConfig defaultConfig() {
-        InputsConfig c = new InputsConfig();
-
-        c.setInputKeyCode(Action.MOVE_DOWN, Keys.DOWN);
-        c.setInputKeyCode(Action.MOVE_UP, Keys.UP);
-        c.setInputKeyCode(Action.MOVE_LEFT, Keys.LEFT);
-        c.setInputKeyCode(Action.MOVE_RIGHT, Keys.RIGHT);
-        c.setInputKeyCode(Action.DROP_BOMB_LEFT, Keys.NUMPAD_4);
-        c.setInputKeyCode(Action.DROP_BOMB_UP, Keys.NUMPAD_8);
-        c.setInputKeyCode(Action.DROP_BOMB_RIGHT, Keys.NUMPAD_6);
-        c.setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
-        c.setInputKeyCode(Action.MODE_MOVE, Keys.D);
-        c.setInputKeyCode(Action.MODE_BOMB, Keys.B);
-        c.setInputKeyCode(Action.ENDTURN, Keys.F);
-        c.setInputKeyCode(Action.ENDTURN, Keys.SPACE);
-        c.setInputKeyCode(Action.DROP_BOMB, Keys.L);
-        c.setInputKeyCode(Action.MENU_GO_BACK, Keys.DEL);
+        setInputKeyCode(Action.MOVE_DOWN, Keys.DOWN);
+        setInputKeyCode(Action.MOVE_UP, Keys.UP);
+        setInputKeyCode(Action.MOVE_LEFT, Keys.LEFT);
+        setInputKeyCode(Action.MOVE_RIGHT, Keys.RIGHT);
+        setInputKeyCode(Action.DROP_BOMB_LEFT, Keys.NUMPAD_4);
+        setInputKeyCode(Action.DROP_BOMB_UP, Keys.NUMPAD_8);
+        setInputKeyCode(Action.DROP_BOMB_RIGHT, Keys.NUMPAD_6);
+        setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
+        setInputKeyCode(Action.MODE_MOVE, Keys.D);
+        setInputKeyCode(Action.MODE_BOMB, Keys.B);
+        setInputKeyCode(Action.ENDTURN, Keys.F);
+        setInputKeyCode(Action.ENDTURN, Keys.SPACE, SECONDARY);
+        setInputKeyCode(Action.DROP_BOMB, Keys.L);
+        setInputKeyCode(Action.MENU_GO_BACK, Keys.ESCAPE);
 
 
-        c.setInputKeyCode(Action.NEXT_SCREEN, Keys.ENTER);
+        setInputKeyCode(Action.NEXT_SCREEN, Keys.ENTER);
+        setInputButtonCode(Action.NEXT_SCREEN, Buttons.LEFT, SECONDARY);
 
 
-        c.setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
-        c.setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
-        //c.setInputButtonCode(Buttons.RIGHT, Action.DROP_BOMB);
-
-        return c;
+        setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
+        setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
+        //setInputButtonCode(Buttons.RIGHT, Action.DROP_BOMB);
     }
 
     public static InputsConfig get() {
