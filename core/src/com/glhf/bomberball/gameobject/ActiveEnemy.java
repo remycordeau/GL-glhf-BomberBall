@@ -8,7 +8,6 @@ public class ActiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        //this.way = this.longestWayMovesSequence(Enemy.constructWays(null, this.getCell()));
         this.way = this.longestWayMovesSequence(Enemy.constructWays(this.getCell()));
     }
 }

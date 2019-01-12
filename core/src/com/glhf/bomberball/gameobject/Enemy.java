@@ -76,39 +76,6 @@ public abstract class Enemy extends Character {
      * @param initial_position
      * @return Node
      */
-    /*public static Node constructWays(ArrayList<Cell> ancestors, Cell initial_position){ //TODO: dérecursiver
-        int i;
-        Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
-        Directions direction = Directions.UP;
-        Cell current_adjacent_cell;
-        //if ancestors is null create en empty family
-        ArrayList<Cell> family = (ancestors==null ? new ArrayList<>() : new ArrayList<>(ancestors));
-        family.add(ways.getMatching_cell());
-        for(i=0; i<4; i++){ // because, all cells have 4 adjacent cells
-            // stop condition no walkable adjacent cell or all adjacent way in acestors
-            switch (i){
-                case 0 : direction = Directions.UP;
-                    break;
-                case 1 : direction = Directions.RIGHT;
-                    break;
-                case 2 : direction = Directions.DOWN;
-                    break;
-                case 3 : direction = Directions.LEFT;
-                    break;
-            }
-            current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(direction);
-            //stop condition
-            if(current_adjacent_cell==null
-                    || !current_adjacent_cell.isWalkable()
-                    || (ways.getAncestors()!=null && ways.getAncestors().contains(current_adjacent_cell))){
-                ways.setSons(null, i);
-            }
-            else{
-                ways.setSons(constructWays(family, current_adjacent_cell), i);
-            }
-        }
-        return ways;
-    }*/
     public static Node constructWays(Cell initial_position) {
         Node ways = new Node(null, initial_position);
         LinkedList<Node> to_construct = new LinkedList<>();
