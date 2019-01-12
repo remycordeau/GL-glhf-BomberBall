@@ -82,7 +82,6 @@ public abstract class Enemy extends Character {
         Node current_node;
         Node son;
         ArrayList<Cell> family;
-        Directions direction = Directions.UP;
         Cell current_adjacent_cell;
         //add the root to to_construct
         to_construct.add(ways);
@@ -90,23 +89,13 @@ public abstract class Enemy extends Character {
         while (to_construct.size() > 0) {
             current_node = to_construct.poll(); //get the next element to construct
             //create sons and adding them to to_construct
-            for (int i=0; i<4; i++) {
-                switch (i){ //traduction of i in a direction
-                    case 0 : direction = Directions.UP;
-                        break;
-                    case 1 : direction = Directions.RIGHT;
-                        break;
-                    case 2 : direction = Directions.DOWN;
-                        break;
-                    case 3 : direction = Directions.LEFT;
-                        break;
-                }
-                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(direction);
+            for (Directions d : Directions.values()) {
+                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
                 //adding son
                 if(current_adjacent_cell==null
                         || !current_adjacent_cell.isWalkable()
                         || (current_node.getAncestors()!=null && current_node.getAncestors().contains(current_adjacent_cell))){
-                    current_node.setSons(null, i);
+                    current_node.setSons(null, d);
                 }
                 else{
                     //creating a son
@@ -114,7 +103,7 @@ public abstract class Enemy extends Character {
                     family = family == null ? new ArrayList<>() : new ArrayList<>(family);
                     family.add(current_node.getMatching_cell());
                     son = new Node(family, current_adjacent_cell);
-                    current_node.setSons(son, i);
+                    current_node.setSons(son, d);
                     //adding son to to_construct
                     to_construct.add(son);
                 }
