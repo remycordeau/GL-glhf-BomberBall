@@ -3,21 +3,22 @@ package com.glhf.bomberball.audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.glhf.bomberball.gameobject.Bonus;
+import com.glhf.bomberball.utils.Constants;
 
 /**
  * @author jyra
  * Example : Audio.CLICK_BUTTON.play() to play a song
  */
 public enum Audio {
-    CLICK_BUTTON("core/assets/sounds/click_button.wav"),
-    VICTORY("core/assets/sounds/victory.wav"),
-    CLICK_PLAY("core/assets/sounds/PlayLevelButtonTone.wav"),
-    MAIN_MENU("core/assets/sounds/MainMenu.mp3"),
-    MULTI("core/assets/sounds/MultiSong.mp3");
+    CLICK_BUTTON(Constants.PATH_SOUNDS+"click_button.wav"),
+    VICTORY(Constants.PATH_SOUNDS+"victory.wav"),
+    CLICK_PLAY(Constants.PATH_SOUNDS+"PlayLevelButtonTone.wav"),
+    MAIN_MENU(Constants.PATH_SOUNDS+"MainMenu.mp3"),
+    MULTI(Constants.PATH_SOUNDS+"MultiSong.mp3");
 
     private Sound sound;
     private Boolean played;
-    public final Boolean AUDIO_ENABLE = false;
+    public final Boolean AUDIO_ENABLE = true;
     Audio(String path)
     {
         if(AUDIO_ENABLE) {
@@ -55,7 +56,7 @@ public enum Audio {
     public void playMusique(){
         if(AUDIO_ENABLE) {
             if (!this.isPlayed()) {
-                this.silence();
+                silence();
                 sound.loop(0.1f);
                 played = true;
             }
