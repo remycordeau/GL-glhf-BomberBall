@@ -54,6 +54,7 @@ public abstract class Enemy extends Character {
         }
     }
 
+
     @Override
     public void interactWithCell(Cell cell) {
         ArrayList<GameObject> goList = cell.getGameObjects();

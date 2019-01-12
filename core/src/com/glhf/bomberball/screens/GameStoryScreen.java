@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.AudioRecorder;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
@@ -46,6 +47,16 @@ public class GameStoryScreen extends GameScreen {
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
+
+        Timer.schedule(new Timer.Task() {   //Verifying if an ennemy has killed the player
+            @Override
+            public void run() {
+                if (!current_player.isAlive()) {
+                    Bomberball.changeScreen(new DeadScreen(screen, maze_id));
+                    Timer.instance().clear();
+                }
+            }
+        }, 1f, 1f);
     }
 
     @Override
@@ -82,14 +93,10 @@ public class GameStoryScreen extends GameScreen {
                 }
             }
 
-            if (!current_player.isAlive()) {
-                Bomberball.changeScreen(new DeadScreen(screen, maze_id));
-            } else {
-                current_player.initiateTurn();
-                setMoveEffect();
-                setMoveMode();
-                input_handler.lock(false);
-            }
+            current_player.initiateTurn();
+            setMoveEffect();
+            setMoveMode();
+            input_handler.lock(false);
         }
     }
 

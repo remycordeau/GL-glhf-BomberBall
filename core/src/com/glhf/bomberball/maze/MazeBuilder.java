@@ -31,7 +31,7 @@ public class MazeBuilder {
 
         //TODO: ajout des ennemis à refaire
         maze.enemy_spawn_positions = new ArrayList<>();
-//        maze.enemy_spawn_positions.add(new Vector2(0, 0));
+        maze.enemy_spawn_positions.add(new Vector2(0, 0));
 
         GameSoloConfig config = GameSoloConfig.get();
         availableWall = new LinkedHashMap<>();
