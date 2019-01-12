@@ -57,40 +57,39 @@ public class GameStoryScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
-        //TODO: wait the execution of all tasks in the Timer
-        while (task.isScheduled()); //marche pas encore
-        if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new DeadScreen(screen, maze_id));
-        }
-        if (maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
-            Bomberball.changeScreen(new EndStoryScreen(screen, this.maze_id));
-            return;
-        }
-        // test if the current_player reached the door
-        boolean isIn = false;
-        for (GameObject o : current_player.getCell().getGameObjects()) {
-            if (o instanceof Door) {
-                isIn = true;
-            }
-        }
-        if (isIn) {
-            Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
-        }
-
-        for (Enemy enemy : enemies) {
-            if (enemy.isAlive()) {
-                enemy.initiateTurn();
-                enemy.followWay();
-            }
-        }
-
         if (!current_player.isAlive()) {
             Bomberball.changeScreen(new DeadScreen(screen, maze_id));
         } else {
-            current_player.initiateTurn();
-            setMoveEffect();
-            setMoveMode();
-            input_handler.lock(false);
+            if (maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+                Bomberball.changeScreen(new EndStoryScreen(screen, this.maze_id));
+                return;
+            }
+            // test if the current_player reached the door
+            boolean isIn = false;
+            for (GameObject o : current_player.getCell().getGameObjects()) {
+                if (o instanceof Door) {
+                    isIn = true;
+                }
+            }
+            if (isIn) {
+                Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
+            }
+
+            for (Enemy enemy : enemies) {
+                if (enemy.isAlive()) {
+                    enemy.initiateTurn();
+                    enemy.followWay();
+                }
+            }
+
+            if (!current_player.isAlive()) {
+                Bomberball.changeScreen(new DeadScreen(screen, maze_id));
+            } else {
+                current_player.initiateTurn();
+                setMoveEffect();
+                setMoveMode();
+                input_handler.lock(false);
+            }
         }
     }
 
