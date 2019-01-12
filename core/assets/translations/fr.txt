@@ -1,7 +1,6 @@
-#EndLevelUI
-"level unlocked"		:	"Niveau %d débloqué !"
-"level succeeded"       :   "Félicitations! Vous avez réussi niveau %d !"
 
+#WelcomingMenu UI
+"Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"
 
 #SoloUI
 "mode movement button"	:	"Déplacement [%s]"
@@ -17,18 +16,33 @@
 
 #Story Menus
 "Level Selection"	:	"Selection des niveaux"
+"Play Selected Level"       :   "Jouer au niveau selectionné"
 "Wasted !"		    :	"Wasted !"
 "égalité ..."		:	"égalité ..."
 "Lost!"				:	"Perdu!"
 "VICTORY!"			:	"VICTOIRE!"
-"All levels unlocked !"	:	"All levels unlocked !"
-"Play next level"		:	"Play next level"
-"Replay level"			:	"Replay level"
-"Replay last level"		:	"Replay last level"
-"Back to level selection"	:	"Back to level selection"
-"Retry level"			:	"Retry level"
-"Play Selected Level"	:	"Play Selected Level"
-"story mode congratulations"		:	"Félicitations ! Vous avez terminé le mode histoire !"
+
+#EndLevelUI
+"level unlocked"		:	"Niveau %d débloqué !"
+"level succeeded"       :   "Félicitations! Vous avez réussi niveau %d !"
+"story mode congratulations"    :	"Félicitations ! Vous avez terminé le mode histoire !"
+"Play next level"               :   "Jouer au niveau suivant"
+"Replay level"                  :   "Rejouer le niveau"
+"Back to level selection"       :   "Revenir à la sélection des niveaux"
+
+#EndStoryScreen
+"All levels unlocked !"     :   "Vous avez débloqué tous les niveaux !"
+"Replay last level"         :   "Rejouer le dernier niveau"
+
+#DeadMenu
+"Quit"              :   "Quitter le jeu"
+#"All levels unlocked !"	:	"All levels unlocked !"
+#"Play next level"		:	"Play next level"
+#"Replay level"			:	"Replay level"
+#"Replay last level"		:	"Replay last level"
+#"Back to level selection"	:	"Back to level selection"
+#"Retry level"			:	"Retry level"
+#"Play Selected Level"	:	"Play Selected Level"
 
 #MainMenuUI
 "Multiplayer"	:	"Multijoueur"
@@ -50,20 +64,3 @@
 
 "Random Maze"		:	"Carte Aléatoire"
 
-#WelcomingMenu UI
-"Press [ENTER] to play"    :     "Appuyez sur [ENTREE] pour jouer"
-
-#EndLevelUI (suite)
-"Play next level"       :   "Jouer au niveau suivant"
-"Replay level"      :   "Rejouer le niveau"
-"Back to level selection"       :   "Revenir à la sélection des niveaux"
-
-#StoryMenuUI (suite)
-"Play Selected Level"       :   "Jouer au niveau selectionné"
-
-#EndStoryScreen
-"All levels unlocked !"     :   "Vous avez débloqué tous les niveaux !"
-"Replay last level"         :   "Rejouer le dernier niveau"
-
-#DeadMenu
-"Quit"              :   "Quitter le jeu"

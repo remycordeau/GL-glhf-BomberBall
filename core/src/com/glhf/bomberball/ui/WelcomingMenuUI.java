@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.utils.Constants;
 
@@ -23,8 +25,11 @@ public class WelcomingMenuUI extends Table {
         this.setFillParent(true);
         TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/background/welcomingScreen.jpg")));
         this.setBackground(texture);
-        Label label = new Label(Translator.translate("Press [ENTER] to play"),Graphics.GUI.getSkin());
+        InputsConfig config = InputsConfig.get();
+        Label label = new Label(Translator.translate("Press [%s] to play", config.getInputName(Action.NEXT_SCREEN)),Graphics.GUI.getSkin());
         this.add(label);
     }
+
+
 
 }

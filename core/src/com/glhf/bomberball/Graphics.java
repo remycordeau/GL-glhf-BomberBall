@@ -1,7 +1,6 @@
 package com.glhf.bomberball;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -117,9 +116,6 @@ public class Graphics {
             skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
 
             skin.add("default", Color.WHITE);
-
-            //
-            skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
 
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
