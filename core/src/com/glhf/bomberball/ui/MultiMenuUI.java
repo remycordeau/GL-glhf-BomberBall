@@ -19,6 +19,8 @@ import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.MultiMenuScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
+
 public class MultiMenuUI extends Table {
 
     private MultiMenuScreen screen;
@@ -28,7 +30,7 @@ public class MultiMenuUI extends Table {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture("core/assets/graphics/background/MultiMenu.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/MultiMenu.png")));
         this.setBackground(texture);
         this.initialize();
     }

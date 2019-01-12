@@ -1,5 +1,6 @@
 package com.glhf.bomberball.maze;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.utils.Constants;
@@ -190,11 +191,9 @@ public class Maze{
         if(gson==null) {
             createGson();
         }
-        try {
-            Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE + name + ".json")), Maze.class);
-            maze.initialize();
-            return maze;
-        } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE + name + ".json").readString(), Maze.class);
+        maze.initialize();
+        return maze;
     }
 
     public void export(String name)
@@ -203,7 +202,8 @@ public class Maze{
             createGson();
         }
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_MAZE + name + ".json"));
+            File file = Gdx.files.internal(Constants.PATH_MAZE + name + ".json").file();
+            Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
         } catch (IOException e) {

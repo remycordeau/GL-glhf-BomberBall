@@ -7,7 +7,7 @@ public class AppConfig extends Config {
 
     public boolean fullscreen = false;
 
-    public Resolutions resolution = Resolutions.LOW;
+    public Resolutions resolution = Resolutions.MEDIUM;
 
     public static AppConfig get() {
         return get(Constants.DEFAULT_CONFIG_APP, AppConfig.class);

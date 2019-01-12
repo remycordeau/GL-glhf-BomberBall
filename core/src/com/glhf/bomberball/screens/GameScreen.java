@@ -15,6 +15,7 @@ import com.glhf.bomberball.utils.VectorInt2;
 import java.util.ArrayList;
 
 public abstract class GameScreen extends AbstractScreen {
+    protected Timer.Task task;
     protected Maze maze;
     protected MazeDrawer maze_drawer;
 
@@ -130,12 +131,13 @@ public abstract class GameScreen extends AbstractScreen {
         clearCellsEffect();
         maze.processEndTurn();
         current_player.endTurn();
-        Timer.schedule(new Timer.Task() {
+        task = new Timer.Task() {
             @Override
             public void run() {
                 nextPlayer();
             }
-        }, 0.5f);
+        };
+        Timer.schedule(task, 0.5f);
     }
 
     protected abstract void nextPlayer();
