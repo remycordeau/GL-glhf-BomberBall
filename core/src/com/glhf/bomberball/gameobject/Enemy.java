@@ -84,27 +84,17 @@ public abstract class Enemy extends Character {
         //if ancestor is null create en empty family
         ArrayList<Cell> family = (ancestors==null ? new ArrayList<>() : new ArrayList<>(ancestors));
         family.add(ways.getMatching_cell());
-        for(i=0; i<4; i++){ // because, all cells have 4 adjacent cells
+        for(Directions dir : Directions.values()){ //for each direction up, down, left, right
             // stop condition no walkable adjacent cell or all adjacent way in acestors
-            switch (i){
-                case 0 : direction = Directions.UP;
-                    break;
-                case 1 : direction = Directions.RIGHT;
-                    break;
-                case 2 : direction = Directions.DOWN;
-                    break;
-                case 3 : direction = Directions.LEFT;
-                    break;
-            }
-            current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(direction);
+            current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(dir);
             //stop condition
             if(current_adjacent_cell==null
                     || !current_adjacent_cell.isWalkable()
                     || (ways.getAncestors()!=null && ways.getAncestors().contains(current_adjacent_cell))){
-                ways.setSons(null, i);
+                ways.setSons(null, dir);
             }
             else{
-                ways.setSons(construct_ways(family, current_adjacent_cell), i);
+                ways.setSons(construct_ways(family, current_adjacent_cell), dir);
             }
         }
         return ways;
