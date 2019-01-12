@@ -118,7 +118,7 @@ public class Cell {
     public void getDamage(int damage)
     {
         ArrayList<GameObject> gameObjects = new ArrayList<>(objects);
-        gameObjects.forEach((o) -> {o.getDamage(damage);});
+        gameObjects.forEach((o) -> o.getDamage(damage));
     }
 
     /**

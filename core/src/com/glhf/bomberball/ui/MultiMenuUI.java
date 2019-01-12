@@ -118,7 +118,7 @@ public class MultiMenuUI extends Table {
         //CREATING A PREVIEW FOR THE PLAYERS
 
 
-        AnimationActor p1 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p1 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id] + "/idle"), Animation.PlayMode.LOOP));
         p1.mustMove(true);
         TextButton Bp1 = new AudioButton("P1", Graphics.GUI.getSkin());
         Bp1.addListener(new ChangeListener() {
@@ -133,7 +133,7 @@ public class MultiMenuUI extends Table {
         Vp1.row();
         Vp1.add(Bp1).growX();
 
-        AnimationActor p2 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p2 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
         p2.mustMove(true);
         TextButton Bp2 = new TextButton("P2", Graphics.GUI.getSkin());
         Bp2.addListener(new ChangeListener() {
@@ -148,7 +148,7 @@ public class MultiMenuUI extends Table {
         Vp2.row();
         Vp2.add(Bp2).growX();
 
-        AnimationActor p3 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p3 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id] + "/idle"), Animation.PlayMode.LOOP));
         p3.mustMove(true);
         TextButton Bp3 = new AudioButton("P3", Graphics.GUI.getSkin());
         Bp3.addListener(new ChangeListener() {
@@ -163,7 +163,7 @@ public class MultiMenuUI extends Table {
         Vp3.row();
         Vp3.add(Bp3).growX();
 
-        AnimationActor p4 = new AnimationActor(new Animation<TextureAtlas.AtlasRegion>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id]+"/idle"), Animation.PlayMode.LOOP));
+        AnimationActor p4 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id] + "/idle"), Animation.PlayMode.LOOP));
         p4.mustMove(true);
         TextButton Bp4 = new AudioButton("P4", Graphics.GUI.getSkin());
         Bp4.addListener(new ChangeListener() {

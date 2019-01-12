@@ -28,7 +28,7 @@ public class Player extends Character {
                   int initial_bomb_range)
     {
         super(player_skin, life, initial_moves);
-        this.observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<>();
         this.active = false;
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;

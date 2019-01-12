@@ -40,4 +40,11 @@ public class GameMultiConfig extends GameConfig {
     public static GameMultiConfig get(String config_name){
         return get(config_name, GameMultiConfig.class);
     }
+
+    public static GameMultiConfig get() {
+        return get("config_game_multi");
+    }
+    public void exportConfig() {
+        super.exportConfig("config_game_multi");
+    }
 }

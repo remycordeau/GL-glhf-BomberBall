@@ -94,9 +94,7 @@ public class MazeDrawer extends Actor {
         float maze_height_px = Constants.BOX_HEIGHT * (maze.getHeight() + 2 * y_padding);
         float maze_aspect_ratio = maze_width_px / maze_height_px;
 
-        float screen_width_px = width;
-        float screen_height_px = height;
-        float screen_aspect_ratio = screen_width_px / screen_height_px;
+        float screen_aspect_ratio = (float) width / (float) height;
 
         float r = screen_aspect_ratio / maze_aspect_ratio;
         float width_scaling = 1 / dw;

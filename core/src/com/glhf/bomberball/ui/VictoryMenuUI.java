@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;

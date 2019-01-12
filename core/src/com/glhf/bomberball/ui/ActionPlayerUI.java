@@ -9,9 +9,7 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.config.InputsConfig;
-import com.glhf.bomberball.screens.GameMultiScreen;
 import com.glhf.bomberball.screens.GameScreen;
-import com.glhf.bomberball.screens.GameStoryScreen;
 
 public class ActionPlayerUI extends Table {
     //attributes

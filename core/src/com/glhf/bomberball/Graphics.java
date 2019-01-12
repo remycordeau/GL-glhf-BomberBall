@@ -38,7 +38,7 @@ public class Graphics {
         private static void load()
         {
             sprites_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_SPRITES));
-            sprites_atlasRegions = new HashMap<String, AtlasRegion>();
+            sprites_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : sprites_atlasTexture.getRegions()) {
                 sprites_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("Sprite " + atlasRegion.name + " loaded");
@@ -62,7 +62,7 @@ public class Graphics {
         private static void load()
         {
             anim_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_ANIMS));
-            anim_atlasRegions = new HashMap<String, Array<AtlasRegion>>();
+            anim_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : anim_atlasTexture.getRegions()) {
                 if (!anim_atlasRegions.containsKey(atlasRegion.name)) {
                     anim_atlasRegions.put(atlasRegion.name, anim_atlasTexture.findRegions(atlasRegion.name));
@@ -219,7 +219,7 @@ public class Graphics {
         private static void loadAtlas()
         {
             gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
-            gui_atlasRegions = new HashMap<String, AtlasRegion>();
+            gui_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
                 gui_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("GUI element" + atlasRegion.name + " loaded");

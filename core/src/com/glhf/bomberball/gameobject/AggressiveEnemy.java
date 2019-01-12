@@ -9,7 +9,6 @@ import com.glhf.bomberball.utils.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.zip.DeflaterInputStream;
 
 public class AggressiveEnemy extends Enemy {
 
@@ -34,9 +33,9 @@ public class AggressiveEnemy extends Enemy {
      * @return ArrayList<Directions>
      */
     public static ArrayList<Directions> depth_graph_transversal(Cell cell_origin, int range) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        LinkedList<Cell> active_queue = new LinkedList<Cell>();
-        LinkedList<Cell> inactive_queue = new LinkedList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
+        LinkedList<Cell> active_queue = new LinkedList<>();
+        LinkedList<Cell> inactive_queue = new LinkedList<>();
         HashMap<Cell, ArrayList<Directions>> paths = new HashMap<>();
         int depth = 0;
         paths.put(cell_origin, new ArrayList<>());
@@ -60,7 +59,7 @@ public class AggressiveEnemy extends Enemy {
             depth++;
 
             active_queue = inactive_queue;
-            inactive_queue = new LinkedList<Cell>();
+            inactive_queue = new LinkedList<>();
         }
         for(Cell c : cells){
             if(!c.getInstancesOf(Player.class).isEmpty()){
@@ -71,15 +70,7 @@ public class AggressiveEnemy extends Enemy {
     }
 
     public int compareTwoNodes(HunterNode n1, HunterNode n2){
-        if(n1.getHeuristic() < n2.getHeuristic()){
-            return 1;
-        }
-        else if(n1.getHeuristic() == n2.getHeuristic()){
-            return 0;
-        }
-        else{
-            return -1;
-        }
+        return Integer.compare(n2.getHeuristic(), n1.getHeuristic());
     }
 
     /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)

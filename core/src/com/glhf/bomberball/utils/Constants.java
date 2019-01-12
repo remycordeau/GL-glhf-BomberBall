@@ -1,7 +1,5 @@
 package com.glhf.bomberball.utils;
 
-import java.io.File;
-
 public class Constants {
     // textures properties
     public static final int BOX_WIDTH = 16;

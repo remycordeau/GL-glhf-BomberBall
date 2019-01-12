@@ -3,9 +3,6 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.glhf.bomberball.audio.Audio;
-import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.WelcomingMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 

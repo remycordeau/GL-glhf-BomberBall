@@ -16,9 +16,7 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 public class InfiniteModeUI extends Table {
 
     private InfiniteModeScreen screen;
-    private Label label;
     private int highscore;
-    private GameSoloConfig config;
     private Maze mazex;
 
     public InfiniteModeUI(InfiniteModeScreen screen) {
@@ -29,7 +27,7 @@ public class InfiniteModeUI extends Table {
         this.padTop(Value.percentHeight(0.1f));
         this.padBottom(Value.percentHeight(0.1f));
 
-        config = new GameSoloConfig();
+        GameSoloConfig config = new GameSoloConfig();
         mazex = screen.maze;
         highscore = config.highscore;
 
@@ -40,7 +38,7 @@ public class InfiniteModeUI extends Table {
     private void addButtons(){
 
         //Title
-        label = new Label(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin(), "Title");
+        Label label = new Label(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.7f, 1.7f);
         this.add(label).row();

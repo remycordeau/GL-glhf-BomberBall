@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.glhf.bomberball.utils.Constants;
 
-import java.io.*;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

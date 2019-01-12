@@ -53,9 +53,7 @@ public abstract class Config {
             return gson.fromJson(new FileReader(fileName), c);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Cannot import config : " + e.getMessage());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
         return null;
@@ -65,6 +63,7 @@ public abstract class Config {
      * Exports a config
      * @param name Config file name
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void exportConfig(String name) {
         try {
             File file = new File(Constants.PATH_CONFIGS + name + ".json");

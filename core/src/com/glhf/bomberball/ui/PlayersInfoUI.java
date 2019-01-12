@@ -1,6 +1,5 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -10,7 +9,6 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
 import java.util.ArrayList;
@@ -92,7 +90,7 @@ public class PlayersInfoUI extends Table {
             this.pad(5);
             this.player = player;
             player.addObserver(this);
-            this.hearts = new ArrayList<Image>();
+            this.hearts = new ArrayList<>();
             for (int i=0; i<player.getLife(); i++) {
                 Image heart = new Image(Graphics.Sprites.get("ui_heart_full"));
                 heart.setScaling(Scaling.fit);

@@ -21,12 +21,8 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class StoryMenuUI extends Table {
 
-    private TextButton back_button, next_level_button, previous_level_button, play_button;
-    private Label label;
     private Table level_selection;
-    private Table buttons;
     private static TextButton[] levels;
-    private static HorizontalGroup horizontal;
     private static MazeDrawer level_preview;
     private static StoryMenuScreen screen;
 
@@ -50,14 +46,14 @@ public class StoryMenuUI extends Table {
 
         // Title
 
-        label = new Label(Translator.translate("Level Selection"), Graphics.GUI.getSkin(), "Title");
+        Label label = new Label(Translator.translate("Level Selection"), Graphics.GUI.getSkin(), "Title");
         label.setAlignment(Align.center);
         label.setFontScale(1.7f, 1.7f);
         this.add(label).row();
 
         // Buttons to select the level
 
-        previous_level_button = new TextButton("<", Graphics.GUI.getSkin());
+        TextButton previous_level_button = new TextButton("<", Graphics.GUI.getSkin());
         previous_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -67,7 +63,7 @@ public class StoryMenuUI extends Table {
         });
         level_selection.add(previous_level_button);
 
-        next_level_button = new TextButton(">", Graphics.GUI.getSkin());
+        TextButton next_level_button = new TextButton(">", Graphics.GUI.getSkin());
         next_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -79,13 +75,13 @@ public class StoryMenuUI extends Table {
 
         this.add(level_selection).align(Align.center).grow().row();
 
-        buttons = new Table();
+        Table buttons = new Table();
 
         // Available levels
 
         int nb_levels = screen.getMazeCount();
         levels = new TextButton[nb_levels];
-        horizontal = new HorizontalGroup();
+        HorizontalGroup horizontal = new HorizontalGroup();
 
         for (int i = 0; i < nb_levels; i++) {
             levels[i] = new TextButton(Integer.toString(i + 1), Graphics.GUI.getSkin());
@@ -106,7 +102,7 @@ public class StoryMenuUI extends Table {
 
         // Play and quit buttons
 
-        play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
+        TextButton play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
         play_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -117,7 +113,7 @@ public class StoryMenuUI extends Table {
         });
         buttons.add(play_button).row();
 
-        back_button = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
+        TextButton back_button = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         back_button.getLabel().setFontScale(0.8f, 0.8f);
         buttons.add(back_button).spaceTop(Value.percentHeight(0.9f));

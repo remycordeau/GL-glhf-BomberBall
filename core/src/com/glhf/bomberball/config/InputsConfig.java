@@ -195,7 +195,7 @@ public class InputsConfig extends Config {
                 String id = id_list[a.ordinal()][p.ordinal()];
                 if(id==null)continue;
                 if(!map_code_to_action.containsKey(id)) {
-                    map_code_to_action.put(id, new ArrayList<Action>());
+                    map_code_to_action.put(id, new ArrayList<>());
                 }
                 map_code_to_action.get(id).add(a);
             }

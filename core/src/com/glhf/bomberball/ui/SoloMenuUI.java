@@ -26,8 +26,6 @@ import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class SoloMenuUI extends Table {
 
-    private TextButton infinite_button, story_button, back_button;
-
     public SoloMenuUI(){
         super();
         // GameSoloConfig.get("config_game_solo").resetLevels();
@@ -42,7 +40,7 @@ public class SoloMenuUI extends Table {
      */
     private void initializeButtons() {
         Table buttons = new Table();
-        story_button = new AudioButton(Translator.translate("Story Mode"), Graphics.GUI.getSkin());
+        TextButton story_button = new AudioButton(Translator.translate("Story Mode"), Graphics.GUI.getSkin());
         story_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -53,11 +51,11 @@ public class SoloMenuUI extends Table {
 
         buttons.add(story_button).space(spacing).growX().row();
 
-        infinite_button = new AudioButton(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin());
+        TextButton infinite_button = new AudioButton(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin());
         infinite_button.addListener(new ScreenChangeListener(InfiniteModeScreen.class));
         buttons.add(infinite_button).space(spacing).growX().row();
 
-        back_button = new AudioButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
+        TextButton back_button = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_button.getLabel().setFontScale(0.8f,0.8f);
         back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
         buttons.add(back_button).space(spacing).growX();

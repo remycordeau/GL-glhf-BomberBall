@@ -1,12 +1,5 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.Audio;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.AudioDevice;
-import com.badlogic.gdx.audio.AudioRecorder;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameSoloConfig;
@@ -15,14 +8,12 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
-import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
 
 public class GameStoryScreen extends GameScreen {
 
-    private GameSoloConfig config;
     private ArrayList<Enemy> enemies;
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private int maze_id;
@@ -34,7 +25,7 @@ public class GameStoryScreen extends GameScreen {
         this.maze_id = maze_id;
         this.screen = screen;
 
-        config = new GameSoloConfig();
+        GameSoloConfig config = new GameSoloConfig();
         current_player = this.maze.spawnPlayer(config);
 
         //enemies = this.maze.getEnemies();

@@ -48,7 +48,7 @@ public abstract class GameScreen extends AbstractScreen {
         input_handler.registerActionHandler(Action.MODE_BOMB, this::setBombMode);
         input_handler.registerActionHandler(Action.MODE_MOVE, this::setMoveMode);
         input_handler.registerActionHandler(Action.ENDTURN, this::endTurn);
-        input_handler.registerActionHandler(Action.DROP_BOMB, (x, y) -> dropBombAt(x, y));
+        input_handler.registerActionHandler(Action.DROP_BOMB, this::dropBombAt);
         input_handler.registerActionHandler(Action.DROP_BOMB_DOWN, () -> dropBomb(Directions.DOWN));
         input_handler.registerActionHandler(Action.DROP_BOMB_UP, () -> dropBomb(Directions.UP));
         input_handler.registerActionHandler(Action.DROP_BOMB_LEFT, () -> dropBomb(Directions.LEFT));

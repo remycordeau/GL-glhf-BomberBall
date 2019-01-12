@@ -51,7 +51,7 @@ public class Node {
      * @return the sequence of UP, RIGHT, DOWN, LEFT for the longest way
      */
     public ArrayList<Directions> get_longest_way(){
-            ArrayList<Directions> current_longest_way = new ArrayList<Directions>();
+            ArrayList<Directions> current_longest_way = new ArrayList<>();
             current_longest_way.add(get_direction_from_ancestor(ancestors.get(ancestors.size()-1)));
             ArrayList<Directions> current_counting;
             boolean stop_condition = sons[0]==null && sons[1]==null && sons[2]==null && sons[3]==null;
