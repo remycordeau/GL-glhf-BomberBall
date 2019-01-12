@@ -97,7 +97,13 @@ public class GameStoryScreen extends GameScreen {
                 current_player.initiateTurn();
                 setMoveEffect();
                 setMoveMode();
-                input_handler.lock(false);
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        input_handler.lock(false);
+                    }
+                }, 0.6f*enemies.size());
+
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
             }
