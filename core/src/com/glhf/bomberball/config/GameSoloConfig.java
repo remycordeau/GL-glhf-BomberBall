@@ -13,6 +13,9 @@ public class GameSoloConfig extends GameConfig {
     public int last_level_played = 0;
     public boolean bonus_activated = true;
 
+    //Settings maze
+    public double probFreeCase = 1.0/3;
+
     // Enemies
     public int activeEnemy_life = 1;
     public int activeEnemy_strength = 1;
