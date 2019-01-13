@@ -11,9 +11,13 @@ import com.glhf.bomberball.utils.Constants;
 public enum Audio {
     CLICK_BUTTON(Constants.PATH_SOUNDS+"click_button.wav"),
     VICTORY(Constants.PATH_SOUNDS+"victory.wav"),
+    WASTED(Constants.PATH_SOUNDS+"wasted.wav"),
     CLICK_PLAY(Constants.PATH_SOUNDS+"PlayLevelButtonTone.wav"),
     MAIN_MENU(Constants.PATH_SOUNDS+"MainMenu.mp3"),
-    MULTI(Constants.PATH_SOUNDS+"MultiSong.mp3");
+    GAME_SONG(Constants.PATH_SOUNDS+"GameSong.mp3"),
+    BOMB(Constants.PATH_SOUNDS+"Bomb.wav"),
+    POWER_UP(Constants.PATH_SOUNDS+"Powerup.wav"),
+    EQUALITY(Constants.PATH_SOUNDS+"equality.ogg");
 
     private Sound sound;
     private Boolean played;
@@ -56,7 +60,7 @@ public enum Audio {
         if(AUDIO_ENABLE) {
             if (!this.isPlayed()) {
                 silence();
-                sound.loop(0.1f);
+                sound.loop(0.3f);
                 played = true;
             }
         }

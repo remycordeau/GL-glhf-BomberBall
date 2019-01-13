@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
 
@@ -23,6 +24,7 @@ public class Bomb extends GameObject {
     }
 
     public void explode() {
+        Audio.BOMB.play();
         cell.explode(null, damage, 0);
         for (Directions dir : Directions.values()) {
             Cell adjacent_cell = cell.getAdjacentCell(dir);

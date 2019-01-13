@@ -21,7 +21,7 @@ public class GameStoryScreen extends GameScreen {
 
     public GameStoryScreen(StoryMenuScreen screen, Maze maze, int maze_id) {
         //super(maze);
-        super(MazeBuilder.createInfinityMaze());
+        super(maze);
         this.maze_id = maze_id;
         this.screen = screen;
 
@@ -31,7 +31,7 @@ public class GameStoryScreen extends GameScreen {
         //enemies = this.maze.getEnemies();
         enemies = this.maze.spawnEnemies(new GameSoloConfig());
         enemies.forEach(Enemy::createAI);
-        this.maze.export("testWithEnemies");
+        //this.maze.export("testWithEnemies");
 
         addUI(new SoloUI(current_player, this));
         addUI(maze_drawer);
@@ -88,7 +88,13 @@ public class GameStoryScreen extends GameScreen {
                 current_player.initiateTurn();
                 setMoveEffect();
                 setMoveMode();
-                input_handler.lock(false);
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        input_handler.lock(false);
+                    }
+                }, 0.6f*enemies.size());
+
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
             }

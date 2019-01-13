@@ -7,6 +7,7 @@ import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.Node;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class Enemy extends Character {
 
@@ -72,39 +73,40 @@ public abstract class Enemy extends Character {
 
     /**
      * this method gives the "root" of a kind of tree which represents the different available ways from an initial position
-     * @param ancestors
      * @param initial_position
      * @return Node
      */
-    public static Node construct_ways(ArrayList<Cell> ancestors, Cell initial_position){ //TODO: dérecursiver
-        int i;
-        Node ways = new Node(ancestors, initial_position); // the node doesn't have ancestors
-        Directions direction = Directions.UP;
+    public static Node constructWays(Cell initial_position) {
+        Node ways = new Node(null, initial_position);
+        LinkedList<Node> to_construct = new LinkedList<>();
+        Node current_node;
+        Node son;
+        ArrayList<Cell> family;
         Cell current_adjacent_cell;
-        //if ancestor is null create en empty family
-        ArrayList<Cell> family = (ancestors==null ? new ArrayList<>() : new ArrayList<>(ancestors));
-        family.add(ways.getMatching_cell());
-        for(i=0; i<4; i++){ // because, all cells have 4 adjacent cells
-            // stop condition no walkable adjacent cell or all adjacent way in acestors
-            switch (i){
-                case 0 : direction = Directions.UP;
-                    break;
-                case 1 : direction = Directions.RIGHT;
-                    break;
-                case 2 : direction = Directions.DOWN;
-                    break;
-                case 3 : direction = Directions.LEFT;
-                    break;
-            }
-            current_adjacent_cell = ways.getMatching_cell().getAdjacentCell(direction);
-            //stop condition
-            if(current_adjacent_cell==null
-                    || !current_adjacent_cell.isWalkable()
-                    || (ways.getAncestors()!=null && ways.getAncestors().contains(current_adjacent_cell))){
-                ways.setSons(null, i);
-            }
-            else{
-                ways.setSons(construct_ways(family, current_adjacent_cell), i);
+        //add the root to to_construct
+        to_construct.add(ways);
+        //constructing the tree
+        while (to_construct.size() > 0) {
+            current_node = to_construct.poll(); //get the next element to construct
+            //create sons and adding them to to_construct
+            for (Directions d : Directions.values()) {
+                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
+                //adding son
+                if(current_adjacent_cell==null
+                        || !current_adjacent_cell.isWalkable()
+                        || (current_node.getAncestors()!=null && current_node.getAncestors().contains(current_adjacent_cell))){
+                    current_node.setSons(null, d);
+                }
+                else{
+                    //creating a son
+                    family = current_node.getAncestors();
+                    family = family == null ? new ArrayList<>() : new ArrayList<>(family);
+                    family.add(current_node.getMatching_cell());
+                    son = new Node(family, current_adjacent_cell);
+                    current_node.setSons(son, d);
+                    //adding son to to_construct
+                    to_construct.add(son);
+                }
             }
         }
         return ways;
@@ -115,12 +117,12 @@ public abstract class Enemy extends Character {
      * @param initial_node
      * @return ArrayList<Cell> a path
      */
-    public ArrayList<Cell> longest_way(Node initial_node){
+    public ArrayList<Cell> longestWay(Node initial_node){
         ArrayList<Cell> longest = new ArrayList<>();
         ArrayList<Cell> current = new ArrayList<>();
         if(initial_node != null) {
             for(int i=0; i<4; i++){
-                current = longest_way(initial_node.getSons(i));
+                current = longestWay(initial_node.getSons(i));
                 if (current != null && current.size() > longest.size()) {
                     longest = current;
                 }
@@ -136,11 +138,11 @@ public abstract class Enemy extends Character {
      * @param initial_node
      * @return ArrayList<Directions>
      */
-    public ArrayList<Directions> longest_way_moves_sequence(Node initial_node){
+    public ArrayList<Directions> longestWayMovesSequence(Node initial_node){
         ArrayList<Directions> moves_sequence = new ArrayList<>();
         ArrayList<Directions> moves_sequence_miror = new ArrayList<>();
         ArrayList<Cell> longest_way = new ArrayList<>();
-        longest_way = this.longest_way(initial_node);
+        longest_way = this.longestWay(initial_node);
         int longest_way_size = longest_way.size();
         Directions next_direction;
         Directions last_direction;

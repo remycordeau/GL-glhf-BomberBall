@@ -16,7 +16,7 @@ public class WelcomingMenuUI extends Table {
     public WelcomingMenuUI() {
         super();
         this.setFillParent(true);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/background/welcomingScreen.jpg")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "/background/welcomingScreen01.png")));
         this.setBackground(texture);
         InputsConfig config = InputsConfig.get();
         Label label = new Label(Translator.translate("Press [%s] to play", config.getInputName(Action.NEXT_SCREEN)),Graphics.GUI.getSkin());
