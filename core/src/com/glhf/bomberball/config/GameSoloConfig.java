@@ -5,7 +5,7 @@ public class GameSoloConfig extends GameConfig {
     public boolean[] level_unlocked = new boolean[maze_count]; //inform if the level is locked or not
     public String player_skin = "knight_m";
     public int highscore = 145970;
-    public int last_level_played = 0;
+    public static int last_level_played = 0;
     public boolean bonus_activated = true;
 
     //Settings maze
@@ -50,6 +50,7 @@ public class GameSoloConfig extends GameConfig {
     public void resetLevels()
     {
         level_unlocked[0] = true;
+        last_level_played = 0;
         for(int i = 1; i<level_unlocked.length; i++)
         {
             level_unlocked[i] = false;
