@@ -39,7 +39,7 @@ public abstract class GameScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        Audio.MULTI.playMusique();
+        Audio.GAME_SONG.playMusique();
     }
 
     @Override

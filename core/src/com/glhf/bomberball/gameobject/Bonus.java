@@ -1,6 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.audio.Audio;
 
 public class Bonus extends GameObject {
 
@@ -44,6 +45,7 @@ public class Bonus extends GameObject {
     public boolean isWalkable() { return true; }
 
     public void applyEffect(Player player) {
+        Audio.POWER_UP.play();
         switch (type) {
             case SPEED:
                 player.bonus_moves++;
