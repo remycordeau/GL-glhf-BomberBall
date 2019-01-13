@@ -28,7 +28,6 @@ public class DeadUI extends Table {
     private int maze_id;
 
     public DeadUI(StoryMenuScreen screen, int maze_id) {
-
         this.setFillParent(true);
         this.screen = screen;
         this.maze_id = maze_id;
