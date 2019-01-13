@@ -16,7 +16,8 @@ public enum Audio {
     MAIN_MENU(Constants.PATH_SOUNDS+"MainMenu.mp3"),
     GAME_SONG(Constants.PATH_SOUNDS+"GameSong.mp3"),
     BOMB(Constants.PATH_SOUNDS+"Bomb.wav"),
-    POWER_UP(Constants.PATH_SOUNDS+"Powerup.wav");
+    POWER_UP(Constants.PATH_SOUNDS+"Powerup.wav"),
+    EQUALITY(Constants.PATH_SOUNDS+"equality.ogg");
 
     private Sound sound;
     private Boolean played;
