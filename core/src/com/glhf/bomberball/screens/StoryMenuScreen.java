@@ -14,7 +14,6 @@ public class StoryMenuScreen extends MenuScreen {
     public StoryMenuScreen(){
         super();
         config = GameSoloConfig.get();
-        maze_id = config.last_level_played;
         maze = Maze.importMaze("maze_" + maze_id);
         addUI(new StoryMenuUI(this));
     }
@@ -23,7 +22,7 @@ public class StoryMenuScreen extends MenuScreen {
      * Change the maze to the next one in the maze list
      */
     public void nextMaze(){
-        maze_id = (maze_id + 1) % GameConfig.maze_count;
+        maze_id = (GameConfig.maze_count + maze_id + 1) % GameConfig.maze_count;
         maze = Maze.importMaze("maze_" + maze_id);
     }
 

@@ -59,6 +59,8 @@ public class StoryMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 level_preview.setMaze(screen.maze);
+                highlightLevel(screen.getMazeId());
+                previous_level_button.setChecked(false);
             }
         });
         level_selection.add(previous_level_button);
@@ -69,6 +71,8 @@ public class StoryMenuUI extends Table {
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextMaze();
                 level_preview.setMaze(screen.maze);
+                highlightLevel(screen.getMazeId());
+                next_level_button.setChecked(false);
             }
         });
         level_selection.add(next_level_button).spaceLeft(Value.percentHeight(8f));
@@ -91,6 +95,7 @@ public class StoryMenuUI extends Table {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     screen.getMaze(finalI);
+                    //highlightLevel(screen.getMazeId());
                     level_preview.setMaze(screen.maze);
                 }
             });
@@ -106,6 +111,7 @@ public class StoryMenuUI extends Table {
         play_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                play_button.setChecked(false);
                 if (screen.isLevelUnlocked(screen.getMazeId())) { // allows to play the level only if it's unlocked
                     Bomberball.changeScreen(new GameStoryScreen(screen, screen.maze, screen.getMazeId()));
                 }
@@ -127,6 +133,17 @@ public class StoryMenuUI extends Table {
     public static void unlockLevel(int i) {
         screen.setLevelUnlocked(i);
         levels[i].setDisabled(false);
+    }
+
+    public void highlightLevel(int j){
+        if(screen.isLevelUnlocked(j)){
+            for(int i = 0;i<screen.getMazeCount();i++){
+                if(i!=j && !levels[i].isDisabled() == true){
+                    levels[i].setChecked(false);
+                }
+            }
+        }
+        levels[j].setChecked(true);
     }
 }
 
