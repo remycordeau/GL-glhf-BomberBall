@@ -1,7 +1,9 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
@@ -15,7 +17,12 @@ import com.glhf.bomberball.screens.MapEditorScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.utils.VectorInt2;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+
+import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
 public class MapEditorUI extends Table {
 
@@ -40,9 +47,21 @@ public class MapEditorUI extends Table {
     public void initializeButtons() {
         TextButton bouton_retour = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
+        TextButton button_save = new AudioButton(Translator.translate("Save"), Graphics.GUI.getSkin());
+        bouton_retour.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
+                File dir = new File(PATH_MAZE);
+                if(!dir.exists()) dir.mkdirs();
+                maze.export(PATH_MAZE+output+".json");
+            }
+        });
         this.add(new ObjectsWidget()).grow();
         this.row();
         this.add(bouton_retour).grow();
+        this.row();
+        this.add(button_save).grow();
     }
 
     public VectorInt2 screenPosToCell(float x, float y) {
