@@ -48,13 +48,13 @@ public class MapEditorUI extends Table {
         TextButton bouton_retour = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
         TextButton button_save = new AudioButton(Translator.translate("Save"), Graphics.GUI.getSkin());
-        bouton_retour.addListener(new ChangeListener() {
+        button_save.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
                 File dir = new File(PATH_MAZE);
                 if(!dir.exists()) dir.mkdirs();
-                maze.export(PATH_MAZE+output+".json");
+                maze.export(output);
             }
         });
         this.add(new ObjectsWidget()).grow();
