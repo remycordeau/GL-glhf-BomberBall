@@ -7,6 +7,7 @@ import com.glhf.bomberball.ui.StoryMenuUI;
 
 public class StoryMenuScreen extends MenuScreen {
 
+    private final StoryMenuUI ui;
     public Maze maze;
     private int maze_id = 0;
     private GameSoloConfig config;
@@ -15,7 +16,8 @@ public class StoryMenuScreen extends MenuScreen {
         super();
         config = GameSoloConfig.get();
         maze = Maze.importMaze("maze_" + maze_id);
-        addUI(new StoryMenuUI(this));
+        ui = new StoryMenuUI(this);
+        addUI(ui);
     }
 
     /**
@@ -55,7 +57,7 @@ public class StoryMenuScreen extends MenuScreen {
      * @return true if the level is unlocked, false otherwise
      */
     public boolean isLevelUnlocked(int i){
-        return config.level_unlocked[i];
+        return i <= config.last_level_unlocked;
     }
 
     // getters and setters
@@ -71,8 +73,16 @@ public class StoryMenuScreen extends MenuScreen {
      * @param i
      */
     public void setLevelUnlocked(int i){
-        config.level_unlocked[i] = true;
+        config.last_level_unlocked=i;
+        ui.unlockLevel(i);
         config.exportConfig();
     }
 
+    public int getLastLevelPlayed() {
+        return config.last_level_played;
+    }
+    public void setLastLevelPlayed(int i) {
+        config.last_level_played=i;
+        config.exportConfig();
+    }
 }

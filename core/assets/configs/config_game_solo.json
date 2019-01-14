@@ -1,16 +1,8 @@
 {
-  "level_unlocked": [
-    true,
-    true,
-    true,
-    false,
-    false,
-    false,
-    false
-  ],
   "player_skin": "knight_m",
   "highscore": 145970,
   "last_level_played": 0,
+  "last_level_unlocked": 1,
   "bonus_activated": true,
   "probFreeCase": 0.3333333333333333,
   "activeEnemy_life": 1,
