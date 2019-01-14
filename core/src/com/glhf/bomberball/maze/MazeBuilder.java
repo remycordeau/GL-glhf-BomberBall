@@ -1,10 +1,11 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.math.Vector2;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -16,22 +17,19 @@ public class MazeBuilder {
     private static Random rand = new Random();
     private static Cell cellDoor;
     private static double probFreeCase;
+    private static int nb_ennemies = 10;
 
     public static Maze createInfinityMaze(){
-        probFreeCase = GameSoloConfig.get("config_game_solo").probFreeCase;
+        probFreeCase = GameSoloConfig.get().probFreeCase;
 
         maze = new Maze();
 
         maze.title = "Classic";
-        maze.height = 7 + (int) (Math.random()*3)*2;
-        maze.width = 9 + (int) (Math.random()*3)*2;
+        maze.height = 5 + (int) (Math.random()*3)*2;
+        maze.width = 7 + (int) (Math.random()*3)*2;
 
         maze.spawn_positions = new ArrayList<>();
-        maze.spawn_positions.add(new Vector2(0, rand.nextInt(maze.height)));
-
-        //TODO: ajout des ennemis à refaire
-        maze.enemy_spawn_positions = new ArrayList<>();
-        maze.enemy_spawn_positions.add(new Vector2(0, 0));
+        maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
 
         GameSoloConfig config = GameSoloConfig.get();
         availableWall = new LinkedHashMap<>();
@@ -46,6 +44,7 @@ public class MazeBuilder {
         cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
         maze.cells[cellDoor.getX()][cellDoor.getY()].addGameObject(new Door());
         initialiseWalls();
+        initialiseEnemies();
 
 
         return maze;
@@ -81,6 +80,28 @@ public class MazeBuilder {
         if(!MazeTransversal.isReachableCell(originPos, cellDoor)){
             System.out.println("new Maze");
                 maze = createInfinityMaze();
+        }
+    }
+
+    private static void initialiseEnemies() {
+        for(int i = 0; i< nb_ennemies; i++){
+            Cell cell;
+            int x;
+            int y;
+            do {
+                x = rand.nextInt(maze.width);
+                y = rand.nextInt(maze.height);
+                cell = maze.cells[x][y];
+            }while (!cell.isEmpty() || maze.spawn_positions.get(0).equals(x,y));
+            float r = rand.nextFloat();
+            if (r < 1) {//todo : once AI is working set to 0.7
+                ArrayList<Directions> ways = MazeTransversal.getRandomPath(cell);
+                cell.addGameObject(new PassiveEnemy("skelet", 1, 3, 1, ways));
+            } else if (r < 0.9) {
+                cell.addGameObject(new ActiveEnemy("swampy", 1, 3, 1));
+            } else if (r < 1) {
+                cell.addGameObject(new AggressiveEnemy("wogol", 1, 1, 1, 5));
+            }
         }
     }
 

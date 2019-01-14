@@ -21,11 +21,11 @@ public class GameInfiniteScreen extends GameScreen {
         //super(maze);
         super(MazeBuilder.createInfinityMaze());
         this.screen = screen;
-
+        //TODO : factoriser le code avec GameStoryScreen
         current_player = this.maze.spawnPlayer();
 
         //enemies = this.maze.getEnemies();
-        enemies = this.maze.spawnEnemies(new GameSoloConfig());
+        enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
         this.maze.export("testWithEnemies");
 

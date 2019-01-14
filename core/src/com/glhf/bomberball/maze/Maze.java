@@ -9,6 +9,7 @@ import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
@@ -17,8 +18,7 @@ import java.util.ArrayList;
 public class Maze{
 
     String title;
-    ArrayList<Vector2> spawn_positions;
-    ArrayList<Vector2> enemy_spawn_positions;
+    ArrayList<VectorInt2> spawn_positions;
     int height;
     int width;
     Cell[][] cells;
@@ -52,8 +52,8 @@ public class Maze{
     public Player spawnPlayer()
     {
         GameSoloConfig config = GameSoloConfig.get();
-        Vector2 p = spawn_positions.get(0);
-        return spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
+        VectorInt2 pos = spawn_positions.get(0);
+        return spawnPlayer(config, config.player_skin, cells[pos.x][pos.y]);
     }
 
     public ArrayList<Player> spawnPlayers(int nb_player)
@@ -61,8 +61,8 @@ public class Maze{
         GameMultiConfig config = GameMultiConfig.get();
         ArrayList<Player> players = new ArrayList<>();
         for (int i = 0; i < nb_player; i++) {
-            Vector2 p = spawn_positions.get(i);
-            Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
+            VectorInt2 pos = spawn_positions.get(i);
+            Player player = spawnPlayer(config, config.player_skins[i], cells[pos.x][pos.y]);
             players.add(player);
         }
         return players;
@@ -77,15 +77,6 @@ public class Maze{
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
-    }
-
-    public ArrayList<Enemy> spawnEnemies(GameSoloConfig config) {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-        for (Vector2 p : enemy_spawn_positions) {
-            Enemy enemy = spawnEnemy(config, cells[(int) p.x][(int) p.y]);
-            enemies.add(enemy);
-        }
-        return enemies;
     }
 
     public Enemy spawnEnemy(GameSoloConfig config, Cell cell) {
