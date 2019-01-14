@@ -6,8 +6,10 @@ package com.glhf.bomberball.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
@@ -109,9 +111,9 @@ public class StoryMenuUI extends Table {
         // Play and quit buttons
 
         TextButton play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
-        play_button.addListener(new ChangeListener() {
+        play_button.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void clicked(InputEvent event, float x, float y) {
                 play_button.setChecked(false);
                 if (screen.isLevelUnlocked(screen.getMazeId())) { // allows to play the level only if it's unlocked
                     Bomberball.changeScreen(new GameStoryScreen(screen, screen.maze, screen.getMazeId()));
