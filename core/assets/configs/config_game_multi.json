@@ -5,7 +5,6 @@
   "bomb_damage": 1,
   "player_life": 1,
   "initial_player_moves": 5,
-  "player_count": 2,
   "player_skins": [
     "knight_m",
     "knight_f",

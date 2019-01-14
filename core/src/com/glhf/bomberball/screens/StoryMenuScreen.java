@@ -24,7 +24,8 @@ public class StoryMenuScreen extends MenuScreen {
      * Change the maze to the next one in the maze list
      */
     public void nextMaze(){
-        maze_id = (GameConfig.maze_count + maze_id + 1) % GameConfig.maze_count;
+        int nb_max = config.last_level_unlocked+1;
+        maze_id = (maze_id + 1) % nb_max;
         maze = Maze.importMaze("maze_" + maze_id);
     }
 
@@ -32,7 +33,8 @@ public class StoryMenuScreen extends MenuScreen {
      * Change the maze to the previous one in the maze list
      */
     public void previousMaze(){
-        maze_id = (GameConfig.maze_count + maze_id - 1) % GameConfig.maze_count;
+        int nb_max = config.last_level_unlocked+1;
+        maze_id = (nb_max + maze_id - 1) % nb_max;
         maze = Maze.importMaze("maze_" + maze_id);
     }
 

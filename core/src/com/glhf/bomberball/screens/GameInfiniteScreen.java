@@ -22,8 +22,7 @@ public class GameInfiniteScreen extends GameScreen {
         super(MazeBuilder.createInfinityMaze());
         this.screen = screen;
 
-        GameSoloConfig config = new GameSoloConfig();
-        current_player = this.maze.spawnPlayer(config);
+        current_player = this.maze.spawnPlayer();
 
         //enemies = this.maze.getEnemies();
         enemies = this.maze.spawnEnemies(new GameSoloConfig());

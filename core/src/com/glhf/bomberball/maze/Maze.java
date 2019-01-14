@@ -23,7 +23,6 @@ public class Maze{
     int width;
     Cell[][] cells;
 
-    private transient GameConfig config;
     private static Gson gson;
 
     public Maze() {
@@ -50,16 +49,18 @@ public class Maze{
         }
     }
 
-    public Player spawnPlayer(GameSoloConfig config)
+    public Player spawnPlayer()
     {
+        GameSoloConfig config = GameSoloConfig.get();
         Vector2 p = spawn_positions.get(0);
         return spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
     }
 
-    public ArrayList<Player> spawnPlayers(GameMultiConfig config)
+    public ArrayList<Player> spawnPlayers(int nb_player)
     {
+        GameMultiConfig config = GameMultiConfig.get();
         ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < config.player_count; i++) {
+        for (int i = 0; i < nb_player; i++) {
             Vector2 p = spawn_positions.get(i);
             Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
             players.add(player);

@@ -142,9 +142,6 @@ public class Graphics {
             textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
 
-            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
-            textButtonStyle.checked = patch3;
-            skin.add("checkable", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("small");
@@ -154,6 +151,11 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("very_small");
             textButtonStyle.checked = patch.tint(Color.RED);
             skin.add("input_select", textButtonStyle);
+
+            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            textButtonStyle.checked = patch3;
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("checkable", textButtonStyle);
 
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();

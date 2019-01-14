@@ -25,8 +25,7 @@ public class GameStoryScreen extends GameScreen {
         this.maze_id = maze_id;
         this.screen = screen;
 
-        GameSoloConfig config = new GameSoloConfig();
-        current_player = this.maze.spawnPlayer(config);
+        current_player = this.maze.spawnPlayer();
 
         //enemies = this.maze.getEnemies();
         enemies = this.maze.spawnEnemies(new GameSoloConfig());
