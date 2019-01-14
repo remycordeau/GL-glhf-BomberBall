@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
@@ -37,7 +38,7 @@ public class MapEditorUI extends Table {
     }
 
     public void initializeButtons() {
-        TextButton bouton_retour = new TextButton(Translator.translate("Back"), Graphics.GUI.getSkin());
+        TextButton bouton_retour = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
         this.add(new ObjectsWidget()).grow();
         this.row();

@@ -140,8 +140,11 @@ public class Graphics {
             textButtonStyle.overFontColor = Color.GRAY;
             textButtonStyle.downFontColor = Color.RED;
             textButtonStyle.disabled = patch2;
-            textButtonStyle.checked = patch3;
             skin.add("default", textButtonStyle);
+
+            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            textButtonStyle.checked = patch3;
+            skin.add("checkable", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("small");

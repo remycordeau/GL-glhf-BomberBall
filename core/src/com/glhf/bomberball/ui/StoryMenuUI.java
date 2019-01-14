@@ -53,7 +53,7 @@ public class StoryMenuUI extends Table {
 
         // Buttons to select the level
 
-        TextButton previous_level_button = new TextButton("<", Graphics.GUI.getSkin());
+        TextButton previous_level_button = new AudioButton("<", Graphics.GUI.getSkin());
         previous_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -65,7 +65,7 @@ public class StoryMenuUI extends Table {
         });
         level_selection.add(previous_level_button);
 
-        TextButton next_level_button = new TextButton(">", Graphics.GUI.getSkin());
+        TextButton next_level_button = new AudioButton(">", Graphics.GUI.getSkin());
         next_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -88,7 +88,7 @@ public class StoryMenuUI extends Table {
         HorizontalGroup horizontal = new HorizontalGroup();
 
         for (int i = 0; i < nb_levels; i++) {
-            levels[i] = new TextButton(Integer.toString(i + 1), Graphics.GUI.getSkin());
+            levels[i] = new AudioButton(Integer.toString(i + 1), Graphics.GUI.getSkin(), "checkable");
             int finalI = i;
             levels[i].setDisabled(!screen.isLevelUnlocked(i));
             levels[i].addListener(new ChangeListener() {

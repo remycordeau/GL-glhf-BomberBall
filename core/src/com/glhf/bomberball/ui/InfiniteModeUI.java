@@ -81,7 +81,7 @@ public class InfiniteModeUI extends Table {
 
         //Other buttons
         TextButton back;
-        back = new TextButton(Translator.translate("Back"), skin);
+        back = new AudioButton(Translator.translate("Back"), skin);
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
