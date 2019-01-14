@@ -71,6 +71,8 @@ public abstract class Enemy extends Character {
 
     public abstract void createAI();
 
+    public abstract void updateAI();
+
     /**
      * this method gives the "root" of a kind of tree which represents the different available ways from an initial position
      * @param initial_position

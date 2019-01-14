@@ -107,6 +107,6 @@ public class GameStoryScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        enemies.forEach(Enemy::createAI);
+        enemies.forEach(Enemy::updateAI);
     }
 }

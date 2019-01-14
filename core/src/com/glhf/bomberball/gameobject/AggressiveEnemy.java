@@ -25,6 +25,13 @@ public class AggressiveEnemy extends Enemy {
         this.way = this.longestWayMovesSequence(new Node(null, this.getCell()));
     }
 
+    @Override
+    public void updateAI() {
+        if(cell!=null){// equivalent to isAlive()
+            this.way = this.longestWayMovesSequence(new Node(null, this.getCell()));
+        }
+    }
+
     /**
      * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range
      * this method is to be called at the beginning of the enemy's turn

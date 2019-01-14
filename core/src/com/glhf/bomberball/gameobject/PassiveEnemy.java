@@ -16,4 +16,9 @@ public class PassiveEnemy extends Enemy {
     public void createAI() {
 
     }
+
+    @Override
+    public void updateAI() {
+
+    }
 }
