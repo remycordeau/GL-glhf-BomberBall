@@ -2,7 +2,6 @@
 "level unlocked"		:	"Niveau %d débloqué !"
 "level succeeded"       :   "Félicitations! Vous avez réussi niveau %d !"
 
-
 #SoloUI
 "mode movement button"	:	"Déplacement [%s]"
 "mode bombe button"		:	"Bombe [%s]"
@@ -18,16 +17,15 @@
 #Story Menus
 "Level Selection"	:	"Selection des niveaux"
 "Wasted !"		    :	"Wasted !"
-"égalité ..."		:	"égalité ..."
+"draw ..."		:	"égalité ..."
 "Lost!"				:	"Perdu!"
 "VICTORY!"			:	"VICTOIRE!"
-"All levels unlocked !"	:	"All levels unlocked !"
-"Play next level"		:	"Play next level"
-"Replay level"			:	"Replay level"
-"Replay last level"		:	"Replay last level"
-"Back to level selection"	:	"Back to level selection"
-"Retry level"			:	"Retry level"
-"Play Selected Level"	:	"Play Selected Level"
+"All levels unlocked !"	:	"Vous avez débloqué tous les niveaux !"
+"Play next level"		:	"Jouer au niveau suivant"
+"Retry this level"			:	"Rejouer le niveau"
+"Retry last level"		:	"Rejouer le dernier niveau"
+"Back to level selection"	:	"Revenir à la sélection des niveaux"
+"Play Selected Level"	:	"Jouer au niveau selectionné"
 "story mode congratulations"		:	"Félicitations ! Vous avez terminé le mode histoire !"
 
 #MainMenuUI
@@ -35,10 +33,10 @@
 "Solo"		    :	"Solo"
 "Map Editor"	:	"Editeur de Carte"
 "Settings"		:	"Paramètres"
-"Quit"		    :	"Quitter"
+"Quit"		    :	"Quitter le jeu"
 
-"Menu multijoueur"		:	"Menu multijoueur"
 "Back to main menu"		:	"Retour au menu principal"
+"Multiplayer menu"		:	"Menu multijoueur"
 "Play"		            :	"Jouer"
 "Back"	        		:	"Retour"
 "Infinite Mode"		    :	"Mode infini"
@@ -51,19 +49,5 @@
 "Random Maze"		:	"Carte Aléatoire"
 
 #WelcomingMenu UI
-"Press [ENTER] to play"    :     "Appuyez sur [ENTREE] pour jouer"
+"Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"
 
-#EndLevelUI (suite)
-"Play next level"       :   "Jouer au niveau suivant"
-"Replay level"      :   "Rejouer le niveau"
-"Back to level selection"       :   "Revenir à la sélection des niveaux"
-
-#StoryMenuUI (suite)
-"Play Selected Level"       :   "Jouer au niveau selectionné"
-
-#EndStoryScreen
-"All levels unlocked !"     :   "Vous avez débloqué tous les niveaux !"
-"Replay last level"         :   "Rejouer le dernier niveau"
-
-#DeadMenu
-"Quit"              :   "Quitter le jeu"

@@ -49,7 +49,7 @@ public class DeadUI extends Table {
         dead.setColor(Color.RED);
         this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
 
-        TextButton replay = new AudioButton(Translator.translate("Replay level"), Graphics.GUI.getSkin());
+        TextButton replay = new AudioButton(Translator.translate("Retry this level"), Graphics.GUI.getSkin());
         replay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

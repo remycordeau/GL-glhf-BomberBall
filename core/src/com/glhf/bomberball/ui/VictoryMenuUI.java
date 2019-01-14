@@ -32,7 +32,7 @@ public class VictoryMenuUI extends Table {
         this.padBottom(Value.percentHeight(0.1f));
 
         if (player == null) {
-            this.add(new Label(Translator.translate("égalité ..."), Graphics.GUI.getSkin(), "default")).row();
+            this.add(new Label(Translator.translate("draw ..."), Graphics.GUI.getSkin(), "default")).row();
             TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/VictoryMenu.png")));
             this.setBackground(texture);
         } else {
@@ -62,7 +62,7 @@ public class VictoryMenuUI extends Table {
         });
         this.add(b).growX().space(spacing).row();
 
-        b = new AudioButton(Translator.translate("Menu multijoueur"), skin);
+        b = new AudioButton(Translator.translate("Multiplayer menu"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
         this.add(b).growX().space(spacing).row();
 

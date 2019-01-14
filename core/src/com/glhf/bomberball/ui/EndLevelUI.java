@@ -69,7 +69,7 @@ public class EndLevelUI extends Table {
         });
         buttons.add(next).spaceTop(Value.percentHeight(0.2f)).row();
 
-        TextButton replay_level = new AudioButton(Translator.translate("Replay level"), Graphics.GUI.getSkin());
+        TextButton replay_level = new AudioButton(Translator.translate("Retry this level"), Graphics.GUI.getSkin());
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
