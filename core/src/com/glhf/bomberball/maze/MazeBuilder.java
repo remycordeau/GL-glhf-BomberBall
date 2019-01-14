@@ -94,7 +94,7 @@ public class MazeBuilder {
                 cell = maze.cells[x][y];
             }while (!cell.isEmpty() || maze.spawn_positions.get(0).equals(x,y));
             float r = rand.nextFloat();
-            if (r < 1) {//todo : once AI is working set to 0.7
+            if (r < 0.7) {
                 ArrayList<Directions> ways = MazeTransversal.getRandomPath(cell);
                 cell.addGameObject(new PassiveEnemy("skelet", 1, 3, 1, ways));
             } else if (r < 0.9) {
