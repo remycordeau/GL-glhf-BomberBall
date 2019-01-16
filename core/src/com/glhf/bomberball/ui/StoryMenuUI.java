@@ -94,11 +94,11 @@ public class StoryMenuUI extends Table {
             buttonGroup.add(levels[i]);
             int finalI = i;
             levels[i].setDisabled(!screen.isLevelUnlocked(i));
-            levels[i].addListener(new ChangeListener() {
+            levels[i].addListener(new ClickListener() {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void clicked(InputEvent event, float x, float y) {
                     screen.getMaze(finalI);
-                    //highlightLevel(screen.getMazeId());
+                    highlightLevel(screen.getMazeId());
                     level_preview.setMaze(screen.maze);
                 }
             });
