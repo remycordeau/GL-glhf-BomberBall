@@ -1,6 +1,7 @@
 package com.glhf.bomberball.maze;
 
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameInfiniteConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.maze.cell.Cell;
@@ -18,9 +19,11 @@ public class MazeBuilder {
     private static Cell cellDoor;
     private static double probFreeCase;
     private static int nb_ennemies = 10;
+    private static GameInfiniteConfig config;
 
     public static Maze createInfinityMaze(){
-        probFreeCase = GameSoloConfig.get().probFreeCase;
+        config = GameInfiniteConfig.get();
+        probFreeCase = config.probFreeCase;
 
         maze = new Maze();
 
@@ -31,7 +34,6 @@ public class MazeBuilder {
         maze.spawn_positions = new ArrayList<>();
         maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
 
-        GameSoloConfig config = GameSoloConfig.get();
         availableWall = new LinkedHashMap<>();
         availableWall.put(IndestructibleWall.class, 4.0);
         availableWall.put(DestructibleWall.class, 4.0);
@@ -96,11 +98,11 @@ public class MazeBuilder {
             float r = rand.nextFloat();
             if (r < 0.7) {
                 ArrayList<Directions> ways = MazeTransversal.getRandomPath(cell);
-                cell.addGameObject(new PassiveEnemy("skelet", 1, 3, 1, ways));
+                cell.addGameObject(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, ways));
             } else if (r < 0.9) {
-                cell.addGameObject(new ActiveEnemy("swampy", 1, 3, 1));
+                cell.addGameObject(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
             } else if (r < 1) {
-                cell.addGameObject(new AggressiveEnemy("wogol", 1, 1, 1, 5));
+                cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, 5));
             }
         }
     }

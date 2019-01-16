@@ -2,10 +2,9 @@ package com.glhf.bomberball.screens;
 
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
@@ -24,8 +23,9 @@ public class GameStoryScreen extends GameScreen {
         super(maze);
         this.maze_id = maze_id;
         this.screen = screen;
+        GameStoryConfig config = GameStoryConfig.get();
 
-        current_player = this.maze.spawnPlayer();
+        current_player = this.maze.spawnPlayer(config);
 
         //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();

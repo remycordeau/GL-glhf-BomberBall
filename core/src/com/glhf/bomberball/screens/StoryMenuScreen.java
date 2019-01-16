@@ -1,7 +1,7 @@
 package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.config.GameConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryMenuUI;
 
@@ -10,11 +10,11 @@ public class StoryMenuScreen extends MenuScreen {
     private final StoryMenuUI ui;
     public Maze maze;
     private int maze_id = 0;
-    private GameSoloConfig config;
+    private GameStoryConfig config;
 
     public StoryMenuScreen(){
         super();
-        config = GameSoloConfig.get();
+        config = GameStoryConfig.get();
         maze = Maze.importMaze("maze_" + maze_id);
         ui = new StoryMenuUI(this);
         addUI(ui);

@@ -1,11 +1,11 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
@@ -49,9 +49,8 @@ public class Maze{
         }
     }
 
-    public Player spawnPlayer()
+    public Player spawnPlayer(GameSoloConfig config)
     {
-        GameSoloConfig config = GameSoloConfig.get();
         VectorInt2 pos = spawn_positions.get(0);
         return spawnPlayer(config, config.player_skin, cells[pos.x][pos.y]);
     }
@@ -77,12 +76,6 @@ public class Maze{
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
-    }
-
-    public Enemy spawnEnemy(GameSoloConfig config, Cell cell) {
-        Enemy enemy = new ActiveEnemy("black_knight", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength);
-        cell.addGameObject(enemy);
-        return enemy;
     }
 
     /**
