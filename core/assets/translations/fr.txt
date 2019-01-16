@@ -52,4 +52,4 @@
 "Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"
 
 #MapEditor
-"Save"   :    "Sauvegarder"
+"Save"   :    "Save"

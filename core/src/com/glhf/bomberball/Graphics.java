@@ -138,7 +138,7 @@ public class Graphics {
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
-            textButtonStyle.downFontColor = Color.RED;
+            //textButtonStyle.downFontColor = Color.RED;
             textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
 
@@ -149,7 +149,6 @@ public class Graphics {
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
-            textButtonStyle.checked = patch.tint(Color.RED);
             skin.add("input_select", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
