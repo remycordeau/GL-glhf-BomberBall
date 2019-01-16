@@ -33,7 +33,7 @@ public class VictoryMenuUI extends Table {
 
         if (player == null) {
             this.add(new Label(Translator.translate("draw ..."), Graphics.GUI.getSkin(), "default")).row();
-            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/VictoryMenu.png")));
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/EqualityMenu.png")));
             this.setBackground(texture);
         } else {
             this.add(new Label(Translator.translate("VICTORY!"), Graphics.GUI.getSkin(), "default")).row();
