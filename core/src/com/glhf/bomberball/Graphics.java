@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -174,6 +175,9 @@ public class Graphics {
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
 
+            //=======WindowStyle
+            WindowStyle windowStyle = new WindowStyle(font, Color.WHITE, skin.getDrawable("white"));
+            skin.add("default", windowStyle);
 
             //=======SliderStyle
             SliderStyle sliderStyle = new SliderStyle();
