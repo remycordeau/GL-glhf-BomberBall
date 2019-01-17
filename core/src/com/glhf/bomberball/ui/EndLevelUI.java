@@ -5,6 +5,7 @@
 
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -39,7 +40,7 @@ public class EndLevelUI extends MenuUI {
         this.next_level = previous_level +1;
         screen.setLevelUnlocked(next_level); // unlocks next level
         addButtons();
-        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png")));
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png"))));
         this.setBackground(background);
     }
 

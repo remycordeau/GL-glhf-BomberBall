@@ -4,6 +4,7 @@
  */
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -33,7 +34,7 @@ public class EndStoryUI extends MenuUI {
         this.setFillParent(true);
         this.screen = screen;
         this.last_level = maze_id;
-        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png")));
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png"))));
         this.setBackground(background);
         addButtons();
     }
