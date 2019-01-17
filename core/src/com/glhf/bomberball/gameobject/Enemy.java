@@ -78,7 +78,7 @@ public abstract class Enemy extends Character {
      * @param initial_position
      * @return Node
      */
-    public static Node constructWays(Cell initial_position) {
+    /*public static Node constructWays(Cell initial_position) {
         Node ways = new Node(null, initial_position);
         LinkedList<Node> to_construct = new LinkedList<>();
         Node current_node;
@@ -93,15 +93,16 @@ public abstract class Enemy extends Character {
             //create sons and adding them to to_construct
             for (Directions d : Directions.values()) {
                 current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
+                family = current_node.getAncestors();
                 //adding son
                 if(current_adjacent_cell==null
                         || !current_adjacent_cell.isWalkable()
-                        || (current_node.getAncestors()!=null && current_node.getAncestors().contains(current_adjacent_cell))){
+                        || (family !=null && family.contains(current_adjacent_cell))
+                        || (family != null && family.size() > 30)){
                     current_node.setSons(null, d);
                 }
                 else{
                     //creating a son
-                    family = current_node.getAncestors();
                     family = family == null ? new ArrayList<>() : new ArrayList<>(family);
                     family.add(current_node.getMatching_cell());
                     son = new Node(family, current_adjacent_cell);
@@ -112,10 +113,40 @@ public abstract class Enemy extends Character {
             }
         }
         return ways;
+    }*/
+
+    public static Node constructWay(Cell initial_position) {
+        Node way = new Node(null, null, initial_position);
+        LinkedList<Node> to_construct = new LinkedList<>();
+        Node current_node;
+        Node son;
+        ArrayList<Cell> family;
+        Cell current_adjacent_cell;
+        to_construct.add(way);
+        while (to_construct.size() > 0) {
+            current_node = to_construct.poll();
+            for (Directions d : Directions.values()) {
+                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
+                family = current_node.getAncestors();
+                if(current_adjacent_cell == null
+                    || !current_adjacent_cell.isWalkable()
+                    || (family != null && family.contains(current_adjacent_cell))) {
+                    current_node.setSons(null, d);
+                    current_node.sonIsSet();
+                } else {
+                    family = family == null ? new ArrayList<>() : new ArrayList<>(family);
+                    family.add(current_node.getMatching_cell());
+                    son = new Node(family, current_node, current_adjacent_cell);
+                    current_node.setSons(son, d);
+                    to_construct.add(son); //TODO: ajouter à une certaine place pour parcourire en profondeur
+                }
+            }
+        }
+        return way;
     }
 
     /**
-     * this method gives the longest way that the active enemy will folow, chose the longest path
+     * this method gives the longest way that the active enemy will follow, chose the longest path
      * @param initial_node
      * @return ArrayList<Cell> a path
      */

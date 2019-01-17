@@ -34,7 +34,7 @@ public class EndStoryUI extends MenuUI {
         this.screen = screen;
         this.last_level = maze_id;
         TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png"))));
-        this.setBackground(background);
+        //this.setBackground(background);
         addButtons();
     }
 

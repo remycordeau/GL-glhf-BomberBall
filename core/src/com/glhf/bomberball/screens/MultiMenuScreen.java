@@ -15,7 +15,7 @@ public class MultiMenuScreen extends MenuScreen {
     public static String[] playable = {"knight_m", "knight_f","black_knight", "elf_f", "elf_m", "wizzard_m", "wizzard_f", "no_player"};
     public static final int nb_Playable = playable.length;
     private int maze_id = 0;
-    private final int maze_count = 7;
+    private final int maze_count = 2;
 
     public static int p1_id=0;
     public static int p2_id=1;

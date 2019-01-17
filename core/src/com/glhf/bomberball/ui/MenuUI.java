@@ -11,6 +11,6 @@ public abstract class MenuUI extends Table {
     public MenuUI () {
         super();
         TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/WallMenu.png")));
-        this.setBackground(texture);
+        //this.setBackground(texture);
     }
 }
