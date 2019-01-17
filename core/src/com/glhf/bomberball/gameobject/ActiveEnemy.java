@@ -8,13 +8,13 @@ public class ActiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        this.way = this.longestWayMovesSequence(Enemy.constructWays(this.getCell()));
+        this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
     }
 
     @Override
     public void updateAI() {
         if(cell!=null){// equivalent to isAlive()
-            this.way = this.longestWayMovesSequence(Enemy.constructWays(this.getCell()));
+            this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
         }
     }
 }
