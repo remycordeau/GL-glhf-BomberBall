@@ -26,6 +26,15 @@ public class MapEditorScreen extends MenuScreen {
     protected void registerActionsHandlers() {
         super.registerActionsHandlers();
         input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, this::dropSelectedObject);
+        input_handler.registerActionHandler(Action.DELETE_OBJECT, this::deleteObject);
+    }
+
+    private void deleteObject(float x, float y) {
+        VectorInt2 coords = ui.screenPosToCell(x,y);
+        Cell cell = maze.getCellAt(coords.x, coords.y);
+        if(cell != null && classSelected != null) {
+            cell.removeGameObjects();
+        }
     }
 
     private void dropSelectedObject(float x, float y) {
