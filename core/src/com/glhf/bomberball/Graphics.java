@@ -112,6 +112,8 @@ public class Graphics {
             //
             Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
             skin.add("white", white);
+            Texture transparent = new Texture(new Pixmap(1,1, Format.RGBA8888));
+            skin.add("transparent", transparent);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
             skin.add("checkboxOff", new TextureRegionDrawable(GUI.get("checkboxOff")));
             skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
@@ -207,7 +209,7 @@ public class Graphics {
             SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
-            selectBoxStyle.background = skin.getDrawable("white");
+            selectBoxStyle.background = skin.getDrawable("transparent");
             selectBoxStyle.listStyle = skin.get(ListStyle.class);
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);
