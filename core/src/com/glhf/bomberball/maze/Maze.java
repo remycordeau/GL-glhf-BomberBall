@@ -167,11 +167,19 @@ public class Maze{
                 .create();
     }
 
-    public static Maze importMaze(String name) {
+    public static Maze importMazeSolo(String name) {
+        return importMaze("solo/"+name);
+    }
+
+    public static Maze importMazeMulti(String name) {
+        return importMaze("multi/"+name);
+    }
+
+    private static Maze importMaze(String name) {
         if(gson==null) {
             createGson();
         }
-        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE + name + ".json").readString(), Maze.class);
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE+ name + ".json").readString(), Maze.class);
         maze.initialize();
         return maze;
     }
