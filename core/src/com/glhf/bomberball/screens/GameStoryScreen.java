@@ -103,7 +103,7 @@ public class GameStoryScreen extends GameScreen {
                     public void run() {
                         input_handler.lock(false);
                     }
-                }, 0.6f*enemies.size());
+                }, 0.1f*enemies.size());
 
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");

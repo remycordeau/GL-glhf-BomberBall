@@ -1,5 +1,6 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
@@ -34,6 +35,16 @@ public class GameInfiniteScreen extends GameScreen {
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
+
+        Timer.schedule(new Timer.Task() {   //Verifying if an ennemy has killed the player
+            @Override
+            public void run() {
+                if (!current_player.isAlive()) {
+                    Bomberball.changeScreen(new MainMenuScreen()); //TODO: changer en DeadScreen
+                    Timer.instance().clear();
+                }
+            }
+        }, 1f, 1f);
     }
 
     @Override
@@ -67,15 +78,30 @@ public class GameInfiniteScreen extends GameScreen {
                     enemy.followWay();
                 }
             }
+
+            try {
+                current_player.initiateTurn();
+                setMoveEffect();
+                setMoveMode();
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        input_handler.lock(false);
+                    }
+                }, 0.1f*enemies.size());
+
+            } catch (RuntimeException e) {
+                System.out.println("The player probably died");
+            }
         }
-        if (!current_player.isAlive()) {
+        /*if (!current_player.isAlive()) {
             Bomberball.changeScreen(new MainMenuScreen());
         } else {
             current_player.initiateTurn();
             setMoveEffect();
             setMoveMode();
             input_handler.lock(false);
-        }
+        }*/
     }
 
     /**
