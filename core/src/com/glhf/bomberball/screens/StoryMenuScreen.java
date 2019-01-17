@@ -15,7 +15,7 @@ public class StoryMenuScreen extends MenuScreen {
     public StoryMenuScreen(){
         super();
         config = GameStoryConfig.get();
-        maze = Maze.importMaze("maze_" + maze_id);
+        maze = Maze.importMazeSolo("maze_" + maze_id);
         ui = new StoryMenuUI(this);
         addUI(ui);
     }
@@ -26,7 +26,7 @@ public class StoryMenuScreen extends MenuScreen {
     public void nextMaze(){
         int nb_max = config.last_level_unlocked+1;
         maze_id = (maze_id + 1) % nb_max;
-        maze = Maze.importMaze("maze_" + maze_id);
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     /**
@@ -35,7 +35,7 @@ public class StoryMenuScreen extends MenuScreen {
     public void previousMaze(){
         int nb_max = config.last_level_unlocked+1;
         maze_id = (nb_max + maze_id - 1) % nb_max;
-        maze = Maze.importMaze("maze_" + maze_id);
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     /**
@@ -45,7 +45,7 @@ public class StoryMenuScreen extends MenuScreen {
     public void getMaze(int i)
     {
         maze_id = i;
-        maze = Maze.importMaze("maze_" + maze_id);
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     public Maze getMaze()

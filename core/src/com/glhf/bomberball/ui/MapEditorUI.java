@@ -90,7 +90,7 @@ public class MapEditorUI extends MenuUI {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        screen.select(o.getClass());
+                        screen.select(o);
                     }
                 });
                 content.add(button).height(75).growX().row();

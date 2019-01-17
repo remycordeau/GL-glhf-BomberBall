@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -55,7 +54,7 @@ public class EndStoryUI extends MenuUI {
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameStoryScreen(screen,Maze.importMaze("maze_" + last_level),screen.getMazeId()));
+                Bomberball.changeScreen(new GameStoryScreen(screen,Maze.importMazeSolo("maze_" + last_level),screen.getMazeId()));
         }
         });
         this.add(replay_level).spaceTop(Value.percentHeight(0.9f)).row();

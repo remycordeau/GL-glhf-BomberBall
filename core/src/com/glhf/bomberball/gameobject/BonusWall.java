@@ -42,4 +42,10 @@ public class BonusWall extends DestructibleWall {
         cell.addGameObject(bonus);
         super.dispose();
     }
+
+
+    @Override
+    public GameObject clone() {
+        return new BonusWall(new Bonus(bonus.getType()));
+    }
 }
