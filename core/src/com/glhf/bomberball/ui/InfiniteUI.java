@@ -10,13 +10,17 @@ import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.screens.GameInfiniteScreen;
 
+import java.util.ArrayList;
+
 public class InfiniteUI extends MenuUI {
 
     public InfiniteUI( Player player, GameInfiniteScreen screen) {
 
         //TODO resolve bug with the directions keys
         this.setFillParent(true);
-        PlayersInfoUI left_ui = new PlayersInfoUI(player);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player);
+        PlayersInfoUI left_ui = new PlayersInfoUI(players);
         left_ui.padRight(Value.percentWidth(2/3f));
         left_ui.setFillParent(true);
         ActionPlayerUI bottom_ui = new ActionPlayerUI(screen);
