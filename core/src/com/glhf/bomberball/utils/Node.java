@@ -75,7 +75,8 @@ public class Node {
         son_set++;
         if (son_set == 4) {
             this.setWay_size();
-            ancestor.sonIsSet();
+            if (ancestor != null)
+                ancestor.sonIsSet();
         }
     }
     //

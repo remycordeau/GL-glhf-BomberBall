@@ -115,7 +115,7 @@ public abstract class Enemy extends Character {
         return ways;
     }*/
 
-    public Node constructWay(Cell initial_position) {
+    public static Node constructWay(Cell initial_position) {
         Node way = new Node(null, null, initial_position);
         LinkedList<Node> to_construct = new LinkedList<>();
         Node current_node;
