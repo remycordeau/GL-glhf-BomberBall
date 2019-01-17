@@ -51,6 +51,8 @@ public class MapEditorUI extends MenuUI {
         button_save.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                //Dialog dialog = new Dialog("Sauvegarder", Graphics.GUI.getSkin());
+                //dialog.text("Choisir le nom du Maze");
                 String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
                 File dir = new File(PATH_MAZE);
                 if(!dir.exists()) dir.mkdirs();

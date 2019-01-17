@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -138,7 +139,7 @@ public class Graphics {
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
-            textButtonStyle.downFontColor = Color.RED;
+            //textButtonStyle.downFontColor = Color.RED;
             textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
 
@@ -149,7 +150,6 @@ public class Graphics {
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
-            textButtonStyle.checked = patch.tint(Color.RED);
             skin.add("input_select", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
@@ -175,6 +175,9 @@ public class Graphics {
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
 
+            //=======WindowStyle
+            WindowStyle windowStyle = new WindowStyle(font, Color.WHITE, skin.getDrawable("white"));
+            skin.add("default", windowStyle);
 
             //=======SliderStyle
             SliderStyle sliderStyle = new SliderStyle();

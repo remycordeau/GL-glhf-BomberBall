@@ -28,7 +28,7 @@ public class SoloMenuUI extends MenuUI {
 
     public SoloMenuUI(){
         super();
-        //GameSoloConfig.get("config_game_solo").resetLevels();
+        //GameStoryConfig.get("config_game_story").resetLevels();
         this.setFillParent(true);
         TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/StoryMenu.png")));
         this.setBackground(texture);

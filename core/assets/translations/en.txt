@@ -51,3 +51,5 @@
 #WelcomingMenu UI
 "Press [%s] to play"    :     "Press [%s] to play"
 
+#MapEditor
+"Save"   :    "Save"

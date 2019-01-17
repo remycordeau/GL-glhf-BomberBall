@@ -1,9 +1,8 @@
 package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
-import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.InfiniteUI;
@@ -17,12 +16,13 @@ public class GameInfiniteScreen extends GameScreen {
     private ArrayList<Cell> selected_cells = new ArrayList<>();
     private InfiniteModeScreen screen;
 
-    public GameInfiniteScreen(InfiniteModeScreen screen, Maze maze) {
+    public GameInfiniteScreen(InfiniteModeScreen screen) {
         //super(maze);
         super(MazeBuilder.createInfinityMaze());
+        GameInfiniteConfig config = GameInfiniteConfig.get();
         this.screen = screen;
         //TODO : factoriser le code avec GameStoryScreen
-        current_player = this.maze.spawnPlayer();
+        current_player = this.maze.spawnPlayer(config);
 
         //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
@@ -58,7 +58,7 @@ public class GameInfiniteScreen extends GameScreen {
                 }
             }
             if (isIn) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen, MazeBuilder.createInfinityMaze()));
+                Bomberball.changeScreen(new GameInfiniteScreen(screen));
             }
 
             for (Enemy enemy : enemies) {
