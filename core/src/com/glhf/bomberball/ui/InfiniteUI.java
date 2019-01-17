@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.screens.GameInfiniteScreen;
 
-public class InfiniteUI extends Table {
+public class InfiniteUI extends MenuUI {
 
     public InfiniteUI( Player player, GameInfiniteScreen screen) {
 

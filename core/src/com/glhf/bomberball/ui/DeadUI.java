@@ -22,7 +22,7 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 
-public class DeadUI extends Table {
+public class DeadUI extends MenuUI {
 
     private StoryMenuScreen screen;
     private int maze_id;

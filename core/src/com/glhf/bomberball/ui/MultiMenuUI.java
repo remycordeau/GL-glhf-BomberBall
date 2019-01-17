@@ -21,7 +21,7 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 
 import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
-public class MultiMenuUI extends Table {
+public class MultiMenuUI extends MenuUI {
 
     private MultiMenuScreen screen;
     private MazeDrawer maze_preview;

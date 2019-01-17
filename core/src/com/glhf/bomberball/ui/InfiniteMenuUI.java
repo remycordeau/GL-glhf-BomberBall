@@ -13,13 +13,13 @@ import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
-public class InfiniteModeUI extends Table {
+public class InfiniteMenuUI extends MenuUI {
 
     private InfiniteModeScreen screen;
     private int highscore;
     private Maze mazex;
 
-    public InfiniteModeUI(InfiniteModeScreen screen) {
+    public InfiniteMenuUI(InfiniteModeScreen screen) {
         this.screen = screen;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));

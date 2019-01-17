@@ -21,7 +21,7 @@ import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
-public class StoryMenuUI extends Table {
+public class StoryMenuUI extends MenuUI {
 
     private Table level_selection;
     private TextButton[] levels;

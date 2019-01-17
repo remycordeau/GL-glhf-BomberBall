@@ -20,7 +20,7 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 
-public class VictoryMenuUI extends Table {
+public class VictoryMenuUI extends MenuUI {
     private int previous_maze_id;
 
     public VictoryMenuUI(Player player, int maze_id) {

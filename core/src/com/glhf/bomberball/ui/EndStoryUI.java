@@ -23,7 +23,7 @@ import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 import com.glhf.bomberball.utils.Constants;
 
-public class EndStoryUI extends Table {
+public class EndStoryUI extends MenuUI {
 
     private StoryMenuScreen screen;
     private int last_level;

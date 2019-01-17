@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
-public class MapEditorUI extends Table {
+public class MapEditorUI extends MenuUI {
 
     private MapEditorScreen screen;
     private Maze maze;

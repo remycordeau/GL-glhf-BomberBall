@@ -1,8 +1,11 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Bomberball;
@@ -15,6 +18,8 @@ import com.glhf.bomberball.screens.MainMenuScreen;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class PlayersInfoUI extends Table {
 
@@ -43,13 +48,15 @@ public class PlayersInfoUI extends Table {
             this.add(back);
     }
 
-    class PlayerWidget extends Table implements Observer {
+    class PlayerWidget extends MenuUI implements Observer {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
         private PlayerInfoWidget player_info;
 
         public PlayerWidget(Player player) {
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/InfoPlayer.png")));
+            this.setBackground(texture);
             this.pad(20);
             this.player = player;
             this.previous_player_state = player.isActive();

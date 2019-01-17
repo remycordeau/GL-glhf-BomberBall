@@ -19,7 +19,7 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.screens.SettingsMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 
-public class SettingsMenuUI extends Table {
+public class SettingsMenuUI extends MenuUI {
 
     private final Table[] contents;
     private final TextButton[] labels;

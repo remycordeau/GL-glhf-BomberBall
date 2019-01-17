@@ -24,7 +24,7 @@ import com.glhf.bomberball.screens.StoryMenuScreen;
 import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 
-public class SoloMenuUI extends Table {
+public class SoloMenuUI extends MenuUI {
 
     public SoloMenuUI(){
         super();

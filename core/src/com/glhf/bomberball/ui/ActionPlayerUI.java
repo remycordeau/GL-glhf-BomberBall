@@ -1,16 +1,21 @@
 package com.glhf.bomberball.ui;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.InputsConfig;
 import com.glhf.bomberball.screens.GameScreen;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class ActionPlayerUI extends Table {
     //attributes

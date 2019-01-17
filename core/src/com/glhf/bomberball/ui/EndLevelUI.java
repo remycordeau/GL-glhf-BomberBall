@@ -24,7 +24,7 @@ import com.glhf.bomberball.utils.Constants;
 //import com.sun.org.apache.bcel.internal.classfile.Constant;
 //import sun.java2d.windows.GDIRenderer;
 
-public class EndLevelUI extends Table {
+public class EndLevelUI extends MenuUI {
 
     private static StoryMenuScreen screen;
     private int previous_level;
