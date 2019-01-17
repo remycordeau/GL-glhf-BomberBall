@@ -16,7 +16,7 @@ public class MapEditorScreen extends MenuScreen {
     public MapEditorScreen()
     {
         super();
-        this.maze = new Maze(13, 11);
+        this.maze = new Maze(13, 13);
 
         ui = new MapEditorUI(this, maze);
         addUI(ui);
