@@ -40,7 +40,7 @@ public class MainMenuUI extends MenuUI {
      */
     private void addButtons()
     {
-//        Maze mazex = Maze.importMaze("maze_0");
+//        Maze mazex = Maze.importMazeSolo("maze_0");
 //        mazex.initialize();
 //        Cell origin = mazex.getCellAt(0,0);
 //        Cell test = mazex.getCellAt(0,1);

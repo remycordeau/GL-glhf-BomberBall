@@ -57,7 +57,7 @@ public class VictoryMenuUI extends MenuUI {
         b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameMultiScreen(Maze.importMaze("maze_" + previous_maze_id), previous_maze_id));
+                Bomberball.changeScreen(new GameMultiScreen(Maze.importMazeMulti("maze_" + previous_maze_id), previous_maze_id));
             }
         });
         this.add(b).growX().space(spacing).row();

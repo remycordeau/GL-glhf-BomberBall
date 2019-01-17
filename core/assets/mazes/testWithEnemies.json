@@ -3,16 +3,26 @@
   "spawn_positions": [
     {
       "x": 0,
-      "y": 1
+      "y": 6
     }
   ],
   "height": 7,
-  "width": 7,
+  "width": 11,
   "cells": [
     [
       {
         "x": 0,
         "y": 0,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 1,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 2,
         "objects": [
           {
             "strength": 1,
@@ -26,7 +36,22 @@
       },
       {
         "x": 0,
-        "y": 1,
+        "y": 3,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 6,
         "objects": [
           {
             "observers": [],
@@ -39,10 +64,93 @@
             "_class": "com.glhf.bomberball.gameobject.Player"
           }
         ]
+      }
+    ],
+    [
+      {
+        "x": 1,
+        "y": 0,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
       },
       {
-        "x": 0,
+        "x": 1,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 1,
         "y": 2,
+        "objects": []
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "objects": []
+      },
+      {
+        "x": 1,
+        "y": 4,
+        "objects": []
+      },
+      {
+        "x": 1,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 1,
+        "y": 6,
+        "objects": [
+          {
+            "strength": 1,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "x": 2,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "objects": []
+      },
+      {
+        "x": 2,
+        "y": 4,
         "objects": [
           {
             "strength": 1,
@@ -55,28 +163,13 @@
         ]
       },
       {
-        "x": 0,
-        "y": 3,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 0,
-        "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 0,
+        "x": 2,
         "y": 5,
+        "objects": []
+      },
+      {
+        "x": 2,
+        "y": 6,
         "objects": [
           {
             "strength": 1,
@@ -87,37 +180,54 @@
             "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
           }
         ]
-      },
-      {
-        "x": 0,
-        "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
       }
     ],
     [
       {
-        "x": 1,
+        "x": 3,
         "y": 0,
         "objects": []
       },
       {
-        "x": 1,
+        "x": 3,
         "y": 1,
         "objects": []
       },
       {
-        "x": 1,
+        "x": 3,
         "y": 2,
         "objects": []
       },
       {
-        "x": 1,
+        "x": 3,
         "y": 3,
+        "objects": []
+      },
+      {
+        "x": 3,
+        "y": 4,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 3,
+        "y": 6,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 4,
+        "y": 0,
         "objects": [
           {
             "strength": 1,
@@ -130,100 +240,7 @@
         ]
       },
       {
-        "x": 1,
-        "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 1,
-        "y": 5,
-        "objects": []
-      },
-      {
-        "x": 1,
-        "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 2,
-        "y": 0,
-        "objects": []
-      },
-      {
-        "x": 2,
-        "y": 1,
-        "objects": []
-      },
-      {
-        "x": 2,
-        "y": 2,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 3,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 4,
-        "objects": []
-      },
-      {
-        "x": 2,
-        "y": 5,
-        "objects": [
-          {
-            "strength": 1,
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 6,
-        "objects": []
-      }
-    ],
-    [
-      {
-        "x": 3,
-        "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 3,
+        "x": 4,
         "y": 1,
         "objects": [
           {
@@ -237,84 +254,9 @@
         ]
       },
       {
-        "x": 3,
-        "y": 2,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 3,
-        "objects": [
-          {
-            "strength": 1,
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 4,
-        "objects": []
-      },
-      {
-        "x": 3,
-        "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 4,
-        "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 4,
-        "y": 1,
-        "objects": []
-      },
-      {
         "x": 4,
         "y": 2,
-        "objects": [
-          {
-            "strength": 1,
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 4,
@@ -324,43 +266,29 @@
       {
         "x": 4,
         "y": 4,
-        "objects": [
-          {
-            "strength": 1,
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 4,
-        "y": 5,
         "objects": []
       },
       {
         "x": 4,
-        "y": 6,
+        "y": 5,
         "objects": [
           {
             "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
           }
         ]
+      },
+      {
+        "x": 4,
+        "y": 6,
+        "objects": []
       }
     ],
     [
       {
         "x": 5,
         "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 5,
@@ -368,7 +296,7 @@
         "objects": [
           {
             "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
           }
         ]
       },
@@ -380,7 +308,12 @@
       {
         "x": 5,
         "y": 3,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
       },
       {
         "x": 5,
@@ -390,12 +323,22 @@
       {
         "x": 5,
         "y": 5,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 5,
         "y": 6,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       }
     ],
     [
@@ -412,16 +355,7 @@
       {
         "x": 6,
         "y": 1,
-        "objects": [
-          {
-            "strength": 1,
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
+        "objects": []
       },
       {
         "x": 6,
@@ -436,11 +370,221 @@
       {
         "x": 6,
         "y": 4,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 6,
         "y": 5,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "y": 6,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 7,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 7,
+        "y": 1,
+        "objects": []
+      },
+      {
+        "x": 7,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 7,
+        "y": 3,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "y": 4,
+        "objects": [
+          {
+            "strength": 1,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "y": 5,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "y": 6,
+        "objects": [
+          {
+            "strength": 1,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "x": 8,
+        "y": 0,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "y": 2,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 8,
+        "y": 6,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 9,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 9,
+        "y": 1,
+        "objects": [
+          {
+            "strength": 1,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "objects": []
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 10,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 10,
+        "y": 1,
+        "objects": []
+      },
+      {
+        "x": 10,
+        "y": 2,
         "objects": [
           {
             "life": 1,
@@ -449,7 +593,31 @@
         ]
       },
       {
-        "x": 6,
+        "x": 10,
+        "y": 3,
+        "objects": []
+      },
+      {
+        "x": 10,
+        "y": 4,
+        "objects": [
+          {
+            "strength": 1,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      },
+      {
+        "x": 10,
+        "y": 5,
+        "objects": []
+      },
+      {
+        "x": 10,
         "y": 6,
         "objects": [
           {

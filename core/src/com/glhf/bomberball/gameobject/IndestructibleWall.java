@@ -15,4 +15,11 @@ public class IndestructibleWall extends Wall {
      */
     @Override
     public void getDamage(int damage){ }
+
+    @Override
+    public GameObject clone() {
+        IndestructibleWall o = new IndestructibleWall();
+        o.sprite = this.sprite;
+        return o;
+    }
 }
