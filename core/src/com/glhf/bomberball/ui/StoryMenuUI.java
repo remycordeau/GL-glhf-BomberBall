@@ -3,11 +3,14 @@
  * creates the interface of the story mode (level selection) */
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
@@ -19,23 +22,23 @@ import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
-public class StoryMenuUI extends Table {
+public class StoryMenuUI extends MenuUI {
 
     private Table level_selection;
-    private static TextButton[] levels;
-    private static MazeDrawer level_preview;
-    private static StoryMenuScreen screen;
+    private TextButton[] levels;
+    private MazeDrawer level_preview;
+    private StoryMenuScreen screen;
 
     public StoryMenuUI(StoryMenuScreen screen) {
 
         super();
-        StoryMenuUI.screen = screen;
+        this.screen = screen;
         this.setFillParent(true);
         level_selection = new Table();
         addButtons();
         level_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f, 0.5f, 0.88f, MazeDrawer.Fit.BEST);
         this.add(level_preview);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS+"/background/SoloMenu.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS+"/background/SoloMenu.png"))));
         this.setBackground(texture);
     }
 
@@ -53,26 +56,24 @@ public class StoryMenuUI extends Table {
 
         // Buttons to select the level
 
-        TextButton previous_level_button = new TextButton("<", Graphics.GUI.getSkin());
+        TextButton previous_level_button = new AudioButton("<", Graphics.GUI.getSkin());
         previous_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.previousMaze();
                 level_preview.setMaze(screen.maze);
                 highlightLevel(screen.getMazeId());
-                previous_level_button.setChecked(false);
             }
         });
         level_selection.add(previous_level_button);
 
-        TextButton next_level_button = new TextButton(">", Graphics.GUI.getSkin());
+        TextButton next_level_button = new AudioButton(">", Graphics.GUI.getSkin());
         next_level_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 screen.nextMaze();
                 level_preview.setMaze(screen.maze);
                 highlightLevel(screen.getMazeId());
-                next_level_button.setChecked(false);
             }
         });
         level_selection.add(next_level_button).spaceLeft(Value.percentHeight(8f));
@@ -86,31 +87,34 @@ public class StoryMenuUI extends Table {
         int nb_levels = screen.getMazeCount();
         levels = new TextButton[nb_levels];
         HorizontalGroup horizontal = new HorizontalGroup();
+        ButtonGroup<TextButton> buttonGroup = new ButtonGroup<>();
+        buttonGroup.setMaxCheckCount(1);
 
         for (int i = 0; i < nb_levels; i++) {
-            levels[i] = new TextButton(Integer.toString(i + 1), Graphics.GUI.getSkin());
+            levels[i] = new AudioButton(Integer.toString(i + 1), Graphics.GUI.getSkin(), "checkable");
+            buttonGroup.add(levels[i]);
             int finalI = i;
             levels[i].setDisabled(!screen.isLevelUnlocked(i));
-            levels[i].addListener(new ChangeListener() {
+            levels[i].addListener(new ClickListener() {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void clicked(InputEvent event, float x, float y) {
                     screen.getMaze(finalI);
-                    //highlightLevel(screen.getMazeId());
+                    highlightLevel(screen.getMazeId());
                     level_preview.setMaze(screen.maze);
                 }
             });
             horizontal.addActor(levels[i]);
             horizontal.space(25);
-
         }
+        levels[screen.getLastLevelPlayed()].setChecked(true);
         buttons.add(horizontal).spaceBottom(Value.percentHeight(0.5f)).row();
 
         // Play and quit buttons
 
         TextButton play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());
-        play_button.addListener(new ChangeListener() {
+        play_button.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void clicked(InputEvent event, float x, float y) {
                 play_button.setChecked(false);
                 if (screen.isLevelUnlocked(screen.getMazeId())) { // allows to play the level only if it's unlocked
                     Bomberball.changeScreen(new GameStoryScreen(screen, screen.maze, screen.getMazeId()));
@@ -130,19 +134,11 @@ public class StoryMenuUI extends Table {
      * changes the texture and allows preview of the level when the button is clicked
      * @param i the id of the level that will be unlocked
      */
-    public static void unlockLevel(int i) {
-        screen.setLevelUnlocked(i);
+    public void unlockLevel(int i) {
         levels[i].setDisabled(false);
     }
 
     public void highlightLevel(int j){
-        if(screen.isLevelUnlocked(j)){
-            for(int i = 0;i<screen.getMazeCount();i++){
-                if(i!=j && !levels[i].isDisabled() == true){
-                    levels[i].setChecked(false);
-                }
-            }
-        }
         levels[j].setChecked(true);
     }
 }

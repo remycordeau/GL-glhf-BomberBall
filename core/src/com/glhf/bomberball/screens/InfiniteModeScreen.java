@@ -1,9 +1,10 @@
 package com.glhf.bomberball.screens;
 
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameInfiniteConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeBuilder;
-import com.glhf.bomberball.ui.InfiniteModeUI;
+import com.glhf.bomberball.ui.InfiniteMenuUI;
 
 import java.util.ArrayList;
 
@@ -15,9 +16,9 @@ public class InfiniteModeScreen extends MenuScreen {
 
     public InfiniteModeScreen() {
         super();
-        GameSoloConfig config = GameSoloConfig.get();
+        GameInfiniteConfig config = GameInfiniteConfig.get();
         maze = MazeBuilder.createInfinityMaze();
-        addUI(new InfiniteModeUI(this));
+        addUI(new InfiniteMenuUI(this));
     }
 
 

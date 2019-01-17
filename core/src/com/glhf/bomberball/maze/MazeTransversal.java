@@ -2,11 +2,14 @@ package com.glhf.bomberball.maze;
 
 import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class MazeTransversal{
+
+    private static Random rand = new Random();
 
     /**
      * Returns all reacheable cells whitin a specified range from a cell
@@ -86,4 +89,31 @@ public class MazeTransversal{
         return false;
     }
 
+    public static ArrayList<Directions> getRandomPath(Cell cell) {
+        ArrayList<Directions> path = new ArrayList<>();
+        for(int i=0; i<10; i++){
+            List<Directions> dirs = Arrays.asList(Directions.values());
+            Collections.shuffle(dirs);
+            Cell adjCell=null;
+            for(Directions dir : dirs) {
+                adjCell = cell.getAdjacentCell(dir);
+                if (adjCell!=null && adjCell.isWalkable()){
+                    path.add(dir);
+                    break;
+                }
+            }
+            if(adjCell==null || !adjCell.isWalkable()){//if all adjacent cell are not walkable
+                return path;//return empty path
+            }
+            cell=adjCell;
+        }
+        //need to add the return path
+        ArrayList<Directions> return_path = new ArrayList<>(path);
+        Collections.reverse(return_path);
+        for(int i=0; i<return_path.size(); i++){
+            return_path.set(i, return_path.get(i).opposite());
+        }
+        path.addAll(return_path);
+        return path;
+    }
 }

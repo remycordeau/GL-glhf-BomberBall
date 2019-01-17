@@ -1,13 +1,17 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
@@ -15,40 +19,27 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
+
 public class PlayersInfoUI extends Table {
 
     public PlayersInfoUI(ArrayList<Player> players) {
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).grow();
+            this.add(pw).growX();
             this.row();
         }
     }
 
-    /**
-     * creates the info UI for the solo mode (only a single player)
-     * @param player
-     */
-    public PlayersInfoUI(Player player) {
-            PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
-            TextButton back = new TextButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
-            back.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Bomberball.changeScreen(new MainMenuScreen());
-                }
-            });
-            this.add(back);
-    }
-
-    class PlayerWidget extends Table implements Observer {
+    class PlayerWidget extends MenuUI implements Observer {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
         private PlayerInfoWidget player_info;
 
         public PlayerWidget(Player player) {
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/InfoPlayer.png")));
+            this.setBackground(texture);
             this.pad(20);
             this.player = player;
             this.previous_player_state = player.isActive();

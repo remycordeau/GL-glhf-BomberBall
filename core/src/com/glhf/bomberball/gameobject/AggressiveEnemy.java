@@ -22,7 +22,14 @@ public class AggressiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        this.way = this.longestWayMovesSequence(new Node(null, this.getCell()));
+        this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
+    }
+
+    @Override
+    public void updateAI() {
+        if(cell!=null){// equivalent to isAlive()
+            this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
+        }
     }
 
     /**

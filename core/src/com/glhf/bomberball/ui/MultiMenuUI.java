@@ -21,7 +21,7 @@ import com.glhf.bomberball.utils.ScreenChangeListener;
 
 import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
-public class MultiMenuUI extends Table {
+public class MultiMenuUI extends MenuUI {
 
     private MultiMenuScreen screen;
     private MazeDrawer maze_preview;
@@ -68,7 +68,7 @@ public class MultiMenuUI extends Table {
             }
         });
 
-        TextButton previousMapButton = new TextButton("<", Graphics.GUI.getSkin());
+        TextButton previousMapButton = new AudioButton("<", Graphics.GUI.getSkin());
         previousMapButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -91,6 +91,7 @@ public class MultiMenuUI extends Table {
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                screen.saveToConfig();
                 Bomberball.changeScreen(new GameMultiScreen(screen.maze, screen.getMazeId()));
             }
         });
@@ -135,7 +136,7 @@ public class MultiMenuUI extends Table {
 
         AnimationActor p2 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
         p2.mustMove(true);
-        TextButton Bp2 = new TextButton("P2", Graphics.GUI.getSkin());
+        TextButton Bp2 = new AudioButton("P2", Graphics.GUI.getSkin());
         Bp2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

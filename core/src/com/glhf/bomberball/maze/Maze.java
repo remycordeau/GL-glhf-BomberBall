@@ -1,14 +1,15 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
@@ -17,13 +18,11 @@ import java.util.ArrayList;
 public class Maze{
 
     String title;
-    ArrayList<Vector2> spawn_positions;
-    ArrayList<Vector2> enemy_spawn_positions;
+    ArrayList<VectorInt2> spawn_positions;
     int height;
     int width;
     Cell[][] cells;
 
-    private transient GameConfig config;
     private static Gson gson;
 
     public Maze() {
@@ -41,6 +40,38 @@ public class Maze{
         initialize();
     }
 
+    /** Fonctions temporaires de création de labyrinthes **/
+    public static Maze Maze0() {
+        Maze maze = new Maze(13, 11);
+        maze.spawn_positions = new ArrayList<VectorInt2>();
+        maze.spawn_positions.add(new VectorInt2(0, 0));
+        maze.spawn_positions.add(new VectorInt2(12, 10));
+        maze.spawn_positions.add(new VectorInt2(0, 10));
+        maze.spawn_positions.add(new VectorInt2(12, 0));
+        for (int x = 0; x < maze.width; x++) {
+            for (int y = 0; y < maze.height; y++) {
+                if (x % 2 == 1 && y % 2 == 1) {
+                    maze.cells[x][y].addGameObject(new IndestructibleWall());
+                } else {
+                        double r = Math.random();
+                        if (r < 0.15f) {
+                            maze.cells[x][y].addGameObject(new DestructibleWall());
+                        }
+                        else if (r < 0.18f) {
+                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.SPEED)));
+                        }
+                        else if (r < 0.21f) {
+                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
+                        }
+                        else if (r < 0.25f){
+                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
+                        }
+                }
+            }
+        }
+        return maze;
+    }
+
     public void initialize()
     {
         for (int x = 0; x < width; x++) {
@@ -52,16 +83,17 @@ public class Maze{
 
     public Player spawnPlayer(GameSoloConfig config)
     {
-        Vector2 p = spawn_positions.get(0);
-        return spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
+        VectorInt2 pos = spawn_positions.get(0);
+        return spawnPlayer(config, config.player_skin, cells[pos.x][pos.y]);
     }
 
-    public ArrayList<Player> spawnPlayers(GameMultiConfig config)
+    public ArrayList<Player> spawnPlayers(int nb_player)
     {
+        GameMultiConfig config = GameMultiConfig.get();
         ArrayList<Player> players = new ArrayList<>();
-        for (int i = 0; i < config.player_count; i++) {
-            Vector2 p = spawn_positions.get(i);
-            Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
+        for (int i = 0; i < nb_player; i++) {
+            VectorInt2 pos = spawn_positions.get(i);
+            Player player = spawnPlayer(config, config.player_skins[i], cells[pos.x][pos.y]);
             players.add(player);
         }
         return players;
@@ -76,21 +108,6 @@ public class Maze{
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
-    }
-
-    public ArrayList<Enemy> spawnEnemies(GameSoloConfig config) {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-        for (Vector2 p : enemy_spawn_positions) {
-            Enemy enemy = spawnEnemy(config, cells[(int) p.x][(int) p.y]);
-            enemies.add(enemy);
-        }
-        return enemies;
-    }
-
-    public Enemy spawnEnemy(GameSoloConfig config, Cell cell) {
-        Enemy enemy = new ActiveEnemy("black_knight", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength);
-        cell.addGameObject(enemy);
-        return enemy;
     }
 
     /**
@@ -182,11 +199,19 @@ public class Maze{
                 .create();
     }
 
-    public static Maze importMaze(String name) {
+    public static Maze importMazeSolo(String name) {
+        return importMaze("solo/"+name);
+    }
+
+    public static Maze importMazeMulti(String name) {
+        return importMaze("multi/"+name);
+    }
+
+    private static Maze importMaze(String name) {
         if(gson==null) {
             createGson();
         }
-        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE + name + ".json").readString(), Maze.class);
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE+ name + ".json").readString(), Maze.class);
         maze.initialize();
         return maze;
     }

@@ -5,6 +5,7 @@
 
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -24,7 +25,7 @@ import com.glhf.bomberball.utils.Constants;
 //import com.sun.org.apache.bcel.internal.classfile.Constant;
 //import sun.java2d.windows.GDIRenderer;
 
-public class EndLevelUI extends Table {
+public class EndLevelUI extends MenuUI {
 
     private static StoryMenuScreen screen;
     private int previous_level;
@@ -38,10 +39,9 @@ public class EndLevelUI extends Table {
         this.previous_level = maze_id;
         this.next_level = previous_level +1;
         screen.setLevelUnlocked(next_level); // unlocks next level
-        StoryMenuUI.unlockLevel(next_level); //updates the ui with the unlocked level
         addButtons();
-        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png")));
-        this.setBackground(background);
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png"))));
+        //this.setBackground(background);
     }
 
     /**
@@ -69,11 +69,11 @@ public class EndLevelUI extends Table {
         });
         buttons.add(next).spaceTop(Value.percentHeight(0.2f)).row();
 
-        TextButton replay_level = new AudioButton(Translator.translate("Replay level"), Graphics.GUI.getSkin());
+        TextButton replay_level = new AudioButton(Translator.translate("Retry this level"), Graphics.GUI.getSkin());
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMaze("maze_" + previous_level),screen.getMazeId()));
+                Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMazeSolo("maze_" + previous_level),screen.getMazeId()));
             }
         });
         buttons.add(replay_level).spaceTop(Value.percentHeight(0.2f)).row();

@@ -24,7 +24,11 @@ public class Translator {
             if(line.matches("^\\s*$") || line.matches("^#.*")) continue;
             Matcher m = pattern.matcher(line);
             if(m.find())
-                dictionary.put(m.group(1), m.group(2));
+                if(!dictionary.containsKey(m.group(1))){
+                    dictionary.put(m.group(1), m.group(2));
+                }else{
+                    System.err.println("translation \""+m.group(1)+"\" is translated twice ! (you need to remove one)");
+                }
             else
                 throw new RuntimeException("File "+path+" wrongly formated");
         }
@@ -33,7 +37,7 @@ public class Translator {
     public static String translate(String key, Object... objects){
         if(!dictionary.containsKey(key)){
 //            dictionary.put(key,key);
-            System.err.println(key+"unkown in translation file "+file_name+".txt");
+            System.err.println("\""+key+"\" unknown in translation file "+file_name+".txt");
             return "ERR "+key;
 //            try {
 //                FileWriter fw = new FileWriter(Constants.PATH_TRANSLATIONS +"en.txt");

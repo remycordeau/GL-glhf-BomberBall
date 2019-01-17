@@ -5,6 +5,9 @@ public class Constants {
     public static final int BOX_WIDTH = 16;
     public static final int BOX_HEIGHT = 16;
 
+    //game constants
+    public static final int NB_MAX_PLAYERS = 4;
+
     // constants for paths
     public static final String PATH_ASSET         = "";
     public static final String PATH_MAZE          = PATH_ASSET+"mazes/";

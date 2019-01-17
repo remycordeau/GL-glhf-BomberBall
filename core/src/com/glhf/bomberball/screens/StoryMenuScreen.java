@@ -1,37 +1,41 @@
 package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.config.GameConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryMenuUI;
 
 public class StoryMenuScreen extends MenuScreen {
 
+    private final StoryMenuUI ui;
     public Maze maze;
     private int maze_id = 0;
-    private GameSoloConfig config;
+    private GameStoryConfig config;
 
     public StoryMenuScreen(){
         super();
-        config = GameSoloConfig.get();
-        maze = Maze.importMaze("maze_" + maze_id);
-        addUI(new StoryMenuUI(this));
+        config = GameStoryConfig.get();
+        maze = Maze.importMazeSolo("maze_" + maze_id);
+        ui = new StoryMenuUI(this);
+        addUI(ui);
     }
 
     /**
      * Change the maze to the next one in the maze list
      */
     public void nextMaze(){
-        maze_id = (GameConfig.maze_count + maze_id + 1) % GameConfig.maze_count;
-        maze = Maze.importMaze("maze_" + maze_id);
+        int nb_max = config.last_level_unlocked+1;
+        maze_id = (maze_id + 1) % nb_max;
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     /**
      * Change the maze to the previous one in the maze list
      */
     public void previousMaze(){
-        maze_id = (GameConfig.maze_count + maze_id - 1) % GameConfig.maze_count;
-        maze = Maze.importMaze("maze_" + maze_id);
+        int nb_max = config.last_level_unlocked+1;
+        maze_id = (nb_max + maze_id - 1) % nb_max;
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     /**
@@ -41,7 +45,7 @@ public class StoryMenuScreen extends MenuScreen {
     public void getMaze(int i)
     {
         maze_id = i;
-        maze = Maze.importMaze("maze_" + maze_id);
+        maze = Maze.importMazeSolo("maze_" + maze_id);
     }
 
     public Maze getMaze()
@@ -55,7 +59,7 @@ public class StoryMenuScreen extends MenuScreen {
      * @return true if the level is unlocked, false otherwise
      */
     public boolean isLevelUnlocked(int i){
-        return config.level_unlocked[i];
+        return i <= config.last_level_unlocked;
     }
 
     // getters and setters
@@ -71,8 +75,16 @@ public class StoryMenuScreen extends MenuScreen {
      * @param i
      */
     public void setLevelUnlocked(int i){
-        config.level_unlocked[i] = true;
+        config.last_level_unlocked=i;
+        ui.unlockLevel(i);
         config.exportConfig();
     }
 
+    public int getLastLevelPlayed() {
+        return config.last_level_played;
+    }
+    public void setLastLevelPlayed(int i) {
+        config.last_level_played=i;
+        config.exportConfig();
+    }
 }

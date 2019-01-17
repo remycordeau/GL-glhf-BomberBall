@@ -1,12 +1,22 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.ui.ActionPlayerUI;
+import com.glhf.bomberball.ui.MultiUI;
+import com.glhf.bomberball.ui.PlayersInfoUI;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
 
@@ -24,12 +34,12 @@ public class GameStoryScreen extends GameScreen {
         super(maze);
         this.maze_id = maze_id;
         this.screen = screen;
+        GameStoryConfig config = GameStoryConfig.get();
 
-        GameSoloConfig config = new GameSoloConfig();
         current_player = this.maze.spawnPlayer(config);
 
         //enemies = this.maze.getEnemies();
-        enemies = this.maze.spawnEnemies(new GameSoloConfig());
+        enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
         //this.maze.export("testWithEnemies");
 
@@ -93,7 +103,7 @@ public class GameStoryScreen extends GameScreen {
                     public void run() {
                         input_handler.lock(false);
                     }
-                }, 0.6f*enemies.size());
+                }, 0.1f*enemies.size());
 
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
@@ -108,6 +118,6 @@ public class GameStoryScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        enemies.forEach(Enemy::createAI);
+        //enemies.forEach(Enemy::updateAI);
     }
 }

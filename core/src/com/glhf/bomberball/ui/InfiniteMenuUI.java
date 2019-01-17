@@ -8,18 +8,20 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
-import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameInfiniteConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
-public class InfiniteModeUI extends Table {
+public class InfiniteMenuUI extends MenuUI {
 
+    private final GameInfiniteConfig config;
     private InfiniteModeScreen screen;
     private int highscore;
     private Maze mazex;
 
-    public InfiniteModeUI(InfiniteModeScreen screen) {
+    public InfiniteMenuUI(InfiniteModeScreen screen) {
         this.screen = screen;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));
@@ -27,7 +29,8 @@ public class InfiniteModeUI extends Table {
         this.padTop(Value.percentHeight(0.1f));
         this.padBottom(Value.percentHeight(0.1f));
 
-        GameSoloConfig config = new GameSoloConfig();
+
+        config = new GameInfiniteConfig();
         mazex = screen.maze;
         highscore = config.highscore;
 
@@ -55,33 +58,27 @@ public class InfiniteModeUI extends Table {
         box1 = new CheckBox("Sans Bonus", skin);
         box2 = new CheckBox("Nombre de tours limite", skin);
         box3 = new CheckBox("Cartes aléatoires", skin);
+        box1.setChecked(!config.bonus_activated);
+        //box2.setChecked(config.nombre_de_tour??);
+        //box3.setChecked(config.carte_alea??);
+        box2.setDisabled(true);
+        box3.setDisabled(true);
 
 
         //Settings CheckBoxes
         box1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(((CheckBox)actor).isChecked()){
-
-                }
-                else{
-
-                }
-                /*com.badlogic.gdx.Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-                AppConfig config = AppConfig.get();
-                if(((CheckBox)actor).isChecked())
-                    Gdx.graphics.setFullscreenMode(displayMode);
-                else
-                    Bomberball.resizeWindow(config.resolution);
-                config.fullscreen = ((CheckBox)actor).isChecked();
-                config.exportConfig();*/
+                GameInfiniteConfig config = GameInfiniteConfig.get();
+                config.bonus_activated = !((CheckBox)actor).isChecked();
+                config.exportConfig();
             }
         });
 
 
         //Other buttons
         TextButton back;
-        back = new TextButton(Translator.translate("Back"), skin);
+        back = new AudioButton(Translator.translate("Back"), skin);
         back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
 
         TextButton play;
@@ -89,7 +86,7 @@ public class InfiniteModeUI extends Table {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen, mazex));
+                Bomberball.changeScreen(new GameInfiniteScreen(screen));
             }
         });
 

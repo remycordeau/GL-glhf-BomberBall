@@ -1,11 +1,14 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
@@ -14,9 +17,14 @@ import com.glhf.bomberball.screens.MapEditorScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.utils.VectorInt2;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class MapEditorUI extends Table {
+import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
+
+public class MapEditorUI extends MenuUI {
 
     private MapEditorScreen screen;
     private Maze maze;
@@ -37,11 +45,25 @@ public class MapEditorUI extends Table {
     }
 
     public void initializeButtons() {
-        TextButton bouton_retour = new TextButton(Translator.translate("Back"), Graphics.GUI.getSkin());
+        TextButton bouton_retour = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
         bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
+        TextButton button_save = new AudioButton(Translator.translate("Save"), Graphics.GUI.getSkin());
+        button_save.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                //Dialog dialog = new Dialog("Sauvegarder", Graphics.GUI.getSkin());
+                //dialog.text("Choisir le nom du Maze");
+                String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
+                File dir = new File(PATH_MAZE);
+                if(!dir.exists()) dir.mkdirs();
+                maze.export(output);
+            }
+        });
         this.add(new ObjectsWidget()).grow();
         this.row();
         this.add(bouton_retour).grow();
+        this.row();
+        this.add(button_save).grow();
     }
 
     public VectorInt2 screenPosToCell(float x, float y) {
@@ -68,7 +90,7 @@ public class MapEditorUI extends Table {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        screen.select(o.getClass());
+                        screen.select(o);
                     }
                 });
                 content.add(button).height(75).growX().row();
