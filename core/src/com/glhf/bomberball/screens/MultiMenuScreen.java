@@ -15,7 +15,7 @@ public class MultiMenuScreen extends MenuScreen {
     public static String[] playable = {"knight_m", "knight_f","black_knight", "elf_f", "elf_m", "wizzard_m", "wizzard_f", "no_player"};
     public static final int nb_Playable = playable.length;
     private int maze_id = 0;
-    private final int maze_count = 7;
+    private final int maze_count = 1;
 
     public static int p1_id=0;
     public static int p2_id=1;
@@ -23,20 +23,19 @@ public class MultiMenuScreen extends MenuScreen {
     public static int p4_id=nb_Playable-1;
 
     public MultiMenuScreen() {
-        maze = Maze.importMaze("maze_" + maze_id);
+        //Maze.Maze0().export("multi/maze_0");
+        maze = Maze.importMaze("multi/maze_" + maze_id);
         this.addUI(new MultiMenuUI(this));
     }
 
     public void nextMaze() {
         maze_id = (maze_id + 1) % maze_count;
-        maze = Maze.importMaze("maze_" + maze_id);
-        System.out.println("New maze = "+ maze_id);
+        maze = Maze.importMaze("multi/maze_" + maze_id);
     }
 
     public void previousMaze() {
         maze_id = (maze_id + maze_count - 1) % maze_count;
-        maze = Maze.importMaze("maze_" + maze_id);
-        System.out.println("New maze = "+ maze_id);
+        maze = Maze.importMaze("multi/maze_" + maze_id);
     }
     public void randomMaze()
     {
