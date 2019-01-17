@@ -73,7 +73,7 @@ public class EndLevelUI extends MenuUI {
         replay_level.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMaze("maze_" + previous_level),screen.getMazeId()));
+                Bomberball.changeScreen(new GameStoryScreen(screen, Maze.importMazeSolo("maze_" + previous_level),screen.getMazeId()));
             }
         });
         buttons.add(replay_level).spaceTop(Value.percentHeight(0.2f)).row();
