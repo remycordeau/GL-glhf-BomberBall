@@ -41,7 +41,7 @@ public class EndLevelUI extends MenuUI {
         screen.setLevelUnlocked(next_level); // unlocks next level
         addButtons();
         TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS + "background/VictorySoloScreen.png"))));
-        this.setBackground(background);
+        //this.setBackground(background);
     }
 
     /**
