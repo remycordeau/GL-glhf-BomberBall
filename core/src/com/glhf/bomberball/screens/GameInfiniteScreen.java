@@ -47,7 +47,7 @@ public class GameInfiniteScreen extends GameScreen {
     protected void nextPlayer() {
         //TODO: wait the execution of all tasks in the Timer
         if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new MainMenuScreen());
+            Bomberball.changeScreen(new EndInfiniteScreen());
         } else {
 
             // test if the current_player reached the door
@@ -69,7 +69,7 @@ public class GameInfiniteScreen extends GameScreen {
             }
         }
         if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new MainMenuScreen());
+            Bomberball.changeScreen(new EndInfiniteScreen());
         } else {
             current_player.initiateTurn();
             setMoveEffect();
