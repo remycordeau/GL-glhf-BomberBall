@@ -111,6 +111,6 @@ public class GameInfiniteScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        enemies.forEach(Enemy::updateAI);
+        //enemies.forEach(Enemy::updateAI);
     }
 }

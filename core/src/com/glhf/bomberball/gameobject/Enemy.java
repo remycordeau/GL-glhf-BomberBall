@@ -13,14 +13,18 @@ public abstract class Enemy extends Character {
 
     protected int strength = 1;
 
-    //protected transient  int actual_move; //transcient to deserialize
-    protected transient ArrayList<Directions> way;
+    //protected transient  int actual_move;
+    protected ArrayList<Directions> way;
 
     protected int actual_move; //current index of path followed
 
     protected Enemy(String skin, int life, int initial_moves, int strength) {
         super(skin, life, initial_moves);
         this.strength = strength;
+    }
+
+    public Enemy() {
+        super();
     }
 
     /**

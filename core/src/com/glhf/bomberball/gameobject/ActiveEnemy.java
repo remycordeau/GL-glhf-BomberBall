@@ -6,6 +6,10 @@ public class ActiveEnemy extends Enemy {
         super(skin, life, initial_moves, strength);
     }
 
+    public ActiveEnemy(){
+        super();
+    }
+
     @Override
     public void createAI() {
         this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
