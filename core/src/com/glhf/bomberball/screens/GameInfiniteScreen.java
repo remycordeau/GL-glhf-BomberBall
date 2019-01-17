@@ -40,7 +40,7 @@ public class GameInfiniteScreen extends GameScreen {
             @Override
             public void run() {
                 if (!current_player.isAlive()) {
-                    Bomberball.changeScreen(new MainMenuScreen()); //TODO: changer en DeadScreen
+                    Bomberball.changeScreen(new EndInfiniteScreen());
                     Timer.instance().clear();
                 }
             }
