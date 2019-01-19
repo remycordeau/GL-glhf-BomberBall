@@ -16,6 +16,7 @@ public class MapEditorScreen extends MenuScreen {
 
     private final Maze maze;
     private final MapEditorUI ui;
+    private boolean symmetric;
     private GameObject objectSelected;
 
     public MapEditorScreen()
@@ -30,13 +31,19 @@ public class MapEditorScreen extends MenuScreen {
     @Override
     protected void registerActionsHandlers() {
         super.registerActionsHandlers();
-        input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, this::dropSelectedObjects);
-        input_handler.registerActionHandler(Action.DELETE_OBJECT, this::deleteObjects);
+        symmetric = true;
+        if(symmetric) {
+            input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, this::dropSelectedObjects);
+            input_handler.registerActionHandler(Action.DELETE_OBJECT, this::deleteObjects);
+        }else{
+            input_handler.registerActionHandler(Action.DROP_SELECTED_OBJECT, (x,y)->dropSelectedObject(ui.screenPosToCell(x,y)));
+            input_handler.registerActionHandler(Action.DELETE_OBJECT, (x,y)->deleteObject(ui.screenPosToCell(x,y)));
+        }
     }
 
-    private void deleteObject(int x, int y) {
-        Cell cell = maze.getCellAt(x, y);
-        cell.removeGameObjects();
+    private void deleteObject(VectorInt2 coords) {
+        Cell cell = maze.getCellAt(coords.x, coords.y);
+        if(cell!=null) cell.removeGameObjects();
     }
 
     private void deleteObjects(float x, float y) {
@@ -47,18 +54,16 @@ public class MapEditorScreen extends MenuScreen {
                 .abs(); //absolute value [-height/2, height/2] -> [0, height/2]
         VectorInt2 min = new VectorInt2(size.x-coords.x,size.y-coords.y);
         VectorInt2 max = new VectorInt2(size.x+coords.x,size.y+coords.y);
-        Cell cell = maze.getCellAt(min.x, min.y);
-        if(cell != null && objectSelected != null) {
-            deleteObject(min.x,min.y);
-            deleteObject(min.x,max.y);
-            deleteObject(max.x,min.y);
-            deleteObject(max.x,max.y);
-        }
+        deleteObject(new VectorInt2(min.x,min.y));
+        deleteObject(new VectorInt2(min.x,max.y));
+        deleteObject(new VectorInt2(max.x,min.y));
+        deleteObject(new VectorInt2(max.x,max.y));
+
     }
 
-    private void dropSelectedObject(int x, int y) {
-        Cell cell = maze.getCellAt(x, y);
-        if(cell.isEmpty()) cell.addGameObject(objectSelected.clone());
+    private void dropSelectedObject(VectorInt2 coords) {
+        Cell cell = maze.getCellAt(coords.x, coords.y);
+        if(cell!=null && objectSelected!=null && cell.isEmpty()) cell.addGameObject(objectSelected.clone());
     }
 
     private void dropSelectedObjects(float x, float y) {
@@ -69,13 +74,10 @@ public class MapEditorScreen extends MenuScreen {
                 .abs(); //absolute value [-height/2, height/2] -> [0, height/2]
         VectorInt2 min = new VectorInt2(size.x-coords.x,size.y-coords.y);
         VectorInt2 max = new VectorInt2(size.x+coords.x,size.y+coords.y);
-        Cell cell = maze.getCellAt(min.x, min.y);
-        if (cell != null && objectSelected != null) {
-            dropSelectedObject(min.x,min.y);
-            dropSelectedObject(min.x,max.y);
-            dropSelectedObject(max.x,min.y);
-            dropSelectedObject(max.x,max.y);
-        }
+        dropSelectedObject(new VectorInt2(min.x,min.y));
+        dropSelectedObject(new VectorInt2(min.x,max.y));
+        dropSelectedObject(new VectorInt2(max.x,min.y));
+        dropSelectedObject(new VectorInt2(max.x,max.y));
     }
 
     public void select(GameObject object){
