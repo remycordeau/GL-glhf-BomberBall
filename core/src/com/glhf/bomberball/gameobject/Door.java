@@ -19,4 +19,8 @@ public class Door extends GameObject {
     @Override
     public boolean isWalkable() { return true; }
 
+    @Override
+    public GameObject clone() {
+        return new Door();
+    }
 }
