@@ -86,8 +86,6 @@ public class MazeDrawer extends Actor {
      */
     public void updateView(int width, int height)
     {
-        batch = new SpriteBatch();
-
         float dw = w_maxp - w_minp;
         float dh = h_maxp - h_minp;
 
@@ -139,6 +137,10 @@ public class MazeDrawer extends Actor {
         drawSideWalls();
         drawFrontWall();
         batch.setProjectionMatrix(tmp);
+    }
+
+    public float getScale() {
+        return camera.zoom;
     }
 
     private void drawCells() {

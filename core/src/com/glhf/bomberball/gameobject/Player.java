@@ -119,5 +119,12 @@ public class Player extends Character {
             observer.update(null, this);
         }
     }
+
+    @Override
+    public GameObject clone() {
+        GameObject p = new Player(skin, life, initial_moves, initial_bomb_number, initial_bomb_range);
+
+        return p;
+    }
 }
 
