@@ -6,7 +6,7 @@ import com.glhf.bomberball.gameobject.GameObject;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.ui.MapEditorUI;
+import com.glhf.bomberball.ui.EditorUI;
 import com.glhf.bomberball.utils.VectorInt2;
 
 import java.io.File;
@@ -14,21 +14,40 @@ import java.util.ArrayList;
 
 import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
-public class MapEditorScreen extends MenuScreen {
+public class EditorScreen extends MenuScreen {
 
     private final Maze maze;
-    private final MapEditorUI ui;
+    private final EditorUI ui;
     private boolean symmetric = true;
     private GameObject objectSelected;
     private VectorInt2 player_pos = null;
+    private int maze_id;
 
-    public MapEditorScreen()
+    public EditorScreen(Maze maze)
     {
         super();
-        this.maze = new Maze(13, 13);
-
-        ui = new MapEditorUI(this, maze);
+        this.maze = maze;
+        ui = new EditorUI(this, maze);
+        maze_id = new File(PATH_MAZE+"/multi/").listFiles().length;
         addUI(ui);
+        addSpawns();
+    }
+
+    public EditorScreen(int maze_id)
+    {
+        super();
+        this.maze = Maze.importMazeMulti("maze_" + maze_id);
+        maze_id = maze_id;
+        ui = new EditorUI(this, maze);
+        addUI(ui);
+        addSpawns();
+    }
+
+    private void addSpawns() {
+        for (VectorInt2 p : maze.getPlayersSpawns()) {
+            maze.getCellAt(p.x, p.y).addGameObject(new Player("knight_m", 1, 1,1, 1));
+            player_pos = p;
+        }
     }
 
     @Override
@@ -98,15 +117,13 @@ public class MapEditorScreen extends MenuScreen {
             return;
         }
 
-        // Removing Players and adding spawn positions
+        // Removing Players and setting spawn positions
         for (VectorInt2 p : getPositions(player_pos)) {
             maze.getCellAt(p.x, p.y).removeGameObjects();
-            maze.addPlayerSpawn(p);
         }
+        maze.setPlayerSpawns(getPositions(player_pos));
 
-        File dir = new File(PATH_MAZE+"/multi/");
-        int maze_id = dir.listFiles().length;
         maze.export("multi/maze_" + maze_id);
-        Bomberball.changeScreen(new MainMenuScreen());
+        Bomberball.changeScreen(new EditorMenuScreen());
     }
 }

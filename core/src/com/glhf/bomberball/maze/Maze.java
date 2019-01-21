@@ -13,6 +13,7 @@ import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Maze{
@@ -76,6 +77,10 @@ public class Maze{
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
+    }
+
+    public ArrayList<VectorInt2> getPlayersSpawns() {
+        return spawn_positions;
     }
 
     /**
@@ -145,6 +150,10 @@ public class Maze{
         return enemies;
     }
 
+    public void setPlayerSpawns(ArrayList<VectorInt2> spawns)
+    {
+        spawn_positions = spawns;
+    }
 
 //    public void applyConfig(GameConfig config) {
 //        ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -158,6 +167,7 @@ public class Maze{
 //                ((Wall) o).setLife(config.wall_life);
 //            }
 //        }
+
 //    }
 
     private static void createGson() {
@@ -201,9 +211,5 @@ public class Maze{
 
     public String toString() {
         return gson.toJson(this);
-    }
-
-    public void addPlayerSpawn(VectorInt2 coords) {
-        spawn_positions.add(coords);
     }
 }
