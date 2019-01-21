@@ -103,6 +103,8 @@ public class EditorScreen extends MenuScreen {
         for (VectorInt2 p : getPositions(coords)) {
             Cell cell = maze.getCellAt(p.x, p.y);
             if(cell != null) {
+                if (cell.hasInstanceOf(Player.class))
+                    player_pos = null;
                 cell.removeGameObjects();
             }
         }
