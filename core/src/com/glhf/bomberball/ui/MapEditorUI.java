@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
@@ -55,10 +56,7 @@ public class MapEditorUI extends MenuUI {
         button_save.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //Dialog dialog = new Dialog("Sauvegarder", Graphics.GUI.getSkin());
-                //dialog.text("Choisir le nom du Maze");
-                String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
-                if(output!=null) screen.saveMaze(output);
+                screen.saveMaze();
             }
         });
         this.add(new ObjectsWidget()).grow();
@@ -90,7 +88,7 @@ public class MapEditorUI extends MenuUI {
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
             presets.add(new Player("knight_m", 1, 1,1, 1));
-            presets.add(new Door());
+            //presets.add(new Door());
 
             this.setActor(content);
             for (GameObject o : presets) {
