@@ -56,7 +56,6 @@ public class GameInfiniteScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
-        //TODO: wait the execution of all tasks in the Timer
         if (!current_player.isAlive()) {
             Bomberball.changeScreen(new EndInfiniteScreen());
         } else {
