@@ -61,6 +61,11 @@ public class Player extends Character {
     public boolean move(Directions dir)
     {
         if (super.move(dir)) {
+            for (GameObject go : cell.getGameObjects()) {
+                if (go instanceof Enemy) {
+                    ((Enemy) go).touchPlayer(this);
+                }
+            }
             this.notifyObservers();
             return true;
         }
