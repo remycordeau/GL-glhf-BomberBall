@@ -70,6 +70,7 @@ public class GameInfiniteScreen extends GameScreen {
             }
             if (isIn) {
                 Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                return;
             }
 
             for (Enemy enemy : enemies) {
