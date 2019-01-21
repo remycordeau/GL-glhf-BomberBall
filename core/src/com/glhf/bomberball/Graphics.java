@@ -135,8 +135,8 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_disable.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_disable.png"), 16, 16, 16, 16));
             NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_selected.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
