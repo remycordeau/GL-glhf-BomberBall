@@ -1,10 +1,13 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
@@ -22,6 +25,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import static com.glhf.bomberball.utils.Constants.BOX_WIDTH;
 import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
 public class MapEditorUI extends MenuUI {
@@ -54,9 +58,7 @@ public class MapEditorUI extends MenuUI {
                 //Dialog dialog = new Dialog("Sauvegarder", Graphics.GUI.getSkin());
                 //dialog.text("Choisir le nom du Maze");
                 String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
-                File dir = new File(PATH_MAZE);
-                if(!dir.exists()) dir.mkdirs();
-                maze.export(output);
+                if(output!=null) screen.saveMaze(output);
             }
         });
         this.add(new ObjectsWidget()).grow();
@@ -74,18 +76,27 @@ public class MapEditorUI extends MenuUI {
 
         private ArrayList<GameObject> presets = new ArrayList<>();
         private Table content;
+        private ButtonGroup<ImageButton> group;
 
         public ObjectsWidget() {
             super(null);
+            group = new ButtonGroup<>();
+            group.setMaxCheckCount(1);
+            group.setMinCheckCount(0);
             content = new Table();
+            presets.add(new IndestructibleWall());
             presets.add(new DestructibleWall());
             presets.add(new BonusWall(new Bonus(Bonus.Type.SPEED)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
-            presets.add(new IndestructibleWall());
+            presets.add(new Player("knight_m", 1, 1,1, 1));
+            presets.add(new Door());
+
             this.setActor(content);
             for (GameObject o : presets) {
-                ImageButton button = new ImageButton(new TextureRegionDrawable(o.getSprite()));
+                TextureRegionDrawable image = new TextureRegionDrawable(o.getSprite());
+                Drawable imageChecked = image.tint(Color.YELLOW);
+                ImageButton button = new ImageButton(image, image, imageChecked);
                 button.getImageCell().expand().fill();
                 button.addListener(new ClickListener(){
                     @Override
@@ -93,8 +104,10 @@ public class MapEditorUI extends MenuUI {
                         screen.select(o);
                     }
                 });
-                content.add(button).height(75).growX().row();
+                content.add(button).minSize(3*BOX_WIDTH).growX().row();//maze_preview.getScale()
+                group.add(button);
             }
+            group.uncheckAll();
         }
     }
 }

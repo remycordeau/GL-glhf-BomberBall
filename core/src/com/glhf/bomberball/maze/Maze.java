@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Maze{
 
     String title;
-    ArrayList<VectorInt2> spawn_positions;
+    ArrayList<VectorInt2> spawn_positions = new ArrayList<>();
     int height;
     int width;
     Cell[][] cells;
@@ -233,5 +233,9 @@ public class Maze{
 
     public String toString() {
         return gson.toJson(this);
+    }
+
+    public void addPlayerSpawn(VectorInt2 coords) {
+        spawn_positions.add(coords);
     }
 }

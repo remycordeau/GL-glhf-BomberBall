@@ -53,8 +53,7 @@ public abstract class GameObject {
     }
 
     public GameObject clone(){
-        System.err.println(this.getClass()+" does not have clone method !!");
-        return null;
+        throw new RuntimeException(this.getClass()+" does not have clone method !!");
     }
 
     /**
