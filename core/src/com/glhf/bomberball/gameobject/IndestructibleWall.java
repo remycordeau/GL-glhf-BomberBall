@@ -1,6 +1,9 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
 
 public class IndestructibleWall extends Wall {
 
@@ -15,6 +18,17 @@ public class IndestructibleWall extends Wall {
      */
     @Override
     public void getDamage(int damage){ }
+
+    @Override
+    public TextureAtlas.AtlasRegion getSprite() {
+        if (this.cell != null) {
+            Cell down = this.cell.getAdjacentCell(Directions.DOWN);
+            if (down != null && down.hasInstanceOf(IndestructibleWall.class)) {
+                return Graphics.Sprites.get("wall_top");
+            }
+        }
+        return this.sprite;
+    }
 
     @Override
     public GameObject clone() {
