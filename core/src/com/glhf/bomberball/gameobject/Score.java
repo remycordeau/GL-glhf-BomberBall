@@ -12,4 +12,8 @@ public class Score {
     public void increaseScore(int n){
         this.score+=n;
     }
+    public void resetScore(){
+        this.score=0;
+        System.out.println("Reset of the score");
+    }
 }
