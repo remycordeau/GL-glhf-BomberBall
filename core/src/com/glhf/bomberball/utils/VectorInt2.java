@@ -23,7 +23,31 @@ public class VectorInt2 {
         return Math.sqrt(x_d * x_d + y_d * y_d);
     }
 
+    public VectorInt2 sub (VectorInt2 v) {
+        x -= v.x;
+        y -= v.y;
+        return this;
+    }
+
+    public VectorInt2 scl (float scalar) {
+        x *= scalar;
+        y *= scalar;
+        return this;
+    }
+
+    public VectorInt2 mulAdd (VectorInt2 vec, float scalar) {
+        this.x += vec.x * scalar;
+        this.y += vec.y * scalar;
+        return this;
+    }
+
     public boolean equals(int x, int y) {
         return this.x==x && this.y==y;
+    }
+
+    public VectorInt2 abs() {
+        x=Math.abs(x);
+        y=Math.abs(y);
+        return this;
     }
 }

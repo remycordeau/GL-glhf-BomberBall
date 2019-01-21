@@ -1,6 +1,8 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.HunterNode;
@@ -32,76 +34,35 @@ public class AggressiveEnemy extends Enemy {
         }
     }
 
-    /**
-     * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range
-     * this method is to be called at the beginning of the enemy's turn
-     * @param cell_origin
-     * @param range
-     * @return ArrayList<Directions>
-     */
-    public static ArrayList<Directions> depth_graph_transversal(Cell cell_origin, int range) {
-        ArrayList<Cell> cells = new ArrayList<>();
-        LinkedList<Cell> active_queue = new LinkedList<>();
-        LinkedList<Cell> inactive_queue = new LinkedList<>();
-        HashMap<Cell, ArrayList<Directions>> paths = new HashMap<>();
-        int depth = 0;
-        paths.put(cell_origin, new ArrayList<>());
-        cells.add(cell_origin);
-        active_queue.add(cell_origin);
-        ArrayList<Directions> path_bis;
-        // Invariant : Distance to all cells in the active queue is depth
-        while (depth < range) {
-            while (!active_queue.isEmpty()) {
-                Cell c = active_queue.poll();
-                for (Cell other : c.getAdjacentCells()) {
-                    if (!cells.contains(other) && other.isWalkable()) {
-                        inactive_queue.add(other);
-                        path_bis = (ArrayList<Directions>) paths.get(c).clone();
-                        path_bis.add(c.getCellDir(other));
-                        paths.put(other, path_bis);
-                        cells.add(other);
-                    }
+    @Override
+    public void followWay() {
+        ArrayList<Cell> reachableCells = MazeTransversal.getReacheableCellsInRange(cell, hunting_range);
+        ArrayList<GameObject> gos;
+        for (Cell c : reachableCells) {
+            gos = c.getGameObjects();
+            for (GameObject go : gos) {
+                if (go instanceof Player) {
+                    way = shortestWay(this.cell, go.getCell());
+                    actual_move = 0;
                 }
             }
-            depth++;
+        }
 
-            active_queue = inactive_queue;
-            inactive_queue = new LinkedList<>();
+        if (moves_remaining > 0 && !way.isEmpty()) {
+            this.move(way.get(actual_move));
+            actual_move = (actual_move+1)%way.size();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    followWay();
+                }
+            }, 0.1f);
         }
-        for(Cell c : cells){
-            if(!c.getInstancesOf(Player.class).isEmpty()){
-                return paths.get(c);
-            }
-        }
+    }
+
+
+    public ArrayList<Directions> shortestWay(Cell start, Cell target) {
+        //TODO: à faire
         return null;
     }
-
-    public int compareTwoNodes(HunterNode n1, HunterNode n2){
-        return Integer.compare(n2.getHeuristic(), n1.getHeuristic());
-    }
-
-    /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
-    closedList = File()
-    openList = FilePrioritaire(comparateur=compare2Noeuds)
-       openList.ajouter(depart)
-    tant que openList n'est pas vide
-    u = openList.depiler()
-    si u.x == objectif.x et u.y == objectif.y
-    reconstituerChemin(u)
-    terminer le programme
-    pour chaque voisin v de u dans g
-    si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
-    neRienFaire()
-    sinon
-    v.cout = u.cout +1
-    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
-                    openList.ajouter(v)
-            closedList.ajouter(u)
-    terminer le programme (avec erreur)*/
-
-    public void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
-
-    }
-
-
 }

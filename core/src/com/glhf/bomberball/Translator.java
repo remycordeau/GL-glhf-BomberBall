@@ -21,6 +21,7 @@ public class Translator {
         FileHandle br = Gdx.files.internal(path);
         Pattern pattern = Pattern.compile("^\\s*\"(.*)\"\\s*:\\s*\"(.*)\"\\s*");
         for(String line : br.readString().split("\n")) {
+            line = line.replace("\r","");
             if(line.matches("^\\s*$") || line.matches("^#.*")) continue;
             Matcher m = pattern.matcher(line);
             if(m.find())
@@ -30,7 +31,7 @@ public class Translator {
                     System.err.println("translation \""+m.group(1)+"\" is translated twice ! (you need to remove one)");
                 }
             else
-                throw new RuntimeException("File "+path+" wrongly formated");
+                System.err.println("cannot parse line : \""+line+"\")");
         }
     }
 

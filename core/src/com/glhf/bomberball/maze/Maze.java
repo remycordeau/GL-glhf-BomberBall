@@ -13,12 +13,13 @@ import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Maze{
 
     String title;
-    ArrayList<VectorInt2> spawn_positions;
+    ArrayList<VectorInt2> spawn_positions = new ArrayList<>();
     int height;
     int width;
     Cell[][] cells;
@@ -38,38 +39,6 @@ public class Maze{
             }
         }
         initialize();
-    }
-
-    /** Fonctions temporaires de création de labyrinthes **/
-    public static Maze Maze0() {
-        Maze maze = new Maze(13, 11);
-        maze.spawn_positions = new ArrayList<VectorInt2>();
-        maze.spawn_positions.add(new VectorInt2(0, 0));
-        maze.spawn_positions.add(new VectorInt2(12, 10));
-        maze.spawn_positions.add(new VectorInt2(0, 10));
-        maze.spawn_positions.add(new VectorInt2(12, 0));
-        for (int x = 0; x < maze.width; x++) {
-            for (int y = 0; y < maze.height; y++) {
-                if (x % 2 == 1 && y % 2 == 1) {
-                    maze.cells[x][y].addGameObject(new IndestructibleWall());
-                } else {
-                        double r = Math.random();
-                        if (r < 0.15f) {
-                            maze.cells[x][y].addGameObject(new DestructibleWall());
-                        }
-                        else if (r < 0.18f) {
-                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.SPEED)));
-                        }
-                        else if (r < 0.21f) {
-                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
-                        }
-                        else if (r < 0.25f){
-                            maze.cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
-                        }
-                }
-            }
-        }
-        return maze;
     }
 
     public void initialize()
@@ -108,6 +77,10 @@ public class Maze{
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
+    }
+
+    public ArrayList<VectorInt2> getPlayersSpawns() {
+        return spawn_positions;
     }
 
     /**
@@ -160,7 +133,7 @@ public class Maze{
      * @param cell_y
      * @return true if the position is in the maze, else it returns false
      */
-    private boolean isCellInBounds(int cell_x, int cell_y)
+    public boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
@@ -177,6 +150,10 @@ public class Maze{
         return enemies;
     }
 
+    public void setPlayerSpawns(ArrayList<VectorInt2> spawns)
+    {
+        spawn_positions = spawns;
+    }
 
 //    public void applyConfig(GameConfig config) {
 //        ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -190,6 +167,7 @@ public class Maze{
 //                ((Wall) o).setLife(config.wall_life);
 //            }
 //        }
+
 //    }
 
     private static void createGson() {

@@ -61,7 +61,7 @@ public class MainMenuUI extends MenuUI {
         Buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Map Editor"), skin);
-        b.addListener(new ScreenChangeListener(MapEditorScreen.class));
+        b.addListener(new ScreenChangeListener(EditorMenuScreen.class));
         Buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Settings"), skin);

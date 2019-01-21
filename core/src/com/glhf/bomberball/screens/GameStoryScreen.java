@@ -85,6 +85,7 @@ public class GameStoryScreen extends GameScreen {
             }
             if (isIn) {
                 Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
+                return;
             }
 
             for (Enemy enemy : enemies) {
