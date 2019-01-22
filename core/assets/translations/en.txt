@@ -16,15 +16,17 @@
 
 #Story Menus
 "Level Selection"	:	"Level Selection"
+"Ragequit ?"		:	"Ragequit ?"
 "Wasted !"		    :	"Wasted !"
-"draw ..."			:	"draw ..."
+"égalité ..."		:	"égalité ..."
 "Lost!"				:	"Lost!"
 "VICTORY!"			:	"VICTORY!"
 "All levels unlocked !"	:	"All levels unlocked !"
 "Play next level"		:	"Play next level"
-"Retry this level"			:	"Retry this level"
-//"Retry last level"		:	"Retry last level"
+"Replay level"			:	"Replay level"
+"Replay last level"		:	"Replay last level"
 "Back to level selection"	:	"Back to level selection"
+"Retry level"			:	"Retry level"
 "Play Selected Level"	:	"Play Selected Level"
 "story mode congratulations"		:	"Congratulations ! You've completed the story mode !"
 
@@ -35,8 +37,8 @@
 "Settings"		:	"Settings"
 "Quit"		    :	"Quit"
 
+"Menu multijoueur"		:	"Menu multijoueur"
 "Back to main menu"		:	"Back to main menu"
-"Multiplayer menu"		:	"Multiplayer menu"
 "Play"		            :	"Play"
 "Back"	        		:	"Back"
 "Infinite Mode"		    :	"Infinite Mode"
@@ -48,8 +50,6 @@
 
 "Random Maze"		:	"Random Maze"
 
-#WelcomingMenu UI
-"Press [%s] to play"    :     "Press [%s] to play"
 
 #MapEditor
 "Save"   :    "Save"
