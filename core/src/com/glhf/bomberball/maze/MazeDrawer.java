@@ -175,25 +175,24 @@ public class MazeDrawer extends Actor {
         Vector2 offsetp;
         float radius = 1 / 3f;
         if (n == 1) {
-            GameObject o = gameObjects.get(0);
-            offsetp = o.getOffset();
-            offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
-
-            drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+            radius = 0f;
         }
-        else {
-            float dteta = 2 * (float)Math.PI / n;
-            float teta =  (float)Math.PI / 4f;
-            for (GameObject gameObject : gameObjects) {
-                if (gameObject instanceof Door)
-                    continue;//skip door
-                offsetp = gameObject.getOffset();
-                offsetp.x += (float) Math.cos(teta) * radius;
-                offsetp.y += (float) Math.sin(teta) * radius;
-                if (gameObject instanceof Character) offsetp.y += 1 / 3f;
-                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
-                teta += dteta;
-            }
+
+//        GameObject o = gameObjects.get(0);
+//        offsetp = o.getOffset();
+//        offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
+//        drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+//    } else {
+        float dteta = 2 * (float)Math.PI / n;
+        float teta =  (float)Math.PI / 4f;
+        for (GameObject gameObject : gameObjects) {
+            if(gameObject instanceof Door)continue;//skip door
+            offsetp = gameObject.getOffset();
+            offsetp.x += (float)Math.cos(teta) * radius;
+            offsetp.y += (float)Math.sin(teta) * radius;
+            if(gameObject instanceof Character) offsetp.y += 1 / 3f;
+            drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+            teta += dteta;
         }
     }
 

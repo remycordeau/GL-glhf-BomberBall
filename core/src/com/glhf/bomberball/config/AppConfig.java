@@ -16,4 +16,9 @@ public class AppConfig extends Config {
     public void exportConfig(){
         exportConfig(Constants.DEFAULT_CONFIG_APP);
     }
+
+    @Override
+    protected Config reset() {
+        return this;
+    }
 }
