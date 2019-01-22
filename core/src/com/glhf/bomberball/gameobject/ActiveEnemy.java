@@ -1,20 +1,26 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.maze.MazeTransversal;
+
 public class ActiveEnemy extends Enemy {
 
     public ActiveEnemy(String skin, int life, int initial_moves, int strength) {
         super(skin, life, initial_moves, strength);
     }
 
+    public ActiveEnemy(){
+        super();
+    }
+
     @Override
     public void createAI() {
-        this.way = this.longestWayMovesSequence(Enemy.constructWays(this.getCell()));
+        this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
     }
 
     @Override
     public void updateAI() {
         if(cell!=null){// equivalent to isAlive()
-            this.way = this.longestWayMovesSequence(Enemy.constructWays(this.getCell()));
+            this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
         }
     }
 }

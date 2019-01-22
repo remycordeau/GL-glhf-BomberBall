@@ -1,9 +1,10 @@
 package com.glhf.bomberball.gameobject;
 
+import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
-import com.glhf.bomberball.utils.HunterNode;
 import com.glhf.bomberball.utils.Node;
 
 import java.util.ArrayList;
@@ -22,86 +23,79 @@ public class AggressiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        this.way = this.longestWayMovesSequence(new Node(null, this.getCell()));
+        this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
     }
 
     @Override
     public void updateAI() {
         if(cell!=null){// equivalent to isAlive()
-            this.way = this.longestWayMovesSequence(new Node(null, this.getCell()));
+            this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
         }
     }
 
-    /**
-     * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range
-     * this method is to be called at the beginning of the enemy's turn
-     * @param cell_origin
-     * @param range
-     * @return ArrayList<Directions>
-     */
-    public static ArrayList<Directions> depth_graph_transversal(Cell cell_origin, int range) {
-        ArrayList<Cell> cells = new ArrayList<>();
-        LinkedList<Cell> active_queue = new LinkedList<>();
-        LinkedList<Cell> inactive_queue = new LinkedList<>();
-        HashMap<Cell, ArrayList<Directions>> paths = new HashMap<>();
-        int depth = 0;
-        paths.put(cell_origin, new ArrayList<>());
-        cells.add(cell_origin);
-        active_queue.add(cell_origin);
-        ArrayList<Directions> path_bis;
-        // Invariant : Distance to all cells in the active queue is depth
-        while (depth < range) {
-            while (!active_queue.isEmpty()) {
-                Cell c = active_queue.poll();
-                for (Cell other : c.getAdjacentCells()) {
-                    if (!cells.contains(other) && other.isWalkable()) {
-                        inactive_queue.add(other);
-                        path_bis = (ArrayList<Directions>) paths.get(c).clone();
-                        path_bis.add(c.getCellDir(other));
-                        paths.put(other, path_bis);
-                        cells.add(other);
-                    }
+    @Override
+    public void followWay() {
+        ArrayList<Cell> reachableCells = MazeTransversal.getReacheableCellsInRange(cell, hunting_range);
+        ArrayList<GameObject> gos;
+        for (Cell c : reachableCells) {
+            gos = c.getGameObjects();
+            for (GameObject go : gos) {
+                if (go instanceof Player) {
+                    way = shortestWay(MazeTransversal.constructWay(this.cell, hunting_range), go.getCell());
+                    actual_move = 0;
                 }
             }
-            depth++;
-
-            active_queue = inactive_queue;
-            inactive_queue = new LinkedList<>();
         }
-        for(Cell c : cells){
-            if(!c.getInstancesOf(Player.class).isEmpty()){
-                return paths.get(c);
+
+        if (moves_remaining > 0 && !way.isEmpty()) {
+            this.move(way.get(actual_move));
+            actual_move = (actual_move+1)%way.size();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    followWay();
+                }
+            }, 0.1f);
+        }
+    }
+
+
+    public ArrayList<Directions> shortestWay(Node ways, Cell target) {
+        //Getting the shortest path to the target
+        Node current_way = null;
+        Node current_node;
+        LinkedList<Node> to_visit = new LinkedList<>();
+        to_visit.add(ways);
+
+        while (to_visit.size() > 0) {
+            current_node = to_visit.poll();
+
+            if (current_node.getMatching_cell() == target && current_way == null) {
+                current_way = current_node;
+            } else if (current_node.getMatching_cell() == target && current_node.getAncestors().size() < current_way.getAncestors().size()) {
+                current_way = current_node;
+            }
+
+            for (int i=0; i<4; i++) {
+                if (current_node.getSons(i) != null) {
+                    to_visit.add(current_node.getSons(i));
+                }
             }
         }
-        return null;
+        ArrayList<Cell> shortest_way = current_way.getAncestors();
+        shortest_way.add(current_way.getMatching_cell());
+
+
+        //Creating the moves sequence
+        ArrayList<Directions> moves_sequence = new ArrayList<>();
+        int shortest_way_size = shortest_way.size();
+        Directions next_direction;
+
+        for(int i=0; i< shortest_way_size-1; i++){
+            next_direction = shortest_way.get(i).getCellDir(shortest_way.get(i+1));
+            moves_sequence.add(next_direction);
+        }
+
+        return moves_sequence;
     }
-
-    public int compareTwoNodes(HunterNode n1, HunterNode n2){
-        return Integer.compare(n2.getHeuristic(), n1.getHeuristic());
-    }
-
-    /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
-    closedList = File()
-    openList = FilePrioritaire(comparateur=compare2Noeuds)
-       openList.ajouter(depart)
-    tant que openList n'est pas vide
-    u = openList.depiler()
-    si u.x == objectif.x et u.y == objectif.y
-    reconstituerChemin(u)
-    terminer le programme
-    pour chaque voisin v de u dans g
-    si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
-    neRienFaire()
-    sinon
-    v.cout = u.cout +1
-    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
-                    openList.ajouter(v)
-            closedList.ajouter(u)
-    terminer le programme (avec erreur)*/
-
-    public void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
-
-    }
-
-
 }

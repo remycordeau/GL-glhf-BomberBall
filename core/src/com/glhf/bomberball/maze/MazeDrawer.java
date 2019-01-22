@@ -10,13 +10,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.glhf.bomberball.gameobject.Door;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.CellEffect;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
@@ -86,8 +86,6 @@ public class MazeDrawer extends Actor {
      */
     public void updateView(int width, int height)
     {
-        batch = new SpriteBatch();
-
         float dw = w_maxp - w_minp;
         float dh = h_maxp - h_minp;
 
@@ -141,6 +139,10 @@ public class MazeDrawer extends Actor {
         batch.setProjectionMatrix(tmp);
     }
 
+    public float getScale() {
+        return camera.zoom;
+    }
+
     private void drawCells() {
         for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
@@ -192,7 +194,6 @@ public class MazeDrawer extends Actor {
             drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
             teta += dteta;
         }
-
     }
 
     private void drawFloor()

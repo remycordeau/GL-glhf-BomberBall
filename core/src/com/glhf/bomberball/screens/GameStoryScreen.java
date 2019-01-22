@@ -1,11 +1,22 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
+import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.ui.ActionPlayerUI;
+import com.glhf.bomberball.ui.MultiUI;
+import com.glhf.bomberball.ui.PlayersInfoUI;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
 
@@ -74,6 +85,7 @@ public class GameStoryScreen extends GameScreen {
             }
             if (isIn) {
                 Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
+                return;
             }
 
             for (Enemy enemy : enemies) {
@@ -92,7 +104,7 @@ public class GameStoryScreen extends GameScreen {
                     public void run() {
                         input_handler.lock(false);
                     }
-                }, 0.6f*enemies.size());
+                }, 0.1f*enemies.size());
 
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
@@ -107,6 +119,6 @@ public class GameStoryScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        enemies.forEach(Enemy::updateAI);
+        //enemies.forEach(Enemy::updateAI);
     }
 }

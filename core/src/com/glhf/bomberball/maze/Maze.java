@@ -13,12 +13,13 @@ import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Maze{
 
     String title;
-    ArrayList<VectorInt2> spawn_positions;
+    ArrayList<VectorInt2> spawn_positions = new ArrayList<>();
     int height;
     int width;
     Cell[][] cells;
@@ -78,6 +79,10 @@ public class Maze{
         return player;
     }
 
+    public ArrayList<VectorInt2> getPlayersSpawns() {
+        return spawn_positions;
+    }
+
     /**
      * Getter for the variable height
      * @return an integer
@@ -128,7 +133,7 @@ public class Maze{
      * @param cell_y
      * @return true if the position is in the maze, else it returns false
      */
-    private boolean isCellInBounds(int cell_x, int cell_y)
+    public boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
     }
@@ -145,6 +150,10 @@ public class Maze{
         return enemies;
     }
 
+    public void setPlayerSpawns(ArrayList<VectorInt2> spawns)
+    {
+        spawn_positions = spawns;
+    }
 
 //    public void applyConfig(GameConfig config) {
 //        ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -158,6 +167,7 @@ public class Maze{
 //                ((Wall) o).setLife(config.wall_life);
 //            }
 //        }
+
 //    }
 
     private static void createGson() {
@@ -167,11 +177,19 @@ public class Maze{
                 .create();
     }
 
-    public static Maze importMaze(String name) {
+    public static Maze importMazeSolo(String name) {
+        return importMaze("solo/"+name);
+    }
+
+    public static Maze importMazeMulti(String name) {
+        return importMaze("multi/"+name);
+    }
+
+    private static Maze importMaze(String name) {
         if(gson==null) {
             createGson();
         }
-        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE + name + ".json").readString(), Maze.class);
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE+ name + ".json").readString(), Maze.class);
         maze.initialize();
         return maze;
     }

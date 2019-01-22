@@ -59,8 +59,11 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.google.code.gson:gson:$gsonVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        testCompile "org.mockito:junit-jupiter:2.20.0"
     }
 }
+
+
 
 tasks.eclipse.doLast {
     delete ".project"

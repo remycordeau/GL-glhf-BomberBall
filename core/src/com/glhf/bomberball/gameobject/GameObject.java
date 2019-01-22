@@ -52,6 +52,10 @@ public abstract class GameObject {
         return cell.getY();
     }
 
+    public GameObject clone(){
+        throw new RuntimeException(this.getClass()+" does not have clone method !!");
+    }
+
     /**
      * used for the initialisation of the different subclasses. Needed because of the deserialization.
      */
