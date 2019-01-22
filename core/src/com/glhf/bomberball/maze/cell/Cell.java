@@ -3,6 +3,7 @@ package com.glhf.bomberball.maze.cell;
 import com.badlogic.gdx.graphics.Color;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
+import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
@@ -230,5 +231,11 @@ public class Cell {
      */
     private void setExplosionEffect(Directions dir, int range) {
         cell_effect = new ExplosionEffect(this, dir, range);
+    }
+
+    public float distanceTo(Cell cell) {
+        int dx = x - cell.x;
+        int dy = y - cell.y;
+        return (float) Math.sqrt(dx*dx+dy*dy);
     }
 }

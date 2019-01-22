@@ -4,10 +4,8 @@ import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
-import com.glhf.bomberball.utils.HunterNode;
 import com.glhf.bomberball.utils.Node;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MazeTransversal{
@@ -287,30 +285,63 @@ public class MazeTransversal{
         return null;
     }
 
-    public static int compareTwoNodes(HunterNode n1, HunterNode n2){
-        return Integer.compare(n2.getHeuristic(), n1.getHeuristic());
-    }
-
     /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
     closedList = File()
     openList = FilePrioritaire(comparateur=compare2Noeuds)
-       openList.ajouter(depart)
+    openList.ajouter(depart)
     tant que openList n'est pas vide
-    u = openList.depiler()
-    si u.x == objectif.x et u.y == objectif.y
-    reconstituerChemin(u)
-    terminer le programme
-    pour chaque voisin v de u dans g
-    si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
-    neRienFaire()
-    sinon
-    v.cout = u.cout +1
-    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
-                    openList.ajouter(v)
-            closedList.ajouter(u)
+        u = openList.depiler()
+        si u.x == objectif.x et u.y == objectif.y
+            reconstituerChemin(u)
+            terminer le programme
+        pour chaque voisin v de u dans g
+            si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
+                neRienFaire()
+            sinon
+                v.cout = u.cout +1
+                v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
+                openList.ajouter(v)
+        closedList.ajouter(u)
     terminer le programme (avec erreur)*/
 
     public static void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
+        List<HunterNode> closedList = new ArrayList<>();
+        PriorityQueue<HunterNode> openList = new PriorityQueue<>();
+        openList.add(origin_node);
+        while(!openList.isEmpty()){
+            HunterNode u = openList.poll();
+            if (u.cell.equals(u.cell))
+        }
 
+
+    }
+
+    public static class HunterNode implements Comparable<HunterNode>{
+        //attributes
+        Cell cell;
+        int x, y, cost;
+        float heuristic;
+
+        public HunterNode(Cell cell){
+            this.cell = cell;
+            this.x = cell.getX();
+            this.y = cell.getY();
+            this.cost = 0;
+            this.heuristic = 0;
+        }
+
+        @Override
+        public int compareTo(HunterNode o) {
+            return Float.compare(heuristic,o.heuristic);
+        }
+
+        /**
+         * calculate the distance between itself and another HunterNode
+         * @param o the other HunterNode
+         * @return the distance
+         */
+        float distanceTo(HunterNode o){
+            return cell.distanceTo(o.cell);
+        }
     }
 }
