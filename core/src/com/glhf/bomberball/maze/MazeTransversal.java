@@ -308,10 +308,10 @@ public class MazeTransversal{
         List<HunterNode> closedList = new ArrayList<>();
         PriorityQueue<HunterNode> openList = new PriorityQueue<>();
         openList.add(origin_node);
-        while(!openList.isEmpty()){
-            HunterNode u = openList.poll();
-            if (u.cell.equals(u.cell))
-        }
+//        while(!openList.isEmpty()){
+//            HunterNode u = openList.poll();
+//            if (u.cell.equals(u.cell))
+//        }
 
 
     }
