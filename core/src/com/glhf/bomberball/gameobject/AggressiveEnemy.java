@@ -23,13 +23,13 @@ public class AggressiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
+        this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
     }
 
     @Override
     public void updateAI() {
         if(cell!=null){// equivalent to isAlive()
-            this.way = this.longestWayMovesSequence(Enemy.constructWay(this.getCell()));
+            this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
         }
     }
 
@@ -62,6 +62,8 @@ public class AggressiveEnemy extends Enemy {
 
     public ArrayList<Directions> shortestWay(Cell start, Cell target) {
         //TODO: à faire
-        return null;
+        LinkedList<Node> way;
+
+        return new ArrayList<>();
     }
 }
