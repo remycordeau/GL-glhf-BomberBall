@@ -11,9 +11,13 @@ public class Score {
     }
     public void increaseScore(int n){
         this.score+=n;
+        System.out.println("New score = " + score);
     }
     public void resetScore(){
         this.score=0;
         System.out.println("Reset of the score");
+    }
+    public int getScore(){
+        return score;
     }
 }

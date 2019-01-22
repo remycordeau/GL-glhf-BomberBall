@@ -102,6 +102,9 @@ public class AggressiveEnemy extends Enemy {
     public void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
 
     }
-
+    @Override
+    public int scoreWhileDestroyed() {
+        return 50;
+    }
 
 }
