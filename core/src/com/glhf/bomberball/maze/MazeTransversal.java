@@ -133,7 +133,7 @@ public class MazeTransversal{
         to_construct.add(way);
         while (to_construct.size() > 0) {
             current_node = to_construct.poll();
-            if (current_node.getAncestors() != null && current_node.getAncestors().size() < range) {
+            if (current_node.getAncestors() == null || current_node.getAncestors().size() < range) {
                 for (Directions d : Directions.values()) {
                     current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
                     family = current_node.getAncestors();
@@ -147,7 +147,11 @@ public class MazeTransversal{
                         family.add(current_node.getMatching_cell());
                         son = new Node(family, current_node, current_adjacent_cell);
                         current_node.setSons(son, d);
-                        to_construct.add(d.ordinal(), son);
+                        if (d.ordinal() < to_construct.size()) {
+                            to_construct.add(d.ordinal(), son);
+                        } else {
+                            to_construct.add(son);
+                        }
                     }
                 }
             }
