@@ -55,11 +55,13 @@ public class EditorMenuUI extends MenuUI {
             TextButton back_button = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
             back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
-            this.add(edit_button).growX();
+            Value spacing = Value.percentHeight(0.1f);
+
+            this.add(edit_button).growX().space(spacing);
             this.row();
-            this.add(new NewMazeWidget()).growX();
+            this.add(new NewMazeWidget()).growX().space(spacing);
             this.row();
-            this.add(back_button).growX();
+            this.add(back_button).growX().space(spacing);
         }
     }
 
