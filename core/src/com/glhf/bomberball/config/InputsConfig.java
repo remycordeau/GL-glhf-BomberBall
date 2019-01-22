@@ -38,34 +38,34 @@ public class InputsConfig extends Config {
         id_list = new String[Action.values().length][KeyPriority.values().length];
     }
 
-    public InputsConfig(boolean reset){
-        this();//call the default constructor
+    @Override
+    protected Config reset() {
+        id_list = new String[Action.values().length][KeyPriority.values().length];
 
-        if(reset) {
-            setInputKeyCode(Action.MOVE_DOWN, Keys.DOWN);
-            setInputKeyCode(Action.MOVE_UP, Keys.UP);
-            setInputKeyCode(Action.MOVE_LEFT, Keys.LEFT);
-            setInputKeyCode(Action.MOVE_RIGHT, Keys.RIGHT);
-            setInputKeyCode(Action.DROP_BOMB_LEFT, Keys.NUMPAD_4);
-            setInputKeyCode(Action.DROP_BOMB_UP, Keys.NUMPAD_8);
-            setInputKeyCode(Action.DROP_BOMB_RIGHT, Keys.NUMPAD_6);
-            setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
-            setInputKeyCode(Action.MODE_MOVE, Keys.D);
-            setInputKeyCode(Action.MODE_BOMB, Keys.B);
-            setInputKeyCode(Action.ENDTURN, Keys.F);
-            setInputKeyCode(Action.ENDTURN, Keys.SPACE, SECONDARY);
-            setInputKeyCode(Action.DROP_BOMB, Keys.L);
-            setInputKeyCode(Action.MENU_GO_BACK, Keys.ESCAPE);
-
-
-            setInputKeyCode(Action.NEXT_SCREEN, Keys.ENTER);
-            setInputButtonCode(Action.NEXT_SCREEN, Buttons.LEFT, SECONDARY);
+        setInputKeyCode(Action.MOVE_DOWN, Keys.DOWN);
+        setInputKeyCode(Action.MOVE_UP, Keys.UP);
+        setInputKeyCode(Action.MOVE_LEFT, Keys.LEFT);
+        setInputKeyCode(Action.MOVE_RIGHT, Keys.RIGHT);
+        setInputKeyCode(Action.DROP_BOMB_LEFT, Keys.NUMPAD_4);
+        setInputKeyCode(Action.DROP_BOMB_UP, Keys.NUMPAD_8);
+        setInputKeyCode(Action.DROP_BOMB_RIGHT, Keys.NUMPAD_6);
+        setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
+        setInputKeyCode(Action.MODE_MOVE, Keys.D);
+        setInputKeyCode(Action.MODE_BOMB, Keys.B);
+        setInputKeyCode(Action.ENDTURN, Keys.F);
+        setInputKeyCode(Action.ENDTURN, Keys.SPACE, SECONDARY);
+        setInputKeyCode(Action.DROP_BOMB, Keys.L);
+        setInputKeyCode(Action.MENU_GO_BACK, Keys.ESCAPE);
 
 
-            setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
-            setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
-            setInputButtonCode(Action.DELETE_OBJECT, Buttons.RIGHT);
-        }
+        setInputKeyCode(Action.NEXT_SCREEN, Keys.ENTER);
+        setInputButtonCode(Action.NEXT_SCREEN, Buttons.LEFT, SECONDARY);
+
+
+        setInputButtonCode(Action.DROP_BOMB, Buttons.LEFT);
+        setInputButtonCode(Action.DROP_SELECTED_OBJECT, Buttons.LEFT);
+        setInputButtonCode(Action.DELETE_OBJECT, Buttons.RIGHT);
+        return this;
     }
 
     public static InputsConfig get() {
@@ -73,6 +73,7 @@ public class InputsConfig extends Config {
         inputsConfig.updateReversedMap();
         return inputsConfig;
     }
+
     public void exportConfig() {
         exportConfig("default_inputs");
     }
