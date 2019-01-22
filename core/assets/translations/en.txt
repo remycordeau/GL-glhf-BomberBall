@@ -3,7 +3,7 @@
 "level succeeded"		:	"Congratulations ! You've succeeded level %d !"
 
 #SoloUI
-"mode movement button"		:	"Movement [%s]"
+"mode movement button"	:	"Movement [%s]"
 "mode bombe button"		:	"Bomb [%s]"
 "endTurn button"		:	"End Turn [%s]"
 

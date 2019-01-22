@@ -31,7 +31,7 @@ public class Translator {
                     System.err.println("translation \""+m.group(1)+"\" is translated twice ! (you need to remove one)");
                 }
             else
-                System.err.println("cannot parse line : \""+line+"\")");
+                System.err.println("cannot parse line : "+line);
         }
     }
 

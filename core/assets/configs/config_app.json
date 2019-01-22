@@ -1,4 +1,5 @@
 {
-  "fullscreen": false,
-  "resolution": "MEDIUM"
+  "fullscreen": true,
+  "resolution": "MEDIUM",
+  "language": "en"
 }
