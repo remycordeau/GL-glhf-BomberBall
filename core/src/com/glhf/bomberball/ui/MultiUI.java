@@ -15,9 +15,9 @@ public class MultiUI extends Table {
 
         PlayersInfoUI left_ui = new PlayersInfoUI(players);
         left_ui.padRight(Value.percentWidth(2/3f));
+        left_ui.padBottom(Value.percentHeight(1/10f));
         left_ui.setFillParent(true);
         ActionPlayerUI bottom_ui = new ActionPlayerUI(screen);
-        bottom_ui.padLeft(Value.percentWidth(1/3f));
         bottom_ui.setFillParent(true);
         bottom_ui.align(Align.bottom);
         this.addActor(left_ui);

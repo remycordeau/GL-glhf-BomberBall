@@ -23,7 +23,6 @@ public class SoloUI extends Table {
         left_ui.padRight(Value.percentWidth(2/3f));
         left_ui.setFillParent(true);
         ActionPlayerUI bottom_ui = new ActionPlayerUI(screen);
-        bottom_ui.padLeft(Value.percentWidth(1/3f));
         bottom_ui.setFillParent(true);
         bottom_ui.align(Align.bottom);
         this.addActor(left_ui);
