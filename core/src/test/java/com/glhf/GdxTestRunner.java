@@ -1,4 +1,4 @@
-package com.glhf.bomberball.maze;
+package com.glhf;
 /*******************************************************************************
  * Copyright 2015 See AUTHORS file.
  *
@@ -43,7 +43,6 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
 
         new HeadlessApplication(this, conf);
         Gdx.gl = mock(GL20.class);
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
     }
 
     @Override

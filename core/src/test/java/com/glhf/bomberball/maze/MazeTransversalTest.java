@@ -1,24 +1,16 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.glhf.bomberball.Bomberball;
+import com.glhf.GdxTestRunner;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.config.AppConfig;
-import com.glhf.bomberball.gameobject.*;
-import com.glhf.bomberball.gameobject.Bonus.Type;
-import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.utils.Constants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(GdxTestRunner.class)
 public class MazeTransversalTest {
@@ -46,7 +38,7 @@ public class MazeTransversalTest {
     @Test
     public void getReacheableCellsInRange() {
     }
-
+    /*
     @Test
     public void getReacheableCells() {
 
@@ -77,9 +69,14 @@ public class MazeTransversalTest {
         list = MazeTransversal.getReacheableCells(mazeVide10x10.getCellAt(0,0));
         assertEquals(99, list.size());
     }
+    */
 
     @Test
     public void isReachableCell() {
+        assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(0,0), mazeVide10x10.getCellAt(9,9)));
+        assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(0,0), mazeVide10x10.getCellAt(0,9)));
+        assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(0,0), mazeVide10x10.getCellAt(0,0)));
+        assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(9,9), mazeVide10x10.getCellAt(9,0)));
     }
 
     @Test
@@ -100,6 +97,7 @@ public class MazeTransversalTest {
 
     @Test
     public void depth_graph_transversal() {
+        MazeTransversal.depth_graph_transversal(mazeVide10x10.getCellAt(0,0),4);
     }
 
     @Test
