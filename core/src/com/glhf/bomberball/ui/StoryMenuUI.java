@@ -3,6 +3,7 @@
  * creates the interface of the story mode (level selection) */
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -37,7 +38,7 @@ public class StoryMenuUI extends MenuUI {
         addButtons();
         level_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f, 0.5f, 0.88f, MazeDrawer.Fit.BEST);
         this.add(level_preview);
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Constants.PATH_GRAPHICS+"/background/SoloMenu.png")));
+        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.PATH_GRAPHICS+"/background/SoloMenu.png"))));
         this.setBackground(texture);
     }
 
@@ -85,7 +86,7 @@ public class StoryMenuUI extends MenuUI {
 
         int nb_levels = screen.getMazeCount();
         levels = new TextButton[nb_levels];
-        HorizontalGroup horizontal = new HorizontalGroup();
+        Table levels_group = new Table();
         ButtonGroup<TextButton> buttonGroup = new ButtonGroup<>();
         buttonGroup.setMaxCheckCount(1);
 
@@ -102,12 +103,10 @@ public class StoryMenuUI extends MenuUI {
                     level_preview.setMaze(screen.maze);
                 }
             });
-            horizontal.addActor(levels[i]);
-            horizontal.space(25);
+            levels_group.add(levels[i]).growX().pad(Value.percentWidth(0.05f));
         }
         levels[screen.getLastLevelPlayed()].setChecked(true);
-        buttons.add(horizontal).spaceBottom(Value.percentHeight(0.5f)).row();
-
+        buttons.add(levels_group).width(Value.percentWidth(0.8f, this)).row();
         // Play and quit buttons
 
         TextButton play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());

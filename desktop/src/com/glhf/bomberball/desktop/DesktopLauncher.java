@@ -17,7 +17,6 @@ public class DesktopLauncher {
 		config.fullscreen = app_config.fullscreen;
 		config.resizable = true;
 
-
         TexturePacker.process(Constants.PATH_GRAPHICS+"animations", Constants.PATH_PACKS, "pack_animations");
 		TexturePacker.process(Constants.PATH_GRAPHICS+"sprites", Constants.PATH_PACKS, "pack_sprites");
         TexturePacker.process(Constants.PATH_GRAPHICS+"gui", Constants.PATH_PACKS, "pack_gui");

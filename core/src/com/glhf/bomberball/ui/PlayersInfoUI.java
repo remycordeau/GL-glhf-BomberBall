@@ -26,26 +26,9 @@ public class PlayersInfoUI extends Table {
     public PlayersInfoUI(ArrayList<Player> players) {
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).grow();
+            this.add(pw).growX();
             this.row();
         }
-    }
-
-    /**
-     * creates the info UI for the solo mode (only a single player)
-     * @param player
-     */
-    public PlayersInfoUI(Player player) {
-            PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).spaceBottom(Value.percentHeight(0.5f)).grow().row();
-            TextButton back = new AudioButton(Translator.translate("Back to main menu"),Graphics.GUI.getSkin());
-            back.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Bomberball.changeScreen(new MainMenuScreen());
-                }
-            });
-            this.add(back);
     }
 
     class PlayerWidget extends MenuUI implements Observer {

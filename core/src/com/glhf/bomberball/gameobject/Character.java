@@ -23,6 +23,10 @@ public abstract class Character extends GameObject {
         initialize();
     }
 
+    public Character() {
+
+    }
+
     @Override
     public void initialize() {
         super.initialize();

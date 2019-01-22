@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -112,6 +114,8 @@ public class Graphics {
             //
             Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
             skin.add("white", white);
+            Texture transparent = new Texture(new Pixmap(1,1, Format.RGBA8888));
+            skin.add("transparent", transparent);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
             skin.add("checkboxOff", new TextureRegionDrawable(GUI.get("checkboxOff")));
             skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
@@ -133,16 +137,15 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_disable.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_selected.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_long_9patch.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
             //textButtonStyle.downFontColor = Color.RED;
             textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
-
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("small");
@@ -152,8 +155,12 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("very_small");
             skin.add("input_select", textButtonStyle);
 
-            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_9patch.png"), 16, 16, 16, 16));
+            patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_9patch.png"), 16, 16, 16, 16));
+            patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_9patch.png"), 16, 16, 16, 16));
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.checked = patch3;
+            textButtonStyle.disabled = patch2;
             textButtonStyle.font = skin.getFont("default");
             skin.add("checkable", textButtonStyle);
 
@@ -174,6 +181,13 @@ public class Graphics {
             labelStyle.font = font;
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
+
+            //=======TextFieldStyle
+            TextFieldStyle textFieldStyle = new TextFieldStyle();
+            textFieldStyle.font = font;
+            textFieldStyle.fontColor = Color.WHITE;
+            textFieldStyle.focusedFontColor = Color.RED;
+            skin.add("default", textFieldStyle);
 
             //=======WindowStyle
             WindowStyle windowStyle = new WindowStyle(font, Color.WHITE, skin.getDrawable("white"));
@@ -207,7 +221,7 @@ public class Graphics {
             SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
-            selectBoxStyle.background = skin.getDrawable("white");
+            selectBoxStyle.background = skin.getDrawable("transparent");
             selectBoxStyle.listStyle = skin.get(ListStyle.class);
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);

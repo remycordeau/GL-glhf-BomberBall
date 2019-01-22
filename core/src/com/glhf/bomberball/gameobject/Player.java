@@ -61,6 +61,11 @@ public class Player extends Character {
     public boolean move(Directions dir)
     {
         if (super.move(dir)) {
+            for (GameObject go : cell.getGameObjects()) {
+                if (go instanceof Enemy) {
+                    ((Enemy) go).touchPlayer(this);
+                }
+            }
             this.notifyObservers();
             return true;
         }
@@ -118,6 +123,13 @@ public class Player extends Character {
         for (Observer observer : this.observers) {
             observer.update(null, this);
         }
+    }
+
+    @Override
+    public GameObject clone() {
+        GameObject p = new Player(skin, life, initial_moves, initial_bomb_number, initial_bomb_range);
+
+        return p;
     }
 }
 
