@@ -10,6 +10,7 @@
 #SettingsMenuUI
 "Action"		:	"Action"
 "inputs"		:	"contrôles"
+"Language"		:	"Langage"
 "general"		:	"général"
 "Primary"		:	"Primary"
 "Secondary"		:	"Secondary"
