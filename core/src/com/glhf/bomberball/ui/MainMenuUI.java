@@ -26,8 +26,8 @@ public class MainMenuUI extends MenuUI {
 
     public MainMenuUI() {
         this.setFillParent(true);
-        this.padLeft(Value.percentWidth(0.25f));
-        this.padRight(Value.percentWidth(0.25f));
+        this.padLeft(Value.percentWidth(0.33f));
+        this.padRight(Value.percentWidth(0.33f));
         this.padTop(Value.percentHeight(0.1f));
         this.padBottom(Value.percentHeight(0.1f));
         TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/MainMenu01.png")));
@@ -40,33 +40,31 @@ public class MainMenuUI extends MenuUI {
      */
     private void addButtons()
     {
-//        Maze mazex = Maze.importMazeSolo("maze_0");
-//        mazex.initialize();
-//        Cell origin = mazex.getCellAt(0,0);
-//        Cell test = mazex.getCellAt(0,1);
-//        System.out.println("Le maze de test est finissable : " + MazeTransversal.isReachableCell(origin, test));
         TextButton b;
         Skin skin = Graphics.GUI.getSkin();
 
         Value spacing = Value.percentHeight(0.15f);
 
-        Table Buttons = new Table();
+        Table buttons = new Table();
+        buttons.pad(Value.percentWidth(0.1f));
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(PATH_GRAPHICS+"background/scroll.png"))));
+        buttons.setBackground(background);
 
         b = new AudioButton(Translator.translate("Solo"), skin);
         b.addListener(new ScreenChangeListener(SoloMenuScreen.class));
-        Buttons.add(b).growX().space(spacing).row();
+        buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Multiplayer"), skin);
         b.addListener(new ScreenChangeListener(MultiMenuScreen.class));
-        Buttons.add(b).growX().space(spacing).row();
+        buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Map Editor"), skin);
         b.addListener(new ScreenChangeListener(EditorMenuScreen.class));
-        Buttons.add(b).growX().space(spacing).row();
+        buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Settings"), skin);
         b.addListener(new ScreenChangeListener(SettingsMenuScreen.class));
-        Buttons.add(b).growX().space(spacing).row();
+        buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Quit"), skin);
         b.addListener(new ClickListener() {
@@ -75,8 +73,8 @@ public class MainMenuUI extends MenuUI {
                 Gdx.app.exit();
             }
         });
-        Buttons.add(b).growX();
+        buttons.add(b).growX();
 
-        this.add(Buttons).padTop(10f);
+        this.add(buttons).grow();
     }
 }
