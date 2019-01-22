@@ -13,6 +13,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
 public class EndInfniteUI extends MenuUI {
@@ -27,12 +28,17 @@ public class EndInfniteUI extends MenuUI {
         player_animation.mustMove(true);
         this.add(player_animation).grow().row();
 
-        // Buttons
+        // Labels
         Label dead = new Label(Translator.translate("Wasted !"), Graphics.GUI.getSkin());
+        this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
-        this .add(dead).spaceBottom(Value.percentHeight(0.9f)).row();
 
+        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHightoscore : " + 999, Graphics.GUI.getSkin());
+        this .add(score).spaceBottom(Value.percentHeight(0.9f)).center().row();
+
+
+        //Buttons
         TextButton back_story_menu = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
