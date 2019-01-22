@@ -28,7 +28,6 @@ public class GameInfiniteScreen extends GameScreen {
         //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
-        this.maze.export("testWithEnemies");
 
         addUI(new InfiniteUI(current_player, this));
         addUI(maze_drawer);
