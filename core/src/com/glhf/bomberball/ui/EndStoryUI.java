@@ -17,6 +17,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
