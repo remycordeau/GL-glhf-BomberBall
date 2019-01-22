@@ -120,9 +120,13 @@ public abstract class GameScreen extends AbstractScreen {
     ////////////////////////////////////////////////////////////////////////////
 
     protected void moveCurrentPlayer(Directions dir) {
-        current_player.move(dir);
-        clearCellsEffect();
-        setMoveEffect();
+        try {
+            current_player.move(dir);
+            clearCellsEffect();
+            setMoveEffect();
+        } catch (RuntimeException e) {
+            System.out.println("The player probably died");
+        }
     }
 
     public void endTurn()

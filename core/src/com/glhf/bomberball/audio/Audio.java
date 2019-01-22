@@ -21,7 +21,7 @@ public enum Audio {
 
     private Sound sound;
     private Boolean played;
-    public final Boolean AUDIO_ENABLE = true;
+    public final Boolean AUDIO_ENABLE = false;
     Audio(String path)
     {
         if(AUDIO_ENABLE) {

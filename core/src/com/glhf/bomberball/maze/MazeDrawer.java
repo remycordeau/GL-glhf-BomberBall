@@ -10,13 +10,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.glhf.bomberball.gameobject.Door;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.CellEffect;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
@@ -175,26 +175,26 @@ public class MazeDrawer extends Actor {
         Vector2 offsetp;
         float radius = 1 / 3f;
         if (n == 1) {
-            radius = 0f;
-        }
+            GameObject o = gameObjects.get(0);
+            offsetp = o.getOffset();
+            offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
 
-//        GameObject o = gameObjects.get(0);
-//        offsetp = o.getOffset();
-//        offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
-//        drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
-//    } else {
-        float dteta = 2 * (float)Math.PI / n;
-        float teta =  (float)Math.PI / 4f;
-        for (GameObject gameObject : gameObjects) {
-            if(gameObject instanceof Door)continue;//skip door
-            offsetp = gameObject.getOffset();
-            offsetp.x += (float)Math.cos(teta) * radius;
-            offsetp.y += (float)Math.sin(teta) * radius;
-            if(gameObject instanceof Character) offsetp.y += 1 / 3f;
-            drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
-            teta += dteta;
+            drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
         }
-
+        else {
+            float dteta = 2 * (float)Math.PI / n;
+            float teta =  (float)Math.PI / 4f;
+            for (GameObject gameObject : gameObjects) {
+                if (gameObject instanceof Door)
+                    continue;//skip door
+                offsetp = gameObject.getOffset();
+                offsetp.x += (float) Math.cos(teta) * radius;
+                offsetp.y += (float) Math.sin(teta) * radius;
+                if (gameObject instanceof Character) offsetp.y += 1 / 3f;
+                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+                teta += dteta;
+            }
+        }
     }
 
     private void drawFloor()

@@ -1,6 +1,6 @@
 {
   "highscore": 145970,
-  "bonus_activated": false,
+  "bonus_activated": true,
   "player_skin": "knight_m",
   "activeEnemy_life": 1,
   "activeEnemy_strength": 1,

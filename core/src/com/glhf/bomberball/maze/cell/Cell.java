@@ -210,6 +210,20 @@ public class Cell {
     }
 
     /**
+     * @param clz Class to search for
+     * @param <T>
+     * @return True if the cell has an object of class clz (False otherwise)
+     */
+    public <T> boolean hasInstanceOf(Class<T> clz) {
+        for(GameObject o : objects){
+            if(clz.isInstance(o)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Removes current cell effect.
      */
     public void removeEffect() {

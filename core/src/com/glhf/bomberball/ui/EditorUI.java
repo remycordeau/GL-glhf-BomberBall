@@ -15,31 +15,28 @@ import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
+import com.glhf.bomberball.screens.EditorMenuScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.MapEditorScreen;
+import com.glhf.bomberball.screens.EditorScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.utils.VectorInt2;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 
 import static com.glhf.bomberball.utils.Constants.BOX_WIDTH;
-import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
-public class MapEditorUI extends MenuUI {
+public class EditorUI extends MenuUI {
 
-    private MapEditorScreen screen;
+    private EditorScreen screen;
     private Maze maze;
     private MazeDrawer maze_preview;
 
-    public MapEditorUI(MapEditorScreen screen, Maze maze)
+    public EditorUI(EditorScreen screen, Maze maze)
     {
         this.screen = screen;
 
         this.maze = maze;
-        maze_preview = new MazeDrawer(maze, 0.0f, 0.9f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(maze, 0.0f, 0.85f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
 
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.85f));
@@ -50,15 +47,12 @@ public class MapEditorUI extends MenuUI {
 
     public void initializeButtons() {
         TextButton bouton_retour = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
-        bouton_retour.addListener(new ScreenChangeListener(MainMenuScreen.class));
+        bouton_retour.addListener(new ScreenChangeListener(EditorMenuScreen.class));
         TextButton button_save = new AudioButton(Translator.translate("Save"), Graphics.GUI.getSkin());
         button_save.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //Dialog dialog = new Dialog("Sauvegarder", Graphics.GUI.getSkin());
-                //dialog.text("Choisir le nom du Maze");
-                String output = JOptionPane.showInputDialog("Choisir le nom du Maze");
-                if(output!=null) screen.saveMaze(output);
+                screen.saveMaze();
             }
         });
         this.add(new ObjectsWidget()).grow();
@@ -90,7 +84,7 @@ public class MapEditorUI extends MenuUI {
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
             presets.add(new Player("knight_m", 1, 1,1, 1));
-            presets.add(new Door());
+            //presets.add(new Door());
 
             this.setActor(content);
             for (GameObject o : presets) {
