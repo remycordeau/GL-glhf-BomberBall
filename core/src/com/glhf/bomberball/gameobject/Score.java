@@ -1,5 +1,7 @@
 package com.glhf.bomberball.gameobject;
 
+import com.glhf.bomberball.config.GameInfiniteConfig;
+
 import java.util.Observable;
 
 public class Score extends Observable {
