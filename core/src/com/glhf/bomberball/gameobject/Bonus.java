@@ -4,7 +4,6 @@ import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.audio.Audio;
 
 public class Bonus extends GameObject {
-
     public enum Type {
         SPEED,
         BOMB_RANGE,
@@ -12,7 +11,6 @@ public class Bonus extends GameObject {
     }
 
     private Type type;
-
     public Bonus() {
         super();
     }
@@ -44,8 +42,14 @@ public class Bonus extends GameObject {
     @Override
     public boolean isWalkable() { return true; }
 
+    @Override
+    public int scoreWhileDestroyed() {
+        return 10;
+    }
+
     public void applyEffect(Player player) {
         Audio.POWER_UP.play();
+        Score.getINSTANCE().increaseScore(10);
         switch (type) {
             case SPEED:
                 player.bonus_moves++;

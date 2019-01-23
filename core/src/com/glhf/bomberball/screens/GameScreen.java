@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.maze.MazeTransversal;
@@ -34,6 +35,7 @@ public abstract class GameScreen extends AbstractScreen {
     public void hide() {
         super.hide();
         Audio.silence();
+        Score.getINSTANCE().resetScore();
     }
 
     @Override

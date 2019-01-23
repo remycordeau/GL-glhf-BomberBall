@@ -19,6 +19,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.Constants;
@@ -52,8 +53,10 @@ public class EndLevelUI extends MenuUI {
         // labels
         Label victory = new Label(Translator.translate("level succeeded", previous_level + 1), Graphics.GUI.getSkin());
         Label unlocked = new Label(Translator.translate("level unlocked", next_level + 1), Graphics.GUI.getSkin());
+        Label score = new Label("Score : "+ Score.getINSTANCE().getScore(), Graphics.GUI.getSkin());
         this.add(victory).spaceBottom(Value.percentHeight(0.9f)).row();
         this.add(unlocked).spaceBottom(Value.percentHeight(1.5f)).row();
+        this.add(score).spaceBottom(Value.percentHeight(0.9f)).row();
 
         //buttons
         Table buttons = new Table();

@@ -25,4 +25,8 @@ public class PassiveEnemy extends Enemy {
     public void updateAI() {
 
     }
+    @Override
+    public int scoreWhileDestroyed() {
+        return 30;
+    }
 }
