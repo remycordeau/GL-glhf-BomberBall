@@ -8,7 +8,7 @@ import com.glhf.bomberball.utils.Directions;
 
 public class IndestructibleWall extends Wall {
 
-    private AtlasRegion top_sprite;
+    private transient AtlasRegion top_sprite;
 
     public IndestructibleWall() {
         super();
