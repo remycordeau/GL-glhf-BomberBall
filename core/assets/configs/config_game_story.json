@@ -1,6 +1,6 @@
 {
   "last_level_played": 0,
-  "last_level_unlocked": 2,
+  "last_level_unlocked": 3,
   "player_skin": "knight_m",
   "activeEnemy_life": 1,
   "activeEnemy_strength": 1,
@@ -11,6 +11,7 @@
   "aggressiveEnemy_life": 1,
   "aggressiveEnemy_strength": 1,
   "aggressiveEnemy_moves": 5,
+  "aggressiveEnemy_huntingRange": 4,
   "wall_life": 1,
   "initial_bomb_number": 1,
   "initial_bomb_range": 3,
