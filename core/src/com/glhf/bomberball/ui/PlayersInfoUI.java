@@ -67,9 +67,9 @@ public class PlayersInfoUI extends Table {
         private HeartsWidget player_hearts;
 
         public PlayerInfoWidget(Player player) {
-            player_hearts = new HeartsWidget(player);
-            this.add(player_hearts).grow();
-            this.row();
+            //player_hearts = new HeartsWidget(player);
+            //this.add(player_hearts).grow();
+            //this.row();
             this.add(new BonusWidget(player)).grow();
         }
     }

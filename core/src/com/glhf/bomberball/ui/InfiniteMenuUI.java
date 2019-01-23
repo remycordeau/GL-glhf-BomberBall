@@ -30,7 +30,7 @@ public class InfiniteMenuUI extends MenuUI {
         this.padBottom(Value.percentHeight(0.1f));
 
 
-        config = new GameInfiniteConfig();
+        config = GameInfiniteConfig.get();
         mazex = screen.maze;
         highscore = config.highscore;
 

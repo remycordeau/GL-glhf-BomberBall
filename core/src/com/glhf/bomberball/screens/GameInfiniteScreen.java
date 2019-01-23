@@ -25,10 +25,8 @@ public class GameInfiniteScreen extends GameScreen {
         //TODO : factoriser le code avec GameStoryScreen
         current_player = this.maze.spawnPlayer(config);
 
-        //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
-        this.maze.export("testWithEnemies");
 
         addUI(new InfiniteUI(current_player, this));
         addUI(maze_drawer);
@@ -94,14 +92,6 @@ public class GameInfiniteScreen extends GameScreen {
                 System.out.println("The player probably died");
             }
         }
-        /*if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new MainMenuScreen());
-        } else {
-            current_player.initiateTurn();
-            setMoveEffect();
-            setMoveMode();
-            input_handler.lock(false);
-        }*/
     }
 
     /**

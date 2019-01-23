@@ -9,11 +9,18 @@ public class AppConfig extends Config {
 
     public Resolutions resolution = Resolutions.MEDIUM;
 
+    public String language = "fr";
+
     public static AppConfig get() {
         return get(Constants.DEFAULT_CONFIG_APP, AppConfig.class);
     }
 
     public void exportConfig(){
         exportConfig(Constants.DEFAULT_CONFIG_APP);
+    }
+
+    @Override
+    protected Config reset() {
+        return this;
     }
 }

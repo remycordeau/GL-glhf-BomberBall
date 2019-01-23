@@ -28,8 +28,8 @@ public class MazeBuilder {
         maze = new Maze();
 
         maze.title = "Classic";
-        maze.height = 5 + (int) (Math.random()*3)*2;
-        maze.width = 7 + (int) (Math.random()*3)*2;
+        maze.height = 7 + (int) (Math.random()*5)*2;
+        maze.width = 9 + (int) (Math.random()*5)*2;
 
         maze.spawn_positions = new ArrayList<>();
         maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
@@ -102,7 +102,7 @@ public class MazeBuilder {
             } else if (r < 0.9) {
                 cell.addGameObject(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
             } else if (r < 1) {
-                cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, 5));
+                cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
             }
         }
     }

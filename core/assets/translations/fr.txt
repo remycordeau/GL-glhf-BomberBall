@@ -1,6 +1,6 @@
 #EndLevelUI
 "level unlocked"		:	"Niveau %d débloqué !"
-"level succeeded"       :   "Félicitations! Vous avez réussi niveau %d !"
+"level succeeded"		:	"Félicitations! Vous avez réussi niveau %d !"
 
 #SoloUI
 "mode movement button"	:	"Déplacement [%s]"
@@ -10,6 +10,7 @@
 #SettingsMenuUI
 "Action"		:	"Action"
 "inputs"		:	"contrôles"
+"Language"		:	"Langage"
 "general"		:	"général"
 "Primary"		:	"Primary"
 "Secondary"		:	"Secondary"
@@ -17,7 +18,7 @@
 #Story Menus
 "Level Selection"	:	"Selection des niveaux"
 "Wasted !"		    :	"Wasted !"
-"draw ..."		:	"égalité ..."
+"draw ..."			:	"égalité ..."
 "Lost!"				:	"Perdu!"
 "VICTORY!"			:	"VICTOIRE!"
 "All levels unlocked !"	:	"Vous avez débloqué tous les niveaux !"
@@ -52,4 +53,8 @@
 "Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"
 
 #MapEditor
-"Save"   :    "Save"
+"Save"   :    "Sauvegarder"
+"Width"  :    "Largeur"
+"Height" :    "Hauteur"
+"Edit"   :    "Editer"
+"New"    :    "Nouveau"

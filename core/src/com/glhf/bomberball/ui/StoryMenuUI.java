@@ -86,7 +86,7 @@ public class StoryMenuUI extends MenuUI {
 
         int nb_levels = screen.getMazeCount();
         levels = new TextButton[nb_levels];
-        HorizontalGroup horizontal = new HorizontalGroup();
+        Table levels_group = new Table();
         ButtonGroup<TextButton> buttonGroup = new ButtonGroup<>();
         buttonGroup.setMaxCheckCount(1);
 
@@ -103,12 +103,10 @@ public class StoryMenuUI extends MenuUI {
                     level_preview.setMaze(screen.maze);
                 }
             });
-            horizontal.addActor(levels[i]);
-            horizontal.space(25);
+            levels_group.add(levels[i]).growX().pad(Value.percentWidth(0.05f));
         }
         levels[screen.getLastLevelPlayed()].setChecked(true);
-        buttons.add(horizontal).spaceBottom(Value.percentHeight(0.5f)).row();
-
+        buttons.add(levels_group).width(Value.percentWidth(0.8f, this)).row();
         // Play and quit buttons
 
         TextButton play_button = new AudioButton(Translator.translate("Play Selected Level"), Graphics.GUI.getSkin());

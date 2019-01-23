@@ -137,16 +137,15 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_disable.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rock_9patch_selected.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_long_9patch.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
             //textButtonStyle.downFontColor = Color.RED;
             textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
-
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("small");
@@ -156,10 +155,18 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("very_small");
             skin.add("input_select", textButtonStyle);
 
-            textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
+            patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_9patch.png"), 16, 16, 16, 16));
+            patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_9patch.png"), 16, 16, 16, 16));
+            patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_9patch.png"), 16, 16, 16, 16));
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.checked = patch3;
+            textButtonStyle.disabled = patch2;
             textButtonStyle.font = skin.getFont("default");
             skin.add("checkable", textButtonStyle);
+
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("small", textButtonStyle);
 
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();

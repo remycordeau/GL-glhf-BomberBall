@@ -7,6 +7,7 @@ public class Constants {
 
     //game constants
     public static final int NB_MAX_PLAYERS = 4;
+    public static final int MAX_DEPTH = 25;
 
     // constants for paths
     public static final String PATH_ASSET         = "";

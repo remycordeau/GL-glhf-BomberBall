@@ -3,13 +3,14 @@
 "level succeeded"		:	"Congratulations ! You've succeeded level %d !"
 
 #SoloUI
-"mode movement button"		:	"Movement [%s]"
+"mode movement button"	:	"Movement [%s]"
 "mode bombe button"		:	"Bomb [%s]"
 "endTurn button"		:	"End Turn [%s]"
 
 #SettingsMenuUI
 "Action"		:	"Action"
 "inputs"		:	"inputs"
+"Language"		:	"Language"
 "general"		:	"general"
 "Primary"		:	"Primary"
 "Secondary"		:	"Secondary"
@@ -17,13 +18,13 @@
 #Story Menus
 "Level Selection"	:	"Level Selection"
 "Wasted !"		    :	"Wasted !"
-"draw ..."			:	"draw ..."
+"draw ..."			:	"égalité ..."
 "Lost!"				:	"Lost!"
 "VICTORY!"			:	"VICTORY!"
 "All levels unlocked !"	:	"All levels unlocked !"
 "Play next level"		:	"Play next level"
-"Retry this level"			:	"Retry this level"
-//"Retry last level"		:	"Retry last level"
+"Retry this level"			:	"Replay level"
+"Retry last level"		:	"Replay last level"
 "Back to level selection"	:	"Back to level selection"
 "Play Selected Level"	:	"Play Selected Level"
 "story mode congratulations"		:	"Congratulations ! You've completed the story mode !"
@@ -53,3 +54,7 @@
 
 #MapEditor
 "Save"   :    "Save"
+"Width"  :    "Width"
+"Height" :    "Height"
+"Edit"   :    "Edit"
+"New"    :    "New"

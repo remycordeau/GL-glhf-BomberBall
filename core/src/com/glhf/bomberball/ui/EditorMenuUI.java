@@ -44,7 +44,7 @@ public class EditorMenuUI extends MenuUI {
     public class ButtonsWidget extends  Table {
 
         public ButtonsWidget() {
-            TextButton edit_button = new AudioButton("Edit", Graphics.GUI.getSkin());
+            TextButton edit_button = new AudioButton(Translator.translate("Edit"), Graphics.GUI.getSkin());
             edit_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -55,23 +55,25 @@ public class EditorMenuUI extends MenuUI {
             TextButton back_button = new AudioButton(Translator.translate("Back"), Graphics.GUI.getSkin());
             back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
 
-            this.add(edit_button).growX().pad(Value.percentHeight(0.1f));
+            Value spacing = Value.percentHeight(0.1f);
+
+            this.add(edit_button).growX().space(spacing);
             this.row();
-            this.add(new NewMazeWidget()).growX().pad(Value.percentHeight(0.1f));
+            this.add(new NewMazeWidget()).growX().space(spacing);
             this.row();
-            this.add(back_button).growX().pad(Value.percentHeight(0.1f));
+            this.add(back_button).growX().space(spacing);
         }
     }
 
     public class NewMazeWidget extends Table {
         public NewMazeWidget() {
 
-            Label width_label = new Label("Width : ", Graphics.GUI.getSkin());
+            Label width_label = new Label(Translator.translate("Width") + " : ", Graphics.GUI.getSkin());
             TextField width_field = new TextField("13", Graphics.GUI.getSkin());
-            Label height_label = new Label("Height : ", Graphics.GUI.getSkin());
+            Label height_label = new Label(Translator.translate("Height") + " : ", Graphics.GUI.getSkin());
             TextField height_field = new TextField("11", Graphics.GUI.getSkin());
 
-            TextButton new_button = new AudioButton("New", Graphics.GUI.getSkin());
+            TextButton new_button = new AudioButton(Translator.translate("New"), Graphics.GUI.getSkin());
             new_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {

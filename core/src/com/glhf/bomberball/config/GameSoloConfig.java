@@ -16,6 +16,7 @@ public abstract class GameSoloConfig extends GameConfig {
     public int aggressiveEnemy_life = 1;
     public int aggressiveEnemy_strength = 1;
     public int aggressiveEnemy_moves = 5;
+    public int aggressiveEnemy_huntingRange = 4;
 
     /**
      * Default constructor with the default configuration values
