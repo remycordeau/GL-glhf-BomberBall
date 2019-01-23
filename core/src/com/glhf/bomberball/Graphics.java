@@ -222,7 +222,7 @@ public class Graphics {
             skin.add("default", scrollStyle);
 
             //========SelectBoxStyle
-            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
+            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
             selectBoxStyle.background = skin.getDrawable("transparent");

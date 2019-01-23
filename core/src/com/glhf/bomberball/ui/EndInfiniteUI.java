@@ -13,11 +13,14 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameInfiniteConfig;
+import com.glhf.bomberball.gameobject.NumberTurn;
 import com.glhf.bomberball.gameobject.Score;
+import com.glhf.bomberball.screens.GameInfiniteScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
 public class EndInfiniteUI extends MenuUI {
-
     public EndInfiniteUI(){
         this.setFillParent(true);
         addButtons();
@@ -34,11 +37,22 @@ public class EndInfiniteUI extends MenuUI {
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
 
-        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHighscore : " + 999, Graphics.GUI.getSkin());
+        int current_highscore = GameInfiniteConfig.get().highscore;
+        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHighscore : " + current_highscore, Graphics.GUI.getSkin());
         this .add(score).spaceBottom(Value.percentHeight(0.9f)).center().row();
 
 
         //Buttons
+        TextButton retry = new AudioButton(Translator.translate("Replay"), Graphics.GUI.getSkin());
+        retry.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Score.getINSTANCE().resetScore();
+                NumberTurn.getINSTANCE().resetNbTurn();
+                Bomberball.changeScreen(new GameInfiniteScreen(1));
+            }
+        });
+
         TextButton back_story_menu = new AudioButton(Translator.translate("Back to main menu"), Graphics.GUI.getSkin());
         back_story_menu.addListener(new ChangeListener() {
             @Override
@@ -46,16 +60,9 @@ public class EndInfiniteUI extends MenuUI {
                 Bomberball.changeScreen(new MainMenuScreen());
             }
         });
-        this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
-        TextButton ragequit = new AudioButton(Translator.translate("Quit"), Graphics.GUI.getSkin());
-        ragequit.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-            }
-        });
-        this.add(ragequit).spaceTop(Value.percentHeight(0.9f)).row();
+        this.add(retry).spaceTop(Value.percentHeight(0.9f)).row();
+        this.add(back_story_menu).spaceTop(Value.percentHeight(0.9f)).row();
 
     }
 }

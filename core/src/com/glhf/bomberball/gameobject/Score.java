@@ -1,6 +1,10 @@
 package com.glhf.bomberball.gameobject;
 
-public class Score {
+import com.glhf.bomberball.config.GameInfiniteConfig;
+
+import java.util.Observable;
+
+public class Score extends Observable {
     int score;
     private Score(){
         score=0;
@@ -12,10 +16,14 @@ public class Score {
     public void increaseScore(int n){
         this.score+=n;
         System.out.println("New score = " + score);
+        setChanged();
+        notifyObservers();
     }
     public void resetScore(){
         this.score=0;
         System.out.println("Reset of the score");
+        setChanged();
+        notifyObservers();
     }
     public int getScore(){
         return score;
