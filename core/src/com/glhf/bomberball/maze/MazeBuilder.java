@@ -48,6 +48,9 @@ public class MazeBuilder {
         if(config.destructible_wall_available){
             availableWall.put(DestructibleWall.class, 4.0);
         }
+        if(config.finite_number_turn){
+
+        }
         initialiseCells();
         initialiseWalls(difficulty);
         initialiseEnemies(difficulty);
