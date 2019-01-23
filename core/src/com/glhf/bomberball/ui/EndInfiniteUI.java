@@ -16,9 +16,9 @@ import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
-public class EndInfniteUI extends MenuUI {
+public class EndInfiniteUI extends MenuUI {
 
-    public EndInfniteUI(){
+    public EndInfiniteUI(){
         this.setFillParent(true);
         addButtons();
     }
@@ -34,7 +34,7 @@ public class EndInfniteUI extends MenuUI {
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
 
-        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHightoscore : " + 999, Graphics.GUI.getSkin());
+        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHighscore : " + 999, Graphics.GUI.getSkin());
         this .add(score).spaceBottom(Value.percentHeight(0.9f)).center().row();
 
 
