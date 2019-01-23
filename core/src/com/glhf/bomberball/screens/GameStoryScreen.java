@@ -41,7 +41,6 @@ public class GameStoryScreen extends GameScreen {
         //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
-        //this.maze.export("testWithEnemies");
 
         addUI(new SoloUI(current_player, this));
         addUI(maze_drawer);

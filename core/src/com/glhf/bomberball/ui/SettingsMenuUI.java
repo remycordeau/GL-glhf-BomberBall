@@ -24,11 +24,12 @@ public class SettingsMenuUI extends MenuUI {
     private final Table[] contents;
     private final TextButton[] labels;
     private final ButtonGroup<InputButton> inputsButtonGroup;
+    private final AppConfig appConfig;
 
     //Constructor
     public SettingsMenuUI(SettingsMenuScreen screen) {
         super();
-        AppConfig appConfig = AppConfig.get();
+        appConfig = AppConfig.get();
         InputsConfig inputsConfig = InputsConfig.get();
         this.setFillParent(true);
 
@@ -72,22 +73,8 @@ public class SettingsMenuUI extends MenuUI {
 
         contents[0] = new Table();
         contents[0].add(new ParameterScreenSize()).growX().row();
-        CheckBox fullscreen = new CheckBox("fullscreen", GUI.getSkin());
-        fullscreen.setChecked(appConfig.fullscreen);
-        fullscreen.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-                AppConfig config = AppConfig.get();
-                if(((CheckBox)actor).isChecked())
-                    Gdx.graphics.setFullscreenMode(displayMode);
-                else
-                    Bomberball.resizeWindow(config.resolution);
-                config.fullscreen = ((CheckBox)actor).isChecked();
-                config.exportConfig();
-            }
-        });
-        contents[0].add(fullscreen).growX().row();
+        contents[0].add(new ParameterLanguage()).growX().row();
+        contents[0].add(new FullscreenCheckbox()).growX().row();
 
         //ajout de chaque paramètre pour inputs
         String[][] id_list = inputsConfig.getIdList();
@@ -152,18 +139,17 @@ public class SettingsMenuUI extends MenuUI {
     }
 
     private class ParameterScreenSize extends Parameter {
-        AppConfig config = AppConfig.get();
         public ParameterScreenSize() {
             super("screen size");
-            SelectBox<Resolutions> value = new SelectBox<>(Graphics.GUI.getSkin());
+            SelectBox<Resolutions> value = new SelectBox<>(GUI.getSkin());
             value.setItems(Resolutions.values());
-            value.setSelected(config.resolution);
+            value.setSelected(appConfig.resolution);
             value.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     Bomberball.resizeWindow(value.getSelected());
-                    config.resolution = value.getSelected();
-                    config.exportConfig();
+                    appConfig.resolution = value.getSelected();
+                    appConfig.exportConfig();
                 }
             });
             this.addActor(value);
@@ -207,6 +193,46 @@ public class SettingsMenuUI extends MenuUI {
             this.action = action;
             this.priority = priority;
             this.input_id = input_id;
+        }
+    }
+
+    private class FullscreenCheckbox extends CheckBox{
+        public FullscreenCheckbox() {
+            super("fullscreen", GUI.getSkin());
+            this.setChecked(appConfig.fullscreen);
+            this.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+                    if(((CheckBox)actor).isChecked())
+                        Gdx.graphics.setFullscreenMode(displayMode);
+                    else
+                        Bomberball.resizeWindow(appConfig.resolution);
+                    appConfig.fullscreen = ((CheckBox)actor).isChecked();
+                    appConfig.exportConfig();
+                }
+            });
+        }
+    }
+
+    private class ParameterLanguage extends Parameter{
+        private SelectBox<String> value;
+        public ParameterLanguage() {
+            super(Translator.translate("Language"));
+            value = new SelectBox<>(Graphics.GUI.getSkin());
+            value.setItems("en","fr");
+            value.setSelected(appConfig.language);
+            value.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    SelectBox<String> s = (SelectBox<String>) actor;
+                    appConfig.language = s.getSelected();
+                    appConfig.exportConfig();
+                    Translator.load(appConfig.language);
+                    Bomberball.changeScreen(new SettingsMenuScreen());
+                }
+            });
+            addActor(value);
         }
     }
 }

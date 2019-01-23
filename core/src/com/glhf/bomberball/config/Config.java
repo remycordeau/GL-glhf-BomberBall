@@ -59,6 +59,10 @@ public abstract class Config {
         return null;
     }
 
+    /**
+     * function applied when file not found, just after the default constructor
+     * @return itself
+     */
     protected abstract Config reset();
 
     /**
