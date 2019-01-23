@@ -37,10 +37,10 @@ public class InfiniteUI extends MenuUI {
         bottom_ui.align(Align.bottom);
 
         ScoreUI top_left_ui = new ScoreUI();
-        left_ui.setFillParent(true);
-        left_ui.padRight(Value.percentWidth(2/3f));
-        left_ui.padBottom(Value.percentHeight(0.50f));
-        left_ui.align(Align.topLeft);
+        top_left_ui.setFillParent(true);
+        top_left_ui.padRight(Value.percentWidth(2/3f));
+        top_left_ui.padBottom(Value.percentHeight(0.50f));
+        top_left_ui.align(Align.topLeft);
 
         this.addActor(left_ui);
         this.addActor(top_left_ui);
@@ -50,7 +50,6 @@ public class InfiniteUI extends MenuUI {
 
     private class ScoreUI extends Table implements Observer {
         private final Score sc;
-        private int cur_score;
         private Label label;
 
         public ScoreUI() {
@@ -58,13 +57,13 @@ public class InfiniteUI extends MenuUI {
             label = new Label("Score : ", Graphics.GUI.getSkin());
             sc = Score.getINSTANCE();
             sc.addObserver(this);
-            addActor(label);
+            add(label).growX();
             update(null, null);
         }
 
         @Override
         public void update(Observable observable, Object o) {
-            label.setText("Score : "+cur_score);
+            label.setText("Score : "+sc.getScore());
         }
     }
 }
