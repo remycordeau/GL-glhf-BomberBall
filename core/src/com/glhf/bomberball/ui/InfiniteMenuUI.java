@@ -10,6 +10,8 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.config.GameStoryConfig;
+import com.glhf.bomberball.gameobject.NumberTurn;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
@@ -30,7 +32,7 @@ public class InfiniteMenuUI extends MenuUI {
         this.padBottom(Value.percentHeight(0.1f));
 
 
-        config = new GameInfiniteConfig();
+        config = GameInfiniteConfig.get();
         mazex = screen.maze;
         highscore = config.highscore;
 
@@ -51,18 +53,19 @@ public class InfiniteMenuUI extends MenuUI {
         CheckBox box1;
         CheckBox box2;
         CheckBox box3;
+        CheckBox box4;
+
         Skin skin = Graphics.GUI.getSkin();
 
         Value spacing = Value.percentHeight(0.5f);
 
         box1 = new CheckBox("Sans Bonus", skin);
-        box2 = new CheckBox("Nombre de tours limite", skin);
-        box3 = new CheckBox("Cartes aléatoires", skin);
+        box2 = new CheckBox("Nombre de tours limité", skin);
+        box3 = new CheckBox("Sans caisse", skin);
         box1.setChecked(!config.bonus_activated);
-        //box2.setChecked(config.nombre_de_tour??);
-        //box3.setChecked(config.carte_alea??);
-        box2.setDisabled(true);
-        box3.setDisabled(true);
+        box2.setChecked(config.finite_number_turn);
+        box3.setChecked(!config.destructible_wall_available);
+
 
 
         //Settings CheckBoxes
@@ -75,6 +78,23 @@ public class InfiniteMenuUI extends MenuUI {
             }
         });
 
+        box2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                GameInfiniteConfig config = GameInfiniteConfig.get();
+                config.finite_number_turn = ((CheckBox)actor).isChecked();
+                config.exportConfig();
+            }
+        });
+
+        box3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                GameInfiniteConfig config = GameInfiniteConfig.get();
+                config.destructible_wall_available = !((CheckBox)actor).isChecked();
+                config.exportConfig();
+            }
+        });
 
         //Other buttons
         TextButton back;
@@ -86,7 +106,9 @@ public class InfiniteMenuUI extends MenuUI {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                Score.getINSTANCE().resetScore();
+                NumberTurn.getINSTANCE().resetNbTurn();
+                Bomberball.changeScreen(new GameInfiniteScreen(1));
             }
         });
 

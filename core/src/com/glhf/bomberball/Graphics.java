@@ -165,20 +165,29 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("default");
             skin.add("checkable", textButtonStyle);
 
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("small", textButtonStyle);
+
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;
             skin.add("default", labelStyle);
 
-            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
+            labelStyle = new LabelStyle();
+            labelStyle.font = font;
+            labelStyle.fontColor = Color.BLACK;
+            skin.add("black", labelStyle);
+
+            labelStyle = new LabelStyle();
             labelStyle.font = skin.getFont("small");
             skin.add("small", labelStyle);
 
-            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
+            labelStyle = new LabelStyle();
             labelStyle.font = skin.getFont("very_small");
             skin.add("very_small", labelStyle);
 
-            labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
+            labelStyle = new LabelStyle();
             labelStyle.font = font;
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
@@ -219,7 +228,7 @@ public class Graphics {
             skin.add("default", scrollStyle);
 
             //========SelectBoxStyle
-            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
+            SelectBoxStyle selectBoxStyle = new SelectBoxStyle();
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
             selectBoxStyle.background = skin.getDrawable("transparent");

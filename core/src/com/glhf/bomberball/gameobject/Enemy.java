@@ -2,6 +2,7 @@ package com.glhf.bomberball.gameobject;
 
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.glhf.bomberball.maze.MazeTransversal;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.Node;
@@ -15,12 +16,14 @@ public abstract class Enemy extends Character {
 
     //protected transient  int actual_move;
     protected ArrayList<Directions> way;
+    protected int nb_reachable_cells;
 
     protected int actual_move; //current index of path followed
 
     protected Enemy(String skin, int life, int initial_moves, int strength) {
         super(skin, life, initial_moves);
         this.strength = strength;
+        this.nb_reachable_cells = 0;
     }
 
     public Enemy() {
@@ -43,6 +46,14 @@ public abstract class Enemy extends Character {
      */
     public void setWay(ArrayList<Directions> way) {
         this.way = way;
+    }
+
+    @Override
+    public void initiateTurn() {
+        super.initiateTurn();
+        if (nb_reachable_cells < MazeTransversal.getReacheableCellsInRange(this.cell, 100).size()) {
+            updateAI();
+        }
     }
 
     /**

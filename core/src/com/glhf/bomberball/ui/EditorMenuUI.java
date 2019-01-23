@@ -2,10 +2,12 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
@@ -35,7 +37,7 @@ public class EditorMenuUI extends MenuUI {
     {
         this.setFillParent(true);
 
-        this.add(new ButtonsWidget()).width(Value.percentWidth(1/3f, this));
+        this.add(new ButtonsWidget()).growY().width(Value.percentWidth(1/3f, this));
         this.add(new MazeSelectorWidget()).grow();
 
         this.add(maze_preview);
@@ -44,7 +46,7 @@ public class EditorMenuUI extends MenuUI {
     public class ButtonsWidget extends  Table {
 
         public ButtonsWidget() {
-            TextButton edit_button = new AudioButton("Edit", Graphics.GUI.getSkin());
+            TextButton edit_button = new AudioButton(Translator.translate("Edit"), Graphics.GUI.getSkin());
             edit_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -61,19 +63,22 @@ public class EditorMenuUI extends MenuUI {
             this.row();
             this.add(new NewMazeWidget()).growX().space(spacing);
             this.row();
-            this.add(back_button).growX().space(spacing);
+            this.add(back_button).expand().growX().align(Align.bottom);
+
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plain_9patch.png"), 5, 5, 5, 5));
+            this.setBackground(patch);
         }
     }
 
     public class NewMazeWidget extends Table {
         public NewMazeWidget() {
 
-            Label width_label = new Label("Width : ", Graphics.GUI.getSkin());
+            Label width_label = new Label(Translator.translate("Width") + " : ", Graphics.GUI.getSkin());
             TextField width_field = new TextField("13", Graphics.GUI.getSkin());
-            Label height_label = new Label("Height : ", Graphics.GUI.getSkin());
+            Label height_label = new Label(Translator.translate("Height") + " : ", Graphics.GUI.getSkin());
             TextField height_field = new TextField("11", Graphics.GUI.getSkin());
 
-            TextButton new_button = new AudioButton("New", Graphics.GUI.getSkin());
+            TextButton new_button = new AudioButton(Translator.translate("New"), Graphics.GUI.getSkin());
             new_button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -100,6 +105,8 @@ public class EditorMenuUI extends MenuUI {
             dimensions.add(width_field).row();
             dimensions.add(height_label).growX();
             dimensions.add(height_field);
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plaindark_9patch.png"), 5, 5, 5, 5));
+            dimensions.setBackground(patch);
 
             this.add(dimensions).growX();
         }
@@ -109,7 +116,7 @@ public class EditorMenuUI extends MenuUI {
 
         public MazeSelectorWidget() {
             //setFillParent(true);
-            this.padTop(Value.percentHeight(0.9f));
+            this.padTop(Value.percentHeight(0.85f));
 
             TextButton next_map = new AudioButton(">", Graphics.GUI.getSkin());
             next_map.addListener(new ChangeListener() {
@@ -129,7 +136,7 @@ public class EditorMenuUI extends MenuUI {
                 }
             });
 
-            maze_preview = new MazeDrawer(screen.maze, 1/3f, 1f,  0.1f, 1f, MazeDrawer.Fit.BEST);
+            maze_preview = new MazeDrawer(screen.maze, 1/3f, 1f,  0.15f, 1f, MazeDrawer.Fit.BEST);
 
             this.add(previous_map).growX().pad(Value.percentHeight(0.1f));
             this.add(next_map).growX().pad(Value.percentHeight(0.1f));

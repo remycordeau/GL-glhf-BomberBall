@@ -1,12 +1,15 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
@@ -26,12 +29,8 @@ public class MultiMenuUI extends MenuUI {
     private MultiMenuScreen screen;
     private MazeDrawer maze_preview;
 
-    //TODO : Comprendre pourquoi lors de la réinitialisation, la table change de forme
-
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/MultiMenu.png")));
-        this.setBackground(texture);
         this.initialize();
     }
 
@@ -39,7 +38,7 @@ public class MultiMenuUI extends MenuUI {
     {
         System.out.println("Initialization of the Multi Menu");
         this.setFillParent(true);
-        this.padTop(Value.percentHeight(0.2f));
+        //this.padTop(Value.percentHeight(0.5f));
         initializeButtons();
         initializeMazePreview();
     }
@@ -53,11 +52,11 @@ public class MultiMenuUI extends MenuUI {
 
     private void initializeMazePreview ()
     {
-        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.4f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
 
-    private void initializeButtons(){
+    private void initializeButtons() {
         // CREATION OF BUTTONS FOR THE CREATION OF THE MAP
         TextButton nextMapButton = new AudioButton(">", Graphics.GUI.getSkin());
         nextMapButton.addListener(new ChangeListener() {
@@ -79,14 +78,14 @@ public class MultiMenuUI extends MenuUI {
 
         //ADDING THE BUTTONS TO THE TABLE
         Table selectMap = new Table();
-        selectMap.add(previousMapButton);
-        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(10f));
-        this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
+        selectMap.add(previousMapButton).expand().align(Align.left);
+        selectMap.add(nextMapButton).expand().align(Align.right);
+        this.add(selectMap).grow();
         this.row();
 
         // BUTTON TO LOAD THE GAME
         Table buttons = new Table();
-
+        buttons.pad(Value.percentWidth(0.05f));
         TextButton playButton = new AudioButton(Translator.translate("Play"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
@@ -95,6 +94,7 @@ public class MultiMenuUI extends MenuUI {
                 Bomberball.changeScreen(new GameMultiScreen(screen.maze, screen.getMazeId()));
             }
         });
+
         // BUTTON TO CHOOSE A RANDOM MAZE
 
         TextButton randomMapButton = new AudioButton(Translator.translate("Random Maze"), Graphics.GUI.getSkin());
@@ -111,13 +111,14 @@ public class MultiMenuUI extends MenuUI {
 
         //ADDING THE BUTTONS TO THE TABLE
         Value spacing = Value.percentHeight(0.2f);
-        buttons.add(playButton).space(spacing).row();
-        buttons.add(randomMapButton).space(spacing).row();
-        buttons.add(cancelButton).space(spacing);
-
+        buttons.add(playButton).grow().space(spacing).row();
+        buttons.add(randomMapButton).grow().space(spacing).row();
+        buttons.add(cancelButton).grow();
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(PATH_GRAPHICS+"background/scroll.png"))));
+        buttons.setBackground(background);
 
         //CREATING A PREVIEW FOR THE PLAYERS
-
+        NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plaindark_9patch.png"), 5, 5, 5, 5));
 
         AnimationActor p1 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id] + "/idle"), Animation.PlayMode.LOOP));
         p1.mustMove(true);
@@ -130,9 +131,11 @@ public class MultiMenuUI extends MenuUI {
             }
         });
         Table Vp1 = new Table();
+        Vp1.pad(Value.percentWidth(0.05f));
         Vp1.add(p1).grow();
         Vp1.row();
         Vp1.add(Bp1).growX();
+        Vp1.setBackground(patch);
 
         AnimationActor p2 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p2_id] + "/idle"), Animation.PlayMode.LOOP));
         p2.mustMove(true);
@@ -145,9 +148,11 @@ public class MultiMenuUI extends MenuUI {
             }
         });
         Table Vp2 = new Table();
+        Vp2.pad(Value.percentWidth(0.05f));
         Vp2.add(p2).grow();
         Vp2.row();
         Vp2.add(Bp2).growX();
+        Vp2.setBackground(patch);
 
         AnimationActor p3 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p3_id] + "/idle"), Animation.PlayMode.LOOP));
         p3.mustMove(true);
@@ -160,9 +165,11 @@ public class MultiMenuUI extends MenuUI {
             }
         });
         Table Vp3 = new Table();
+        Vp3.pad(Value.percentWidth(0.05f));
         Vp3.add(p3).grow();
         Vp3.row();
         Vp3.add(Bp3).growX();
+        Vp3.setBackground(patch);
 
         AnimationActor p4 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p4_id] + "/idle"), Animation.PlayMode.LOOP));
         p4.mustMove(true);
@@ -175,17 +182,19 @@ public class MultiMenuUI extends MenuUI {
             }
         });
         Table Vp4 = new Table();
+        Vp4.pad(Value.percentWidth(0.05f));
         Vp4.add(p4).grow();
         Vp4.row();
         Vp4.add(Bp4).growX();
+        Vp4.setBackground(patch);
 
         Table selectPlayer = new Table();
         selectPlayer.add(Vp1).grow();
         selectPlayer.add(Vp2).grow();
-        selectPlayer.add(buttons).grow().spaceTop(Value.percentHeight(2f));
+        selectPlayer.add(buttons).grow();
         selectPlayer.add(Vp3).grow();
         selectPlayer.add(Vp4).grow();
-        this.add(selectPlayer).grow();
+        this.add(selectPlayer).height(Value.percentHeight(0.40f, this)).growX();
     }
 
 

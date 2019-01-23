@@ -11,9 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import static com.glhf.bomberball.utils.Constants.MAX_DEPTH;
+
 public class AggressiveEnemy extends Enemy {
 
     private int hunting_range;
+
+    public AggressiveEnemy(){
+        super();
+    }
 
     public AggressiveEnemy(String skin, int life, int initial_moves, int strength, int hunting_range) {
         super(skin, life, initial_moves, strength);
@@ -23,14 +29,21 @@ public class AggressiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
-        this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
+        this.nb_reachable_cells = MazeTransversal.getReacheableCellsInRange(this.cell, 100).size();
+        this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), MAX_DEPTH));
     }
 
     @Override
     public void updateAI() {
         if(cell!=null){// equivalent to isAlive()
-            this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), 50));
+            this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), MAX_DEPTH));
         }
+    }
+
+
+    @Override
+    public GameObject clone() {
+        return new AggressiveEnemy(skin,life,initial_moves, strength, hunting_range);
     }
 
     @Override

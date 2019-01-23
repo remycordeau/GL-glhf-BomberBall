@@ -22,7 +22,17 @@ public class PassiveEnemy extends Enemy {
     }
 
     @Override
+    public GameObject clone() {
+        return new PassiveEnemy(skin,life,initial_moves, strength, way);
+    }
+
+    @Override
     public void updateAI() {
 
+
+    }
+    @Override
+    public int scoreWhileDestroyed() {
+        return 30;
     }
 }

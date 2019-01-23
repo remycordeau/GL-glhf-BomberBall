@@ -1,12 +1,13 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.NumberTurn;
 import com.glhf.bomberball.maze.MazeBuilder;
-import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.ui.InfiniteUI;
+import com.glhf.bomberball.ui.GameUI;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
@@ -14,22 +15,19 @@ import java.util.ArrayList;
 public class GameInfiniteScreen extends GameScreen {
 
     private ArrayList<Enemy> enemies;
-    private ArrayList<Cell> selected_cells = new ArrayList<>();
-    private InfiniteModeScreen screen;
+    private int difficulty;
 
-    public GameInfiniteScreen(InfiniteModeScreen screen) {
+    public GameInfiniteScreen(int difficulty) {
         //super(maze);
-        super(MazeBuilder.createInfinityMaze());
+        super(MazeBuilder.createInfinityMaze(difficulty));
+        this.difficulty = difficulty;
         GameInfiniteConfig config = GameInfiniteConfig.get();
-        this.screen = screen;
-        //TODO : factoriser le code avec GameStoryScreen
         current_player = this.maze.spawnPlayer(config);
 
-        //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new InfiniteUI(current_player, this));
+        addUI(new GameUI(current_player, true));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -39,11 +37,25 @@ public class GameInfiniteScreen extends GameScreen {
             @Override
             public void run() {
                 if (!current_player.isAlive()) {
-                    Bomberball.changeScreen(new EndInfiniteScreen());
+                    endGame();
                     Timer.instance().clear();
                 }
             }
         }, 1f, 1f);
+    }
+
+    protected void endGame() {
+        GameInfiniteConfig config = GameInfiniteConfig.get();
+        Score s = Score.getINSTANCE();
+        if(config.highscore < s.getScore()){
+            config.highscore=s.getScore();
+            config.exportConfig();
+        }
+        Bomberball.changeScreen(new EndInfiniteScreen());
+    }
+
+    @Override
+    protected void startGame() {
     }
 
     @Override
@@ -55,8 +67,15 @@ public class GameInfiniteScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
+        if(GameInfiniteConfig.get().finite_number_turn){
+            NumberTurn nt = NumberTurn.getINSTANCE();
+            nt.decreaseTurn(1);
+            if(nt.getNbTurn()==0){
+                endGame();
+            }
+        }
         if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new EndInfiniteScreen());
+            endGame();
         } else {
 
             // test if the current_player reached the door
@@ -67,7 +86,7 @@ public class GameInfiniteScreen extends GameScreen {
                 }
             }
             if (isIn) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                Bomberball.changeScreen(new GameInfiniteScreen(difficulty+1));
                 return;
             }
 
@@ -87,20 +106,12 @@ public class GameInfiniteScreen extends GameScreen {
                     public void run() {
                         input_handler.lock(false);
                     }
-                }, 0.1f*enemies.size());
+                }, 0.2f*enemies.size());
 
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
             }
         }
-        /*if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new MainMenuScreen());
-        } else {
-            current_player.initiateTurn();
-            setMoveEffect();
-            setMoveMode();
-            input_handler.lock(false);
-        }*/
     }
 
     /**
@@ -110,6 +121,5 @@ public class GameInfiniteScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        //enemies.forEach(Enemy::updateAI);
     }
 }

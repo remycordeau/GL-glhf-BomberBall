@@ -1,7 +1,6 @@
 package com.glhf.bomberball.maze;
 
 import com.glhf.bomberball.config.GameInfiniteConfig;
-import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.maze.cell.Cell;
@@ -17,53 +16,64 @@ public class MazeBuilder {
     private static Maze maze;
     private static Random rand = new Random();
     private static Cell cellDoor;
+    private static Cell cellPlayer;
     private static double probFreeCase;
     private static int nb_ennemies = 10;
     private static GameInfiniteConfig config;
 
-    public static Maze createInfinityMaze(){
+
+    public static Maze createInfinityMaze(int difficulty){
         config = GameInfiniteConfig.get();
         probFreeCase = config.probFreeCase;
+
+        nb_ennemies = 1 + difficulty/2;
 
         maze = new Maze();
 
         maze.title = "Classic";
-        maze.height = 5 + (int) (Math.random()*3)*2;
-        maze.width = 7 + (int) (Math.random()*3)*2;
+        int diff_sizer = 1 + difficulty/10;
+        maze.height = 7 + (int) (Math.random()*5*diff_sizer)*2;
+        maze.width = 9 + (int) (Math.random()*5*diff_sizer)*2;
 
         maze.spawn_positions = new ArrayList<>();
-        maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
+        VectorInt2 pos = new VectorInt2(0, rand.nextInt(maze.height));
+        maze.spawn_positions.add(pos);
 
         availableWall = new LinkedHashMap<>();
         availableWall.put(IndestructibleWall.class, 4.0);
-        availableWall.put(DestructibleWall.class, 4.0);
+
         if(config.bonus_activated){
             availableWall.put(BonusWall.class, 1.0);
         }
+        if(config.destructible_wall_available){
+            availableWall.put(DestructibleWall.class, 4.0);
+        }
 
-        maze.cells = new Cell[maze.width][maze.height];
         initialiseCells();
-        cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
-        maze.cells[cellDoor.getX()][cellDoor.getY()].addGameObject(new Door());
-        initialiseWalls();
-        initialiseEnemies();
+        initialiseWalls(difficulty);
+        initialiseEnemies(difficulty);
 
 
         return maze;
     }
 
     private static void initialiseCells() {
-        normalizeProba();
 
+        maze.cells = new Cell[maze.width][maze.height];
         for (int x = 0; x < maze.width; x++) {
             for (int y = 0; y < maze.height; y++) {
                 maze.cells[x][y] = new Cell(x, y);
             }
         }
         maze.initialize();
+        cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
+        VectorInt2 pos = maze.spawn_positions.get(0);
+        cellPlayer = maze.getCellAt(pos.x, pos.y);
+        cellDoor.addGameObject(new Door());
+
     }
 
-    private static void initialiseWalls() {
+    private static void initialiseWalls(int difficulty) {
         normalizeProba();
 
         for (int x = 0; x < maze.width; x++) {
@@ -78,14 +88,16 @@ public class MazeBuilder {
                 }
             }
         }
-        Cell originPos = maze.getCellAt(0, 0);
-        if(!MazeTransversal.isReachableCell(originPos, cellDoor)){
-            System.out.println("new Maze");
-                maze = createInfinityMaze();
+
+        if(!MazeTransversal.isReachableCell(cellPlayer, cellDoor)){
+            initialiseCells();
+            initialiseWalls(difficulty);
         }
     }
 
-    private static void initialiseEnemies() {
+    private static void initialiseEnemies(int difficulty) {
+        double diff_ratio = 0.5 + Math.pow(0.5, difficulty);
+        System.out.println(diff_ratio);
         for(int i = 0; i< nb_ennemies; i++){
             Cell cell;
             int x;
@@ -96,13 +108,13 @@ public class MazeBuilder {
                 cell = maze.cells[x][y];
             }while (!cell.isEmpty() || maze.spawn_positions.get(0).equals(x,y));
             float r = rand.nextFloat();
-            if (r < 0.7) {
+            if (r < diff_ratio) {
                 ArrayList<Directions> ways = MazeTransversal.getRandomPath(cell);
                 cell.addGameObject(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, ways));
-            } else if (r < 0.9) {
+            } else if (i < difficulty/3) {
+                cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
+            } else {
                 cell.addGameObject(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
-            } else if (r < 1) {
-                cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, 5));
             }
         }
     }
