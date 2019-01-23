@@ -1,5 +1,6 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -30,8 +31,6 @@ public class MultiMenuUI extends MenuUI {
 
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
-        TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/MultiMenu.png")));
-        this.setBackground(texture);
         this.initialize();
     }
 
@@ -39,7 +38,7 @@ public class MultiMenuUI extends MenuUI {
     {
         System.out.println("Initialization of the Multi Menu");
         this.setFillParent(true);
-        this.padTop(Value.percentHeight(0.2f));
+        //this.padTop(Value.percentHeight(0.5f));
         initializeButtons();
         initializeMazePreview();
     }
@@ -53,7 +52,7 @@ public class MultiMenuUI extends MenuUI {
 
     private void initializeMazePreview ()
     {
-        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.5f, 1f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(screen.maze, 0.25f, 0.75f,  0.4f, 1f, MazeDrawer.Fit.BEST);
         this.add(maze_preview);
     }
 
@@ -79,14 +78,13 @@ public class MultiMenuUI extends MenuUI {
 
         //ADDING THE BUTTONS TO THE TABLE
         Table selectMap = new Table();
-        selectMap.add(previousMapButton);
-        selectMap.add(nextMapButton).spaceLeft(Value.percentHeight(10f));
-        this.add(selectMap).align(Align.center).spaceBottom(Value.percentHeight(0.9f)).grow();
+        selectMap.add(previousMapButton).expand().align(Align.left);
+        selectMap.add(nextMapButton).expand().align(Align.right);
+        this.add(selectMap).grow();
         this.row();
 
         // BUTTON TO LOAD THE GAME
         Table buttons = new Table();
-
         TextButton playButton = new AudioButton(Translator.translate("Play"), Graphics.GUI.getSkin());
         playButton.addListener(new ChangeListener() {
             @Override
@@ -95,6 +93,7 @@ public class MultiMenuUI extends MenuUI {
                 Bomberball.changeScreen(new GameMultiScreen(screen.maze, screen.getMazeId()));
             }
         });
+
         // BUTTON TO CHOOSE A RANDOM MAZE
 
         TextButton randomMapButton = new AudioButton(Translator.translate("Random Maze"), Graphics.GUI.getSkin());
@@ -114,11 +113,10 @@ public class MultiMenuUI extends MenuUI {
         buttons.add(playButton).space(spacing).row();
         buttons.add(randomMapButton).space(spacing).row();
         buttons.add(cancelButton).space(spacing);
-
+        TextureRegionDrawable background = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(PATH_GRAPHICS+"background/scroll.png"))));
+        buttons.setBackground(background);
 
         //CREATING A PREVIEW FOR THE PLAYERS
-
-
         AnimationActor p1 = new AnimationActor(new Animation<>(0.15f, Graphics.Anims.get(MultiMenuScreen.playable[MultiMenuScreen.p1_id] + "/idle"), Animation.PlayMode.LOOP));
         p1.mustMove(true);
         TextButton Bp1 = new AudioButton("P1", Graphics.GUI.getSkin());
@@ -185,7 +183,7 @@ public class MultiMenuUI extends MenuUI {
         selectPlayer.add(buttons).grow().spaceTop(Value.percentHeight(2f));
         selectPlayer.add(Vp3).grow();
         selectPlayer.add(Vp4).grow();
-        this.add(selectPlayer).grow();
+        this.add(selectPlayer).height(Value.percentHeight(0.40f, this)).growX();
     }
 
 

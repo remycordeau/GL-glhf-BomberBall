@@ -54,3 +54,7 @@
 
 #MapEditor
 "Save"   :    "Save"
+"Width"  :    "Width"
+"Height" :    "Height"
+"Edit"   :    "Edit"
+"New"    :    "New"
