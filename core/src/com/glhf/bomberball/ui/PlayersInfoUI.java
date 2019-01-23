@@ -110,9 +110,9 @@ public class PlayersInfoUI extends Table {
             this.player = player;
             player.addObserver(this);
             //ajout des icones
-            Image number_moves_image = new Image(Graphics.Sprites.get("arrowSpeed"));
-            Image number_bombs_image = new Image(Graphics.Sprites.get("bomb"));
-            Image bomb_range_image = new Image(Graphics.Sprites.get("flame"));
+            Image number_moves_image = new Image(Graphics.Sprites.get("speed_bonus"));
+            Image number_bombs_image = new Image(Graphics.Sprites.get("bomb_bonus"));
+            Image bomb_range_image = new Image(Graphics.Sprites.get("explo_bonus"));
             number_moves_image.setScaling(Scaling.fit);
             number_bombs_image.setScaling(Scaling.fit);
             bomb_range_image.setScaling(Scaling.fit);
