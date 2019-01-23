@@ -18,7 +18,7 @@ public class EditorScreen extends MenuScreen {
 
     private final Maze maze;
     private final EditorUI ui;
-    private boolean symmetric = false;
+    private boolean symmetric = true;
     private GameObject objectSelected;
     private VectorInt2 player_pos = null;
     private int maze_id;

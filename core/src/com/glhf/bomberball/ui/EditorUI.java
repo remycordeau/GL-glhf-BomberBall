@@ -86,12 +86,12 @@ public class EditorUI extends MenuUI {
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
             GameInfiniteConfig config = GameInfiniteConfig.get();
-            presets.add(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, new ArrayList<>()));
-            presets.add(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
-            presets.add(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
+            //presets.add(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, new ArrayList<>()));
+            //presets.add(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
+            //presets.add(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
 
             presets.add(new Player("knight_m", 1, 1,1, 1));
-            presets.add(new Door());
+            //presets.add(new Door());
 
             this.setActor(content);
             for (GameObject o : presets) {
