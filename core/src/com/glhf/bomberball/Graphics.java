@@ -164,6 +164,10 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("default");
             skin.add("checkable", textButtonStyle);
 
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("small", textButtonStyle);
+
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();
             labelStyle.font = font;

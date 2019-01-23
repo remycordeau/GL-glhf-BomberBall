@@ -3,17 +3,22 @@
   "spawn_positions": [
     {
       "x": 0,
-      "y": 2
+      "y": 3
     }
   ],
-  "height": 7,
+  "height": 5,
   "width": 7,
   "cells": [
     [
       {
         "x": 0,
         "y": 0,
-        "objects": []
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
       },
       {
         "x": 0,
@@ -23,6 +28,11 @@
       {
         "x": 0,
         "y": 2,
+        "objects": []
+      },
+      {
+        "x": 0,
+        "y": 3,
         "objects": [
           {
             "observers": [],
@@ -38,65 +48,97 @@
       },
       {
         "x": 0,
-        "y": 3,
-        "objects": []
-      },
-      {
-        "x": 0,
         "y": 4,
         "objects": []
-      },
+      }
+    ],
+    [
       {
-        "x": 0,
-        "y": 5,
+        "x": 1,
+        "y": 0,
         "objects": [
           {
-            "top_sprite": {
-              "index": -1,
-              "name": "wall_top",
-              "offsetX": 0.0,
-              "offsetY": 0.0,
-              "packedWidth": 16,
-              "packedHeight": 32,
-              "originalWidth": 16,
-              "originalHeight": 32,
-              "rotate": false,
-              "texture": {
-                "data": {
-                  "file": {
-                    "file": {
-                      "path": "graphics/packs/pack_sprites.png"
-                    },
-                    "type": "Internal"
-                  },
-                  "width": 1024,
-                  "height": 512,
-                  "format": "RGBA8888",
-                  "useMipMaps": false,
-                  "isPrepared": false
-                },
-                "glTarget": 3553,
-                "glHandle": 1,
-                "minFilter": "Nearest",
-                "magFilter": "Nearest",
-                "uWrap": "ClampToEdge",
-                "vWrap": "ClampToEdge"
-              },
-              "u": 0.4375,
-              "v": 0.29101562,
-              "u2": 0.453125,
-              "v2": 0.35351562,
-              "regionWidth": 16,
-              "regionHeight": 32
-            },
+            "strength": 1,
+            "way": [
+              "RIGHT",
+              "UP",
+              "DOWN",
+              "RIGHT",
+              "RIGHT",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "LEFT",
+              "LEFT",
+              "UP",
+              "DOWN",
+              "LEFT"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
             "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
           }
         ]
       },
       {
-        "x": 0,
-        "y": 6,
+        "x": 1,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "y": 2,
+        "objects": [
+          {
+            "strength": 1,
+            "way": [
+              "RIGHT",
+              "RIGHT",
+              "RIGHT",
+              "DOWN",
+              "DOWN",
+              "LEFT",
+              "LEFT",
+              "UP",
+              "DOWN",
+              "RIGHT",
+              "RIGHT",
+              "UP",
+              "UP",
+              "LEFT",
+              "LEFT",
+              "LEFT"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "objects": []
+      },
+      {
+        "x": 1,
+        "y": 4,
         "objects": [
           {
             "top_sprite": {
@@ -145,42 +187,37 @@
     ],
     [
       {
-        "x": 1,
+        "x": 2,
         "y": 0,
         "objects": []
       },
       {
-        "x": 1,
+        "x": 2,
         "y": 1,
-        "objects": []
-      },
-      {
-        "x": 1,
-        "y": 2,
         "objects": [
           {
             "strength": 1,
             "way": [
+              "UP",
+              "RIGHT",
               "LEFT",
+              "DOWN",
               "UP",
+              "DOWN",
+              "DOWN",
               "UP",
+              "DOWN",
+              "LEFT",
               "RIGHT",
               "UP",
               "DOWN",
-              "DOWN",
               "UP",
-              "LEFT",
+              "UP",
               "DOWN",
               "UP",
               "RIGHT",
-              "DOWN",
-              "UP",
-              "UP",
-              "DOWN",
               "LEFT",
-              "DOWN",
-              "DOWN",
-              "RIGHT"
+              "DOWN"
             ],
             "actual_move": 0,
             "initial_moves": 5,
@@ -191,31 +228,231 @@
         ]
       },
       {
-        "x": 1,
+        "x": 2,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 2,
         "y": 3,
+        "objects": [
+          {
+            "top_sprite": {
+              "index": -1,
+              "name": "wall_top",
+              "offsetX": 0.0,
+              "offsetY": 0.0,
+              "packedWidth": 16,
+              "packedHeight": 32,
+              "originalWidth": 16,
+              "originalHeight": 32,
+              "rotate": false,
+              "texture": {
+                "data": {
+                  "file": {
+                    "file": {
+                      "path": "graphics/packs/pack_sprites.png"
+                    },
+                    "type": "Internal"
+                  },
+                  "width": 1024,
+                  "height": 512,
+                  "format": "RGBA8888",
+                  "useMipMaps": false,
+                  "isPrepared": false
+                },
+                "glTarget": 3553,
+                "glHandle": 1,
+                "minFilter": "Nearest",
+                "magFilter": "Nearest",
+                "uWrap": "ClampToEdge",
+                "vWrap": "ClampToEdge"
+              },
+              "u": 0.4375,
+              "v": 0.29101562,
+              "u2": 0.453125,
+              "v2": 0.35351562,
+              "regionWidth": 16,
+              "regionHeight": 32
+            },
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "objects": [
+          {
+            "strength": 1,
+            "way": [
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "x": 3,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 3,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "y": 4,
+        "objects": [
+          {
+            "strength": 1,
+            "way": [
+              "RIGHT",
+              "RIGHT",
+              "RIGHT",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "DOWN",
+              "UP",
+              "UP",
+              "DOWN",
+              "UP",
+              "UP",
+              "DOWN",
+              "UP",
+              "LEFT",
+              "LEFT",
+              "LEFT"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "x": 4,
+        "y": 0,
+        "objects": []
+      },
+      {
+        "x": 4,
+        "y": 1,
         "objects": [
           {
             "strength": 1,
             "way": [
               "DOWN",
               "LEFT",
-              "UP",
-              "DOWN",
-              "UP",
-              "RIGHT",
-              "DOWN",
-              "DOWN",
-              "DOWN",
-              "RIGHT",
               "LEFT",
               "UP",
               "UP",
+              "LEFT",
               "UP",
               "LEFT",
               "DOWN",
+              "DOWN",
               "UP",
+              "UP",
+              "RIGHT",
               "DOWN",
               "RIGHT",
+              "DOWN",
+              "DOWN",
+              "RIGHT",
+              "RIGHT",
+              "UP"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "objects": [
+          {
+            "strength": 1,
+            "way": [
+              "DOWN",
+              "UP",
+              "LEFT",
+              "RIGHT",
+              "DOWN",
+              "UP",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "DOWN",
+              "UP",
+              "LEFT",
+              "RIGHT",
+              "DOWN",
               "UP"
             ],
             "actual_move": 0,
@@ -227,13 +464,186 @@
         ]
       },
       {
-        "x": 1,
-        "y": 4,
-        "objects": []
+        "x": 4,
+        "y": 3,
+        "objects": [
+          {
+            "top_sprite": {
+              "index": -1,
+              "name": "wall_top",
+              "offsetX": 0.0,
+              "offsetY": 0.0,
+              "packedWidth": 16,
+              "packedHeight": 32,
+              "originalWidth": 16,
+              "originalHeight": 32,
+              "rotate": false,
+              "texture": {
+                "data": {
+                  "file": {
+                    "file": {
+                      "path": "graphics/packs/pack_sprites.png"
+                    },
+                    "type": "Internal"
+                  },
+                  "width": 1024,
+                  "height": 512,
+                  "format": "RGBA8888",
+                  "useMipMaps": false,
+                  "isPrepared": false
+                },
+                "glTarget": 3553,
+                "glHandle": 1,
+                "minFilter": "Nearest",
+                "magFilter": "Nearest",
+                "uWrap": "ClampToEdge",
+                "vWrap": "ClampToEdge"
+              },
+              "u": 0.4375,
+              "v": 0.29101562,
+              "u2": 0.453125,
+              "v2": 0.35351562,
+              "regionWidth": 16,
+              "regionHeight": 32
+            },
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
       },
       {
-        "x": 1,
-        "y": 5,
+        "x": 4,
+        "y": 4,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 5,
+        "y": 0,
+        "objects": [
+          {
+            "top_sprite": {
+              "index": -1,
+              "name": "wall_top",
+              "offsetX": 0.0,
+              "offsetY": 0.0,
+              "packedWidth": 16,
+              "packedHeight": 32,
+              "originalWidth": 16,
+              "originalHeight": 32,
+              "rotate": false,
+              "texture": {
+                "data": {
+                  "file": {
+                    "file": {
+                      "path": "graphics/packs/pack_sprites.png"
+                    },
+                    "type": "Internal"
+                  },
+                  "width": 1024,
+                  "height": 512,
+                  "format": "RGBA8888",
+                  "useMipMaps": false,
+                  "isPrepared": false
+                },
+                "glTarget": 3553,
+                "glHandle": 1,
+                "minFilter": "Nearest",
+                "magFilter": "Nearest",
+                "uWrap": "ClampToEdge",
+                "vWrap": "ClampToEdge"
+              },
+              "u": 0.4375,
+              "v": 0.29101562,
+              "u2": 0.453125,
+              "v2": 0.35351562,
+              "regionWidth": 16,
+              "regionHeight": 32
+            },
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "y": 2,
+        "objects": [
+          {
+            "top_sprite": {
+              "index": -1,
+              "name": "wall_top",
+              "offsetX": 0.0,
+              "offsetY": 0.0,
+              "packedWidth": 16,
+              "packedHeight": 32,
+              "originalWidth": 16,
+              "originalHeight": 32,
+              "rotate": false,
+              "texture": {
+                "data": {
+                  "file": {
+                    "file": {
+                      "path": "graphics/packs/pack_sprites.png"
+                    },
+                    "type": "Internal"
+                  },
+                  "width": 1024,
+                  "height": 512,
+                  "format": "RGBA8888",
+                  "useMipMaps": false,
+                  "isPrepared": false
+                },
+                "glTarget": 3553,
+                "glHandle": 1,
+                "minFilter": "Nearest",
+                "magFilter": "Nearest",
+                "uWrap": "ClampToEdge",
+                "vWrap": "ClampToEdge"
+              },
+              "u": 0.4375,
+              "v": 0.29101562,
+              "u2": 0.453125,
+              "v2": 0.35351562,
+              "regionWidth": 16,
+              "regionHeight": 32
+            },
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "objects": [
+          {
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "objects": []
+      }
+    ],
+    [
+      {
+        "x": 6,
+        "y": 0,
         "objects": [
           {
             "strength": 1,
@@ -242,18 +652,18 @@
               "DOWN",
               "UP",
               "DOWN",
-              "RIGHT",
-              "LEFT",
-              "DOWN",
-              "DOWN",
-              "DOWN",
-              "LEFT",
-              "RIGHT",
               "UP",
               "UP",
+              "DOWN",
+              "DOWN",
               "UP",
-              "RIGHT",
-              "LEFT",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "UP",
+              "UP",
+              "DOWN",
+              "DOWN",
               "UP",
               "DOWN",
               "UP",
@@ -268,519 +678,8 @@
         ]
       },
       {
-        "x": 1,
-        "y": 6,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [
-              "DOWN",
-              "RIGHT",
-              "RIGHT",
-              "LEFT",
-              "RIGHT",
-              "LEFT",
-              "LEFT",
-              "RIGHT",
-              "LEFT",
-              "UP",
-              "DOWN",
-              "RIGHT",
-              "LEFT",
-              "RIGHT",
-              "RIGHT",
-              "LEFT",
-              "RIGHT",
-              "LEFT",
-              "LEFT",
-              "UP"
-            ],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 2,
-        "y": 0,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [
-              "LEFT",
-              "UP",
-              "DOWN",
-              "UP",
-              "UP",
-              "DOWN",
-              "LEFT",
-              "RIGHT",
-              "UP",
-              "LEFT",
-              "RIGHT",
-              "DOWN",
-              "LEFT",
-              "RIGHT",
-              "UP",
-              "DOWN",
-              "DOWN",
-              "UP",
-              "DOWN",
-              "RIGHT"
-            ],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 1,
-        "objects": [
-          {
-            "top_sprite": {
-              "index": -1,
-              "name": "wall_top",
-              "offsetX": 0.0,
-              "offsetY": 0.0,
-              "packedWidth": 16,
-              "packedHeight": 32,
-              "originalWidth": 16,
-              "originalHeight": 32,
-              "rotate": false,
-              "texture": {
-                "data": {
-                  "file": {
-                    "file": {
-                      "path": "graphics/packs/pack_sprites.png"
-                    },
-                    "type": "Internal"
-                  },
-                  "width": 1024,
-                  "height": 512,
-                  "format": "RGBA8888",
-                  "useMipMaps": false,
-                  "isPrepared": false
-                },
-                "glTarget": 3553,
-                "glHandle": 1,
-                "minFilter": "Nearest",
-                "magFilter": "Nearest",
-                "uWrap": "ClampToEdge",
-                "vWrap": "ClampToEdge"
-              },
-              "u": 0.4375,
-              "v": 0.29101562,
-              "u2": 0.453125,
-              "v2": 0.35351562,
-              "regionWidth": 16,
-              "regionHeight": 32
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 2,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 3,
-        "objects": []
-      },
-      {
-        "x": 2,
-        "y": 4,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 2,
-        "y": 5,
-        "objects": []
-      },
-      {
-        "x": 2,
-        "y": 6,
-        "objects": [
-          {
-            "top_sprite": {
-              "index": -1,
-              "name": "wall_top",
-              "offsetX": 0.0,
-              "offsetY": 0.0,
-              "packedWidth": 16,
-              "packedHeight": 32,
-              "originalWidth": 16,
-              "originalHeight": 32,
-              "rotate": false,
-              "texture": {
-                "data": {
-                  "file": {
-                    "file": {
-                      "path": "graphics/packs/pack_sprites.png"
-                    },
-                    "type": "Internal"
-                  },
-                  "width": 1024,
-                  "height": 512,
-                  "format": "RGBA8888",
-                  "useMipMaps": false,
-                  "isPrepared": false
-                },
-                "glTarget": 3553,
-                "glHandle": 1,
-                "minFilter": "Nearest",
-                "magFilter": "Nearest",
-                "uWrap": "ClampToEdge",
-                "vWrap": "ClampToEdge"
-              },
-              "u": 0.4375,
-              "v": 0.29101562,
-              "u2": 0.453125,
-              "v2": 0.35351562,
-              "regionWidth": 16,
-              "regionHeight": 32
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 3,
-        "y": 0,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "swampy",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 1,
-        "objects": []
-      },
-      {
-        "x": 3,
-        "y": 2,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 3,
-        "objects": []
-      },
-      {
-        "x": 3,
-        "y": 4,
-        "objects": [
-          {
-            "bonus": {
-              "type": "SPEED",
-              "life": 1
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.BonusWall"
-          }
-        ]
-      },
-      {
-        "x": 3,
-        "y": 5,
-        "objects": []
-      },
-      {
-        "x": 3,
-        "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 4,
-        "y": 0,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 4,
-        "y": 1,
-        "objects": []
-      },
-      {
-        "x": 4,
-        "y": 2,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "swampy",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 4,
-        "y": 3,
-        "objects": [
-          {
-            "bonus": {
-              "type": "SPEED",
-              "life": 1
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.BonusWall"
-          }
-        ]
-      },
-      {
-        "x": 4,
-        "y": 4,
-        "objects": []
-      },
-      {
-        "x": 4,
-        "y": 5,
-        "objects": []
-      },
-      {
-        "x": 4,
-        "y": 6,
-        "objects": []
-      }
-    ],
-    [
-      {
-        "x": 5,
-        "y": 0,
-        "objects": []
-      },
-      {
-        "x": 5,
-        "y": 1,
-        "objects": []
-      },
-      {
-        "x": 5,
-        "y": 2,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "swampy",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 5,
-        "y": 3,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [
-              "DOWN",
-              "UP",
-              "RIGHT",
-              "UP",
-              "LEFT",
-              "RIGHT",
-              "DOWN",
-              "UP",
-              "LEFT",
-              "LEFT",
-              "RIGHT",
-              "RIGHT",
-              "DOWN",
-              "UP",
-              "LEFT",
-              "RIGHT",
-              "DOWN",
-              "LEFT",
-              "DOWN",
-              "UP"
-            ],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 5,
-        "y": 4,
-        "objects": [
-          {
-            "strength": 1,
-            "way": [
-              "DOWN",
-              "UP",
-              "DOWN",
-              "RIGHT",
-              "LEFT",
-              "RIGHT",
-              "DOWN",
-              "DOWN",
-              "LEFT",
-              "DOWN",
-              "UP",
-              "RIGHT",
-              "UP",
-              "UP",
-              "LEFT",
-              "RIGHT",
-              "LEFT",
-              "UP",
-              "DOWN",
-              "UP"
-            ],
-            "actual_move": 0,
-            "initial_moves": 5,
-            "skin": "skelet",
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
-          }
-        ]
-      },
-      {
-        "x": 5,
-        "y": 5,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      },
-      {
-        "x": 5,
-        "y": 6,
-        "objects": [
-          {
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.DestructibleWall"
-          }
-        ]
-      }
-    ],
-    [
-      {
-        "x": 6,
-        "y": 0,
-        "objects": [
-          {
-            "top_sprite": {
-              "index": -1,
-              "name": "wall_top",
-              "offsetX": 0.0,
-              "offsetY": 0.0,
-              "packedWidth": 16,
-              "packedHeight": 32,
-              "originalWidth": 16,
-              "originalHeight": 32,
-              "rotate": false,
-              "texture": {
-                "data": {
-                  "file": {
-                    "file": {
-                      "path": "graphics/packs/pack_sprites.png"
-                    },
-                    "type": "Internal"
-                  },
-                  "width": 1024,
-                  "height": 512,
-                  "format": "RGBA8888",
-                  "useMipMaps": false,
-                  "isPrepared": false
-                },
-                "glTarget": 3553,
-                "glHandle": 1,
-                "minFilter": "Nearest",
-                "magFilter": "Nearest",
-                "uWrap": "ClampToEdge",
-                "vWrap": "ClampToEdge"
-              },
-              "u": 0.4375,
-              "v": 0.29101562,
-              "u2": 0.453125,
-              "v2": 0.35351562,
-              "regionWidth": 16,
-              "regionHeight": 32
-            },
-            "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
-          }
-        ]
-      },
-      {
         "x": 6,
         "y": 1,
-        "objects": []
-      },
-      {
-        "x": 6,
-        "y": 2,
-        "objects": []
-      },
-      {
-        "x": 6,
-        "y": 3,
-        "objects": []
-      },
-      {
-        "x": 6,
-        "y": 4,
         "objects": [
           {
             "life": 1,
@@ -790,56 +689,70 @@
       },
       {
         "x": 6,
-        "y": 5,
+        "y": 2,
+        "objects": []
+      },
+      {
+        "x": 6,
+        "y": 3,
         "objects": [
           {
-            "top_sprite": {
-              "index": -1,
-              "name": "wall_top",
-              "offsetX": 0.0,
-              "offsetY": 0.0,
-              "packedWidth": 16,
-              "packedHeight": 32,
-              "originalWidth": 16,
-              "originalHeight": 32,
-              "rotate": false,
-              "texture": {
-                "data": {
-                  "file": {
-                    "file": {
-                      "path": "graphics/packs/pack_sprites.png"
-                    },
-                    "type": "Internal"
-                  },
-                  "width": 1024,
-                  "height": 512,
-                  "format": "RGBA8888",
-                  "useMipMaps": false,
-                  "isPrepared": false
-                },
-                "glTarget": 3553,
-                "glHandle": 1,
-                "minFilter": "Nearest",
-                "magFilter": "Nearest",
-                "uWrap": "ClampToEdge",
-                "vWrap": "ClampToEdge"
-              },
-              "u": 0.4375,
-              "v": 0.29101562,
-              "u2": 0.453125,
-              "v2": 0.35351562,
-              "regionWidth": 16,
-              "regionHeight": 32
-            },
+            "strength": 1,
+            "way": [
+              "UP",
+              "LEFT",
+              "LEFT",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "RIGHT",
+              "RIGHT",
+              "DOWN"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
             "life": 1,
-            "_class": "com.glhf.bomberball.gameobject.IndestructibleWall"
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
           }
         ]
       },
       {
         "x": 6,
-        "y": 6,
-        "objects": []
+        "y": 4,
+        "objects": [
+          {
+            "strength": 1,
+            "way": [
+              "DOWN",
+              "UP",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "UP",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "LEFT",
+              "LEFT",
+              "RIGHT",
+              "RIGHT",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "UP",
+              "DOWN",
+              "UP"
+            ],
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "skelet",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.PassiveEnemy"
+          }
+        ]
       }
     ]
   ]

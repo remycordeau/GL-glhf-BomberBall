@@ -53,4 +53,8 @@
 "Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"
 
 #MapEditor
-"Save"   :    "Save"
+"Save"   :    "Sauvegarder"
+"Width"  :    "Largeur"
+"Height" :    "Hauteur"
+"Edit"   :    "Editer"
+"New"    :    "Nouveau"

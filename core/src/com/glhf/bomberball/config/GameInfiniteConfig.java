@@ -2,7 +2,7 @@ package com.glhf.bomberball.config;
 
 public class GameInfiniteConfig extends GameSoloConfig {
 
-    public int highscore = 145970;
+    public int highscore = 0;
     public boolean bonus_activated = true;
 
     //Settings maze
