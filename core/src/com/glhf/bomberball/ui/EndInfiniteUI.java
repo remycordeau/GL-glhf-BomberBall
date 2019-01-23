@@ -13,6 +13,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.screens.MainMenuScreen;
 
@@ -34,7 +35,8 @@ public class EndInfiniteUI extends MenuUI {
         dead.setFontScale(2f,2f);
         dead.setColor(Color.RED);
 
-        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHighscore : " + 999, Graphics.GUI.getSkin());
+        int current_highscore = GameInfiniteConfig.get().highscore;
+        Label score = new Label("Score : " + Score.getINSTANCE().getScore() +"\nHighscore : " + current_highscore, Graphics.GUI.getSkin());
         this .add(score).spaceBottom(Value.percentHeight(0.9f)).center().row();
 
 

@@ -10,6 +10,7 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.config.GameStoryConfig;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
@@ -98,7 +99,8 @@ public class InfiniteMenuUI extends MenuUI {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen, 1));
+                Score.getINSTANCE().resetScore();
+                Bomberball.changeScreen(new GameInfiniteScreen(screen,1));
             }
         });
 
