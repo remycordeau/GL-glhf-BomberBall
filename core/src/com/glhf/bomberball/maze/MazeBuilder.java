@@ -21,15 +21,19 @@ public class MazeBuilder {
     private static int nb_ennemies = 10;
     private static GameInfiniteConfig config;
 
-    public static Maze createInfinityMaze(){
+
+    public static Maze createInfinityMaze(int difficulty){
         config = GameInfiniteConfig.get();
         probFreeCase = config.probFreeCase;
+
+        nb_ennemies = 1 + difficulty/3;
 
         maze = new Maze();
 
         maze.title = "Classic";
-        maze.height = 7 + (int) (Math.random()*5)*2;
-        maze.width = 9 + (int) (Math.random()*5)*2;
+        int diff_sizer = 1 + difficulty/5;
+        maze.height = 7 + (int) (Math.random()*5*diff_sizer)*2;
+        maze.width = 9 + (int) (Math.random()*5*diff_sizer)*2;
 
         maze.spawn_positions = new ArrayList<>();
         maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
@@ -45,8 +49,8 @@ public class MazeBuilder {
         initialiseCells();
         cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
         maze.cells[cellDoor.getX()][cellDoor.getY()].addGameObject(new Door());
-        initialiseWalls();
-        initialiseEnemies();
+        initialiseWalls(difficulty);
+        initialiseEnemies(difficulty);
 
 
         return maze;
@@ -63,7 +67,7 @@ public class MazeBuilder {
         maze.initialize();
     }
 
-    private static void initialiseWalls() {
+    private static void initialiseWalls(int difficulty) {
         normalizeProba();
 
         for (int x = 0; x < maze.width; x++) {
@@ -81,11 +85,11 @@ public class MazeBuilder {
         Cell originPos = maze.getCellAt(0, 0);
         if(!MazeTransversal.isReachableCell(originPos, cellDoor)){
             System.out.println("new Maze");
-                maze = createInfinityMaze();
+                maze = createInfinityMaze(difficulty);
         }
     }
 
-    private static void initialiseEnemies() {
+    private static void initialiseEnemies(int difficulty) {
         for(int i = 0; i< nb_ennemies; i++){
             Cell cell;
             int x;

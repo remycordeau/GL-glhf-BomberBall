@@ -86,7 +86,7 @@ public class InfiniteMenuUI extends MenuUI {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                Bomberball.changeScreen(new GameInfiniteScreen(screen, 1));
             }
         });
 

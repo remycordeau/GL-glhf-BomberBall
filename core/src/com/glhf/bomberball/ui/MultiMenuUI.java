@@ -27,8 +27,6 @@ public class MultiMenuUI extends MenuUI {
     private MultiMenuScreen screen;
     private MazeDrawer maze_preview;
 
-    //TODO : Comprendre pourquoi lors de la réinitialisation, la table change de forme
-
     public MultiMenuUI(MultiMenuScreen screen) {
         this.screen = screen;
         this.initialize();

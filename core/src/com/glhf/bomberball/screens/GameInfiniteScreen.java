@@ -5,7 +5,6 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.MazeBuilder;
-import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.InfiniteUI;
 import com.glhf.bomberball.utils.Directions;
 
@@ -14,15 +13,16 @@ import java.util.ArrayList;
 public class GameInfiniteScreen extends GameScreen {
 
     private ArrayList<Enemy> enemies;
-    private ArrayList<Cell> selected_cells = new ArrayList<>();
     private InfiniteModeScreen screen;
+    private int difficulty;
 
-    public GameInfiniteScreen(InfiniteModeScreen screen) {
+    public GameInfiniteScreen(InfiniteModeScreen screen, int difficulty) {
         //super(maze);
-        super(MazeBuilder.createInfinityMaze());
+        super(MazeBuilder.createInfinityMaze(difficulty));
+        this.difficulty = difficulty;
         GameInfiniteConfig config = GameInfiniteConfig.get();
         this.screen = screen;
-        //TODO : factoriser le code avec GameStoryScreen
+        
         current_player = this.maze.spawnPlayer(config);
 
         enemies = this.maze.getEnemies();
@@ -66,7 +66,7 @@ public class GameInfiniteScreen extends GameScreen {
                 }
             }
             if (isIn) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                Bomberball.changeScreen(new GameInfiniteScreen(screen, difficulty+1));
                 return;
             }
 
@@ -101,6 +101,5 @@ public class GameInfiniteScreen extends GameScreen {
     @Override
     protected void dropBomb(Directions dir) {
         super.dropBomb(dir);
-        //enemies.forEach(Enemy::updateAI);
     }
 }

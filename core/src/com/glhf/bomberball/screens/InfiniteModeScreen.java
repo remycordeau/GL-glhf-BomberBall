@@ -17,7 +17,7 @@ public class InfiniteModeScreen extends MenuScreen {
     public InfiniteModeScreen() {
         super();
         GameInfiniteConfig config = GameInfiniteConfig.get();
-        maze = MazeBuilder.createInfinityMaze();
+        //maze = MazeBuilder.createInfinityMaze();
         addUI(new InfiniteMenuUI(this));
     }
 
