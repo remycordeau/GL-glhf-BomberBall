@@ -255,26 +255,26 @@ public class MazeTransversal{
     }
 
     public static ArrayList<Directions> shortestPath(HunterNode depart, HunterNode arriver){
-        ArrayList<HunterNode> closedList = new ArrayList<>();
-        PriorityQueue<HunterNode> openList = new PriorityQueue<>();
-        openList.add(depart);
-        while(!openList.isEmpty()){
-            HunterNode u = openList.poll();
-            if(u.cell == u.cell){
-                //  reconstituerChemin(u)
-                //  terminer le programme
-            }
-            for(HunterNode v : u.getSons()){
-                if(closedList.find(v).cout>=v.cout && openList.find(v).cout>=c.cout){
-                    v.cout = u.cout +1; 
-                    v.heuristique = v.cout + v.distanceTo(objectif);
-                        openList.add(v);
-                }
-            }
-            closedList.add(u);
-        }
-        System.err.println("Aucun chemin trouve");
-        return null;
+//        ArrayList<HunterNode> closedList = new ArrayList<>();
+//        PriorityQueue<HunterNode> openList = new PriorityQueue<>();
+//        openList.add(depart);
+//        while(!openList.isEmpty()){
+//            HunterNode u = openList.poll();
+//            if(u.cell == u.cell){
+//                //  reconstituerChemin(u)
+//                //  terminer le programme
+//            }
+//            for(HunterNode v : u.getSons()){
+//                if(closedList.find(v).cout>=v.cout && openList.find(v).cout>=c.cout){
+//                    v.cout = u.cout +1;
+//                    v.heuristique = v.cout + v.distanceTo(objectif);
+//                        openList.add(v);
+//                }
+//            }
+//            closedList.add(u);
+//        }
+//        System.err.println("Aucun chemin trouve");
+          return null;
     }
 
     public static class HunterNode implements Comparable<HunterNode>{
