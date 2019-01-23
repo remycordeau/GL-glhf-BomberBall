@@ -26,12 +26,12 @@ public class MazeBuilder {
         config = GameInfiniteConfig.get();
         probFreeCase = config.probFreeCase;
 
-        nb_ennemies = 1 + difficulty/3;
+        nb_ennemies = 1 + difficulty/2;
 
         maze = new Maze();
 
         maze.title = "Classic";
-        int diff_sizer = 1 + difficulty/5;
+        int diff_sizer = 1 + difficulty/10;
         maze.height = 7 + (int) (Math.random()*5*diff_sizer)*2;
         maze.width = 9 + (int) (Math.random()*5*diff_sizer)*2;
 
@@ -90,6 +90,8 @@ public class MazeBuilder {
     }
 
     private static void initialiseEnemies(int difficulty) {
+        double diff_ratio = 0.5 + Math.pow(0.5, difficulty);
+        System.out.println(diff_ratio);
         for(int i = 0; i< nb_ennemies; i++){
             Cell cell;
             int x;
@@ -100,13 +102,13 @@ public class MazeBuilder {
                 cell = maze.cells[x][y];
             }while (!cell.isEmpty() || maze.spawn_positions.get(0).equals(x,y));
             float r = rand.nextFloat();
-            if (r < 0.7) {
+            if (r < diff_ratio) {
                 ArrayList<Directions> ways = MazeTransversal.getRandomPath(cell);
                 cell.addGameObject(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, ways));
-            } else if (r < 0.9) {
-                cell.addGameObject(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
-            } else if (r < 1) {
+            } else if (i < difficulty/3) {
                 cell.addGameObject(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
+            } else {
+                cell.addGameObject(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
             }
         }
     }

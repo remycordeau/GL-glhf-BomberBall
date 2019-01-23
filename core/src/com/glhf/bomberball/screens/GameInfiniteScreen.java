@@ -86,7 +86,7 @@ public class GameInfiniteScreen extends GameScreen {
                     public void run() {
                         input_handler.lock(false);
                     }
-                }, 0.1f*enemies.size());
+                }, 0.2f*enemies.size());
 
             } catch (RuntimeException e) {
                 System.out.println("The player probably died");
