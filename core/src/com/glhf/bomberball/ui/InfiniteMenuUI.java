@@ -1,35 +1,114 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.screens.MainMenuScreen;
-import com.glhf.bomberball.screens.ScreenChangeListener;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameInfiniteConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
+import com.glhf.bomberball.maze.Maze;
+import com.glhf.bomberball.screens.*;
+import com.glhf.bomberball.utils.ScreenChangeListener;
 
-public class InfiniteMenuUI extends Table {
+public class InfiniteMenuUI extends MenuUI {
 
-     private TextButton back_button;
+    private final GameInfiniteConfig config;
+    private InfiniteModeScreen screen;
+    private int highscore;
+    private Maze mazex;
 
-    public InfiniteMenuUI(){
-
-        super();
-
+    public InfiniteMenuUI(InfiniteModeScreen screen) {
+        this.screen = screen;
         this.setFillParent(true);
         this.padLeft(Value.percentWidth(0.25f));
         this.padRight(Value.percentWidth(0.25f));
         this.padTop(Value.percentHeight(0.1f));
         this.padBottom(Value.percentHeight(0.1f));
 
-        initializeButtons();
 
+        config = GameInfiniteConfig.get();
+        mazex = screen.maze;
+        highscore = config.highscore;
+
+        this.setFillParent(true);
+        this.addButtons();
     }
 
-    private void initializeButtons() {
+    private void addButtons(){
 
-        back_button = new TextButton("Back to main menu", Graphics.GUI.getSkin());
-        back_button.getLabel().setFontScale(0.8f,0.8f);
-        back_button.addListener(new ScreenChangeListener(MainMenuScreen.class));
-        this.add(back_button).row();
+        //Title
+        Label label = new Label(Translator.translate("Infinite Mode"), Graphics.GUI.getSkin(), "Title");
+        label.setAlignment(Align.center);
+        label.setFontScale(1.7f, 1.7f);
+        this.add(label).row();
+
+
+        //CheckBoxes
+        CheckBox box1;
+        CheckBox box2;
+        CheckBox box3;
+        Skin skin = Graphics.GUI.getSkin();
+
+        Value spacing = Value.percentHeight(0.5f);
+
+        box1 = new CheckBox("Sans Bonus", skin);
+        box2 = new CheckBox("Nombre de tours limite", skin);
+        box3 = new CheckBox("Cartes aléatoires", skin);
+        box1.setChecked(!config.bonus_activated);
+        //box2.setChecked(config.nombre_de_tour??);
+        //box3.setChecked(config.carte_alea??);
+        box2.setDisabled(true);
+        box3.setDisabled(true);
+
+
+        //Settings CheckBoxes
+        box1.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                GameInfiniteConfig config = GameInfiniteConfig.get();
+                config.bonus_activated = !((CheckBox)actor).isChecked();
+                config.exportConfig();
+            }
+        });
+
+
+        //Other buttons
+        TextButton back;
+        back = new AudioButton(Translator.translate("Back"), skin);
+        back.addListener(new ScreenChangeListener(SoloMenuScreen.class));
+
+        TextButton play;
+        play = new AudioButton(Translator.translate("Play"), Graphics.GUI.getSkin());
+        play.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+            }
+        });
+
+
+        //Current Highscore
+        Label lab;
+        lab = new Label(Translator.translate("Highscore :") + this.highscore, skin, "default");
+
+        HorizontalGroup horizontal = new HorizontalGroup();
+        horizontal.align(Align.center);
+        horizontal.addActor(back);
+        horizontal.space(25);
+        horizontal.addActor(play);
+        horizontal.space(25);
+        horizontal.addActor(lab);
+
+        //Adding to the screen
+        this.add(box1).space(spacing).row();
+        this.add(box2).space(spacing).row();
+        this.add(box3).space(spacing).row();
+
+        this.add(horizontal).padTop(Value.percentHeight(0.8f));
+
     }
 }

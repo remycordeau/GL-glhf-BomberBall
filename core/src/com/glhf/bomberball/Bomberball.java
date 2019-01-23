@@ -3,8 +3,8 @@ package com.glhf.bomberball;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.glhf.bomberball.maze.Maze;
-import com.glhf.bomberball.screens.MainMenuScreen;
+import com.glhf.bomberball.config.AppConfig;
+import com.glhf.bomberball.screens.WelcomingMenuScreen;
 import com.glhf.bomberball.utils.Resolutions;
 
 public class Bomberball extends Game {
@@ -18,8 +18,9 @@ public class Bomberball extends Game {
 		instance = this;
 		Bomberball.time_elapsed = 0;
 		Graphics.load();
-
-		changeScreen(new MainMenuScreen());
+        AppConfig config = AppConfig.get();
+        Translator.load(config.language);
+		changeScreen(new WelcomingMenuScreen());
 	}
 
 	@Override

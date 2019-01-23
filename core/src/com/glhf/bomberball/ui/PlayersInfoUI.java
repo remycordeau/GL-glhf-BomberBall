@@ -1,34 +1,45 @@
 package com.glhf.bomberball.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.screens.MainMenuScreen;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class PlayersInfoUI extends Table {
 
     public PlayersInfoUI(ArrayList<Player> players) {
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).grow();
+            this.add(pw).growX();
             this.row();
         }
     }
 
-    class PlayerWidget extends Table implements Observer {
+    class PlayerWidget extends MenuUI implements Observer {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
         private PlayerInfoWidget player_info;
 
         public PlayerWidget(Player player) {
+            TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/InfoPlayer.png")));
+            this.setBackground(texture);
             this.pad(20);
             this.player = player;
             this.previous_player_state = player.isActive();
@@ -56,9 +67,9 @@ public class PlayersInfoUI extends Table {
         private HeartsWidget player_hearts;
 
         public PlayerInfoWidget(Player player) {
-            player_hearts = new HeartsWidget(player);
-            this.add(player_hearts).grow();
-            this.row();
+            //player_hearts = new HeartsWidget(player);
+            //this.add(player_hearts).grow();
+            //this.row();
             this.add(new BonusWidget(player)).grow();
         }
     }
@@ -70,7 +81,7 @@ public class PlayersInfoUI extends Table {
             this.pad(5);
             this.player = player;
             player.addObserver(this);
-            this.hearts = new ArrayList<Image>();
+            this.hearts = new ArrayList<>();
             for (int i=0; i<player.getLife(); i++) {
                 Image heart = new Image(Graphics.Sprites.get("ui_heart_full"));
                 heart.setScaling(Scaling.fit);
@@ -99,9 +110,9 @@ public class PlayersInfoUI extends Table {
             this.player = player;
             player.addObserver(this);
             //ajout des icones
-            Image number_moves_image = new Image(Graphics.Sprites.get("gift_01a"));
+            Image number_moves_image = new Image(Graphics.Sprites.get("arrowSpeed"));
             Image number_bombs_image = new Image(Graphics.Sprites.get("bomb"));
-            Image bomb_range_image = new Image(Graphics.Sprites.get("bow_02a"));
+            Image bomb_range_image = new Image(Graphics.Sprites.get("flame"));
             number_moves_image.setScaling(Scaling.fit);
             number_bombs_image.setScaling(Scaling.fit);
             bomb_range_image.setScaling(Scaling.fit);

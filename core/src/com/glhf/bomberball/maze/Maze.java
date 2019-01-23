@@ -1,60 +1,41 @@
 package com.glhf.bomberball.maze;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.Gdx;
+import com.glhf.bomberball.config.GameSoloConfig;
+import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
-import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.json.GameObjectTypeAdapter;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Maze {
+public class Maze{
 
-    private String title;
-    private ArrayList<Vector2> spawn_positions;
-    private int players_count;
-    private int height;
-    private int width;
-    private Cell[][] cells;
+    String title;
+    ArrayList<VectorInt2> spawn_positions = new ArrayList<>();
+    int height;
+    int width;
+    Cell[][] cells;
 
-    private transient GameConfig config;
     private static Gson gson;
 
     public Maze() {
-        if(gson == null) {
-            createGson();
-        }
     }
 
-    public Maze(int h, int w) {
-        super();
-        title = "Classic";
-        height = h;
-        width = w;
-        cells = new Cell[width][height];
-        spawn_positions = new ArrayList<Vector2>(){};
-        spawn_positions.add(new Vector2(0, 0));
-        spawn_positions.add(new Vector2(0, h - 1));
-        spawn_positions.add(new Vector2(w - 1, 0f));
-        spawn_positions.add(new Vector2(w - 1, h - 1));
-        players_count = spawn_positions.size();
+    public Maze(int w, int h) {
+        this.height = h;
+        this.width = w;
+        cells = new Cell[w][h];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 cells[x][y] = new Cell(x, y);
-                if (x % 2 == 1 && y % 2 == 1) {
-                    cells[x][y].addGameObject(new IndestructibleWall());
-                }
-                else if (Math.random() < 0.1) {
-                    cells[x][y].addGameObject(new DestructibleWall());
-                }
-                else if (Math.random() < 0.05) {
-                    cells[x][y].addGameObject(new BonusWall(new Bonus(Bonus.Type.SPEED)));
-                }
             }
         }
         initialize();
@@ -69,20 +50,19 @@ public class Maze {
         }
     }
 
-
     public Player spawnPlayer(GameSoloConfig config)
     {
-        Vector2 p = spawn_positions.get(0);
-        Player player = spawnPlayer(config, config.player_skin, cells[(int) p.x][(int) p.y]);
-        return player;
+        VectorInt2 pos = spawn_positions.get(0);
+        return spawnPlayer(config, config.player_skin, cells[pos.x][pos.y]);
     }
 
-    public ArrayList<Player> spawnPlayers(GameMultiConfig config)
+    public ArrayList<Player> spawnPlayers(int nb_player)
     {
-        ArrayList<Player> players = new ArrayList<Player>();
-        for (int i = 0; i < config.player_count; i++) {
-            Vector2 p = spawn_positions.get(i);
-            Player player = spawnPlayer(config, config.player_skins[i], cells[(int) p.x][(int) p.y]);
+        GameMultiConfig config = GameMultiConfig.get();
+        ArrayList<Player> players = new ArrayList<>();
+        for (int i = 0; i < nb_player; i++) {
+            VectorInt2 pos = spawn_positions.get(i);
+            Player player = spawnPlayer(config, config.player_skins[i], cells[pos.x][pos.y]);
             players.add(player);
         }
         return players;
@@ -97,6 +77,10 @@ public class Maze {
                 config.initial_bomb_range);
         cell.addGameObject(player);
         return player;
+    }
+
+    public ArrayList<VectorInt2> getPlayersSpawns() {
+        return spawn_positions;
     }
 
     /**
@@ -116,7 +100,7 @@ public class Maze {
     }
 
     public ArrayList<Player> getPlayers() {
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 players.addAll(cells[x][y].getInstancesOf(Player.class));
@@ -149,9 +133,26 @@ public class Maze {
      * @param cell_y
      * @return true if the position is in the maze, else it returns false
      */
-    private boolean isCellInBounds(int cell_x, int cell_y)
+    public boolean isCellInBounds(int cell_x, int cell_y)
     {
         return cell_x >= 0 && cell_x < width && cell_y >= 0 && cell_y < height;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        for(Cell[] cell_column : cells){
+            for(Cell cell : cell_column){
+                for(GameObject o : cell.getGameObjects()){
+                    if(o instanceof Enemy) enemies.add((Enemy) o);
+                }
+            }
+        }
+        return enemies;
+    }
+
+    public void setPlayerSpawns(ArrayList<VectorInt2> spawns)
+    {
+        spawn_positions = spawns;
     }
 
 //    public void applyConfig(GameConfig config) {
@@ -166,6 +167,7 @@ public class Maze {
 //                ((Wall) o).setLife(config.wall_life);
 //            }
 //        }
+
 //    }
 
     private static void createGson() {
@@ -175,15 +177,21 @@ public class Maze {
                 .create();
     }
 
-    public static Maze importMaze(String name) {
+    public static Maze importMazeSolo(String name) {
+        return importMaze("solo/"+name);
+    }
+
+    public static Maze importMazeMulti(String name) {
+        return importMaze("multi/"+name);
+    }
+
+    private static Maze importMaze(String name) {
         if(gson==null) {
             createGson();
         }
-        try {
-            Maze maze = gson.fromJson(new FileReader(new File(Constants.PATH_MAZE + name + ".json")), Maze.class);
-            maze.initialize();
-            return maze;
-        } catch (FileNotFoundException e) { throw new RuntimeException("ERROR : "+e.getMessage()); }
+        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE+ name + ".json").readString(), Maze.class);
+        maze.initialize();
+        return maze;
     }
 
     public void export(String name)
@@ -192,7 +200,8 @@ public class Maze {
             createGson();
         }
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_MAZE + name + ".json"));
+            File file = Gdx.files.internal(Constants.PATH_MAZE + name + ".json").file();
+            Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
         } catch (IOException e) {

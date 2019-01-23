@@ -2,12 +2,12 @@ package com.glhf.bomberball.gameobject;
 
 import com.glhf.bomberball.Graphics;
 
-public class BonusWall extends GameObject {
+public class BonusWall extends DestructibleWall {
 
     public Bonus bonus;
 
     public BonusWall() {
-        super(1);
+        super();
     }
 
     /**
@@ -15,7 +15,7 @@ public class BonusWall extends GameObject {
      * @param bonus which bonus is inside the wall
      */
     public BonusWall(Bonus bonus) {
-        super(1);
+        super();
         this.bonus = bonus;
         initialize();
     }
@@ -23,7 +23,17 @@ public class BonusWall extends GameObject {
     @Override
     public void initialize() {
         super.initialize();
-        this.sprite = Graphics.Sprites.get("crate_speed");
+        switch (this.bonus.getType()) {
+            case SPEED:
+                this.sprite = Graphics.Sprites.get("speedWall");
+                break;
+            case BOMB_RANGE:
+                this.sprite = Graphics.Sprites.get("rangeWall");
+                break;
+            case BOMB_NUMBER:
+                this.sprite = Graphics.Sprites.get("bombWall");
+                break;
+        }
         bonus.initialize();
     }
 
@@ -31,5 +41,11 @@ public class BonusWall extends GameObject {
     public void dispose() {
         cell.addGameObject(bonus);
         super.dispose();
+    }
+
+
+    @Override
+    public GameObject clone() {
+        return new BonusWall(new Bonus(bonus.getType()));
     }
 }

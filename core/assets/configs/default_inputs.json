@@ -1,79 +1,68 @@
 {
-  "map_code_to_action": {
-    "K152": [
-      "DROP_BOMB_UP",
-      null,
+  "id_list": [
+    [
+      "K19",
       null
     ],
-    "K150": [
-      "DROP_BOMB_RIGHT",
-      null,
+    [
+      "K20",
       null
     ],
-    "M0": [
-      "DROP_BOMB",
-      null,
+    [
+      "K21",
       null
     ],
-    "K62": [
-      "ENDTURN",
-      null,
+    [
+      "K22",
       null
     ],
-    "K40": [
-      "DROP_BOMB",
-      null,
+    [
+      "K150",
       null
     ],
-    "K20": [
-      "MOVE_DOWN",
-      null,
-      "DROP_BOMB_DOWN"
-    ],
-    "K148": [
-      "DROP_BOMB_LEFT",
-      null,
+    [
+      "K152",
       null
     ],
-    "K30": [
-      "MODE_BOMB",
-      null,
+    [
+      "K148",
       null
     ],
-    "K22": [
-      "MOVE_RIGHT",
-      null,
-      "DROP_BOMB_RIGHT"
-    ],
-    "K146": [
-      "DROP_BOMB_DOWN",
-      null,
+    [
+      "K146",
       null
     ],
-    "K21": [
-      "MOVE_LEFT",
-      null,
-      "DROP_BOMB_LEFT"
+    [
+      "K34",
+      "K62"
     ],
-    "K32": [
-      "MODE_MOVE",
-      null,
+    [
+      "K30",
       null
     ],
-    "K34": [
-      "ENDTURN",
-      null,
+    [
+      "K32",
       null
     ],
-    "K67": [
-      "MENU_GO_BACK",
-      null,
+    [
+      "M0",
       null
     ],
-    "K19": [
-      "MOVE_UP",
-      null,
-      "DROP_BOMB_UP"
+    [
+      "K131",
+      null
+    ],
+    [
+      "M0",
+      null
+    ],
+    [
+      "K66",
+      "M0"
+    ],
+    [
+      "M1",
+      null
     ]
-  }
+  ]
 }

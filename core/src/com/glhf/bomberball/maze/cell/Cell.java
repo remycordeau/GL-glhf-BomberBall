@@ -3,6 +3,7 @@ package com.glhf.bomberball.maze.cell;
 import com.badlogic.gdx.graphics.Color;
 import com.glhf.bomberball.gameobject.Bomb;
 import com.glhf.bomberball.gameobject.GameObject;
+import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
@@ -75,6 +76,13 @@ public class Cell {
     /*===========================*/
 
     /**
+     * @return true if the cell is empty (else otherwise)
+     */
+    public boolean isEmpty() {
+        return objects.isEmpty();
+    }
+
+    /**
      * @param cell
      * @return Returns the direction of cell if cell is an adjacent cell (null instead)
      */
@@ -111,7 +119,7 @@ public class Cell {
     public void getDamage(int damage)
     {
         ArrayList<GameObject> gameObjects = new ArrayList<>(objects);
-        gameObjects.forEach((o) -> {o.getDamage(damage);});
+        gameObjects.forEach((o) -> o.getDamage(damage));
     }
 
     /**
@@ -131,6 +139,13 @@ public class Cell {
     public void removeGameObject(GameObject gameObject) {
         gameObject.setCell(null);
         objects.remove(gameObject);
+    }
+
+    /**
+     * Removes all objects from the cell
+     */
+    public void removeGameObjects() {
+        objects.clear();
     }
 
     /**
@@ -195,6 +210,20 @@ public class Cell {
     }
 
     /**
+     * @param clz Class to search for
+     * @param <T>
+     * @return True if the cell has an object of class clz (False otherwise)
+     */
+    public <T> boolean hasInstanceOf(Class<T> clz) {
+        for(GameObject o : objects){
+            if(clz.isInstance(o)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Removes current cell effect.
      */
     public void removeEffect() {
@@ -216,5 +245,11 @@ public class Cell {
      */
     private void setExplosionEffect(Directions dir, int range) {
         cell_effect = new ExplosionEffect(this, dir, range);
+    }
+
+    public float distanceTo(Cell cell) {
+        int dx = x - cell.x;
+        int dy = y - cell.y;
+        return (float) Math.sqrt(dx*dx+dy*dy);
     }
 }

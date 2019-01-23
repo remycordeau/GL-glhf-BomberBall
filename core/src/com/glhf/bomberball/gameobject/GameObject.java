@@ -17,7 +17,6 @@ import com.glhf.bomberball.utils.Directions;
 public abstract class GameObject {
 
     protected int life = 1;
-
     protected transient AtlasRegion sprite;
     protected transient Cell cell;
     
@@ -52,10 +51,23 @@ public abstract class GameObject {
         return cell.getY();
     }
 
+    public GameObject clone(){
+        throw new RuntimeException(this.getClass()+" does not have clone method !!");
+    }
+
     /**
      * used for the initialisation of the different subclasses. Needed because of the deserialization.
      */
     public void initialize() { }
+
+    /**@author Jyra
+     * @return the score given to the player when a game object is destroyed
+     * I use a class in order to be able to override the value returned
+     */
+    public int scoreWhileDestroyed()
+    {
+        return 0;
+    }
 
     /**
      * modification of the life of the gameObject
@@ -63,6 +75,7 @@ public abstract class GameObject {
      */
     public void getDamage(int damage){
         life -= damage;
+        Score.getINSTANCE().increaseScore(scoreWhileDestroyed());
         if (life <= 0) {
             this.dispose();
         }

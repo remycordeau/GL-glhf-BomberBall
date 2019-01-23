@@ -1,6 +1,6 @@
 package com.glhf.bomberball.config;
 
-public class GameSoloConfig extends GameConfig {
+public abstract class GameSoloConfig extends GameConfig {
 
     public String player_skin = "knight_m";
 
@@ -16,8 +16,11 @@ public class GameSoloConfig extends GameConfig {
     public int aggressiveEnemy_life = 1;
     public int aggressiveEnemy_strength = 1;
     public int aggressiveEnemy_moves = 5;
+    public int aggressiveEnemy_huntingRange = 4;
 
-    public static GameSoloConfig get(String config_name){
-        return get(config_name, GameSoloConfig.class);
+    /**
+     * Default constructor with the default configuration values
+     */
+    public GameSoloConfig() {
     }
 }

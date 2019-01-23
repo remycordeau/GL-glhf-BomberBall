@@ -1,7 +1,6 @@
 package com.glhf.bomberball;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
@@ -21,6 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -28,6 +29,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.glhf.bomberball.utils.Constants;
 
 import java.util.HashMap;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class Graphics {
 
@@ -37,8 +40,8 @@ public class Graphics {
 
         private static void load()
         {
-            sprites_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_SPRITES);
-            sprites_atlasRegions = new HashMap<String, AtlasRegion>();
+            sprites_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_SPRITES));
+            sprites_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : sprites_atlasTexture.getRegions()) {
                 sprites_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("Sprite " + atlasRegion.name + " loaded");
@@ -61,8 +64,8 @@ public class Graphics {
 
         private static void load()
         {
-            anim_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_ANIMS);
-            anim_atlasRegions = new HashMap<String, Array<AtlasRegion>>();
+            anim_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_ANIMS));
+            anim_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : anim_atlasTexture.getRegions()) {
                 if (!anim_atlasRegions.containsKey(atlasRegion.name)) {
                     anim_atlasRegions.put(atlasRegion.name, anim_atlasTexture.findRegions(atlasRegion.name));
@@ -111,19 +114,16 @@ public class Graphics {
             //
             Texture white = new Texture(new Pixmap(1,1, Format.RGB888));
             skin.add("white", white);
+            Texture transparent = new Texture(new Pixmap(1,1, Format.RGBA8888));
+            skin.add("transparent", transparent);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
             skin.add("checkboxOff", new TextureRegionDrawable(GUI.get("checkboxOff")));
             skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
 
             skin.add("default", Color.WHITE);
 
-            //
-            skin.addRegions(new TextureAtlas(Constants.PATH_ATLAS_GUI));
-
-            //BitmapFont font = new BitmapFont(new FileHandle(Constants.PATH_FONTS + "Calibri/Calibri.fnt"));
-
             /* Génération de la BitmapFont avec FreeTypeFontGenerator */
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
+            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.PATH_FONTS + "Compass/CompassPro.ttf"));
             FreeTypeFontParameter parameter = new FreeTypeFontParameter();
             parameter.size = 32;
             BitmapFont font = generator.generateFont(parameter);
@@ -137,11 +137,14 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture("core/assets/graphics/gui/rock_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_long_9patch.png"), 16, 16, 16, 16));
+            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_long_9patch.png"), 16, 16, 16, 16));
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
-            textButtonStyle.downFontColor = Color.RED;
+            //textButtonStyle.downFontColor = Color.RED;
+            textButtonStyle.disabled = patch2;
             skin.add("default", textButtonStyle);
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
@@ -150,8 +153,20 @@ public class Graphics {
 
             textButtonStyle = new TextButtonStyle(textButtonStyle);//copy of textButtonStyle
             textButtonStyle.font = skin.getFont("very_small");
-            textButtonStyle.checked = patch.tint(Color.RED);
             skin.add("input_select", textButtonStyle);
+
+            patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_9patch.png"), 16, 16, 16, 16));
+            patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_9patch.png"), 16, 16, 16, 16));
+            patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_9patch.png"), 16, 16, 16, 16));
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
+            textButtonStyle.checked = patch3;
+            textButtonStyle.disabled = patch2;
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("checkable", textButtonStyle);
+
+            textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
+            textButtonStyle.font = skin.getFont("default");
+            skin.add("small", textButtonStyle);
 
             //========LabelStyle
             LabelStyle labelStyle = new LabelStyle();
@@ -171,6 +186,16 @@ public class Graphics {
             labelStyle.fontColor = Color.GREEN;
             skin.add("Title", labelStyle);
 
+            //=======TextFieldStyle
+            TextFieldStyle textFieldStyle = new TextFieldStyle();
+            textFieldStyle.font = font;
+            textFieldStyle.fontColor = Color.WHITE;
+            textFieldStyle.focusedFontColor = Color.RED;
+            skin.add("default", textFieldStyle);
+
+            //=======WindowStyle
+            WindowStyle windowStyle = new WindowStyle(font, Color.WHITE, skin.getDrawable("white"));
+            skin.add("default", windowStyle);
 
             //=======SliderStyle
             SliderStyle sliderStyle = new SliderStyle();
@@ -200,7 +225,7 @@ public class Graphics {
             SelectBoxStyle selectBoxStyle = new SelectBoxStyle();//TODO meilleur visuel
             selectBoxStyle.font = font;
             selectBoxStyle.fontColor = Color.BLUE;
-            selectBoxStyle.background = skin.getDrawable("white");
+            selectBoxStyle.background = skin.getDrawable("transparent");
             selectBoxStyle.listStyle = skin.get(ListStyle.class);
             selectBoxStyle.scrollStyle = skin.get(ScrollPaneStyle.class);
             skin.add("default", selectBoxStyle);
@@ -216,8 +241,8 @@ public class Graphics {
 
         private static void loadAtlas()
         {
-            gui_atlasTexture = new TextureAtlas(Constants.PATH_ATLAS_GUI);
-            gui_atlasRegions = new HashMap<String, AtlasRegion>();
+            gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
+            gui_atlasRegions = new HashMap<>();
             for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
                 gui_atlasRegions.put(atlasRegion.name, atlasRegion);
                 System.out.println("GUI element" + atlasRegion.name + " loaded");
@@ -233,6 +258,7 @@ public class Graphics {
             return gui_atlasRegions.get(sprite_str);
         }
     }
+
 
     public static void load() {
         Graphics.Sprites.load();

@@ -30,6 +30,7 @@ public abstract class Config {
      * @param c Config class to serialize
      * @return config class from config file
      */
+    @SuppressWarnings("unchecked")
     public static <T extends Config> T get(String config_name, Class<T> c){
         if(!configs.containsKey(config_name)){
             configs.put(config_name, importConfig(config_name, c));
@@ -45,19 +46,35 @@ public abstract class Config {
      */
     private static <T extends Config> T importConfig(String name, Class<T> c) {
         try {
-            return gson.fromJson(new FileReader(Constants.PATH_CONFIGS + name + ".json"), c);
+            String fileName = Constants.PATH_CONFIGS + name + ".json";
+            if(!new File(fileName).exists()) {
+                c.newInstance().reset().exportConfig(name);
+            }
+            return gson.fromJson(new FileReader(fileName), c);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Cannot import config : " + e.getMessage());
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
         }
+        return null;
     }
+
+    /**
+     * function applied when file not found, just after the default constructor
+     * @return itself
+     */
+    protected abstract Config reset();
 
     /**
      * Exports a config
      * @param name Config file name
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void exportConfig(String name) {
         try {
-            Writer writer = new FileWriter(new File(Constants.PATH_CONFIGS + name + ".json"));
+            File file = new File(Constants.PATH_CONFIGS + name + ".json");
+            if(!file.getParentFile().exists()) file.getParentFile().mkdirs(); //needed when file in a directory
+            Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
             configs.remove(name);

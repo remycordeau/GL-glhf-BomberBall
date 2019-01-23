@@ -10,12 +10,14 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.CellEffect;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -84,8 +86,6 @@ public class MazeDrawer extends Actor {
      */
     public void updateView(int width, int height)
     {
-        batch = new SpriteBatch();
-
         float dw = w_maxp - w_minp;
         float dh = h_maxp - h_minp;
 
@@ -93,9 +93,7 @@ public class MazeDrawer extends Actor {
         float maze_height_px = Constants.BOX_HEIGHT * (maze.getHeight() + 2 * y_padding);
         float maze_aspect_ratio = maze_width_px / maze_height_px;
 
-        float screen_width_px = width;
-        float screen_height_px = height;
-        float screen_aspect_ratio = screen_width_px / screen_height_px;
+        float screen_aspect_ratio = (float) width / (float) height;
 
         float r = screen_aspect_ratio / maze_aspect_ratio;
         float width_scaling = 1 / dw;
@@ -141,6 +139,10 @@ public class MazeDrawer extends Actor {
         batch.setProjectionMatrix(tmp);
     }
 
+    public float getScale() {
+        return camera.zoom;
+    }
+
     private void drawCells() {
         for(int y = maze_height - 1; y >= 0; y--) {
             for (int x = 0; x < maze_width; x++) {
@@ -151,6 +153,11 @@ public class MazeDrawer extends Actor {
 
     private void drawCell(Cell cell)
     {
+        boolean thereIsADoor = false;
+        for(Door door : cell.getInstancesOf(Door.class)){
+            drawTextureInCell(door.getSprite(), cell.getX(), cell.getY());
+            thereIsADoor = true;
+        }
         CellEffect cell_effect = cell.getCellEffect();
         if (cell_effect != null) {
             batch.setColor(cell_effect.getColor());
@@ -160,27 +167,32 @@ public class MazeDrawer extends Actor {
 
         ArrayList<GameObject> gameObjects = cell.getGameObjects();
         int n = gameObjects.size();
+        if(thereIsADoor) n--;
         if (n == 0) {
             return;
         }
 
         Vector2 offsetp;
+        float radius = 1 / 3f;
         if (n == 1) {
-            GameObject o = gameObjects.get(0);
-            offsetp = o.getOffset();
-            offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
-            drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
-        } else {
+            radius = 0f;
+        }
 
-            float dteta = 2 * (float)Math.PI / n;
-            float teta =  (float)Math.PI / 4f;
-            for (GameObject gameObject : gameObjects) {
-                offsetp = gameObject.getOffset();
-                offsetp.x += (float)Math.cos(teta) * (1 / 3f);
-                offsetp.y += (float)Math.sin(teta) * (1 / 3f) + (1/3f);
-                drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
-                teta += dteta;
-            }
+//        GameObject o = gameObjects.get(0);
+//        offsetp = o.getOffset();
+//        offsetp.y += (o instanceof Player) ? 1/3f : 0.0f;
+//        drawTextureInCell(o.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+//    } else {
+        float dteta = 2 * (float)Math.PI / n;
+        float teta =  (float)Math.PI / 4f;
+        for (GameObject gameObject : gameObjects) {
+            if(gameObject instanceof Door)continue;//skip door
+            offsetp = gameObject.getOffset();
+            offsetp.x += (float)Math.cos(teta) * radius;
+            offsetp.y += (float)Math.sin(teta) * radius;
+            if(gameObject instanceof Character) offsetp.y += 1 / 3f;
+            drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
+            teta += dteta;
         }
     }
 
@@ -255,14 +267,15 @@ public class MazeDrawer extends Actor {
      * @param screen_y screen y position
      * @return Corresponding cell position in maze
      */
-    public Vector2 screenPosToCell(int screen_x, int screen_y)
+    public VectorInt2 screenPosToCell(float screen_x, float screen_y)
     {
+        screen_y = Gdx.graphics.getHeight() - screen_y;
         Vector3 p = new Vector3(screen_x, screen_y, 0f);
         camera.unproject(p);
         p.x = p.x - (Constants.BOX_WIDTH * x_padding);
         p.y = p.y - (Constants.BOX_HEIGHT * y_padding);
         int cell_x = (int)Math.floor(p.x / Constants.BOX_WIDTH);
         int cell_y = (int)Math.floor(p.y / Constants.BOX_HEIGHT);
-        return new Vector2(cell_x, cell_y);
+        return new VectorInt2(cell_x, cell_y);
     }
 }

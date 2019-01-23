@@ -28,7 +28,7 @@ public class Player extends Character {
                   int initial_bomb_range)
     {
         super(player_skin, life, initial_moves);
-        this.observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<>();
         this.active = false;
         this.initial_bomb_number = initial_bomb_number;
         this.initial_bomb_range = initial_bomb_range;
@@ -51,6 +51,7 @@ public class Player extends Character {
         this.notifyObservers();
     }
 
+    @Override
     public void endTurn() {
         active = false;
         this.notifyObservers();
@@ -59,8 +60,12 @@ public class Player extends Character {
     @Override
     public boolean move(Directions dir)
     {
-        if (moves_remaining > 0 && super.move(dir)) {
-            moves_remaining--;
+        if (super.move(dir)) {
+            for (GameObject go : cell.getGameObjects()) {
+                if (go instanceof Enemy) {
+                    ((Enemy) go).touchPlayer(this);
+                }
+            }
             this.notifyObservers();
             return true;
         }
@@ -70,9 +75,10 @@ public class Player extends Character {
     /**
      * The player create a bomb and put it on the square given
      * @param dir
-     * @return a new Bomb
+     * @return if the bomb has been dropped
      */
-    public void dropBomb(Directions dir) {
+    public boolean dropBomb(Directions dir) {
+        boolean dropped = false;
         if (bombs_remaining > 0) {
             Cell dest_cell = cell.getAdjacentCell(dir);
             if (dest_cell != null && dest_cell.isWalkable()) {
@@ -80,8 +86,10 @@ public class Player extends Character {
                 Bomb bomb = new Bomb(1, initial_bomb_range + bonus_bomb_range);
                 dest_cell.addGameObject(bomb);
                 this.notifyObservers();
+                dropped = true;
             }
         }
+        return dropped;
     }
 
     public void interactWithCell(Cell cell) {
@@ -115,6 +123,13 @@ public class Player extends Character {
         for (Observer observer : this.observers) {
             observer.update(null, this);
         }
+    }
+
+    @Override
+    public GameObject clone() {
+        GameObject p = new Player(skin, life, initial_moves, initial_bomb_number, initial_bomb_range);
+
+        return p;
     }
 }
 
