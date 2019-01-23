@@ -1,7 +1,6 @@
 package com.glhf.bomberball.maze;
 
 import com.glhf.bomberball.config.GameInfiniteConfig;
-import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.gameobject.Bonus.Type;
 import com.glhf.bomberball.maze.cell.Cell;
@@ -17,6 +16,7 @@ public class MazeBuilder {
     private static Maze maze;
     private static Random rand = new Random();
     private static Cell cellDoor;
+    private static Cell cellPlayer;
     private static double probFreeCase;
     private static int nb_ennemies = 10;
     private static GameInfiniteConfig config;
@@ -32,19 +32,19 @@ public class MazeBuilder {
         maze.width = 9 + (int) (Math.random()*5)*2;
 
         maze.spawn_positions = new ArrayList<>();
-        maze.spawn_positions.add(new VectorInt2(0, rand.nextInt(maze.height)));
+        VectorInt2 pos = new VectorInt2(0, rand.nextInt(maze.height));
+        maze.spawn_positions.add(pos);
 
         availableWall = new LinkedHashMap<>();
         availableWall.put(IndestructibleWall.class, 4.0);
-        availableWall.put(DestructibleWall.class, 4.0);
+
         if(config.bonus_activated){
             availableWall.put(BonusWall.class, 1.0);
         }
-
-        maze.cells = new Cell[maze.width][maze.height];
+        if(config.destructible_wall_available){
+            availableWall.put(DestructibleWall.class, 4.0);
+        }
         initialiseCells();
-        cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
-        maze.cells[cellDoor.getX()][cellDoor.getY()].addGameObject(new Door());
         initialiseWalls();
         initialiseEnemies();
 
@@ -53,14 +53,19 @@ public class MazeBuilder {
     }
 
     private static void initialiseCells() {
-        normalizeProba();
 
+        maze.cells = new Cell[maze.width][maze.height];
         for (int x = 0; x < maze.width; x++) {
             for (int y = 0; y < maze.height; y++) {
                 maze.cells[x][y] = new Cell(x, y);
             }
         }
         maze.initialize();
+        cellDoor = maze.getCellAt(maze.width-1,rand.nextInt(maze.height));
+        VectorInt2 pos = maze.spawn_positions.get(0);
+        cellPlayer = maze.getCellAt(pos.x, pos.y);
+        cellDoor.addGameObject(new Door());
+
     }
 
     private static void initialiseWalls() {
@@ -78,10 +83,10 @@ public class MazeBuilder {
                 }
             }
         }
-        Cell originPos = maze.getCellAt(0, 0);
-        if(!MazeTransversal.isReachableCell(originPos, cellDoor)){
-            System.out.println("new Maze");
-                maze = createInfinityMaze();
+
+        if(!MazeTransversal.isReachableCell(cellPlayer, cellDoor)){
+            initialiseCells();
+            initialiseWalls();
         }
     }
 

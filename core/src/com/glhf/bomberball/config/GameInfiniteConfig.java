@@ -4,6 +4,7 @@ public class GameInfiniteConfig extends GameSoloConfig {
 
     public int highscore = 0;
     public boolean bonus_activated = true;
+    public boolean destructible_wall_available = true;
 
     //Settings maze
     public transient double probFreeCase = 1.0 / 3;
