@@ -38,10 +38,10 @@ public class EditorUI extends MenuUI {
         this.screen = screen;
 
         this.maze = maze;
-        maze_preview = new MazeDrawer(maze, 0.0f, 0.85f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(maze, 0.0f, 0.80f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
 
         this.setFillParent(true);
-        this.padLeft(Value.percentWidth(0.85f));
+        this.padLeft(Value.percentWidth(0.80f));
 
         initializeButtons();
         this.addActor(maze_preview);
