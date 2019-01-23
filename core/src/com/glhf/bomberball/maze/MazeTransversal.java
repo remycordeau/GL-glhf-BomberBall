@@ -92,7 +92,7 @@ public class MazeTransversal{
 
     public static ArrayList<Directions> getRandomPath(Cell cell) {
         ArrayList<Directions> path = new ArrayList<>();
-        for(int i=0; i<10; i++){
+        for(int i=0; i<5; i++){
             List<Directions> dirs = Arrays.asList(Directions.values());
             Collections.shuffle(dirs);
             Cell adjCell=null;
@@ -255,16 +255,18 @@ public class MazeTransversal{
     }
 
     public static ArrayList<Directions> shortestPath(HunterNode depart, HunterNode arriver){
-//        ArrayList<HunterNode> closedList = new ArrayList<>();
+//        ArrayList<Cell> closedList = new ArrayList<>();
 //        PriorityQueue<HunterNode> openList = new PriorityQueue<>();
 //        openList.add(depart);
 //        while(!openList.isEmpty()){
 //            HunterNode u = openList.poll();
-//            if(u.cell == u.cell){
+//            if(u.cell == arriver.cell){
 //                //  reconstituerChemin(u)
 //                //  terminer le programme
 //            }
 //            for(HunterNode v : u.getSons()){
+//                closedList.indexOf(v.cell);
+//                Cell p = closedList.get(closedList.indexOf(v.cell));
 //                if(closedList.find(v).cout>=v.cout && openList.find(v).cout>=c.cout){
 //                    v.cout = u.cout +1;
 //                    v.heuristique = v.cout + v.distanceTo(objectif);
@@ -274,7 +276,7 @@ public class MazeTransversal{
 //            closedList.add(u);
 //        }
 //        System.err.println("Aucun chemin trouve");
-          return null;
+        return null;
     }
 
     public static class HunterNode implements Comparable<HunterNode>{
@@ -303,6 +305,16 @@ public class MazeTransversal{
          */
         float distanceTo(HunterNode o){
             return cell.distanceTo(o.cell);
+        }
+
+        public ArrayList<HunterNode> getSons() {
+            ArrayList<HunterNode> l = new ArrayList<>();
+            for(Cell cell : cell.getAdjacentCells()){
+                if(cell != null && cell.isWalkable()){
+                    l.add(new HunterNode(cell));
+                }
+            }
+            return l;
         }
     }
 }
