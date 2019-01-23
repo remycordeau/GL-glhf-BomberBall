@@ -5,11 +5,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Graphics.Anims;
 import com.glhf.bomberball.Graphics.GUI;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.screens.SoloMenuScreen;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 import com.glhf.bomberball.screens.StoryTellingScreen;
@@ -31,17 +33,30 @@ public class StoryTellingUI extends Table {
         Table characters = new Table();
         characters.setFillParent(true);
         characters.align(Align.top);
-        characters.add(new CharacterUI("knight_m", "Le héros", "Maximilien"));
-        characters.add(new CharacterUI("black_knight", "Le méchant", "Plétor"));
-        characters.add(new CharacterUI("wizzard_m", "le magicien", "Bernard"));
-        characters.add(new CharacterUI("elf_f", "le héros", "Bianca"));
+        characters.padTop(10);
+        characters.add(new CharacterUI("knight_m", "Le héros", "Maximilien"))
+                .height(Value.percentHeight(0.3f, this));
+        characters.add(new CharacterUI("black_knight", "Le méchant", "Plétor"))
+                .height(Value.percentHeight(0.3f, this));
+        characters.add(new CharacterUI("wizzard_m", "Le magicien", "Bernard"))
+                .height(Value.percentHeight(0.3f, this));
+        characters.add(new CharacterUI("elf_f", "La princesse", "Bianca"))
+                .height(Value.percentHeight(0.3f, this));
         addActor(characters);
 
         Table buttons = new Table();
         buttons.setFillParent(true);
         buttons.align(Align.bottom);
         TextButton skip = new AudioButton(Translator.translate("Skip"), skin);
-        skip.addListener(new ScreenChangeListener(StoryMenuScreen.class));
+        skip.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                AppConfig config = AppConfig.get();
+                config.story_displayed = true;
+                config.exportConfig();
+                Bomberball.changeScreen(new StoryMenuScreen());
+            }
+        });
         skip.align(Align.bottomLeft);
         buttons.add(skip);
         buttons.add().growX();
@@ -68,7 +83,7 @@ public class StoryTellingUI extends Table {
             image.setScaling(Scaling.fit);
             image.setAlign(Align.center);
 
-            add(image).grow().height(Value.percentHeight(0.8f,this)).row();
+            add(image).grow().height(100).row();
             add(new Label(titre, skin)).row();
             add(new Label(nom, skin)).row();
         }
