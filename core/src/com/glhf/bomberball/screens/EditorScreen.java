@@ -71,9 +71,9 @@ public class EditorScreen extends MenuScreen {
             int x = p.x - half_w;
             int y = p.y - half_h;
             positions.add(new VectorInt2(x + half_w, y + half_h));
+            positions.add(new VectorInt2(-x + half_w, -y + half_h));
             positions.add(new VectorInt2(-x + half_w, y + half_h));
             positions.add(new VectorInt2(x + half_w, -y + half_h));
-            positions.add(new VectorInt2(-x + half_w, -y + half_h));
         }
         return positions;
     }
