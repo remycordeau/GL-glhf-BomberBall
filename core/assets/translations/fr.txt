@@ -37,7 +37,7 @@
 
 #MainMenuUI
 "Multiplayer"	:	"Multijoueur"
-"Solo"		    :	"Solo"
+"Solo"		    :	"Solitaire"
 "Map Editor"	:	"Editeur de Carte"
 "Settings"		:	"Paramètres"
 "Quit"		    :	"Quitter le jeu"
