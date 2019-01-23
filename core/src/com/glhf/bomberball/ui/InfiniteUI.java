@@ -4,13 +4,19 @@
  */
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
+import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.gameobject.Player;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.screens.GameInfiniteScreen;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class InfiniteUI extends MenuUI {
 
@@ -30,8 +36,35 @@ public class InfiniteUI extends MenuUI {
         bottom_ui.padTop(Value.percentHeight(0.80f));
         bottom_ui.align(Align.bottom);
 
-        this.addActor(left_ui);
-        this.addActor(bottom_ui);
+        ScoreUI top_left_ui = new ScoreUI();
+        left_ui.setFillParent(true);
+        left_ui.padRight(Value.percentWidth(2/3f));
+        left_ui.padBottom(Value.percentHeight(0.50f));
+        left_ui.align(Align.topLeft);
 
+        this.addActor(left_ui);
+        this.addActor(top_left_ui);
+        this.addActor(bottom_ui);
+        debug();
+    }
+
+    private class ScoreUI extends Table implements Observer {
+        private final Score sc;
+        private int cur_score;
+        private Label label;
+
+        public ScoreUI() {
+            super();
+            label = new Label("Score : ", Graphics.GUI.getSkin());
+            sc = Score.getINSTANCE();
+            sc.addObserver(this);
+            addActor(label);
+            update(null, null);
+        }
+
+        @Override
+        public void update(Observable observable, Object o) {
+            label.setText("Score : "+cur_score);
+        }
     }
 }

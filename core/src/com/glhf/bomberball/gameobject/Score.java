@@ -1,6 +1,8 @@
 package com.glhf.bomberball.gameobject;
 
-public class Score {
+import java.util.Observable;
+
+public class Score extends Observable {
     int score;
     private Score(){
         score=0;
@@ -12,10 +14,12 @@ public class Score {
     public void increaseScore(int n){
         this.score+=n;
         System.out.println("New score = " + score);
+        notifyObservers();
     }
     public void resetScore(){
         this.score=0;
         System.out.println("Reset of the score");
+        notifyObservers();
     }
     public int getScore(){
         return score;
