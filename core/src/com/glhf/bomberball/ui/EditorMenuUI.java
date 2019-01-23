@@ -35,7 +35,7 @@ public class EditorMenuUI extends MenuUI {
     {
         this.setFillParent(true);
 
-        this.add(new ButtonsWidget()).width(Value.percentWidth(1/3f, this));
+        this.add(new ButtonsWidget()).width(Value.percentWidth(1/3f, this)).growY();
         this.add(new MazeSelectorWidget()).grow();
 
         this.add(maze_preview);
@@ -61,7 +61,7 @@ public class EditorMenuUI extends MenuUI {
             this.row();
             this.add(new NewMazeWidget()).growX().space(spacing);
             this.row();
-            this.add(back_button).growX().space(spacing);
+            this.add(back_button).expand().growX().align(Align.bottom);
         }
     }
 
@@ -109,7 +109,7 @@ public class EditorMenuUI extends MenuUI {
 
         public MazeSelectorWidget() {
             //setFillParent(true);
-            this.padTop(Value.percentHeight(0.9f));
+            this.padTop(Value.percentHeight(0.85f));
 
             TextButton next_map = new AudioButton(">", Graphics.GUI.getSkin());
             next_map.addListener(new ChangeListener() {
@@ -129,7 +129,7 @@ public class EditorMenuUI extends MenuUI {
                 }
             });
 
-            maze_preview = new MazeDrawer(screen.maze, 1/3f, 1f,  0.1f, 1f, MazeDrawer.Fit.BEST);
+            maze_preview = new MazeDrawer(screen.maze, 1/3f, 1f,  0.15f, 1f, MazeDrawer.Fit.BEST);
 
             this.add(previous_map).growX().pad(Value.percentHeight(0.1f));
             this.add(next_map).growX().pad(Value.percentHeight(0.1f));
