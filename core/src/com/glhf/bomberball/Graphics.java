@@ -173,6 +173,11 @@ public class Graphics {
             labelStyle.font = font;
             skin.add("default", labelStyle);
 
+            labelStyle = new LabelStyle(labelStyle);
+            labelStyle.font = font;
+            labelStyle.fontColor = Color.BLACK;
+            skin.add("black", labelStyle);
+
             labelStyle = new LabelStyle(labelStyle);//copy of labelStyle
             labelStyle.font = skin.getFont("small");
             skin.add("small", labelStyle);

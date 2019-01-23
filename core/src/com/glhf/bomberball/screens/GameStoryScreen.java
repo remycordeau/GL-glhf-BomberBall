@@ -1,24 +1,13 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
-import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.InputHandler.Action;
-import com.glhf.bomberball.Translator;
-import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.cell.Cell;
-import com.glhf.bomberball.ui.ActionPlayerUI;
-import com.glhf.bomberball.ui.MultiUI;
-import com.glhf.bomberball.ui.PlayersInfoUI;
-import com.glhf.bomberball.ui.SoloUI;
+import com.glhf.bomberball.ui.GameUI;
 import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.VectorInt2;
 
@@ -44,7 +33,7 @@ public class GameStoryScreen extends GameScreen {
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new SoloUI(current_player, this));
+        addUI(new GameUI(current_player, true));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
