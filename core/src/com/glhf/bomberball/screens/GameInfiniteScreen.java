@@ -45,7 +45,7 @@ public class GameInfiniteScreen extends GameScreen {
         }, 1f, 1f);
     }
 
-    private void endGame() {
+    protected void endGame() {
         GameInfiniteConfig config = GameInfiniteConfig.get();
         Score s = Score.getINSTANCE();
         if(config.highscore < s.getScore()){
@@ -53,6 +53,11 @@ public class GameInfiniteScreen extends GameScreen {
             config.exportConfig();
         }
         Bomberball.changeScreen(new EndInfiniteScreen());
+    }
+
+    @Override
+    protected void startGame() {
+
     }
 
     @Override
