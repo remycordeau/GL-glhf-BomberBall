@@ -3,7 +3,7 @@ package com.glhf.bomberball.screens;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.gameobject.Player;
-import com.glhf.bomberball.ui.MultiUI;
+import com.glhf.bomberball.ui.GameUI;
 import com.glhf.bomberball.maze.Maze;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class GameMultiScreen extends GameScreen {
         players = maze.spawnPlayers(config.player_count);
         //setSelectEffect();
 
-        addUI(new MultiUI(players, this));
+        addUI(new GameUI(players, false));
         addUI(maze_drawer);
 
         startGame();

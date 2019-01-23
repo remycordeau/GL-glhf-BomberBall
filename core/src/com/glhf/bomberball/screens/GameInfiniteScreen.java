@@ -5,7 +5,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.MazeBuilder;
-import com.glhf.bomberball.ui.InfiniteUI;
+import com.glhf.bomberball.ui.GameUI;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class GameInfiniteScreen extends GameScreen {
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new InfiniteUI(current_player, this));
+        addUI(new GameUI(current_player, true));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui

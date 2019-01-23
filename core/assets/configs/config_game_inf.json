@@ -1,7 +1,7 @@
 {
   "highscore": 250,
-  "bonus_activated": true,
-  "destructible_wall_available": true,
+  "bonus_activated": false,
+  "destructible_wall_available": false,
   "player_skin": "knight_m",
   "activeEnemy_life": 1,
   "activeEnemy_strength": 1,
