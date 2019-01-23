@@ -10,6 +10,7 @@ import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.config.GameStoryConfig;
+import com.glhf.bomberball.gameobject.Score;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
@@ -51,14 +52,18 @@ public class InfiniteMenuUI extends MenuUI {
         CheckBox box1;
         CheckBox box2;
         CheckBox box3;
+        CheckBox box4;
+
         Skin skin = Graphics.GUI.getSkin();
 
         Value spacing = Value.percentHeight(0.5f);
 
         box1 = new CheckBox("Sans Bonus", skin);
+        box4 = new CheckBox("Sans caisse", skin);
         box2 = new CheckBox("Nombre de tours limite", skin);
         box3 = new CheckBox("Cartes aléatoires", skin);
         box1.setChecked(!config.bonus_activated);
+        box4.setChecked(!config.destructible_wall_available);
         //box2.setChecked(config.nombre_de_tour??);
         //box3.setChecked(config.carte_alea??);
         box2.setDisabled(true);
@@ -75,6 +80,14 @@ public class InfiniteMenuUI extends MenuUI {
             }
         });
 
+        box4.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                GameInfiniteConfig config = GameInfiniteConfig.get();
+                config.destructible_wall_available = !((CheckBox)actor).isChecked();
+                config.exportConfig();
+            }
+        });
 
         //Other buttons
         TextButton back;
@@ -86,7 +99,8 @@ public class InfiniteMenuUI extends MenuUI {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen));
+                Score.getINSTANCE().resetScore();
+                Bomberball.changeScreen(new GameInfiniteScreen(screen,1));
             }
         });
 
@@ -105,6 +119,7 @@ public class InfiniteMenuUI extends MenuUI {
 
         //Adding to the screen
         this.add(box1).space(spacing).row();
+        this.add(box4).space(spacing).row();
         this.add(box2).space(spacing).row();
         this.add(box3).space(spacing).row();
 

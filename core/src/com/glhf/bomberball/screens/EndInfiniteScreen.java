@@ -1,8 +1,7 @@
 package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.audio.Audio;
-import com.glhf.bomberball.ui.DeadUI;
-import com.glhf.bomberball.ui.EndInfniteUI;
+import com.glhf.bomberball.ui.EndInfiniteUI;
 
 public class EndInfiniteScreen extends MenuScreen {
     @Override
@@ -12,6 +11,6 @@ public class EndInfiniteScreen extends MenuScreen {
     }
     public EndInfiniteScreen(){
         super();
-        addUI(new EndInfniteUI());
+        addUI(new EndInfiniteUI());
     }
 }

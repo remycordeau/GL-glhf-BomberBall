@@ -1,3 +1,9 @@
+#General
+"End Turn" : "End Turn"
+"Actions" : "Actions"
+"Move" : "Move"
+"Bomb" : "Bomb"
+
 #EndLevelUI
 "level unlocked"		:	"Level %d unlocked !"
 "level succeeded"		:	"Congratulations ! You've succeeded level %d !"
