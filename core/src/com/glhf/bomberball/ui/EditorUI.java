@@ -12,14 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.EditorMenuScreen;
+import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.EditorScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 import com.glhf.bomberball.utils.VectorInt2;
+import com.sun.org.apache.xml.internal.security.encryption.AgreementMethod;
 
 import java.util.ArrayList;
 
@@ -83,8 +86,13 @@ public class EditorUI extends MenuUI {
             presets.add(new BonusWall(new Bonus(Bonus.Type.SPEED)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
+            GameInfiniteConfig config = GameInfiniteConfig.get();
+            presets.add(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, new ArrayList<>()));
+            presets.add(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
+            presets.add(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
+
             presets.add(new Player("knight_m", 1, 1,1, 1));
-            //presets.add(new Door());
+            presets.add(new Door());
 
             this.setActor(content);
             for (GameObject o : presets) {

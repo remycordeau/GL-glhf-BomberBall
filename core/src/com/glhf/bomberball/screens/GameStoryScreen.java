@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
+import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
 import com.glhf.bomberball.config.GameStoryConfig;
@@ -19,6 +20,7 @@ import com.glhf.bomberball.ui.MultiUI;
 import com.glhf.bomberball.ui.PlayersInfoUI;
 import com.glhf.bomberball.ui.SoloUI;
 import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
 
@@ -62,53 +64,65 @@ public class GameStoryScreen extends GameScreen {
     @Override
     public void registerActionsHandlers() {
         super.registerActionsHandlers();
+        input_handler.registerActionHandler(Action.DROP_BOMB, this::teleportPlayer);
+    }
+
+    private void teleportPlayer(float x, float y) {
+        VectorInt2 pos = maze_drawer.screenPosToCell(x, y);
+        if(maze.isCellInBounds(pos.x, pos.y)) {
+            current_player.moveToCell(maze.getCellAt(pos.x, pos.y));
+        }
     }
 
     /**
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
-        if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new DeadScreen(screen, maze_id));
-        } else {
-            if (maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
-                Bomberball.changeScreen(new EndStoryScreen(screen, this.maze_id));
-                return;
-            }
-            // test if the current_player reached the door
-            boolean isIn = false;
-            for (GameObject o : current_player.getCell().getGameObjects()) {
-                if (o instanceof Door) {
-                    isIn = true;
-                }
-            }
-            if (isIn) {
-                Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
-                return;
-            }
+        if(!current_player.isAlive()
+            || current_player.getCell().hasInstanceOf(Door.class)){
+            endGame();
+            return;
+        }
 
-            for (Enemy enemy : enemies) {
-                if (enemy.isAlive()) {
-                    enemy.initiateTurn();
-                    enemy.followWay();
-                }
-            }
-
-            try {
-                current_player.initiateTurn();
-                setMoveEffect();
-                setMoveMode();
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        input_handler.lock(false);
-                    }
-                }, 0.1f*enemies.size());
-
-            } catch (RuntimeException e) {
-                System.out.println("The player probably died");
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive()) {
+                enemy.initiateTurn();
+                enemy.followWay();
             }
         }
+
+        try {
+            current_player.initiateTurn();
+            setMoveEffect();
+            setMoveMode();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    input_handler.lock(false);
+                }
+            }, 0.1f*enemies.size());
+
+        } catch (RuntimeException e) {
+            System.out.println("The player probably died");
+        }
+    }
+
+    @Override
+    protected void endGame() {
+        if(current_player.isAlive()){
+            if (maze_id + 1 == screen.getMazeCount()) { // if the current_player has completed the last level
+                Bomberball.changeScreen(new EndStoryScreen(screen, this.maze_id));
+            }else{
+                Bomberball.changeScreen(new EndLevelScreen(screen, this.maze_id));
+            }
+        }else{
+            Bomberball.changeScreen(new DeadScreen(screen, maze_id));
+        }
+    }
+
+    @Override
+    protected void startGame() {
+
     }
 
     /**

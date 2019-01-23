@@ -18,7 +18,7 @@ public class EditorScreen extends MenuScreen {
 
     private final Maze maze;
     private final EditorUI ui;
-    private boolean symmetric = true;
+    private boolean symmetric = false;
     private GameObject objectSelected;
     private VectorInt2 player_pos = null;
     private int maze_id;
@@ -37,7 +37,7 @@ public class EditorScreen extends MenuScreen {
     {
         super();
         this.maze = Maze.importMazeMulti("maze_" + maze_id);
-        maze_id = maze_id;
+        this.maze_id = maze_id;
         ui = new EditorUI(this, maze);
         addUI(ui);
         addSpawns();
