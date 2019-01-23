@@ -54,7 +54,7 @@ public class SoloMenuUI extends MenuUI {
         buttons.setBackground(background);
 
         b = new AudioButton(Translator.translate("Story Mode"), skin);
-        b.addListener(new ScreenChangeListener(StoryMenuScreen.class));
+        b.addListener(new ScreenChangeListener(StoryTellingScreen.class));
         buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Infinite Mode"), skin);
