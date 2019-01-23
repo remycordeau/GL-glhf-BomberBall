@@ -92,7 +92,7 @@ public class MazeTransversal{
 
     public static ArrayList<Directions> getRandomPath(Cell cell) {
         ArrayList<Directions> path = new ArrayList<>();
-        for(int i=0; i<5; i++){
+        for(int i=0; i<10; i++){
             List<Directions> dirs = Arrays.asList(Directions.values());
             Collections.shuffle(dirs);
             Cell adjCell=null;
@@ -252,69 +252,5 @@ public class MazeTransversal{
             }
         }
         return null;
-    }
-
-    public static ArrayList<Directions> shortestPath(HunterNode depart, HunterNode arriver){
-//        ArrayList<Cell> closedList = new ArrayList<>();
-//        PriorityQueue<HunterNode> openList = new PriorityQueue<>();
-//        openList.add(depart);
-//        while(!openList.isEmpty()){
-//            HunterNode u = openList.poll();
-//            if(u.cell == arriver.cell){
-//                //  reconstituerChemin(u)
-//                //  terminer le programme
-//            }
-//            for(HunterNode v : u.getSons()){
-//                closedList.indexOf(v.cell);
-//                Cell p = closedList.get(closedList.indexOf(v.cell));
-//                if(closedList.find(v).cout>=v.cout && openList.find(v).cout>=c.cout){
-//                    v.cout = u.cout +1;
-//                    v.heuristique = v.cout + v.distanceTo(objectif);
-//                        openList.add(v);
-//                }
-//            }
-//            closedList.add(u);
-//        }
-//        System.err.println("Aucun chemin trouve");
-        return null;
-    }
-
-    public static class HunterNode implements Comparable<HunterNode>{
-        //attributes
-        Cell cell;
-        int x, y, cost;
-        float heuristic;
-
-        public HunterNode(Cell cell){
-            this.cell = cell;
-            this.x = cell.getX();
-            this.y = cell.getY();
-            this.cost = 0;
-            this.heuristic = 0;
-        }
-
-        @Override
-        public int compareTo(HunterNode o) {
-            return Float.compare(heuristic,o.heuristic);
-        }
-
-        /**
-         * calculate the distance between itself and another HunterNode
-         * @param o the other HunterNode
-         * @return the distance
-         */
-        float distanceTo(HunterNode o){
-            return cell.distanceTo(o.cell);
-        }
-
-        public ArrayList<HunterNode> getSons() {
-            ArrayList<HunterNode> l = new ArrayList<>();
-            for(Cell cell : cell.getAdjacentCells()){
-                if(cell != null && cell.isWalkable()){
-                    l.add(new HunterNode(cell));
-                }
-            }
-            return l;
-        }
     }
 }

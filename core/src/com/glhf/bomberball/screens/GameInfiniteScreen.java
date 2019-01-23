@@ -8,7 +8,6 @@ import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.InfiniteUI;
 import com.glhf.bomberball.utils.Directions;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,6 @@ public class GameInfiniteScreen extends GameScreen {
         //TODO : factoriser le code avec GameStoryScreen
         current_player = this.maze.spawnPlayer(config);
 
-        //enemies = this.maze.getEnemies();
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
@@ -94,14 +92,6 @@ public class GameInfiniteScreen extends GameScreen {
                 System.out.println("The player probably died");
             }
         }
-        /*if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new MainMenuScreen());
-        } else {
-            current_player.initiateTurn();
-            setMoveEffect();
-            setMoveMode();
-            input_handler.lock(false);
-        }*/
     }
 
     /**

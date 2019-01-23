@@ -15,6 +15,7 @@ public class ActiveEnemy extends Enemy {
 
     @Override
     public void createAI() {
+        this.nb_reachable_cells = MazeTransversal.getReacheableCellsInRange(this.cell, 100).size();
         this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), MAX_DEPTH));
     }
 
