@@ -38,11 +38,21 @@ public class GameInfiniteScreen extends GameScreen {
             @Override
             public void run() {
                 if (!current_player.isAlive()) {
-                    Bomberball.changeScreen(new EndInfiniteScreen());
+                    endGame();
                     Timer.instance().clear();
                 }
             }
         }, 1f, 1f);
+    }
+
+    private void endGame() {
+        GameInfiniteConfig config = GameInfiniteConfig.get();
+        Score s = Score.getINSTANCE();
+        if(config.highscore < s.getScore()){
+            config.highscore=s.getScore();
+            config.exportConfig();
+        }
+        Bomberball.changeScreen(new EndInfiniteScreen());
     }
 
     @Override
@@ -55,7 +65,7 @@ public class GameInfiniteScreen extends GameScreen {
      */
     protected void nextPlayer() {
         if (!current_player.isAlive()) {
-            Bomberball.changeScreen(new EndInfiniteScreen());
+            endGame();
         } else {
 
             // test if the current_player reached the door

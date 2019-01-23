@@ -35,7 +35,6 @@ public abstract class GameScreen extends AbstractScreen {
     public void hide() {
         super.hide();
         Audio.silence();
-        Score.getINSTANCE().resetScore();
     }
 
     @Override
