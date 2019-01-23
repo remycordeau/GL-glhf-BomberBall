@@ -8,7 +8,6 @@ import com.glhf.bomberball.maze.MazeBuilder;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.InfiniteUI;
 import com.glhf.bomberball.utils.Directions;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.util.ArrayList;
 
