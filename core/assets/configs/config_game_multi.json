@@ -1,7 +1,7 @@
 {
   "wall_life": 1,
-  "initial_bomb_number": 5,
-  "initial_bomb_range": 5,
+  "initial_bomb_number": 1,
+  "initial_bomb_range": 3,
   "bomb_damage": 1,
   "player_life": 1,
   "initial_player_moves": 5,
