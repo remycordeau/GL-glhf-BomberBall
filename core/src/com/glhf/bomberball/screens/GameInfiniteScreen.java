@@ -33,6 +33,8 @@ public class GameInfiniteScreen extends GameScreen {
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
 
+        NumberTurn.getINSTANCE().resetNbTurn();
+
         Timer.schedule(new Timer.Task() {   //Verifying if an ennemy has killed the player
             @Override
             public void run() {
@@ -48,7 +50,7 @@ public class GameInfiniteScreen extends GameScreen {
         GameInfiniteConfig config = GameInfiniteConfig.get();
         Score s = Score.getINSTANCE();
         if(config.highscore < s.getScore()){
-            config.highscore=s.getScore();
+            config.highscore = s.getScore();
             config.exportConfig();
         }
         Bomberball.changeScreen(new EndInfiniteScreen());

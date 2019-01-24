@@ -109,7 +109,6 @@ public class InfiniteMenuUI extends MenuUI {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     Score.getINSTANCE().resetScore();
-                    NumberTurn.getINSTANCE().resetNbTurn();
                     Bomberball.changeScreen(new GameInfiniteScreen(1));
                 }
             });
