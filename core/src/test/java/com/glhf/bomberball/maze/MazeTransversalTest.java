@@ -3,16 +3,21 @@ package com.glhf.bomberball.maze;
 import com.glhf.GdxTestRunner;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
+import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
+import com.glhf.bomberball.utils.VectorInt2;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(GdxTestRunner.class)
+//@RunWith(GdxTestRunner.class)
 public class MazeTransversalTest {
 
     private Maze mazeVide10x10;
@@ -20,9 +25,8 @@ public class MazeTransversalTest {
 
     @BeforeClass
     public static void create(){
-        Graphics.load();
-        Translator.load("fr");
-
+//        Graphics.load();
+//        Translator.load("fr");
     }
     
     @Before
@@ -38,7 +42,7 @@ public class MazeTransversalTest {
     @Test
     public void getReacheableCellsInRange() {
     }
-    /*
+
     @Test
     public void getReacheableCells() {
 
@@ -48,28 +52,7 @@ public class MazeTransversalTest {
 
         list = MazeTransversal.getReacheableCells(mazeVide15x10.getCellAt(0,0));
         assertEquals(150, list.size());
-
-        Cell cell = mazeVide10x10.getCellAt(0,1);
-        cell.addGameObject(new IndestructibleWall());
-        list = MazeTransversal.getReacheableCells(mazeVide10x10.getCellAt(0,0));
-        assertEquals(99, list.size());
-
-        cell.removeGameObjects();
-        cell.addGameObject(new DestructibleWall());
-        list = MazeTransversal.getReacheableCells(mazeVide10x10.getCellAt(0,0));
-        assertEquals(99, list.size());
-
-        cell.removeGameObjects();
-        cell.addGameObject(new Bomb(1,1));
-        list = MazeTransversal.getReacheableCells(mazeVide10x10.getCellAt(0,0));
-        assertEquals(99, list.size());
-
-        cell.removeGameObjects();
-        cell.addGameObject(new BonusWall(new Bonus(Type.SPEED)));
-        list = MazeTransversal.getReacheableCells(mazeVide10x10.getCellAt(0,0));
-        assertEquals(99, list.size());
     }
-    */
 
     @Test
     public void isReachableCell() {
@@ -77,10 +60,23 @@ public class MazeTransversalTest {
         assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(0,0), mazeVide10x10.getCellAt(0,9)));
         assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(0,0), mazeVide10x10.getCellAt(0,0)));
         assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(9,9), mazeVide10x10.getCellAt(9,0)));
+
+        assertTrue(MazeTransversal.isReachableCell(mazeVide10x10.getCellAt(9,9), null));
     }
 
     @Test
     public void getRandomPath() {
+        ArrayList<Directions> path = MazeTransversal.getRandomPath(mazeVide10x10.getCellAt(0, 0));
+        VectorInt2 diff = new VectorInt2(0,0);
+        for(Directions d : path){
+            switch (d){
+                case UP: diff.y++; break;
+                case DOWN: diff.y--; break;
+                case LEFT: diff.x--; break;
+                case RIGHT: diff.x++; break;
+            }
+        }
+        assertEquals(diff, new VectorInt2(0,0));//the path should be a loop
     }
 
     @Test
@@ -93,15 +89,6 @@ public class MazeTransversalTest {
 
     @Test
     public void longestWayMovesSequence() {
-    }
-
-    @Test
-    public void depth_graph_transversal() {
-        MazeTransversal.depth_graph_transversal(mazeVide10x10.getCellAt(0,0),4);
-    }
-
-    @Test
-    public void compareTwoNodes() {
     }
 
     @Test

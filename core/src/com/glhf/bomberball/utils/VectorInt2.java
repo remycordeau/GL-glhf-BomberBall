@@ -1,5 +1,7 @@
 package com.glhf.bomberball.utils;
 
+import java.util.HashMap;
+
 public class VectorInt2 {
     public int x;
     public int y;
@@ -7,6 +9,15 @@ public class VectorInt2 {
     public VectorInt2(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof VectorInt2){
+            VectorInt2 v = (VectorInt2) obj;
+            return v.x==this.x && v.y==this.y;
+        }
+        return false;
     }
 
     public int getX() {

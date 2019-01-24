@@ -209,6 +209,45 @@ public class MazeTransversal{
         return moves_sequence;
     }
 
+    public static ArrayList<Directions> shortestWay(Node ways, Cell target) {
+        //Getting the shortest path to the target
+        Node current_way = null;
+        Node current_node;
+        LinkedList<Node> to_visit = new LinkedList<>();
+        to_visit.add(ways);
+
+        while (to_visit.size() > 0) {
+            current_node = to_visit.poll();
+
+            if (current_node.getMatching_cell() == target && current_way == null) {
+                current_way = current_node;
+            } else if (current_node.getMatching_cell() == target && current_node.getAncestors().size() < current_way.getAncestors().size()) {
+                current_way = current_node;
+            }
+
+            for (int i=0; i<4; i++) {
+                if (current_node.getSons(i) != null) {
+                    to_visit.add(current_node.getSons(i));
+                }
+            }
+        }
+        ArrayList<Cell> shortest_way = current_way.getAncestors();
+        shortest_way.add(current_way.getMatching_cell());
+
+
+        //Creating the moves sequence
+        ArrayList<Directions> moves_sequence = new ArrayList<>();
+        int shortest_way_size = shortest_way.size();
+        Directions next_direction;
+
+        for(int i=0; i< shortest_way_size-1; i++){
+            next_direction = shortest_way.get(i).getCellDir(shortest_way.get(i+1));
+            moves_sequence.add(next_direction);
+        }
+
+        return moves_sequence;
+    }
+
 
     /**
      * this methods give to the agressif enemy the way he has to follow if the player is in his area given by range

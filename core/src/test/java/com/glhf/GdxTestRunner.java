@@ -18,8 +18,7 @@ package com.glhf;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.glhf.bomberball.utils.Constants;
+
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
