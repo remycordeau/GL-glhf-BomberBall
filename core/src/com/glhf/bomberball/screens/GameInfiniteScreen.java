@@ -27,7 +27,7 @@ public class GameInfiniteScreen extends GameScreen {
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new GameUI(current_player, true));
+        addUI(new GameUI(current_player, true, config.finite_number_turn));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui

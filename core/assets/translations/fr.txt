@@ -57,6 +57,7 @@
 "Limited turns"     :   "Limite nombre de tours"
 "No crates"         :   "Sans caisses"
 "Random Maze"		:	"Carte Aléatoire"
+"Turns left" : "Tours restants"
 
 #WelcomingMenu UI
 "Press [%s] to play"    :     "Appuyez sur [%s] pour jouer"

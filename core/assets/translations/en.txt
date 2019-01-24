@@ -57,6 +57,7 @@
 "Limited turns"     :   "Limited turns"
 "No crates"         :   "No crates"
 "Random Maze"		:	"Random Maze"
+"Turns left" : "Turns left"
 
 #WelcomingMenu UI
 "Press [%s] to play"    :     "Press [%s] to play"
