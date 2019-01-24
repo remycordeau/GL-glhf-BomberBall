@@ -2,6 +2,7 @@ package com.glhf.bomberball.screens;
 
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
+import com.glhf.bomberball.audio.Audio;
 import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryTellingUI;
@@ -17,6 +18,7 @@ public class StoryTellingScreen extends AbstractScreen {
         addUI(ui);
         chapter=1;
         config = AppConfig.get();
+        Audio.STORY_SONG.playMusique();
     }
 
     @Override
