@@ -56,10 +56,7 @@ public class StoryTellingUI extends Table {
         skip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                AppConfig config = AppConfig.get();
-                config.story_displayed = true;
-                config.exportConfig();
-                Bomberball.changeScreen(new StoryMenuScreen());
+                screen.endStory();
             }
         });
         skip.align(Align.bottomLeft);
