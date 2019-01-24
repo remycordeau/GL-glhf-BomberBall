@@ -119,7 +119,17 @@
       {
         "x": 1,
         "y": 4,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 1,
@@ -144,7 +154,17 @@
       {
         "x": 1,
         "y": 8,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 1,
@@ -572,7 +592,17 @@
       {
         "x": 6,
         "y": 9,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 6,
@@ -659,7 +689,17 @@
       {
         "x": 7,
         "y": 10,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 7,
@@ -880,7 +920,17 @@
       {
         "x": 10,
         "y": 3,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 10,
@@ -1006,7 +1056,17 @@
       {
         "x": 11,
         "y": 9,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 11,
@@ -1058,7 +1118,17 @@
       {
         "x": 12,
         "y": 3,
-        "objects": []
+        "objects": [
+          {
+            "strength": 1,
+            "nb_reachable_cells": 0,
+            "actual_move": 0,
+            "initial_moves": 5,
+            "skin": "swampy",
+            "life": 1,
+            "_class": "com.glhf.bomberball.gameobject.ActiveEnemy"
+          }
+        ]
       },
       {
         "x": 12,
