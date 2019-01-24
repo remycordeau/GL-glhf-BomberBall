@@ -79,4 +79,4 @@
 "The hero"      :   "Le héros"
 "The princess"  :   "La princesse"
 "The magician"  :   "Le magicien"
-"The evil"      :   "Le méchant"
+"The bad guy"      :   "Le méchant"
