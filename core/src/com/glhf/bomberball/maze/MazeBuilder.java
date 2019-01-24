@@ -128,7 +128,7 @@ public class MazeBuilder {
                 if (rand < range_end) {
                     GameObject o = c.newInstance();
                     if(o instanceof BonusWall){
-                        Bonus b = new Bonus(Type.SPEED);
+                        Bonus b = new Bonus(Type.values()[(int)(Math.random()*10)%3]);
                         o = new BonusWall(b);
                     }
                     return (Wall)o;
