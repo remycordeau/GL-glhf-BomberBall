@@ -3,6 +3,7 @@ package com.glhf.bomberball.screens;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.config.AppConfig;
+import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.StoryTellingUI;
 
 public class StoryTellingScreen extends AbstractScreen {
@@ -29,9 +30,13 @@ public class StoryTellingScreen extends AbstractScreen {
             chapter++;
             ui.continueStory();
         }else {
-            config.story_displayed=true;
-            config.exportConfig();
-            Bomberball.changeScreen(new StoryMenuScreen());
+            endStory();
         }
+    }
+
+    public void endStory() {
+        config.story_displayed=true;
+        config.exportConfig();
+        Bomberball.changeScreen(new GameStoryScreen(new StoryMenuScreen(), Maze.importMazeSolo("maze_"+0), 0));
     }
 }
