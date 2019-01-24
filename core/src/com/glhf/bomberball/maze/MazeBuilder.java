@@ -31,7 +31,7 @@ public class MazeBuilder {
         maze = new Maze();
 
         maze.title = "Classic";
-        int diff_sizer = 1 + difficulty/10;
+        int diff_sizer = 1 + difficulty/15;
         maze.height = 7 + (int) (Math.random()*5*diff_sizer)*2;
         maze.width = 9 + (int) (Math.random()*5*diff_sizer)*2;
 
