@@ -61,7 +61,9 @@ public class AggressiveEnemy extends Enemy {
         }
 
         if (moves_remaining > 0 && !way.isEmpty()) {
-            this.move(way.get(actual_move));
+            if (!this.move(way.get(actual_move))) {
+                way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), MAX_DEPTH));
+            }
             actual_move = (actual_move+1)%way.size();
             Timer.schedule(new Timer.Task() {
                 @Override
