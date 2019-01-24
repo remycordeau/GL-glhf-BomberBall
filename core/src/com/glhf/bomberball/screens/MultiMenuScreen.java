@@ -16,7 +16,7 @@ import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 public class MultiMenuScreen extends MenuScreen {
 
     public Maze maze;
-    public static String[] playable = {"knight_m", "knight_f","black_knight", "elf_f", "elf_m", "wizzard_m", "wizzard_f", "no_player"};
+    public static String[] playable = {"knight_m", "knight_f", "elf_f", "elf_m", "wizzard_m", "wizzard_f", "no_player"};
     public static final int nb_Playable = playable.length;
     private int maze_id = 0;
     private int maze_count;

@@ -20,6 +20,7 @@ import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.AppConfig;
 import com.glhf.bomberball.screens.*;
 import com.glhf.bomberball.utils.ScreenChangeListener;
 
@@ -54,7 +55,17 @@ public class SoloMenuUI extends MenuUI {
         buttons.setBackground(background);
 
         b = new AudioButton(Translator.translate("Story Mode"), skin);
-        b.addListener(new ScreenChangeListener(StoryMenuScreen.class));
+        b.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                if(AppConfig.get().story_displayed){
+                    Bomberball.changeScreen(new StoryMenuScreen());
+                }else{
+                    Bomberball.changeScreen(new StoryTellingScreen());
+                }
+            }
+        });
         buttons.add(b).growX().space(spacing).row();
 
         b = new AudioButton(Translator.translate("Infinite Mode"), skin);

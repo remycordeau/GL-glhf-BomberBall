@@ -1,10 +1,12 @@
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
@@ -26,12 +28,13 @@ public class PlayersInfoUI extends Table {
     public PlayersInfoUI(ArrayList<Player> players) {
         for (Player player : players) {
             PlayerWidget pw = new PlayerWidget(player);
-            this.add(pw).growX();
+            this.add(pw).growX().prefHeight(Value.percentHeight(1/3f, this)).space(Value.percentHeight(0.05f, this));
             this.row();
         }
+        this.pad(Value.percentHeight(0.05f));
     }
 
-    class PlayerWidget extends MenuUI implements Observer {
+    class PlayerWidget extends Table implements Observer {
         private Player player;
         private boolean previous_player_state;
         private AnimationActor player_skin;
@@ -49,6 +52,9 @@ public class PlayersInfoUI extends Table {
             player_info = new PlayerInfoWidget(player);
             this.add(player_info).grow();
             player.addObserver(this);
+
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plaindark_9patch.png"), 5, 5, 5, 5));
+            this.setBackground(patch);
         }
 
         @Override
@@ -110,15 +116,15 @@ public class PlayersInfoUI extends Table {
             this.player = player;
             player.addObserver(this);
             //ajout des icones
-            Image number_moves_image = new Image(Graphics.Sprites.get("arrowSpeed"));
-            Image number_bombs_image = new Image(Graphics.Sprites.get("bomb"));
-            Image bomb_range_image = new Image(Graphics.Sprites.get("flame"));
+            Image number_moves_image = new Image(Graphics.Sprites.get("speed_bonus"));
+            Image number_bombs_image = new Image(Graphics.Sprites.get("bomb_bonus"));
+            Image bomb_range_image = new Image(Graphics.Sprites.get("explo_bonus"));
             number_moves_image.setScaling(Scaling.fit);
             number_bombs_image.setScaling(Scaling.fit);
             bomb_range_image.setScaling(Scaling.fit);
-            this.add(number_moves_image).grow().space(10);
-            this.add(number_bombs_image).grow().space(10);
-            this.add(bomb_range_image).grow().space(10);
+            this.add(number_moves_image).grow();
+            this.add(number_bombs_image).grow();
+            this.add(bomb_range_image).grow();
             //retour ligne
             this.row();
             //ajout des nombres
@@ -128,9 +134,12 @@ public class PlayersInfoUI extends Table {
             number_moves.setAlignment(Align.center);
             number_bombs.setAlignment(Align.center);
             bomb_range.setAlignment(Align.center);
-            this.add(number_moves).grow().space(10);
-            this.add(number_bombs).grow().space(10);
-            this.add(bomb_range).grow().space(10);
+            this.add(number_moves).grow();
+            this.add(number_bombs).grow();
+            this.add(bomb_range).grow();
+
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plain_9patch.png"), 5, 5, 5, 5));
+            this.setBackground(patch);
         }
 
         @Override

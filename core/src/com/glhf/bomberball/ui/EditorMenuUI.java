@@ -2,10 +2,12 @@ package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.glhf.bomberball.Bomberball;
@@ -35,7 +37,7 @@ public class EditorMenuUI extends MenuUI {
     {
         this.setFillParent(true);
 
-        this.add(new ButtonsWidget()).width(Value.percentWidth(1/3f, this)).growY();
+        this.add(new ButtonsWidget()).growY().width(Value.percentWidth(1/3f, this));
         this.add(new MazeSelectorWidget()).grow();
 
         this.add(maze_preview);
@@ -62,6 +64,9 @@ public class EditorMenuUI extends MenuUI {
             this.add(new NewMazeWidget()).growX().space(spacing);
             this.row();
             this.add(back_button).expand().growX().align(Align.bottom);
+
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plain_9patch.png"), 5, 5, 5, 5));
+            this.setBackground(patch);
         }
     }
 
@@ -100,6 +105,8 @@ public class EditorMenuUI extends MenuUI {
             dimensions.add(width_field).row();
             dimensions.add(height_label).growX();
             dimensions.add(height_field);
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plaindark_9patch.png"), 5, 5, 5, 5));
+            dimensions.setBackground(patch);
 
             this.add(dimensions).growX();
         }

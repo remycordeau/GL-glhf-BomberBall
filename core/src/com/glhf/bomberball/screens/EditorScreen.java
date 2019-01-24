@@ -37,7 +37,7 @@ public class EditorScreen extends MenuScreen {
     {
         super();
         this.maze = Maze.importMazeMulti("maze_" + maze_id);
-        maze_id = maze_id;
+        this.maze_id = maze_id;
         ui = new EditorUI(this, maze);
         addUI(ui);
         addSpawns();

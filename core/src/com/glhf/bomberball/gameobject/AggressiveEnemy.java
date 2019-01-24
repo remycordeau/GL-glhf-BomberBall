@@ -17,6 +17,10 @@ public class AggressiveEnemy extends Enemy {
 
     private int hunting_range;
 
+    public AggressiveEnemy(){
+        super();
+    }
+
     public AggressiveEnemy(String skin, int life, int initial_moves, int strength, int hunting_range) {
         super(skin, life, initial_moves, strength);
         // active mode when created
@@ -34,6 +38,12 @@ public class AggressiveEnemy extends Enemy {
         if(cell!=null){// equivalent to isAlive()
             this.way = MazeTransversal.longestWayMovesSequence(MazeTransversal.constructWay(this.getCell(), MAX_DEPTH));
         }
+    }
+
+
+    @Override
+    public GameObject clone() {
+        return new AggressiveEnemy(skin,life,initial_moves, strength, hunting_range);
     }
 
     @Override
