@@ -48,7 +48,7 @@ public abstract class Config {
         try {
             String fileName = Constants.PATH_CONFIGS + name + ".json";
             if(!new File(fileName).exists()) {
-                c.newInstance().exportConfig(name);
+                c.newInstance().reset().exportConfig(name);
             }
             return gson.fromJson(new FileReader(fileName), c);
         } catch (FileNotFoundException e) {
@@ -58,6 +58,12 @@ public abstract class Config {
         }
         return null;
     }
+
+    /**
+     * function applied when file not found, just after the default constructor
+     * @return itself
+     */
+    protected abstract Config reset();
 
     /**
      * Exports a config

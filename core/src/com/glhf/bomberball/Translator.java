@@ -26,12 +26,12 @@ public class Translator {
             Matcher m = pattern.matcher(line);
             if(m.find())
                 if(!dictionary.containsKey(m.group(1))){
-                    dictionary.put(m.group(1), m.group(2));
+                    dictionary.put(m.group(1), m.group(2).replace("\\n","\n"));
                 }else{
                     System.err.println("translation \""+m.group(1)+"\" is translated twice ! (you need to remove one)");
                 }
             else
-                System.err.println("cannot parse line : \""+line+"\")");
+                System.err.println("cannot parse line : "+line);
         }
     }
 

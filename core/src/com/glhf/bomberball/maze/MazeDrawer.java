@@ -10,13 +10,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.glhf.bomberball.gameobject.Door;
+import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.CellEffect;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.Graphics;
-import com.glhf.bomberball.gameobject.GameObject;
-import com.glhf.bomberball.gameobject.Character;
 import com.glhf.bomberball.maze.cell.Cell;
+import com.glhf.bomberball.utils.Directions;
 import com.glhf.bomberball.utils.VectorInt2;
 
 import java.util.ArrayList;
@@ -194,7 +194,6 @@ public class MazeDrawer extends Actor {
             drawTextureInCell(gameObject.getSprite(), cell.getX(), cell.getY(), offsetp.x, offsetp.y);
             teta += dteta;
         }
-
     }
 
     private void drawFloor()
@@ -226,9 +225,15 @@ public class MazeDrawer extends Actor {
     {
         AtlasRegion sprite_top = Graphics.Sprites.get("wall_top_mid");
         AtlasRegion sprite_mid = Graphics.Sprites.get("wall_mid");
+        AtlasRegion sprite_wall_top = Graphics.Sprites.get("wall_top");
         for (int x = 0; x < maze_width; x++) {
-            drawTextureInCell(sprite_top, x, maze_height + 1);
-            drawTextureInCell(sprite_mid, x, maze_height);
+            Cell down = maze.getCellAt(x,maze_height - 1);
+            if (down.hasInstanceOf(IndestructibleWall.class)) {
+                drawTextureInCell(sprite_wall_top, x, maze_height);
+            } else {
+                drawTextureInCell(sprite_top, x, maze_height + 1);
+                drawTextureInCell(sprite_mid, x, maze_height);
+            }
         }
     }
 

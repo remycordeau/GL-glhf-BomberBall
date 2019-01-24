@@ -4,10 +4,8 @@ import com.glhf.bomberball.gameobject.IndestructibleWall;
 import com.glhf.bomberball.gameobject.Player;
 import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.utils.Directions;
-import com.glhf.bomberball.utils.HunterNode;
 import com.glhf.bomberball.utils.Node;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MazeTransversal{
@@ -125,44 +123,7 @@ public class MazeTransversal{
      * @param initial_position
      * @return Node
      */
-    /*public static Node constructWays(Cell initial_position) {
-        Node ways = new Node(null, initial_position);
-        LinkedList<Node> to_construct = new LinkedList<>();
-        Node current_node;
-        Node son;
-        ArrayList<Cell> family;
-        Cell current_adjacent_cell;
-        //add the root to to_construct
-        to_construct.add(ways);
-        //constructing the tree
-        while (to_construct.size() > 0) {
-            current_node = to_construct.poll(); //get the next element to construct
-            //create sons and adding them to to_construct
-            for (Directions d : Directions.values()) {
-                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
-                family = current_node.getAncestors();
-                //adding son
-                if(current_adjacent_cell==null
-                        || !current_adjacent_cell.isWalkable()
-                        || (family !=null && family.contains(current_adjacent_cell))
-                        || (family != null && family.size() > 30)){
-                    current_node.setSons(null, d);
-                }
-                else{
-                    //creating a son
-                    family = family == null ? new ArrayList<>() : new ArrayList<>(family);
-                    family.add(current_node.getMatching_cell());
-                    son = new Node(family, current_adjacent_cell);
-                    current_node.setSons(son, d);
-                    //adding son to to_construct
-                    to_construct.add(son);
-                }
-            }
-        }
-        return ways;
-    }*/
-
-    public static Node constructWay(Cell initial_position) {
+    public static Node constructWay(Cell initial_position, int range) {
         Node way = new Node(null, null, initial_position);
         LinkedList<Node> to_construct = new LinkedList<>();
         Node current_node;
@@ -172,20 +133,26 @@ public class MazeTransversal{
         to_construct.add(way);
         while (to_construct.size() > 0) {
             current_node = to_construct.poll();
-            for (Directions d : Directions.values()) {
-                current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
-                family = current_node.getAncestors();
-                if(current_adjacent_cell == null
-                    || !current_adjacent_cell.isWalkable()
-                    || (family != null && family.contains(current_adjacent_cell))) {
-                    current_node.setSons(null, d);
-                    current_node.sonIsSet();
-                } else {
-                    family = family == null ? new ArrayList<>() : new ArrayList<>(family);
-                    family.add(current_node.getMatching_cell());
-                    son = new Node(family, current_node, current_adjacent_cell);
-                    current_node.setSons(son, d);
-                    to_construct.add(son); //TODO: ajouter à une certaine place pour parcourire en profondeur
+            if (current_node.getAncestors() == null || current_node.getAncestors().size() < range) {
+                for (Directions d : Directions.values()) {
+                    current_adjacent_cell = current_node.getMatching_cell().getAdjacentCell(d);
+                    family = current_node.getAncestors();
+                    if(current_adjacent_cell == null
+                            || !current_adjacent_cell.isWalkable()
+                            || (family != null && family.contains(current_adjacent_cell))) {
+                        current_node.setSons(null, d);
+                        current_node.sonIsSet();
+                    } else {
+                        family = family == null ? new ArrayList<>() : new ArrayList<>(family);
+                        family.add(current_node.getMatching_cell());
+                        son = new Node(family, current_node, current_adjacent_cell);
+                        current_node.setSons(son, d);
+                        if (d.ordinal() < to_construct.size()) {
+                            to_construct.add(d.ordinal(), son);
+                        } else {
+                            to_construct.add(son);
+                        }
+                    }
                 }
             }
         }
@@ -200,7 +167,7 @@ public class MazeTransversal{
      */
     public static ArrayList<Cell> longestWay(Node initial_node){
         ArrayList<Cell> longest = new ArrayList<>();
-        ArrayList<Cell> current = new ArrayList<>();
+        ArrayList<Cell> current;
         if(initial_node != null) {
             for(int i=0; i<4; i++){
                 current = longestWay(initial_node.getSons(i));
@@ -221,8 +188,8 @@ public class MazeTransversal{
      */
     public static ArrayList<Directions> longestWayMovesSequence(Node initial_node){
         ArrayList<Directions> moves_sequence = new ArrayList<>();
-        ArrayList<Directions> moves_sequence_miror = new ArrayList<>();
-        ArrayList<Cell> longest_way = new ArrayList<>();
+        ArrayList<Directions> moves_sequence_mirror = new ArrayList<>();
+        ArrayList<Cell> longest_way;
         longest_way = longestWay(initial_node);
         int longest_way_size = longest_way.size();
         Directions next_direction;
@@ -230,14 +197,14 @@ public class MazeTransversal{
         for(int i=0; i< longest_way_size-1; i++){
             next_direction = longest_way.get(i).getCellDir(longest_way.get(i+1));
             moves_sequence.add(next_direction);
-            moves_sequence_miror.add(0, Directions.values()[(next_direction.ordinal()+2)%4]);
+            moves_sequence_mirror.add(0, Directions.values()[(next_direction.ordinal()+2)%4]);
         }
         last_direction = longest_way.get(longest_way_size-1).getCellDir(initial_node.getMatching_cell());
         if(longest_way.get(longest_way_size-1).getCellDir(initial_node.getMatching_cell()) != null){
             moves_sequence.add(last_direction);
         }
         else{
-            moves_sequence.addAll(moves_sequence_miror);
+            moves_sequence.addAll(moves_sequence_mirror);
         }
         return moves_sequence;
     }
@@ -285,32 +252,5 @@ public class MazeTransversal{
             }
         }
         return null;
-    }
-
-    public static int compareTwoNodes(HunterNode n1, HunterNode n2){
-        return Integer.compare(n2.getHeuristic(), n1.getHeuristic());
-    }
-
-    /*Fonction cheminPlusCourt(g:Graphe, objectif:Nœud, depart:Nœud)
-    closedList = File()
-    openList = FilePrioritaire(comparateur=compare2Noeuds)
-       openList.ajouter(depart)
-    tant que openList n'est pas vide
-    u = openList.depiler()
-    si u.x == objectif.x et u.y == objectif.y
-    reconstituerChemin(u)
-    terminer le programme
-    pour chaque voisin v de u dans g
-    si v existe dans closedList avec un cout inférieur ou si v existe dans openList avec un cout inférieur
-    neRienFaire()
-    sinon
-    v.cout = u.cout +1
-    v.heuristique = v.cout + distance([v.x, v.y], [objectif.x, objectif.y])
-                    openList.ajouter(v)
-            closedList.ajouter(u)
-    terminer le programme (avec erreur)*/
-
-    public static void shortestPath(Maze maze, HunterNode origin_node, HunterNode targeted_node){
-
     }
 }

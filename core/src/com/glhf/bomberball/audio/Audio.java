@@ -17,7 +17,8 @@ public enum Audio {
     GAME_SONG(Constants.PATH_SOUNDS+"GameSong.mp3"),
     BOMB(Constants.PATH_SOUNDS+"Bomb.wav"),
     POWER_UP(Constants.PATH_SOUNDS+"Powerup.wav"),
-    EQUALITY(Constants.PATH_SOUNDS+"equality.ogg");
+    EQUALITY(Constants.PATH_SOUNDS+"equality.ogg"),
+    STORY_SONG(Constants.PATH_SOUNDS+"histoireMusique.mp3");
 
     private Sound sound;
     private Boolean played;
