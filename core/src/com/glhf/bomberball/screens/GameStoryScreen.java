@@ -53,7 +53,7 @@ public class GameStoryScreen extends GameScreen {
     @Override
     public void registerActionsHandlers() {
         super.registerActionsHandlers();
-        input_handler.registerActionHandler(Action.DROP_BOMB, this::teleportPlayer);
+        //input_handler.registerActionHandler(Action.DROP_BOMB, this::teleportPlayer);
     }
 
     private void teleportPlayer(float x, float y) {
