@@ -7,6 +7,7 @@
 #EndLevelUI
 "level unlocked"		:	"Level %d unlocked !"
 "level succeeded"		:	"Congratulations ! You've succeeded level %d !"
+"Replay last level"     :   "Replay"
 
 #SoloUI
 "mode movement button"	:	"Movement [%s]"
