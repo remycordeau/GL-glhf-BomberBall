@@ -8,17 +8,17 @@
 		`------'  `---' `--`--`--' `---'  `----'`--'   `------'  `--`--'`--'`--' 
 --------------------
 Version: 1.0
-Autheur: Équipe GLHF
+Auteur: Équipe GLHF
 --------------------
 
 Merci d'avoir choisi de jouer au jeu BomberBall développé par l'équipe GLHF !
 
-	Bomberball est un jeu tour par tour que vous pourrez jouer seul ou avec des amis ! Il dispose d'un mode histoire, d'un mode infinis dans lequel vous pourrez essayer de vous dépasser pour obtenir le meilleur score ! 
-	Profitez du mode multi-joueur avec vos amis sur des labyrinthes préfait ou sur un labyrinthe que vous aurez entierrement crée grâce à notre éditeur de labyrinthe. 
+	Bomberball est un jeu tour par tour où vous pourrez jouer seul ou avec des amis ! Il dispose d'un mode histoire, d'un mode infini dans lequel vous pourrez essayer de vous dépasser pour obtenir le meilleur score !
+	Profitez également, avec vos amis, du mode multijoueur sur des labyrinthes préfaits ou sur un labyrinthe que vous aurez entièrement créé grâce à notre éditeur de labyrinthe.
 	
 Prérequis :
 -----------
-Pour lancer notre jeu vous aurez besoin d'avoir installé la version 8 de java https://www.java.com/fr/download/		
+Pour lancer notre jeu vous aurez besoin d'avoir installé la version 8 de java (https://www.java.com/fr/download/).
 				                                                         
 Installation :
 --------------
@@ -33,18 +33,19 @@ Lancer le fichier .jar
 
 Bugs connus :
 -------------
-	- Aucun le jeu est parfait !
+	- Possibles lags lors des parties solo (dûs au calculs de chemin des ennemis).
+	- Problème d'affichage lors du changement de résolution.
 
 Support :
 ---------
-Si vous avez des problèmes, n'hésitez pas à les reporter a cette adresse : contact.glhfcorp@gmail.com
+Si vous avez des problèmes, n'hésitez pas à les reporter à cette adresse : contact.glhfcorp@gmail.com
 
 Les futures mises à jour :
 ------------------------
 	- Possibilité de mettre en ligne les cartes éditées par la communauté via un workshop.
-	- Ajout de plus de carte en mode histoire
-	- Ajout de nouveau bonus
-	- Plus d'option dans le mode infini
+	- Ajout de plus de cartes en mode histoire
+	- Ajout de nouveaux bonus
+	- Plus d'options dans le mode infini
 
 
 Construit avec :
@@ -56,8 +57,8 @@ Construit avec :
 	
 Remerciements : 
 ---------------
-	- Monsieur MOREAU et PICOGNALA de nous avoir proposé de mener à bien ce projet.
+	- Monsieur MOREAU et PICOGNA de nous avoir proposé de mener ce projet.
 	- Tous les testeurs qui ont répondu à notre appel.
-	- Les IMR3 qui nous ont aidé à bien débuter et qui sont venu nous donner leur précieux conseils lors de la session de test.
-	- Vous qui jouez à ce jeux et qui aura lu ce README jusq'au bout !
+	- Les IMR3 qui nous ont aidé à bien débuter et qui sont venus nous donner leurs précieux conseils lors de la session de test.
+	- Vous qui jouez à ce jeu et qui avez lu ce README jusqu'au bout !
 
