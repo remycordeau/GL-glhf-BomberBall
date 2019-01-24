@@ -1,21 +1,22 @@
 package com.glhf.bomberball.ui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.*;
 import com.glhf.bomberball.Graphics;
 import com.glhf.bomberball.Translator;
 import com.glhf.bomberball.audio.AudioButton;
+import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.maze.MazeDrawer;
 import com.glhf.bomberball.screens.EditorMenuScreen;
+import com.glhf.bomberball.screens.GameStoryScreen;
 import com.glhf.bomberball.screens.MainMenuScreen;
 import com.glhf.bomberball.screens.EditorScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
@@ -24,6 +25,7 @@ import com.glhf.bomberball.utils.VectorInt2;
 import java.util.ArrayList;
 
 import static com.glhf.bomberball.utils.Constants.BOX_WIDTH;
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class EditorUI extends MenuUI {
 
@@ -36,10 +38,10 @@ public class EditorUI extends MenuUI {
         this.screen = screen;
 
         this.maze = maze;
-        maze_preview = new MazeDrawer(maze, 0.0f, 0.85f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
+        maze_preview = new MazeDrawer(maze, 0.0f, 0.80f, 0.0f, 1.0f, MazeDrawer.Fit.BEST);
 
         this.setFillParent(true);
-        this.padLeft(Value.percentWidth(0.85f));
+        this.padLeft(Value.percentWidth(0.80f));
 
         initializeButtons();
         this.addActor(maze_preview);
@@ -83,6 +85,11 @@ public class EditorUI extends MenuUI {
             presets.add(new BonusWall(new Bonus(Bonus.Type.SPEED)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_NUMBER)));
             presets.add(new BonusWall(new Bonus(Bonus.Type.BOMB_RANGE)));
+            GameInfiniteConfig config = GameInfiniteConfig.get();
+            //presets.add(new PassiveEnemy("skelet", config.passiveEnemy_life, config.passiveEnemy_moves, config.passiveEnemy_strength, new ArrayList<>()));
+            //presets.add(new AggressiveEnemy("wogol", config.aggressiveEnemy_life, config.aggressiveEnemy_moves, config.aggressiveEnemy_strength, config.aggressiveEnemy_huntingRange));
+            //presets.add(new ActiveEnemy("swampy", config.activeEnemy_life, config.activeEnemy_moves, config.activeEnemy_strength));
+
             presets.add(new Player("knight_m", 1, 1,1, 1));
             //presets.add(new Door());
 

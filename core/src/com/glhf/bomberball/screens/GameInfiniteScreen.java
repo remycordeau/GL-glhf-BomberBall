@@ -1,11 +1,13 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Timer;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.config.GameInfiniteConfig;
 import com.glhf.bomberball.gameobject.*;
+import com.glhf.bomberball.gameobject.NumberTurn;
 import com.glhf.bomberball.maze.MazeBuilder;
-import com.glhf.bomberball.ui.InfiniteUI;
+import com.glhf.bomberball.ui.GameUI;
 import com.glhf.bomberball.utils.Directions;
 
 import java.util.ArrayList;
@@ -13,22 +15,19 @@ import java.util.ArrayList;
 public class GameInfiniteScreen extends GameScreen {
 
     private ArrayList<Enemy> enemies;
-    private InfiniteModeScreen screen;
     private int difficulty;
 
-    public GameInfiniteScreen(InfiniteModeScreen screen, int difficulty) {
+    public GameInfiniteScreen(int difficulty) {
         //super(maze);
         super(MazeBuilder.createInfinityMaze(difficulty));
         this.difficulty = difficulty;
         GameInfiniteConfig config = GameInfiniteConfig.get();
-        this.screen = screen;
-        
         current_player = this.maze.spawnPlayer(config);
 
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new InfiniteUI(current_player, this));
+        addUI(new GameUI(current_player, true));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
@@ -45,7 +44,7 @@ public class GameInfiniteScreen extends GameScreen {
         }, 1f, 1f);
     }
 
-    private void endGame() {
+    protected void endGame() {
         GameInfiniteConfig config = GameInfiniteConfig.get();
         Score s = Score.getINSTANCE();
         if(config.highscore < s.getScore()){
@@ -53,6 +52,10 @@ public class GameInfiniteScreen extends GameScreen {
             config.exportConfig();
         }
         Bomberball.changeScreen(new EndInfiniteScreen());
+    }
+
+    @Override
+    protected void startGame() {
     }
 
     @Override
@@ -64,6 +67,13 @@ public class GameInfiniteScreen extends GameScreen {
      * gives the next current_player after a turn. If the next current_player is dead, choose the following current_player.
      */
     protected void nextPlayer() {
+        if(GameInfiniteConfig.get().finite_number_turn){
+            NumberTurn nt = NumberTurn.getINSTANCE();
+            nt.decreaseTurn(1);
+            if(nt.getNbTurn()==0){
+                endGame();
+            }
+        }
         if (!current_player.isAlive()) {
             endGame();
         } else {
@@ -76,7 +86,7 @@ public class GameInfiniteScreen extends GameScreen {
                 }
             }
             if (isIn) {
-                Bomberball.changeScreen(new GameInfiniteScreen(screen, difficulty+1));
+                Bomberball.changeScreen(new GameInfiniteScreen(difficulty+1));
                 return;
             }
 
