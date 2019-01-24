@@ -31,7 +31,7 @@ public class PlayersInfoUI extends Table {
             this.add(pw).growX().prefHeight(Value.percentHeight(1/3f, this)).space(Value.percentHeight(0.05f, this));
             this.row();
         }
-        this.pad(Value.percentHeight(0.05f));
+        this.pad(Value.percentHeight(0.025f));
     }
 
     class PlayerWidget extends Table implements Observer {
@@ -43,7 +43,6 @@ public class PlayersInfoUI extends Table {
         public PlayerWidget(Player player) {
             TextureRegionDrawable texture = new TextureRegionDrawable(new TextureRegion(new Texture(PATH_GRAPHICS+"background/InfoPlayer.png")));
             this.setBackground(texture);
-            this.pad(20);
             this.player = player;
             this.previous_player_state = player.isActive();
             player_skin = new AnimationActor(player.getAnimation());

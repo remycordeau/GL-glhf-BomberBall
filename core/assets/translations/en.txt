@@ -71,7 +71,7 @@
 "story2"    :   "Driven by wrath and jealousy, he kidnapped Maximilien and locked him inside\nthe highest dungeon of his castle.\n"You will lie here forever and I will marry princess Bianca", said Plétor"
 "story3"    :   "Out of despair, alone in the dungeon, the knight finally met Bernard the magician,\nwho was quite struggling under a pile of rags."
 "story4"    :   ""I can help you to escape this prison and see your wife again. Here are\nsome bombs to help you in your task. It won't be easy to find your way\naround the castle because it is huge and heavily guarded.\nBut I'm sure you will figure it out and meet princess Bianca again" said Bernard"
-"Skip"      :   "Passer"
+"Skip"      :   "Skip"
 "Next chapter"  :   "Next chapter"
 "The hero"      :   "The hero"
 "The princess"  :   "The princess"
