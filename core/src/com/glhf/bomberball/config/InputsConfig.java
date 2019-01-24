@@ -52,8 +52,8 @@ public class InputsConfig extends Config {
         setInputKeyCode(Action.DROP_BOMB_DOWN, Keys.NUMPAD_2);
         setInputKeyCode(Action.MODE_MOVE, Keys.D);
         setInputKeyCode(Action.MODE_BOMB, Keys.B);
-        setInputKeyCode(Action.ENDTURN, Keys.F);
-        setInputKeyCode(Action.ENDTURN, Keys.SPACE, SECONDARY);
+        setInputKeyCode(Action.ENDTURN, Keys.SPACE);
+        setInputKeyCode(Action.ENDTURN, Keys.F, SECONDARY);
         setInputKeyCode(Action.DROP_BOMB, Keys.L);
         setInputKeyCode(Action.MENU_GO_BACK, Keys.ESCAPE);
 
