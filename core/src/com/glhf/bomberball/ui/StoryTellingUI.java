@@ -34,13 +34,13 @@ public class StoryTellingUI extends Table {
         characters.setFillParent(true);
         characters.align(Align.top);
         characters.padTop(10);
-        characters.add(new CharacterUI("knight_m", "Le héros", "Maximilien"))
+        characters.add(new CharacterUI("knight_m", Translator.translate("The hero"), "Maximilien"))
                 .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("black_knight", "Le méchant", "Plétor"))
+        characters.add(new CharacterUI("black_knight", Translator.translate("The bad guy"), "Plétor"))
                 .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("wizzard_m", "Le magicien", "Bernard"))
+        characters.add(new CharacterUI("wizzard_m", Translator.translate("The magician"), "Bernard"))
                 .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("elf_f", "La princesse", "Bianca"))
+        characters.add(new CharacterUI("elf_f", Translator.translate("The princess"), "Bianca"))
                 .height(Value.percentHeight(0.3f, this));
         addActor(characters);
 

@@ -72,3 +72,7 @@
 "story4"    :   "Bernard : "Je peux vous aider à retrouver votre douce. Voici pléthore ..."\nMaximilien : "Où ça ?"\nBernard : "de bombes vous permettant de vous échapper de ce donjon.\nFaites-en bon usage"
 "Skip"      :   "Passer"
 "Next chapter"  :   "Chapitre suivant"
+"The hero"      :   "Le héros"
+"The princess"  :   "La princesse"
+"The magician"  :   "Le magicien"
+"The evil"      :   "Le méchant"
