@@ -19,9 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox.SelectBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -86,16 +86,7 @@ public class Graphics {
 
     public static class GUI {
         private static Skin skin;
-        private static TextureAtlas gui_atlasTexture;
-        private static HashMap<String, AtlasRegion> gui_atlasRegions;
-        private static float initial_height;
-
-        private static void load()
-        {
-            initial_height = Gdx.graphics.getHeight();
-            loadAtlas();
-            loadSkin();
-        }
+        private static float font_size = 1;
 
         public static Skin getSkin(){
             return skin;
@@ -103,11 +94,11 @@ public class Graphics {
 
         public static void scaleFont() {
             for (ObjectMap.Entry<String, BitmapFont> f : skin.getAll(BitmapFont.class)) {
-                f.value.getData().setScale(Gdx.graphics.getHeight() / initial_height);
+                f.value.getData().setScale(font_size);
             }
         }
 
-        private static void loadSkin() {
+        private static void load() {
 
             skin = new Skin();
 
@@ -117,8 +108,18 @@ public class Graphics {
             Texture transparent = new Texture(new Pixmap(1,1, Format.RGBA8888));
             skin.add("transparent", transparent);
             skin.add("bomb", new TextureRegionDrawable(Sprites.get("bomb")));
-            skin.add("checkboxOff", new TextureRegionDrawable(GUI.get("checkboxOff")));
-            skin.add("checkboxOn", new TextureRegionDrawable(GUI.get("checkboxOn")));
+
+            TextureAtlas gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
+            int i=0;
+            for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
+                if(atlasRegion.name.matches(".*9patch.*"))
+                    skin.add(atlasRegion.name, new NinePatchDrawable(new NinePatch(atlasRegion,16,16,16,16)), Drawable.class);
+                else
+                    skin.add(atlasRegion.name, new TextureRegionDrawable(atlasRegion), Drawable.class);
+                System.out.println("GUI element " + atlasRegion.name + " loaded");
+                i++;
+            }
+            System.out.println(i + " gui elements succesfully loaded");
 
             skin.add("default", Color.WHITE);
 
@@ -137,9 +138,9 @@ public class Graphics {
             generator.dispose();
 
             //==========TextButtonStyle
-            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_long_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_long_9patch.png"), 16, 16, 16, 16));
-            NinePatchDrawable patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_long_9patch.png"), 16, 16, 16, 16));
+            Drawable patch = skin.getDrawable("rockdark_long_9patch");
+            Drawable patch2 = skin.getDrawable("rockbright_long_9patch");
+            Drawable patch3 = skin.getDrawable("rockselected_long_9patch");
             TextButtonStyle textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.fontColor = Color.WHITE;
             textButtonStyle.overFontColor = Color.GRAY;
@@ -155,9 +156,9 @@ public class Graphics {
             textButtonStyle.font = skin.getFont("very_small");
             skin.add("input_select", textButtonStyle);
 
-            patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockdark_9patch.png"), 16, 16, 16, 16));
-            patch2 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockbright_9patch.png"), 16, 16, 16, 16));
-            patch3 = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/rockselected_9patch.png"), 16, 16, 16, 16));
+            patch = skin.getDrawable("rockdark_9patch");
+            patch2 = skin.getDrawable("rockbright_9patch");
+            patch3 = skin.getDrawable("rockselected_9patch");
             textButtonStyle = new TextButtonStyle(patch, patch, patch, skin.getFont("default"));
             textButtonStyle.checked = patch3;
             textButtonStyle.disabled = patch2;
@@ -237,30 +238,11 @@ public class Graphics {
 
             //=======CheckBoxStyle
             CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
-            checkBoxStyle.checkboxOff = skin.get("checkboxOff", TextureRegionDrawable.class);
-            checkBoxStyle.checkboxOn = skin.get("checkboxOn", TextureRegionDrawable.class);
+            checkBoxStyle.checkboxOff = skin.getDrawable("checkboxOff");
+            checkBoxStyle.checkboxOn = skin.getDrawable("checkboxOn");
             checkBoxStyle.font = skin.getFont("default");
             checkBoxStyle.fontColor = skin.getColor("default");
             skin.add("default", checkBoxStyle);
-        }
-
-        private static void loadAtlas()
-        {
-            gui_atlasTexture = new TextureAtlas(Gdx.files.internal(Constants.PATH_ATLAS_GUI));
-            gui_atlasRegions = new HashMap<>();
-            for (AtlasRegion atlasRegion : gui_atlasTexture.getRegions()) {
-                gui_atlasRegions.put(atlasRegion.name, atlasRegion);
-                System.out.println("GUI element" + atlasRegion.name + " loaded");
-            }
-            System.out.println(gui_atlasRegions.size() + " gui elements succesfully loaded");
-        }
-
-        public static AtlasRegion get(String sprite_str)
-        {
-            if (!gui_atlasRegions.containsKey(sprite_str)) {
-                throw new RuntimeException("GUI element " + sprite_str + " doesn't exists");
-            }
-            return gui_atlasRegions.get(sprite_str);
         }
     }
 
