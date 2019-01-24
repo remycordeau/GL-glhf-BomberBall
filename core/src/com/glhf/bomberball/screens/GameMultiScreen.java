@@ -22,7 +22,7 @@ public class GameMultiScreen extends GameScreen {
         players = maze.spawnPlayers(config.player_count);
         //setSelectEffect();
 
-        addUI(new GameUI(players, false));
+        addUI(new GameUI(players, false, false));
         addUI(maze_drawer);
 
         startGame();

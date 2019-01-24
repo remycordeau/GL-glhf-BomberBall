@@ -33,7 +33,7 @@ public class GameStoryScreen extends GameScreen {
         enemies = this.maze.getEnemies();
         enemies.forEach(Enemy::createAI);
 
-        addUI(new GameUI(current_player, true));
+        addUI(new GameUI(current_player, true, false));
         addUI(maze_drawer);
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
