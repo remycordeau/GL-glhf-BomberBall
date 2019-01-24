@@ -73,9 +73,6 @@ public class PlayersInfoUI extends Table {
         private HeartsWidget player_hearts;
 
         public PlayerInfoWidget(Player player) {
-            //player_hearts = new HeartsWidget(player);
-            //this.add(player_hearts).grow();
-            //this.row();
             this.add(new BonusWidget(player)).grow();
         }
     }
@@ -128,9 +125,9 @@ public class PlayersInfoUI extends Table {
             //retour ligne
             this.row();
             //ajout des nombres
-            number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.GUI.getSkin(), "small");
-            number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.GUI.getSkin(), "small");
-            bomb_range = new Label("x"+player.getBombRange(), Graphics.GUI.getSkin(), "small");
+            number_moves = new Label("x"+player.getNumberMoveRemaining(), Graphics.GUI.getSkin(), "black");
+            number_bombs = new Label("x"+player.getNumberBombRemaining(), Graphics.GUI.getSkin(), "black");
+            bomb_range = new Label("x"+player.getBombRange(), Graphics.GUI.getSkin(), "black");
             number_moves.setAlignment(Align.center);
             number_bombs.setAlignment(Align.center);
             bomb_range.setAlignment(Align.center);
