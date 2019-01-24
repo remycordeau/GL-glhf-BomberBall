@@ -38,6 +38,7 @@ public class GameStoryScreen extends GameScreen {
 
         current_player.initiateTurn();      //after the UI because initiateTurn notify the ui
         setMoveMode();
+        Score.getINSTANCE().resetScore();
 
         Timer.schedule(new Timer.Task() {   //Verifying if an ennemy has killed the player
             @Override
