@@ -66,9 +66,13 @@
 "New"    :    "New"
 
 #Story
-"story1"    :   "Bianca la plus belle princesse du royaume et Maximilien le plus preux\ndes Chevalier vivaient une fascinante idylle, tellement\nfascinante qu'elle venait à rendre envieux le seigneur Plétor."
-"story2"    :   "Pris d'une rage et d'une jalousie folles, il enleva Maximilien en l'enfermant\ndans le cachot de sa plus haute tour.\nPlétor : "Ici, tu resteras à jamais et la princesse Bianca j'épouserai""
-"story3"    :   "3"
-"story4"    :   "4"
+"story1"    :   "Bianca, the most beautiful princess in the whole kingdom and Maximius,\nthe most doughty man among the knights lived a passionate idylle.\nTheir love was so powerful that Lord Plethor became envious."
+"story2"    :   "Driven by wrath and jealousy, he kidnapped Maximilus and locked him inside\nthe highest dungeon of his castle.\n"You will lie here forever and I will marry princess Bianca", said Plethor"
+"story3"    :   "Out of despair, alone in the dungeon, the knight finally met Bernard the magician,\nwho was quite struggling under a pile of rags."
+"story4"    :   ""I can help you to escape this prison and see your wife again. Here are\nsome bombs to help you in your task. It won't be easy to find your way\naround the castle because it is huge and heavily guarded.\nBut I'm sure you will figure it out and meet princess Bianca again" said Bernard"
 "Skip"      :   "Passer"
 "Next chapter"  :   "Next chapter"
+"The hero"      :   "The hero"
+"The princess"  :   "The princess"
+"The magician"  :   "The magician"
+"The bad guy"   :   "The bad guy"

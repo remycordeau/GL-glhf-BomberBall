@@ -1,8 +1,11 @@
 package com.glhf.bomberball.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.glhf.bomberball.Bomberball;
@@ -16,6 +19,8 @@ import com.glhf.bomberball.screens.SoloMenuScreen;
 import com.glhf.bomberball.screens.StoryMenuScreen;
 import com.glhf.bomberball.screens.StoryTellingScreen;
 import com.glhf.bomberball.utils.ScreenChangeListener;
+
+import static com.glhf.bomberball.utils.Constants.PATH_GRAPHICS;
 
 public class StoryTellingUI extends Table {
     private final Label label;
@@ -33,14 +38,14 @@ public class StoryTellingUI extends Table {
         Table characters = new Table();
         characters.setFillParent(true);
         characters.align(Align.top);
-        characters.padTop(10);
-        characters.add(new CharacterUI("knight_m", "Le héros", "Maximilien"))
-                .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("black_knight", "Le méchant", "Plétor"))
-                .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("wizzard_m", "Le magicien", "Bernard"))
-                .height(Value.percentHeight(0.3f, this));
-        characters.add(new CharacterUI("elf_f", "La princesse", "Bianca"))
+        Value spacing = Value.percentWidth(0.05f);
+        characters.add(new CharacterUI("knight_m", Translator.translate("The hero"), "Maximilien"))
+                .height(Value.percentHeight(0.3f, this)).pad(spacing);
+        characters.add(new CharacterUI("black_knight", Translator.translate("The bad guy"), "Plétor"))
+                .height(Value.percentHeight(0.3f, this)).pad(spacing);
+        characters.add(new CharacterUI("wizzard_m", Translator.translate("The magician"), "Bernard"))
+                .height(Value.percentHeight(0.3f, this)).pad(spacing);
+        characters.add(new CharacterUI("elf_f", Translator.translate("The princess"), "Bianca"))
                 .height(Value.percentHeight(0.3f, this));
         addActor(characters);
 
@@ -51,10 +56,7 @@ public class StoryTellingUI extends Table {
         skip.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                AppConfig config = AppConfig.get();
-                config.story_displayed = true;
-                config.exportConfig();
-                Bomberball.changeScreen(new StoryMenuScreen());
+                screen.endStory();
             }
         });
         skip.align(Align.bottomLeft);
@@ -86,6 +88,9 @@ public class StoryTellingUI extends Table {
             add(image).grow().height(100).row();
             add(new Label(titre, skin)).row();
             add(new Label(nom, skin)).row();
+
+            NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plain_9patch.png"), 5, 5, 5, 5));
+            this.setBackground(patch);
         }
     }
 }
