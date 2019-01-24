@@ -52,8 +52,10 @@
 "Replay"		        :	"Replay"
 
 #InfiniteMenuUI
-"Highscore :"			:	"Highscore :"
-
+"Highscore"			:	"Highscore"
+"No bonus"          :   "No bonus"
+"Limited turns"     :   "Limited turns"
+"No crates"         :   "No crates"
 "Random Maze"		:	"Random Maze"
 
 #WelcomingMenu UI

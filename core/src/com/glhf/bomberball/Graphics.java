@@ -189,7 +189,7 @@ public class Graphics {
 
             labelStyle = new LabelStyle();
             labelStyle.font = font;
-            labelStyle.fontColor = Color.GREEN;
+            labelStyle.fontColor = Color.WHITE;
             skin.add("Title", labelStyle);
 
             //=======TextFieldStyle
@@ -241,7 +241,7 @@ public class Graphics {
             checkBoxStyle.checkboxOff = skin.getDrawable("checkboxOff");
             checkBoxStyle.checkboxOn = skin.getDrawable("checkboxOn");
             checkBoxStyle.font = skin.getFont("default");
-            checkBoxStyle.fontColor = skin.getColor("default");
+            checkBoxStyle.fontColor = Color.BLACK;
             skin.add("default", checkBoxStyle);
         }
     }

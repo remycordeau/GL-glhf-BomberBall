@@ -52,8 +52,10 @@
 "Replay"		        :	"Rejouer"
 
 #InfiniteMenuUI
-"Highscore :"			:	"Highscore :"
-
+"Highscore"			:	"Highscore"
+"No bonus"          :   "Sans bonus"
+"Limited turns"     :   "Limite nombre de tours"
+"No crates"         :   "Sans caisses"
 "Random Maze"		:	"Carte Aléatoire"
 
 #WelcomingMenu UI
