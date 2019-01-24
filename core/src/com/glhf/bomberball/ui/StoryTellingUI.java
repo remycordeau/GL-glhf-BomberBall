@@ -86,8 +86,8 @@ public class StoryTellingUI extends Table {
             image.setAlign(Align.center);
 
             add(image).grow().height(100).row();
-            add(new Label(titre, skin)).row();
-            add(new Label(nom, skin)).row();
+            add(new Label(titre, skin,"black")).row();
+            add(new Label(nom, skin,"black")).row();
 
             NinePatchDrawable patch = new NinePatchDrawable(new NinePatch(new Texture(PATH_GRAPHICS+"gui/plain_9patch.png"), 5, 5, 5, 5));
             this.setBackground(patch);

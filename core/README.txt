@@ -39,18 +39,19 @@ Support :
 ---------
 Si vous avez des problèmes, n'hésitez pas à les reporter a cette adresse : contact.glhfcorp@gmail.com
 
-Les futurs mise à jour : 
+Les futures mises à jour :
 ------------------------
-	- Possibilité de mettre en ligne les cartes édité par la communauté via un workshop.
+	- Possibilité de mettre en ligne les cartes éditées par la communauté via un workshop.
 	- Ajout de plus de carte en mode histoire
 	- Ajout de nouveau bonus
-	- Plus d'option dans le mode ifinis
+	- Plus d'option dans le mode infini
 
 
 Construit avec :
 ----------------
 	- jdk 1.8
 	- gradle
+	- libgdx
 
 	
 Remerciements : 

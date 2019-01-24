@@ -66,8 +66,8 @@
 "New"    :    "New"
 
 #Story
-"story1"    :   "Bianca, the most beautiful princess in the whole kingdom and Maximius,\nthe most doughty man among the knights lived a passionate idylle.\nTheir love was so powerful that Lord Plethor became envious."
-"story2"    :   "Driven by wrath and jealousy, he kidnapped Maximilus and locked him inside\nthe highest dungeon of his castle.\n"You will lie here forever and I will marry princess Bianca", said Plethor"
+"story1"    :   "Bianca, the most beautiful princess in the whole kingdom and Maximilien,\nthe most doughty man among the knights lived a passionate idyll.\nTheir love was so powerful that Lord Plétor became envious."
+"story2"    :   "Driven by wrath and jealousy, he kidnapped Maximilien and locked him inside\nthe highest dungeon of his castle.\n"You will lie here forever and I will marry princess Bianca", said Plétor"
 "story3"    :   "Out of despair, alone in the dungeon, the knight finally met Bernard the magician,\nwho was quite struggling under a pile of rags."
 "story4"    :   ""I can help you to escape this prison and see your wife again. Here are\nsome bombs to help you in your task. It won't be easy to find your way\naround the castle because it is huge and heavily guarded.\nBut I'm sure you will figure it out and meet princess Bianca again" said Bernard"
 "Skip"      :   "Passer"
