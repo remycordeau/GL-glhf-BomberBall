@@ -67,14 +67,14 @@ public class EditorScreen extends MenuScreen {
             positions.add(p);
         }
         else {
-            int half_w = maze.getWidth() / 2;
-            int half_h = maze.getHeight() / 2;
-            int x = p.x - half_w;
-            int y = p.y - half_h;
-            positions.add(new VectorInt2(x + half_w, y + half_h));
-            positions.add(new VectorInt2(-x + half_w, -y + half_h));
-            positions.add(new VectorInt2(-x + half_w, y + half_h));
-            positions.add(new VectorInt2(x + half_w, -y + half_h));
+            float half_w = (maze.getWidth()-1) / 2f;
+            float half_h = (maze.getHeight()-1) / 2f;
+            float x = p.x - half_w;
+            float y = p.y - half_h;
+            positions.add(new VectorInt2((int)(x + half_w), (int)(y + half_h)));
+            positions.add(new VectorInt2((int)(-x + half_w), (int)(-y + half_h)));
+            positions.add(new VectorInt2((int)(-x + half_w), (int)(y + half_h)));
+            positions.add(new VectorInt2((int)(x + half_w), (int)(-y + half_h)));
         }
         return positions;
     }
