@@ -1,6 +1,7 @@
 package com.glhf.bomberball.maze;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.glhf.bomberball.config.GameSoloConfig;
 import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.utils.Constants;
@@ -15,6 +16,7 @@ import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 
 public class Maze{
 
@@ -189,7 +191,12 @@ public class Maze{
         if(gson==null) {
             createGson();
         }
-        Maze maze = gson.fromJson(Gdx.files.internal(Constants.PATH_MAZE+ name + ".json").readString(), Maze.class);
+        FileHandle fl = Gdx.files.internal(Constants.PATH_MAZE+ name + ".json");
+        if(!fl.exists()){
+            fl = Gdx.files.external(Constants.PATH_MAZE+ name + ".json");
+            if(!fl.exists()) System.err.println("file maze not found ...");
+        }
+        Maze maze = gson.fromJson(fl.readString(), Maze.class);
         maze.initialize();
         return maze;
     }
