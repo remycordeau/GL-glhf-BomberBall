@@ -3,7 +3,6 @@ package com.glhf.bomberball.maze;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.glhf.bomberball.config.GameSoloConfig;
-import com.glhf.bomberball.config.GameStoryConfig;
 import com.glhf.bomberball.utils.Constants;
 import com.glhf.bomberball.config.GameConfig;
 import com.glhf.bomberball.config.GameMultiConfig;
@@ -14,9 +13,7 @@ import com.glhf.bomberball.utils.VectorInt2;
 import com.google.gson.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.logging.FileHandler;
 
 public class Maze{
 
@@ -157,21 +154,6 @@ public class Maze{
         spawn_positions = spawns;
     }
 
-//    public void applyConfig(GameConfig config) {
-//        ArrayList<GameObject> objects = new ArrayList<GameObject>();
-//        for (int x = 0; x < width; x++) {
-//            for (int y = 0; y < height; y++) {
-//                objects.addAll(cells[x][y].getGameObjects());
-//            }
-//        }
-//        for (Object o : objects) {
-//            if (o instanceof Wall) {
-//                ((Wall) o).setLife(config.wall_life);
-//            }
-//        }
-
-//    }
-
     private static void createGson() {
         gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(GameObject.class, new GameObjectTypeAdapter())
@@ -180,34 +162,57 @@ public class Maze{
     }
 
     public static Maze importMazeSolo(String name) {
-        return importMaze("solo/"+name);
+        FileHandle fh = Gdx.files.internal(Constants.PATH_MAZE + "solo/" + name + ".json");
+        return importMaze(fh);
     }
 
     public static Maze importMazeMulti(String name) {
-        return importMaze("multi/"+name);
+        FileHandle fh = getFileHandleMulti(name);
+        return importMaze(fh);
     }
 
-    private static Maze importMaze(String name) {
+    private static Maze importMaze(FileHandle fh) {
         if(gson==null) {
             createGson();
         }
-        FileHandle fl = Gdx.files.external(Constants.PATH_MAZE+ name + ".json");
-        if(!fl.exists()){
-            fl = Gdx.files.internal(Constants.PATH_MAZE+ name + ".json");
-            if(!fl.exists()) System.err.println("file maze not found ...");
-        }
-        Maze maze = gson.fromJson(fl.readString(), Maze.class);
+        if(fh == null) System.err.println("file maze not found ...");
+        Maze maze = gson.fromJson(fh.readString(), Maze.class);
         maze.initialize();
         return maze;
     }
 
-    public void export(String name)
-    {
-        if(gson == null) {
-            createGson();
+    private static FileHandle getFileHandleMulti(String name) {
+        FileHandle fh = Gdx.files.external(Constants.PATH_MAZECUSTOM+ name + ".json");
+        if(!fh.exists()){
+            fh = Gdx.files.internal(Constants.PATH_MAZE+ "multi/" + name + ".json");
+            if(!fh.exists()){
+                fh = null;
+            }
         }
+        return fh;
+    }
+
+    public static int countMazesMulti() {
+        int i;
+        for(i = 0; getFileHandleMulti("maze_"+i) != null; i++);
+        return i;
+    }
+
+    public void exportMaze(String name) {
+        File file = Gdx.files.internal(Constants.PATH_MAZE + name + ".json").file();
+        writeToFile(file);
+    }
+
+    public void exportCustomMaze(String name) {
+        File file = Gdx.files.external(Constants.PATH_MAZECUSTOM + name + ".json").file();
+        if(!file.getParentFile().exists()) file.getParentFile().mkdirs();
+        writeToFile(file);
+    }
+
+    private void writeToFile(File file){
+        if(gson == null) createGson();
+
         try {
-            File file = Gdx.files.external(Constants.PATH_MAZE + name + ".json").file();
             Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();

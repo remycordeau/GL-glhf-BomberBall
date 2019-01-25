@@ -1,6 +1,5 @@
 package com.glhf.bomberball.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -10,10 +9,7 @@ import com.glhf.bomberball.maze.cell.Cell;
 import com.glhf.bomberball.ui.EditorUI;
 import com.glhf.bomberball.utils.VectorInt2;
 
-import java.io.File;
 import java.util.ArrayList;
-
-import static com.glhf.bomberball.utils.Constants.PATH_MAZE;
 
 public class EditorScreen extends MenuScreen {
 
@@ -29,7 +25,7 @@ public class EditorScreen extends MenuScreen {
         super();
         this.maze = maze;
         ui = new EditorUI(this, maze);
-        maze_id = Gdx.files.internal(PATH_MAZE+"/multi/").file().listFiles().length;
+        maze_id = Maze.countMazesMulti();
         addUI(ui);
         addSpawns();
     }
@@ -129,7 +125,7 @@ public class EditorScreen extends MenuScreen {
         }
         maze.setPlayerSpawns(getPositions(player_pos));
 
-        maze.export("multi/maze_" + maze_id);
+        maze.exportCustomMaze("maze_" + maze_id);
         Bomberball.changeScreen(new EditorMenuScreen());
     }
 }

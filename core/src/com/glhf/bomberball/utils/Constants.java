@@ -21,6 +21,7 @@ public class Constants {
     public static final String PATH_ATLAS_SPRITES = PATH_PACKS+"pack_sprites.atlas";
     public static final String PATH_ATLAS_ANIMS   = PATH_PACKS+"pack_animations.atlas";
     public static final String PATH_ATLAS_GUI     = PATH_PACKS+"pack_gui.atlas";
+    public static final String PATH_MAZECUSTOM    = "mazes/";
 
     // others constants
     public static final int NB_ANIMATION_FRAMES = 5;

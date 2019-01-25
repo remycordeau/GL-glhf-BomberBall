@@ -9,6 +9,11 @@ public class VectorInt2 {
         this.y = y;
     }
 
+    public VectorInt2(VectorInt2 v) {
+        this.x=v.x;
+        this.y=v.y;
+    }
+
     public int getX() {
         return x;
     }
