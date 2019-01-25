@@ -60,8 +60,8 @@ public class EditorScreen extends MenuScreen {
 
     private ArrayList<VectorInt2> getPositions(VectorInt2 p) {
         ArrayList<VectorInt2> positions = new ArrayList<VectorInt2>();
-        if (!maze.isCellInBounds(p.x, p.y))
-            return positions;
+//        if (!maze.isCellInBounds(p.x, p.y))
+//            return positions;
 
         if (!symmetric) {
             positions.add(p);
@@ -80,17 +80,10 @@ public class EditorScreen extends MenuScreen {
     }
 
     private void dropSelectedObject(VectorInt2 coords) {
-        boolean placed = false;
-        for (VectorInt2 p : getPositions(coords)) {
-            Cell cell = maze.getCellAt(p.x, p.y);
-            if(cell != null && objectSelected != null && cell.isEmpty()) {
-                cell.addGameObject(objectSelected.clone());
-                placed = true;
-            }
-        }
+            if(!maze.isCellInBounds(coords.x, coords.y)) return;
 
         // Checks if already placed players spawns
-        if (placed && objectSelected instanceof Player) {
+        if (objectSelected instanceof Player) {
             if (player_pos != null) {
                 for (VectorInt2 p : getPositions(player_pos)) {
                     maze.getCellAt(p.x, p.y).removeGameObjects();
@@ -98,9 +91,19 @@ public class EditorScreen extends MenuScreen {
             }
             player_pos = coords;
         }
+
+        for (VectorInt2 p : getPositions(coords)) {
+            Cell cell = maze.getCellAt(p.x, p.y);
+            if (cell != null && objectSelected != null){
+                if (cell.isEmpty() || (objectSelected.isWalkable() && cell.isWalkable())) {
+                    cell.addGameObject(objectSelected.clone());
+                }
+            }
+        }
     }
 
     private void deleteObject(VectorInt2 coords) {
+        if(!maze.isCellInBounds(coords.x, coords.y)) return;
         for (VectorInt2 p : getPositions(coords)) {
             Cell cell = maze.getCellAt(p.x, p.y);
             if(cell != null) {
