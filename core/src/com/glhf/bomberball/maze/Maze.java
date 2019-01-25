@@ -191,9 +191,9 @@ public class Maze{
         if(gson==null) {
             createGson();
         }
-        FileHandle fl = Gdx.files.internal(Constants.PATH_MAZE+ name + ".json");
+        FileHandle fl = Gdx.files.external(Constants.PATH_MAZE+ name + ".json");
         if(!fl.exists()){
-            fl = Gdx.files.external(Constants.PATH_MAZE+ name + ".json");
+            fl = Gdx.files.internal(Constants.PATH_MAZE+ name + ".json");
             if(!fl.exists()) System.err.println("file maze not found ...");
         }
         Maze maze = gson.fromJson(fl.readString(), Maze.class);
@@ -207,7 +207,7 @@ public class Maze{
             createGson();
         }
         try {
-            File file = Gdx.files.internal(Constants.PATH_MAZE + name + ".json").file();
+            File file = Gdx.files.external(Constants.PATH_MAZE + name + ".json").file();
             Writer writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
