@@ -1,5 +1,6 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.glhf.bomberball.Bomberball;
 import com.glhf.bomberball.InputHandler.Action;
 import com.glhf.bomberball.gameobject.GameObject;
@@ -28,7 +29,7 @@ public class EditorScreen extends MenuScreen {
         super();
         this.maze = maze;
         ui = new EditorUI(this, maze);
-        maze_id = new File(PATH_MAZE+"/multi/").listFiles().length;
+        maze_id = Gdx.files.internal(PATH_MAZE+"/multi/").file().listFiles().length;
         addUI(ui);
         addSpawns();
     }

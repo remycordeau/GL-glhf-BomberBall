@@ -1,5 +1,6 @@
 package com.glhf.bomberball.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.glhf.bomberball.config.GameMultiConfig;
 import com.glhf.bomberball.maze.Maze;
 import com.glhf.bomberball.ui.MultiMenuUI;
@@ -27,7 +28,7 @@ public class MultiMenuScreen extends MenuScreen {
     public static int p4_id=nb_Playable-1;
 
     public MultiMenuScreen() {
-        maze_count = new File(PATH_MAZE+"/multi/").listFiles().length;
+        maze_count = Gdx.files.internal(PATH_MAZE+"/multi/").file().listFiles().length;
         System.out.println("MC " + maze_count);
         maze = Maze.importMazeMulti("maze_" + maze_id);
         this.addUI(new MultiMenuUI(this));
